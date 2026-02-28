@@ -1,0 +1,31 @@
+---
+id: map-point
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import MapPointTable from "../../../gen/tables/MapPoint.md"
+
+# MapPoint
+
+## Beschreibung
+
+Diese Komponente stellt einen verankerten Punkt auf der Karte dar.
+
+## Eigenschaften {#properties}
+
+<MapPointTable />
+
+## Funktionen
+
+<ComponentFunctions
+    name="MapPoint"
+    properties={{
+        latitude: 37.7955281,
+        longitude: -122.3934225,
+        meters: 33.33,
+        minScale: false,
+    }}
+    mutate={`cursor.latitude = 37.4419;
+    cursor.longitude = -122.1430;
+    return false;`}
+/>

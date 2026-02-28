@@ -1,0 +1,124 @@
+---
+id: media-recorder
+---
+
+import {EventExample} from '@site/src/components/event-example'
+
+# メディア・レコーダー・イベント
+
+## 説明
+
+このMedia Recorderを使用すると、実行時にStudioプロジェクトのスクリーンショットをキャプチャしたり、ビデオを録画したりできます。
+
+メディア・レコーダーのイベントは、[world.events.globalId](/api/studio/world/events/#properties)で発行されます。
+
+## イベント
+
+### RECORDER_SCREENSHOT_READY
+
+スクリーンショットの準備ができたときに発行されます。
+
+#### プロパティ一覧
+
+| プロパティ | タイプ | 説明                  |
+| ----- | --- | ------------------- |
+| blob  | ブロブ | スクリーンショットのJPEG画像ブロブ |
+
+#### 例
+
+<EventExample ns="ecs.events" event="RECORDER_SCREENSHOT_READY" target="world.events.globalId" callbackBody={`console.log('Screenshot blob: ', event.data.blob)`} />
+
+### RECORDER_VIDEO_STARTED
+
+録音が開始されたときに発せられる。
+
+#### プロパティ一覧
+
+いない。
+
+#### 例
+
+<EventExample ns="ecs.events" event="RECORDER_VIDEO_STARTED" target="world.events.globalId" hasPayload={false} callbackBody={`console.log('Recording started')`} />
+
+### RECORDER_VIDEO_STOPPED
+
+録音が停止したときに発せられる。
+
+#### プロパティ一覧
+
+いない。
+
+#### 例
+
+<EventExample ns="ecs.events" event="RECORDER_VIDEO_STARTED" target="world.events.globalId" hasPayload={false} callbackBody={`console.log('Recording stopped')`} />
+
+### RECORDER_VIDEO_ERROR
+
+エラーが発生したときに発せられる。
+
+#### プロパティ
+
+| プロパティ   | タイプ    | 説明            |
+| ------- | ------ | ------------- |
+| message | string | エラーメッセージ      |
+| name    | string | エラー名          |
+| stack   | string | エラー・スタック・トレース |
+
+#### 例
+
+<EventExample ns="ecs.events" event="RECORDER_VIDEO_ERROR" target="world.events.globalId" callbackBody={`console.log('Recorder error: ', event.data.message)`} />
+
+### RECORDER_VIDEO_READY
+
+録画が完了し、ビデオの準備ができたときに発せられる。
+
+#### プロパティ一覧
+
+| プロパティ     | タイプ | 説明           |
+| --------- | --- | ------------ |
+| videoBlob | ブロブ | 録画されたビデオ・ブロブ |
+
+#### 例
+
+<EventExample ns="ecs.events" event="RECORDER_VIDEO_READY" target="world.events.globalId" callbackBody={`console.log('Video ready: ', event.data.videoBlob)`} />
+
+### RECORDER_PREVIEW_READY
+
+プレビュー可能だが、共有に最適化されていないビデオの準備ができたときに発行される（Android/デスクトップのみ）。
+
+#### プロパティ
+
+| プロパティ     | タイプ | 説明        |
+| --------- | --- | --------- |
+| videoBlob | ブロブ | プレビュー映像の塊 |
+
+#### 例
+
+<EventExample ns="ecs.events" event="RECORDER_PREVIEW_READY" target="world.events.globalId" callbackBody={`console.log('Preview ready: ', event.data.videoBlob)`} />
+
+### RECORDER_FINALIZE_PROGRESS
+
+メディアレコーダーが最終的な書き出しを進めているときに発せられる（Android/デスクトップのみ）。
+
+#### プロパティ
+
+| プロパティ    | タイプ | 説明            |
+| -------- | --- | ------------- |
+| progress | 番号  | 最終化の進捗状況（0～1） |
+
+#### 例
+
+<EventExample ns="ecs.events" event="RECORDER_FINALIZE_PROGRESS" target="world.events.globalId" callbackBody={`console.log('Finalize progress: ', event.data.progress * 100)`} />
+
+### RECORDER_PROCESS_FRAME
+
+#### プロパティ
+
+| プロパティ     | タイプ     | 説明               |
+| --------- | ------- | ---------------- |
+| frame     | イメージデータ | 処理されたビデオフレーム     |
+| timestamp | 番号      | フレームのタイムスタンプ（ms） |
+
+#### 例
+
+<EventExample ns="ecs.events" event="RECORDER_PROCESS_FRAME" target="world.events.globalId" callbackBody={`console.log('Process frame: ', event.data.timestamp, event.data.frame)`} />

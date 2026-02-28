@@ -1,0 +1,37 @@
+---
+id: video-controls
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import VideoControlsTable from "../../../gen/tables/VideoControls.md"
+
+# VideoControls
+
+## Description
+
+Ce composant permet aux entités de contrôler la lecture vidéo des textures appliquées aux matériaux. Il est automatiquement ajouté lorsqu'une vidéo est définie via le configurateur de studio. Si la vidéo est ajoutée par programme, ce composant doit être ajouté manuellement pour activer les contrôles de lecture.
+
+## Propriétés
+
+<VideoControlsTable />
+
+## Fonctions
+
+<ComponentFunctions
+    name="VideoControls"
+    properties={{
+        url: "./assets/video.mp4",
+        volume: 1,
+        loop: false,
+        paused: false,
+        speed: 1,
+        positional: false,
+        refDistance: 1,
+        distanceModel: "inverse",
+        rolloffFactor: 1,
+        maxDistance: 10000
+    }}
+    mutate={`cursor.volume = 0.5;
+    cursor.loop = true;
+    return false;`}
+/>

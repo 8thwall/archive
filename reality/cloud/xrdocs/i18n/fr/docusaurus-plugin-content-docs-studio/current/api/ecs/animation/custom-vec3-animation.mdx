@@ -1,0 +1,46 @@
+---
+id: custom-vec3-animation
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# CustomVec3Animation
+
+## Description
+
+Ce composant crée une animation sur une entité.
+
+## Propriétés
+
+| Propriété             | Type                  | Défaut    | Description                                                                                                                                                            |
+| --------------------- | --------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| attribut              | chaîne de caractères  | ''        | Attribut sélectionné à animer (par exemple, position, échelle, matériau)                                                                                               |
+| cible                 | eid                   | indéfini  | L'objet cible à animer. Si elle n'est pas spécifiée, l'animation est exécutée sur l'objet auquel le composant est attaché.                                             |
+| de                    | objet                 | indéfini  | L'état de départ de l'animation                                                                                                                                        |
+| à                     | objet                 | indéfini  | L'état final de l'animation                                                                                                                                            |
+| autoFrom              | booléen               | faux      | Si cette option est activée, la propriété "from" est ignorée et l'animation se fait à partir de l'état de l'objet au début de l'animation.                             |
+| durée                 | nombre                | 0         | Durée de l'animation en millisecondes.                                                                                                                                 |
+| boucle                | booléen               | faux      | Si cette option est activée, l'animation est répétée.                                                                                                                  |
+| inverser              | booléen               | faux      | Indique si la lecture doit se faire en sens inverse, si la boucle est réglée.                                                                                          |
+| easeIn                | booléen               | faux      | Si cette option est activée, la fonction d'assouplissement sera appliquée dans le temps au lieu d'une interpolation directe.                                           |
+| facilitéSortie        | booléen               | faux      | Si cette option est activée, la fonction d'assouplissement sera appliquée dans le temps au lieu d'une interpolation directe.                                           |
+| easingFunction        | chaîne de caractères  | ''        | Choisissez parmi les options suivantes : quadratique (par défaut), cubique, quartique, quintique, sinusoïdale, exponentielle, circulaire, élastique, retour et rebond. |
+
+<ComponentFunctions
+    name="CustomVec3Animation"
+    properties={{
+        attribute : "position",
+        from : { x: 0, y: 0, z: 0 },
+        to : { x: 10, y: 10, z: 10 },
+        autoFrom : false,
+        duration : 1000,
+        loop : false,
+        reverse : false,
+        easeIn : false,
+        easeOut : false,
+        easingFunction : "Cubic"
+    }}
+    mutate={`cursor.duration = 1000 ;
+    cursor.loop = true ;
+    return false;`}
+/>

@@ -1,0 +1,1150 @@
+{
+  "entrySpaceId": "919d4174-4532-4960-8536-ccb100727e84",
+  "inputs": {
+    "default": [
+      {
+        "name": "forward",
+        "bindings": [
+          {
+            "input": "gamepad:axis:left:up",
+            "modifiers": []
+          },
+          {
+            "input": "keyboard:KeyW",
+            "modifiers": []
+          },
+          {
+            "input": "keyboard:ArrowUp",
+            "modifiers": []
+          }
+        ]
+      },
+      {
+        "name": "left",
+        "bindings": [
+          {
+            "input": "gamepad:axis:left:left",
+            "modifiers": []
+          },
+          {
+            "input": "keyboard:KeyA",
+            "modifiers": []
+          },
+          {
+            "input": "keyboard:ArrowLeft",
+            "modifiers": []
+          }
+        ]
+      },
+      {
+        "name": "right",
+        "bindings": [
+          {
+            "input": "gamepad:axis:left:right",
+            "modifiers": []
+          },
+          {
+            "input": "keyboard:KeyD",
+            "modifiers": []
+          },
+          {
+            "input": "keyboard:ArrowRight",
+            "modifiers": []
+          }
+        ]
+      },
+      {
+        "name": "backward",
+        "bindings": [
+          {
+            "input": "gamepad:axis:left:down",
+            "modifiers": []
+          },
+          {
+            "input": "keyboard:KeyS",
+            "modifiers": []
+          },
+          {
+            "input": "keyboard:ArrowDown",
+            "modifiers": []
+          }
+        ]
+      },
+      {
+        "name": "lookup",
+        "bindings": [
+          {
+            "input": "mouse:move:up",
+            "modifiers": []
+          },
+          {
+            "input": "gamepad:axis:right:up",
+            "modifiers": []
+          }
+        ]
+      },
+      {
+        "name": "lookdown",
+        "bindings": [
+          {
+            "input": "mouse:move:down",
+            "modifiers": []
+          },
+          {
+            "input": "gamepad:axis:right:down",
+            "modifiers": []
+          }
+        ]
+      },
+      {
+        "name": "lookleft",
+        "bindings": [
+          {
+            "input": "mouse:move:left",
+            "modifiers": []
+          },
+          {
+            "input": "gamepad:axis:right:left",
+            "modifiers": []
+          }
+        ]
+      },
+      {
+        "name": "lookright",
+        "bindings": [
+          {
+            "input": "mouse:move:right",
+            "modifiers": []
+          },
+          {
+            "input": "gamepad:axis:right:right",
+            "modifiers": []
+          }
+        ]
+      },
+      {
+        "name": "shoot",
+        "bindings": [
+          {
+            "input": "mouse:button:0",
+            "modifiers": []
+          },
+          {
+            "input": "gamepad:button:7",
+            "modifiers": []
+          }
+        ]
+      },
+      {
+        "name": "jump",
+        "bindings": [
+          {
+            "input": "keyboard:Space",
+            "modifiers": []
+          }
+        ]
+      }
+    ]
+  },
+  "objects": {
+    "0d2df978-1983-4cbb-80f3-15aceffa7753": {
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Level/object-11.glb"
+        }
+      },
+      "id": "0d2df978-1983-4cbb-80f3-15aceffa7753",
+      "name": "object-11",
+      "order": 0.7398741391286332,
+      "parentId": "83de25ec-92e8-433c-af77-5e2bbafea588",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": false,
+        "receiveShadow": true
+      }
+    },
+    "10a5be4b-4ce8-4f2c-8ed5-84e871b1370a": {
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Level/object-10.glb"
+        }
+      },
+      "id": "10a5be4b-4ce8-4f2c-8ed5-84e871b1370a",
+      "name": "object-10",
+      "order": 0.7355956783024952,
+      "parentId": "83de25ec-92e8-433c-af77-5e2bbafea588",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": false,
+        "receiveShadow": true
+      }
+    },
+    "12a6eda8-dee9-4ca0-946e-717b0533fa47": {
+      "collider": {
+        "friction": 0.05,
+        "geometry": {
+          "type": "capsule",
+          "radius": 0.5,
+          "height": 1.5
+        },
+        "linearDamping": 0.1,
+        "lockXAxis": true,
+        "lockYAxis": true,
+        "lockZAxis": true,
+        "mass": 1,
+        "type": "dynamic"
+      },
+      "components": {
+        "06bbbe97-4f72-458d-a2c6-ab05fb55269c": {
+          "id": "06bbbe97-4f72-458d-a2c6-ab05fb55269c",
+          "name": "First Person Character",
+          "parameters": {}
+        },
+        "4262cac3-eaa3-4bfa-9079-5001ce7a0e70": {
+          "id": "4262cac3-eaa3-4bfa-9079-5001ce7a0e70",
+          "name": "Projectile Shooter",
+          "parameters": {}
+        }
+      },
+      "geometry": null,
+      "id": "12a6eda8-dee9-4ca0-946e-717b0533fa47",
+      "material": null,
+      "name": "Player",
+      "order": 3.9414603680017537,
+      "parentId": "919d4174-4532-4960-8536-ccb100727e84",
+      "position": [
+        6,
+        4,
+        3
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "1601d2f5-cd3c-46a9-8f29-14b33d7e9430": {
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Level/object-3.glb"
+        }
+      },
+      "id": "1601d2f5-cd3c-46a9-8f29-14b33d7e9430",
+      "name": "object-3",
+      "order": 0.4030970479114631,
+      "parentId": "83de25ec-92e8-433c-af77-5e2bbafea588",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": false,
+        "receiveShadow": true
+      }
+    },
+    "21951937-6b9f-4eed-9f89-445eea58609c": {
+      "components": {},
+      "geometry": null,
+      "hidden": false,
+      "id": "21951937-6b9f-4eed-9f89-445eea58609c",
+      "material": null,
+      "name": "Dynamic Boxes",
+      "order": 6.925036610568897,
+      "parentId": "919d4174-4532-4960-8536-ccb100727e84",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "2281b070-952a-49fb-a60a-14b3ca6f4925": {
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Level/object-9.glb"
+        }
+      },
+      "id": "2281b070-952a-49fb-a60a-14b3ca6f4925",
+      "name": "object-9",
+      "order": 0.7326318476692689,
+      "parentId": "83de25ec-92e8-433c-af77-5e2bbafea588",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": false,
+        "receiveShadow": true
+      }
+    },
+    "2b7547a3-6a71-4a4d-bc6b-eba8ec811e69": {
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Level/object-1.glb"
+        }
+      },
+      "hidden": false,
+      "id": "2b7547a3-6a71-4a4d-bc6b-eba8ec811e69",
+      "name": "object-1",
+      "order": -1.7398741391286332,
+      "parentId": "83de25ec-92e8-433c-af77-5e2bbafea588",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": false,
+        "receiveShadow": true
+      }
+    },
+    "33ddd0ee-6c6f-43d4-9892-a6f01516d023": {
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Level/object-4.glb"
+        }
+      },
+      "id": "33ddd0ee-6c6f-43d4-9892-a6f01516d023",
+      "name": "object-4",
+      "order": 0.5532524530818383,
+      "parentId": "83de25ec-92e8-433c-af77-5e2bbafea588",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": false,
+        "receiveShadow": true
+      }
+    },
+    "38ebf60a-2324-426d-ac5c-585e6d969258": {
+      "collider": {
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1,
+          "width": 1
+        }
+      },
+      "components": {},
+      "geometry": {
+        "depth": 1,
+        "height": 1,
+        "type": "box",
+        "width": 1
+      },
+      "id": "38ebf60a-2324-426d-ac5c-585e6d969258",
+      "material": {
+        "color": "#FFFFFF",
+        "opacity": 0,
+        "type": "basic"
+      },
+      "name": "Floor",
+      "order": 5.878411378817292,
+      "parentId": "83de25ec-92e8-433c-af77-5e2bbafea588",
+      "position": [
+        0,
+        0.19116548802386824,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        23,
+        0.5,
+        23
+      ]
+    },
+    "3eacccb8-e467-4700-944d-b5d01cc45ba8": {
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Level/object-2.glb"
+        }
+      },
+      "id": "3eacccb8-e467-4700-944d-b5d01cc45ba8",
+      "name": "object-2",
+      "order": 0.026031167932405452,
+      "parentId": "83de25ec-92e8-433c-af77-5e2bbafea588",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": false,
+        "receiveShadow": true
+      }
+    },
+    "4630af5e-da90-47f3-acd5-7b5846962a35": {
+      "collider": {
+        "friction": 0.5,
+        "geometry": {
+          "depth": 2,
+          "height": 2,
+          "type": "box",
+          "width": 2
+        },
+        "linearDamping": 0,
+        "mass": 5
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Level/green-box.glb"
+        }
+      },
+      "hidden": false,
+      "id": "4630af5e-da90-47f3-acd5-7b5846962a35",
+      "name": "Box-1",
+      "order": 5.982651366925513,
+      "parentId": "21951937-6b9f-4eed-9f89-445eea58609c",
+      "position": [
+        -9.485307553567075,
+        1.5,
+        -9.398295128029753
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.7499999999999999,
+        0.7499999999999999,
+        0.7499999999999999
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "47699d9e-18a5-4f88-a4f9-b8be92e8f74a": {
+      "components": {},
+      "geometry": null,
+      "hidden": false,
+      "id": "47699d9e-18a5-4f88-a4f9-b8be92e8f74a",
+      "light": {
+        "intensity": 0.5,
+        "type": "ambient"
+      },
+      "material": null,
+      "name": "Ambient Light",
+      "order": 0.9414603680017535,
+      "parentId": "919d4174-4532-4960-8536-ccb100727e84",
+      "position": [
+        10,
+        5,
+        8
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "4b64939c-066f-4321-a52c-bca34aa10b57": {
+      "collider": {
+        "friction": 0.5,
+        "geometry": {
+          "depth": 2,
+          "height": 2,
+          "type": "box",
+          "width": 2
+        },
+        "linearDamping": 0,
+        "mass": 5
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Level/green-box.glb"
+        }
+      },
+      "hidden": false,
+      "id": "4b64939c-066f-4321-a52c-bca34aa10b57",
+      "name": "Box-2",
+      "order": 5.987400667206829,
+      "parentId": "21951937-6b9f-4eed-9f89-445eea58609c",
+      "position": [
+        8.129110058452456,
+        1.5,
+        8.06341883102116
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.75,
+        0.7499999999999999,
+        0.7499999999999999
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "5313af1a-c519-4749-aff7-0d6ac2c8b8a8": {
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Level/object-12.glb"
+        }
+      },
+      "id": "5313af1a-c519-4749-aff7-0d6ac2c8b8a8",
+      "name": "object-12",
+      "order": 3.7398741391286334,
+      "parentId": "83de25ec-92e8-433c-af77-5e2bbafea588",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": false,
+        "receiveShadow": true
+      }
+    },
+    "5ab7b456-75d1-43bf-84a3-0fdd5b3a1b21": {
+      "components": {},
+      "geometry": null,
+      "hidden": false,
+      "id": "5ab7b456-75d1-43bf-84a3-0fdd5b3a1b21",
+      "material": null,
+      "name": "HUD",
+      "order": 1.3028366778323743,
+      "parentId": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "position": [
+        6.000000812065296,
+        -3.5000000239703506,
+        3.0000003854866275
+      ],
+      "rotation": [
+        0,
+        1,
+        0,
+        6.123233995736767e-17
+      ],
+      "scale": [
+        1.000000135344216,
+        1.0000000068486716,
+        1.0000001284955422
+      ],
+      "ui": {
+        "bottom": "0",
+        "fontSize": 16,
+        "left": "50%",
+        "opacity": 0.8,
+        "position": "absolute",
+        "text": "Press ESC To Exit",
+        "width": 200
+      }
+    },
+    "5d8b7dac-1f8e-4db9-9335-61d9e63a3789": {
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Level/object-6.glb"
+        }
+      },
+      "id": "5d8b7dac-1f8e-4db9-9335-61d9e63a3789",
+      "name": "object-6",
+      "order": 0.6817519703795651,
+      "parentId": "83de25ec-92e8-433c-af77-5e2bbafea588",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": false,
+        "receiveShadow": true
+      }
+    },
+    "73d2a463-ab4e-4a66-aee6-8cfad3380feb": {
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Level/object-5.glb"
+        }
+      },
+      "id": "73d2a463-ab4e-4a66-aee6-8cfad3380feb",
+      "name": "object-5",
+      "order": 0.6278750059076017,
+      "parentId": "83de25ec-92e8-433c-af77-5e2bbafea588",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": false,
+        "receiveShadow": true
+      }
+    },
+    "78e91476-bc46-463b-8ac3-e468ef6d1cdd": {
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Level/object-7.glb"
+        }
+      },
+      "id": "78e91476-bc46-463b-8ac3-e468ef6d1cdd",
+      "name": "object-7",
+      "order": 0.7139689994769367,
+      "parentId": "83de25ec-92e8-433c-af77-5e2bbafea588",
+      "position": [
+        0,
+        0.003730479252014529,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": false,
+        "receiveShadow": true
+      }
+    },
+    "83de25ec-92e8-433c-af77-5e2bbafea588": {
+      "components": {},
+      "geometry": null,
+      "hidden": false,
+      "id": "83de25ec-92e8-433c-af77-5e2bbafea588",
+      "material": null,
+      "name": "Static Level",
+      "order": 5.66219055200263,
+      "parentId": "919d4174-4532-4960-8536-ccb100727e84",
+      "position": [
+        0,
+        0.1531888811050166,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "8e94b2de-d659-405c-98d5-c244f4bc8823": {
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Level/object-13.glb"
+        }
+      },
+      "id": "8e94b2de-d659-405c-98d5-c244f4bc8823",
+      "name": "object-13",
+      "order": 4.739874139128633,
+      "parentId": "83de25ec-92e8-433c-af77-5e2bbafea588",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": false,
+        "receiveShadow": true
+      }
+    },
+    "a608ddd9-9379-464d-966f-5d8d8674c83c": {
+      "camera": {
+        "type": "perspective",
+        "xr": {
+          "desktop": "3D",
+          "headset": "disabled",
+          "xrCameraType": "3dOnly"
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "hidden": false,
+      "id": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "material": null,
+      "name": "Camera",
+      "order": 0.9979041807206233,
+      "parentId": "12a6eda8-dee9-4ca0-946e-717b0533fa47",
+      "position": [
+        0,
+        0.5,
+        0
+      ],
+      "rotation": [
+        0,
+        1,
+        0,
+        -6.123233995736766e-17
+      ],
+      "scale": [
+        0.9999998646558023,
+        0.9999999931513284,
+        0.9999998715044741
+      ]
+    },
+    "ac1989e3-3b71-49e2-a05f-e682aeb18c36": {
+      "components": {},
+      "geometry": null,
+      "hidden": false,
+      "id": "ac1989e3-3b71-49e2-a05f-e682aeb18c36",
+      "light": {
+        "intensity": 0.6,
+        "shadowBias": -0.0005,
+        "shadowNormalBias": 0,
+        "type": "directional"
+      },
+      "material": null,
+      "name": "Directional Light",
+      "order": 1.9414603680017535,
+      "parentId": "919d4174-4532-4960-8536-ccb100727e84",
+      "position": [
+        5.308160269055198,
+        20,
+        6.600403681754205
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": false
+      }
+    },
+    "bf65d105-e6c5-4f15-a871-071dbbfe68dc": {
+      "collider": {
+        "friction": 0.5,
+        "geometry": {
+          "depth": 2,
+          "height": 2,
+          "type": "box",
+          "width": 2
+        },
+        "mass": 5
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Level/green-box.glb"
+        }
+      },
+      "hidden": false,
+      "id": "bf65d105-e6c5-4f15-a871-071dbbfe68dc",
+      "name": "Box-3",
+      "order": 5.992149967488145,
+      "parentId": "21951937-6b9f-4eed-9f89-445eea58609c",
+      "position": [
+        1.8291153805886875,
+        1.8976829712808296,
+        2.38972848670503
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.7499999999999999,
+        0.7499999999999999,
+        0.7499999999999999
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "de8ba2df-d1e2-4232-814d-c6fc6846bb68": {
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Level/object-8.glb"
+        }
+      },
+      "id": "de8ba2df-d1e2-4232-814d-c6fc6846bb68",
+      "name": "object-8",
+      "order": 0.7240250569367601,
+      "parentId": "83de25ec-92e8-433c-af77-5e2bbafea588",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": false,
+        "receiveShadow": true
+      }
+    },
+    "f7909c40-bdde-4903-873f-99317fe196bc": {
+      "components": {},
+      "geometry": {
+        "innerRadius": 0.003,
+        "outerRadius": 0.007,
+        "type": "ring"
+      },
+      "id": "f7909c40-bdde-4903-873f-99317fe196bc",
+      "material": {
+        "color": "#FFFFFF",
+        "opacity": 0.8,
+        "type": "unlit"
+      },
+      "name": "AimMarker",
+      "order": 2.9958083614412465,
+      "parentId": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "position": [
+        -5.967979789448489e-17,
+        -0.00795781715017485,
+        0.48732252864506626
+      ],
+      "rotation": [
+        0,
+        1,
+        0,
+        6.123233995736767e-17
+      ],
+      "scale": [
+        1.000000135344216,
+        1.0000000068486716,
+        1.0000001284955422
+      ]
+    }
+  },
+  "spaces": {
+    "919d4174-4532-4960-8536-ccb100727e84": {
+      "activeCamera": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "id": "919d4174-4532-4960-8536-ccb100727e84",
+      "name": "Default",
+      "sky": {
+        "type": "image",
+        "src": {
+          "type": "asset",
+          "asset": "assets/Textures/sky.png"
+        }
+      },
+      "reflections": {
+        "type": "url",
+        "url": "https://cdn.8thwall.com/web/assets/envmap/basic_env_map-m9hqpneh.jpg"
+      }
+    }
+  },
+  "runtimeVersion": {
+    "type": "version",
+    "level": "major",
+    "major": 2,
+    "minor": 1,
+    "patch": 0
+  },
+  "historyVersion": "mgtyub3u"
+}

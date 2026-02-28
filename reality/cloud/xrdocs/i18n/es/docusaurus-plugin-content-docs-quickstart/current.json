@@ -1,0 +1,14 @@
+{
+  "version.label": {
+    "message": "Siguiente",
+    "description": "The label for version current"
+  },
+  "sidebar.apiSidebar.category.Getting Started": {
+    "message": "Primeros pasos",
+    "description": "The label for category Getting Started in sidebar apiSidebar"
+  },
+  "sidebar.apiSidebar.category.Development": {
+    "message": "Desarrollo",
+    "description": "The label for category Development in sidebar apiSidebar"
+  }
+}

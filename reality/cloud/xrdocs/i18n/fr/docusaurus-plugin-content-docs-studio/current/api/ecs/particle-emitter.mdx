@@ -1,0 +1,73 @@
+---
+id: particle-emitter
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Émetteur de particules
+
+## Description
+
+Ce composant permet à une entité d'émettre des particules.
+
+## Propriétés
+
+| Propriété                                               | Type                       | Défaut    | Description                                                                                              |
+| ------------------------------------------------------- | -------------------------- | --------- | -------------------------------------------------------------------------------------------------------- |
+| arrêté                                                  | booléen                    | faux      | État de lecture de l'émetteur                                                                            |
+| émetteurVie                                             | nombre                     | 0         | Durée de vie de l'émetteur en secondes                                                                   |
+| particulesPerShot                                       | entier                     | 20        | Particules par émission                                                                                  |
+| emitDelay                                               | nombre                     | 0.1       | Le temps entre les émissions de particules                                                               |
+| durée de vie minimale                                   | nombre                     | 1         | Durée de vie minimale pour chaque particule                                                              |
+| durée de vie maximale                                   | nombre                     | 1         | Durée de vie maximale de chaque particule                                                                |
+| masse                                                   | nombre                     | 1         | Masse de chaque particule                                                                                |
+| gravité                                                 | nombre                     | 0.2       | Facteur de gravité de chaque particule                                                                   |
+| échelle                                                 | nombre                     | 0.2       | Échelle uniforme de chaque particule                                                                     |
+| forceX                                                  | nombre                     | 5         | Force appliquée à chaque particule dans la direction X                                                   |
+| forceY                                                  | nombre                     | 12        | Force appliquée à chaque particule dans la direction Y                                                   |
+| forceZ                                                  | nombre                     | 5         | Force appliquée à chaque particule dans la direction Z                                                   |
+| se propager                                             | nombre                     | 360       | Zone et direction d'apparition de chaque particule par rapport à son origine                             |
+| vitesse radiale                                         | nombre                     | 5         | Quantité de vitesse radiale appliquée à chaque particule                                                 |
+| spawnAreaType                                           | chaîne de caractères       | point     | Les types pris en charge sont les suivants : "point", "boîte" et "sphère".                               |
+| Largeur de la zone d'entraînement                       | nombre                     | 0         | Largeur de la boîte de la zone de frai (boîte uniquement)                                                |
+| Hauteur de la zone d'entraînement                       | nombre                     | 0         | Hauteur de la boîte de la zone de spawn (boîte uniquement)                                               |
+| Profondeur de la zone d'entraînement                    | nombre                     | 0         | Profondeur de la boîte de la zone de frai (boîte uniquement)                                             |
+| spawnAreaRadius                                         | nombre                     | 0         | Rayon de la sphère de la zone de spawn (sphère uniquement)                                               |
+| boundingZoneType                                        | chaîne de caractères       | aucun     | Les types pris en charge sont les suivants : "aucun", "boîte", "sphère".                                 |
+| largeur de la zone de délimitation                      | nombre                     | 0         | Largeur de la zone de délimitation (boîte uniquement)                                                    |
+| hauteur de la zone de délimitation (boundingZoneHeight) | nombre                     | 0         | Hauteur de la zone de délimitation (boîte uniquement)                                                    |
+| profondeur de la zone de délimitation                   | nombre                     | 0         | Profondeur de la zone de délimitation (boîte uniquement)                                                 |
+| rayon de la zone de délimitation                        | nombre                     | 0         | Rayon de la zone de délimitation (sphère uniquement)                                                     |
+| type de ressource                                       | chaîne de caractères       | 'sprite'  | Les types pris en charge sont : "sprite" et "modèle                                                      |
+| ressourceUrl                                            | chaîne de caractères (URL) | ''        | URL de la ressource                                                                                      |
+| blendingMode                                            | chaîne de caractères       | aucun     | Les types pris en charge sont les suivants : "aucun", "normal", "ajouter", "multiplier" et "soustraire". |
+| animerCouleur                                           | booléen                    | faux      | Détermine si la couleur doit être animée                                                                 |
+| colorStart                                              | chaîne de caractères (Hex) | indéfini  | La couleur de départ de chaque particule                                                                 |
+| colorEnd                                                | chaîne de caractères (Hex) | indéfini  | La couleur finale de chaque particule                                                                    |
+| dérive aléatoire                                        | booléen                    | faux      | Activer la dérive aléatoire pour chaque particule                                                        |
+| randomDriftRange                                        | nombre                     | indéfini  | Détermine la distance de dérive aléatoire et la vitesse de chaque particule.                             |
+| collisions                                              | booléen                    | faux      | Détermine si les particules doivent réagir aux collisions physiques                                      |
+
+## Fonctions
+
+<ComponentFunctions
+    name="ParticleEmitter"
+    properties={{
+        stopped: false,
+        emitterLife: 0,
+        particlesPerShot: 20,
+        emitDelay: 0.1,
+        minimumLifespan: 1,
+        maximumLifespan: 1,
+        mass: 1,
+        gravity: 0.2,
+        scale: 0.2,
+        forceX: 5,
+        forceY: 12,
+        forceZ: 5,
+        spread: 360,
+    }}
+    mutate={`cursor.emitDelay = 0.05 ;
+    cursor.particlesPerShot = 50 ;
+    return false;`}
+/>

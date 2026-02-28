@@ -1,0 +1,77 @@
+---
+id: animation
+description: >-
+  Esta sección proporciona una guía para configurar animaciones personalizadas
+  en las entidades. Son animaciones que transforman algún elemento de la entidad
+  a lo largo del tiempo, como la posición, la escala o una propiedad de algún
+  componente de la entidad.
+---
+
+# Animación
+
+## Introducción
+
+{frontMatter.description} Nota: Esta sección trata de la creación de animaciones en Studio y del trabajo con el sistema de animación principal de Studio. Si desea obtener información sobre cómo trabajar con las animaciones integradas en un archivo de modelo GLTF, consulte la [Guía de modelos](/studio/guides/models/).
+
+Los componentes se proporcionan para la animación procedimental, y se pueden dividir en dos tipos:
+
+1. Transición
+2. Relación
+
+## Animaciones de transición
+
+Estas animaciones hacen que un objeto pase de un estado a otro a lo largo del tiempo. Habrá un estado 'desde' y 'hasta', y la animación puede terminar o establecerse en bucle.
+
+### Posición Animación
+
+Animar la posición de un objeto de destino.
+
+Véase [Componente de animación de posición](/api/studio/ecs/animation/position-animation/) API.
+
+### Animación a escala
+
+Animar el vector de escala de un objeto de destino.
+
+Véase [Componente de animación a escala](/api/studio/ecs/animation/scale-animation/) API.
+
+### Girar animación
+
+Animar la rotación de un objeto de destino.
+
+Véase la API [Rotar componente de animación](/api/studio/ecs/animation/rotate-animation/).
+
+### Animación Vec3 personalizada
+
+Anima el atributo vectorial 3D nombrado en un objeto de destino.
+
+Véase la API [Custom Vec3 Animation Component](/api/studio/ecs/animation/custom-vec3-animation/).
+
+### Animación de propiedades personalizadas
+
+Animar una sola propiedad numérica en los atributos de un objeto de destino.
+
+Véase la API [Custom Property Animation Component](/api/studio/ecs/animation/custom-property-animation/).
+
+## Animaciones de relaciones
+
+Son animaciones que expresan una relación entre un objeto y un objetivo. Cuando están en funcionamiento, mantienen esa relación para el objeto al que están unidos.
+
+### Seguir la animación
+
+Mantener la distancia a un objetivo o punto determinado.
+
+Véase la API [Follow Animation Component](/api/studio/ecs/animation/follow-animation/).
+
+### Mira la animación
+
+Mantener la orientación para enfrentarse a un objetivo o punto determinado.
+
+Véase la API [Look At Animation Component](/api/studio/ecs/animation/look-at-animation/).
+
+## Añadir una animación
+
+Las animaciones pueden añadirse a la entidad a través del editor o en código. Para añadirlos en el editor, pulse el botón "Nuevo componente":
+
+![animation-component.png](/images/studio/animation-component.png)
+
+Las animaciones también pueden añadirse mediante código, utilizando el nombre de importación del componente.

@@ -1,0 +1,26 @@
+diff --git libarchive/archive.h libarchive/archive.h
+index 9ad9260b..32913082 100644
+--- libarchive/archive.h
++++ libarchive/archive.h
+@@ -98,7 +98,7 @@ typedef ssize_t la_ssize_t;
+ 
+ /* Large file support for Android */
+ #ifdef __ANDROID__
+-#include "android_lf.h"
++#include "contrib/android/include/android_lf.h"
+ #endif
+ 
+ /*
+diff --git libarchive/archive_entry.h libarchive/archive_entry.h
+index 71cc6365..237564d2 100644
+--- libarchive/archive_entry.h
++++ libarchive/archive_entry.h
+@@ -100,7 +100,7 @@ typedef ssize_t la_ssize_t;
+ 
+ /* Large file support for Android */
+ #ifdef __ANDROID__
+-#include "android_lf.h"
++#include "contrib/android/include/android_lf.h"
+ #endif
+ 
+ /*

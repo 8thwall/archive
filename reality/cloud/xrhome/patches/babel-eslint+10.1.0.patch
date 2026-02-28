@@ -1,0 +1,13 @@
+diff --git a/node_modules/babel-eslint/lib/parse.js b/node_modules/babel-eslint/lib/parse.js
+index d0fe8e5..0614cb7 100644
+--- a/node_modules/babel-eslint/lib/parse.js
++++ b/node_modules/babel-eslint/lib/parse.js
+@@ -19,7 +19,7 @@ module.exports = function(code, options) {
+     ranges: true,
+     tokens: true,
+     plugins: [
+-      ["flow", { all: true, enums: true }],
++      "typescript",
+       "jsx",
+       "estree",
+       "asyncFunctions",

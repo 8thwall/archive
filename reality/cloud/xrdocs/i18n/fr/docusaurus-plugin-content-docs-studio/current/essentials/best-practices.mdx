@@ -1,0 +1,156 @@
+---
+id: best-practices
+description: >-
+  Problèmes courants et bonnes pratiques à suivre lors de la création de
+  composants personnalisés.
+sidebar_position: 50
+---
+
+# Meilleures pratiques
+
+<p>{frontMatter.description}</p>
+
+## Références périmées
+
+Lorsque votre composant se voit passer `(world, component)` pour ajouter, cocher ou supprimer des callbacks, il n'est pas toujours sûr de référencer `component` dans une fonction imbriquée et de l'utiliser après le retour du callback.
+
+<div class="code-invalide">
+  ### Exemple incorrect
+
+  ```ts
+  ecs.registerComponent({
+      name: 'age-counter',
+      data: {
+      age: ecs.i32,
+      interval: ecs.i32,
+  },
+      add: (world, component) => {
+      const interval = world.time.setInterval(() => {
+      // This is not safe because we're accessing data after some amount of time
+      // has passed, it's not guaranteed to still be valid.
+      component.data.age += 1
+  }, 1000)
+
+      // This is safe because we're assigning to data within the add function
+      component.data.interval = interval
+  },
+      tick: (world, component) => {
+      console.log('I am', component.data.age, 'seconds old')
+  },
+      remove: (world, component) => {
+      world.time.clearTimeout(component.data.interval)
+  }
+  })
+  ```
+</div>
+
+<div class="code-valid">
+  ### Exemple correct
+
+  ```ts
+  ecs.registerComponent({
+    name: 'age-counter',
+    data: {
+      age: ecs.i32,
+      interval: ecs.i32,
+    },
+    add: (world, component) => {
+      const {eid, dataAttribute} = component
+      const interval = world.time.setInterval(() => {
+  	  // This is safe because we're re-acquiring a cursor at the time we need it,
+        // instead of using a stale cursor from before.
+  	  const data = dataAttribute.cursor(eid)
+        data.age += 1
+      }, 1000)
+
+      component.data.interval = interval
+  },
+  tick: (world, component) => {
+  console.log('I am', component.data.age, 'seconds old')
+  },
+  remove: (world, component) => {
+  // world.time.clearTimeout(component.data.interval)
+  }
+  })
+  ```
+</div>
+
+Dans l'exemple ci-dessus, dataAttribute est utilisé comme méthode stable pour accéder aux données du composant dans une fonction imbriquée. Cela garantit que les données restent valides et à jour même lorsque la fonction est appelée de manière asynchrone.
+
+En outre, la variable eid est déstructurée plutôt que d'accéder directement à component.eid, car ce dernier peut changer en fonction de l'entité qui reçoit le rappel. L'utilisation d'une variable déstructurée permet d'éviter les références périmées.
+
+Voici la validité de chacun des arguments transmis aux rappels de composants :
+
+:::warning
+Déstructurez toujours l'eid avant de l'utiliser au lieu d'accéder à component.eid, car l'accès direct à component.eid peut entraîner des références périmées.
+:::
+
+| contexte          | Changements après la sortie du callback ? | Peut-on l'utiliser dans une fonction imbriquée ? | Durée de vie                 |
+| ----------------- | ----------------------------------------- | ------------------------------------------------ | ---------------------------- |
+| monde             | ❌ Non                                     | ✅ Oui                                            | Expérience à vie             |
+| eid               | ✅ Oui                                     | ✅ Oui                                            | Durée de vie de l'entité     |
+| schéma et données | ✅ Oui                                     | ❌ Non                                            | Niveau supérieur de Callback |
+| schemaAttribute   | ❌ Non                                     | ✅ Oui                                            | Durée de vie de l'entité     |
+
+## Curseurs non validés
+
+Les objets curseurs servent d'interfaces pour la lecture et l'écriture de données dans l'état ECS. Chaque fois qu'un curseur est demandé pour un composant, la même instance de curseur est réutilisée, mais elle pointe vers un emplacement différent dans la mémoire. Par conséquent, une référence de curseur peut devenir invalide, c'est-à-dire qu'elle peut ne plus pointer vers les données attendues.
+
+### Exemple incorrect
+
+<div class="code-invalide">
+  ```ts
+  const cursor1 = MyComponent.get(world, entity1)
+  console.log(cursor1.name) // 'entity1'
+
+  const cursor2 = MyComponent.get(world, entity2)
+  console.log(cursor2.name) // 'entity2'
+
+  // Unexpected bugs may occur if using cursor1 after another access of the component
+  console.log(cursor1.name) // 'entity2'
+  console.log(cursor1 === cursor2) // 'true' - it's the same object, just initialized differently each time
+  ```
+</div>
+
+## Les auditeurs suspendus
+
+Évitez de supposer qu'un objet ou un composant persistera indéfiniment. Au fur et à mesure que votre projet évolue ou que de nouvelles fonctionnalités sont introduites, il est important de s'assurer que la logique de votre composant est robuste, notamment en nettoyant correctement les récepteurs d'événements.
+
+Les machines à états sont un excellent moyen de gérer et de nettoyer les écouteurs d'événements.
+
+### Exemple correct
+
+<div class="code-valid">
+  ```ts
+  ecs.registerComponent({
+    name: 'Game Manager',
+    schema: {
+      // Add data that can be configured on the component.
+      scoreDisplay: ecs.eid,  // how many coins you've collected
+    },
+    schemaDefaults: {
+      // Add defaults for the schema fields.
+    },
+    data: {
+      // Add data that cannot be configured outside of the component.
+      score: ecs.i32,  // The integer value of the score
+    },
+    stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+      // Add score event
+      const coinCollect = () => {
+        const data = dataAttribute.cursor(eid)
+        data.score += 1
+        ecs.Ui.set(world, schemaAttribute.get(eid).scoreDisplay, {
+          text: data.score.toString(),
+        })
+      }
+
+      ecs.defineState('default').initial().onEnter(() => {
+        world.events.addListener(world.events.globalId, 'coinCollect', coinCollect)
+      }).onExit(() => {
+        world.events.removeListener(world.events.globalId, 'coinCollect', coinCollect)
+      })
+    },
+  })
+  ```
+</div>

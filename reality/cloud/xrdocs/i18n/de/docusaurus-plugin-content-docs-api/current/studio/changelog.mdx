@@ -1,0 +1,80 @@
+---
+id: changelog
+sidebar_position: 1000
+---
+
+# Änderungsliste
+
+## 2.2.0 (24. Oktober 2025) {#2.2.0}
+
+### Neue Funktionen
+
+- Hinzufügen von Physik-Kollider-Rotations-Offsets
+
+### Funktionen und Erweiterungen
+
+- Korrektur des Schattenwinkels des Richtungslichts beim Verfolgen der Kamera
+
+## 2.1.0 (Oktober 16, 2025) {#2.1.0}
+
+### Neue Funktionen
+
+- Hinzufügen der Effektmanager-API zur Aktualisierung von Himmel und Nebel (`world.effects`)
+
+### Korrekturen und Erweiterungen
+
+- Aktualisierte Typdefinition für Schema/Daten in der Komponente remove callback
+- Hinzufügen von Animationsereignissen zu event-ids
+- Korrigiert doppelte Beobachteraufrufe bei `add()` für vorgefertigte Instanzen
+- Problem mit Mauseingaben, die eine Zeigersperre verursachen, behoben
+- Problem behoben, bei dem `ScaleAnimation` Kollider fälschlicherweise verschoben hat
+
+## 2.0.1 (25. September 2025) {#2.0.1}
+
+### Korrekturen und Erweiterungen
+
+- Ein Problem mit der Physik wurde behoben, bei dem dynamische Objekte nicht vollständig zur Ruhe kommen konnten
+- Behebung eines Absturzes, der nach wiederholter Änderung der Physik-Kollider-Skala auftreten konnte
+- Korrigierte Richtungen der Partikelemission
+- Partikeleffekte sind nun unabhängig von der Framerate
+- Erhöhte Zuverlässigkeit des Desktop-App-Simulators
+- Ein UI-Problem behoben, das zu einer falschen Platzierung von Elementen führte
+
+## 2.0.0 (September 10, 2025) {#2.0.0}
+
+Die brandneue Studio Runtime 2.0 verfügt über eine überarbeitete Physik-Engine. Einige physikalische Verhaltensweisen sind daher anders. In der [2.0 Upgrade-Anleitung] (http://8th.io/v2upgradeguide) finden Sie Anweisungen und Tipps für eine reibungslose Migration.
+
+### Wechselnde Änderungen
+
+- Eigenschaften von `ecs.Collider` entfernt:
+  - Rollende Reibung
+  - SpinningFriction".
+- Der Aktualisierungsmodus der Matrix wurde geändert: Manuell" als Standard, was optimaler ist. Wenn Sie three.js-Objekte direkt ändern, müssen Sie für jedes geänderte Objekt "world.three.notifyChanged()" aufrufen oder mit "world.three.setMatrixUpdateMode('auto')" zum ursprünglichen Verhalten zurückkehren.
+- In Version 2.0 unterscheiden sich einige der zugrunde liegenden Berechnungen der neuen Physik-Engine für Eigenschaften wie Reibung, Rückstellung und Dämpfung. Weitere Einzelheiten finden Sie in der [Upgrade-Anleitung](http://8th.io/v2upgradeguide).
+
+### Neue Funktionen
+
+- Wir haben eine neue Eigenschaft `type` (erforderlich) zu `ecs.Collider` hinzugefügt, um zu bestimmen, ob und wie die Physiksimulation auf das Objekt angewendet werden soll. Zuvor bestimmte ein Massenwert über 0, ob ein Collider dynamisch war oder nicht (0 Masse = statisch), und kinematische Collider wurden nicht unterstützt.
+  - Erlaubte Werte: ColliderType.Static", "ColliderType.Kinematic", "ColliderType.Dynamic
+  - Kinematische Kollisionskörper werden nicht von physikalischen Kräften beeinflusst, können sich aber bewegen und andere dynamische Körper durch Kollisionen beeinflussen.
+  - Siehe [Collider API Dokumentation](https://www.8thwall.com/docs/api/studio/ecs/collider/) für Details und Anwendungsfälle
+
+### Korrekturen und Erweiterungen
+
+- Strengere Typescript-Prüfung bei der Erstellung standardmäßig aktiviert, um die Fehlerberichterstattung zu verbessern
+
+## 1.1.0 (29. August 2025) {#1.1.0}
+
+- Exportierte zusätzliche Konstanten für XR-Ereignisse
+- Behoben: Das Gesichtsnetz wurde nicht wie konfiguriert mit der Face AR-Kamera gerendert
+- Verhalten bei deaktivierten Kollidern korrigiert
+- Korrumpierte Form, die auf Auto-Kollider angewendet wurde, wurde behoben
+
+## 1.0.1 (25. August 2025) {#1.0.1}
+
+- Sicherstellung, dass die booleschen Typen der Physik als `true`/`false` dargestellt werden, nicht als `1`/`0`
+- Exportierter `GpsPointer`
+
+## 1.0.0 (6. August 2025) {#1.0.0}
+
+- Erste versionierte Version

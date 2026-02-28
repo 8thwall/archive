@@ -1,0 +1,162 @@
+---
+id: entity
+description: >-
+  Diese Klasse repräsentiert eine einzelne Entität im 8. Wall Studio-Szenengraph
+  und bietet Zugriff auf Komponenten, Zustandssteuerung und hierarchische
+  Operationen.
+sidebar_position: 500
+---
+
+# Entität
+
+## Beschreibung
+
+{frontMatter.description}
+
+## Eigenschaften
+
+| Eigentum | Typ  | Beschreibung                              |
+| -------- | ---- | ----------------------------------------- |
+| eid      | Eid  | Eindeutiger Bezeichner für diese Entität. |
+
+## Bauteil-Methoden
+
+### bekommen.
+
+Zugriff auf die aktuellen Daten für eine Komponente auf dieser Entität.
+
+```ts
+entity.get(component: RootAttribute<Schema>) // -> ReadData<Schema>
+```
+
+### hat
+
+Prüfen, ob eine Komponente auf dieser Entität existiert.
+
+```ts
+entity.has(component: RootAttribute<Schema>) // -> boolean
+```
+
+### einstellen.
+
+Daten auf eine Komponente auf dieser Entität anwenden.
+
+```ts
+entity.set(component: RootAttribute<Schema>, data: ReadData<Schema>) // -> void
+```
+
+### entfernen
+
+Entfernt eine Komponente aus dieser Entität.
+
+```ts
+entity.remove(component: RootAttribute<Schema>) // -> void
+```
+
+### zurücksetzen
+
+Setzt eine Komponente auf dieser Entität auf ihren Standardwert zurück.
+
+```ts
+entity.reset(component: RootAttribute<Schema>) // -> void
+```
+
+## Staatliche Methoden
+
+### ausblenden
+
+Diese Entität ausblenden.
+
+```ts
+entity.hide() // -> void
+```
+
+### anzeigen
+
+Zeigt diese Entität an, wenn sie ausgeblendet ist.
+
+```ts
+entity.show() // -> void
+```
+
+### isHidden
+
+Prüfen Sie, ob die Entität derzeit ausgeblendet ist.
+
+```ts
+entity.isHidden() // -> boolescher Wert
+```
+
+### deaktivieren
+
+Deaktivieren Sie diese Entität.
+
+```ts
+entity.disable() // -> void
+```
+
+### aktivieren.
+
+Aktivieren Sie diese Entität.
+
+```ts
+entity.enable() // -> void
+```
+
+### isDisabled
+
+Prüfen Sie, ob die Entität derzeit deaktiviert ist.
+
+```ts
+entity.isDisabled() // -> boolescher Wert
+```
+
+### löschen
+
+Löscht diese Entität aus der Welt.
+
+```ts
+entity.delete() // -> ungültig
+```
+
+### isDeleted
+
+Prüfen Sie, ob die Entität gelöscht wurde.
+
+```ts
+entity.isDeleted() // -> boolesch
+```
+
+## Hierarchie-Methoden
+
+### setParent
+
+Legen Sie das übergeordnete Element dieser Entität fest.
+
+```ts
+entity.setParent(parent: Eid | undefined | null) // -> void
+```
+
+### getChildren
+
+Erhalten Sie die Kinder dieser Entität.
+
+```ts
+Entität.getChildren() // -> Generator<Eid>
+```
+
+### getParent
+
+Ermittelt das übergeordnete Element dieser Entität.
+
+```ts
+entity.getParent() // -> Eid | undefiniert
+```
+
+### addChild
+
+Machen Sie eine andere Entität zu einem Kind dieser Entität.
+
+```ts
+entity.addChild(child: Eid) // -> void
+```

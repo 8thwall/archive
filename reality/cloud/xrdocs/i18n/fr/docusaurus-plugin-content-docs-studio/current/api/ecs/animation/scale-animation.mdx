@@ -1,0 +1,48 @@
+---
+id: scale-animation
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# ScaleAnimation
+
+## Description
+
+Ce composant crée une animation sur une entité.
+
+## Propriétés
+
+| Propriété             | Type                  | Défaut      | Description                                                                                                                                                        |
+| --------------------- | --------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| cible                 | eid                   | indéfini    | L'objet cible à animer. Si elle n'est pas spécifiée, l'animation est exécutée sur l'objet auquel le composant est attaché.                                         |
+| de                    | objet                 | {0, 0, 0}   | L'état de départ de l'animation.                                                                                                                                   |
+| à                     | objet                 | {0, 0, 0}   | L'état final de l'animation.                                                                                                                                       |
+| autoFrom              | booléen               | faux        | Si cette option est activée, la propriété "from" est ignorée et l'animation se fait à partir de l'état de l'objet au début de l'animation.                         |
+| durée                 | nombre                | 1000        | Durée de l'animation en millisecondes.                                                                                                                             |
+| boucle                | booléen               | vrai        | Si cette option est activée, l'animation est répétée.                                                                                                              |
+| inverser              | booléen               | faux        | Indique si la lecture doit se faire en sens inverse, si la boucle est réglée.                                                                                      |
+| easeIn                | booléen               | faux        | Si cette option est activée, la fonction d'assouplissement sera appliquée dans le temps au lieu d'une interpolation directe.                                       |
+| facilitéSortie        | booléen               | faux        | Si cette option est activée, la fonction d'assouplissement sera appliquée dans le temps au lieu d'une interpolation directe.                                       |
+| easingFunction        | chaîne de caractères  | Quadratique | Choisissez parmi les options suivantes : quadratique, cubique, quartique, quintique, sinusoïdale, exponentielle, circulaire, élastique, retour et rebond.          |
+
+## Fonctions
+
+<ComponentFunctions
+    name="ScaleAnimation"
+    properties={{
+        from : { x: 0, y: 0, z: 0 },
+        to : { x: 0, y: 0, z: 0 },
+        autoFrom : false,
+        duration : 1000,
+        loop : true,
+        reverse : false,
+        easeIn : false,
+        easeOut : false,
+        easingFunction : "Quadratic"
+    }}
+    mutate={`cursor.to.x = 2 ;
+    cursor.to.y = 2 ;
+    cursor.to.z = 2 ;
+    cursor.duration = 2000 ;
+    return false;`}
+/>

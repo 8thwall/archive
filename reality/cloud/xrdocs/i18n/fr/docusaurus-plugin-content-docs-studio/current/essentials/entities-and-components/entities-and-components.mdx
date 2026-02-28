@@ -1,0 +1,34 @@
+---
+id: entities-and-components
+description: >-
+  8th Wall Studio utilise une architecture de composants d'entités (ECS) pour
+  gérer les entités et leurs comportements.
+sidebar_position: 1
+---
+
+# Entités et composants
+
+## Introduction
+
+{frontMatter.description} Une entité représente un objet distinct dans votre univers de jeu, tandis que les composants définissent les données ou fonctionnalités spécifiques que les entités possèdent. Cette conception permet de construire des systèmes complexes de manière flexible et modulaire en combinant divers composants avec différentes entités.
+
+## Les relations
+
+Les entités et les composants fonctionnent ensemble de manière hiérarchique. Une entité est essentiellement un identifiant auquel peuvent être associés un ou plusieurs composants. Les composants contiennent les données ou la logique qui définissent ce qu'une entité peut faire ou comment elle se comporte. En composant des entités à partir de différents éléments, vous pouvez construire des objets de jeu divers et complexes sans avoir besoin de structures d'héritage rigides.
+
+### Exemple
+
+Une entité existe dans un espace qui appartient à un monde. Le monde représente l'environnement ou le contexte général, tandis que les espaces regroupent les entités. Par exemple, un monde peut contenir un niveau de jeu, avec des espaces organisant différentes zones ou scènes. Les entités de chaque espace peuvent avoir des composantes telles que la position, la rotation, l'échelle, la santé, la géométrie et la matière. Chaque composant définit une caractéristique ou un comportement distinct de l'entité, ce qui permet un contrôle modulaire de ses attributs.
+
+```mermaid
+%%{init : {"flowchart" : {"htmlLabels" : false}} }%%
+graph TD ;
+    world("World") --> space("Space") ;
+    space --> eid("Entity") ;
+    eid("Entity") --> ComponentA("Position") ;
+    eid("Entity") --> ComponentB("Rotation") ;
+    eid("Entité") --> ComposantC("Échelle") ;
+    eid("Entité") --> ComposantE("CapsuleGéométrie") ;
+    eid("Entité") --> ComposantF("Matériau") ;
+    eid("Entité") --> ComposantD("Santé") ;
+```

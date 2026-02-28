@@ -1,0 +1,25 @@
+---
+sidebar_label: stop()
+---
+
+# XR8.stop()
+
+`XR8.stop()`
+
+## Description {#description}
+
+Lorsque l'appareil est à l'arrêt, le flux de la caméra est fermé et les mouvements de l'appareil ne sont pas suivis. Doit appeler [`XR8.run()`](run.md) pour redémarrer après l'arrêt du moteur.
+
+## Paramètres {#parameters}
+
+Aucun
+
+## Retours {#returns}
+
+Aucun
+
+## Exemple {#example}
+
+```javascript
+XR8.stop()
+```

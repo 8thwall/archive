@@ -1,0 +1,17 @@
+{
+  "projectUrl": "https://8w.8thwall.app/catch-the-stack",
+  "shell": "android",
+  "android": {
+    "manifest": "AndroidManifest.xml",
+    "packageName": "com.the8thwall.catchthestack",
+    "minSdkVersion": 26,
+    "targetSdkVersion": 34
+  },
+  "appInfo": {
+    "workspace": "8w",
+    "appName": "catch-the-stack",
+    "bundleIdentifier": "com.the8w.catch_the_stack",
+    "refHead": "production",
+    "resourceDir": "res/"
+  }
+}

@@ -1,0 +1,33 @@
+<!-- Copyright (c) 2020 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<div class="prompt"><span id="text">Tap to Place<br>Hologram</span></div>
+
+<h2>8th Wall - Depthkit - A-Frame</h2>
+
+<a-scene
+  xrextras-tap-recenter
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  xrweb>
+
+  <a-camera position="0 2 2"></a-camera>
+
+  <a-entity 
+    id="depthkitEntity" 
+    position="0 1.18 0"
+    scale="1.25 1.25 -1.25"
+    depthkit="capture: autumn; loop: true; opacity: 0.0;">
+  </a-entity>
+  
+  <a-circle
+    id="shadow"
+    visible="false"
+    rotation="-90 45 0"
+    scale="1 0.8 1"
+    src="./assets/shadow.png"
+    opacity="0.4">
+  </a-circle>
+  
+</a-scene>

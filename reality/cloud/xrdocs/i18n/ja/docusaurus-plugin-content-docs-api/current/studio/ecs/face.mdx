@@ -1,0 +1,31 @@
+---
+id: face
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import FaceTable from "../../../gen/tables/Face.md"
+
+# 顔
+
+## 説明
+
+このコンポーネントは、エンティティのトランスフォームをXRで追跡された顔に追従させる。 顔を見つけたり失ったりすると、その実体を表示したり隠したりする。
+
+## プロパティ
+
+テストしたいサンプルシーンを **Scenes in Build** にドラッグします。 **Home** シーンがリストの一番上にあることを確認します。 
+<FaceTable />
+
+## 機能
+
+テストしたいサンプルシーンを **Scenes in Build** にドラッグします。 **Home** シーンがリストの一番上にあることを確認します。 
+<ComponentFunctions
+    name="Face"
+    properties={{
+        id: 1,
+        addAttachmentState: false
+    }}
+    mutate={`cursor.id = 1;
+    cursor.addAttachmentState = true;
+    return false;`}
+/>

@@ -1,0 +1,43 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<div id="status">not localized</div>
+
+<a-scene
+  networked-scene="adapter: sharedar; connectOnLoad: false"
+  lobby-handler
+  lobby-pages
+  vps-coaching-overlay
+  xrextras-loading
+  xrextras-runtime-error
+  xrextras-gesture-detector>
+  <a-assets>
+    <a-asset-item id="vps-mesh" src="./assets/vps-mesh.glb"></a-asset-item>
+
+    <template id="sphere-template">
+      <a-entity
+        class="cantap"
+        geometry="primitive: box"
+        scale="0.5 0.5 0.5"
+        position="0 0 0"
+        material="
+        color: #AD50FF; shader: flat; 
+        src: https://cdn.8thwall.com/web/assets/cube-texture.png"
+        color-changer></a-entity>
+    </template>
+  </a-assets>
+
+  <a-camera
+    id="camera"
+    position="0 2 2"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;">
+  </a-camera>
+
+  <a-entity id="wayspot" named-wayspot="name: california-p">
+    <a-entity gltf-model="#vps-mesh" xrextras-hider-material></a-entity>
+    <a-entity
+      id="sphere"
+      networked="template: #sphere-template; networkId: sphere; persistent: true; owner: scene">
+    </a-entity>
+  </a-entity>
+</a-scene>

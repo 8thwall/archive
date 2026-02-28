@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!-- MPD file Generated with GPAC version 0.8.0-rev1-gc1990d5c-master  at 2019-11-06T07:01:39.490Z-->
+<MPD xmlns="urn:mpeg:dash:schema:mpd:2011" minBufferTime="PT1.500S" type="static" mediaPresentationDuration="PT0H0M6.233S" maxSegmentDuration="PT0H0M2.005S" profiles="urn:mpeg:dash:profile:full:2011">
+ <ProgramInformation moreInformationURL="http://gpac.io">
+  <Title>mp4</Title>
+ </ProgramInformation>
+
+ <Period duration="PT0H0M6.233S">
+  <AdaptationSet segmentAlignment="true" maxWidth="2048" maxHeight="2048" maxFrameRate="30" par="1:1" lang="und">
+   <SegmentTemplate media="mp4_dash_track1_$Time$.m4s" initialization="mp4_dash_track1_init.mp4" timescale="30000" startNumber="1">
+    <SegmentTimeline>
+     <S t="0" d="60000" r="2"/>
+     <S d="6990"/>
+    </SegmentTimeline>
+   </SegmentTemplate>
+   <Representation id="1" mimeType="video/mp4" codecs="avc1.42C032" width="2048" height="2048" frameRate="30" sar="1:1" bandwidth="19465831">
+   </Representation>
+  </AdaptationSet>
+  <AdaptationSet segmentAlignment="true" lang="und">
+   <SegmentTemplate media="mp4_dash_track2_$Time$.m4s" initialization="mp4_dash_track2_init.mp4" timescale="48000" startNumber="1">
+    <SegmentTimeline>
+     <S t="0" d="95232"/>
+     <S d="96240" r="1"/>
+     <S d="9216"/>
+    </SegmentTimeline>
+   </SegmentTemplate>
+   <Representation id="2" mimeType="audio/mp4" codecs="mp4a.40.2" audioSamplingRate="48000" bandwidth="192000">
+    <AudioChannelConfiguration schemeIdUri="urn:mpeg:dash:23003:3:audio_channel_configuration:2011" value="2"/>
+   </Representation>
+  </AdaptationSet>
+ </Period>
+</MPD>

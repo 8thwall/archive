@@ -1,0 +1,30 @@
+{
+  "logo.alt": {
+    "message": "8. Wand",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Support": {
+    "message": "Unterstützung",
+    "description": "Navbar item with label Support"
+  },
+  "item.label.Project Library": {
+    "message": "Projektbibliothek",
+    "description": "Navbar item with label Project Library"
+  },
+  "item.label.Tutorials": {
+    "message": "Anleitungen",
+    "description": "Navbar item with label Tutorials"
+  },
+  "item.label.Slack Community": {
+    "message": "Slack-Gemeinschaft",
+    "description": "Navbar item with label Slack Community"
+  },
+  "item.label.Courses": {
+    "message": "Kurse",
+    "description": "Navbar item with label Courses"
+  },
+  "item.label.Forum": {
+    "message": "Forum",
+    "description": "Navbar item with label Forum"
+  }
+}

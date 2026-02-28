@@ -1,0 +1,59 @@
+---
+id: component-lifecycle
+description: ライフサイクル イベントは、追加、ティック、または削除時にコンポーネントの動作をトリガするために使用できます。
+sidebar_position: 55
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# コンポーネントのライフサイクル
+
+## はじめに
+
+{frontMatter.description}
+
+## 例
+
+```ts
+const MyComponent = ecs.registerComponent({
+  name: 'My Component',
+  add: (world, component) => {
+    console.log('My component was added to', component.eid) 
+  },
+  tick: (world, component) => {
+    console.log('My tick function is running on', component.eid) 
+  },
+  remove: (world, component) => {
+    console.log('My component was removed from', component.eid) 
+  },
+})
+```
+
+## メソッド
+
+| 方法   | 説明                                                                                       |
+| ---- | ---------------------------------------------------------------------------------------- |
+| 追加   | コンポーネントが初期化されたときに一度だけ呼び出されます。 初期状態の設定と変数のインスタンス化に使用する。                                   |
+| 取り除く | コンポーネントがエンティティから削除されたとき、またはエンティティがシーンから切り離されたときに呼び出されます。 エンティティに対する以前の変更をすべて取り消すために使用する。 |
+| ダニ   | シーンのレンダー・ループまたはティックごとに呼び出される。 継続的な変更やチェックに使用される。                                         |
+
+### パラメータ
+
+| プロパティ                         | タイプ                                 | 概要                                        |
+| ----------------------------- | ----------------------------------- | ----------------------------------------- |
+| world                         | [世界](/api/studio/world)             | 世界への言及。                                   |
+| コンポーネントが初期化されたときに一度だけ呼び出されます。 | [ComponentObject](#componentobject) | カーソルは、エンティティにアタッチされた別のコンポーネントのスキーマへの参照です。 |
+
+### ComponentObject
+
+:::warning
+タイマーやイベント・ハンドラなどの非同期コンテキストでは、eid、schema、data プロパティの代わりに schemaAttribute または dataAttribute を使用してください。
+:::
+
+| プロパティ                                                | タイプ             | 説明                                                                       |
+| ---------------------------------------------------- | --------------- | ------------------------------------------------------------------------ |
+| eid                                                  | eid             | \| イード             \| イード            \| 現在のコンポーネントのエンティティID。             |
+| 列挙                                                   | \|              | 現在のエンティティのスキーマへの参照                                                       |
+| このような場合は、代わりにschemaAttributeとdataAttributeを使用してください。 | ComponentObject | \| スキーマ属性          \| ワールド属性         \| ワールドスコープにおける現在のコンポーネントのスキーマへの参照。 |
+| data                                                 | \|              | 現在のエンティティのデータへの参照                                                        |
+| \|                                                   | ComponentObject | \| データ属性           \| ワールド属性         \| ワールドスコープにおける現在のコンポーネントのデータへの参照。  |

@@ -1,0 +1,4 @@
+assets/**/*.woff filter=lfs diff=lfs merge=lfs -text
+bin/**/*.osx filter=lfs diff=lfs merge=lfs -text
+bin/**/*.linux filter=lfs diff=lfs merge=lfs -text
+bin/**/*.so.* filter=lfs diff=lfs merge=lfs -text

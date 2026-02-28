@@ -1,0 +1,42 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  xrweb="disableWorldTracking: true">
+
+  <a-assets>
+    <video id="beach-video-1" autoplay muted crossorigin="anonymous" loop="true" src="./assets/beach1.mp4"></video>
+    <video id="beach-video-2" autoplay muted crossorigin="anonymous" loop="true" src="./assets/beach2.mp4"></video>
+    <video id="beach-video-3" autoplay muted crossorigin="anonymous" loop="true" src="./assets/beach3.mp4"></video>
+    <video id="beach-video-4" autoplay muted crossorigin="anonymous" loop="true" src="./assets/beach4.mp4"></video>
+  </a-assets>
+  
+  <a-camera
+    position="0 4 10"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;">
+  </a-camera>
+  
+  <a-light type="ambient" intensity="1"></a-light>
+  
+  <!-- Note: "name:" must be set to the name of the image target uploaded to the 8th Wall Console -->
+  <xrextras-named-image-target name="pebble-beach1">
+    <xrextras-target-video-fade video="#beach-video-1"></xrextras-target-video-fade>
+  </xrextras-named-image-target>
+  
+  <xrextras-named-image-target name="pebble-beach2">
+    <xrextras-target-video-fade video="#beach-video-2"></xrextras-target-video-fade>
+  </xrextras-named-image-target>
+  
+  <xrextras-named-image-target name="pebble-beach3">
+    <xrextras-target-video-fade video="#beach-video-3"></xrextras-target-video-fade>
+  </xrextras-named-image-target>
+  
+  <xrextras-named-image-target name="pebble-beach4">
+    <xrextras-target-video-fade video="#beach-video-4"></xrextras-target-video-fade>
+  </xrextras-named-image-target>
+  
+</a-scene>

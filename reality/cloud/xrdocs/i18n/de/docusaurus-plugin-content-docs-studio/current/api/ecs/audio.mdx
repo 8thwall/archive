@@ -1,0 +1,47 @@
+---
+id: Audio
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Audio
+
+## Beschreibung
+
+Mit dieser Komponente können Entitäten Klänge abspielen.
+
+## Eigenschaften
+
+| Eigenschaft         | Typ     | Standard   | Beschreibung                                                                                                                                                                                                                                                                                                                             |
+| ------------------- | ------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| url (erforderlich)  | String  | ''         | Quelle URL                                                                                                                                                                                                                                                                                                                               |
+| Band                | Nummer  | 1          | Wie laut der Ton abgespielt werden soll. Ein Wert zwischen 0 und 1                                                                                                                                                                                                                                                                       |
+| Schleife            | boolean | false      | Ob der Ton nach Beendigung neu gestartet wird                                                                                                                                                                                                                                                                                            |
+| pausiert            | boolean | false      | Ob der Ton gerade pausiert ist                                                                                                                                                                                                                                                                                                           |
+| Stellplatz          | Nummer  | 1          | Der Faktor, der verwendet wird, um die Tonhöhe des Audios zu ändern. 1 ist die Standardeinstellung.                                                                                                                                                                                                                                      |
+| Standort            | boolean | false      | Ob das Audio positionell abgespielt wird                                                                                                                                                                                                                                                                                                 |
+| refDistance         | Nummer  | 1          | **Wird nur angewandt, wenn positional true ist.** Der Wert, der angibt, ab welcher Entfernung die Lautstärke von dieser Quelle abnimmt, wenn sich der Zuhörer entfernt. Muss ein nicht-negativer Wert sein.                                                                                                                              |
+| distanceModel       | String  | Invers     | \*\*Der Algorithmus, der verwendet wird, um die Lautstärke mit zunehmender Entfernung zwischen dieser Audioquelle und dem Zuhörer zu reduzieren. Mögliche Werte sind "linear", "invers" und "exponentiell".                                                                                                                              |
+| rolloffFactor       | Nummer  | 1          | **Wird nur angewendet, wenn positional true ist.** Wie schnell die Lautstärke mit zunehmender Entfernung zwischen dieser Audioquelle und dem Zuhörer reduziert wird. Der zulässige Wertebereich ändert sich je nach distanceModel wie folgt: linear: 0 bis 1, invers: 0 bis Unendlich, exponentiell: 0 bis Unendlich                     |
+| maxDistance         | Nummer  | 10000      | **Wird nur angewandt, wenn positional wahr ist** und distanceModel gleich linear ist. Der maximale Abstand zwischen dieser Audioquelle und dem Zuhörer. Danach wird das Volumen nicht mehr reduziert. Muss ein positiver Wert sein.                                                                                                      |
+
+## Funktionen
+
+<ComponentFunctions
+    name="Audio"
+    properties={{
+        url: "",
+        volume: 1,
+        loop: false,
+        paused: false,
+        pitch: 1,
+        positional: false,
+        refDistance: 1,
+        distanceModel: "'inverse'",
+        rolloffFactor: 1,
+        maxDistance: 10000
+    }}
+    mutate={`cursor.volume = 0.5;
+    cursor.loop = true;
+    return false;`}
+/>

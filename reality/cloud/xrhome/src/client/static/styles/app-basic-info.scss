@@ -1,0 +1,97 @@
+@import 'settings';
+
+$cover-image-padding: 0.3em;
+
+.edit-basic-info-card {
+  .cam-section {
+    margin-bottom: 1em;
+    .icon {
+      margin-left: 2em;
+      cursor: pointer;
+    }
+  }
+
+  .basic-info-field {
+    .field-value {
+      // Match the vertical padding of a Semantic Form.Field input element.
+      padding: .67857143em 0em;
+    }
+
+    label {
+      .subtitle {
+        margin-left: 0.25em;
+      }
+    }
+  }
+}
+
+.add-basic-info-card {
+  .field + .field {
+    margin-top: 0em !important;
+  }
+
+  .basic-info-field {
+    label {
+      .subtitle {
+        display: inline;
+        margin-left: 0.5em;
+        font-size: 0.85em;
+        color: $brand-black;
+      }
+
+      .required {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.round-edges {
+  img {
+    border-radius: 0.5em;
+    max-height: inherit;
+    width: 100%;
+  }
+}
+
+.cover-image-fields {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: flex-start;
+
+  .cover-image-container {
+    position: relative;
+    margin: 0.3em;
+    padding: $cover-image-padding;
+    border: 0.3em solid $brand-highlight;
+    max-height: 14em;
+    max-width: 90%;
+    box-sizing: content-box;
+
+    .cover-image {
+      max-height: inherit;
+      max-width: 100%;
+    }
+
+    .cover-image-overlay {
+      position: absolute;
+      top: $cover-image-padding;
+      left: $cover-image-padding;
+      bottom: $cover-image-padding;
+      right: $cover-image-padding;
+
+      &.hovering {
+        background: #2D2D4532;
+      }
+    }
+  }
+
+  .field {
+    margin: 0.3em !important;
+  }
+
+  input {
+    display: none;
+  }
+}

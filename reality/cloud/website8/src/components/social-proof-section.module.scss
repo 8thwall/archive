@@ -1,0 +1,62 @@
+@use '../styles/brand-colors';
+@use '../styles/constants';
+
+.socialProofSection {
+  background-color: brand-colors.$brand-purple;
+  background: linear-gradient(
+    90deg,
+    brand-colors.$white 0.03%,
+    rgba(255,255,255, .79) 54.73%,
+    rgba(255, 255, 255, 0.74) 81.55%,
+    rgba(255, 255, 255, 0) 109.22%),
+    url('../../img/industry-section-logos/industry-section-background.jpg'
+    );
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 60% 0;
+}
+
+.socialHeader {
+    color: brand-colors.$brand-purple;
+}
+
+.socialProofContent {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+@media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+  .socialHeader {
+    font-size: 1.5rem;
+  }
+
+  .socialProofContent {
+    gap: 1.5rem;
+  }
+
+  .logos {
+    justify-content: center;
+    vertical-align: middle;
+    grid-template-columns: repeat(3, auto);
+    gap: 2rem 4rem;
+  }
+
+  .logo {
+    max-width: 8em;
+  }
+}
+
+@media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+  .socialHeader {
+    font-size: 1.125rem;
+  }
+
+  .logos {
+    grid-template-columns: 115px repeat(2, auto);
+    gap: 0;
+  }
+}

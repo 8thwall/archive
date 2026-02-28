@@ -1,0 +1,84 @@
+---
+id: audio
+description: Cette bibliothèque comprend des fonctions qui gèrent la lecture audio.
+---
+
+# audio
+
+## Description
+
+{frontMatter.description}
+
+## Audio
+
+| Propriété              | Type                  | Défaut    | Description                                                                                                                                                                                                                                                                                                                     |
+| ---------------------- | --------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| url (Obligatoire)      | chaîne de caractères  | ''        | Source URL                                                                                                                                                                                                                                                                                                                      |
+| volume                 | nombre                | 1         | Volume de l'audio qui sera joué. Une valeur comprise entre 0 et 1                                                                                                                                                                                                                                                               |
+| boucle                 | booléen               | faux      | Si l'audio redémarre après la fin de l'émission                                                                                                                                                                                                                                                                                 |
+| en pause               | booléen               | faux      | Météo L'audio est actuellement en pause                                                                                                                                                                                                                                                                                         |
+| hauteur                | nombre                | 1         | Facteur utilisé pour modifier la hauteur du son. 1 est la hauteur par défaut.                                                                                                                                                                                                                                                   |
+| positionnel            | booléen               | faux      | si l'audio est joué de manière positionnelle                                                                                                                                                                                                                                                                                    |
+| refDistance            | nombre                | 1         | \*\*La valeur indiquant la distance à laquelle le volume de cette source commencera à diminuer lorsque l'auditeur s'éloignera. Doit être une valeur non négative.                                                                                                                                                               |
+| modèle de distance     | chaîne de caractères  | inverse   | \*\*L'algorithme utilisé pour réduire le volume à mesure que la distance entre cette source audio et l'auditeur augmente. Les valeurs possibles sont "linéaire", "inverse" et "exponentiel".                                                                                                                                    |
+| Facteur d'atténuation  | nombre                | 1         | \*\*La vitesse à laquelle le volume est réduit lorsque la distance entre cette source audio et l'auditeur augmente. La plage de valeurs acceptables change en fonction du modèle de distance, comme le montrent les exemples suivants : linéaire : 0 à 1, inverse : 0 à l'infini, exponentiel : 0 à l'infini                    |
+| maxDistance            | nombre                | 10000     | **Appliqué uniquement si positional est vrai** et si distanceModel est égal à linear. La distance maximale entre cette source audio et l'auditeur. Le volume n'est pas réduit après ce point. Doit être une valeur positive.                                                                                                    |
+
+## Son
+
+| Propriété    | Type                                  | Description                                                 |
+| ------------ | ------------------------------------- | ----------------------------------------------------------- |
+| id           | eid                                   | L'Aïd du son.                                               |
+| audioNode    | Audio / PositionalAudio               | AudioNode                                                   |
+| élément      | HTMLAudioElement                      | L'élément HTML audio.                                       |
+| contrôleur   | AbortController                       | Le contrôleur audio AbortController.                        |
+| url          | chaîne de caractères                  | L'URL source                                                |
+| en pause     | booléen                               | Indique si l'audio est en pause ou en cours de lecture.     |
+
+## Propriétés
+
+| Propriété | Type                                                                  | Description                                                                                |
+| --------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| auditeur  | [AudioListener](https://threejs.org/docs/#api/en/audio/AudioListener) | Un auditeur virtuel de tous les effets audio positionnels et non positionnels de la scène. |
+
+## Fonctions
+
+### sourdine
+
+Couper le son de la scène.
+
+```ts
+world.audio.mute() // -> void
+```
+
+### unmute
+
+Désactiver le son de la scène.
+
+```ts
+world.audio.unmute() // -> void
+```
+
+### pause
+
+Mettre en pause l'audio de la scène.
+
+```ts
+world.audio.pause() // -> void
+```
+
+### jouer
+
+Lecture de l'audio de la scène.
+
+```ts
+world.audio.play() // -> void
+```
+
+### setVolume
+
+Régler le volume de l'audio de la scène. \*\*Le paramètre doit être une valeur comprise entre 0 et 1.
+
+```ts
+world.audio.setVolume(newVolume : number) // -> void
+```

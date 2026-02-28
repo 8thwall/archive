@@ -1,0 +1,30 @@
+{
+  "logo.alt": {
+    "message": "8番目の壁",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Support": {
+    "message": "サポート",
+    "description": "Navbar item with label Support"
+  },
+  "item.label.Project Library": {
+    "message": "プロジェクト・ライブラリー",
+    "description": "Navbar item with label Project Library"
+  },
+  "item.label.Tutorials": {
+    "message": "チュートリアル",
+    "description": "Navbar item with label Tutorials"
+  },
+  "item.label.Slack Community": {
+    "message": "スラック・コミュニティ",
+    "description": "Navbar item with label Slack Community"
+  },
+  "item.label.Courses": {
+    "message": "コース",
+    "description": "Navbar item with label Courses"
+  },
+  "item.label.Forum": {
+    "message": "フォーラム",
+    "description": "Navbar item with label Forum"
+  }
+}

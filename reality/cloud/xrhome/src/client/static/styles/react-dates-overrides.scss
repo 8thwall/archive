@@ -1,0 +1,12 @@
+@import 'settings';
+.CalendarDay__selected {
+  background: $brand-purple;
+  color: $brand-white;
+  border: none;
+}
+
+.CalendarDay__selected:hover {
+  background: $brand-purple;
+  color: $brand-white;
+  border: none;
+}

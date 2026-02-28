@@ -1,0 +1,42 @@
+---
+id: events
+description: このライブラリには、イベント管理を行う関数が含まれている。
+---
+
+# イベント
+
+## 説明
+
+{frontMatter.description}
+
+## 物件 {#properties}
+
+| プロパティ   | 説明                                  |
+| ------- | ----------------------------------- |
+| グローバルID | グローバルなイベントのディスパッチ/リッスンに使用される。       |
+
+## 機能 {#functions}
+
+### 追加リスナー
+
+イベントをリッスンするコンポーネントを登録する。
+
+```ts
+world.events.addListener(target: eid, name: string, listener: function) -> void
+```
+
+### removeListener
+
+既存のリスナーの登録を解除する
+
+```ts
+world.events.removeListener(target: eid, name: string, listener: function) -> void
+```
+
+### 派遣
+
+リスナーがリッスンできるイベントを発行するために使用します。
+
+```ts
+world.events.dispatch(target: eid, name: string, data: object /* (optional */)) -> void
+```

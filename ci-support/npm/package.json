@@ -1,0 +1,12 @@
+{
+  "name": "ci-support",
+  "description": "runtime deps for ci-support",
+  "private": true,
+  "dependencies": {
+    "js-yaml": "^4.1.0",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.2"
+  }
+}

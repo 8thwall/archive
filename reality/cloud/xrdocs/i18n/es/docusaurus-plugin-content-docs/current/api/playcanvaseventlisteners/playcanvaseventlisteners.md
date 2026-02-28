@@ -1,0 +1,13 @@
+# Receptores de eventos PlayCanvas
+
+Esta sección describe los eventos que escucha 8th Wall Web en un entorno PlayCanvas.
+
+Puedes disparar estos eventos en tu aplicación web para realizar diversas acciones:
+
+| Escuchar eventos                               | Descripción                                                                                                                                                                                                                                                                                      |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [xr:hidecamerafeed](xrhidecamerafeed.md)       | Oculta la imagen de la cámara. El seguimiento no se detiene.                                                                                                                                                                                                                                     |
+| [xr:recenter](xrrecenter.md)                   | Vuelve a dirigir el canal de la cámara a su origen. Si se proporciona un nuevo origen como argumento, el origen de la cámara se restablecerá a ese, y luego se recentrará.                                                                                                                       |
+| [xr:screenshotrequest](xrscreenshotrequest.md) | Emite una petición al motor para capturar una pantalla de PlayCanvas. El motor emitirá un evento [`xr:screenshotready`](/api/playcanvasevents/xrscreenshotready) con la imagen comprimida en JPEG o [`xr:screenshoterror`](/api/playcanvasevents/xrscreenshoterror) si se ha producido un error. |
+| [xr:showcamerafeed](xrshowcamerafeed.md)       | Muestra el canal de la cámara.                                                                                                                                                                                                                                                                   |
+| [xr:stopxr](xrstopxr.md)                       | Detén la sesión XR actual. Mientras está parada, el canal de la cámara se detiene y no se sigue el movimiento del dispositivo.                                                                                                                                                                   |

@@ -1,0 +1,184 @@
+---
+id: ecs
+---
+
+import EcsTypes from '@site/src/components/_ecs-types.mdx'
+
+# エク
+
+## プロパティ一覧
+
+### 種類
+
+<EcsTypes/>
+
+## 関数一覧
+
+### 登録コンポーネント
+
+コンポーネントをECSに登録する。
+
+```ts
+ecs.registerComponent({
+    name: string,
+    schema: Schema,
+    data: Schema,
+    schemaDefaults: Object,
+    add: function
+    remove: function,
+    tick: function
+})// -> コンポーネント・ハンドル
+```
+
+#### 状態
+
+| パラメーター             | Type                        | 商品説明                                                                          |
+| ------------------ | --------------------------- | ----------------------------------------------------------------------------- |
+| トリガー（必須）           | `Record<String, Trigger[]>`   | このステートと遷移する次のステートの名前とそのトリガー。                                                  |
+| オンエンター             | 機能                          | ステートに入る前に呼ばれる関数。                                                              |
+| 終了                 | 機能                          | ステートに入る前に呼ばれる関数。                                                              |
+
+#### トリガー
+
+##### イベントトリガー
+
+| パラメーター          | Type               | 商品説明                                                                                                                         |
+| --------------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| タイプ (必須)        | constant: 'event'  | トリガーのタイプを示す定数                                                                                                                |
+| イベント (必須)       | ストリング              | このトリガーとなるイベントタイプ                                                                                                             |
+| ターゲット           | イード                | このトリガーの状態を変更したいエンティティ                                                                                                        |
+| 遷移前             | (event) => boolean | トランジションの前に実行される関数で、結果が真であればトランジションは終了し、状態は変化しない。                                                                             |
+
+##### タイムアウトトリガー
+
+| パラメーター          | Type                | 商品説明                                      |
+| --------------- | ------------------- | ----------------------------------------- |
+| タイプ (必須)        | constant: 'timeout' | トリガーのタイプを示す定数                             |
+| タイムアウト（必須）      | 番号                  | 遷移するまでのミリ秒数                               |
+
+### ステートマシン
+
+ステートマシンを作る。
+
+```ts
+ecs.createStateMachine(world, owner, {initialState: string, states: Record<string, State>}) // -> ステートマシンID
+```
+
+### デリートステートマシン
+
+ステートマシンを削除する。
+
+```ts
+ecs.deleteStateMachine(world, machineId) // -> void
+```
+
+### 定義状態
+
+状態を定義する。
+
+```ts
+ecs.defineState(name: string) // -> 状態
+```
+
+#### 初回
+
+この状態をステートマシンの初期状態としてマークする。
+
+```ts
+ecs.defineState(name).initial() // -> void
+```
+
+#### オンエンター
+
+この状態になったときに実行するコールバックを設定する。
+
+```ts
+ecs.defineState(name).onEnter(callback) // -> void
+```
+
+#### オンイベント
+
+##### イベント
+
+| パラメーター          | Type               | 商品説明                                                                                                                       |
+| --------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| ターゲット           | イード                | このトリガーの状態を変更したいエンティティ                                                                                                      |
+| 遷移前             | (event) => boolean | 遷移の前に実行される関数で、結果が真であれば遷移は終了し、状態は変化しない。                                                                                     |
+
+イベント受信時に次のステートへの遷移をトリガーする。
+
+```ts
+ecs.defineState(name).onEvent(event: string, nextState: string | State, args: EventObject) // -> void
+```
+
+#### 終了
+
+この状態を終了するときに実行するコールバックを設定します。
+
+```ts
+ecs.defineState(name).onExit(callback) // -> void
+```
+
+#### ウェイト
+
+状態を移行する前に待つ。
+
+```ts
+ecs.defineState(name).wait(waitTime: number, nextState: string | State) // -> void
+```
+
+### 定義システム
+
+システムを定義する。
+
+```ts
+ecs.defineSystem([terms]: string[], behavior: function) // -> システム
+```
+
+### 定義クエリ
+
+クエリーを定義する。
+
+```ts
+ecs.defineQuery([terms: string]) // -> コールバック
+```
+
+### 属性の取得
+
+内蔵コンポーネントもecsのプロパティとして公開されている。
+
+```ts
+ecs.getAttribute(attributeName: string) // -> その名前で登録されている属性。
+```
+
+### リスト属性
+
+属性のリストを返す。
+
+```ts
+ecs.listAttributes() // -> string[].
+```
+
+### ゲットビヘイビア
+
+登録されているビヘイビアのリストを返します。
+
+```ts
+ecs.getBehaviors() // -> function[].
+```
+
+### レジスタ・ビヘイビア
+
+刻みごとにワールド上で実行される関数を登録する。
+
+```ts
+ecs.registerBehavior(behavior: function) // -> void
+```
+
+### アンレジスタービヘイビア
+
+ビヘイビアを非アクティブにする。
+
+```ts
+ecs.unregisterBehavior(behavior: function) // -> void
+```

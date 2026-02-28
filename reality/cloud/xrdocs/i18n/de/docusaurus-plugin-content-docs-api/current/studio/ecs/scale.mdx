@@ -1,0 +1,31 @@
+---
+id: scale
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import ScaleTable from "../../../gen/tables/Scale.md"
+
+# Skala
+
+## Beschreibung
+
+Diese Komponente steuert, wie das Objekt skaliert wird.
+
+## Eigenschaften
+
+<ScaleTable />
+
+## Funktionen
+
+<ComponentFunctions
+    name="Scale"
+    properties={{
+        x: 0,
+        y: 0,
+        z: 0
+    }}
+    mutate={`cursor.x = 2;
+    cursor.y = 2;
+    cursor.z = 2;
+    return false;`}
+/>

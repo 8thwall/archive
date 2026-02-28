@@ -1,0 +1,57 @@
+---
+id: material
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Material
+
+## Descripción
+
+Este componente crea un material en una entidad con geometría.
+
+## Propiedades
+
+| Propiedad                   | Tipo     | Por defecto  | Descripción                                                                                                                                  |
+| --------------------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| r                           | número   | 0            | Valor del canal rojo del material [0...255]                                                                                                  |
+| g                           | número   | 0            | Valor del canal verde del material [0...255]                                                                                                 |
+| b                           | número   | 0            | Valor del canal azul del material [0...255]                                                                                                  |
+| textureSrc                  | cadena   | ""           | La fuente del mapa de color, modulado por color (si está configurado)                                                                        |
+| rugosidad                   | número   | 0            | Cómo de rugoso parece el material [0...1]                                                                                                    |
+| rugosidadMapa               | cadena   | ""           | Canal verde de este mapa de textura recurso la rugosidad, multiplicado por el número de rugosidad.                                           |
+| metalness                   | número   | 0            | Cómo de metálico parece el material [0...1]                                                                                                  |
+| metalnessMap                | cadena   | ""           | El canal azul de este recurso de textura afecta al aspecto metálico del material.                                                            |
+| escala normal               | número   | 0            | Cuánto afecta el mapa de normales (si está configurado) al material [0...1]                                                                  |
+| normalMapa                  | cadena   | ""           | Fuente del mapa normal de la textura.                                                                                                        |
+| opacidad                    | número   | 0            | Alfa/transparencia general del material [0...1]                                                                                              |
+| opacityMap                  | cadena   | ""           | Alfa/transparencia mapeada a través de un recurso de textura.                                                                                |
+| intensidademisiva           | número   | 0            | Intensidad global del mapa emisivo [0...1]                                                                                                   |
+| emissiveMap                 | cadena   | ""           | Fuerza emisiva mapeada como recurso de textura. Modulada por el color y la intensidad emisivos.                                              |
+| emisivoR                    | número   | 0            | Color emisivo del canal rojo del material [0...255]                                                                                          |
+| emisivoG                    | número   | 0            | Color emisivo del canal verde del material [0...255]                                                                                         |
+| emisivoB                    | número   | 0            | Color emisivo del canal azul del material [0...255]                                                                                          |
+| lateral                     | cadena   | ""           | Qué lados de las caras se renderizarán. Elija entre frontal, trasera o doble.                                                                |
+| mezcla                      | cadena   | ""           | Mezcla a utilizar al mostrar objetos con este material. Elija entre no, normal, aditivo, sustractivo y multiplicar.                          |
+| repetirX                    | número   | 0            | Cuántas veces se repite una textura a través de un material en el eje X.                                                                     |
+| repetirY                    | número   | 0            | Cuántas veces se repite una textura a través de un material en el eje Y.                                                                     |
+| offsetX                     | número   | 0            | Cuanto se desplaza una textura a través de un material en el eje X.                                                                          |
+| offsetY                     | número   | 0            | Cuanto se desplaza una textura a través de un material en el eje Y.                                                                          |
+| depthTest                   | booleano | verdadero    | Si se comprueba la profundidad al renderizar este material                                                                                   |
+| profundidadEscritura        | booleano | verdadero    | Si el renderizado de este material afecta al búfer de profundidad                                                                            |
+| wireframe                   | booleano | falso        | Renderizar geometría como wireframe.                                                                                                         |
+| forceTransparent            | booleano | falso        | Si se quiere forzar que el canal alfa se renderice como transparente.                                                                        |
+
+## Funciones
+
+<ComponentFunctions
+    name="Material"
+    properties={{
+        r: 255,
+        g: 0,
+        b: 0,
+    }}
+    mutate={`cursor.rugosidad = 0,8;
+    cursor.wireframe = true;
+    return false;`}
+/>

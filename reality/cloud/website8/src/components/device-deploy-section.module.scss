@@ -1,0 +1,52 @@
+@use '../styles/brand-colors';
+@use '../styles/constants';
+
+.metaverseBGContainer {
+  display: flex;
+  justify-content: center;
+  max-height: 20rem;
+  overflow: hidden;
+}
+
+.metaverseBG {
+  width: 100vw;
+  min-width: constants.$SMALL_MONITOR_WIDTH_BREAKPOINT;
+  object-fit: cover;
+  object-position: 0% -10%;
+  padding-top: 2rem;
+}
+
+.metaverseItemsContainer {
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+  .metaverseBG {
+    padding-top: 5rem;
+  }
+}
+
+
+@media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+  .metaverseContainer {
+    margin-top: 4rem;
+  }
+
+  .metaverseBGContainer {
+    height: 12rem;
+  }
+
+  .metaverseBG {
+    padding-top: 1rem;
+  }
+
+  .metaverseItem {
+    width: 90%;
+    max-width: 500px;
+    height: auto;
+  }
+}

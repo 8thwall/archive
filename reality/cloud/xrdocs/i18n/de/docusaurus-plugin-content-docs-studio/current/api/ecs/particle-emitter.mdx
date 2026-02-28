@@ -1,0 +1,73 @@
+---
+id: particle-emitter
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# PartikelEmitter
+
+## Beschreibung
+
+Diese Komponente bewirkt, dass ein Objekt Partikel aussendet.
+
+## Eigenschaften
+
+| Eigenschaft             | Typ                | Standard    | Beschreibung                                                                                 |
+| ----------------------- | ------------------ | ----------- | -------------------------------------------------------------------------------------------- |
+| gestoppt                | boolean            | false       | Wiedergabestatus des Senders                                                                 |
+| emitterLife             | Nummer             | 0           | Die Lebensdauer des Strahlers in Sekunden                                                    |
+| PartikelPerSchuss       | integer            | 20          | Partikel pro Emission                                                                        |
+| emitDelay               | Nummer             | 0.1         | Die Zeit zwischen den Partikelemissionen                                                     |
+| minimumLifespan         | Nummer             | 1           | Mindestlebensdauerbereich für jedes Partikel                                                 |
+| maximumLifespan         | Nummer             | 1           | Maximale Reichweite der Lebensdauer für jedes Partikel                                       |
+| Masse                   | Nummer             | 1           | Masse der einzelnen Teilchen                                                                 |
+| Schwerkraft             | Nummer             | 0.2         | Schwerkraftfaktor der einzelnen Teilchen                                                     |
+| scale                   | Nummer             | 0.2         | Einheitliche Skala für jedes Teilchen                                                        |
+| forceX                  | Nummer             | 5           | Kraft, die auf jedes Teilchen in X-Richtung ausgeübt wird                                    |
+| forceY                  | Nummer             | 12          | Kraft, die auf jedes Teilchen in Y-Richtung ausgeübt wird                                    |
+| forceZ                  | Nummer             | 5           | Kraft, die auf jedes Teilchen in Z-Richtung ausgeübt wird                                    |
+| Verbreitung             | Nummer             | 360         | Gebiet und Richtung, in der jedes Partikel relativ zu seinem Ursprung entsteht               |
+| radialVelocity          | Nummer             | 5           | Höhe der auf jedes Teilchen angewandten Radialgeschwindigkeit                                |
+| spawnAreaType           | String             | Punkt       | Unterstützte Typen sind: Punkt", "Box" und "Kugel".                                          |
+| spawnAreaWidth          | Nummer             | 0           | Breite des Feldes für den Laichbereich (nur Box)                                             |
+| spawnAreaHeight         | Nummer             | 0           | Höhe der Spawn Area Box (nur Box)                                                            |
+| spawnAreaDepth          | Nummer             | 0           | Tiefe des Laichgebietskastens (nur Kasten)                                                   |
+| spawnAreaRadius         | Nummer             | 0           | Radius der Sphäre des Spawnbereichs (nur Sphere)                                             |
+| boundingZoneType        | String             | keine       | Unterstützte Typen sind: 'keine', 'Box', 'Kugel'                                             |
+| boundingZoneWidth       | Nummer             | 0           | Breite der Begrenzungszone (nur Box)                                                         |
+| boundingZoneHeight      | Nummer             | 0           | Höhe der Begrenzungszone (nur Box)                                                           |
+| boundingZoneDepth       | Nummer             | 0           | Tiefe der Begrenzungszone (nur Box)                                                          |
+| boundingZoneRadius      | Nummer             | 0           | Radius der Begrenzungszone (nur Sphere)                                                      |
+| resourceType            | String             | Sprite      | Unterstützte Typen sind: 'sprite' und 'model'.                                               |
+| resourceUrl             | Zeichenfolge (URL) | ''          | URL der Ressource                                                                            |
+| blendingMode            | String             | keine       | Unterstützte Typen sind: 'keine', 'normal', 'addieren', 'multiplizieren' und 'subtrahieren'. |
+| animateColor            | boolean            | false       | Legt fest, ob die Farbe animiert werden soll                                                 |
+| colorStart              | Zeichenkette (Hex) | undefiniert | Die Ausgangsfarbe eines jeden Partikels                                                      |
+| colorEnd                | Zeichenkette (Hex) | undefiniert | Die Endfarbe der einzelnen Partikel                                                          |
+| randomDrift             | boolean            | false       | Randomisiertes Driften für jedes Partikel aktivieren                                         |
+| randomDriftRange        | Nummer             | undefiniert | Bestimmt den zufälligen Driftbereich und die Geschwindigkeit eines jeden Partikels           |
+| Kollisionen             | boolean            | false       | Legt fest, ob Partikel auf physikalische Kollisionen reagieren sollen                        |
+
+## Funktionen
+
+<ComponentFunctions
+    name="ParticleEmitter"
+    properties={{
+        stopped: false,
+        emitterLife: 0,
+        particlesPerShot: 20,
+        emitDelay: 0.1,
+        minimumLifespan: 1,
+        maximumLifespan: 1,
+        mass: 1,
+        gravity: 0.2,
+        scale: 0.2,
+        forceX: 5,
+        forceY: 12,
+        forceZ: 5,
+        spread: 360,
+    }}
+    mutate={`cursor.emitDelay = 0.05;
+    cursor.particlesPerShot = 50;
+    return false;`}
+/>

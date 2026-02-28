@@ -1,0 +1,28 @@
+---
+id: splat
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Splat
+
+## Description
+
+Ce composant établit un Splat gaussien sur une entité.
+
+## Propriétés
+
+| Propriété | Type                 | Défaut  | Description         |
+| --------- | -------------------- | ------- | ------------------- |
+| url       | chaîne de caractères | ''      | L'url de la source. |
+
+## Fonctions
+
+<ComponentFunctions
+    name="Splat"
+    properties={{
+        url : "./assets/splat.spz"
+    }}
+    mutate={`cursor.url = './assets/new_splat.spz';
+    return false;`}
+/>

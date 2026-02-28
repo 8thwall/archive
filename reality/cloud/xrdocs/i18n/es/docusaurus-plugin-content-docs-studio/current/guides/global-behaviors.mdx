@@ -1,0 +1,79 @@
+---
+id: global-behaviors
+description: Un comportamiento es una función que se ejecuta en el Mundo cada tick.
+---
+
+# Comportamientos globales
+
+## Introducción
+
+{frontMatter.description} En comparación con los Componentes, que sólo operan sobre una única Entidad a la vez, un comportamiento puede utilizar consultas para enumerar entidades coincidentes y operar sobre ellas como un grupo.
+
+## Definir un comportamiento
+
+El siguiente código es un ejemplo de cómo definir un comportamiento personalizado:
+
+```ts
+const behavior = (world) => {
+  if (world.time.elapsed % 5000 - world.time.delta < 0) {
+     const eid = world.createEntity()
+     Enemy.set(world, eid, {health: 100})
+  }
+}
+```
+
+## Registrar un comportamiento
+
+El siguiente código es un ejemplo de cómo registrar un comportamiento personalizado:
+
+```ts
+ecs.registerBehavior(behavior)
+```
+
+## Desactivar un comportamiento
+
+El siguiente código es un ejemplo de cómo desactivar un comportamiento personalizado:
+
+```ts
+ecs.unregisterBehavior(behavior)
+```
+
+## Consulta de comportamiento
+
+Los comportamientos pueden ejecutar consultas, que devuelven listas de ID de entidades.
+
+```ts
+const query = ecs.defineQuery([Enemy, Health])
+
+const enemyDieBehavior = (world) => {
+  const enemies = query(world)
+
+  for (const enemyId of enemies) {
+    if (Health.get(world, enemyId).hp <= 0) {
+      world.destroyEntity(enemyId)
+    }
+  }
+}
+
+ecs.registerBehavior(enemyDieBehavior)
+```
+
+## Sistemas
+
+Los comportamientos también pueden estructurarse como Sistemas, que se ejecutan en entidades que coinciden con consultas específicas y permiten un acceso eficaz a los datos.
+
+:::tip
+Este enfoque mejora el rendimiento porque los datos como "enemigo" y "salud" están preconfigurados, lo que hace que la iteración sea más rápida.
+:::
+
+```ts
+const enemyDieSystem = ecs.defineSystem([Enemy, Health], 
+  (world, eid, [enemy, health]) => {
+    if (health.hp <= 0) {
+      world.destroyEntity(eid)
+    }
+  }
+)
+
+ecs.registerBehavior(enemyDieSystem)
+```

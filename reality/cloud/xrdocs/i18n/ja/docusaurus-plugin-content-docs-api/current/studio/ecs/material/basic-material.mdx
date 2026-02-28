@@ -1,0 +1,31 @@
+---
+id: basic-material
+sidebar_position: 1
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import MaterialTable from "../../../../gen/tables/Material.md"
+
+# 素材
+
+## 概要
+
+このコンポーネントは、ジオメトリを持つエンティティに標準的な [PBR](https://learn.microsoft.com/en-us/azure/remote-rendering/overview/features/pbr-materials) マテリアルを作成します。
+
+## 物件 {#properties}
+
+<MaterialTable />
+
+## 機能
+
+<ComponentFunctions
+    name="Material"
+    properties={{
+        r: 255,
+        g: 0,
+        b: 0,
+    }}
+    mutate={`cursor.roughness = 0.8;
+    cursor.wireframe = true;
+    return false;`}
+/>

@@ -1,0 +1,28 @@
+---
+id: splat
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Splat
+
+## Beschreibung
+
+Diese Komponente erstellt einen Gauß-Splat auf einem Objekt.
+
+## Eigenschaften
+
+| Eigenschaft | Typ    | Standard | Beschreibung     |
+| ----------- | ------ | -------- | ---------------- |
+| url         | String | ''       | Die Quellurl.    |
+
+## Funktionen
+
+<ComponentFunctions
+    name="Splat"
+    properties={{
+        url: "./assets/splat.spz"
+    }}
+    mutate={`cursor.url = './assets/new_splat.spz';
+    return false;`}
+/>

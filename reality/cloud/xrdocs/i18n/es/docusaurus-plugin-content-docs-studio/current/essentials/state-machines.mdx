@@ -1,0 +1,340 @@
+---
+id: state-machines
+description: Las Máquinas de Estado están diseñadas para simplificar la gestión de estados.
+sidebar_position: 50
+toc_max_heading_level: 3
+---
+
+# Máquinas de estado
+
+## Introducción
+
+<p>{frontMatter.description}</p>
+
+Una máquina de estados consta de tres componentes principales:
+
+- Estados
+- Grupos estatales
+- Disparadores
+
+Una máquina de estados siempre está en un solo estado a la vez y pasa de un estado a otro cuando se cumplen determinadas condiciones (definidas por los activadores). Los grupos de estados son una forma práctica de agrupar la lógica compartida entre varios estados, pero los grupos no son estados en sí mismos.
+
+## Ejemplo
+
+```ts
+ecs.registerComponent({
+  name: 'Jump On Touch',
+  stateMachine: ({world, entity, defineState}) => {
+    const idle = defineState('idle').initial().onEnter(() => {
+      console.log('Entrando en estado idle')
+    }).onEvent(ecs.input.SCREEN_TOUCH_START, 'jumping')
+
+    const jumping = defineState('jumping').onEnter(() => {
+      console.log('Entrando en estado de salto')
+      ecs.physics.applyImpulse(world, entity.eid, 0, 5, 0)
+    }).onTick(() => {
+      console.log('En estado de salto')
+    }).wait(2000, 'idle')
+  },
+})
+```
+
+## Definición de una máquina de estados
+
+Al crear una máquina de estados dentro de un componente, se llama a su función con lo siguiente:
+
+### Propiedades
+
+| Propiedad          | Tipo            | Descripción                                                          |
+| ------------------ | --------------- | -------------------------------------------------------------------- |
+| mundo              | Mundo           | Referencia al mundo.                                                 |
+| eid                | eid             | ID de entidad del componente actual                                  |
+| entidad            | Entidad         | La instancia de la entidad del componente actual                     |
+| definirEstado      | función         | Una función para definir estados en la máquina de estados            |
+| defineGrupoEstado  | función         | Una función para definir grupos en la máquina de estados             |
+| esquemaAtributo    | AtributoMundo   | Referencia al esquema del componente actual en el ámbito mundial.    |
+| dataAttribute      | AtributoMundo   | Referencia a los datos del componente actual en World Scope.         |
+
+El siguiente código es un ejemplo de cómo definir una máquina de estados vacía:
+
+```ts
+ecs.registerComponent({
+  ...
+  stateMachine: ({world, entity, defineState}) => {
+    // Define estados aquí
+  },
+})
+```
+
+## Estado
+
+Un estado es la unidad atómica fundamental de una máquina de estados. Después de definir los posibles estados de tu máquina de estados, puedes moverte entre ellos definiendo disparadores.
+
+### Definir un Estado
+
+El siguiente código es un ejemplo de cómo definir un nuevo Estado dentro de una máquina de estados dentro de un componente.
+
+```ts
+ecs.registerComponent({
+  ...
+  stateMachine: ({world, entity, defineState}) => {
+    const foo = defineEstado('foo')
+    ...
+  }
+})
+```
+
+:::tip
+Las funciones de estado son "fluidas", es decir, devuelven la misma instancia del estado, lo que permite encadenar varias llamadas a funciones en una única sentencia.
+:::
+
+### .inicial()
+
+Marca este estado como el primer estado activo cuando se crea la máquina de estados.
+
+```ts
+defineEstado('miEstadoPersonalizado').inicial()
+```
+
+### .onEnter()
+
+Establece una llamada de retorno que se ejecutará al entrar en este estado.
+
+```ts
+defineState('miEstadoPersonalizado').onEnter(() => {
+  // Haz algo
+})
+```
+
+### .onTick()
+
+Establece una llamada de retorno para que se ejecute en cada fotograma mientras este estado esté activo.
+
+```ts
+defineState('myCustomState').onTick(() => {
+  // Haz algo
+})
+```
+
+### .onExit()
+
+Establece una llamada de retorno que se ejecutará al salir de este estado.
+
+```ts
+defineState('myCustomState').onExit(() => {
+  // Haz algo
+})
+```
+
+### .onEvent()
+
+Transición a un nuevo estado cuando se recibe un evento específico.
+
+| Parámetro                | Tipo            | Descripción                                         |
+| ------------------------ | --------------- | --------------------------------------------------- |
+| evento (Obligatorio)     | cadena          | El nombre del evento a escuchar                     |
+| nextState (Obligatorio)  | cadena o Estado | Estado al que se pasa cuando se produce el suceso   |
+| opciones (Opcional)      | objeto          | Opciones adicionales                                |
+
+#### Opciones
+
+| Parámetro   | Tipo                 | Descripción                                                                                                       |
+| ----------- | -------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| objetivo    | eid                  | La entidad que se espera que reciba el evento (por defecto es la entidad actual)                                  |
+| donde       | (evento) => booleano | Condición opcional que se comprobará antes de realizar la transición; si es falsa, la transición no se producirá. |
+
+```ts
+defineState('myCustomState').onEvent(
+    ecs.input.SCREEN_TOUCH_START,
+    'other',
+    {
+        target: world.events.globalId,
+        where: (event) => event.data.position.y > 0.5
+    }
+)
+```
+
+### .wait()
+
+Transición a un nuevo estado tras un tiempo determinado.
+
+| Parámetro          | Tipo            | Descripción                                        |
+| ------------------ | --------------- | -------------------------------------------------- |
+| tiempo de espera   | número          | La duración en milisegundos antes de la transición |
+| nextState          | cadena o Estado | Siguiente estado de transición                     |
+
+```ts
+defineEstado('miEstadoPersonalizado').wait(1000, 'miOtroEstadoPersonalizado')
+```
+
+### .onTrigger()
+
+Transición a un nuevo estado cuando se activa un TriggerHandle (definido con `ecs.defineTrigger()`).
+
+| Parámetro | Tipo            | Descripción                                                          |
+| --------- | --------------- | -------------------------------------------------------------------- |
+| asa       | TriggerHandle   | La manilla que provocará una transición cuando se active manualmente |
+| nextState | cadena o Estado | Siguiente estado de transición                                       |
+
+```ts
+const toOther = ecs.defineTrigger()
+defineState('ejemplo').onTrigger(toOther, 'otro')
+...
+toOther.trigger()
+```
+
+### .listen()
+
+Registra un receptor de eventos que se añadirá automáticamente al entrar en el estado y se eliminará al salir.
+
+| Parámetro   | Tipo                   | Descripción                                                   |
+| ----------- | ---------------------- | ------------------------------------------------------------- |
+| objetivo    | eid o () => eid        | La entidad que se espera que reciba un evento                 |
+| nombre      | cadena                 | El acontecimiento a tener en cuenta                           |
+| oyente      | (evento) => void       | La función a la que se llamará cuando se envíe el evento      |
+
+```ts
+const handleCollision = (event) => { 
+  console.log('Colisionó con', event.data.other)
+}
+defineState('ejemplo').listen(eid, ecs.physics.COLLISION_START_EVENT, handleCollision)
+```
+
+## Grupos estatales
+
+Un grupo de estados es una forma de definir comportamientos y disparadores que se aplican a una lista de estados. Los grupos estatales no son Estados propiamente dichos y no se puede pasar directamente a ellos. En cambio, cuando cualquier estado del grupo está activo, el comportamiento y los activadores del grupo también lo están.
+
+### Definición de un grupo de Estados
+
+| Parámetro             | Tipo                      | Descripción                                                                                              |
+| --------------------- | ------------------------- | -------------------------------------------------------------------------------------------------------- |
+| subestados (Opcional) | Matriz de cadena o Estado | La lista de estados que componen este grupo; excluir este parámetro equivale a listar todos los estados  |
+
+```ts
+const fizz = defineEstado('fizz')
+const buzz = defineEstado('buzz')
+
+const fizzBuzz = defineEstadoGrupo([fizz, 'buzz'])
+```
+
+:::tip
+Las funciones de grupo de estados son "fluidas", es decir, devuelven la misma instancia del grupo de estados, lo que permite encadenar varias llamadas a funciones en una única sentencia.
+:::
+
+### .onEnter()
+
+Establece una llamada de retorno para que se ejecute al entrar en este grupo.
+
+```ts
+defineStateGroup(['a', 'b']).onEnter(() => {
+  // Haz algo
+})
+```
+
+### .onTick()
+
+Establece una llamada de retorno para que se ejecute en cada fotograma mientras este grupo esté activo.
+
+```ts
+defineStateGroup(['a', 'b']).onTick(() => {
+  // Haz algo
+})
+```
+
+### .onExit()
+
+Establece una llamada de retorno que se ejecutará al salir de este grupo.
+
+```ts
+defineStateGroup(['a', 'b']).onTick(() => {
+  // Haz algo
+})
+```
+
+### .onEvent()
+
+Transición a un nuevo estado cuando se recibe un evento específico.
+
+| Parámetro                | Tipo            | Descripción                                         |
+| ------------------------ | --------------- | --------------------------------------------------- |
+| evento (Obligatorio)     | cadena          | El nombre del evento a escuchar                     |
+| nextState (Obligatorio)  | cadena o Estado | Estado al que se pasa cuando se produce el suceso   |
+| opciones (Opcional)      | objeto          | Opciones adicionales                                |
+
+#### Opciones
+
+| Parámetro   | Tipo                 | Descripción                                                                                                       |
+| ----------- | -------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| objetivo    | eid                  | La entidad que se espera que reciba el evento (por defecto es la entidad actual)                                  |
+| donde       | (evento) => booleano | Condición opcional que se comprobará antes de realizar la transición; si es falsa, la transición no se producirá. |
+
+```ts
+defineStateGroup(['a', 'b']).onEvent(
+    ecs.input.SCREEN_TOUCH_START,
+    'other',
+    {
+        target: world.events.globalId,
+        where: (event) => event.data.position.y > 0.5
+    }
+)
+```
+
+### .wait()
+
+Transición a un nuevo estado tras un tiempo determinado.
+
+| Parámetro          | Tipo            | Descripción                                        |
+| ------------------ | --------------- | -------------------------------------------------- |
+| tiempo de espera   | número          | La duración en milisegundos antes de la transición |
+| nextState          | cadena o Estado | Siguiente estado de transición                     |
+
+```ts
+defineEstadoGrupo(['a', 'b']).espera(1000, 'c')
+```
+
+### .onTrigger()
+
+Transición a un nuevo estado cuando se activa un TriggerHandle (definido con `ecs.defineTrigger()`).
+
+| Parámetro | Tipo            | Descripción                                                          |
+| --------- | --------------- | -------------------------------------------------------------------- |
+| asa       | TriggerHandle   | La manilla que provocará una transición cuando se active manualmente |
+| nextState | cadena o Estado | Siguiente estado de transición                                       |
+
+```ts
+const toC = ecs.defineTrigger()
+defineStateGroup(['a', 'b']).onTrigger(toC, 'c')
+...
+toC.trigger()
+```
+
+### .listen()
+
+Registra un receptor de eventos que se añadirá automáticamente al entrar en el grupo de estados y se eliminará al salir.
+
+| Parámetro   | Tipo                   | Descripción                                                   |
+| ----------- | ---------------------- | ------------------------------------------------------------- |
+| objetivo    | eid o () => eid        | La entidad que se espera que reciba un evento                 |
+| nombre      | cadena                 | El acontecimiento a tener en cuenta                           |
+| oyente      | (evento) => void       | La función a la que se llamará cuando se envíe el evento      |
+
+```ts
+const handleCollision = (event) => { 
+  console.log('colisionó con', event.data.other)
+}
+defineStateGroup(['a', 'b']).listen(eid, ecs.physics.COLLISION_START_EVENT, handleCollision)
+```
+
+## Activadores personalizados
+
+Puede definir un activador personalizado que pueda invocarse en cualquier momento para provocar una transición.
+
+```ts
+const go = ecs.defineTrigger()
+const parado = defineState('parado').onTick(() => {
+  if (world.input.getAction('inicio-marcha')) {
+    go.trigger()
+  }
+}).onTrigger(go, 'going')
+const going = defineState('going')
+```

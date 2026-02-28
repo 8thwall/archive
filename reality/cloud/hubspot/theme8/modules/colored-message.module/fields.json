@@ -1,0 +1,37 @@
+[ {
+  "id" : "40065330-56f3-d50d-6272-7d9cf039c4fe",
+  "name" : "text",
+  "display_width" : null,
+  "label" : "Text",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "default" : "<p><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></p>"
+}, {
+  "id" : "75d52f99-7329-398d-f5f5-33b6a456a319",
+  "name" : "color",
+  "display_width" : null,
+  "label" : "Message Color",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "purple", "8W Purple" ], [ "blueberry", "Blueberry" ], [ "mint", "Mint" ], [ "mango", "Mango" ], [ "cherry", "Cherry" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "default" : "purple"
+}, {
+  "id" : "505ff575-0251-4d3c-d44c-14debf82cd09",
+  "name" : "icon",
+  "display_width" : null,
+  "label" : "Icon",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "none", "None" ], [ "info", "Information" ], [ "warning", "Warning" ], [ "danger", "Danger" ], [ "success", "Success" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice"
+} ]

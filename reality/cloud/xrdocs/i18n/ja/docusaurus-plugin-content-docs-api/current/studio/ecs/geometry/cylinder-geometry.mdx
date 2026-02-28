@@ -1,0 +1,25 @@
+---
+id: cylinder-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import CylinderGeometryTable from "../../../../gen/tables/CylinderGeometry.md"
+
+# 円柱幾何学
+
+## 説明
+
+このコンポーネントは、エンティティのジオメトリを確立する。
+
+## プロパティ
+
+<CylinderGeometryTable />
+
+## 機能
+
+<ComponentFunctions
+    name="CylinderGeometry"
+    properties={{ radius: 1, height: 1 }}
+    mutate={`カーソル.半径 += 1;
+    カーソル.高さ *= 2;
+    return false;`}/>

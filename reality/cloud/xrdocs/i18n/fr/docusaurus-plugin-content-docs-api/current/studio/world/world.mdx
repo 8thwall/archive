@@ -1,0 +1,139 @@
+---
+id: world
+description: Cette bibliothèque comprend des propriétés et des fonctions liées au monde.
+---
+
+# monde
+
+## Description
+
+{frontMatter.description}
+
+## Propriétés
+
+| Propriété         | Type               | Description                                 |
+| ----------------- | ------------------ | ------------------------------------------- |
+| toutes lesEntités | Set (jeu de mots)  | Ensemble de toutes les entités de la scène. |
+
+## Fonctions
+
+### createEntity
+
+Créer une nouvelle entité. Il est possible de spécifier une entité ou un nom de préfabriqué pour créer une instance de ce préfabriqué.
+
+```ts
+world.createEntity(prefabOrPrefabName? : Eid | string) // -> eid
+```
+
+### deleteEntity
+
+Supprimer une entité existante.
+
+```ts
+world.deleteEntity(eid) // -> void
+```
+
+### getChildren
+
+Obtenir les enfants d'une entité.
+
+```ts
+world.getChildren(eid) // -> Générateur<Eid>
+```
+
+### getParent
+
+Obtenir le parent d'une entité.
+
+```ts
+world.getParent(eid) // -> eid
+```
+
+### setParent
+
+Définit le parent d'une entité.
+
+```ts
+world.setParent(eid, parent : eid) // -> void
+```
+
+### getWorldTransform
+
+Obtenir la transformation du monde d'une entité. **Copie la worldTransform de la cible dans le second paramètre.**
+
+```ts
+world.getWorldTransform(eid, transform : Mat4) // -> void
+```
+
+### setTransform
+
+Définir la transformation d'une entité.
+
+```ts
+world.setTransform(eid, transform : Mat4) // -> void
+```
+
+### setPosition
+
+Définir la position d'une entité.
+
+```ts
+world.setPosition(eid, x : number, y : number, z : number) // -> void
+```
+
+### setQuaternion
+
+Définit la rotation d'une entité.
+
+```ts
+world.setQuaternion(eid, x : number, y : number, z : number, w : number) // -> void
+```
+
+### setScale
+
+Définir l'échelle d'une entité.
+
+```ts
+world.setScale(eid, x : number, y : number, z : number) // -> void
+```
+
+### normalizeQuaternion
+
+Normalise le quaternion d'une entité.
+
+```ts
+world.normalizeQuaternion(eid) // -> void
+```
+
+### getInstanceEntity
+
+Obtenir l'entité d'instance correspondante dans une hiérarchie d'instances de préfabriqués, à partir de l'instance racine et d'un préfabriqué source ou d'une entité enfant de préfabriqué.
+
+```ts
+world.getInstanceEntity(prefabInstance : Eid, prefabSourceEntity : Eid) // -> Eid
+```
+
+### diffusion
+
+Effectuer un Raycast à partir d'une position et d'une direction.
+
+```ts
+world.raycast(origin : Vec3, direction : Vec3, near : number = 0, far : number = Infinity) // -> IntersectionResult[]
+```
+
+### raycastFrom
+
+Effectuer un Raycast à partir de la position d'une entité et de la direction vers l'avant.
+
+```ts
+world.raycastFrom(eid : Eid, near : number = 0, far : number = Infinity) // -> IntersectionResult[]
+```
+
+## IntersectionResult
+
+| Propriété    | Type         | Description                                                              |
+| ------------ | ------------ | ------------------------------------------------------------------------ |
+| eid ?        | Aïd          | L'eid de l'objet qui a été touché.                                       |
+| point        | Vec3         | L'endroit de l'espace mondial où l'intersection s'est produite.          |
+| distance     | nombre       | La distance entre le point de départ et le point d'arrivée.              |
+| troisDonnées | Intersection | Les données de l'intersection three.js.                                  |

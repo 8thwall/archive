@@ -1,0 +1,141 @@
+<!--
+    templateType: page
+    isAvailableForNewContent: true
+-->
+
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+{% dnd_area "dnd_area"
+  label="Main section",
+  class="body-container body-container--about"
+%}
+  {% dnd_section
+    background_color={{ context.background_color or "#7611B6" }},
+    vertical_alignment="MIDDLE"
+  %}
+    {% dnd_module
+      path="../modules/hero-heading",
+      offset=0,
+      width=12,
+      heading="Lesson 1: Get Excited!",
+      subheading=""
+    %}
+    {% end_dnd_module %}
+  {% end_dnd_section %}
+
+  {% dnd_section
+    vertical_alignment="TOP"
+  %}
+    {% dnd_column %}
+      {% dnd_row %}
+        {% dnd_module
+          path="@hubspot/rich_text"
+        %}
+          {% module_attribute "html" %}
+            <h3>Introduction</h3>
+            <p>Welcome to <b>Lesson 1: Get Excited</b>!</p>
+            <p>This is the first of five lessons designed to take you from starting 8th Wall to publishing your first WebAR experience.</p>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {% dnd_row %}
+        {% dnd_module
+          path="@hubspot/rich_text"
+        %}
+          {% module_attribute "html" %}
+            <h3>Learning Objectives</h3>
+            <p>By the end of this lesson, you will be able to answer the following questions:</p>
+            <ul>
+              <li>What is WebAR?</li>
+              <li>What is 8th Wall?</li>
+              <li>How is it diffferent from other types of AR development?</li>
+              <li>How can it help me build great WebAR experiences?</li>
+            </ul>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}      
+      {% dnd_row %}
+        {% dnd_module
+          path="@hubspot/rich_text"
+        %}
+          {% module_attribute "html" %}
+            <h3>Video: Cloud Editor Tutorial</h3>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/colored-message"
+          color="blueberry"
+          icon="info"
+        %}
+          {% module_attribute "text" %}
+            <p><b>Watch this video</b> with Evan, our Developer Support Engineer, to learn about the possibilities of WebAR! </p>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {% dnd_row %}
+        {% dnd_module
+          path="@hubspot/video",
+          video_type="embed",
+        %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {% dnd_row %}
+        {% dnd_module
+          path="@hubspot/rich_text"
+        %}
+          {% module_attribute "html" %}
+            <h3>Explore: WebAR vs. Native Apps vs. Social Apps</h3>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/colored-message"
+          color="mint"
+          icon="info"
+        %}
+          {% module_attribute "text" %}
+            <p>In this section, review different options for creating AR experiences and the unique advantages of WebAR.</p>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {% dnd_row %}
+        {% dnd_module
+          path="@hubspot/rich_text"
+        %}
+          {% module_attribute "html" %}
+            <p>If you found your way to this lesson, you’re probably here because you’re interested in developing AR experiences. But as you started learning about in the video above, there’s more than one pathway to creating AR experiences.</p>
+            <p>As you continue to develop your interest in AR, you should explore these different options:</p>
+            <ul>
+              <li><b>Web</b>, where anyone can access the AR experience on their phones by scanning a QR code and/or going to a website</li>
+              <li><b>Native app</b>, where anyone can access the AR experience but will need to download a new app</li>
+              <blockquote>
+                If you’re interested in developing native AR experiences, be sure to check out our sister product, [Niantic Lightship ARDK](https://lightship.dev/).
+              </blockquote>
+              <li><b>An existing app (usually a social network)</b>, where only users of that particular app can access your AR experience.</li>
+            </ul>
+            <p>[Flow chart here]</p>
+            <p><b>Here at 8th Wall, we believe that WebAR is the way to go!</b></p>
+            <p>Let’s break down what sets 8th Wall apart from other approaches in the next video.</p>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      
+    {% end_dnd_column %}
+  {% end_dnd_section %}
+
+  {% include_dnd_partial
+    path="../sections/more-resources-section.html"
+  %}
+
+{% end_dnd_area %}
+{% endblock body %}

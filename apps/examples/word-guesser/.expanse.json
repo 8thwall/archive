@@ -1,0 +1,2650 @@
+{
+  "objects": {
+    "04e0e1bd-e2fc-431d-a6af-266d9935fe9f": {
+      "components": {},
+      "geometry": null,
+      "id": "04e0e1bd-e2fc-431d-a6af-266d9935fe9f",
+      "material": null,
+      "name": "parent1",
+      "order": -0.6221386913049236,
+      "parentId": "569ec144-8f2b-43ad-abe6-a5b42179fb80",
+      "position": [
+        -0.22975817424655254,
+        0.8994044557033484,
+        -0.3655276312694847
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.12,
+        0.12,
+        0.12
+      ]
+    },
+    "0d1180f6-99e2-42d8-95c3-2a0b47013ff7": {
+      "components": {
+        "ae575378-b670-4967-ab23-ebe0a6c3ae82": {
+          "id": "ae575378-b670-4967-ab23-ebe0a6c3ae82",
+          "name": "game",
+          "parameters": {
+            "wordDisplay": {
+              "type": "entity",
+              "id": "68765a6c-beba-4c05-85cb-067e953ac0d8"
+            },
+            "loadingUI": {
+              "type": "entity",
+              "id": "53c9f9a6-5c5b-40d1-9835-65dbcc13f269"
+            },
+            "onboardingUI": {
+              "type": "entity",
+              "id": "499e4fad-6f09-4d35-9375-bb72e3e65277"
+            },
+            "guessingUI": {
+              "type": "entity",
+              "id": "e50ae043-912a-41f1-8643-534c68026ff3"
+            },
+            "replayUI": {
+              "type": "entity",
+              "id": "4c2a7146-91d7-426c-8d2a-9b38b62f58d5"
+            },
+            "replayText": {
+              "type": "entity",
+              "id": "2bc0e00a-c3bb-4763-8357-f00750d59ce0"
+            },
+            "startButton": {
+              "type": "entity",
+              "id": "5a4cb105-ea91-4c16-b4ae-360ec8f0a660"
+            },
+            "replayButton": {
+              "type": "entity",
+              "id": "6a50471d-36c6-430e-8e94-76870ef581b7"
+            },
+            "keyboard": {
+              "type": "entity",
+              "id": "af31710e-4384-43ec-a6f9-675330344c11"
+            },
+            "life1": {
+              "type": "entity",
+              "id": "04e0e1bd-e2fc-431d-a6af-266d9935fe9f"
+            },
+            "life2": {
+              "type": "entity",
+              "id": "d75dd0ca-016a-4205-9dad-e9846af18fa0"
+            },
+            "life3": {
+              "type": "entity",
+              "id": "b3255394-75fc-4ec6-b50f-001c1110e911"
+            },
+            "life4": {
+              "type": "entity",
+              "id": "59be6126-2f7b-49a2-abe9-5a80e88fb86f"
+            },
+            "life5": {
+              "type": "entity",
+              "id": "86983c70-e06b-4ed4-bc7a-4b24c8011604"
+            },
+            "life6": {
+              "type": "entity",
+              "id": "ae154b1f-969e-43a2-a65e-4d1c3383633d"
+            },
+            "livesElement": {
+              "type": "entity",
+              "id": "7c3e6a78-39f7-4c4f-9da9-08bf9589cd94"
+            },
+            "startButtonText": {
+              "type": "entity",
+              "id": "c88a2cc6-fd5f-4850-be73-3e382af8ab5d"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "0d1180f6-99e2-42d8-95c3-2a0b47013ff7",
+      "material": null,
+      "name": "Game",
+      "order": -0.8406720364342106,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "hidden": false,
+      "parentId": "00c719b2-881a-44bf-85fd-1ae1dd0a1012"
+    },
+    "179d9c5e-e29f-4e07-810e-3fc6fb454194": {
+      "components": {
+        "d2193e19-6843-4bb2-80a8-0a4f8d20e396": {
+          "id": "d2193e19-6843-4bb2-80a8-0a4f8d20e396",
+          "name": "letter",
+          "parameters": {
+            "letter": "i"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "179d9c5e-e29f-4e07-810e-3fc6fb454194",
+      "material": null,
+      "name": "i",
+      "order": 7.5395052844967765,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        2.883042816676465,
+        1.1554568487530803,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "I",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "17c8367e-a102-49ed-86f7-7be927ff7c91": {
+      "components": {
+        "a70d8303-b271-46c1-b035-18760d94653f": {
+          "id": "a70d8303-b271-46c1-b035-18760d94653f",
+          "name": "letter",
+          "parameters": {
+            "letter": "q"
+          }
+        }
+      },
+      "geometry": null,
+      "hidden": false,
+      "id": "17c8367e-a102-49ed-86f7-7be927ff7c91",
+      "material": null,
+      "name": "q",
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        -5.166957183323536,
+        1.1554568487530805,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1.0000000000000007,
+        1,
+        1.0000000000000007
+      ],
+      "ui": {
+        "color": "#000000",
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "fontSize": 75,
+        "height": 100,
+        "text": "Q",
+        "width": 100,
+        "background": "#ffffff",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "borderRadius": 8,
+        "type": "3d",
+        "backgroundOpacity": 1,
+        "verticalTextAlign": "center"
+      },
+      "order": -2.403191975522109
+    },
+    "28780e26-1aea-4cae-b713-d981874daf10": {
+      "components": {
+        "e24d97ff-7211-4cd6-b764-8e84fc24e51f": {
+          "id": "e24d97ff-7211-4cd6-b764-8e84fc24e51f",
+          "name": "letter",
+          "parameters": {
+            "letter": "r"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "28780e26-1aea-4cae-b713-d981874daf10",
+      "material": null,
+      "name": "r",
+      "order": 3.539505284496776,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        -1.7169571833235358,
+        1.1554568487530803,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "R",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "39ede1f2-bd5a-4194-9f59-62c3fc800b17": {
+      "components": {
+        "89df5b7a-913d-41f7-a2d1-860558e28bfe": {
+          "id": "89df5b7a-913d-41f7-a2d1-860558e28bfe",
+          "name": "letter",
+          "parameters": {
+            "letter": "u"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "39ede1f2-bd5a-4194-9f59-62c3fc800b17",
+      "material": null,
+      "name": "u",
+      "order": 6.5395052844967765,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        1.7330428166764644,
+        1.1554568487530803,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "U",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "47699d9e-18a5-4f88-a4f9-b8be92e8f74a": {
+      "components": {},
+      "geometry": null,
+      "id": "47699d9e-18a5-4f88-a4f9-b8be92e8f74a",
+      "light": {
+        "type": "ambient",
+        "intensity": 0.25
+      },
+      "material": null,
+      "name": "Ambient Light",
+      "order": 3.17071478482387,
+      "parentId": "ebdafab9-0d0c-49f4-97c7-7641217f7c11",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "49e475e0-9019-4554-9d26-58744ee79274": {
+      "components": {
+        "5596d9dc-d16b-4a0a-bc8f-88e696aa47d0": {
+          "id": "5596d9dc-d16b-4a0a-bc8f-88e696aa47d0",
+          "name": "rotate-animation",
+          "parameters": {
+            "autoFrom": false,
+            "duration": 2000,
+            "fromX": -10,
+            "fromZ": -5,
+            "reverse": true,
+            "toX": 10,
+            "toZ": 5
+          }
+        },
+        "6068d8b8-1800-4a5e-9210-fb001f22c3c1": {
+          "id": "6068d8b8-1800-4a5e-9210-fb001f22c3c1",
+          "name": "position-animation",
+          "parameters": {
+            "autoFrom": true,
+            "duration": 1125,
+            "fromY": 0.1,
+            "reverse": true,
+            "toX": 0,
+            "toY": 0.1,
+            "toZ": 0
+          }
+        }
+      },
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/pumpkin.glb"
+        }
+      },
+      "id": "49e475e0-9019-4554-9d26-58744ee79274",
+      "material": null,
+      "name": "pumpkin6",
+      "order": 8.520133456468606,
+      "parentId": "ae154b1f-969e-43a2-a65e-4d1c3383633d",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "4dc5137d-37c9-4e97-b965-c24dbf6f03bc": {
+      "components": {
+        "e32a8b08-61b1-4ce4-82d4-0ffc1073aa07": {
+          "id": "e32a8b08-61b1-4ce4-82d4-0ffc1073aa07",
+          "name": "letter",
+          "parameters": {
+            "letter": "k"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "4dc5137d-37c9-4e97-b965-c24dbf6f03bc",
+      "material": null,
+      "name": "k",
+      "order": 17.539505284496776,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        3.3794282480209623,
+        0.006515413273606718,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "K",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "4f62c0bc-96c6-4822-8d44-3f2a2eb2ca85": {
+      "components": {
+        "79c06a30-a96e-4048-94b5-3ee335e42677": {
+          "id": "79c06a30-a96e-4048-94b5-3ee335e42677",
+          "name": "letter",
+          "parameters": {
+            "letter": "t"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "4f62c0bc-96c6-4822-8d44-3f2a2eb2ca85",
+      "material": null,
+      "name": "t",
+      "order": 4.5395052844967765,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        -0.5669571833235363,
+        1.1554568487530805,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "T",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "54b99340-3d0e-4d74-8788-a5320637c1c0": {
+      "components": {
+        "264cf581-da9b-46b4-8c73-e8450a9565b1": {
+          "id": "264cf581-da9b-46b4-8c73-e8450a9565b1",
+          "name": "letter",
+          "parameters": {
+            "letter": "f"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "54b99340-3d0e-4d74-8788-a5320637c1c0",
+      "material": null,
+      "name": "f",
+      "order": 13.539505284496776,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        -1.2205717519790382,
+        0.006515413273606718,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "F",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "569ec144-8f2b-43ad-abe6-a5b42179fb80": {
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/cauldron.glb"
+        }
+      },
+      "id": "569ec144-8f2b-43ad-abe6-a5b42179fb80",
+      "name": "Cauldron",
+      "order": 0.17071478482386993,
+      "parentId": "00c719b2-881a-44bf-85fd-1ae1dd0a1012",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2.5,
+        2.5,
+        2.5
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": false
+      }
+    },
+    "59be6126-2f7b-49a2-abe9-5a80e88fb86f": {
+      "components": {},
+      "id": "59be6126-2f7b-49a2-abe9-5a80e88fb86f",
+      "name": "parent4",
+      "order": 6.008173390222103,
+      "parentId": "569ec144-8f2b-43ad-abe6-a5b42179fb80",
+      "position": [
+        0.14048846582855243,
+        0.8994044557033484,
+        -0.4388379095911842
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.11999999999999998,
+        0.12,
+        0.11999999999999998
+      ]
+    },
+    "5b66707f-72f0-470a-8a18-536980f55865": {
+      "components": {
+        "40ac3fb6-8b7f-44c2-af45-e5d4def1baa3": {
+          "id": "40ac3fb6-8b7f-44c2-af45-e5d4def1baa3",
+          "name": "letter",
+          "parameters": {
+            "letter": "b"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "5b66707f-72f0-470a-8a18-536980f55865",
+      "material": null,
+      "name": "b",
+      "order": 23.539505284496776,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        1.081173601705582,
+        -1.1406882244057543,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "B",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "6783ad57-640c-4762-aad3-433c6fb046d2": {
+      "components": {
+        "431e88cc-dad4-4986-816f-96071fa9f52d": {
+          "id": "431e88cc-dad4-4986-816f-96071fa9f52d",
+          "name": "letter",
+          "parameters": {
+            "letter": "g"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "6783ad57-640c-4762-aad3-433c6fb046d2",
+      "material": null,
+      "name": "g",
+      "order": 14.539505284496776,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        -0.07057175197903875,
+        0.006515413273606718,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "G",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "6a2c705c-8785-412d-91aa-6fedfa5ef559": {
+      "components": {
+        "48874731-ab08-4978-98bd-c8b89df3fcd9": {
+          "id": "48874731-ab08-4978-98bd-c8b89df3fcd9",
+          "name": "letter",
+          "parameters": {
+            "letter": "y"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "6a2c705c-8785-412d-91aa-6fedfa5ef559",
+      "material": null,
+      "name": "y",
+      "order": 5.5395052844967765,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        0.5830428166764641,
+        1.1554568487530803,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "Y",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "6afa2729-a2ad-4e28-abae-2cd2601ff049": {
+      "components": {
+        "61ab7a06-a416-4ca5-a9b1-3059fbbb9bde": {
+          "id": "61ab7a06-a416-4ca5-a9b1-3059fbbb9bde",
+          "name": "letter",
+          "parameters": {
+            "letter": "w"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "6afa2729-a2ad-4e28-abae-2cd2601ff049",
+      "material": null,
+      "name": "w",
+      "order": 1.539505284496776,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        -4.012256595964464,
+        1.1554568487530803,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "W",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "7041b114-8df7-4a5b-a6d4-eccb845cf1f1": {
+      "components": {
+        "fa0a0cc5-2bed-402b-93b2-502da0d55a21": {
+          "id": "fa0a0cc5-2bed-402b-93b2-502da0d55a21",
+          "name": "letter",
+          "parameters": {
+            "letter": "c"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "7041b114-8df7-4a5b-a6d4-eccb845cf1f1",
+      "material": null,
+      "name": "c",
+      "order": 21.539505284496776,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        -1.2188263982944179,
+        -1.1406882244057543,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "C",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "716d8184-6959-48e1-8625-4a3d6ac753f2": {
+      "components": {
+        "23d04b74-9860-46e2-8275-35b4cb03add3": {
+          "id": "23d04b74-9860-46e2-8275-35b4cb03add3",
+          "name": "letter",
+          "parameters": {
+            "letter": "z"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "716d8184-6959-48e1-8625-4a3d6ac753f2",
+      "material": null,
+      "name": "z",
+      "order": 19.539505284496776,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        -3.5188263982944172,
+        -1.1406882244057543,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "Z",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "71c45ded-3ed0-4bf3-a043-afda4e618ce0": {
+      "components": {
+        "32a3a4e7-a67c-41b7-b367-ad8a786ff5ba": {
+          "id": "32a3a4e7-a67c-41b7-b367-ad8a786ff5ba",
+          "name": "letter",
+          "parameters": {
+            "letter": "m"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "71c45ded-3ed0-4bf3-a043-afda4e618ce0",
+      "material": null,
+      "name": "m",
+      "order": 25.539505284496776,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        3.381173601705583,
+        -1.1406882244057543,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "M",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "7a46fd66-2e97-4824-81b5-65d4adbbbe22": {
+      "components": {
+        "5596d9dc-d16b-4a0a-bc8f-88e696aa47d0": {
+          "id": "5596d9dc-d16b-4a0a-bc8f-88e696aa47d0",
+          "name": "rotate-animation",
+          "parameters": {
+            "autoFrom": false,
+            "duration": 2000,
+            "fromX": 12,
+            "fromZ": -4,
+            "reverse": true,
+            "toX": -12,
+            "toZ": 4
+          }
+        },
+        "6068d8b8-1800-4a5e-9210-fb001f22c3c1": {
+          "id": "6068d8b8-1800-4a5e-9210-fb001f22c3c1",
+          "name": "position-animation",
+          "parameters": {
+            "autoFrom": true,
+            "duration": 1075,
+            "fromY": 0.1,
+            "reverse": true,
+            "toX": 0,
+            "toY": 0.1,
+            "toZ": 0
+          }
+        }
+      },
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/pumpkin.glb"
+        }
+      },
+      "id": "7a46fd66-2e97-4824-81b5-65d4adbbbe22",
+      "material": null,
+      "name": "pumpkin4",
+      "order": 6.008173390222103,
+      "parentId": "59be6126-2f7b-49a2-abe9-5a80e88fb86f",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "86983c70-e06b-4ed4-bc7a-4b24c8011604": {
+      "components": {},
+      "id": "86983c70-e06b-4ed4-bc7a-4b24c8011604",
+      "name": "parent5",
+      "order": 7.505993189278544,
+      "parentId": "569ec144-8f2b-43ad-abe6-a5b42179fb80",
+      "position": [
+        0.2819396678632224,
+        0.8994044557033484,
+        0.16171612500077828
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.11999999999999998,
+        0.12,
+        0.11999999999999998
+      ]
+    },
+    "8745c2e3-c533-4fb1-9c27-d14008852e64": {
+      "components": {
+        "5596d9dc-d16b-4a0a-bc8f-88e696aa47d0": {
+          "id": "5596d9dc-d16b-4a0a-bc8f-88e696aa47d0",
+          "name": "rotate-animation",
+          "parameters": {
+            "autoFrom": false,
+            "duration": 2000,
+            "fromX": -10,
+            "fromZ": -5,
+            "reverse": true,
+            "toX": 10,
+            "toZ": 5
+          }
+        },
+        "6068d8b8-1800-4a5e-9210-fb001f22c3c1": {
+          "id": "6068d8b8-1800-4a5e-9210-fb001f22c3c1",
+          "name": "position-animation",
+          "parameters": {
+            "autoFrom": true,
+            "duration": 1100,
+            "fromY": 0.1,
+            "reverse": true,
+            "toX": 0,
+            "toY": 0.1,
+            "toZ": 0
+          }
+        }
+      },
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/pumpkin.glb"
+        }
+      },
+      "id": "8745c2e3-c533-4fb1-9c27-d14008852e64",
+      "material": null,
+      "name": "pumpkin5",
+      "order": 7.505993189278544,
+      "parentId": "86983c70-e06b-4ed4-bc7a-4b24c8011604",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "8904e4f3-c728-4ea2-b866-2599cb7b5509": {
+      "components": {
+        "1f23c3c5-c1f4-41d7-a9c4-c00cf5abcc41": {
+          "id": "1f23c3c5-c1f4-41d7-a9c4-c00cf5abcc41",
+          "name": "position-animation",
+          "parameters": {
+            "autoFrom": true,
+            "fromY": -0.1,
+            "reverse": true,
+            "toY": 0.1
+          }
+        },
+        "5596d9dc-d16b-4a0a-bc8f-88e696aa47d0": {
+          "id": "5596d9dc-d16b-4a0a-bc8f-88e696aa47d0",
+          "name": "rotate-animation",
+          "parameters": {
+            "autoFrom": false,
+            "duration": 2000,
+            "fromX": -10,
+            "fromZ": -5,
+            "reverse": true,
+            "toX": 10,
+            "toZ": 5
+          }
+        }
+      },
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/pumpkin.glb"
+        }
+      },
+      "id": "8904e4f3-c728-4ea2-b866-2599cb7b5509",
+      "material": null,
+      "name": "pumpkin1",
+      "order": 1.1177615104299132,
+      "parentId": "04e0e1bd-e2fc-431d-a6af-266d9935fe9f",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "9068c7d6-642f-45d6-9af2-2bf3078f76d0": {
+      "components": {
+        "3d8614b7-92dd-4b2c-8c2a-0d31bbe685d5": {
+          "id": "3d8614b7-92dd-4b2c-8c2a-0d31bbe685d5",
+          "name": "letter",
+          "parameters": {
+            "letter": "s"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "9068c7d6-642f-45d6-9af2-2bf3078f76d0",
+      "material": null,
+      "name": "s",
+      "order": 11.539505284496776,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        -3.5158711646199667,
+        0.006515413273606718,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "S",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "9778a213-c921-40eb-bb3f-9c856dfb6f28": {
+      "components": {
+        "7ed1002b-bba2-4281-84b0-6ec501d9040e": {
+          "id": "7ed1002b-bba2-4281-84b0-6ec501d9040e",
+          "name": "letter",
+          "parameters": {
+            "letter": "o"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "9778a213-c921-40eb-bb3f-9c856dfb6f28",
+      "material": null,
+      "name": "o",
+      "order": 8.539505284496776,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        4.033042816676463,
+        1.1554568487530803,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "O",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "9f18549b-a476-438a-b85c-e45675981622": {
+      "components": {
+        "67de3e17-99c9-48dd-a172-df65b6e9abcc": {
+          "id": "67de3e17-99c9-48dd-a172-df65b6e9abcc",
+          "name": "letter",
+          "parameters": {
+            "letter": "e"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "9f18549b-a476-438a-b85c-e45675981622",
+      "material": null,
+      "name": "e",
+      "order": 2.539505284496776,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        -2.866957183323536,
+        1.1554568487530803,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "E",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "a4c20ddd-887d-40e5-b960-eb393415a776": {
+      "components": {
+        "cc7c6897-0bd2-4526-9000-340731d3d01b": {
+          "id": "cc7c6897-0bd2-4526-9000-340731d3d01b",
+          "name": "letter",
+          "parameters": {
+            "letter": "v"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "a4c20ddd-887d-40e5-b960-eb393415a776",
+      "material": null,
+      "name": "v",
+      "order": 22.539505284496776,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        -0.0688263982944175,
+        -1.1406882244057543,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "V",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "a608ddd9-9379-464d-966f-5d8d8674c83c": {
+      "camera": {
+        "type": "perspective",
+        "xr": {
+          "desktop": "3D",
+          "xrCameraType": "3dOnly",
+          "headset": "disabled",
+          "phone": "3D"
+        }
+      },
+      "components": {
+        "092b9f45-bac8-43c9-ad3a-6cd6a2165a29": {
+          "id": "092b9f45-bac8-43c9-ad3a-6cd6a2165a29",
+          "name": "orbit-controls",
+          "parameters": {
+            "focusEntity": {
+              "type": "entity",
+              "id": "c39b7cbb-b53f-4c36-b339-eb375c8ca394"
+            },
+            "pitchAngleMin": 30,
+            "pitchAngleMax": 30,
+            "constrainYaw": false
+          }
+        }
+      },
+      "geometry": null,
+      "id": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "material": null,
+      "name": "Camera",
+      "order": 2.050367253885131,
+      "position": [
+        0,
+        5.202330467552535,
+        6.820029855918676
+      ],
+      "rotation": [
+        -1.841291944451838e-17,
+        0.9537169517857893,
+        -0.3007057962135456,
+        -5.839832572618049e-17
+      ],
+      "scale": [
+        0.9999998646558022,
+        0.9999999931513284,
+        0.999999871504474
+      ],
+      "parentId": "00c719b2-881a-44bf-85fd-1ae1dd0a1012"
+    },
+    "ac1989e3-3b71-49e2-a05f-e682aeb18c36": {
+      "components": {},
+      "geometry": null,
+      "id": "ac1989e3-3b71-49e2-a05f-e682aeb18c36",
+      "light": {
+        "intensity": 1,
+        "type": "directional",
+        "shadowBias": 0.001,
+        "shadowRadius": 1,
+        "shadowMapSize": [
+          2048,
+          2048
+        ],
+        "shadowNormalBias": 0
+      },
+      "material": null,
+      "name": "Directional Light",
+      "order": 4.283414815983691,
+      "parentId": "ebdafab9-0d0c-49f4-97c7-7641217f7c11",
+      "position": [
+        20,
+        20,
+        10
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "ae154b1f-969e-43a2-a65e-4d1c3383633d": {
+      "components": {},
+      "id": "ae154b1f-969e-43a2-a65e-4d1c3383633d",
+      "name": "parent6",
+      "order": 8.520133456468606,
+      "parentId": "569ec144-8f2b-43ad-abe6-a5b42179fb80",
+      "position": [
+        -0.35501137019871365,
+        0.8994044557033484,
+        0.041321865046691976
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.11999999999999998,
+        0.12,
+        0.11999999999999998
+      ]
+    },
+    "aef35d12-4376-4d16-b2ac-0300ef8fb0df": {
+      "components": {
+        "2164ae2f-7f95-42ca-b91e-13da0667676d": {
+          "id": "2164ae2f-7f95-42ca-b91e-13da0667676d",
+          "name": "letter",
+          "parameters": {
+            "letter": "h"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "aef35d12-4376-4d16-b2ac-0300ef8fb0df",
+      "material": null,
+      "name": "h",
+      "order": 15.539505284496776,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        1.0794282480209616,
+        0.006515413273606718,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "H",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "af31710e-4384-43ec-a6f9-675330344c11": {
+      "components": {},
+      "geometry": null,
+      "id": "af31710e-4384-43ec-a6f9-675330344c11",
+      "material": null,
+      "name": "Keyboard",
+      "order": 0.9395327643753709,
+      "parentId": "e50ae043-912a-41f1-8643-534c68026ff3",
+      "position": [
+        0,
+        1,
+        3.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.3,
+        0.3,
+        0.3
+      ],
+      "disabled": false,
+      "hidden": false
+    },
+    "b3255394-75fc-4ec6-b50f-001c1110e911": {
+      "components": {},
+      "id": "b3255394-75fc-4ec6-b50f-001c1110e911",
+      "name": "parent3",
+      "order": 4.123504034306984,
+      "parentId": "569ec144-8f2b-43ad-abe6-a5b42179fb80",
+      "position": [
+        -0.02784879816027417,
+        0.8994044557033484,
+        -0.0710857814849886
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.11999999999999998,
+        0.12,
+        0.11999999999999998
+      ]
+    },
+    "b8f72996-fe81-4755-9534-f39ba3c8f60e": {
+      "components": {
+        "4f10851b-1911-400b-8fd3-1f71e39a9eb1": {
+          "id": "4f10851b-1911-400b-8fd3-1f71e39a9eb1",
+          "name": "letter",
+          "parameters": {
+            "letter": "a"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "b8f72996-fe81-4755-9534-f39ba3c8f60e",
+      "material": null,
+      "name": "a",
+      "order": 10.539505284496776,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        -4.670571751979039,
+        0.006515413273606718,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "A",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "c39b7cbb-b53f-4c36-b339-eb375c8ca394": {
+      "components": {
+        "af34402e-f777-441a-b6fb-f1de2b254b79": {
+          "id": "af34402e-f777-441a-b6fb-f1de2b254b79",
+          "name": "look-at-animation",
+          "parameters": {
+            "target": {
+              "type": "entity",
+              "id": "a608ddd9-9379-464d-966f-5d8d8674c83c"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "c39b7cbb-b53f-4c36-b339-eb375c8ca394",
+      "material": null,
+      "name": "Pivot",
+      "order": -1.4318595868395487,
+      "parentId": "0d1180f6-99e2-42d8-95c3-2a0b47013ff7",
+      "position": [
+        0,
+        2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "c8bc63c3-662d-47d8-8255-635f00b215d8": {
+      "components": {
+        "8d1143d2-16e0-4823-b6e0-387ff48e626c": {
+          "id": "8d1143d2-16e0-4823-b6e0-387ff48e626c",
+          "name": "letter",
+          "parameters": {
+            "letter": "p"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "c8bc63c3-662d-47d8-8255-635f00b215d8",
+      "material": null,
+      "name": "p",
+      "order": 9.539505284496776,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        5.183042816676464,
+        1.1554568487530803,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "P",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "cb11c03d-bd24-40e3-8ff5-4610abac229e": {
+      "components": {
+        "7ef6dad8-8d6c-4be6-9c7e-845e294dbebd": {
+          "id": "7ef6dad8-8d6c-4be6-9c7e-845e294dbebd",
+          "name": "letter",
+          "parameters": {
+            "letter": "x"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "cb11c03d-bd24-40e3-8ff5-4610abac229e",
+      "material": null,
+      "name": "x",
+      "order": 20.539505284496776,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        -2.3641258109353456,
+        -1.1406882244057543,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "X",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "cb5b9151-ab16-4c66-8119-599ae4e69abb": {
+      "components": {
+        "950fd2c9-c2c0-48a1-bb66-060816672828": {
+          "id": "950fd2c9-c2c0-48a1-bb66-060816672828",
+          "name": "letter",
+          "parameters": {
+            "letter": "l"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "cb5b9151-ab16-4c66-8119-599ae4e69abb",
+      "material": null,
+      "name": "l",
+      "order": 18.539505284496776,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        4.5294282480209604,
+        0.006515413273606718,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "L",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "d1781e9d-2306-4d41-8da9-28b964328b93": {
+      "components": {
+        "92e516d9-c202-4f69-bf33-a312ea4b912f": {
+          "id": "92e516d9-c202-4f69-bf33-a312ea4b912f",
+          "name": "letter",
+          "parameters": {
+            "letter": "n"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "d1781e9d-2306-4d41-8da9-28b964328b93",
+      "material": null,
+      "name": "n",
+      "order": 24.539505284496776,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        2.2311736017055828,
+        -1.1406882244057543,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "N",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "d75dd0ca-016a-4205-9dad-e9846af18fa0": {
+      "components": {},
+      "id": "d75dd0ca-016a-4205-9dad-e9846af18fa0",
+      "name": "parent2",
+      "order": 3.025555428347206,
+      "parentId": "569ec144-8f2b-43ad-abe6-a5b42179fb80",
+      "position": [
+        0.3347179555728712,
+        0.8994044557033484,
+        -0.1759431954675181
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.11999999999999998,
+        0.12,
+        0.11999999999999998
+      ]
+    },
+    "e4c16bdb-642c-4b42-bd56-84038893fade": {
+      "components": {
+        "059a5e00-5161-416b-b22f-58deda8da656": {
+          "id": "059a5e00-5161-416b-b22f-58deda8da656",
+          "name": "letter",
+          "parameters": {
+            "letter": "d"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "e4c16bdb-642c-4b42-bd56-84038893fade",
+      "material": null,
+      "name": "d",
+      "order": 12.539505284496776,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        -2.3705717519790386,
+        0.006515413273606718,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "D",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "e522f49f-f5a2-4d01-a4d9-7bd6bd7ff97d": {
+      "components": {
+        "5596d9dc-d16b-4a0a-bc8f-88e696aa47d0": {
+          "id": "5596d9dc-d16b-4a0a-bc8f-88e696aa47d0",
+          "name": "rotate-animation",
+          "parameters": {
+            "autoFrom": false,
+            "duration": 2000,
+            "fromX": 10,
+            "fromZ": 5,
+            "reverse": true,
+            "toX": -10,
+            "toZ": -5
+          }
+        },
+        "6068d8b8-1800-4a5e-9210-fb001f22c3c1": {
+          "id": "6068d8b8-1800-4a5e-9210-fb001f22c3c1",
+          "name": "position-animation",
+          "parameters": {
+            "autoFrom": true,
+            "duration": 1025,
+            "fromY": 0.1,
+            "reverse": true,
+            "toX": 0,
+            "toY": 0.1,
+            "toZ": 0
+          }
+        }
+      },
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/pumpkin.glb"
+        }
+      },
+      "id": "e522f49f-f5a2-4d01-a4d9-7bd6bd7ff97d",
+      "material": null,
+      "name": "pumpkin2",
+      "order": 3.025555428347206,
+      "parentId": "d75dd0ca-016a-4205-9dad-e9846af18fa0",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "ebdafab9-0d0c-49f4-97c7-7641217f7c11": {
+      "components": {},
+      "geometry": null,
+      "id": "ebdafab9-0d0c-49f4-97c7-7641217f7c11",
+      "material": null,
+      "name": "Environment",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "00c719b2-881a-44bf-85fd-1ae1dd0a1012"
+    },
+    "ee128f44-8bff-4008-b17b-66fa15754eec": {
+      "components": {
+        "5596d9dc-d16b-4a0a-bc8f-88e696aa47d0": {
+          "id": "5596d9dc-d16b-4a0a-bc8f-88e696aa47d0",
+          "name": "rotate-animation",
+          "parameters": {
+            "autoFrom": false,
+            "duration": 2000,
+            "fromX": -10,
+            "fromZ": -5,
+            "reverse": true,
+            "toX": 10,
+            "toZ": 5
+          }
+        },
+        "6068d8b8-1800-4a5e-9210-fb001f22c3c1": {
+          "id": "6068d8b8-1800-4a5e-9210-fb001f22c3c1",
+          "name": "position-animation",
+          "parameters": {
+            "autoFrom": true,
+            "duration": 1050,
+            "fromY": 0.1,
+            "reverse": true,
+            "toX": 0,
+            "toY": 0.1,
+            "toZ": 0
+          }
+        }
+      },
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/pumpkin.glb"
+        }
+      },
+      "id": "ee128f44-8bff-4008-b17b-66fa15754eec",
+      "material": null,
+      "name": "pumpkin3",
+      "order": 4.123504034306984,
+      "parentId": "b3255394-75fc-4ec6-b50f-001c1110e911",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "f0fee476-0cbe-4a7f-9c32-4ec0d6f64ec0": {
+      "components": {
+        "a05c9ab7-0e8d-4631-9c06-2d5bb6f0684f": {
+          "id": "a05c9ab7-0e8d-4631-9c06-2d5bb6f0684f",
+          "name": "letter",
+          "parameters": {
+            "letter": "j"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "f0fee476-0cbe-4a7f-9c32-4ec0d6f64ec0",
+      "material": null,
+      "name": "j",
+      "order": 16.539505284496776,
+      "parentId": "af31710e-4384-43ec-a6f9-675330344c11",
+      "position": [
+        2.229428248020962,
+        0.006515413273606718,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": 100,
+        "type": "3d",
+        "width": 100,
+        "fontSize": 75,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "J",
+        "color": "#000000",
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "verticalTextAlign": "center"
+      }
+    },
+    "68765a6c-beba-4c05-85cb-067e953ac0d8": {
+      "id": "68765a6c-beba-4c05-85cb-067e953ac0d8",
+      "position": [
+        0,
+        3,
+        -0.16193555267523274
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "e50ae043-912a-41f1-8643-534c68026ff3",
+      "components": {},
+      "name": "Word",
+      "order": -0.5038283464791639,
+      "ui": {
+        "type": "3d",
+        "fontSize": 96,
+        "text": "LOADING",
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "color": "#ffffff",
+        "width": 512,
+        "height": 128
+      },
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "5a4cb105-ea91-4c16-b4ae-360ec8f0a660": {
+      "id": "5a4cb105-ea91-4c16-b4ae-360ec8f0a660",
+      "position": [
+        0,
+        1,
+        4.503893402146092
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "499e4fad-6f09-4d35-9375-bb72e3e65277",
+      "components": {
+        "84c0c806-a0e6-4eb9-896a-5886dca6e5c0": {
+          "id": "84c0c806-a0e6-4eb9-896a-5886dca6e5c0",
+          "name": "scale-animation",
+          "parameters": {
+            "loop": true,
+            "autoFrom": true,
+            "toX": 0.6,
+            "toY": 0.6,
+            "toZ": 0.6,
+            "reverse": true,
+            "easeIn": true,
+            "easeOut": true,
+            "easingFunction": "Quadratic"
+          }
+        }
+      },
+      "name": "Start Button",
+      "order": -1.3401387689738034,
+      "ui": {
+        "type": "3d",
+        "width": 400,
+        "height": 100,
+        "background": "#ffffff",
+        "backgroundOpacity": 0.9,
+        "borderRadius": 50,
+        "alignItems": "center",
+        "justifyContent": "center"
+      }
+    },
+    "c88a2cc6-fd5f-4850-be73-3e382af8ab5d": {
+      "id": "c88a2cc6-fd5f-4850-be73-3e382af8ab5d",
+      "position": [
+        0,
+        -1,
+        -3.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "5a4cb105-ea91-4c16-b4ae-360ec8f0a660",
+      "components": {},
+      "name": "Start",
+      "ui": {
+        "text": "START",
+        "width": 100,
+        "height": 50,
+        "color": "#000000",
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "fontSize": 40,
+        "verticalTextAlign": "center"
+      }
+    },
+    "499e4fad-6f09-4d35-9375-bb72e3e65277": {
+      "id": "499e4fad-6f09-4d35-9375-bb72e3e65277",
+      "position": [
+        0,
+        -2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "c39b7cbb-b53f-4c36-b339-eb375c8ca394",
+      "components": {},
+      "name": "Onboarding UI",
+      "order": -2.5716118532972834,
+      "hidden": false
+    },
+    "e50ae043-912a-41f1-8643-534c68026ff3": {
+      "id": "e50ae043-912a-41f1-8643-534c68026ff3",
+      "position": [
+        0,
+        -2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.001,
+        0.001,
+        0.001
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "c39b7cbb-b53f-4c36-b339-eb375c8ca394",
+      "components": {},
+      "name": "Guessing UI",
+      "order": -0.9033133928626152,
+      "disabled": false,
+      "hidden": false
+    },
+    "53c9f9a6-5c5b-40d1-9835-65dbcc13f269": {
+      "id": "53c9f9a6-5c5b-40d1-9835-65dbcc13f269",
+      "position": [
+        0,
+        -2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "c39b7cbb-b53f-4c36-b339-eb375c8ca394",
+      "components": {},
+      "name": "Loading",
+      "order": -5.372494569695927,
+      "ui": {
+        "backgroundOpacity": 0,
+        "background": "#111111"
+      },
+      "disabled": true
+    },
+    "4c2a7146-91d7-426c-8d2a-9b38b62f58d5": {
+      "id": "4c2a7146-91d7-426c-8d2a-9b38b62f58d5",
+      "position": [
+        0,
+        -2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.001,
+        0.001,
+        0.001
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "c39b7cbb-b53f-4c36-b339-eb375c8ca394",
+      "components": {},
+      "name": "Replay UI",
+      "order": 0.544612862702721,
+      "hidden": false
+    },
+    "6a50471d-36c6-430e-8e94-76870ef581b7": {
+      "id": "6a50471d-36c6-430e-8e94-76870ef581b7",
+      "position": [
+        0,
+        1,
+        4.503893402146092
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "4c2a7146-91d7-426c-8d2a-9b38b62f58d5",
+      "components": {},
+      "name": "Replay Button",
+      "order": -0.32166157872026124,
+      "ui": {
+        "type": "3d",
+        "width": 400,
+        "height": 100,
+        "background": "#ffffff",
+        "backgroundOpacity": 0.9,
+        "borderRadius": 50,
+        "alignItems": "center",
+        "justifyContent": "center"
+      }
+    },
+    "c3cd6db0-a5bf-45b4-b727-af5f8d977b71": {
+      "id": "c3cd6db0-a5bf-45b4-b727-af5f8d977b71",
+      "position": [
+        0,
+        -1,
+        -3.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "6a50471d-36c6-430e-8e94-76870ef581b7",
+      "components": {},
+      "name": "Replay",
+      "ui": {
+        "text": "REPLAY",
+        "width": 100,
+        "height": 50,
+        "color": "#000000",
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "fontSize": 40,
+        "verticalTextAlign": "center"
+      }
+    },
+    "2bc0e00a-c3bb-4763-8357-f00750d59ce0": {
+      "id": "2bc0e00a-c3bb-4763-8357-f00750d59ce0",
+      "position": [
+        0,
+        4.999999999999999,
+        -0.1619355526752327
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        0.9999999999999999
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "4c2a7146-91d7-426c-8d2a-9b38b62f58d5",
+      "components": {},
+      "name": "Replay Text",
+      "order": -2.3208499519882135,
+      "ui": {
+        "type": "3d",
+        "fontSize": 96,
+        "text": "",
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "color": "#ffffff",
+        "width": 512,
+        "height": 128
+      },
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "f41feec4-3e70-4f47-a109-f2e3b7063420": {
+      "id": "f41feec4-3e70-4f47-a109-f2e3b7063420",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "499e4fad-6f09-4d35-9375-bb72e3e65277",
+      "components": {},
+      "name": "Empty Object",
+      "order": -3.8527841064776505
+    },
+    "7c3e6a78-39f7-4c4f-9da9-08bf9589cd94": {
+      "id": "7c3e6a78-39f7-4c4f-9da9-08bf9589cd94",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "0d1180f6-99e2-42d8-95c3-2a0b47013ff7",
+      "components": {},
+      "name": "Guesses Counter",
+      "order": -2.958144972257707,
+      "ui": {
+        "fontSize": 32,
+        "font": {
+          "type": "asset",
+          "asset": "assets/JollyLodger-Regular.font8"
+        },
+        "text": "Guesses Remaining: 0",
+        "position": "absolute",
+        "top": "8",
+        "right": "",
+        "left": "8",
+        "backgroundOpacity": 0,
+        "color": "#ffffff",
+        "width": "100%",
+        "ignoreRaycast": true,
+        "verticalTextAlign": "center"
+      }
+    },
+    "e7f2768a-bf81-4f3f-99e8-bcc2f3a41471": {
+      "id": "e7f2768a-bf81-4f3f-99e8-bcc2f3a41471",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        -0.7071067811865475,
+        0,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": {
+        "type": "circle",
+        "radius": 20
+      },
+      "material": {
+        "type": "basic",
+        "color": "#cfcfcf",
+        "roughness": 1,
+        "metalness": 0,
+        "textureSrc": {
+          "type": "asset",
+          "asset": "assets/slate.jpeg"
+        },
+        "wrap": "repeat",
+        "repeatX": 20,
+        "repeatY": 15,
+        "depthWrite": false
+      },
+      "parentId": "ebdafab9-0d0c-49f4-97c7-7641217f7c11",
+      "components": {},
+      "name": "Circle",
+      "order": 5.693709427954916
+    }
+  },
+  "spaces": {
+    "00c719b2-881a-44bf-85fd-1ae1dd0a1012": {
+      "id": "00c719b2-881a-44bf-85fd-1ae1dd0a1012",
+      "name": "Default",
+      "activeCamera": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "reflections": {
+        "type": "url",
+        "url": "https://cdn.8thwall.com/web/assets/envmap/basic_env_map-m9hqpneh.jpg"
+      },
+      "sky": {
+        "type": "color"
+      },
+      "fog": {
+        "type": "linear",
+        "near": 15,
+        "far": 32,
+        "color": "#10071d"
+      }
+    }
+  },
+  "entrySpaceId": "00c719b2-881a-44bf-85fd-1ae1dd0a1012",
+  "runtimeVersion": {
+    "type": "version",
+    "level": "major",
+    "major": 2,
+    "minor": 0,
+    "patch": 0
+  },
+  "historyVersion": "mfehga9b"
+}

@@ -1,0 +1,51 @@
+---
+id: rotate-animation
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# RotateAnimation
+
+## Beschreibung
+
+Diese Komponente erstellt eine Animation für ein Objekt.
+
+## Eigenschaften
+
+| Eigenschaft        | Typ     | Standard      | Beschreibung                                                                                                                                                       |
+| ------------------ | ------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Ziel               | eid     | undefiniert   | Das Zielobjekt, das animiert werden soll. Wenn nicht angegeben, wird die Animation auf dem Objekt ausgeführt, an das die Komponente angehängt ist.                 |
+| vonX               | Nummer  | 0             | Die Start-X-Koordinate für die Animation.                                                                                                                          |
+| vonY               | Nummer  | 0             | Die Start-Y-Koordinate für die Animation.                                                                                                                          |
+| vonZ               | Nummer  | 0             | Die Start-Z-Koordinate für die Animation.                                                                                                                          |
+| toX                | Nummer  | 0             | Die Ziel-X-Koordinate für die Animation.                                                                                                                           |
+| toY                | Nummer  | 0             | Die Y-Zielkoordinate für die Animation.                                                                                                                            |
+| toZ                | Nummer  | 0             | Die Ziel-Z-Koordinate für die Animation.                                                                                                                           |
+| autoFrom           | boolean | false         | Wenn diese Option aktiviert ist, werden die 'fromX/Y/Z'-Eigenschaften ignoriert und die Animation beginnt mit dem Zustand des Objekts zu Beginn der Animation.     |
+| Dauer              | Nummer  | 1000          | Die Dauer der Animation in Millisekunden.                                                                                                                          |
+| Schleife           | boolean | true          | Wenn aktiviert, wird die Animation wiederholt.                                                                                                                     |
+| umkehren           | boolean | false         | Ob rückwärts abgespielt werden soll, wenn Schleife eingestellt ist.                                                                                                |
+| easeIn             | boolean | false         | Wenn diese Funktion aktiviert ist, wird anstelle einer geraden Interpolation eine zeitliche Staffelung vorgenommen.                                                |
+| easeOut            | boolean | false         | Wenn diese Funktion aktiviert ist, wird anstelle einer geraden Interpolation eine zeitliche Staffelung vorgenommen.                                                |
+| easingFunction     | String  | Quadratisch   | Wählen Sie zwischen quadratisch, kubisch, quartisch, quintisch, sinusförmig, exponentiell, kreisförmig, elastisch, zurück und prellend                             |
+| kürzesterWeg       | boolean | false         | Wenn diese Option aktiviert ist, nimmt die Animation den kürzesten Weg zur Fertigstellung.                                                                         |
+
+## Funktionen
+
+<ComponentFunctions
+    name="RotateAnimation"
+    properties={{
+        from: { x: 0, y: 0, z: 0 },
+        to: { x: 0, y: 0, z: 0 },
+        autoFrom: false,
+        duration: 1000,
+        loop: true,
+        reverse: false,
+        easeIn: false,
+        easeOut: false,
+        easingFunction: "Quadratic"
+    }}
+    mutate={`cursor.to.z = 90;
+    cursor.duration = 1500;
+    return false;`}
+/>

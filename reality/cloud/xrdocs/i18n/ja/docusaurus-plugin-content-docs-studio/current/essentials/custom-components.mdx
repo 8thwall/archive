@@ -1,0 +1,60 @@
+---
+id: custom-components
+description: カスタムコンポーネントは、エンティティにカスタムゲームロジックを追加するために使用します。
+sidebar_position: 40
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# カスタム・コンポーネント
+
+## はじめに
+
+{frontMatter.description}
+
+## カスタムコンポーネントの作成
+
+カスタムコンポーネントを作成するには、以下の手順に従います：
+
+1. ファイルブラウザでプラスボタン（＋）をクリックする。
+2. 新規ファイル」→「新規コンポーネントファイル」をクリックし、名前を付ける（拡張子は任意）。
+   1. 新しいComponentファイルが生成され、デフォルトではプロジェクト内にTypeScriptが生成される。
+   2. 新しいComponentファイルには、カスタムComponentの登録に必要な定型コードが含まれます。
+
+## カスタムコンポーネントの登録
+
+次のコードは、新しく作成されたカスタムコンポーネントがコードエディターに表示される例です：
+
+### 例
+
+```ts
+// This is a component file. You can use this file to define a custom component for your project.
+// This component will appear as a custom component in the editor.
+
+import * as ecs from '@8thwall/ecs'  // This is how you access the ecs library.
+
+ecs.registerComponent({
+  name: 'Custom Component',
+  // schema: {
+  // },
+  // schemaDefaults: {
+  // },
+  // data: {
+  // },
+  // add: (world, component) => {
+  // },
+  // tick: (world, component) => {
+  // },
+  // remove: (world, component) => {
+  // },
+  // stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+  //   ecs.defineState('default').initial()
+  // },
+})
+```
+
+この例から、[スキーマ](../schema)、[ステートマシン](../state-machines)、[ライフサイクルコールバック](../component-lifecycle)を追加することができます。
+
+:::warning
+debug-'で始まるコンポーネント名は内部デバッグのために予約されており、エディターには表示されません。
+:::

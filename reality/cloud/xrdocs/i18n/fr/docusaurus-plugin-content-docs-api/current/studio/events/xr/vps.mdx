@@ -1,0 +1,123 @@
+---
+id: vps
+sidebar_position: 2
+---
+
+import {EventExample} from '@site/src/components/event-example'
+
+# Événements VPS
+
+## Types {#types}
+
+### LocationObject {#LocationObject}
+
+| Propriété | Type     | Description                                                                        |
+| --------- | -------- | ---------------------------------------------------------------------------------- |
+| id        | `Chaîne` | Un identifiant pour cet emplacement de projet qui est stable au sein d'une session |
+| nom       | `Chaîne` | Nom de l'emplacement du projet.                                                    |
+| imageUrl  | `Chaîne` | URL d'une image représentative de l'emplacement du projet.                         |
+| titre     | `Chaîne` | Titre de l'emplacement du projet.                                                  |
+| lat       | `Nombre` | Latitude de l'emplacement du projet.                                               |
+| lng       | `Nombre` | Longitude de l'emplacement du projet.                                              |
+
+### PositionAttributeObject {#PositionAttributeObject}
+
+| Propriété | Type             | Description                                  |
+| --------- | ---------------- | -------------------------------------------- |
+| nom       | `Chaîne`         | Le nom de l'objet                            |
+| réseau    | `Float32Array()` | Les données géométriques brutes du maillage. |
+| itemSize  | `Integer`        | Le nombre d'éléments dans l'objet            |
+
+### ColorAttributeObject {#ColorAttributeObject}
+
+| Propriété | Type             | Description                                  |
+| --------- | ---------------- | -------------------------------------------- |
+| nom       | `Chaîne`         | Le nom de l'objet                            |
+| réseau    | `Float32Array()` | Les données géométriques brutes du maillage. |
+| itemSize  | `Integer`        | Le nombre d'éléments dans l'objet            |
+
+### Objet géométrique {#GeometryObject}
+
+| Propriété | Type                                                                                                           | Description                                                           |
+| --------- | -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| index     | `Chaîne`                                                                                                       | Un identifiant pour ce maillage qui est stable au sein d'une session. |
+| attributs | `[`[`PositionAttributeObject`](#PositionAttributeObject)`,`[`ColorAttributeObject`](#ColorAttributeObject)`]`. | Les données géométriques brutes du maillage.                          |
+
+## Evénements
+
+### REALITY_LOCATION_FOUND
+
+Cet événement est émis lorsqu'un emplacement de projet est trouvé pour la première fois.
+
+#### Propriétés
+
+| Propriété | Type           | Description                                                               |
+| --------- | -------------- | ------------------------------------------------------------------------- |
+| nom       | `Chaîne`       | Le nom de l'emplacement du projet.                                        |
+| position  | `{x, y, z}`    | La position 3d de l'emplacement du projet localisé.                       |
+| rotation  | `{w, x, y, z}` | L'orientation locale 3D (quaternion) de l'emplacement du projet localisé. |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="REALITY_LOCATION_FOUND" target="world.events.globalId" callbackBody={`console.log('Location found: ', event.data.name)`} />
+
+### REALITY_LOCATION_LOST
+
+Cet événement est émis lorsqu'un lieu de projet n'est plus suivi.
+
+#### Propriétés
+
+| Propriété | Type           | Description                                                               |
+| --------- | -------------- | ------------------------------------------------------------------------- |
+| nom       | `Chaîne`       | Le nom de l'emplacement du projet.                                        |
+| position  | `{x, y, z}`    | La position 3d de l'emplacement du projet localisé.                       |
+| rotation  | `{w, x, y, z}` | L'orientation locale 3D (quaternion) de l'emplacement du projet localisé. |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="REALITY_LOCATION_LOST" target="world.events.globalId" callbackBody={`console.log('Location lost: ', event.data.name)`} />
+
+### BALAYAGE_DE_LIEU_DE_LA_RÉALITÉ
+
+Cet événement est émis lorsque tous les emplacements de projet ont été chargés pour la numérisation.
+
+#### Propriétés
+
+| Propriété | Type                      | Description                                                        |
+| --------- | ------------------------- | ------------------------------------------------------------------ |
+| lieux     | `Tableau<LocationObject>` | Un tableau d'objets contenant des informations sur la localisation |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="REALITY_LOCATION_SCANNING" target="world.events.globalId" callbackBody={`console.log('Locations scanning: ', event.data.locations)`} />
+
+### REALITY_MESH_FOUND
+
+Cet événement est émis lorsqu'une maille est trouvée pour la première fois, soit après le démarrage, soit après un `recenter()`.
+
+#### Propriétés
+
+| Propriété | Type                                | Description                                                                                                                            |
+| --------- | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| id        | `Chaîne`                            | Un identifiant pour ce maillage qui est stable au sein d'une session.                                                                  |
+| position  | `{x, y, z}`                         | La position 3d de l'emplacement du projet localisé.                                                                                    |
+| rotation  | `{w, x, y, z}`                      | L'orientation locale 3D (quaternion) de l'emplacement du projet localisé.                                                              |
+| géométrie | [`GeometryObject`](#GeometryObject) | Un objet contenant des données brutes sur la géométrie du maillage. Les attributs contiennent des attributs de position et de couleur. |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="REALITY_MESH_FOUND" target="world.events.globalId" callbackBody={`console.log('Mesh found: ', event.data.id)`} />
+
+### RÉALITÉ_MAILLE_PERDUE
+
+Cet événement est émis lorsque la fonction `recenter()` est appelée.
+
+#### Propriété
+
+| Propriété | Type     | Description                                                           |
+| --------- | -------- | --------------------------------------------------------------------- |
+| id        | `Chaîne` | Un identifiant pour ce maillage qui est stable au sein d'une session. |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="REALITY_MESH_LOST" target="world.events.globalId" callbackBody={`console.log('Mesh lost: ', event.data.id)`} />

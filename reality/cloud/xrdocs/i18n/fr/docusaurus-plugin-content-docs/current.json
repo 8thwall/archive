@@ -1,0 +1,142 @@
+{
+  "version.label": {
+    "message": "Suivant",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Home": {
+    "message": "Accueil",
+    "description": "The label for category Home in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Getting Started": {
+    "message": "Pour commencer",
+    "description": "The label for category Getting Started in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Guides": {
+    "message": "Guides",
+    "description": "The label for category Guides in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Projects": {
+    "message": "Projets",
+    "description": "The label for category Projects in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Advanced Topics": {
+    "message": "Sujets avancés",
+    "description": "The label for category Advanced Topics in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.API Reference": {
+    "message": "Référence API",
+    "description": "The label for category API Reference in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.XR8": {
+    "message": "XR8",
+    "description": "The label for category XR8 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.AccessPass": {
+    "message": "AccessPass",
+    "description": "The label for category AccessPass in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.AFrame": {
+    "message": "Cadre AF",
+    "description": "The label for category AFrame in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.AFrame Events": {
+    "message": "Événements AFrame",
+    "description": "The label for category AFrame Events in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.AFrame Event Listeners": {
+    "message": "Écoute d'événements AFrame",
+    "description": "The label for category AFrame Event Listeners in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Babylonjs": {
+    "message": "Babylonjs",
+    "description": "The label for category Babylonjs in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.CameraPipelineModule": {
+    "message": "Module CameraPipeline",
+    "description": "The label for category CameraPipelineModule in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.CameraPixelArray": {
+    "message": "CameraPixelArray",
+    "description": "The label for category CameraPixelArray in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.CanvasScreenshot": {
+    "message": "Capture d'écran",
+    "description": "The label for category CanvasScreenshot in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.CoachingOverlay": {
+    "message": "CoachingOverlay",
+    "description": "The label for category CoachingOverlay in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.FaceController": {
+    "message": "FaceController",
+    "description": "The label for category FaceController in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.GlTextureRenderer": {
+    "message": "GlTextureRenderer",
+    "description": "The label for category GlTextureRenderer in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.LayersController": {
+    "message": "Contrôleur de couches",
+    "description": "The label for category LayersController in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.LandingPage": {
+    "message": "Page d'atterrissage",
+    "description": "The label for category LandingPage in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.MediaRecorder": {
+    "message": "Enregistreur de médias",
+    "description": "The label for category MediaRecorder in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.PlayCanvas": {
+    "message": "PlayCanvas",
+    "description": "The label for category PlayCanvas in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.PlayCanvas Events": {
+    "message": "Événements PlayCanvas",
+    "description": "The label for category PlayCanvas Events in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.PlayCanvas Event Listeners": {
+    "message": "Écoute d'événements PlayCanvas",
+    "description": "The label for category PlayCanvas Event Listeners in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Threejs": {
+    "message": "Threejs",
+    "description": "The label for category Threejs in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.VPS": {
+    "message": "VPS",
+    "description": "The label for category VPS in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.VpsCoachingOverlay": {
+    "message": "VpsCoachingOverlay",
+    "description": "The label for category VpsCoachingOverlay in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.XrConfig": {
+    "message": "XrConfig",
+    "description": "The label for category XrConfig in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.XrController": {
+    "message": "XrController",
+    "description": "The label for category XrController in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.XrDevice": {
+    "message": "Appareil Xr",
+    "description": "The label for category XrDevice in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.XrPermissions": {
+    "message": "XrPermissions",
+    "description": "The label for category XrPermissions in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Troubleshooting": {
+    "message": "Dépannage",
+    "description": "The label for category Troubleshooting in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.HandController": {
+    "message": "Contrôleur de main",
+    "description": "The label for category HandController in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Modules": {
+    "message": "Modules",
+    "description": "The label for category Modules in sidebar tutorialSidebar"
+  }
+}

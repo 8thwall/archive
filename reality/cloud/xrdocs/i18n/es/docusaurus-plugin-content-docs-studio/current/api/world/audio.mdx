@@ -1,0 +1,84 @@
+---
+id: audio
+description: This library includes functions that handle audio playback.
+---
+
+# audio
+
+## Descripción
+
+{frontMatter.description}
+
+## Audio
+
+| Propiedad       | Tipo    | Por defecto   | Descripción                                                                                                                                                                                                                                                                                               |
+| --------------- | ------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| url (Required)  | string  | ''            | Source URL                                                                                                                                                                                                                                                                                                |
+| volume          | number  | 1             | How loud the audio will be played. A value between 0 and 1                                                                                                                                                                                                                                                |
+| loop            | boolean | false         | Wheather the audio restarts after it finishes                                                                                                                                                                                                                                                             |
+| paused          | boolean | false         | Weather the audio is currently paused                                                                                                                                                                                                                                                                     |
+| pitch           | number  | 1             | The factor used to change the audio's pitch. 1 is the default pitch.                                                                                                                                                                                                                                      |
+| positional      | boolean | false         | weather the audio is played positional                                                                                                                                                                                                                                                                    |
+| refDistance     | number  | 1             | **Only applied if positional is true.** The value indicating at what distance the volume from this source will start reducing as the listener moves away. Must be a non-negative value.                                                                                                                   |
+| distanceModel   | string  | 'inverse'     | **Only applied if positional is true.** The algorithm used to reduce volume as the distance increases between this audio source and the listener. Possible values include 'linear', 'inverse', and 'exponential'.                                                                                         |
+| rolloffFactor   | number  | 1             | **Only applied if positional is true.** How quickly volume is reduced as distance increases between this audio source and the listener. The acceptable range of values changes depending on the distanceModel, shown by the following: linear: 0 to 1, inverse: 0 to Infinity, exponential: 0 to Infinity |
+| maxDistance     | number  | 10000         | **Only applied if positional is true** and distanceModel equals linear. The max distance between this audio source and the listener. Volume is not reduced after this point. Must be a positive value.                                                                                                    |
+
+## Sound
+
+| Propiedad   | Tipo                    | Descripción                                       |
+| ----------- | ----------------------- | ------------------------------------------------- |
+| id          | eid                     | The eid of the sound.                             |
+| audioNode   | Audio / PositionalAudio | AudioNode                                         |
+| element     | HTMLAudioElement        | The HTML audio element.                           |
+| controller  | AbortController         | The audio AbortController.                        |
+| url         | string                  | The source URL                                    |
+| paused      | boolean                 | Whether the audio is paused or currently playing. |
+
+## Propiedades
+
+| Propiedad | Tipo                                                                  | Descripción                                                                             |
+| --------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| listener  | [AudioListener](https://threejs.org/docs/#api/en/audio/AudioListener) | A virtual listener of the all positional and non-positional audio effects in the scene. |
+
+## Funciones
+
+### mute
+
+Mute scene audio.
+
+```ts
+world.audio.mute() // -> void
+```
+
+### unmute
+
+Unmute scene audio.
+
+```ts
+world.audio.unmute() // -> void
+```
+
+### pause
+
+Pause scene audio.
+
+```ts
+world.audio.pause() // -> void
+```
+
+### play
+
+Play scene audio.
+
+```ts
+world.audio.play() // -> void
+```
+
+### setVolume
+
+Set volume of scene audio. **The parameter should be a value between 0 and 1.**
+
+```ts
+world.audio.setVolume(newVolume: number) // -> void
+```

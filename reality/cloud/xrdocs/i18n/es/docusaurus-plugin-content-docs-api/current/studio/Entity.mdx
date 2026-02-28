@@ -1,0 +1,162 @@
+---
+id: entity
+description: >-
+  Esta clase representa una entidad individual en el gráfico de escena de 8th
+  Wall Studio, ofreciendo acceso a componentes, control de estado y operaciones
+  jerárquicas.
+sidebar_position: 500
+---
+
+# Entidad
+
+## Descripción
+
+{frontMatter.description}
+
+## Propiedades
+
+| Propiedad | Tipo | Descripción                            |
+| --------- | ---- | -------------------------------------- |
+| eid       | Eid  | Identificador único para esta entidad. |
+
+## Métodos de los componentes
+
+### consiga
+
+Accede a los datos actuales de un componente de esta entidad.
+
+```ts
+entity.get(component: RootAttribute<Schema>) // -> ReadData<Schema>
+```
+
+### tiene
+
+Comprueba si existe un componente en esta entidad.
+
+```ts
+entity.has(component: RootAttribute<Schema>) // -> boolean
+```
+
+### configure
+
+Aplicar datos a un componente de esta entidad.
+
+```ts
+entity.set(component: RootAttribute<Schema>, data: ReadData<Schema>) // -> void
+```
+
+### eliminar
+
+Elimina un componente de esta entidad.
+
+```ts
+entity.remove(component: RootAttribute<Schema>) // -> void
+```
+
+### reiniciar
+
+Restablece un componente de esta entidad a su valor por defecto.
+
+```ts
+entity.reset(component: RootAttribute<Schema>) // -> void
+```
+
+## Métodos estatales
+
+### ocultar
+
+Ocultar esta entidad.
+
+```ts
+entity.hide() // -> void
+```
+
+### Mostrar
+
+Mostrar esta entidad si está oculta.
+
+```ts
+entity.show() // -> void
+```
+
+### isHidden
+
+Comprueba si la entidad está actualmente oculta.
+
+```ts
+entity.isHidden() // -> booleano
+```
+
+### desactivar
+
+Desactivar esta entidad.
+
+```ts
+entity.disable() // -> void
+```
+
+### active
+
+Habilitar esta entidad.
+
+```ts
+entity.enable() // -> void
+```
+
+### isDisabled
+
+Comprueba si la entidad está actualmente desactivada.
+
+```ts
+entity.isDisabled() // -> booleano
+```
+
+### borrar
+
+Elimina esta entidad del mundo.
+
+```ts
+entity.delete() // -> void
+```
+
+### isDeleted
+
+Comprueba si la entidad ha sido eliminada.
+
+```ts
+entity.isDeleted() // -> booleano
+```
+
+## Métodos jerárquicos
+
+### setParent
+
+Establece el padre de esta entidad.
+
+```ts
+entity.setParent(parent: Eid | undefined | null) // -> void
+```
+
+### getChildren
+
+Obtener los hijos de esta entidad.
+
+```ts
+entity.getChildren() // -> Generador<Eid>
+```
+
+### getParent
+
+Obtener el padre de esta entidad.
+
+```ts
+entity.getParent() // -> Eid | undefined
+```
+
+### addChild
+
+Hacer otra entidad hija de ésta.
+
+```ts
+entity.addChild(child: Eid) // -> void
+```

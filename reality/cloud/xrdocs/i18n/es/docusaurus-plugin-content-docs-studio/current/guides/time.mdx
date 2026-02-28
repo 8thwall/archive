@@ -1,0 +1,66 @@
+---
+id: time
+description: >-
+  Esta sección proporciona todo lo necesario para gestionar el tiempo dentro del
+  mundo, desde el seguimiento del tiempo de ejecución transcurrido y los
+  intervalos de fotogramas hasta la configuración de acciones únicas o
+  repetitivas.
+---
+
+# Tiempo
+
+## Introducción
+
+{frontMatter.description} Aprenda a utilizar las funciones de temporización integradas para crear interacciones receptivas y bien sincronizadas en su experiencia.
+
+## tiempo.mundial.transcurrido
+
+El número de milisegundos que el mundo ha estado en ejecución, excluyendo el tiempo transcurrido mientras el mundo estaba en pausa.
+
+## delta.tiempo.mundial
+
+El número de milisegundos transcurridos desde el fotograma anterior, excluyendo los saltos de tiempo debidos a estar en pausa.
+
+## tiempo.mundial.absoluto
+
+El número de milisegundos que han transcurrido desde que se creó el mundo.
+
+## tiempo.mundial.delta.absoluto
+
+El número de milisegundos desde el último fotograma, incluyendo grandes saltos de tiempo si el mundo se está reanudando después de haber sido pausado.
+
+## Temporizadores
+
+Ejecuta una función una vez tras un retardo especificado.
+
+### Iniciar un temporizador
+
+```ts
+const timeout = world.time.setTimeout(() => {
+    console.log('¡Han pasado 1000 ms!')
+}, 1000)
+```
+
+### Borrar un temporizador
+
+```ts
+world.time.clearTimeout(timeout)
+```
+
+## Intervalos
+
+Ejecuta repetidamente una función a intervalos de tiempo especificados.
+
+### Establecer un intervalo
+
+```ts
+const interval = world.time.setInterval(() => {
+    console.log('¡Han pasado otros 1000 ms!')
+}, 1000)
+```
+
+### Borrar un intervalo
+
+```ts
+world.time.clearTimeout(intervalo)
+```

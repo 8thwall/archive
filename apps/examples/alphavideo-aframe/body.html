@@ -1,0 +1,40 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene
+  xrextras-gesture-detector
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  xrweb="disableWorldTracking: true">
+
+  <a-assets>
+    <video
+      id="alpha-video"
+      muted
+      autoplay
+      playsinline
+      crossorigin="anonymous"
+      loop="true"
+      src="./assets/alpaca.mp4">
+    </video>
+  </a-assets>
+
+  <a-camera
+    position="0 4 10"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;">
+  </a-camera>
+
+  <a-light type="directional" intensity="0.5" position="1 1 1"></a-light>
+
+  <a-light type="ambient" intensity="1"></a-light>
+
+  <!-- Note: "name:" must be set to the name of the image target uploaded to the 8th Wall Console -->
+  <a-entity 
+    target-video="name: outside; video: #alpha-video; fade: 800"
+    material="shader: chromakey; src: #alpha-video; color: 0.1 0.9 0.2"
+    geometry="primitive: plane; height: 0.6; width: 1.38;"
+  ></a-entity>
+
+</a-scene>

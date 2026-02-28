@@ -1,0 +1,70 @@
+[package]
+name = "html-shell-tauri"
+version = "0.1.0"
+description = "The HTML shell for Tauri"
+authors = ["8thWall"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+# The `_lib` suffix may seem redundant but it is necessary
+# to make the lib name unique and wouldn't conflict with the bin name.
+# This seems to be only an issue on Windows, see https://github.com/rust-lang/cargo/issues/8519
+name = "html_shell_tauri_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { git = "https://github.com/8thwall/tauri", rev = "5cbdece0e115532ea2601e5afedd3d53f208e4e2" }
+tauri-plugin = { git = "https://github.com/8thwall/tauri", rev = "5cbdece0e115532ea2601e5afedd3d53f208e4e2", features = ["build"] }
+
+[dependencies]
+tauri = { git = "https://github.com/8thwall/tauri", rev = "5cbdece0e115532ea2601e5afedd3d53f208e4e2" }
+tauri-utils = { git = "https://github.com/8thwall/tauri", rev = "5cbdece0e115532ea2601e5afedd3d53f208e4e2" }
+
+# Tauri Plugins
+tauri-plugin-cors-fetch = { git = "https://github.com/8thwall/tauri-plugin-cors-fetch", rev = "92ba272750c78e5b410d34db9d622e46703cd2f2" }
+
+aes-gcm = "0.10.3"
+hex = "0.4"
+once_cell = "1.19"
+regex = "1.11.2"
+reqwest = { version = "0.11", features = ["blocking", "json"] }
+sha2 = "0.10.9"
+url = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+mime_guess = "2.0.5"
+log = "0.4"
+thiserror = "2"
+specta = { version = "2.0.0-rc.22", optional = true }
+
+[dev-dependencies]
+mockito = "1.0"
+tokio-test = "0.4"
+tokio = { version = "1.0", features = ["full"] }
+
+[patch.crates-io]
+swift-rs = { git = "https://github.com/8thwall/swift-rs", rev = "e86b0968d5e7b6b9bd8a6451f85c3b5409dffb46" }
+cc = { git = "https://github.com/8thwall/cc-rs", rev = "6f3dff90a19757d4e1193310efeafd603993afb8" }
+zerocopy = { git = "https://github.com/8thwall/zerocopy", rev = "dafed1baca408e7a15f7deae23af1266ca9e7d4a" }
+# If you update objc2-exception-helper, also make sure to update try_catch.m.
+objc2-exception-helper = { git = "https://github.com/8thwall/objc2", rev = "724f8c74e472089890619ed03dd2e099d53c212d" }
+# NOTE(paris): To test a patch repo's changes locally before landing, use:
+# cc = { path = "/Users/<name>/repo/cc-rs" }
+
+openssl-sys = { git = "https://github.com/8thwall/rust-openssl.git", rev = "463f1bb84f171accfa51c870b34622af6769a884" }
+
+# NOTE(lreyna): Forces all dependencies to use the same source for Tauri
+tauri = { git = "https://github.com/8thwall/tauri", rev = "5cbdece0e115532ea2601e5afedd3d53f208e4e2" }
+tauri-utils = { git = "https://github.com/8thwall/tauri", rev = "5cbdece0e115532ea2601e5afedd3d53f208e4e2" }
+tauri-plugin = { git = "https://github.com/8thwall/tauri", rev = "5cbdece0e115532ea2601e5afedd3d53f208e4e2", features = ["build"] }
+
+[target.'cfg(target_os = "ios")'.dependencies]
+objc = "0.2.7"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+objc = "0.2.7"
+
+[features]
+specta = ["dep:specta", "tauri/specta"]

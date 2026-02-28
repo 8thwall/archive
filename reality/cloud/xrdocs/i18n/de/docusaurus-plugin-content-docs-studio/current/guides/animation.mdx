@@ -1,0 +1,77 @@
+---
+id: animation
+description: >-
+  Dieser Abschnitt enthält Anleitungen zum Einrichten von benutzerdefinierten
+  Animationen für Objekte. Dies sind Animationen, die ein Element der Entität im
+  Laufe der Zeit verändern, z. B. die Position, die Skalierung oder eine
+  Eigenschaft einer Komponente der Entität.
+---
+
+# Animation
+
+## Einführung
+
+{frontMatter.description} Hinweis: Dieser Abschnitt befasst sich mit der Erstellung von Animationen in Studio und der Arbeit mit dem Kern-Animationssystem von Studio - wenn Sie nach einer Anleitung für die Arbeit mit den in einer GLTF-Modelldatei integrierten Animationen suchen, lesen Sie den [Models guide](/studio/guides/models/).
+
+Für die prozedurale Animation stehen Komponenten zur Verfügung, die in zwei Typen unterteilt werden können:
+
+1. Animierte Übergänge
+2. Beziehung
+
+## Animierte Übergänge
+
+Diese Animationen führen ein Objekt im Laufe der Zeit von einem Zustand in einen anderen. Es gibt einen "von"- und einen "bis"-Zustand, und die Animation kann entweder beendet oder in eine Schleife gesetzt werden.
+
+### Position Animation
+
+Animieren der Position eines Zielobjekts.
+
+Siehe [Position Animation Component](/api/studio/ecs/animation/position-animation/) API.
+
+### Skala Animation
+
+Animieren Sie den Maßstabsvektor eines Zielobjekts.
+
+Siehe [Scale Animation Component](/api/studio/ecs/animation/scale-animation/) API.
+
+### Drehen der Animation
+
+Animieren Sie die Drehung eines Zielobjekts.
+
+Siehe [Rotate Animation Component](/api/studio/ecs/animation/rotate-animation/) API.
+
+### Benutzerdefinierte Vec3-Animation
+
+Animieren Sie das benannte 3D-Vektorattribut auf einem Zielobjekt.
+
+Siehe [Custom Vec3 Animation Component](/api/studio/ecs/animation/custom-vec3-animation/) API.
+
+### Benutzerdefinierte Eigenschaftsanimation
+
+Animieren Sie eine einzelne Zahleneigenschaft auf den Attributen eines Zielobjekts.
+
+Siehe [Custom Property Animation Component](/api/studio/ecs/animation/custom-property-animation/) API.
+
+## Beziehungs-Animationen
+
+Das sind Animationen, die eine Beziehung zwischen einem Objekt und einem Ziel ausdrücken. Wenn sie laufen, behalten sie diese Beziehung für das Objekt bei, an das sie angehängt sind.
+
+### Animation verfolgen
+
+Abstand zu einem bestimmten Ziel oder Punkt beibehalten.
+
+Siehe [Follow Animation Component](/api/studio/ecs/animation/follow-animation/) API.
+
+### Blick auf die Animation
+
+Ausrichtung auf ein bestimmtes Ziel oder einen bestimmten Punkt beibehalten.
+
+Siehe [Look At Animation Component](/api/studio/ecs/animation/look-at-animation/) API.
+
+## Hinzufügen einer Animation
+
+Animationen können der Entität über den Editor oder im Code hinzugefügt werden. Das Hinzufügen von Komponenten im Editor erfolgt über die Schaltfläche "Neue Komponente":
+
+![animation-component.png](/images/studio/animation-component.png)
+
+Animationen können auch über Code hinzugefügt werden, indem der Importname der Komponente verwendet wird.

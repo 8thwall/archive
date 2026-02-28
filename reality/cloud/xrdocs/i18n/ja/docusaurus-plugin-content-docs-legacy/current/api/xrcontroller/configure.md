@@ -1,0 +1,58 @@
+---
+sidebar_label: configure()
+---
+
+# XR8.XrController.configure()
+
+`XrController.configure({ disableWorldTracking, enableLighting, enableWorldPoints, enableVps, imageTargets：[]、leftHandedAxes、mirroredDisplay、projectWayspots、scale })`。
+
+## 説明 {#description}
+
+XrController\\`が実行する処理を設定する（設定によってはパフォーマンスに影響する場合がある）。
+
+## パラメータ {#parameters}
+
+| パラメータ                                                                             | タイプ   | デフォルト     | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| --------------------------------------------------------------------------------- | ----- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| disableWorldTracking [オプション]。 | ブーリアン | false\\` | もしtrueなら、効率化のためにSLAMトラッキングをオフにする。 もしtrueなら、効率化のためにSLAMトラッキングをオフにする。 これは、[`XR8.run()`](/legacy/api/xr8/run)が呼び出される \*\*前に行う必要があります。 もしtrueなら、効率化のためにSLAMトラッキングをオフにする。 これは、[`XR8.run()`](/legacy/api/xr8/run)が呼び出される \*\*前に行う必要があります。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| enableLighting［オプション］                                                             | ブーリアン | false\\` | true の場合、`lighting` は [`XR8.XrController.pipelineModule()`](pipelinemodule.md) によって `processCpuResult.reality.lighting` として提供される。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| enableWorldPoints [オプション］                               | ブーリアン | false\\` | trueの場合、`worldPoints`は[`XR8.XrController.pipelineModule()`](pipelinemodule.md)から`processCpuResult.reality.worldPoints`として提供されます。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| enableVps [オプション］                                       | ブーリアン | false\\` | もしそうなら、プロジェクト・ロケーションとメッシュを探す。 返されるメッシュはプロジェクト・ロケーションとは関係なく、プロジェクト・ロケーションが設定されていなくても返されます。 VPS を有効にすると、`scale` と `disableWorldTracking` の設定が上書きされる。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| imageTargets [オプション］                                    | 配列    |           | 検出する画像ターゲットの名前のリスト。 実行時に変更可能。 注意：現在アクティブなイメージターゲットはすべて、このリストで指定されたものに置き換えられます。 実行時に変更可能。 検出する画像ターゲットの名前のリスト。 実行時に変更可能。 注意：現在アクティブなイメージターゲットはすべて、このリストで指定されたものに置き換えられます。 実行時に変更可能。 注意：現在アクティブなイメージターゲットはすべて、このリストで指定されたものに置き換えられます。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| leftHandedAxes [オプション]。       | ブーリアン | false\\` | trueの場合、左手座標を使用する。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| mirroredDisplay［オプション］                                                            | ブーリアン | false\\` | trueの場合、出力の左右を反転する。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| projectWayspots [オプション］                                 | 配列    | `[]`      | ローカライズ専用のプロジェクトロケーション名のサブセット。 空の配列が渡された場合、近くにあるすべてのプロジェクトロケーションをローカライズします。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| scale [オプション］                                           | 文字列   | レスポンシブ    | レスポンシブ」または「アブソリュート」のいずれか。 レスポンシブ」または「アブソリュート」のいずれか。 responsive`はフレーム1のカメラが[`XR8.XrController.updateCameraProjectionMatrix()`](updatecameraprojectionmatrix.md)で定義された原点に来るように値を返します。 absolute`はカメラ、イメージターゲットなどをメートル単位で返す。 absolute`を使用する場合、スケールが推定されると、開始ポーズのx-position、z-position、rotationは[`XR8.XrController.updateCameraProjectionMatrix()\`](updatecameraprojectionmatrix.md)で設定されたパラメータを尊重します。 y-positionは接地面からのカメラの物理的な高さに依存する。 absolute`はカメラ、イメージターゲットなどをメートル単位で返す。 absolute`を使用する場合、スケールが推定されると、開始ポーズのx-position、z-position、rotationは[`XR8.XrController.updateCameraProjectionMatrix()\`](updatecameraprojectionmatrix.md)で設定されたパラメータを尊重します。 y-positionは接地面からのカメラの物理的な高さに依存する。 |
+
+**重要:** `disableWorldTracking: true` は、[`XR8.XrController.pipelineModule()`](pipelinemodule.md)と[`XR8.run()`](/legacy/api/xr8/run)がコールされる前に設定する必要があります。
+
+## {#returns}を返す。
+
+なし
+
+## 例 {#example}
+
+```javascript
+XR8.XrController.configure({enableLighting: true, disableWorldTracking: false, scale: 'absolute'})
+```
+
+## 例 - VPS {#example---enable-vps}を有効にする
+
+```javascript
+XR8.XrController.configure({enableVps: true})
+```
+
+## 例 - ワールドトラッキングを無効にする {#example---disable-world-tracking}
+
+```javascript
+//
+XR8.XrController.configure({disableWorldTracking: true})
+// カメラを開き、カメラランループの実行を開始
+XR8.run({canvas: document.getElementById('camerafeed')})
+```
+
+## 例 - アクティブイメージターゲットセットの変更 {#example---change-active-image-target-set}
+
+```javascript
+XR8.XrController.configure({imageTargets: ['image-target1', 'image-target2', 'image-target3']})
+```

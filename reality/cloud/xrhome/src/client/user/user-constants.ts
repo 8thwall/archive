@@ -1,0 +1,7 @@
+import {MILLISECONDS_PER_MINUTE} from '../../shared/time-utils'
+
+const JWT_REFRESH_INTERVAL_MILLIS = 20 * MILLISECONDS_PER_MINUTE
+
+export {
+  JWT_REFRESH_INTERVAL_MILLIS,
+}

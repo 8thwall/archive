@@ -1,0 +1,80 @@
+---
+id: changelog
+sidebar_position: 1000
+---
+
+# Changelog
+
+## 2.2.0 (24 octobre 2025) {#2.2.0}
+
+### Nouvelles fonctionnalités 
+
+- Ajout des décalages de rotation des collisionneurs physiques
+
+### Fonctionnalités et améliorations
+
+- Correction de l'angle d'ombre de la lumière directionnelle lors du suivi de la caméra
+
+## 2.1.0 (16 octobre 2025) {#2.1.0}
+
+### Nouvelles fonctionnalités 
+
+- Ajout d'une API de gestion des effets pour mettre à jour le ciel et le brouillard (`world.effects`)
+
+### Corrections et améliorations 
+
+- Mise à jour de la définition de type pour les schémas/données dans le composant remove callback
+- Ajouter des événements d'animation aux event-ids
+- Correction de la duplication des callbacks de l'observateur sur `add()` pour les instances de préfabriqués
+- Correction d'un problème de blocage du pointeur lors de l'utilisation de la souris
+- Correction d'un problème où `ScaleAnimation` décalait incorrectement les colliders
+
+## 2.0.1 (25 septembre 2025) {#2.0.1}
+
+### Corrections et améliorations 
+
+- Correction d'un problème de physique où les objets dynamiques ne s'immobilisaient pas complètement.
+- Correction d'un crash qui pouvait se produire après avoir changé de manière répétée l'échelle du collisionneur physique.
+- Correction des directions d'émission des particules
+- Indépendance des effets de particules par rapport au framerate
+- Fiabilité accrue du simulateur d'application de bureau
+- Correction d'un problème d'interface utilisateur entraînant un placement incorrect des décalages sur les éléments
+
+## 2.0.0 (10 septembre 2025) {#2.0.0}
+
+Le tout nouveau Studio Runtime 2.0 est doté d'un moteur physique remanié. Certains comportements physiques sont donc différents. Consultez le [Guide de mise à niveau 2.0] (http://8th.io/v2upgradeguide) pour obtenir des instructions et des conseils afin d'assurer une migration en douceur.
+
+### Rupture des changements
+
+- Suppression des propriétés de `ecs.Collider` :
+  - `roulementFriction`
+  - `friction d'essorage`
+- Changement du mode de mise à jour de la matrice : `manuel` par défaut, qui est plus optimisé. Si l'on modifie directement les objets three.js, il faut appeler `world.three.notifyChanged()` sur chaque objet modifié, ou revenir au comportement original avec `world.three.setMatrixUpdateMode('auto')`
+- Dans la version 2.0, certains des calculs sous-jacents du nouveau moteur physique diffèrent pour des propriétés telles que la friction, la restitution et l'amortissement. Voir le [guide de mise à niveau] (http://8th.io/v2upgradeguide) pour plus de détails.
+
+### Nouvelles fonctionnalités 
+
+- Nous avons ajouté une nouvelle propriété `type` (obligatoire) à `ecs.Collider` pour permettre de déterminer si et comment la simulation physique doit s'appliquer à l'objet. Auparavant, une valeur de masse supérieure à 0 déterminait si un collisionneur était dynamique ou non (0 masse = statique), et les collisionneurs cinématiques n'étaient pas pris en charge.
+  - Valeurs autorisées : `ColliderType.Static`, `ColliderType.Kinematic`, `ColliderType.Dynamic`
+  - Les collisionneurs cinématiques ne sont pas affectés par les forces physiques, mais peuvent avoir un mouvement et affecter d'autres corps dynamiques par le biais de collisions.
+  - Voir [Collider API documentation](https://www.8thwall.com/docs/api/studio/ecs/collider/) pour les détails et les cas d'utilisation.
+
+### Corrections et améliorations 
+
+- Activation par défaut d'une vérification plus stricte des scripts de type au moment de la compilation afin d'améliorer les rapports d'erreur.
+
+## 1.1.0 (29 août 2025) {#1.1.0}
+
+- Exportation de constantes supplémentaires pour les événements XR
+- Correction du maillage du visage qui n'est pas rendu tel que configuré avec la caméra Face AR
+- Correction du comportement des collisionneurs désactivés
+- Correction de l'application d'une forme corrompue aux collisionneurs automatiques
+
+## 1.0.1 (25 août 2025) {#1.0.1}
+
+- S'assurer que les types booléens de physique sont exposés comme `vrai`/`faux`, et non comme `1`/`0`.
+- Exportation de `GpsPointer`
+
+## 1.0.0 (6 août 2025) {#1.0.0}
+
+- Version initiale

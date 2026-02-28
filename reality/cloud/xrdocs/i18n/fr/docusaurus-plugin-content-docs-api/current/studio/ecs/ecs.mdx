@@ -1,0 +1,184 @@
+---
+id: ecs
+---
+
+import EcsTypes from '/src/components/_ecs-types.mdx'
+
+# ecs
+
+## Propriétés
+
+### Types {#types}
+
+<EcsTypes/>
+
+## Fonctions
+
+### registerComponent
+
+Enregistre un composant auprès du SCE.
+
+```ts
+ecs.registerComponent({
+    name : string,
+    schema : Schema,
+    data : Schema,
+    schemaDefaults : Object,
+    add : function
+    remove : function,
+    tick : function
+}) // -> Poignée de composant
+```
+
+#### État
+
+| Paramètres                 | Type                        | Description                                                                                                     |
+| -------------------------- | --------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| déclencheurs (obligatoire) | `Record<String, Trigger[]>` | Nom des états suivants vers lesquels cet état et la transition se font et les déclencheurs de cette transition. |
+| onEnter                    | fonction                    | Fonction appelée avant l'entrée dans l'état.                                                                    |
+| onExit                     | fonction                    | Fonction appelée avant l'entrée dans l'état.                                                                    |
+
+#### Déclencheur
+
+##### Déclencheur d'événements
+
+| Paramètres              | Type                             | Description                                                                                                                                        |
+| ----------------------- | -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type (obligatoire)      | constante : "event               | Une constante pour indiquer le type de déclencheur                                                                                                 |
+| événement (obligatoire) | chaîne de caractères             | Le type d'événement qui déclenche cette                                                                                                            |
+| cible                   | eid                              | L'entité pour laquelle vous voulez que ce déclencheur change d'état                                                                                |
+| avantTransition         | (événement) => booléen           | Une fonction qui s'exécute avant la transition, si le résultat est vrai, la transition se termine et l'état ne change pas.                         |
+
+##### Déclencheur de délai d'attente
+
+| Paramètres            | Type                                    | Description                                          |
+| --------------------- | --------------------------------------- | ---------------------------------------------------- |
+| type (obligatoire)    | constante : "timeout" (délai d'attente) | Une constante pour indiquer le type de déclencheur   |
+| timeout (Obligatoire) | nombre                                  | Nombre de millisecondes avant la transition          |
+
+### createStateMachine
+
+Créer une machine à états.
+
+```ts
+ecs.createStateMachine(world, owner, {initialState : string, states : Record<string, State>}) // -> ID de la machine à état
+```
+
+### deleteStateMachine
+
+Supprimer une machine d'état.
+
+```ts
+ecs.deleteStateMachine(world, machineId) // -> void
+```
+
+### defineState
+
+Définir un état.
+
+```ts
+ecs.defineState(name : string) // -> État
+```
+
+#### initial
+
+Marquer cet état comme l'état initial de la machine à états
+
+```ts
+ecs.defineState(name).initial() // -> void
+```
+
+#### onEnter
+
+Définir une procédure de rappel à exécuter lors de l'entrée dans cet état.
+
+```ts
+ecs.defineState(name).onEnter(callback) // -> void
+```
+
+#### onEvent
+
+##### Événement
+
+| Paramètres        | Type                   | Description                                                                                                                                      |
+| ----------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| cible             | eid                    | l'entité pour laquelle vous voulez que ce déclencheur change d'état                                                                              |
+| avantTransition   | (événement) => booléen | Fonction exécutée avant la transition, si le résultat est vrai, la transition se termine et l'état ne change pas.                                |
+
+Déclencher une transition vers l'état suivant lorsqu'un événement est reçu.
+
+```ts
+ecs.defineState(name).onEvent(event : string, nextState : string | State, args : EventObject) // -> void
+```
+
+#### onExit
+
+Définit un rappel à exécuter lorsque l'on quitte cet état.
+
+```ts
+ecs.defineState(name).onExit(callback) // -> void
+```
+
+#### attendre
+
+Attendre avant de passer à l'état suivant.
+
+```ts
+ecs.defineState(name).wait(waitTime : number, nextState : string | State) // -> void
+```
+
+### définirSystème
+
+Définir un système.
+
+```ts
+ecs.defineSystem([terms] : string[], behavior : function) // -> System
+```
+
+### defineQuery
+
+Définir une requête.
+
+```ts
+ecs.defineQuery([terms : string]) // -> callback
+```
+
+### getAttribute
+
+Les composants intégrés sont également exposés en tant que propriété de l'ecs.
+
+```ts
+ecs.getAttribute(attributeName : string) // -> l'attribut qui a été enregistré avec ce nom.
+```
+
+### listAttributes
+
+Renvoie une liste d'attributs.
+
+```ts
+ecs.listAttributes() // -> string[]
+```
+
+### getBehaviors
+
+Renvoie une liste des comportements enregistrés.
+
+```ts
+ecs.getBehaviors() // -> fonction[]
+```
+
+### registerBehavior
+
+Enregistrer une fonction qui s'exécute sur le monde à chaque tic-tac.
+
+```ts
+ecs.registerBehavior(behavior : function) // -> void
+```
+
+### désenregistrer le comportement
+
+Désactiver un comportement.
+
+```ts
+ecs.unregisterBehavior(behavior : function) // -> void
+```

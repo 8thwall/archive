@@ -1,0 +1,162 @@
+---
+id: entity
+description: >-
+  Cette classe représente une entité individuelle dans le graphe de scène de 8th
+  Wall Studio, offrant un accès aux composants, un contrôle de l'état et des
+  opérations hiérarchiques.
+sidebar_position: 500
+---
+
+# Entité
+
+## Description
+
+{frontMatter.description}
+
+## Propriétés
+
+| Propriété | Type | Description                           |
+| --------- | ---- | ------------------------------------- |
+| eid       | Aïd  | Identifiant unique pour cette entité. |
+
+## Méthodes des composants
+
+### obtenir
+
+Accéder aux données actuelles d'un composant de cette entité.
+
+```ts
+entity.get(component : RootAttribute<Schema>) // -> ReadData<Schema>
+```
+
+### a
+
+Vérifier si un composant existe sur cette entité.
+
+```ts
+entity.has(component : RootAttribute<Schema>) // -> booléen
+```
+
+### fixer
+
+Appliquer des données à un composant de cette entité.
+
+```ts
+entity.set(component : RootAttribute<Schema>, data : ReadData<Schema>) // -> void
+```
+
+### supprimer
+
+Retirer un composant de cette entité.
+
+```ts
+entity.remove(component : RootAttribute<Schema>) // -> void
+```
+
+### réinitialiser
+
+Réinitialise un composant de cette entité à sa valeur par défaut.
+
+```ts
+entity.reset(component : RootAttribute<Schema>) // -> void
+```
+
+## Méthodes nationales
+
+### cacher
+
+Masquer cette entité.
+
+```ts
+entity.hide() // -> void
+```
+
+### montrer
+
+Afficher cette entité si elle est cachée.
+
+```ts
+entity.show() // -> void
+```
+
+### estCaché
+
+Vérifie si l'entité est actuellement cachée.
+
+```ts
+entity.isHidden() // -> booléen
+```
+
+### désactiver
+
+Désactiver cette entité.
+
+```ts
+entity.disable() // -> void
+```
+
+### permettre
+
+Activer cette entité.
+
+```ts
+entity.enable() // -> void
+```
+
+### est désactivé
+
+Vérifier si l'entité est actuellement désactivée.
+
+```ts
+entity.isDisabled() // -> booléen
+```
+
+### supprimer
+
+Supprimer cette entité du monde.
+
+```ts
+entity.delete() // -> void
+```
+
+### est supprimé
+
+Vérifier si l'entité a été supprimée.
+
+```ts
+entity.isDeleted() // -> booléen
+```
+
+## Méthodes de hiérarchisation
+
+### setParent
+
+Définit le parent de cette entité.
+
+```ts
+entity.setParent(parent : Eid | undefined | null) // -> void
+```
+
+### getChildren
+
+Obtenir les enfants de cette entité.
+
+```ts
+entity.getChildren() // -> Générateur<Eid>
+```
+
+### getParent
+
+Obtenir le parent de cette entité.
+
+```ts
+entity.getParent() // -> Eid | undefined
+```
+
+### addChild
+
+Faire d'une autre entité un enfant de celle-ci.
+
+```ts
+entity.addChild(child : Eid) // -> void
+```

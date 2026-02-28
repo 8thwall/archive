@@ -1,0 +1,191 @@
+---
+id: schema
+description: Ein Komponentenschema definiert die in einer Komponente enthaltenen Daten.
+toc_max_heading_level: 3
+sidebar_position: 42
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import EcsTypes from '/src/components/_ecs-types.mdx'
+
+# Schema
+
+{frontMatter.description} Bei der Definition eines Schemas geben Sie ein Objekt mit Schlüssel/Wert-Paaren an, wobei der Schlüssel der Name der Eigenschaft und der Wert ein [ECS-Typ] (/api/studio/ecs/#types) ist, der die Art der Daten angibt, die diese Eigenschaft enthalten soll.
+
+<EcsTypes />
+
+## Beispiel
+
+Das folgende Beispiel zeigt das Schema einer benutzerdefinierten Komponente.
+
+```ts
+schema: {
+  target: ecs.eid,             // Unique entity reference for the NPC (Entity ID)
+  speed: ecs.f32,              // Movement speed of the NPC (32-bit float)
+  strength: ecs.f64,           // Strength level for the NPC (64-bit float)
+  level: ecs.i32,              // Character level of the NPC (32-bit integer)
+  armor: ecs.ui8,              // Armor rating of the NPC (0-255, 8-bit unsigned integer)
+  experience: ecs.ui32,        // Experience points of the NPC (32-bit unsigned integer)
+  guildName: ecs.string,       // Name of the Guild NPC belongs to. (String)
+  isHostile: ecs.boolean       // Boolean indicating if the NPC is hostile to the player (Boolean)
+}
+```
+
+Standardwerte können angegeben werden, sind aber nicht erforderlich. Wenn keine Standardwerte angegeben werden, haben Zahlen den Standardwert "0", Boolesche Werte den Standardwert "False", Strings den Standardwert "''\` und Entity-Referenzen den Standardwert "unset". Es gibt keine Möglichkeit, einen Standard für eine Entitätsreferenz auf Komponentenebene festzulegen.
+
+```ts
+schemaDefaults: {
+  speed: 3.14,
+  strength: 5.8,
+  level: 10,
+  armor: 255,
+  experience: 12,
+  guildName: 'Niantic Crew'
+  isHostile: false
+}
+```
+
+## Benutzerdefinierte Editor-Felder {#custom-editor-fields}
+
+Die Anzeige und Funktionalität Ihrer Komponenten im Entity-Editor kann auf verschiedene Weise angepasst werden. Dies geschieht über Kommentare innerhalb des Schemas, in denen die Felder mit `// @` gekennzeichnet sind.
+
+### Etiketten
+
+Manchmal müssen Bezeichnungen im Editor aussagekräftiger sein als ihre Namen im Code.
+
+```ts
+schema: {
+   // @label Foo
+   bar: ecs.eid,
+},
+```
+
+### Asset-Referenzen
+
+Wenn Sie auf ein Asset im Projekt verweisen müssen.
+
+```ts
+schema: {
+   // @asset
+   yetiModel: ecs.string,
+}
+```
+
+### Min & Max
+
+Wenn Sie verhindern wollen, dass Werte bei Änderungen in der Schnittstelle einen bestimmten Wert überschreiten.
+\*Änderungen an der Variablen zur Laufzeit bleiben unberücksichtigt.
+
+```ts
+schema: {
+   // @min 0
+   // @max 128
+   goldCoins: ecs.i32,
+}
+```
+
+### Bedingungen
+
+Eigenschaften können so eingestellt werden, dass sie nur in Abhängigkeit von den Werten anderer Eigenschaften angezeigt werden.
+
+```ts
+schema: {
+   // 'from' will only show if autoFrom set false:
+   autoFrom: ecs.boolean,
+   // @condition autoFrom=false
+   from: ecs.f32,
+
+   // 'easingFunction' will show if either easeIn or easeOut set:
+   easeIn: ecs.boolean,
+   easeOut: ecs.boolean,
+   // @condition easeIn=true|easeOut=true
+   easingFunction: ecs.string,
+
+   // 'targetX' only shows if no target set:
+   target: ecs.eid,
+   // @condition target=null
+   targetX: ecs.f32,
+}
+```
+
+### Aufzählungen
+
+Zeichenketteneigenschaften können auf eine bestimmte Liste beschränkt werden:
+
+```ts
+schema: {
+   // @enum Quadratic, Cubic, Quartic, Quintic, Sinusoidal, Exponential
+   easingFunction: ecs.string,
+}
+```
+
+### Gruppen
+
+Bestimmte Gruppen von Eigenschaften können angewiesen werden, im Editor besonders behandelt zu werden. Gruppen werden wie folgt konfiguriert:
+
+* Der Anfang und das Ende der Gruppe sind mit // @group start …gekennzeichnet. und // @Gruppe Ende
+* Bedingungen können mit // @group condition auf die gesamte Gruppe angewendet werden
+* Derzeit werden zwei Arten von Gruppen unterstützt: vector3 und color
+
+#### Etiketten
+
+Benutzerdefinierte Bezeichnungen können weiterhin für einzelne Felder verwendet werden:
+
+```ts
+schema: {
+   // @group start orient:vector3
+   // @label Pitch
+   orientPitch: ecs.f32,
+   // @label Yaw
+   orientYaw: ecs.f32,
+   // @label Roll
+   orientRoll: ecs.f32,
+   // @group end
+}
+```
+
+#### Vektor3
+
+Gruppen von Eigenschaften, die 3D-Vektoren darstellen, können wie folgt angegeben werden:
+
+```ts
+schema: {
+ autoFrom: ecs.boolean,
+ // @group start from:vector3
+ // @group condition autoFrom=false
+ fromX: ecs.f32,
+ fromY: ecs.f32,
+ fromZ: ecs.f32,
+ // @group end
+}
+```
+
+#### Farbe
+
+Die Farben können wie im folgenden Beispiel angegeben werden:
+
+```ts
+schema: {
+ // @group start background:color
+ bgRed: ecs.f32,
+ bgGreen: ecs.f32,
+ bgBlue: ecs.f32,
+ // @group end
+}
+```
+
+## Daten
+
+Data ist ähnlich wie Schema, allerdings gibt es zwei bemerkenswerte Unterschiede.
+
+1. Daten können **nicht** außerhalb der Komponente, in der sie definiert sind, gelesen oder geschrieben werden.
+2. Für die Daten gibt es **keine** Standardwerte, sie können jedoch in der Lebenszyklusmethode "add" für eine ähnliche Funktionalität festgelegt werden.
+
+## Cursors
+
+Ein Cursor ist ein Verweis auf das Schema einer anderen Komponente, das mit einer Entität verbunden ist. Man kann es sich wie einen Zeiger oder Handle vorstellen, mit dem man Eigenschaften lesen oder schreiben kann.
+
+Aber denken Sie daran:
+
+* Cursors können veralten, wenn sie asynchron verwendet werden (z. B. innerhalb von setTimeout oder verzögerten Callbacks). Verwenden Sie in diesen Fällen stattdessen schemaAttribute und dataAttribute.
+* Cursor bieten einen Live-Zugriff auf die Daten einer Entität, was bedeutet, dass die Änderung eines Cursors direkt den Wert in der Welt ändert.

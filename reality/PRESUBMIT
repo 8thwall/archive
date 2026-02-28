@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# build patterns.
+bazel build -c opt --ios_multi_cpus=armv7,arm64 --fat_apk_cpu=x86,armeabi-v7a --keep_going -- \
+  //reality/...
+
+# test patterns.
+bazel test -c opt --ios_multi_cpus=armv7,arm64 --fat_apk_cpu=x86,armeabi-v7a --keep_going -- \
+  //reality/...

@@ -1,0 +1,36 @@
+// Colors from go/brand.
+$brand-purple: #7611B6;
+$brand-purple-dark: #5C0D8F;
+$brand-pop: #C86DD7;
+$brand-highlight: #AD50FF;
+$blueberry: #57bfff;
+$cherry: #DD0065;
+$mango: #FFC828;
+$mint: #00EDAF;
+$light-mint: #00EDAF1A;
+$dark-mint: #009770;
+
+
+// Gray shades from lighest to darkest.
+$white: #FFFFFF;
+$moonlight: #F9F9FA;
+$gray0: #F2F1F3;
+$gray1:#EBEBF1;
+$gray2:#D5D7E4;
+$gray3:#B5B8D0;
+$gray4:#8083A2;
+$gray5:#464766;
+$brand-black: #2D2E43;
+$dark-black: #1C1D2A;
+
+$dark-background: #20292E;
+$dark-background2: #2F3940;
+$dark-background3: #262E34;
+$dark-background4: #29292B;
+$dark-background5: #323232;
+
+
+// Gradients
+$purple-gradient: linear-gradient(135deg, $brand-purple, 50%, $brand-pop);
+$purple-gradient-hover: linear-gradient(135deg, $brand-purple, 80%, $brand-pop);
+$black-gradient: linear-gradient(135deg, #452568, 80%, $brand-black);

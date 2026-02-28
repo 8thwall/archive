@@ -1,0 +1,26 @@
+[ {
+  "id" : "cb6ad741-aafd-742e-6dcb-1ad341a9b463",
+  "name" : "heading",
+  "display_width" : null,
+  "label" : "Main Heading",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text",
+  "default" : "Main Heading"
+}, {
+  "id" : "c0a1e118-381a-a079-799e-dd6dc8ce1dc5",
+  "name" : "subheading",
+  "display_width" : null,
+  "label" : "Sub Heading",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "placeholder" : "Sub Heading",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text",
+  "default" : ""
+} ]

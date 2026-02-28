@@ -1,0 +1,134 @@
+---
+id: input
+description: このセクションでは、プロジェクトの入力を設定する方法を説明します。
+---
+
+# インプット
+
+## はじめに
+
+{frontMatter.description} 入力とは、ユーザーがアプリケーションとやりとりする様々な方法を指す。 現在、サポートされている入力方法は、タッチ、キーボード、マウス、ゲームパッドです。
+
+apiについては[world.input](/api/studio/world/input/)を参照。
+
+## インプット・マネージャー
+
+スタジオでは、インプットとアクションがあり、インプット・マネージャーはその間のマッピングを設定します。 アクションは、それが受け取る入力のソースを抽象化したものである。 物理的」な入力（例えば「キーボードのスペースバーが押された」）ではなく、「論理的」な概念（例えば「ジャンプ」）として入力を表現する場合に最も有用である。
+
+![input-manager.png](/images/studio/input-manager.png)
+
+### アクション・マップ
+
+アクションマップは、スペース設定（エンティティが選択されていないときのインスペクタのデフォルト状態）の入力マネージャで管理できます。
+
+#### アクションマップの追加
+
+アクション・マップは、プログラムで入れ替え可能なアクションのセットである。 新しいアクション マップを作成するには、アクション マップのドロップダウンをクリックし、[新しいアクション マップの作成] をクリックします。 次にアクションマップの名前を入力して保存します。 アクションマップは名前の変更、複製、削除が可能です。 デフォルトのアクションマップは複製しかできない。
+
+![input-add-action-map.png](/images/studio/input-add-action-map.png)
+
+:::info
+現在選択されているアクションマップは、デフォルトでアクティブになるアクションマップです。
+:::
+
+#### アクション・マップ・テンプレート
+
+新しいアクション マップの作成] を選択すると、複数のアクション マップ テンプレートが表示されます。 Fly ControllerとOrbit Controlsのテンプレートは、それぞれのコンポーネントに使用されます。
+
+![input-action-map-templates.png](/images/studio/input-action-map-templates.png)
+
+### アクションの追加
+
+アクションはユーザー入力の抽象化レイヤーである。 アクションマップにアクションを追加するには、(+)新規アクションボタンをクリックし、アクションの名前を入力します。
+
+![input-add-action.png](/images/studio/input-add-action.png)
+
+### アクションへのバインド
+
+バインディングとは、入力をアクションに関連付ける方法である。 バインディングを追加するには、Add Bindingボタンをクリックし、アクションにバインドしたい入力をドロップダウンで選択します。 キーボード、マウス、ゲームパッドなど、さまざまな入力に対応するバインディングが用意されている。 複数の入力バインディングを1つのアクションにマッピングできる。 バインディングを削除するには、削除したいバインディングの横にあるゴミ箱をクリックします。
+
+![input-add-bindings.png](/images/studio/input-add-bindings.png)
+
+### アクション修飾子
+
+モディファイアは、アクションを有効にするためにバインディングに割り当てることができる追加入力です。 修飾子を使ってバインディングを作成するには、With Modifierボタンをクリックします。 モディファイアは最初のドロップダウンで選択され、バインディングは2番目のドロップダウンで選択される。
+
+![input-add-modifier.png](/images/studio/input-add-modifier.png)
+
+## 例
+
+### ダニのアクションを検出する
+
+```ts
+ecs.registerComponent({
+  name: 'player-controller',
+  tick: (world, component) => {
+    if (world.input.getAction('jump')){
+      // ジャンプロジックはここで処理する
+    }.
+  },
+})
+```
+
+### ステートマシンのアクションを検出する
+
+```ts
+stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+  ecs.defineState('default').initial().onTick(() => {
+    if (world.input.getAction('jump'))){
+      // ジャンプロジックはここで処理する
+    }.
+  })
+}
+```
+
+### アクションマップの切り替え
+
+:::info
+新しいアクションマップを設定すると、次のティックまで新しいマップはアクティブにならない。
+:::
+
+#### ダニ
+
+```ts
+tick: (world, component) => {
+  if (world.input.getAction('menu')){
+    world.input.setActiveMap(world.input.getActiveMap() === 'player' ?'menu' : 'player')
+    return
+  }
+  if (world.input.getAction('jump')){
+    // ジャンプロジックはここで処理
+  }.
+}
+```
+
+#### ステートマシン
+
+```ts
+stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+  const switchMap = ecs.defineTrigger()
+
+  ecs.defineState('default')
+  .initial()
+  .onEnter(() => {
+    world.input.setActiveMap('player')
+  })
+  .onTick(() => {
+    if (world.input.getAction('menu')).{
+      switchMap.trigger()
+      return
+    } // 移動ロジックはここで処理する。
+    // 移動ロジックはここで処理
+  }).onTrigger(switchMap, 'menu')
+
+  ecs.defineState('menu').onEnter(() => {
+        world.input.setActiveMap('menu')
+  }).onTick(() => {
+    if (world.input.getAction('menu')){
+      switchMap.trigger()
+      return
+    } // メニューロジックはここで処理する。
+    // ここでメニュー・ロジックを処理する
+  }).onTrigger(switchMap, 'default')
+}.
+```

@@ -1,0 +1,19 @@
+# XR8.XrController
+
+## Conditions préalables
+
+La caméra active doit être une World AR Camera, et le bloc `slam` doit être chargé. Cette fonction est activée par défaut.
+
+## Description {#description}
+
+`XrController` fournit un suivi de caméra 6DoF et des interfaces pour configurer le suivi.
+
+## Fonctions {#functions}
+
+| Fonction                                                        | Description                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [configurer](configure.md)                                      | Configure le traitement effectué par `XrController` (peut avoir des conséquences sur les performances).                                                                                                                                                                                                                                                                                               |
+| [hitTest](hittest.md)                                           | Estimer la position 3D d'un point sur le flux de la caméra.                                                                                                                                                                                                                                                                                                                                                              |
+| [module pipeline](pipelinemodule.md)                            | Crée un module de pipeline de caméra qui, lorsqu'il est installé, reçoit des rappels sur le démarrage de la caméra, les événements d'essai de la caméra et d'autres changements d'état. Ils sont utilisés pour calculer la position de la caméra.                                                                                                                                                        |
+| [recentrer](recenter.md)                                        | Repositionne la caméra à l'origine / dans la direction spécifiée par updateCameraProjectionMatrix et redémarre le suivi.                                                                                                                                                                                                                                                                                                 |
+| [updateCameraProjectionMatrix](updatecameraprojectionmatrix.md) | Réinitialise la géométrie d'affichage de la scène et la position initiale de la caméra dans la scène. La géométrie d'affichage est nécessaire pour superposer correctement la position des objets dans la scène virtuelle à leur position correspondante dans l'image de la caméra. La position de départ indique l'endroit où la caméra sera placée et orientée au début de la session. |

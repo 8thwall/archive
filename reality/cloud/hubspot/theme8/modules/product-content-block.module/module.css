@@ -1,0 +1,109 @@
+.productBlockContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 4em;
+  font-size: 16px;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 2.5em 0;
+}
+
+.productBlockReverse {
+  flex-direction: row-reverse;
+}
+
+.productBlockImage {
+  border-radius: 8px;
+  max-width: 40%;
+  height: auto;
+}
+
+.productBlockVideo {
+  max-width: 40%;
+  max-height: auto;
+  border-radius: 8px;
+}
+
+.productTextBlock {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.productBlockHeading {
+  font-size: 1.5em;
+  margin: 0;
+  font-weight: 900;
+}
+
+.productBlockLink, .productTextBlock li, .productTextBlock p {
+  margin: 0;
+  font-size: 1.25em;
+}
+
+.productBlockLink {
+  color: #7611B6;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.productBlockLink:hover {
+  color: #408CBA;
+}
+
+.productTextBlock ul {
+  margin: 0;
+  padding: 0 0 0 2.25em;
+  position: relative;
+}
+
+.productTextBlock li {
+  list-style: none;
+  font-size: 1.25em;
+}
+
+.productTextBlock li::before {
+  content: "x";
+  color: transparent;
+  padding-right: 2em;
+  position: absolute;
+  left: -0.5em;
+  transform: translate(0, -2px);
+}
+
+@media screen and (max-width: 991px) {
+  .productBlockContainer, .productBlockReverse {
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+  }
+
+  .productBlockImage {
+    width: 100%;
+    max-width: unset;
+    height: auto;
+  }
+
+  .productBlockLink, .productTextBlock li, .productTextBlock p {
+    font-size: 1.125em;
+  }
+
+  .productBlockHeading {
+    font-size: 1.25em;
+  }
+}
+
+@media screen and (max-width: 576px) {
+
+  .productBlockLink, .productTextBlock li, .productTextBlock p {
+    font-size: 1em;
+  }
+
+  .productBlockVideo {
+    width: 100%;
+    max-width: unset;
+    height: auto;
+  }
+}
+

@@ -1,0 +1,8 @@
+{
+  "projectUrl": "https://threejs.org/examples/webgl_morphtargets_horse.html",
+  "shell": "android",
+  "android": {
+    "packageName": "com.nianticlabs.bzl.htmlapp.example",
+    "resourceDir": "res/"
+  }
+}

@@ -1,0 +1,23 @@
+# General CI jobs for NAE yml to depend on
+
+include:
+  - apps/client/nae/ci-scripts.yml
+  - ci-support/util.yml
+
+# This job needs to be run in a previous stage, so the environment will be set for dependent jobs
+
+# Expecting tags to be in the format of "nae/<app_name>/<'release'|'test'>/<version_name>"
+# e.g. "nae/solsitce/release/1.0.0"
+# Other apps can extend this job for more tag processing
+nae:pre:process_tag:
+  stage: .pre
+  before_script:
+    - !reference [.global, before_script]
+    - !reference [.nae:defaults, script:before:process_tag]
+  script:
+    - cat tag_data.env
+  artifacts:
+    reports:
+      dotenv: tag_data.env
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^nae\//

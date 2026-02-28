@@ -1,0 +1,150 @@
+[ {
+  "id" : "00179af5-f817-301d-acc4-5f895d8f792e",
+  "name" : "media_type",
+  "display_width" : null,
+  "label" : "Media Type",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "image", "Image" ], [ "video", "Video" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "default" : "image"
+}, {
+  "id" : "3804d9c6-0509-1fdd-7319-2b5c75e8584c",
+  "name" : "image",
+  "display_width" : null,
+  "label" : "Image",
+  "required" : false,
+  "locked" : false,
+  "visibility" : {
+    "controlling_field" : null,
+    "controlling_field_path" : "media_type",
+    "controlling_value_regex" : "image",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "default" : {
+    "size_type" : "auto_custom_max",
+    "src" : "https://7255816.fs1.hubspotusercontent-na1.net/hubfs/7255816/Screenshot%202023-08-11%20at%204.49.24%20PM.png",
+    "alt" : "Screenshot 2023-08-11 at 4.49.24 PM",
+    "loading" : "lazy",
+    "width" : 3112,
+    "height" : 1678,
+    "max_width" : 2000,
+    "max_height" : 1078.4061696658098
+  }
+}, {
+  "picker" : "video",
+  "id" : "14699405-ac75-60ea-5648-0fc30568f06e",
+  "name" : "video",
+  "display_width" : null,
+  "label" : "Video",
+  "required" : false,
+  "locked" : false,
+  "visibility" : {
+    "controlling_field" : null,
+    "controlling_field_path" : "media_type",
+    "controlling_value_regex" : "video",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "type" : "file",
+  "default" : ""
+}, {
+  "id" : "eea13600-1901-99b6-449d-b13663116c31",
+  "name" : "image_position",
+  "display_width" : null,
+  "label" : "Align Media to Right",
+  "required" : false,
+  "locked" : false,
+  "display" : "toggle",
+  "type" : "boolean",
+  "default" : false
+}, {
+  "id" : "72cc92f4-51f5-759e-6672-5d1113e721bf",
+  "name" : "heading",
+  "display_width" : null,
+  "label" : "Heading",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text",
+  "default" : "Example Heading"
+}, {
+  "id" : "78358903-fa65-c3e0-4e45-385f2e5b0a06",
+  "name" : "text",
+  "display_width" : null,
+  "label" : "Body Text",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "default" : "<p><strong>This block can render plain text or bullet points</strong>, or both. Please give this module a try!</p>\n<ul>\n<li>Bullet Point 1</li>\n<li>Bullet Point 2</li>\n<li>Bullet Point 3</li>\n</ul>"
+}, {
+  "id" : "8f6303c6-ffd7-ca5f-e183-7adc719e8895",
+  "name" : "show_link",
+  "display_width" : null,
+  "label" : "Show Click Through Link",
+  "required" : false,
+  "locked" : false,
+  "display" : "toggle",
+  "type" : "boolean",
+  "default" : false
+}, {
+  "id" : "92d8733f-2d67-eb27-a163-b8fff15c7f43",
+  "name" : "link_text",
+  "display_width" : null,
+  "label" : "Click Through Link Text",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "visibility" : {
+    "controlling_field" : null,
+    "controlling_field_path" : "show_link",
+    "controlling_value_regex" : "true",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text",
+  "default" : "Example Link Text"
+}, {
+  "id" : "9713c3b6-e9b9-f636-59dd-bbcbc743c3c7",
+  "name" : "link",
+  "display_width" : null,
+  "label" : "Click Through URL",
+  "required" : false,
+  "locked" : false,
+  "visibility" : {
+    "controlling_field" : null,
+    "controlling_field_path" : "show_link",
+    "controlling_value_regex" : "true",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION", "PHONE_NUMBER", "WHATSAPP_NUMBER", "PAYMENT" ],
+  "show_advanced_rel_options" : false,
+  "type" : "link",
+  "default" : {
+    "url" : {
+      "content_id" : null,
+      "href" : "https://8thwall.com",
+      "type" : "EXTERNAL"
+    },
+    "open_in_new_tab" : false,
+    "no_follow" : false
+  }
+} ]

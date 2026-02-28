@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DataRecorder</string>
+    <string name="start_text">Start</string>
+    <string name="logging_text">Logging</string>
+    <string name="frame_label"> Frames to record </string>
+    <string-array name="frame_count_list">
+        <item>30</item>
+        <item>90</item>
+        <item>300</item>
+        <item>600</item>
+        <item>900</item>
+        <item>1800</item>
+    </string-array>
+    <color name="grey">#202020</color>
+    <color name="whitish">#CCCCCC</color>
+</resources>

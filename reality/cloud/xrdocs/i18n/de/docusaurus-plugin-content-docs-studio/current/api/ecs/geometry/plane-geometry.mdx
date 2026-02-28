@@ -1,0 +1,28 @@
+---
+id: plane-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# PlaneGeometry
+
+## Beschreibung
+
+Diese Komponente legt die Geometrie einer Entität fest.
+
+## Eigenschaften
+
+| Eigenschaft | Typ    | Standard | Beschreibung                |
+| ----------- | ------ | -------- | --------------------------- |
+| width       | Nummer | 1        | Breite entlang der X-Achse. |
+| height      | Nummer | 1        | Breite entlang der Y-Achse. |
+
+## Funktionen
+
+<ComponentFunctions
+    name="PlaneGeometry"
+    properties={{ width: 1, height: 1 }}
+    mutate={`cursor.width += 1;
+    cursor.height *= 2;
+    return false;`}
+/>

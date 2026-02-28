@@ -1,0 +1,336 @@
+---
+id: face
+sidebar_position: 1
+---
+
+import {EventExample} from '@site/src/components/event-example'
+
+# フェイス・エフェクト・イベント
+
+## 種類
+
+### TransformObject {#TransformObject}
+
+| プロパティ        | タイプ            | 説明                                  |
+| ------------ | -------------- | ----------------------------------- |
+| position     | `{x, y, z}`    | 位置する面の3Dポジション。                      |
+| rotation     | `{w, x, y, z}` | 配置された面の3次元の局所的な向き。                  |
+| scale        | 番号             | この面に取り付けられているオブジェクトに適用されるスケールファクター。 |
+| scaledWidth  | 番号             | スケールを掛けたときのシーン内の頭部のおおよその幅。          |
+| scaledHeight | 番号             | スケールを掛けたときのシーン内の頭部のおおよその高さ。         |
+| scaledDepth  | 番号             | スケールを掛けたときの、シーン内の頭部のおおよその深さ。        |
+
+## イベント
+
+### FACE_LOADING
+
+このイベントは、追加の顔ARリソースのロードが開始されたときにFace Effectsによって発行されます。
+
+#### プロパティ一覧
+
+| プロパティ              | タイプ           | 概要                                                           |
+| ------------------ | ------------- | ------------------------------------------------------------ |
+| maxDetections      | 番号            | 同時に処理できる面の最大数。                                               |
+| pointsPerDetection | 番号            | 面ごとに抽出される頂点の数。                                               |
+| indices            | `[{a, b, c}]` | configureのmeshGeometryで指定された、要求されたメッシュの三角形を形成する頂点配列へのインデックス。 |
+| uvs                | `[{u, v}]`    | 返された頂点ポイントに対応するテクスチャ・マップのuv位置。                               |
+
+#### 例
+
+<EventExample ns="ecs.events" event="FACE_LOADING" target="world.events.globalId" callbackBody={`console.log('Face loading')`} />
+
+### FACE_SCANNING
+
+このイベントは、すべての顔ARリソースがロードされ、スキャンが開始されたときにFace Effectsによって発行されます。
+
+#### プロパティ
+
+| プロパティ           | タイプ           | 説明                                                           |
+| --------------- | ------------- | ------------------------------------------------------------ |
+| 最大検出数           | 番号            | 同時に処理できる面の最大数。                                               |
+| ポイント・パー・ディテクション | 番号            | 面ごとに抽出される頂点の数。                                               |
+| 指標              | `[{a, b, c}]` | configureのmeshGeometryで指定された、要求されたメッシュの三角形を形成する頂点配列へのインデックス。 |
+| 紫外線             | `[{u, v}]`    | 返された頂点ポイントに対応するテクスチャ・マップのuv位置。                               |
+
+#### 例
+
+<EventExample ns="ecs.events" event="FACE_SCANNING" target="world.events.globalId" callbackBody={`console.log('Face scanning')`} />
+
+### FACE_FOUND
+
+このイベントは、Face Effectsが最初に顔を見つけたときに発行される。
+
+#### プロパティ
+
+| プロパティ            | タイプ                                   | 概要                                                                                                                                                                                                            |
+| ---------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id               | 番号                                    | 位置する面の数値ID                                                                                                                                                                                                    |
+| transform        | [`TransformObject`](#TransformObject) | 位置する顔の変形情報。                                                                                                                                                                                                   |
+| vertices         | `[{x, y, z}]`                         | トランスフォームに対する顔点の位置。                                                                                                                                                                                            |
+| normals          | `[{x, y, z}]`                         | トランスフォームに対する頂点の法線方向。                                                                                                                                                                                          |
+| attachmentPoints | `{ name, position: {x,y,z} }`         | 使用可能なアタッチメントポイントのリストについては、[`XR8.FaceController.AttachmentPoints`](https://www.8thwall.com/docs/api/facecontroller/attachmentpoints/) を参照してください。 position\`はトランスフォームからの相対位置である。 position\`はトランスフォームからの相対位置である。 |
+| uvsInCameraFrame | `[{u, v}]`                            | 返された頂点点に対応するカメラフレーム内の uv 位置のリスト。                                                                                                                                                                              |
+
+#### 例
+
+<EventExample ns="ecs.events" event="FACE_FOUND" target="world.events.globalId" callbackBody={`console.log('Face found')`} />
+
+### FACE_UPDATED
+
+このイベントは、Face Effectsによって、その後顔が見つかったときに発行される。
+
+#### プロパティ
+
+| プロパティ            | タイプ                                   | 説明                                                                                                                                                                                                            |
+| ---------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id               | 番号                                    | 位置する面の数値ID                                                                                                                                                                                                    |
+| transform        | [`TransformObject`](#TransformObject) | 位置する顔の変形情報。                                                                                                                                                                                                   |
+| vertices         | `[{x, y, z}]`                         | トランスフォームに対する顔点の位置。                                                                                                                                                                                            |
+| normals          | `[{x, y, z}]`                         | トランスフォームに対する頂点の法線方向。                                                                                                                                                                                          |
+| attachmentPoints | `{ name, position: {x,y,z} }`         | 使用可能なアタッチメントポイントのリストについては、[`XR8.FaceController.AttachmentPoints`](https://www.8thwall.com/docs/api/facecontroller/attachmentpoints/) を参照してください。 position\`はトランスフォームからの相対位置である。 position\`はトランスフォームからの相対位置である。 |
+| uvsInCameraFrame | `[{u, v}]`                            | 返された頂点点に対応するカメラフレーム内の uv 位置のリスト。                                                                                                                                                                              |
+
+#### 例
+
+<EventExample ns="ecs.events" event="FACE_UPDATED" target="world.events.globalId" callbackBody={`console.log('Face updated: ', event.data.transform)`} />
+
+### FACE_LOST
+
+このイベントは、顔が追跡されなくなったときにFace Effectsから発行される。
+
+#### プロパティ
+
+| プロパティ | タイプ | 概要          |
+| ----- | --- | ----------- |
+| id    | 番号  | 失われた顔の数値ID。 |
+
+#### 例
+
+<EventExample ns="ecs.events" event="FACE_LOST" target="world.events.globalId" callbackBody={`console.log('Face lost')`} />
+
+### FACE_BLINKED
+
+このイベントは、トラッキングされた顔の目がまばたきしたときにFace Effectsから発行されます。
+
+#### プロパティ
+
+| プロパティ | タイプ | 説明         |
+| ----- | --- | ---------- |
+| id    | 番号  | 位置する面の数値ID |
+
+#### 例
+
+<EventExample ns="ecs.events" event="FACE_BLINKED" target="world.events.globalId" callbackBody={`console.log('Blinked')`} />
+
+### 顔面瞳孔間距離
+
+このイベントは、トラッキングされた顔の各瞳孔の中心間の距離がミリメートル単位で最初に検出されたときに、Face Effectsによって発行されます。
+
+#### プロパティ
+
+| プロパティ | タイプ | 説明                       |
+| ----- | --- | ------------------------ |
+| id    | 番号  | 位置する面の数値ID。              |
+| 瞳孔間距離 | 番号  | 各瞳孔の中心間のおおよその距離（ミリメートル）。 |
+
+#### 例
+
+<EventExample ns="ecs.events" event="FACE_INTERPUPILLARY_DISTANCE" target="world.events.globalId" callbackBody={`console.log('Interpupillary distance: ', event.data.interpupillaryDistance)`} />
+
+### 顔_左眉を下げる
+
+このイベントは、トラッキングされた顔の各瞳孔の中心間の距離がミリメートル単位で最初に検出されたときに、Face Effectsによって発行されます。
+
+#### プロパティ一覧
+
+| プロパティ | タイプ | 説明          |
+| ----- | --- | ----------- |
+| id    | 番号  | 位置する面の数値ID。 |
+
+#### 例
+
+<EventExample ns="ecs.events" event="FACE_LEFT_EYEBROW_LOWERED" target="world.events.globalId" callbackBody={`console.log('Left eyebrow lowered')`} />
+
+### 左眉を上げた顔
+
+このイベントは、トラッキングされた顔の左眉が、顔を発見したときの初期位置から上がったときに、Face Effectsによって発行されます。
+
+#### プロパティ
+
+| プロパティ | タイプ | 概要          |
+| ----- | --- | ----------- |
+| id    | 番号  | 位置する面の数値ID。 |
+
+#### 例
+
+<EventExample ns="ecs.events" event="FACE_LEFT_EYEBROW_RAISED" target="world.events.globalId" callbackBody={`console.log('Left eyebrow raised')`} />
+
+### 顔_左目_閉じ
+
+このイベントは、トラッキングされた顔の左目が閉じたときにFace Effectsから発行されます。
+
+#### プロパティ
+
+| プロパティ | タイプ | 概要          |
+| ----- | --- | ----------- |
+| id    | 番号  | 位置する面の数値ID。 |
+
+#### 例
+
+<EventExample ns="ecs.events" event="FACE_LEFT_EYE_CLOSED" target="world.events.globalId" callbackBody={`console.log('Left eye closed')`} />
+
+### 顔_左目_開いた
+
+このイベントは、トラッキングされた顔の左目が開いたときにFace Effectsが発する。
+
+#### プロパティ
+
+| プロパティ | タイプ | 説明          |
+| ----- | --- | ----------- |
+| id    | 番号  | 位置する面の数値ID。 |
+
+#### 例
+
+<EventExample ns="ecs.events" event="FACE_LEFT_EYE_OPENED" target="world.events.globalId" callbackBody={`console.log('Left eye opened')`} />
+
+### 顔_左目_ウインク
+
+このイベントは、トラッキングされた顔の左目が750ミリ秒以内に閉じたり開いたりする一方で、右目は開いたままである場合に、Face Effectsによって発せられる。
+
+#### プロパティ
+
+| プロパティ | タイプ | 説明          |
+| ----- | --- | ----------- |
+| id    | 番号  | 位置する面の数値ID。 |
+
+#### 例
+
+<EventExample ns="ecs.events" event="FACE_LEFT_EYE_WINKED" target="world.events.globalId" callbackBody={`console.log('Left eye winked')`} />
+
+### 顔_口閉じ
+
+このイベントは、トラッキングされた顔の口が閉じたときにFace Effectsから発行されます。
+
+#### プロパティ
+
+| プロパティ | タイプ | 説明          |
+| ----- | --- | ----------- |
+| id    | 番号  | 位置する面の数値ID。 |
+
+#### 例
+
+<EventExample ns="ecs.events" event="FACE_MOUTH_CLOSED" target="world.events.globalId" callbackBody={`console.log('Mouth closed')`} />
+
+### フェイス_マウス_オープン
+
+このイベントは、トラッキングされた顔の口が開いたときにFace Effectsが発する。
+
+#### プロパティ
+
+| プロパティ | タイプ | 概要          |
+| ----- | --- | ----------- |
+| id    | 番号  | 位置する面の数値ID。 |
+
+#### 例
+
+<EventExample ns="ecs.events" event="FACE_MOUTH_OPENED" target="world.events.globalId" callbackBody={`console.log('Mouth opened')`} />
+
+### 顔_右_眉を下げる
+
+このイベントは、トラッキングされた顔の右眉が、顔を発見したときの初期位置まで下がったときに、Face Effectsによって発行される。
+
+#### プロパティ
+
+| プロパティ | タイプ | 説明          |
+| ----- | --- | ----------- |
+| id    | 番号  | 位置する面の数値ID。 |
+
+#### 例
+
+<EventExample ns="ecs.events" event="FACE_RIGHT_EYEBROW_LOWERED" target="world.events.globalId" callbackBody={`console.log('Right eyebrow lowered')`} />
+
+### 右眉を上げる
+
+このイベントは、トラッキングされた顔の右眉が、顔を発見したときの初期位置から上がったときに、Face Effectsによって発行される。
+
+#### プロパティ
+
+| プロパティ | タイプ | 説明          |
+| ----- | --- | ----------- |
+| id    | 番号  | 位置する面の数値ID。 |
+
+#### 例
+
+<EventExample ns="ecs.events" event="FACE_RIGHT_EYEBROW_RAISED" target="world.events.globalId" callbackBody={`console.log('Right eyebrow raised')`} />
+
+### 顔_右_目_閉じ
+
+このイベントは、トラッキングされた顔の右目が閉じたときにFace Effectsが発する。
+
+#### プロパティ
+
+| プロパティ | タイプ | 概要          |
+| ----- | --- | ----------- |
+| id    | 番号  | 位置する面の数値ID。 |
+
+#### 例
+
+<EventExample ns="ecs.events" event="FACE_RIGHT_EYE_CLOSED" target="world.events.globalId" callbackBody={`console.log('Right eye closed')`} />
+
+### フェイス_ライト_アイ_オープン
+
+このイベントは、トラッキングされた顔の右目が開いたときにFace Effectsが発する。
+
+#### プロパティ
+
+| プロパティ | タイプ | 概要          |
+| ----- | --- | ----------- |
+| id    | 番号  | 位置する面の数値ID。 |
+
+#### 例
+
+<EventExample ns="ecs.events" event="FACE_RIGHT_EYE_OPENED" target="world.events.globalId" callbackBody={`console.log('Right eye opened')`} />
+
+### フェイス_ライトアイ_ウインク
+
+このイベントは、トラッキングされた顔の右目が750ms以内に閉じたり開いたりする一方で、左目は開いたままである場合に、Face Effectsによって発せられる。
+
+#### プロパティ
+
+| プロパティ | タイプ | 説明          |
+| ----- | --- | ----------- |
+| id    | 番号  | 位置する面の数値ID。 |
+
+#### 例
+
+<EventExample ns="ecs.events" event="FACE_RIGHT_EYE_WINKED" target="world.events.globalId" callbackBody={`console.log('Right eye winked')`} />
+
+### 顔_耳_点_発見
+
+このイベントはイヤーポイントが見つかるとFace Effectsから発行されます。
+
+#### プロパティ
+
+| プロパティ | タイプ | 概要                                                       |
+| ----- | --- | -------------------------------------------------------- |
+| id    | 番号  | 位置する面の数値ID                                               |
+| ポイント  | 文字列 | イヤーポイント名。 以下のいずれか：左葉`、`左管`、`左ヘリックス`、`右葉`、`右管`、`右ヘリックス\`。 |
+
+#### 例
+
+<EventExample ns="ecs.events" event="FACE_EAR_POINT_FOUND" target="world.events.globalId" callbackBody={`console.log('Ear point found: ', event.data.point)`} />
+
+### フェイス_イヤーポイント_ロスト
+
+このイベントは、イヤーポイントが失われたときにFace Effectsが発する。
+
+#### プロパティ
+
+| プロパティ | タイプ    | 説明                                                       |
+| ----- | ------ | -------------------------------------------------------- |
+| id    | 番号     | 位置する面の数値ID                                               |
+| ポイント  | String | イヤーポイント名。 以下のいずれか：左葉`、`左管`、`左ヘリックス`、`右葉`、`右管`、`右ヘリックス\`。 |
+
+#### 例
+
+<EventExample ns="ecs.events" event="FACE_EAR_POINT_LOST" target="world.events.globalId" callbackBody={`console.log('Ear point lost: ', event.data.point)`} />

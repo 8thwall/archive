@@ -1,0 +1,110 @@
+---
+id: physics
+description: >-
+  Studio verfügt über ein eingebautes Physiksystem, das für die Handhabung
+  robuster und dynamischer Interaktionen in Ihrer Szene gedacht ist.
+---
+
+# Physik
+
+## Einführung
+
+{frontMatter.description}
+
+## Hinzufügen von Kollidern
+
+:::note
+
+- Collider können in einigen Konfigurationen verschachtelt werden, in anderen jedoch nicht. Ein statischer Kollider innerhalb eines dynamischen Kolliders oder zwei verschachtelte dynamische Kollider könnten sich beispielsweise falsch verhalten.
+- Wenn Sie nicht über eine Geometriekomponente verfügen, die auch eine gültige Kollisionsform ist, müssen Sie eine Form manuell angeben. So gibt es zum Beispiel keinen unterstützten passenden Collider für das Tetraeder-Primitiv.
+- Die Erzeugung von GLTF-Modellkollidern für komplexe Modelle kann die Leistung beeinträchtigen.
+  :::
+
+### Beispiel
+
+Das folgende Beispiel zeigt, wie ein Collider zur Laufzeit zu einer Entität hinzugefügt werden kann.
+
+```ts
+ecs.Collider.set(world, component.eid, {
+    shape: ecs.ColliderShape.Sphere,
+    type: ecs.ColliderType.Dynamic,
+    radius: 1,
+    mass: 1,
+    eventOnly: false,
+    lockXAxis: false,
+    lockYAxis: false,
+    lockZAxis: false,
+    friction: 0.5,
+    restitution: 0.5,
+    linearDamping: 0,
+    angularDamping: 0,
+})
+```
+
+## Statische vs. dynamische vs. kinematische Kollidertypen
+
+In der Physiksimulation definieren Kollider die physikalische Form eines Objekts für die Kollisionserkennung. Diese können statisch, dynamisch oder kinematisch sein, je nachdem, wie sie mit Kräften und der Umgebung interagieren.
+
+- **Statisch:** Ein Collider, der nicht auf externe Kräfte oder Physiksimulationen reagiert. Sie bleibt an Ort und Stelle und ist daher ideal für unbewegliche Objekte wie Wände, Böden oder Gelände.
+- **Dynamisch:** Ein Collider, der auf äußere Kräfte wie Schwerkraft, Kollisionen oder Impulse reagiert. Sie eignet sich für bewegliche Objekte wie Spieler, Feinde oder Trümmer.
+- **Kinematisch:** Ein Collider, dessen Bewegung nicht durch Kräfte beeinflusst wird, sondern vollständig vom Benutzer programmatisch gesteuert wird. Im Gegensatz zu statischen Körpern können sich kinematische Körper bewegen und andere dynamische Körper durch Kollisionen beeinflussen.
+
+### Nur Veranstaltung
+
+Die Einstellung `eventOnly` verwandelt einen Collider in einen Triggerbereich - er blockiert oder reagiert nicht mehr auf physische Objekte, sondern gibt stattdessen Eintritts- und Austrittsereignisse aus, wenn andere physikalische Körper mit ihm interagieren.
+
+## Funktionen
+
+Sie können direkt Kräfte (linear und winklig) auf jedes Objekt mit einem Physik-Kollider anwenden. Diese Kräfte werden bei der nächsten Aktualisierung der Physiksimulation angewendet, die in regelmäßigen Abständen stattfindet. Die Funktion akzeptiert einen 3D-Vektor, um die Richtung und den Betrag der Kraft zu definieren.
+
+### Geschwindigkeit
+
+#### Linear
+
+```ts
+ecs.physics.setLinearVelocity(world, component.eid, forceX, forceY, forceZ)
+```
+
+#### Eckig
+
+```ts
+ecs.physics.setAngularVelocity(world, component.eid, forceX, forceY, forceZ)
+```
+
+### Kraft und Drehmoment
+
+#### Kraft
+
+```ts
+ecs.physics.applyForce(world, component.eid, forceX, forceY, forceZ)
+```
+
+#### Drehmoment
+
+```ts
+ecs.physics.applyTorque(world, component.eid, torqueX, torqueY, torqueZ)
+```
+
+### Impulse
+
+:::tip
+:::tip
+Diese Funktion wird verwendet, um eine einmalige Impulskraft auf einen Physikkollider anzuwenden, die seine Geschwindigkeit basierend auf dem gegebenen Impulsvektor verändert.
+Diese Methode eignet sich für Ereignisse, die eine schnelle, einmalige Reaktion erfordern, wie z. B. Springen, Schlagen oder ein plötzlicher Stoß.
+:::
+
+```ts
+ecs.physics.applyImpulse(world, component.eid, impulseX, impulseY, impulseZ)
+```
+
+### Schwerkraft
+
+#### Schwerkraft-Faktor
+
+In jeder Szene wirkt die Schwerkraft als eine konstante Kraft, die als "Weltgravitation" bekannt ist. Diese Kraft wirkt auf jeden Kollisionspartner in der Szene, der auf dynamisch eingestellt ist. Um festzulegen, wie sich die Weltgravitation auf einen einzelnen Collider auswirkt, gibt es ein Attribut namens "Gravitationsfaktor".
+
+#### Weltgravitation einstellen
+
+```ts
+ecs.physics.setWorldGravity(world, gravity)
+```

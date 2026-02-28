@@ -1,0 +1,22 @@
+diff --git a/node_modules/react-country-region-selector/index.d.ts b/node_modules/react-country-region-selector/index.d.ts
+index 4eda6c4..ed1920a 100644
+--- a/node_modules/react-country-region-selector/index.d.ts
++++ b/node_modules/react-country-region-selector/index.d.ts
+@@ -124,6 +124,8 @@ export interface CountryDropdownProps<T = Element> {
+    * Default value: false
+    */
+   disabled?: boolean;
++
++  required?: boolean;
+ }
+ 
+ export class CountryDropdown extends React.Component<CountryDropdownProps> {}
+@@ -254,6 +256,8 @@ export interface RegionDropdownProps<T = Element> {
+    * Default value: []
+    */
+   customOptions?: string[];
++
++  required?: boolean;
+ }
+ 
+ export class RegionDropdown extends React.Component<RegionDropdownProps> {}

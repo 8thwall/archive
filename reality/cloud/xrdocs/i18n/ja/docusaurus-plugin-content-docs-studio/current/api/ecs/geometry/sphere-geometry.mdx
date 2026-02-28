@@ -1,0 +1,26 @@
+---
+id: sphere-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# 球体幾何学
+
+## 商品説明
+
+このコンポーネントは、エンティティのジオメトリを確立する。
+
+## プロパティ一覧
+
+| Property | Type   | 初期値     | 商品説明           |
+| -------- | ------ | ------- | -------------- |
+| radius   | 番号     | 1       | 球の半径。          |
+
+## 関数一覧
+
+<ComponentFunctions
+    name="SphereGeometry"
+    properties={{ radius: 1 }}
+    mutate={`cursor.radius += 1;
+    return false;`}
+/>

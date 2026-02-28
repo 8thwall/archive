@@ -1,0 +1,86 @@
+---
+id: ui
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Ui
+
+## Descripción
+
+This component establishes a User Interface in relation to the entity.
+
+## Propiedades
+
+I'll create a table in the same format for the provided schema:
+
+## Propiedades
+
+| Propiedad          | Tipo    | Por defecto | Descripción                                                                                                                                 |
+| ------------------ | ------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| type (Required)    | string  |             | Supported types are: 'overlay' and '3d'                                                                                                     |
+| font               | string  |             | Font to use                                                                                                                                 |
+| fontSize           | f32     |             | Size of the text                                                                                                                            |
+| position           | string  |             | Positioning type                                                                                                                            |
+| opacity            | f32     | 1           | Overall opacity of the object                                                                                                               |
+| backgroundOpacity  | f32     | 0           | Opacity of the background                                                                                                                   |
+| backgroundSize     | string  |             | Size of the background                                                                                                                      |
+| background         | string  |             | Background color                                                                                                                            |
+| color              | string  |             | Foreground (text) color                                                                                                                     |
+| text               | string  | ""          | Text content of the object                                                                                                                  |
+| image              | string  | nulo        | Image resource                                                                                                                              |
+| fixedSize          | boolean |             | Determines if size is fixed                                                                                                                 |
+| width              | string  | 100         | Width of the object                                                                                                                         |
+| height             | string  | 100         | Height of the object                                                                                                                        |
+| top                | string  |             | Vertical position from top border                                                                                                           |
+| left               | string  |             | Horizontal position from left border                                                                                                        |
+| bottom             | string  |             | Vertical position from bottom border                                                                                                        |
+| right              | string  |             | Horizontal position from right border                                                                                                       |
+| borderColor        | string  |             | Color of the border                                                                                                                         |
+| borderRadius       | f32     | 0           | Rounds the corners of the element                                                                                                           |
+| alignContent       | string  |             | Distribution of space between content items; allowed values: 'flex-start’, 'center’, 'flex-end’, 'stretch’, 'space-between’, 'space-around’ |
+| alignItems         | string  |             | Alignment of items on the cross axis; allowed values: 'flex-start’, 'center’, 'flex-end’, 'stretch’, 'baseline’                             |
+| alignSelf          | string  |             | Alignment of an individual flex item; allowed values: 'auto’, 'flex-start’, 'center’, 'flex-end’, 'stretch’, 'baseline’                     |
+| borderWidth        | f32     | 0           | Width of the border                                                                                                                         |
+| columnGap          | string  |             | Gap between columns                                                                                                                         |
+| direction          | string  |             | Text direction; allowed values: 'inherit’, 'LTR’, 'RTL’                                                                                     |
+| display            | string  |             | Display type of the element; allowed values: 'flex’, 'none’                                                                                 |
+| flex               | f32     |             | Flex grow, shrink, and basis shorthand                                                                                                      |
+| flexBasis          | string  |             | Initial main size of a flex item                                                                                                            |
+| flexDirection      | string  |             | Direction of flex items in the container; allowed values: 'column’, 'column-reverse’, 'row’, 'row-reverse’                                  |
+| flexGrow           | f32     |             | Defines the ability for a flex item to grow                                                                                                 |
+| flexShrink         | f32     |             | Defines the ability for a flex item to shrink                                                                                               |
+| flexWrap           | string  |             | Whether flex items wrap; allowed values: 'no-wrap’, 'wrap’, 'wrap-reverse’                                                                  |
+| gap                | string  |             | Gap between flex items                                                                                                                      |
+| justifyContent     | string  |             | Alignment of items on the main axis; allowed values: 'flex-start’, 'center’, 'flex-end’, 'space-between’, 'space-around’, 'space-evenly’    |
+| margin             | string  |             | Margin around the element                                                                                                                   |
+| marginBottom       | string  |             | Bottom margin                                                                                                                               |
+| marginLeft         | string  |             | Left margin                                                                                                                                 |
+| marginRight        | string  |             | Right margin                                                                                                                                |
+| marginTop          | string  |             | Top margin                                                                                                                                  |
+| maxHeight          | string  |             | Maximum height of the element                                                                                                               |
+| maxWidth           | string  |             | Maximum width of the element                                                                                                                |
+| minHeight          | string  |             | Minimum height of the element                                                                                                               |
+| minWidth           | string  |             | Minimum width of the element                                                                                                                |
+| overflow           | string  |             | How content that exceeds the element’s size is handled; allowed values: 'visible’, 'hidden’, 'scroll’                                       |
+| padding            | string  |             | Padding inside the element                                                                                                                  |
+| paddingBottom      | string  |             | Bottom padding                                                                                                                              |
+| paddingLeft        | string  |             | Left padding                                                                                                                                |
+| paddingRight       | string  |             | Right padding                                                                                                                               |
+| paddingTop         | string  |             | Top padding                                                                                                                                 |
+| rowGap             | string  |             | Gap between rows                                                                                                                            |
+| textAlign          | string  |             | Alignment of text within the element; allowed values: 'left’, 'right’, 'center’, 'justify’                                                  |
+
+## Funciones
+
+<ComponentFunctions
+    name="Ui"
+    properties={{
+        type: "overlay",
+        background: "#FFFFFF",
+    }}
+    mutate={`cursor.opacity = 0.5;
+    cursor.text = 'Hello World!';
+    cursor.width = 150;
+    return false;`}
+/>

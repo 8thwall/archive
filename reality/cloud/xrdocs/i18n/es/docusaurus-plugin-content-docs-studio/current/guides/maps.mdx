@@ -1,0 +1,67 @@
+---
+id: maps
+description: >-
+  Los objetos de mapa proporcionan mapas interactivos en 3D del mundo real para
+  integrar datos geoespaciales en experiencias de RA y 3D.
+---
+
+# Mapas
+
+## Introducción
+
+{frontMatter.description} Permiten anclar contenidos a lugares concretos del mundo real.
+
+La función incluye terrenos, paisajes urbanos y estructuras del mundo real, lo que permite colocar con precisión objetos virtuales en un entorno cartografiado. Esta funcionalidad es compatible con las aplicaciones basadas en la localización, incluidas las experiencias del Sistema de Posicionamiento Visual (VPS) y las interacciones de RA en el mundo real.
+
+![](/images/studio/maps-intro.gif)
+
+## Añadir un mapa
+
+Puede añadir un mapa a su escena creando una entidad Mapa. Para ello, haga clic en ( + ) en la jerarquía de escenas y seleccione Mapa.
+
+![](/images/studio/maps-add.png)
+
+## Configuraciones de mapas
+
+### Centro y radio
+
+Por defecto, el centro del mapa se establece en la ubicación GPS del dispositivo. Si es necesario, puede configurar manualmente la latitud, la longitud y el radio para especificar una ubicación personalizada.
+
+Puedes seleccionar la casilla "Usar GPS" para utilizar el GPS del dispositivo en tiempo de ejecución.
+
+### Temas del mapa
+
+Puedes personalizar la apariencia del mapa seleccionando entre 20 temas predefinidos. También puede ajustar las propiedades individuales para crear un tema personalizado.
+
+### Características
+
+El mapa se compone de las siguientes capas:
+
+- Terreno: La base del mapa, zonas donde no hay otras características.
+- Edificios: Edificios en el mapa. Estos pueden elevarse por encima del mapa.
+- Parques: Espacios verdes (naturales y artificiales).
+- Aparcamientos: Aparcamientos.
+- Tránsito: Líneas de ferrocarril y otras plataformas de tránsito (por ejemplo, tren o transbordador).
+- Carretera: Carreteras de varios tamaños.
+- Arena: Playas y desiertos.
+- El agua: Masas de agua y cursos de agua.
+
+Cada uno de ellos puede activarse y personalizarse mediante el inspector de mapas. Para ver la lista completa de propiedades configurables, consulte la [Referencia de la API `MapTheme`](/api/studio/ecs/map-theme).
+
+## Puntos del mapa
+
+Los puntos cartográficos son objetos anclados a una latitud y longitud determinadas. Al añadir un recurso como hijo de un punto del mapa, puede fijarlo a la latitud y longitud del punto del mapa, donde se moverá y escalará a medida que cambien las coordenadas y el radio del mapa.
+
+Puede crear un único punto cartográfico haciendo clic en "Nuevo punto cartográfico" en el Panel de inspección y especificando la latitud y la longitud. También puede seleccionar una Ubicación VPS como fuente de coordenadas.
+
+Si marcas la casilla "Spawn Locations", Studio generará proceduralmente un punto de mapa en cada ubicación VPS del mundo. Vea el [Map Explorer sample project](https://www.8thwall.com/8thwall/map-explorer) para un ejemplo de cómo generar entidades personalizadas en cada POI visible.
+
+![](/images/studio/map-points.gif)
+
+## Simulador
+
+Puede probar su experiencia con los mapas utilizando el Simulador. El segundo desplegable de la parte superior de la ventana permite cambiar la latitud y longitud simuladas, lo que permite probar la experiencia en distintos lugares. También puede navegar a cualquier ubicación o punto del mapa en su proyecto.
+
+La selección de "Ninguno" en el desplegable simula la ausencia de datos de localización.
+
+![](/images/studio/maps-simulator.png)

@@ -1,0 +1,75 @@
+---
+id: animation
+description: >-
+  このセクションでは、エンティティにカスタムアニメーションを設定するためのガイダンスを提供します。
+  これらは、位置やスケール、エンティティ上のコンポーネントのプロパティなど、時間経過とともにエンティティの何らかの要素を変換するアニメーションである。
+---
+
+# アニメーション
+
+## はじめに
+
+{frontMatter.description} 注：このセクションでは、Studioでのアニメーションの作成と、Studioのコアアニメーションシステムでの作業について説明します。GLTFモデルファイルに組み込まれたアニメーションでの作業については、[モデルガイド](/studio/guides/models/)を参照してください。
+
+コンポーネントはプロシージャル・アニメーションのために提供され、2つのタイプに分けられる：
+
+1. トランジション
+2. 人間関係
+
+## トランジション・アニメーション
+
+これらのアニメーションは、オブジェクトをある状態から別の状態へと時間と共に移行させる。 from」と「to」の状態があり、アニメーションは終了するか、ループするように設定することができる。
+
+### ポジション アニメーション
+
+ターゲットオブジェクトの位置をアニメートする。
+
+Position Animation Component](/api/studio/ecs/animation/position-animation/) API を参照。
+
+### スケールアニメーション
+
+ターゲットオブジェクトのスケールベクトルをアニメートする。
+
+Scale Animation Component](/api/studio/ecs/animation/scale-animation/) API を参照。
+
+### 回転アニメーション
+
+ターゲットオブジェクトの回転をアニメートする。
+
+Rotate Animation Component](/api/studio/ecs/animation/rotate-animation/) API を参照。
+
+### カスタムVec3アニメーション
+
+ターゲットオブジェクト上の指定された3Dベクター属性をアニメートする。
+
+Custom Vec3 Animation Component](/api/studio/ecs/animation/custom-vec3-animation/) APIを参照してください。
+
+### カスタム プロパティ アニメーション
+
+ターゲット・オブジェクトの属性上の単一の数値プロパティをアニメートする。
+
+カスタムプロパティアニメーションコンポーネント](/api/studio/ecs/animation/custom-property-animation/) API を参照。
+
+## 人間関係アニメーション
+
+オブジェクトとターゲットの関係を表現するアニメーションである。 走っているときは、その関係を維持している。
+
+### アニメーションをフォローする
+
+指定されたターゲットやポイントまでの距離を維持する.
+
+Follow Animation Component](/api/studio/ecs/animation/follow-animation/) APIを参照。
+
+### アニメーションを見る
+
+指定されたターゲットやポイントに向くように姿勢を維持する。
+
+Look At Animation Component](/api/studio/ecs/animation/look-at-animation/) APIを参照。
+
+## アニメーションの追加
+
+アニメーションは、エディタまたはコードでエンティティに追加できます。 エディターでの追加は "New Component "ボタンで行う：
+
+![animation-component.png](/images/studio/animation-component.png)
+
+アニメーションは、コンポーネントのインポート名を使ってコードから追加することもできる。

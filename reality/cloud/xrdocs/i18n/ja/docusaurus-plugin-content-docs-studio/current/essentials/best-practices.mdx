@@ -1,0 +1,154 @@
+---
+id: best-practices
+description: カスタムコンポーネントを作成する際の一般的な問題とベストプラクティス。
+sidebar_position: 50
+---
+
+# ベストプラクティス
+
+<p>{frontMatter.description}</p>
+
+## 陳腐なリファレンス
+
+コンポーネントに `(world, component)` を渡してコールバックを追加、チック、削除する場合、ネストされた関数の中で `component` を参照し、コールバックが返った後にそれを使用するのは必ずしも安全ではありません。
+
+<div class="コード無効">
+  ### 誤った例
+
+  ```ts
+  ecs.registerComponent({
+      name: 'age-counter',
+      data: {
+      age: ecs.i32,
+      interval: ecs.i32,
+  },
+      add: (world, component) => {
+      const interval = world.time.setInterval(() => {
+      // This is not safe because we're accessing data after some amount of time
+      // has passed, it's not guaranteed to still be valid.
+      component.data.age += 1
+  }, 1000)
+
+      // This is safe because we're assigning to data within the add function
+      component.data.interval = interval
+  },
+      tick: (world, component) => {
+      console.log('I am', component.data.age, 'seconds old')
+  },
+      remove: (world, component) => {
+      world.time.clearTimeout(component.data.interval)
+  }
+  })
+  ```
+</div>
+
+<div class="コード検証">
+  ### 正しい例
+
+  ```ts
+  ecs.registerComponent({
+    name: 'age-counter',
+    data: {
+      age: ecs.i32,
+      interval: ecs.i32,
+    },
+    add: (world, component) => {
+      const {eid, dataAttribute} = component
+      const interval = world.time.setInterval(() => {
+  	  // This is safe because we're re-acquiring a cursor at the time we need it,
+        // instead of using a stale cursor from before.
+  	  const data = dataAttribute.cursor(eid)
+        data.age += 1
+      }, 1000)
+
+      component.data.interval = interval
+  },
+  tick: (world, component) => {
+  console.log('I am', component.data.age, 'seconds old')
+  },
+  remove: (world, component) => {
+  // world.time.clearTimeout(component.data.interval)
+  }
+  })
+  ```
+</div>
+
+上記の例では、dataAttributeは、ネストされた関数内でコンポーネントのデータにアクセスするための安定したメソッドとして使用されています。 これにより、関数が非同期に呼び出された場合でも、データが有効で最新の状態を保つことができる。
+
+さらに、component.eidは、どのエンティティがコールバックを受信するかによって変化する可能性があるため、component.eidに直接アクセスするのではなく、eid変数を構造化解除する。 構造化されていない変数を使用することで、陳腐化する可能性のある参照を避けることができる。 構造化されていない変数を使用することで、陳腐化する可能性のある参照を避けることができる。
+
+コンポーネントのコールバックに渡される引数のうち、それぞれの有効性を以下に示す：
+
+:::warning
+さらに、component.eidは、どのエンティティがコールバックを受信するかによって変化する可能性があるため、component.eidに直接アクセスするのではなく、eid変数を構造化解除する。
+:::
+
+| コンテキスト         | コールバック終了後の変更？ | ネストされた関数の中で使えるか？ | 生涯            |
+| -------------- | ------------- | ---------------- | ------------- |
+| world          | いいえ           | はい               | 生涯経験          |
+| eid            | はい            | はい               | 事業体の寿命        |
+| スキーマとデータ       | はい            | いいえ              | コールバックのトップレベル |
+| スキーマ属性 & データ属性 | いいえ           | はい               | 事業体の寿命        |
+
+## 無効なカーソル
+
+カーソル・オブジェクトは、ECS状態のデータを読み書きするためのインターフェースとして機能する。 コンポーネントに対してカーソルが要求されるたびに、同じカーソルインスタンスが再使用されますが、メモリ内の異なる場所を指します。 その結果、カーソル参照は無効となり、期待されたデータを指すことができなくなります。
+
+### 誤った例
+
+<div class="コード無効">
+  ```ts
+  const cursor1 = MyComponent.get(world, entity1)
+  console.log(cursor1.name) // 'entity1'
+
+  const cursor2 = MyComponent.get(world, entity2)
+  console.log(cursor2.name) // 'entity2'
+
+  // Unexpected bugs may occur if using cursor1 after another access of the component
+  console.log(cursor1.name) // 'entity2'
+  console.log(cursor1 === cursor2) // 'true' - it's the same object, just initialized differently each time
+  ```
+</div>
+
+## ぶら下がるリスナー
+
+オブジェクトやコンポーネントが無期限に存続すると思い込まないこと。 プロジェクトが進化したり、新しい機能が導入されたりすると、イベントリスナーを適切にクリーンアップするなど、コンポーネントロジックが堅牢であることを確認することが重要になります。
+
+ステート・マシンは、イベント・リスナーを管理し、クリーンアップする素晴らしい方法です。
+
+### 正しい例
+
+<div class="コード検証">
+  ```ts
+  ecs.registerComponent({
+    name: 'Game Manager',
+    schema: {
+      // Add data that can be configured on the component.
+      scoreDisplay: ecs.eid,  // how many coins you've collected
+    },
+    schemaDefaults: {
+      // Add defaults for the schema fields.
+    },
+    data: {
+      // Add data that cannot be configured outside of the component.
+      score: ecs.i32,  // The integer value of the score
+    },
+    stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+      // Add score event
+      const coinCollect = () => {
+        const data = dataAttribute.cursor(eid)
+        data.score += 1
+        ecs.Ui.set(world, schemaAttribute.get(eid).scoreDisplay, {
+          text: data.score.toString(),
+        })
+      }
+
+      ecs.defineState('default').initial().onEnter(() => {
+        world.events.addListener(world.events.globalId, 'coinCollect', coinCollect)
+      }).onExit(() => {
+        world.events.removeListener(world.events.globalId, 'coinCollect', coinCollect)
+      })
+    },
+  })
+  ```
+</div>

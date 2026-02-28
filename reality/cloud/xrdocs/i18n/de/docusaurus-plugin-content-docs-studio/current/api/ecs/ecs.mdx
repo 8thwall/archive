@@ -1,0 +1,184 @@
+---
+id: ecs
+---
+
+import EcsTypes from '@site/src/components/_ecs-types.mdx'
+
+# ecs
+
+## Eigenschaften
+
+### Typen
+
+<EcsTypes/>
+
+## Funktionen
+
+### registerComponent
+
+Registriert eine Komponente beim ECS.
+
+```ts
+ecs.registerComponent({
+    name: string,
+    schema: Schema,
+    data: Schema,
+    schemaDefaults: Object,
+    add: function
+    remove: function,
+    tick: function
+}) // -> Komponenten-Handle
+```
+
+#### Zustand
+
+| Parameter               | Typ                               | Beschreibung                                                                                            |
+| ----------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Auslöser (erforderlich) | `Record<String, Trigger[]>`       | Bezeichnung der nächsten Zustände, in die dieser Zustand übergeht, und der Auslöser dafür.              |
+| onEnter                 | Funktion                          | Funktion, die aufgerufen wird, bevor der Zustand betreten wird.                                         |
+| onExit                  | Funktion                          | Funktion, die aufgerufen wird, bevor der Zustand betreten wird.                                         |
+
+#### Auslöser
+
+##### EventTrigger
+
+| Parameter            | Typ                    | Beschreibung                                                                                                                                  |
+| -------------------- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| type (erforderlich)  | Konstante: 'Ereignis'  | Eine Konstante zur Angabe der Art des Auslösers                                                                                               |
+| event (erforderlich) | String                 | Der Ereignistyp, der dies auslöst                                                                                                             |
+| Ziel                 | eid                    | Die Entität, für die dieser Trigger den Status ändern soll                                                                                    |
+| beforeTransition     | (Ereignis) => boolesch | Eine Funktion, die vor dem Übergang ausgeführt wird. Wenn das Ergebnis wahr ist, wird der Übergang beendet und der Zustand ändert sich nicht. |
+
+##### TimeoutTrigger
+
+| Parameter              | Typ                             | Beschreibung                                      |
+| ---------------------- | ------------------------------- | ------------------------------------------------- |
+| type (erforderlich)    | Konstante: 'Zeitüberschreitung' | Eine Konstante zur Angabe der Art des Auslösers   |
+| timeout (erforderlich) | Nummer                          | Die Anzahl der Millisekunden vor dem Übergang     |
+
+### createStateMachine
+
+Erstellen Sie einen Zustandsautomaten.
+
+```ts
+ecs.createStateMachine(world, owner, {initialState: string, states: Record<string, State>}) // -> State Machine ID
+```
+
+### deleteStateMachine
+
+Löschen eines Zustandsautomaten.
+
+```ts
+ecs.deleteStateMachine(world, machineId) // -> void
+```
+
+### defineState
+
+Definieren Sie einen Zustand.
+
+```ts
+ecs.defineState(name: string) // -> Zustand
+```
+
+#### erste
+
+Markieren Sie diesen Zustand als Anfangszustand des Zustandsautomaten
+
+```ts
+ecs.defineState(name).initial() // -> void
+```
+
+#### onEnter
+
+Legen Sie einen Callback fest, der beim Eintritt in diesen Zustand ausgeführt wird.
+
+```ts
+ecs.defineState(name).onEnter(callback) // -> void
+```
+
+#### onEvent
+
+##### Veranstaltung
+
+| Parameter        | Typ                    | Beschreibung                                                                                                                             |
+| ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Ziel             | eid                    | die Entität, für die dieser Auslöser den Status ändern soll                                                                              |
+| beforeTransition | (Ereignis) => boolesch | Funktion, die vor dem Übergang ausgeführt wird; wenn das Ergebnis wahr ist, wird der Übergang beendet und der Zustand ändert sich nicht  |
+
+Auslösen eines Übergangs zum nächsten Zustand, wenn ein Ereignis empfangen wird.
+
+```ts
+ecs.defineState(name).onEvent(event: string, nextState: string | State, args: EventObject) // -> void
+```
+
+#### onExit
+
+Legen Sie einen Callback fest, der beim Verlassen dieses Zustands ausgeführt wird.
+
+```ts
+ecs.defineState(name).onExit(callback) // -> void
+```
+
+#### warten
+
+Warten Sie, bevor Sie den Zustand wechseln.
+
+```ts
+ecs.defineState(name).wait(waitTime: Zahl, nextState: String | State) // -> void
+```
+
+### defineSystem
+
+Definieren Sie ein System.
+
+```ts
+ecs.defineSystem([Begriffe]: string[], Verhalten: function) // -> System
+```
+
+### defineQuery
+
+Definieren Sie eine Abfrage.
+
+```ts
+ecs.defineQuery([Begriffe: string]) // -> Rückruf
+```
+
+### getAttribute
+
+Eingebaute Komponenten werden auch als eine Eigenschaft von ecs angezeigt.
+
+```ts
+ecs.getAttribute(attributeName: string) // -> das Attribut, das mit diesem Namen registriert wurde.
+```
+
+### listAttributes
+
+Gibt eine Liste von Attributen zurück.
+
+```ts
+ecs.listAttributes() // -> string[]
+```
+
+### getBehaviors
+
+Gibt eine Liste der registrierten Verhaltensweisen zurück.
+
+```ts
+ecs.getBehaviors() // -> Funktion[]
+```
+
+### registerBehavior
+
+Registrieren Sie eine Funktion, die bei jedem Tick in der Welt ausgeführt wird.
+
+```ts
+ecs.registerBehavior(behavior: function) // -> void
+```
+
+### unregisterBehavior
+
+Deaktivieren Sie ein Verhalten.
+
+```ts
+ecs.unregisterBehavior(behavior: function) // -> void
+```

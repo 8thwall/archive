@@ -1,0 +1,23 @@
+{
+  "projectUrl": "https://8thwall.8thwall.app/putt-putt-paradise/",
+  "shell": "ios",
+  "apple": {
+    "teamIdentifier": "<REMOVED_BEFORE_OPEN_SOURCING>",
+    "signingType": "development"
+  },
+  "appInfo": {
+    "appDisplayName": "Putt Putt Paradise",
+    "bundleIdentifier": "com.the8thwall.puttputtparadise",
+    "naeBuildMode": "static",
+    "workspace": "8thwall",
+    "appName": "putt-putt-paradise",
+    "refHead": "production"
+  },
+  "accountUuid": "5f853779-a91d-4c71-b90b-13d3f114fa85",
+  "appUuid": "f1fd5b94-e392-47b3-bd55-57eedd5fc1b1",
+  "exportType": "ipa",
+  "iconId": "2q22krotk3clhabtn03ymo4dvah458t9mv2i5ox01mxzyymg5hevagj9",
+  "launchScreenIconId": "2q22krotk3clhabtn03ymo4dvah458t9mv2i5ox01mxzyymg5hevagj9",
+  "requestRef": "lucas-default",
+  "repoId": "cc.8.app.f1fd5b94-e392-47b3-bd55-57eedd5fc1b1"
+}

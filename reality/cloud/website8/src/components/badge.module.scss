@@ -1,0 +1,34 @@
+@use '../styles/brand-colors';
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 2px;
+  white-space: pre;
+  line-height: 16px;
+}
+
+.small {
+  height: 24px;
+  padding: 2px 8px;
+}
+
+.tiny {
+  height: 18px;
+  padding: 1px 8px;
+}
+
+.primary {
+  background: brand-colors.$brand-black;
+  color: brand-colors.$white;
+}
+
+.mango {
+  background: brand-colors.$mango;
+  color: brand-colors.$brand-black;
+}
+
+.mint {
+  background: brand-colors.$light-mint;
+  color: brand-colors.$dark-mint;
+}

@@ -1,0 +1,75 @@
+.caseStudyStatContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+  max-width: 40em;
+  margin: 1em;
+}
+
+.caseStudyHeading {
+  white-space: pre-line;
+  font-weight: 900;
+  font-size: 1.25em;
+  text-align: center;
+}
+
+.caseStudyNumber {
+  font-family: "Nunito", sans serif;
+  color: #7611B6;
+  font-weight: 500;
+  font-size: 1.5em;
+}
+
+.caseStudyStatGraphic * {
+  margin: 0;
+  padding: 0;
+}
+
+.caseStudyGraphic {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.caseStudyCircle circle {
+  fill: none;
+  stroke: url(#GradientColor);
+  stroke-width: 20px;
+  stroke-dasharray: 500;
+  stroke-dashoffset: 500;
+/*   animation: anim 2s ease-in-out forwards; */
+}
+
+.circleSpeedFast circle {
+  animation: anim 2s ease-in-out forwards;
+}
+
+.circleSpeedMedium circle {
+  animation: anim 2.5s ease-in-out forwards;
+}
+
+.circleSpeedSlow circle {
+  animation: anim 3s ease-in-out forwards;
+}
+
+@keyframes anim {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.caseStudyUnderCircle circle {
+  fill: none;
+  stroke: #D5D7E4;
+  stroke-width: 20px;
+}
+
+.caseStudyCircle, .caseStudyUnderCircle {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

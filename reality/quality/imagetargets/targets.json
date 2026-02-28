@@ -1,0 +1,246 @@
+{
+    "tully-crop-gray.jpg": {
+        "type": "CYLINDER",
+        "curvySpec": {
+            "arc": 0.3269,
+            "isRotated": false,
+            "crop": {
+                "outerWidth": 1.03194,
+                "outerHeight": 1.0,
+                "cropStartX": 0.01597,
+                "cropStartY": 0.0
+            },
+            "base": 1.0
+        }
+    },
+    "17_cup_h<w_rotated_cropped.jpg": {
+        "type": "CYLINDER",
+        "curvySpec": {
+            "arc": 1.0,
+            "isRotated": false,
+            "crop": {
+                "outerWidth": 3.4647,
+                "outerHeight": 1.0607,
+                "cropStartX": 0.3557,
+                "cropStartY": 0.0279
+            },
+            "base": 1.3485
+        }
+    },
+    "teaparty_crop.jpg": {
+        "type": "CYLINDER",
+        "curvySpec": {
+            "arc": 1.0,
+            "isRotated": false,
+            "crop": {
+                "outerWidth": 3.271984,
+                "outerHeight": 1.0,
+                "cropStartX": 0.20125,
+                "cropStartY": 0.0
+            },
+            "base": 1.4
+        }
+    },
+    "teaparty_crop2.jpg": {
+        "type": "CYLINDER",
+        "curvySpec": {
+            "arc": 1.0,
+            "isRotated": false,
+            "crop": {
+                "outerWidth": 3.271984,
+                "outerHeight": 1.0,
+                "cropStartX": 0.20125,
+                "cropStartY": 0.0
+            },
+            "base": 1.4
+        }
+    },
+    "teaparty_yflipped.jpg": {
+        "type": "CYLINDER",
+        "curvySpec": {
+            "arc": 1.0,
+            "isRotated": false,
+            "crop": {
+                "outerWidth": 1.0,
+                "outerHeight": 1.0,
+                "cropStartX": 0.0,
+                "cropStartY": 0.0
+            },
+            "base": 0.7191
+        }
+    },
+    "teaparty_yflipped_crop1.jpg": {
+        "type": "CYLINDER",
+        "curvySpec": {
+            "arc": 1.0,
+            "isRotated": false,
+            "crop": {
+                "outerWidth": 3.271984,
+                "outerHeight": 1.0,
+                "cropStartX": 0.3325,
+                "cropStartY": 0.0
+            },
+            "base": 0.7191
+        }
+    },
+    "teaparty_yflipped_crop2.jpg": {
+        "type": "CYLINDER",
+        "curvySpec": {
+            "arc": 1.0,
+            "isRotated": false,
+            "crop": {
+                "outerWidth": 3.271984,
+                "outerHeight": 1.0,
+                "cropStartX": 0.51,
+                "cropStartY": 0.0
+            },
+            "base": 0.7191
+        }
+    },
+    "teaparty_yflipped_crop3.jpg": {
+        "type": "CYLINDER",
+        "curvySpec": {
+            "arc": 1.0,
+            "isRotated": false,
+            "crop": {
+                "outerWidth": 3.271984,
+                "outerHeight": 1.0,
+                "cropStartX": 0.4069,
+                "cropStartY": 0.0
+            },
+            "base": 0.7191
+        }
+    },
+    "teaparty_yflipped_crop3_scaled.jpg": {
+        "type": "CYLINDER",
+        "curvySpec": {
+            "arc": 1.0,
+            "isRotated": false,
+            "crop": {
+                "outerWidth": 3.271984,
+                "outerHeight": 1.0,
+                "cropStartX": 0.4069,
+                "cropStartY": 0.0
+            },
+            "base": 0.7191
+        }
+    },
+    "amity_crop.png": {
+        "type": "CYLINDER",
+        "curvySpec": {
+            "arc": 0.3993,
+            "isRotated": false,
+            "crop": {
+                "outerWidth": 1.1387,
+                "outerHeight": 1.0,
+                "cropStartX": 0.0614,
+                "cropStartY": 0.0
+            },
+            "base": 1.0
+        }
+    },
+    "amity_crop.jpg": {
+        "type": "CYLINDER",
+        "curvySpec": {
+            "arc": 0.3993,
+            "isRotated": false,
+            "crop": {
+                "outerWidth": 1.1387,
+                "outerHeight": 1.0,
+                "cropStartX": 0.0614,
+                "cropStartY": 0.0
+            },
+            "base": 1.0
+        }
+    },
+    "amity_rotated.jpg": {
+        "type": "CYLINDER",
+        "curvySpec": {
+            "arc": 0.3993,
+            "isRotated": true,
+            "crop": {
+                "outerWidth": 1.5915,
+                "outerHeight": 1.0196,
+                "cropStartX":  0.2144,
+                "cropStartY": 0.0192
+            },
+            "base": 1.0
+        }
+    },
+    "tyrell_crop.jpg": {
+        "type": "CYLINDER",
+        "curvySpec": {
+            "arc": 0.33,
+            "isRotated": false,
+            "crop": {
+                "outerWidth": 1.21,
+                "outerHeight": 1.17,
+                "cropStartX": 0.17,
+                "cropStartY": 0.07
+            },
+            "base": 1.0
+        }
+    },
+    "tully.jpg": {
+        "type": "CYLINDER",
+        "curvySpec": {
+            "arc": 0.3269,
+            "isRotated": false,
+            "crop": {
+                "outerWidth": 1.0,
+                "outerHeight": 1.0,
+                "cropStartX": 0.0,
+                "cropStartY": 0.0
+            },
+            "base": 1.0
+        }
+    },
+    "tully_rotated.jpg": {
+        "type": "CYLINDER",
+        "curvySpec": {
+            "arc": 0.32692,
+            "isRotated": true,
+            "crop": {
+                "outerWidth": 1.791,
+                "outerHeight": 1.0406,
+                "cropStartX": 0.3354,
+                "cropStartY": 0.0054
+            },
+            "base": 1.0
+        }
+    },
+    "tyrell.jpg": {
+        "type": "CYLINDER",
+        "curvySpec": {
+            "arc": 0.3269,
+            "isRotated": false,
+            "crop": {
+                "outerWidth": 1.0,
+                "outerHeight": 1.0,
+                "cropStartX": 0.0,
+                "cropStartY": 0.0
+            },
+            "base": 1.0
+        }
+    },
+    "tyrell_rotated.jpg": {
+        "type": "CYLINDER",
+        "curvySpec": {
+            "arc": 0.33,
+            "isRotated": true,
+            "crop": {
+                "outerWidth": 1.78,
+                "outerHeight": 1.04,
+                "cropStartX": 0.28,
+                "cropStartY": 0.0
+            },
+            "base": 1.0
+        }
+    },
+    "planar-image-placeholder.jpg": {
+        "type": "PLANAR",
+        "planarGeometry": {
+            "isRotated": false
+        }
+    }
+}

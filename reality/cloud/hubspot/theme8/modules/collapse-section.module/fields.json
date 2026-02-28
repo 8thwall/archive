@@ -1,0 +1,36 @@
+[ {
+  "id" : "70416e39-cc0c-641a-321e-bcce81176933",
+  "name" : "question",
+  "display_width" : null,
+  "label" : "Question",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text",
+  "default" : "I have a question!"
+}, {
+  "id" : "21e5b5a7-5e55-415e-048f-5994738ee237",
+  "name" : "answer",
+  "display_width" : null,
+  "label" : "Answer",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "default" : "<p>Here's the answer!</p>"
+}, {
+  "id" : "5394f17e-3260-361f-66ad-6d65d22cf74e",
+  "name" : "color",
+  "display_width" : null,
+  "label" : "Color",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "white", "White" ], [ "gray", "Gray 1" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "default" : "white"
+} ]

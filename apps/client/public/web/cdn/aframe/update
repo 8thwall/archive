@@ -1,0 +1,37 @@
+#!/bin/bash
+set -e
+
+function setURL() {
+  echo "https://aframe.io/releases/$1/aframe.min.js"
+}
+
+if [ -z "$1" ]; then
+  echo "usage: $0 <version>"
+  echo "  download and modifies $(setURL 1.2.3)"
+  exit 1
+fi
+
+wget $(setURL $1)
+OUT=8frame-$1.min.js
+
+function make8frame() {
+  echo 'if(!window.XR8 && window.XR && typeof(window.XR) === "function"){window.nativeXR = window.XR; window.XR = undefined}'
+  echo -n 'window.navigator.getVRDisplays = function() { return Promise && Promise.resolve([{ displayName: "noVRDisplay" }]) };'
+  echo -n 'window.WebVRConfig = window.WebVRConfig || {};'
+
+  cat aframe.min.js |\
+    sed 's/,\(this.play(),scenes.push(this),\)/;const onPlay = () => {\1/;s/\(},writable:window.debug},initSystems:\)/};window.XR8?onPlay():window.addEventListener("xrloaded",onPlay)\1/' |\
+    sed 's/vrdisplayactivate/_vrdisplayactivate_/g;s/exports.getUrlParameter/exports.getUrlParameter = function() { return "false" }; oldGetUrlParameters/;s/apple-mobile-web-app-capable",content:"yes"/apple-mobile-web-app-capable",content:"no"/;s|https://aframe.io/images/aframe-logo-152.png|https://apps.8thwall.com/eight.png|;s|sourceMappingURL=aframe.min.js.map||;'
+
+    echo 'if (window.XR8) {window.AFRAME.registerComponent("xrconfig", window.XR8.AFrame.xrconfigComponent())}'
+    echo 'if (window.XR8) {window.AFRAME.registerComponent("xrweb", window.XR8.AFrame.xrwebComponent())}'
+    echo 'if (window.XR8) {window.AFRAME.registerComponent("xrface", window.XR8.AFrame.xrfaceComponent())}'
+    echo 'if (window.XR8) {window.AFRAME.registerComponent("xrlayers", window.XR8.AFrame.xrlayersComponent())}'
+    echo 'if (window.XR8) {window.AFRAME.registerComponent("xrlayerscene", window.XR8.AFrame.xrlayersceneComponent())}'
+    echo 'if (window.XR8) {window.AFRAME.registerPrimitive("sky-scene", window.XR8.AFrame.skyscenePrimitive())}'
+}
+
+make8frame > $OUT
+
+rm aframe.min.js
+echo Created $OUT

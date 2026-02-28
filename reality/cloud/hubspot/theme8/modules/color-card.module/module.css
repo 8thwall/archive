@@ -1,0 +1,103 @@
+.colorCardContainer {
+  overflow: hidden;
+  font-size: 16px;
+  filter: drop-shadow(0 0 0.75em #D5D7E4);
+  display: flex;
+  flex-direction: row;
+  border-radius: 8px;
+}
+
+.colorCardBlock {
+  width: 60%;
+}
+
+.colorCardImageBlock {
+  height: 100%;
+  width: 40em;
+  position: absolute;
+  z-index: -1;
+  right: 0;
+}
+
+.colorCardGradient {
+  height: 100%;
+  width: 100%;
+}
+
+.colorCardImage {
+  height: 100%;
+  width: auto;
+  right: 0;
+}
+
+.colorCardBlock {
+  max-width: 60%;
+  padding: 3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.colorCardHeading {
+  font-weight: 900;
+  font-size: 1.5em;
+}
+
+.colorCardDescription {
+  font-size: 1.25em;
+  margin-bottom: 0.5em;
+}
+
+.colorCardLink{
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 20px;
+  padding: 0.5em 1em;
+}
+
+.colorCardLink:hover {
+  color: #408CBA;
+  border: 1px solid #408CBA;
+}
+
+@media screen and (max-width: 991px) {
+  .colorCardContainer {
+    flex-direction: column-reverse;
+  }
+  
+  .colorCardImageBlock {
+    position: static;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+  
+  .colorCardBlock {
+    width: 100%;
+    max-width: unset;
+    padding-top: 0;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .colorCardBlock {
+    padding: 0 1.5em 2em 1.5em;
+  }
+  
+  .colorCardHeading {
+    font-size: 1.25em;
+  }
+
+  .colorCardDescription {
+    font-size: 1.125em;
+  }
+  
+  .colorCardBlock {
+    align-items: stretch;  
+  }
+  
+  .colorCardLink {
+    margin: 0;
+    text-align: center;
+  }
+}

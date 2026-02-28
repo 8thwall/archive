@@ -1,0 +1,13 @@
+# xrmeshactualizado
+
+## Descripción {#description}
+
+Este evento es emitido por [`xrweb`](/legacy/api/aframe/#world-tracking-image-targets-andor-lightship-vps) cuando la **primera** malla encontrada cambia de posición o rotación.
+
+`xrmeshupdated.detail : { id, position, rotation }`
+
+| Propiedad                                    | Descripción                                                                                     |
+| -------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| id                                           | Un id para esta malla que es estable dentro de una sesión                                       |
+| posición: `{x, y, z}`        | La posición 3d de la malla localizada.                                          |
+| rotación: \`{w, x, y, z}\`\` | La orientación local 3d (cuaternión) de la malla localizada. |

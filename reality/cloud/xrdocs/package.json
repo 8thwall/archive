@@ -1,0 +1,73 @@
+{
+  "name": "xrdocs",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "docusaurus": "docusaurus",
+    "start": "npm run generate-tables && docusaurus start",
+    "build": "npm run generate-tables && docusaurus build",
+    "generate-tables": "npx ts-node tools/generate-tables.ts",
+    "build:de": "docusaurus build --locale de",
+    "build:en": "docusaurus build --locale en",
+    "build:es": "docusaurus build --locale es",
+    "build:fr": "docusaurus build --locale fr",
+    "build:ja": "docusaurus build --locale ja",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "clear": "docusaurus clear",
+    "serve": "docusaurus serve",
+    "check-mdx": "docusaurus-mdx-checker",
+    "write-translations": "docusaurus write-translations",
+    "write-i18n-markdown-ids": "npx ts-node tools/write-i18n-markdown-ids.ts",
+    "crowdin:sync": "tools/crowdin-sync.sh",
+    "crowdin:sync:upload": "tools/crowdin-sync.sh upload",
+    "crowdin:sync:download": "tools/crowdin-sync.sh download",
+    "write-heading-ids": "docusaurus write-heading-ids",
+    "upload-website-staging": "tools/upload-website-then-link.sh staging",
+    "invalidate-staging": "tools/invalidate-deploy.sh staging",
+    "invalidate-prod": "tools/invalidate-deploy.sh prod",
+    "build-to-staging": "tools/build-to-staging.sh",
+    "update-staging-to-prod": "tools/update-staging-to-prod.sh",
+    "get-prod-invalidations": "tools/get-invalidations.sh prod"
+  },
+  "dependencies": {
+    "@docusaurus/core": "^3.6.3",
+    "@docusaurus/plugin-client-redirects": "^3.6.3",
+    "@docusaurus/preset-classic": "^3.6.3",
+    "@docusaurus/theme-mermaid": "^3.6.3",
+    "@mdx-js/react": "^3.0.1",
+    "clsx": "^2.1.0",
+    "csv-writer": "^1.6.0",
+    "docusaurus-plugin-sass": "^0.2.5",
+    "prism-react-renderer": "^2.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sass": "^1.72.0"
+  },
+  "devDependencies": {
+    "@crowdin/cli": "^4.1.1",
+    "@docusaurus/module-type-aliases": "^3.6.3",
+    "@docusaurus/tsconfig": "^3.6.3",
+    "@docusaurus/types": "^3.6.3",
+    "docusaurus-mdx-checker": "^3.0.0",
+    "eslint": "^7.32.0",
+    "gray-matter": "^4.0.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "engines": {
+    "node": ">=16.14"
+  }
+}

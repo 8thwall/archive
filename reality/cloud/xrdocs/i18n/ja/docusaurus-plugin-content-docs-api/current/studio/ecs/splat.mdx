@@ -1,0 +1,27 @@
+---
+id: splat
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import SplatTable from "../../../gen/tables/Splat.md"
+
+# スプラット
+
+## 説明
+
+このコンポーネントは、エンティティにガウススプラットを確立する。
+
+## プロパティ
+
+<SplatTable />
+
+## 機能
+
+<ComponentFunctions
+    name="Splat"
+    properties={{
+        url: "./assets/splat.spz"
+    }}
+    mutate={`cursor.url = './assets/new_splat.spz';
+    return false;`}
+/>

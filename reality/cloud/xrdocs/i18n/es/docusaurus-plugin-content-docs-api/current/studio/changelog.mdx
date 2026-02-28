@@ -1,0 +1,80 @@
+---
+id: changelog
+sidebar_position: 1000
+---
+
+# Registro de cambios
+
+## 2.2.0 (24 de octubre de 2025) {#2.2.0}
+
+### Nuevas funciones
+
+- Añadir desplazamientos rotacionales del colisionador de física
+
+### Características y mejoras
+
+- Fijar el ángulo de sombra de la luz direccional al seguir la cámara
+
+## 2.1.0 (16 de octubre de 2025) {#2.1.0}
+
+### Nuevas funciones
+
+- Añadir la API del gestor de efectos para actualizar el cielo y la niebla (`world.effects`)
+
+### Correcciones y mejoras
+
+- Se ha actualizado la definición del tipo de esquema/datos en la llamada de retorno para eliminar componentes.
+- Añadir eventos de animación a event-ids
+- Corregir duplicado observador callbacks en `add()` para instancias prefabricadas
+- Se ha solucionado un problema que provocaba que las entradas del ratón bloquearan el puntero.
+- Se ha solucionado un problema por el que `ScaleAnimation` desplazaba incorrectamente los colisionadores.
+
+## 2.0.1 (25 de septiembre de 2025) {#2.0.1}
+
+### Correcciones y mejoras
+
+- Se ha solucionado un problema con la física por el que los objetos dinámicos no se detenían por completo.
+- Se ha corregido un fallo que podía producirse tras cambiar repetidamente la escala del colisionador físico.
+- Direcciones de emisión de partículas corregidas
+- Efectos de partículas independientes de la velocidad de fotogramas
+- Mayor fiabilidad del simulador de aplicaciones de escritorio
+- Se ha corregido un problema de la interfaz de usuario que provocaba la colocación incorrecta del desplazamiento en los elementos.
+
+## 2.0.0 (10 de septiembre de 2025) {#2.0.0}
+
+El nuevo Studio Runtime 2.0 incluye un motor de física renovado. Como resultado, algunos comportamientos físicos son diferentes. Consulte la [Guía de actualización a 2.0](http://8th.io/v2upgradeguide) para obtener instrucciones y consejos que garanticen una migración sin problemas.
+
+### Cambios de última hora
+
+- Eliminadas propiedades de `ecs.Collider`:
+  - `rodaduraFricción`
+  - `spinningFriction`
+- Cambiado el modo de actualización de la matriz: `manual` por defecto, que está más optimizado. Si se modifican objetos three.js directamente, es necesario llamar a `world.three.notifyChanged()` en cada objeto modificado, o volver al comportamiento original con `world.three.setMatrixUpdateMode('auto')`.
+- En la versión 2.0, algunos de los cálculos subyacentes del nuevo motor de física difieren para propiedades como la fricción, la restitución y la amortiguación. Consulte la [guía de actualización](http://8th.io/v2upgradeguide) para más detalles.
+
+### Nuevas funciones
+
+- Hemos añadido una nueva propiedad `type` (requerida) a `ecs.Collider` para permitir determinar si y cómo la simulación de física debe aplicarse al objeto. Anteriormente, un valor de masa superior a 0 determinaba si un colisionador era Dinámico o no (masa 0 = Estático), y los colisionadores Cinemáticos no estaban soportados.
+  - Valores permitidos: `ColliderType.Static`, `ColliderType.Kinematic`, `ColliderType.Dynamic`
+  - Los colisionadores cinemáticos no se ven afectados por las fuerzas físicas, pero pueden tener movimiento y afectar a otros cuerpos dinámicos mediante colisiones.
+  - Consulte [Collider API documentation](https://www.8thwall.com/docs/api/studio/ecs/collider/) para más detalles y casos de uso.
+
+### Correcciones y mejoras
+
+- Se ha activado por defecto una comprobación más estricta de typescript en tiempo de compilación para mejorar la notificación de errores.
+
+## 1.1.0 (29 de agosto de 2025) {#1.1.0}
+
+- Constantes adicionales exportadas para eventos XR
+- Arreglado que la malla de la cara no se renderizara como estaba configurada con la cámara Face AR.
+- Corregido el comportamiento de los colliders desactivados
+- Corregida una forma corrupta que se aplicaba a los autocolisionadores.
+
+## 1.0.1 (25 de agosto de 2025) {#1.0.1}
+
+- Los tipos booleanos de física se exponen como `true`/`false`, no como `1`/`0`.
+- Exportado `GpsPointer`
+
+## 1.0.0 (6 de agosto de 2025) {#1.0.0}
+
+- Versión inicial

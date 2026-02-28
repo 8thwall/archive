@@ -1,0 +1,28 @@
+---
+id: cylinder-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# CylinderGeometry
+
+## Descripción
+
+This component establishes geometry on an entity.
+
+## Propiedades
+
+| Propiedad | Tipo   | Por defecto | Descripción             |
+| --------- | ------ | ----------- | ----------------------- |
+| radio     | number | 1           | Radius of the cylinder. |
+| height    | number | 1           | Height of the cylinder. |
+
+## Funciones
+
+<ComponentFunctions
+    name="CylinderGeometry"
+    properties={{ radius: 1, height: 1 }}
+    mutate={`cursor.radius += 1;
+    cursor.height *= 2;
+    return false;`}
+/>

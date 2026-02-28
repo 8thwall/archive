@@ -1,0 +1,39 @@
+[ {
+  "id" : "d8762b74-ad5d-d419-9598-169403f66244",
+  "name" : "stat",
+  "display_width" : null,
+  "label" : "statistic",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text",
+  "default" : "2%"
+}, {
+  "id" : "4bafa4e1-426e-d63d-6282-35baa5c51119",
+  "name" : "heading",
+  "display_width" : null,
+  "label" : "Heading",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text",
+  "default" : "Example Statistic Heading"
+}, {
+  "id" : "f1acf95e-9324-7a96-befd-0fa502009662",
+  "name" : "speed",
+  "display_width" : null,
+  "label" : "Circle Speed",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "medium", "Medium" ], [ "slow", "Slow" ], [ "fast", "Fast" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "default" : "medium"
+} ]

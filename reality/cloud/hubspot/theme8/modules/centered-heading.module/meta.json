@@ -1,0 +1,9 @@
+{
+  "global" : false,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE" ],
+  "icon" : "fontawesome-5.14.0:font:SOLID",
+  "host_template_types" : [ "PAGE" ],
+  "module_id" : 131241122362,
+  "label" : "Heading and Subheading",
+  "is_available_for_new_content" : true
+}

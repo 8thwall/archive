@@ -1,0 +1,124 @@
+---
+id: media-recorder
+---
+
+import {EventExample} from '@site/src/components/event-example'
+
+# Media Recorder Ereignisse
+
+## Beschreibung
+
+Mit diesem Media Recorder können Sie zur Laufzeit Screenshots und Videos von Ihrem Studio-Projekt aufnehmen.
+
+Medienrekorder-Ereignisse werden über die [world.events.globalId](/api/studio/world/events/#properties) ausgegeben.
+
+## Veranstaltungen
+
+### REKORDER_BILDSCHIRMFOTO_BEREIT
+
+Wird ausgegeben, wenn der Screenshot fertig ist.
+
+#### Eigenschaften
+
+| Eigentum | Typ    | Beschreibung                      |
+| -------- | ------ | --------------------------------- |
+| klecks   | Klecks | Der JPEG-Blob des Bildschirmfotos |
+
+#### Beispiel
+
+<EventExample ns="ecs.events" event="RECORDER_SCREENSHOT_READY" target="world.events.globalId" callbackBody={`console.log('Screenshot blob: ', event.data.blob)`} />
+
+### REKORDER_VIDEO_GESTARTET
+
+Wird ausgegeben, wenn die Aufnahme begonnen hat.
+
+#### Eigenschaften
+
+Keine.
+
+#### Beispiel
+
+<EventExample ns="ecs.events" event="RECORDER_VIDEO_STARTED" target="world.events.globalId" hasPayload={false} callbackBody={`console.log('Recording started')`} />
+
+### REKORDER_VIDEO_GESTOPPT
+
+Wird ausgegeben, wenn die Aufzeichnung beendet ist.
+
+#### Eigenschaften
+
+Keine.
+
+#### Beispiel
+
+<EventExample ns="ecs.events" event="RECORDER_VIDEO_STARTED" target="world.events.globalId" hasPayload={false} callbackBody={`console.log('Recording stopped')`} />
+
+### REKORDER_VIDEO_FEHLER
+
+Wird ausgegeben, wenn ein Fehler aufgetreten ist.
+
+#### Eigenschaften
+
+| Eigenschaft | Typ    | Beschreibung           |
+| ----------- | ------ | ---------------------- |
+| nachricht   | String | Die Fehlermeldung      |
+| name        | String | Der Fehlername         |
+| Stapel      | String | Der Fehler-Stack-Trace |
+
+#### Beispiel
+
+<EventExample ns="ecs.events" event="RECORDER_VIDEO_ERROR" target="world.events.globalId" callbackBody={`console.log('Recorder error: ', event.data.message)`} />
+
+### REKORDER_VIDEO_BEREIT
+
+Wird ausgegeben, wenn die Aufnahme abgeschlossen und das Video bereit ist.
+
+#### Eigenschaften
+
+| Eigentum  | Typ    | Beschreibung                 |
+| --------- | ------ | ---------------------------- |
+| videoBlob | Klecks | Der aufgezeichnete Videoblob |
+
+#### Beispiel
+
+<EventExample ns="ecs.events" event="RECORDER_VIDEO_READY" target="world.events.globalId" callbackBody={`console.log('Video ready: ', event.data.videoBlob)`} />
+
+### SCHREIBER_VORSCHAU_BEREIT
+
+Wird ausgegeben, wenn ein vorschaubares, aber nicht für die Freigabe optimiertes Video bereit ist (nur Android/Desktop).
+
+#### Eigenschaften
+
+| Eigenschaft | Typ    | Beschreibung           |
+| ----------- | ------ | ---------------------- |
+| videoBlob   | Klecks | Der Vorschau-Videoblob |
+
+#### Beispiel
+
+<EventExample ns="ecs.events" event="RECORDER_PREVIEW_READY" target="world.events.globalId" callbackBody={`console.log('Preview ready: ', event.data.videoBlob)`} />
+
+### SCHREIBER_FINALISIEREN_FORTSCHRITT
+
+Wird ausgegeben, wenn der Medienrekorder beim endgültigen Export Fortschritte macht (nur Android/Desktop).
+
+#### Eigenschaft
+
+| Eigentum     | Art    | Beschreibung                             |
+| ------------ | ------ | ---------------------------------------- |
+| Fortschritte | Nummer | Fortschritt der Fertigstellung (0 bis 1) |
+
+#### Beispiel
+
+<EventExample ns="ecs.events" event="RECORDER_FINALIZE_PROGRESS" target="world.events.globalId" callbackBody={`console.log('Finalize progress: ', event.data.progress * 100)`} />
+
+### RECORDER_PROCESS_FRAME
+
+#### Eigenschaften
+
+| Eigenschaft | Typ       | Beschreibung                    |
+| ----------- | --------- | ------------------------------- |
+| Rahmen      | BildDaten | Das verarbeitete Videobild      |
+| Zeitstempel | Nummer    | Der Zeitstempel des Frames (ms) |
+
+#### Beispiel
+
+<EventExample ns="ecs.events" event="RECORDER_PROCESS_FRAME" target="world.events.globalId" callbackBody={`console.log('Process frame: ', event.data.timestamp, event.data.frame)`} />

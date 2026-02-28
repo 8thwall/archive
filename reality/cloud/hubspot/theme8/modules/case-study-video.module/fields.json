@@ -1,0 +1,28 @@
+[ {
+  "picker" : "video",
+  "id" : "894b7a76-f579-27f1-8ff5-5fa8806a8d35",
+  "name" : "video",
+  "display_width" : null,
+  "label" : "Video",
+  "required" : false,
+  "locked" : false,
+  "type" : "file",
+  "default" : "https://7255816.fs1.hubspotusercontent-na1.net/hubfs/7255816/jumanji-vid.mp4"
+}, {
+  "id" : "7bbf72e9-d82d-4820-b9cc-a292b4a62ef0",
+  "name" : "casestudyvid",
+  "display_width" : null,
+  "label" : "Video",
+  "required" : false,
+  "locked" : false,
+  "resizable" : true,
+  "show_preview" : true,
+  "show_advanced_options" : false,
+  "type" : "videoplayer",
+  "default" : {
+    "player_id" : 131083049015,
+    "height" : 1080,
+    "width" : 1080,
+    "player_type" : "hsvideo2"
+  }
+} ]

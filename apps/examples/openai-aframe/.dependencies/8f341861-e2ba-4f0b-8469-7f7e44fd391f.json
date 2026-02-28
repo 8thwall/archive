@@ -1,0 +1,85 @@
+{
+  "type": "module",
+  "dependencyId": "c62a0e45-b6dc-4f6a-ad05-d3f2a29e678f",
+  "moduleId": "0f4ded6b-9ce0-4e2c-a366-578485a10096",
+  "alias": "openai",
+  "backendTemplates": [
+    {
+      "baseUrl": "https://api.openai.com/v1/",
+      "headers": {
+        "Authorization": {
+          "type": "secretslot",
+          "slotId": "39b575a7-05e4-4d9c-955f-f02168a9a5eb",
+          "label": "API Key",
+          "prefix": "Bearer "
+        }
+      },
+      "routes": [
+        {
+          "id": "1",
+          "name": "createChatCompletions",
+          "integrationType": "http",
+          "url": "chat/completions",
+          "methods": [
+            "POST"
+          ],
+          "headers": {}
+        },
+        {
+          "id": "2",
+          "name": "createImage",
+          "integrationType": "http",
+          "url": "images/generations",
+          "methods": [
+            "POST"
+          ],
+          "headers": {}
+        },
+        {
+          "id": "3",
+          "name": "createImageVariation",
+          "integrationType": "http",
+          "url": "images/variations",
+          "methods": [
+            "POST"
+          ],
+          "headers": {}
+        },
+        {
+          "id": "4",
+          "name": "createTranscription",
+          "integrationType": "http",
+          "url": "audio/transcriptions",
+          "methods": [
+            "POST"
+          ],
+          "headers": {}
+        },
+        {
+          "id": "6",
+          "name": "listModels",
+          "integrationType": "http",
+          "url": "models",
+          "methods": [
+            "GET"
+          ],
+          "headers": {}
+        }
+      ],
+      "name": "openai-api"
+    }
+  ],
+  "backendSlotValues": {
+    "39b575a7-05e4-4d9c-955f-f02168a9a5eb": {
+      "type": "secret",
+      "secretId": "3831518a-414e-4f70-a084-2e44adb2ec44",
+      "length": 164,
+      "lastCouple": "ydsA",
+      "allowedOrigin": "https://api.openai.com"
+    }
+  },
+  "target": {
+    "type": "branch",
+    "branch": "master"
+  }
+}

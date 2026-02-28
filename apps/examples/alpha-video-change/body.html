@@ -1,0 +1,62 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<!-- UI Buttons used to change colors -->
+<div id="container"></div>
+
+<a-scene
+  responsive-immersive
+  landing-page
+  xrextras-gesture-detector
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="colorManagement: true"
+  xrweb="allowedDevices: any">
+
+  <a-assets>
+    <video id="alpha-video1" playsinline crossorigin="anonymous" loop="true" src="./assets/videos/alpaca.mp4#t=0.001"></video>
+    <video id="alpha-video2" playsinline crossorigin="anonymous" loop="true" src="./assets/videos/chicken.mp4#t=0.001"></video>
+    <video id="alpha-video3" playsinline crossorigin="anonymous" loop="true" src="./assets/videos/cow.mp4#t=0.001"></video>
+    <img id="blobShadow" src="./assets/textures/blob-shadow.png">
+    <a-asset-item id="grass" src="assets/grass.glb"></a-asset-item>
+  </a-assets>
+
+  <a-camera
+    id="camera"
+    position="0 4 4"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;">
+  </a-camera>
+
+  <a-entity 
+    gltf-model="#grass" 
+    scale=".5 .5 .5" 
+    position="0 0 -.5">
+  </a-entity>
+
+  <a-entity
+    id="alphaVideo"
+    change-video
+    custom-hold-drag="riseHeight: 1.1"
+    geometry="primitive: plane; height: 1; width: 1.78;"
+    xrextras-two-finger-rotate
+    position="0 1.1 0"
+    scale="3 3 3">
+      <a-circle
+        position="0 -0.35 0"
+        rotation="-90 0 0"
+        scale="1.5 0.6 1"
+        radius="0.5"
+        material="src: #blobShadow; opacity: 0.65; roughness: 0.8; metalness: 0;">
+      </a-circle>
+  </a-entity>
+
+  <a-plane
+    id="ground" 
+    rotation="-90 0 0" 
+    width="1000" 
+    height="1000" 
+    material="shader: shadow"
+    shadow>
+  </a-plane>
+</a-scene>

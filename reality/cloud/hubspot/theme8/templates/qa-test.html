@@ -1,0 +1,696 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: false
+  label: QA test
+-->
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+{% dnd_area "dnd_area"
+  label="Main section",
+  class="body-container body-container--qa-test"
+%}
+
+  {# Typography section #}
+
+  {% dnd_section %}
+    {% dnd_column %}
+      {% dnd_row %}
+        {% dnd_module path="@hubspot/rich_text" %}
+          {% module_attribute "html" %}
+            <h1>Typography</h1>
+            <hr>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row %}
+        {% dnd_module path="@hubspot/rich_text" %}
+          {% module_attribute "html" %}
+            <h1>Heading 1</h1>
+            <h2>Heading 2</h2>
+            <h3>Heading 3</h3>
+            <h4>Heading 4</h4>
+            <h5>Heading 5</h5>
+            <h6>Heading 6</h6>
+            <p>Lorem ipsum dolor sit amet, consectetur <em>adipiscing elit</em>. Duis porttitor, quam vel <strong>dignissim</strong> tincidunt, odio libero porta ligula, vitae fermentum lacus libero vel risus. Aenean pulvinar nisl et <a href="#">vestibulum commodo</a>. Quisque euismod tempus dignissim. Quisque dictum luctus velit, eu viverra urna tristique non. Vivamus at dolor tellus. Cras congue sapien non turpis dapibus, et vestibulum ante ultrices. Mauris eu nisi non sapien fermentum fermentum in eu odio. Fusce congue elit et tortor sagittis, sit amet auctor risus sagittis.</p>
+            <p>This line contains <sub>subscript</sub> text.</p>
+            <p>This line contains <sup>superscript</sup> text.</p>
+            <p>This line contains <code>code</code>.</p>
+            <p>This line contains <small>small</small> text.</p>
+            <p>This line contains <mark>highlighted</mark> text</p>
+            <pre><code>.preformatted-code { background-color: #FFF; }</code></pre>
+            <ul>
+            <li>Unordered list item</li>
+            <li>Unordered list item</li>
+            <li>Unordered list item</li>
+            <li>Unordered list item</li>
+            </ul>
+            <ol>
+            <li>First ordered list item</li>
+            <li>Second ordered list item</li>
+            <li>Third ordered list item</li>
+            <li>Fourth ordered list item</li>
+            </ol>
+            <blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porttitor, quam vel dignissim tincidunt, odio libero porta ligula, vitae fermentum lacus libero vel risus. Aenean pulvinar nisl et vestibulum commodo. Quisque euismod tempus dignissim.</blockquote>
+            <table>
+              <thead>
+                <tr>
+                  <th>Header column one</th>
+                  <th>Header column two</th>
+                  <th>Header column three</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Row one column one</td>
+                  <td>Row one column two</td>
+                  <td>Row one column three</td>
+                </tr>
+                <tr>
+                  <td>Row two column one</td>
+                  <td>Row two column two</td>
+                  <td>Row two column three</td>
+                </tr>
+                <tr>
+                  <td>Row three column one</td>
+                  <td>Row three column two</td>
+                  <td>Row three column three</td>
+                </tr>
+                <tr>
+                  <td>Row four column one</td>
+                  <td>Row four column two</td>
+                  <td>Row four column three</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td>Footer column one</td>
+                  <td>Footer column two</td>
+                  <td>Footer column three</td>
+                </tr>
+              </tfoot>
+            </table>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+    {% end_dnd_column %}
+  {% end_dnd_section %}
+
+  {# Default modules section #}
+
+  {% dnd_section %}
+    {% dnd_column %}
+      {% dnd_row %}
+        {% dnd_module path="@hubspot/rich_text" %}
+          {% module_attribute "html" %}
+            <h2>Default modules </h2>
+            <hr>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {# Forms #}
+
+      {% dnd_row
+        margin={
+          "top": 35
+        }
+      %}
+        {% dnd_module path="@hubspot/rich_text" %}
+          {% module_attribute "html" %}
+            <h3>Forms</h3>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {# One column #}
+
+      {% dnd_row
+        padding={
+        "top": 35
+        }
+      %}
+        {% dnd_module path="@hubspot/form" %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+
+      {# Two column #}
+
+      {% dnd_row
+        padding={
+        "top": 35
+        }
+      %}
+        {% dnd_module path="@hubspot/form",
+          offset=0,
+          width=6
+        %}
+        {% end_dnd_module %}
+        {% dnd_module path="@hubspot/form",
+          offset=6,
+          width=6
+        %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {# Three column #}
+
+      {% dnd_row
+        padding={
+        "top": 35
+        }
+      %}
+        {% dnd_module path="@hubspot/form",
+          offset=0,
+          width=4
+        %}
+        {% end_dnd_module %}
+        {% dnd_module path="@hubspot/form",
+          offset=4,
+          width=4
+        %}
+        {% end_dnd_module %}
+        {% dnd_module path="@hubspot/form",
+          offset=8,
+          width=4
+        %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+    {% end_dnd_column %}
+  {% end_dnd_section %}
+
+  {# Theme modules section #}
+
+  {% dnd_section %}
+    {% dnd_column %}
+      {% dnd_row %}
+        {% dnd_module path="@hubspot/rich_text" %}
+          {% module_attribute "html" %}
+            <h2>Theme modules</h2>
+            <hr>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {# Centered Heading #}
+
+      {% dnd_row
+        margin={
+          "top": 35
+        }
+      %}
+        {% dnd_module path="@hubspot/rich_text" %}
+          {% module_attribute "html" %}
+            <h3>Centered Heading</h3>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row %}
+        {% dnd_module path="../modules/centered-heading" %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row %}
+        {% dnd_module path="../modules/centered-heading" headingSub="" %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {# Button #}
+
+      {% dnd_row
+        margin={
+          "top": 35
+        }
+      %}
+        {% dnd_module path="@hubspot/rich_text" %}
+          {% module_attribute "html" %}
+            <h3>Buttons</h3>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row padding={top: "1em", bottom: "1em"} %}
+        {% dnd_module path="../modules/primary-button" color="primary" %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row padding={top: "1em", bottom: "1em"} %}
+        {% dnd_module path="../modules/primary-button" color="secondary" %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row padding={top: "1em", bottom: "1em"} %}
+        {% dnd_module path="../modules/primary-button" color="tertiary" %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row padding={top: "1em", bottom: "1em"} %}
+        {% dnd_module path="../modules/primary-button" color="secondary_round" %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {# Colored Notif #}
+
+      {% dnd_row
+        margin={
+          "top": 35
+        }
+      %}
+        {% dnd_module path="@hubspot/rich_text" %}
+          {% module_attribute "html" %}
+            <h3>Colored Message</h3>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row %}
+        {% dnd_module path="../modules/colored-message" %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row %}
+        {% dnd_module path="../modules/colored-message" color="blueberry" icon="info" %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row %}
+        {% dnd_module path="../modules/colored-message" color="cherry" icon="danger" %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row %}
+        {% dnd_module path="../modules/colored-message" color="mango" icon="warning" %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row %}
+        {% dnd_module path="../modules/colored-message" color="mint" icon="success" %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {# Collapse Section #}
+
+      {% dnd_row
+        margin={
+          "top": 35
+        }
+      %}
+        {% dnd_module path="@hubspot/rich_text" %}
+          {% module_attribute "html" %}
+            <h3>Collapsible Section</h3>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row %}
+        {% dnd_module path="../modules/collapse-section" %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row %}
+        {% dnd_module path="../modules/collapse-section" color="gray" %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {# Product Content Block #}
+
+      {% dnd_row
+        margin={
+          "top": 35
+        }
+      %}
+        {% dnd_module path="@hubspot/rich_text" %}
+          {% module_attribute "html" %}
+            <h3>Product Content Block</h3>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row %}
+        {% dnd_module path="../modules/product-content-block" %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {# Tutorial Card #}
+
+      {% dnd_row
+        margin={
+          "top": 35
+        }
+      %}
+        {% dnd_module path="@hubspot/rich_text" %}
+          {% module_attribute "html" %}
+            <h3>Tutorial Card</h3>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row %}
+        {% dnd_module path="../modules/tutorial-card" %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {# Color Card #}
+
+      {% dnd_row
+        margin={
+          "top": 35
+        }
+      %}
+        {% dnd_module path="@hubspot/rich_text" %}
+          {% module_attribute "html" %}
+            <h3>Color Card</h3>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row %}
+        {% dnd_module path="../modules/color-card" %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {# Lesson Card #}
+
+      {% dnd_row
+        margin={
+          "top": 35
+        }
+      %}
+        {% dnd_module path="@hubspot/rich_text" %}
+          {% module_attribute "html" %}
+            <h3>Lesson Click Through Section</h3>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row %}
+        {% dnd_module path="../modules/lesson-cta" %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {# Card #}
+
+      {% dnd_row
+        margin={
+          "top": 35
+        }
+      %}
+        {% dnd_module path="@hubspot/rich_text" %}
+          {% module_attribute "html" %}
+            <h3>News Content Block</h3>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {# One column #}
+
+      {% dnd_row
+        padding={
+        "top": 35
+        }
+      %}
+        {% dnd_module path="../modules/news-content-block" %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {# Two column #}
+
+      {% dnd_row
+        padding={
+        "top": 35
+        }
+      %}
+        {% dnd_module path="../modules/news-content-block",
+          offset=0,
+          width=6
+        %}
+        {% end_dnd_module %}
+        {% dnd_module path="../modules/news-content-block",
+          offset=6,
+          width=6
+        %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {# Three column #}
+
+      {% dnd_row
+        padding={
+        "top": 35
+        }
+      %}
+        {% dnd_module path="../modules/news-content-block",
+          offset=0,
+          width=4
+        %}
+        {% end_dnd_module %}
+        {% dnd_module path="../modules/news-content-block",
+          offset=4,
+          width=4
+        %}
+        {% end_dnd_module %}
+        {% dnd_module path="../modules/news-content-block",
+          offset=8,
+          width=4
+        %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {# Resource card #}
+
+      {% dnd_row
+        margin={
+          "top": 35
+        }
+      %}
+        {% dnd_module path="@hubspot/rich_text" %}
+          {% module_attribute "html" %}
+            <h3>Resource card</h3>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {# One column #}
+
+      {% dnd_row
+        padding={
+        "top": 35
+        }
+      %}
+        {% dnd_module path="../modules/resource-card" %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {# Two column #}
+
+      {% dnd_row
+        padding={
+        "top": 35
+        }
+      %}
+        {% dnd_module path="../modules/resource-card",
+          offset=0,
+          width=6
+        %}
+        {% end_dnd_module %}
+        {% dnd_module path="../modules/resource-card",
+          offset=6,
+          width=6
+        %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {# Case Study Carousel card #}
+
+      {% dnd_row
+        margin={
+          "top": 35
+        }
+      %}
+        {% dnd_module path="@hubspot/rich_text" %}
+          {% module_attribute "html" %}
+            <h3>Case Study Carousel Card</h3>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {# One column #}
+
+      {% dnd_row
+        padding={
+        "top": 35
+        }
+      %}
+        {% dnd_module path="../modules/case-study-carousel-card" %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {# Two column #}
+
+      {% dnd_row
+        padding={
+        "top": 35
+        }
+      %}
+        {% dnd_module path="../modules/case-study-carousel-card",
+          offset=0,
+          width=6
+        %}
+        {% end_dnd_module %}
+        {% dnd_module path="../modules/case-study-carousel-card",
+          offset=6,
+          width=6,
+          number_of_brands="2"
+        %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {# Three column #}
+
+      {% dnd_row
+        padding={
+        "top": 35
+        }
+      %}
+        {% dnd_module path="../modules/case-study-carousel-card",
+          offset=0,
+          width=3
+        %}
+        {% end_dnd_module %}
+        {% dnd_module path="../modules/case-study-carousel-card",
+          offset=6,
+          width=3,
+          number_of_brands="2"
+        %}
+        {% end_dnd_module %}
+        {% dnd_module path="../modules/case-study-carousel-card",
+          offset=3,
+          width=3
+        %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+    {% end_dnd_column %}
+  {% end_dnd_section %}
+
+  {# Theme sections #}
+
+  {% dnd_section %}
+    {% dnd_column %}
+      {% dnd_row %}
+        {% dnd_module path="@hubspot/rich_text" %}
+          {% module_attribute "html" %}
+            <h2>Theme sections</h2>
+            <hr>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+    {% end_dnd_column %}
+  {% end_dnd_section %}
+
+  {# Hero #}
+
+  {% dnd_section
+    padding={
+      "top": 0,
+      "bottom": 0
+    },
+    margin={
+      "top": 35
+    }
+  %}
+    {% dnd_column %}
+      {% dnd_row %}
+        {% dnd_module path="@hubspot/rich_text" %}
+          {% module_attribute "html" %}
+            <h3>Hero</h3>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+    {% end_dnd_column %}
+  {% end_dnd_section %}
+
+  {% include_dnd_partial path="../sections/hero.html" %}
+
+  {# Free Trial #}
+
+  {% dnd_section
+    padding={
+      "top": 0,
+      "bottom": 0
+    },
+    margin={
+      "top": 35
+    }
+  %}
+    {% dnd_column %}
+      {% dnd_row %}
+        {% dnd_module path="@hubspot/rich_text" %}
+          {% module_attribute "html" %}
+            <h3>Free Trial Sign Up</h3>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+    {% end_dnd_column %}
+  {% end_dnd_section %}
+
+  {% include_dnd_partial path="../sections/free-trial-section.html" %}
+
+  {# More Resources #}
+
+  {% dnd_section
+    padding={
+      "top": 0,
+      "bottom": 0
+    },
+    margin={
+      "top": 35
+    }
+  %}
+    {% dnd_column %}
+      {% dnd_row %}
+        {% dnd_module path="@hubspot/rich_text" %}
+          {% module_attribute "html" %}
+            <h3>More Resources</h3>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+    {% end_dnd_column %}
+  {% end_dnd_section %}
+
+  {% include_dnd_partial path="../sections/more-resources-section.html" %}
+
+  {# News Block Section #}
+
+  {% dnd_section
+    padding={
+      "top": 0,
+      "bottom": 0
+    },
+    margin={
+      "top": 35
+    }
+  %}
+    {% dnd_column %}
+      {% dnd_row %}
+        {% dnd_module path="@hubspot/rich_text" %}
+          {% module_attribute "html" %}
+            <h3>News Block Section</h3>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+    {% end_dnd_column %}
+  {% end_dnd_section %}
+
+  {% include_dnd_partial path="../sections/news-block-section.html" %}
+
+  {# Case Study Carousel #}
+
+  {% dnd_section
+    padding={
+      "top": 0,
+      "bottom": 0
+    },
+    margin={
+      "top": 35
+    }
+  %}
+    {% dnd_column %}
+      {% dnd_row %}
+        {% dnd_module path="@hubspot/rich_text" %}
+          {% module_attribute "html" %}
+            <h3>Case Study Carousel</h3>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+    {% end_dnd_column %}
+  {% end_dnd_section %}
+
+  {% include_dnd_partial path="../sections/case-study-carousel.html" %}
+
+{% end_dnd_area %}
+{% endblock body %}

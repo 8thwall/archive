@@ -1,0 +1,37 @@
+---
+id: video-controls
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import VideoControlsTable from "../../../gen/tables/VideoControls.md"
+
+# VideoControls
+
+## Descripción
+
+Este componente permite a las entidades controlar la reproducción de vídeo en las texturas aplicadas a los materiales. Se añade automáticamente cuando se configura un vídeo a través del configurador de Studio. Si el vídeo se añade mediante programación, este componente debe añadirse manualmente para habilitar los controles de reproducción.
+
+## Propiedades
+
+<VideoControlsTable />
+
+## Funciones
+
+<ComponentFunctions
+    name="VideoControls"
+    properties={{
+        url: "./assets/video.mp4",
+        volume: 1,
+        loop: false,
+        paused: false,
+        speed: 1,
+        positional: false,
+        refDistance: 1,
+        distanceModel: "inverse",
+        rolloffFactor: 1,
+        maxDistance: 10000
+    }}
+    mutate={`cursor.volume = 0.5;
+    cursor.loop = true;
+    return false;`}
+/>

@@ -1,0 +1,26 @@
+---
+id: ring-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import RingGeometryTable from "../../../../gen/tables/RingGeometry.md"
+
+# RingGeometry
+
+## Descripción
+
+Este componente establece la geometría de una entidad.
+
+## Propiedades
+
+<RingGeometryTable />
+
+## Funciones
+
+<ComponentFunctions
+    name="RingGeometry"
+    properties={{ innerRadius: 1, outerRadius: 1 }}
+    mutate={`cursor.innerRadius += 0.5;
+    cursor.outerRadius += 1;
+    return false;`}
+/>

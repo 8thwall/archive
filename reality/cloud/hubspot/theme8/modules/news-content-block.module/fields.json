@@ -1,0 +1,77 @@
+[ {
+  "id" : "7d3b444d-a904-b7f9-d7dc-1d74b1851f0a",
+  "name" : "image",
+  "display_width" : null,
+  "label" : "Image",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "default" : {
+    "size_type" : "auto_custom_max",
+    "src" : "https://7255816.fs1.hubspotusercontent-na1.net/hubfs/7255816/pexels-engin-akyurt-1458867-1.jpg",
+    "alt" : "pexels-engin-akyurt-1458867-1",
+    "loading" : "lazy",
+    "width" : 3888,
+    "height" : 2592,
+    "max_width" : 2000,
+    "max_height" : 1333.3333333333333
+  }
+}, {
+  "id" : "ae8b7e19-a85e-73c9-a849-a80273eebc36",
+  "name" : "heading",
+  "display_width" : null,
+  "label" : "Heading",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text",
+  "default" : "Default News Heading"
+}, {
+  "id" : "4db77ede-f08c-a776-41aa-ae19b484e9ab",
+  "name" : "text",
+  "display_width" : null,
+  "label" : "Body Text",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text",
+  "default" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+}, {
+  "id" : "87c9da06-ce20-533b-3ca7-50dfbe683018",
+  "name" : "link_text",
+  "display_width" : null,
+  "label" : "Link Text",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text",
+  "default" : "Read more"
+}, {
+  "id" : "58cd13f2-0e22-c310-2718-d90c753136b4",
+  "name" : "link",
+  "display_width" : null,
+  "label" : "Link",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION", "PHONE_NUMBER", "WHATSAPP_NUMBER", "PAYMENT" ],
+  "show_advanced_rel_options" : false,
+  "type" : "link",
+  "default" : {
+    "url" : {
+      "content_id" : null,
+      "href" : "https://8thwall.com",
+      "type" : "EXTERNAL"
+    },
+    "open_in_new_tab" : false,
+    "no_follow" : false
+  }
+} ]

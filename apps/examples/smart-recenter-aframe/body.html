@@ -1,0 +1,22 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<div id="positionOut"></div>
+<div id="recenterOut"></div>
+<div id="recenterSmart">smart recenter</div>
+<div id="recenter">recenter origin</div>
+
+<a-scene
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  recenter="recenterDistance: 3; recenterHeight: 1; recenterFactor: 0.25"
+  treadmill
+  path-display
+  height-display
+  xrweb>
+
+  <a-camera id="camera" position="0 1 0"></a-camera>
+  <a-entity light="type: directional; intensity: 0.8;" position="1 4.3 2.5"></a-entity>
+  <a-light type="ambient" intensity="1"></a-light>
+  
+</a-scene>

@@ -1,0 +1,57 @@
+---
+id: requirements
+sidebar_position: 2
+---
+
+# Anforderungen
+
+## 8. Wand-Branding
+
+1. Der Standard-Eröffnungsbildschirm wird zu Beginn jedes Erlebnisses oder Spiels angezeigt, das mit der 8ten Wand erstellt wurde. Sie kann nicht angepasst werden.
+2. Alle Projekte müssen das [Powered by 8th Wall](https://8th.io/poweredby) Abzeichen auf der Ladeseite des Spiels oder Erlebnisses anzeigen.
+
+:::tip
+Um den Standard-Splash-Screen und das Powered by 8th Wall-Abzeichen aus Ihrem Projekt zu entfernen, erwerben Sie ein White Label-Abonnement über das Projekt-Dashboard. Weitere Einzelheiten zu White-Label-Abonnements finden Sie auf der [Preisseite](https://8thwall.com/pricing).
+:::
+
+| Standard-Splash-Screen                                                                                                                                                                                      | Ladebildschirm                                                                                         |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| <img width="300" alt="Splash Screen" src={require('/images/quickstart/splash-screen.png').default}/> <img width="300" alt="Loading Screen" src={require('/images/quickstart/loading-screen.png').default}/> | <img width="300" alt="Loading Screen" src={require('/images/quickstart/loading-screen.png').default}/> |
+
+## Browser-Anforderungen {#browser-requirements}
+
+:::info
+8th Wall Web-Erfahrungen müssen über **https** angezeigt werden. Dies wird von den Browsern für den **Kamera-Zugang** **erforderlich**.
+:::
+
+Mobile Browser benötigen die folgenden Funktionen, um 8th Wall Web-Erlebnisse zu unterstützen:
+
+- **WebGL** (canvas.getContext('webgl') || canvas.getContext('webgl2'))
+- **getUserMedia** (navigator.mediaDevices.getUserMedia - **nur erforderlich, wenn AR aktiviert ist**)
+- **Geräteausrichtung** (window.DeviceOrientationEvent - **nur erforderlich, wenn SLAM/VPS aktiviert ist**)
+- **Web-Assembly/WASM** (window.WebAssembly)
+
+Daraus ergibt sich die folgende Kompatibilität für iOS- und Android-Geräte:
+
+- iOS:
+  - **Safari** (iOS 11+)
+  - **Apps**, die **SFSafariViewController** Webansichten verwenden (iOS 13+)
+    - Apple hat in iOS 13 die Unterstützung von getUserMedia() zu SFSafariViewController hinzugefügt.  8th Wall funktioniert in iOS 13-Apps, die SFSafariViewController-Webansichten verwenden.
+    - Beispiele: Twitter, Slack, Discord, Gmail, Hangouts und mehr.
+  - **Apps/Browser**, die **WKWebView** Webansichten verwenden (iOS 14.3+)
+    - Beispiele:
+      - Chrom
+      - Firefox
+      - Microsoft Edge
+      - Facebook
+      - Facebook Messenger
+      - Instagram
+      - und mehr...
+- Android:
+  - **Browser**, von denen bekannt ist, dass sie die für WebAR erforderlichen Funktionen von Haus aus unterstützen:
+    - **Chrom**
+    - **Firefox**
+    - **Samsung Internet**
+    - **Microsoft Edge**
+  - **Anwendungen**, die Webansichten verwenden, von denen bekannt ist, dass sie die für WebAR erforderlichen Funktionen unterstützen:
+    - Twitter, WhatsApp, Slack, Gmail, Hangouts, Reddit, LinkedIn und mehr.

@@ -1,0 +1,37 @@
+---
+id: quaternion
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Quaternion
+
+## Description
+
+Ce composant contrôle la façon dont l'entité est tournée.
+
+## Propriétés
+
+| Propriété | Type   | Défaut  | Description  |
+| --------- | ------ | ------- | ------------ |
+| x         | nombre | 0       | Coordonnée x |
+| y         | nombre | 0       | coordonnée y |
+| z         | nombre | 0       | coordonnée z |
+| w         | nombre | 0       | coordonnée w |
+
+## Fonctions
+
+<ComponentFunctions
+    name="Quaternion"
+    properties={{
+        x: 0,
+        y: 0,
+        z: 0,
+        w: 0
+    }}
+    mutate={`cursor.x = 1;
+    cursor.y = 1;
+    cursor.z = 1;
+    cursor.w = 1;
+    return false;`}
+/>

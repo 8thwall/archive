@@ -1,0 +1,29 @@
+<!-- Copyright (c) 2021 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<p id="openValue"></p>
+
+<a-scene 
+  xrextras-almost-there
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="colorManagement: true;"
+  xrface="cameraDirection: front; mirroredDisplay: true; allowedDevices: any;">
+
+  <a-assets>
+    <a-asset-item id="cookieModel" src="./assets/cookie.glb"></a-asset-item>
+  </a-assets>
+
+  <a-camera position="0 1 2"></a-camera>
+  
+  <a-entity face-events></a-entity>
+
+  <xrextras-faceanchor>
+    
+    <xrextras-face-attachment point="upperLip">
+      <a-entity id="cookie" gltf-model="#cookieModel"></a-entity>
+    </xrextras-face-attachment>
+    
+  </xrextras-faceanchor>
+
+</a-scene>

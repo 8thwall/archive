@@ -1,0 +1,40 @@
+---
+id: shadow-material
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# ShadowMaterial
+
+## 商品説明
+
+このコンポーネントは、ジオメトリを持つエンティティに影のみをレンダリングするマテリアルを作成します。
+
+## プロパティ一覧
+
+| Property   | Type    | 初期値   | 商品説明                                                             |
+| ---------- | ------- | ------- | ------------------------------------------------------------------- |
+| r          | number  | 0       | 素材の赤チャンネルの値 [0...255]                                       |
+| g          | number  | 0       | 素材のグリーン・チャンネル値 [0...255]                                  |
+| b          | number  | 0       | 素材の青チャンネル値 [0...255]                                         |
+| opacity    | number  | 0       | 素材の全体的なアルファ値／透明度 [0...1]                                |
+| side       | string  | 'front' | 面のどの面をレンダリングするか。 フロント、バック、ダブルからお選びください。   |
+| depthTest  | boolean | true    | この素材をレンダリングする際に深さをテストするかどうか                     |
+| depthWrite | boolean | true    | この素材のレンダリングが深度バッファに影響を与えるかどうか                 |
+
+## 関数一覧
+
+<ComponentFunctions
+    name="ShadowMaterial"
+    properties={{
+        r: 0,
+        g: 0,
+        b: 0,
+        opacity: 0.5,
+    }}
+    mutate={`cursor.opacity = 0.5;
+    cursor.r = 128;
+    cursor.g = 128;
+    cursor.b = 128;
+    return false;`}
+/>

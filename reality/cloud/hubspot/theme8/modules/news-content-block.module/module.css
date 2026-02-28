@@ -1,0 +1,49 @@
+.newsBlockContainer {
+  max-width: 40em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  font-size: 16px;
+}
+
+.newsBlockImage {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.newsTextBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.newsTextBlock * {
+  margin: 0;
+}
+
+.newsHeading {
+  font-size: 1.25em;
+  font-weight: 700;
+}
+
+.newsBody {
+  font-size: 1.125em;
+}
+
+.newsLink {
+  color: #7611B6;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.newsLink:hover {
+  color: #408CBA;
+}
+
+@media screen and (max-width: 991px) {
+  .newsBlockContainer {
+    margin: 0 0 2em 0;
+  }
+}

@@ -1,0 +1,103 @@
+---
+id: ui
+description: >-
+  8th Wall Studio ofrece un sistema de interfaz de usuario integrado para crear
+  interfaces interactivas y fáciles de usar dentro de su experiencia.
+---
+
+# INTERFAZ DE USUARIO
+
+## Introducción
+
+{frontMatter.description} El componente de interfaz de usuario proporciona una variedad de bloques de construcción con propiedades configurables que van desde texto e imágenes hasta un diseño flexible y un estilo personalizable. 
+
+## Añadir elementos de interfaz de usuario
+
+Puede introducir elementos de interfaz de usuario a través de varios métodos:
+
+- **Nueva Primitiva:** Utilice la opción (+) en la Jerarquía para añadir preconfiguraciones.
+- **Agregar componente:** Adjuntar elementos de interfaz de usuario en una entidad existente.
+- **Scripting:** Añadir elementos mediante programación utilizando la API.
+
+![add-ui-elements.png](/images/studio/ui-add.png)
+
+:::note
+Las opciones de menú (+) son todas preconfiguraciones del mismo componente de interfaz de usuario y pueden configurarse de la misma manera mediante el inspector de interfaz de usuario.
+:::
+
+### IU 3D
+
+Los elementos de interfaz de usuario 3D se integran a la perfección en la escena 3D, lo que permite una visualización espacial interactiva. Pueden posicionarse en el mundo con el inspector de transformaciones y requieren una anchura y una altura en píxeles de mundo (1/100 de una unidad de mundo), por ejemplo `'500'`. La posición de un elemento UI hijo está totalmente determinada por las propiedades de diseño de éste y de su padre.
+
+![ui-3d](/images/studio/ui-3d.png)
+
+### Interfaz de usuario superpuesta
+
+Para la interfaz de usuario anclada a la pantalla, los elementos superpuestos ofrecen un posicionamiento fijo sobre el lienzo. El tamaño y la posición pueden especificarse en píxeles de visualización (por ejemplo, `'125'`) o porcentajes (por ejemplo, `'30%'`). El traspaso de los elementos de interfaz de usuario superpuestos de nivel superior sólo sirve para organizarlos en la ventana gráfica; su posición en la pantalla se controla con `position: 'absolute'`. Al igual que en 3D, los elementos hijos se posicionan con respecto a su padre.
+
+![ui-overlay](/images/studio/ui-overlay.png)
+
+## Propiedades
+
+El componente UI viene con muchas propiedades configurables. En el inspector de la ventana gráfica, están agrupados por categorías y no siempre son visibles. Para añadir una sección, haga clic en el menú desplegable "Seleccionar propiedad" situado en la parte inferior del configurador. Para obtener la lista completa de propiedades individuales que pueden especificarse en tiempo de ejecución en el código, consulte la [Documentación de la API `Ui`](/api/studio/ecs/ui/).
+
+### Diseño
+
+Utilice el configurador de diseño para controlar la posición de los elementos secundarios. Las distintas propiedades de alineación permiten crear menús dinámicos capaces de adaptarse a los cambios de contenido y tamaño de pantalla. El orden en que aparecerán los hijos viene determinado por su orden en la jerarquía. Los hijos de la interfaz de usuario que se establezcan en "Posición absoluta" se fijarán en relación con el padre, ignorando su configuración de diseño.
+
+![ui-layout](/images/studio/ui-layout.gif)
+
+### Texto
+
+Se puede añadir texto a cualquier elemento de la interfaz de usuario. La sección de texto permite configurar el contenido, la fuente, el tamaño, el color y la alineación. El texto que supere la anchura del elemento se desplazará automáticamente a una nueva línea.
+
+![ui-text](/images/studio/ui-text.png)
+
+### Fondo y borde
+
+El estilo visual de un elemento de interfaz de usuario se controla mediante la sección Fondo y la sección Borde. Aquí pueden configurarse los colores y la transparencia, y puede aplicarse una imagen desde una URL web o desde los activos del proyecto.
+
+![ui-background-border](/images/studio/ui-background-border.png)
+
+## Interacción
+
+Puede crear botones funcionales utilizando un componente personalizado con un receptor de eventos. Los elementos de interfaz de usuario admiten eventos de clic/toque, así como estados hover. Consulte la [Documentación de la API de eventos de entrada](/api/studio/events/input/) para obtener una lista completa de los eventos admitidos y código de ejemplo. Funcionan con elementos de interfaz de usuario superpuestos y en 3D.
+
+Un clic sólo se disparará en el elemento situado más arriba en la posición del puntero. La estratificación está controlada por el orden jerárquico, de modo que los hermanos posteriores aparecen sobre los anteriores. Para un control más preciso, utilice la opción "Orden de apilamiento" en la parte superior del configurador para organizar grupos de elementos de interfaz de usuario en un orden personalizado.
+
+Active la propiedad "Ignorar Raycast" en los marcos decorativos, invisibles o de diseño de pantalla completa para evitar que bloqueen la entrada del usuario de elementos interactivos que puedan encontrarse debajo.
+
+![ui-interaction](/images/studio/ui-interaction.gif)
+
+## Fuentes
+
+### Fuentes predeterminadas
+
+Hay disponible una selección de fuentes incorporadas para su uso en cualquier proyecto de 8th Wall.
+
+<div class="font-preview">
+
+    #### Nunito
+    ![Nunito.png](/images/studio/fonts/Nunito.png)
+    #### Akidenz Grotesk
+    ![AkidenzGrotesk.png](/images/studio/fonts/AkidenzGrotesk.png)
+    #### Baskerville
+    ![Baskerville.png](/images/studio/fonts/Baskerville.png)
+    #### Futura ![Futura.png](/images/studio/fonts/Futura.png)
+    #### Gotham
+    ![Gotham.png](/images/studio/fonts/Gotham.png)
+    #### Helvetica
+    ![Helvetica.png](/images/studio/fonts/Helvetica.png)
+    #### Nanum Pen Script
+    ![NanumPenScript.png](/images/studio/fonts/NanumPenScript.png)
+    #### Press Start 2P
+    ![PressStart2P.png](/images/studio/fonts/PressStart2P.png)
+    #### Times
+    ![Times.png](/images/studio/fonts/Times.png)
+    #### Inconsolata
+    ![Inconsolata.png](/images/studio/fonts/Inconsolata.png)
+</div>
+
+### Fuentes personalizadas
+
+También puede cargar fuentes personalizadas mediante archivos TTF para utilizarlas en sus elementos de interfaz de usuario. Cargue archivos de fuentes en sus activos para que estén disponibles automáticamente para cualquier interfaz de usuario de su proyecto.

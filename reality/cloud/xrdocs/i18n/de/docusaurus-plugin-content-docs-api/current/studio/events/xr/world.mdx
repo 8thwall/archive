@@ -1,0 +1,25 @@
+---
+id: world
+sidebar_position: 4
+---
+
+import {EventExample} from '@site/src/components/event-example'
+
+# Weltweite Effekte Ereignisse
+
+## Veranstaltungen {#events}
+
+### REALITÄTS_VERFOLGUNG_STATUS
+
+Dieses Ereignis wird von World Effects ausgelöst, wenn der Motor startet und sich der Status oder der Grund der Verfolgung ändert.
+
+#### Eigenschaften {#properties}
+
+| Eigentum | Typ            | Beschreibung                               |
+| -------- | -------------- | ------------------------------------------ |
+| Status   | `Zeichenfolge` | Eine der Optionen `LIMITED` oder `NORMAL`. |
+| Grund    | `Zeichenfolge` | Eines von `INITIALIZING` oder `UNDEFINED`. |
+
+#### Beispiel
+
+<EventExample ns="ecs.events" event="REALITY_TRACKING_STATUS" target="world.events.globalId" callbackBody={`console.log('Tracking status: ', event.data.status)`} />

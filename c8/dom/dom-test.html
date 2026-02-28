@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Sample Page</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="This is a sample page">
+    <meta name="keywords" content="HTML, CSS, Sample">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #333;
+        }
+        @media (max-width: 700px) {
+            main {
+                margin: 0 auto;
+                width: auto;
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const extraParagraph = document.createElement('p')
+          extraParagraph.textContent = 'This paragraph was added using JavaScript.'
+          document.querySelector('main').appendChild(extraParagraph)
+          if (globalThis.testDOMContentLoaded) {
+            globalThis.testDOMContentLoaded()
+          }
+        })
+    </script>
+    <canvas id="canvas" width="100" height="200"> </canvas>
+</head>
+<body>
+    <!-- Header -->
+    <header style="background-color: #f8f9fa; padding: 10px;">
+        <h1>Welcome to My Sample Page</h1>
+    </header>
+    <!-- Main -->
+    <main style="margin: 15px;">
+        <p>This is a simple HTML page.<br>It's not example.com, but it's a good start!
+        <p>Feel free to explore HTML and add more elements to this page.
+    </main>
+    <!-- Footer -->
+    <footer style="background-color: #f8f9fa; padding: 10px;">
+        <p>Copyright &copy; 2022 My Sample Page</p>
+    </footer>
+</body>
+</html>

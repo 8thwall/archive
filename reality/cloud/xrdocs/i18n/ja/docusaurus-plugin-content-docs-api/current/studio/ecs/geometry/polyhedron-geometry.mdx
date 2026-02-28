@@ -1,0 +1,24 @@
+---
+id: polyhedron-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import PolyhedronGeometryTable from "../../../../gen/tables/PolyhedronGeometry.md"
+
+# 多面体幾何学
+
+## 説明
+
+このコンポーネントは、エンティティのジオメトリを確立する。
+
+## プロパティ
+
+<PolyhedronGeometryTable />
+
+## 機能
+
+<ComponentFunctions
+    name="PolyhedronGeometry"
+    properties={{ radius: 1 }}
+    mutate={`cursor.radius += 1;
+    return false;`}/>

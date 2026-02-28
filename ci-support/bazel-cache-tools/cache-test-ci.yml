@@ -1,0 +1,44 @@
+include:
+  - ci-support/util.yml
+
+.cache-test-ci:common:
+  stage: build
+  interruptible: true
+  before_script:
+    - !reference [.global, before_script]
+  script:
+    - bazel clean
+    - bazel build --build_event_text_file=$(pwd)/build_event_text_file_ci.txt  --execution_log_json_file=$(pwd)/execution_log_json_file_ci.txt  --execution_log_binary_file=$(pwd)/execution_log_binary_file_ci.log ${BUILD_OPTIONS}
+    # Hash object files in bazel-bin.
+    - find -L bazel-bin -type f | xargs -I% openssl dgst -md5 % > object_file_hashes_ci.txt
+    # Compress bazel-out and use -h to dereference symlinks.
+    - tar -czhf bazel_out_ci.tar.gz bazel-out/
+    - tar -czhf bazel_bin_ci.tar.gz bazel-bin/
+  after_script:
+    - !reference [.global, after_script]
+  artifacts:
+    paths:
+      - build_event_text_file_ci.txt
+      - execution_log_json_file_ci.txt
+      - execution_log_binary_file_ci.log
+      - object_file_hashes_ci.txt
+      - bazel_out_ci.tar.gz
+      - bazel_bin_ci.tar.gz
+    expire_in: 1 week
+    when: always
+
+ci-support:cache-test-ci:macos_m1:
+  extends: .cache-test-ci:common
+  tags:
+    - m1
+  rules:
+    - if: $CI_SUPPORT_TRIGGER == "cache_test_ci_trigger" && $CI_HOST_PLATFORM == "//bzl:osx_arm64"
+
+ci-support:cache-test-ci:macos_x86:
+  extends: .cache-test-ci:common
+  tags:
+    - intel
+  rules:
+    - if: $CI_SUPPORT_TRIGGER == "cache_test_ci_trigger" && $CI_HOST_PLATFORM == "//bzl:osx_x86_64"
+
+# TODO(paris): Add support for other platforms

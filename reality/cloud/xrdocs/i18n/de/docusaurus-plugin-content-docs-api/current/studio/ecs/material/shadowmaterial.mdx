@@ -1,0 +1,33 @@
+---
+id: shadow-material
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import ShadowMaterialTable from "../../../../gen/tables/ShadowMaterial.md"
+
+# SchattenMaterial
+
+## Beschreibung
+
+Diese Komponente erstellt ein Material, das nur Schatten auf ein Objekt mit Geometrie rendert.
+
+## Eigenschaften {#properties}
+
+<ShadowMaterialTable />
+
+## Funktionen
+
+<ComponentFunctions
+    name="ShadowMaterial"
+    properties={{
+        r: 0,
+        g: 0,
+        b: 0,
+        opacity: 0.5,
+    }}
+    mutate={`cursor.opacity = 0.5;
+    cursor.r = 128;
+    cursor.g = 128;
+    cursor.b = 128;
+    return false;`}
+/>

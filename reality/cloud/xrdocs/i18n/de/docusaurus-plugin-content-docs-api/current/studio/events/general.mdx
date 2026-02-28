@@ -1,0 +1,40 @@
+---
+id: general
+---
+
+import {EventExample} from '@site/src/components/event-example'
+
+# Allgemeine Ereignisse
+
+## Ereignisse
+
+### AKTIV_SPACE_CHANGE
+
+Wird bei [world.events.globalId](/api/studio/world/events/#properties) ausgegeben, wenn die Welt einen Space lädt (kein Versprechen, dass der Space geladen wird).
+
+#### Eigenschaft
+
+Keine.
+
+#### Beispiel
+
+<EventExample ns="ecs.events" event="ACTIVE_SPACE_CHANGE" target="world.events.globalId" hasPayload={false} callbackBody={`console.log('Active space change')`} />
+
+### ORT_GESPAWNT
+
+Wird auf der Karte eid und [world.events.globalId](/api/studio/world/events/#properties) ausgegeben, wenn eine VPS Location auf der Karte gespawnt wird.
+
+#### Eigenschaften
+
+| Eigentum | Typ    | Beschreibung                                                        |
+| -------- | ------ | ------------------------------------------------------------------- |
+| ID       | String | Der eindeutige Bezeichner für den Ort                               |
+| imageUrl | String | Das Standortbild                                                    |
+| Titel    | String | Der Titel des Standorts                                             |
+| lat      | nummer | Breitengrad des Standortes                                          |
+| lng      | nummer | Längengrad des Standortes                                           |
+| mapPoint | Eid    | Die gespawnte Map Point-Entität, unter der der Inhalt geparent wird |
+
+#### Beispiel (Global)
+
+<EventExample ns="ecs.events" event="LOCATION_SPAWNED" callbackBody={`console.log('Location spawned: ', event.data.lat, event.data.lng)`} />

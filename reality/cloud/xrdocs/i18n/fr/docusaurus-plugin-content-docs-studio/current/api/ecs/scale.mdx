@@ -1,0 +1,34 @@
+---
+id: scale
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Échelle
+
+## Description
+
+Ce composant contrôle la manière dont l'entité est mise à l'échelle.
+
+## Propriétés
+
+| Propriété | Type   | Défaut  | Description                            |
+| --------- | ------ | ------- | -------------------------------------- |
+| x         | nombre | 0       | Facteur d'échelle dans la direction X. |
+| y         | nombre | 0       | Facteur d'échelle dans la direction Y. |
+| z         | nombre | 0       | Facteur d'échelle dans la direction Z. |
+
+## Fonctions
+
+<ComponentFunctions
+    name="Scale"
+    properties={{
+        x: 0,
+        y: 0,
+        z: 0
+    }}
+    mutate={`cursor.x = 2;
+    cursor.y = 2;
+    cursor.z = 2;
+    return false;`}
+/>

@@ -1,0 +1,106 @@
+---
+id: local-hosting
+---
+
+# ローカル・ホスティング
+
+WebARプロジェクトを独自のWebサーバーでホストするには、**ProまたはEnterprise**プランが必要です。
+
+プロプランのご購入は、https://www.8thwall.com/docs/legacy/guides/account-settings/#purchase-plan をご覧ください。
+
+## はじめに {#getting-started}
+
+スタートガイドに従って、[8th Wall Github Repository](https://github.com/8thwall/web)からセルフホストされたサンプルプロジェクトをクローンしてください。
+
+ローカルで開発するには、Node.jsとnpmがインストールされている必要がある。 ローカルで開発するには、Node.jsとnpmがインストールされている必要がある。 Node.jsとnpmをまだインストールしていない場合は、[ここから入手](https://www.npmjs.com/get-npm)。 ローカルで開発するには、Node.jsとnpmがインストールされている必要がある。 Node.jsとnpmをまだインストールしていない場合は、[ここから入手](https://www.npmjs.com/get-npm)。
+
+1. 8th Wall Github Repository](https://github.com/8thwall/web)からソースコードをダウンロードし、`cd`を好きなサンプル（初心者はaframeを推奨）にコピーする。
+2. 8番目のWallコンソールで、`index.html`のアプリキーをあなたの[プロジェクト設定ページのアプリキー](https://www.8thwall.com/docs/legacy/guides/projects/project-settings/#app-key)に置き換えてください。
+3. デバイスの認証](https://www.8thwall.com/docs/web/#device-authorization)または[ドメインのホワイトリスト化](https://www.8thwall.com/docs/web/#connected-domains)（localhost/IPアドレス）により、デバイス上のアプリキーへのアクセスを許可します。
+4. http-server](https://github.com/http-party/http-server#readme) を使用して、ローカル・ネットワーク上のプロジェクト・ディレクトリを HTTPS で配信します。 Serve projects over HTTPS](https://www.8thwall.com/docs/legacy/guides/advanced-topics/local-hosting/#serve-projects-over-https) を参照してください。 Serve projects over HTTPS](https://www.8thwall.com/docs/legacy/guides/advanced-topics/local-hosting/#serve-projects-over-https) を参照してください。
+5. デバイスからサーバーに接続し、証明書の警告とカメラの許可を受け入れる。 デバイスからサーバーに接続し、証明書の警告とカメラの許可を受け入れる。 iOSでプロジェクトを見る](https://www.8thwall.com/docs/legacy/guides/advanced-topics/local-hosting/#view-project-on-ios)または[Androidでプロジェクトを見る](https://www.8thwall.com/docs/legacy/guides/advanced-topics/local-hosting/#view-project-on-android)を参照してください。
+
+## HTTPS でプロジェクトを配信 {#serve-projects-over-https}
+
+ブラウザがカメラにアクセスするにはHTTPS証明書が必要です。 プロジェクト・ディレクトリをHTTPSで提供するには、[http-server](https://github.com/http-party/http-server#readme)を使用します。 プロジェクト・ディレクトリをHTTPSで提供するには、[http-server](https://github.com/http-party/http-server#readme)を使用します。
+
+まず、[openssl](https://github.com/openssl/openssl) がインストールされ、key.pem と cert.pem ファイルがあることを確認する必要があります。 このコマンドで生成できる： このコマンドで生成できる：
+
+```
+openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem
+```
+
+コマンド入力後、いくつかの質問が表示されます。 コマンド入力後、いくつかの質問が表示されます。 OSのルート証明書ストアやブラウザに証明書をインストールして信頼させたい場合は、Common nameの値として127.0.0.1を使用する。
+
+これは証明鍵ペアを生成し、3650日間（約10年間）有効である。
+
+次に、SSLを有効にするために`-S`、証明書ファイルを`-C`で`http-server`を実行します：
+
+```
+npx http-server [project-path] -S -C cert.pem
+```
+
+例
+
+```sh
+npx http-server gettingstarted/aframe/ -S -C cert.pem
+```
+
+![ServeLocally](/images/serve-locally.jpg)
+
+**注意最初に表示されるIPアドレスは**127.0.0.1:8080\*\*（ループバック
+、別名 "localhost"）で、携帯電話はこのIPアドレスに直接接続することはできません。
+他のIPアドレスを使用してください。
+他のIPアドレスを使用してください。
+
+\*\*Windowsユーザー標準のコマンドプロンプトウィンドウ（cmd.exe）を使用してhttp-serverコマンドを実行します。 PowerShellからスクリプトを実行するとエラーが発生する場合があります。 PowerShellからスクリプトを実行するとエラーが発生する場合があります。
+
+詳しくは[http-server documentation](https://github.com/http-party/http-server#tlsssl)をご覧ください。
+
+## iOSでプロジェクトを見る {#view-project-on-ios}
+
+1. iOS 11+**で**Safariを開き、"Available on "URLのいずれかに接続する。 注：サファリはSSL証明書について
+   。 注：サファリはSSL証明書について
+   。
+
+**重要**：
+冒頭の "**https://**"と末尾の**ポート**番号の両方を含む、\*\*"Available on "URL全体をブラウザにコピーしてください。
+
+Example: `https://10.0.0.99:8080`
+
+2. このウェブサイトを見る」をクリックする：
+
+![iOSConnect1](/images/ios-connect-1.jpg)
+
+3. 詳細を表示」をクリックする：
+
+![iOSConnect2](/images/ios-connect-2.jpg)
+
+4. ウェブサイトを見る」をクリックする：
+
+![iOSConnect3](/images/ios-connect-3.jpg)
+
+5. 最後に、「許可」をクリックしてカメラの使用許可を与え、AR体験サンプルの閲覧を開始する：
+
+![iOSConnect4](/images/ios-connect-4.jpg)
+
+## Android でプロジェクトを見る {#view-project-on-android}
+
+1. Chrome**、Chrome-variant**（Samsungブラウザなど）または**Firefox**を開く。
+
+**重要**：
+冒頭の "**https://**"と末尾の**ポート**番号の両方を含む、\*\*"Available on "URL全体をブラウザにコピーしてください。
+
+Example: `https://10.0.0.99:8080`
+
+2. Chrome の例：  ブラウザは証明書が無効であることを訴えますが、`'ADVANCED'`をクリックするだけで続行できます：
+
+```mdx-code-block
+<img src={require('/images/android-connect-1.jpg').default} width='280px' alt='AndroidConnect1'/>
+```
+
+3. PROCEED TO ...」をクリックします。 (UNSAFE）」： (UNSAFE）」：
+
+```mdx-code-block
+<img src={require('/images/android-connect-2.jpg').default} width='280px' alt='AndroidConnect2'/>
+```

@@ -1,0 +1,10 @@
+{
+  "extends": "@docusaurus/tsconfig",
+  "compilerOptions": {
+    "noEmit": true,
+    "module": "commonjs",
+    "target": "es2020",
+    "moduleResolution": "node",
+    "baseUrl": "."
+  }
+}

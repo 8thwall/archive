@@ -1,0 +1,101 @@
+---
+id: ui
+description: 8th Wall Studioは、インタラクティブでユーザーフレンドリーなインターフェースを作成するためのUIシステムを内蔵しています。
+---
+
+# UI
+
+## はじめに
+
+{frontMatter.description} UIコンポーネントは、テキストや画像から柔軟なレイアウトやカスタマイズ可能なスタイリングまで、設定可能なプロパティを持つさまざまなビルディングブロックを提供します。 
+
+## UI要素の追加
+
+UI要素を導入するには、いくつかの方法がある：
+
+- \*\*プリセットを追加するには、階層内の(+)オプションを使用します。
+- **Add Component:** 既存のエンティティに UI 要素をアタッチします。
+- **スクリプティング:** APIを使用してプログラムで要素を追加します。
+
+![add-ui-elements.png](/images/studio/ui-add.png)
+
+:::note
+メニューの（＋）オプションはすべて同じUIコンポーネントのプリセットで、UIインスペクタを使って同じように設定できます。
+:::
+
+### 3D UI
+
+3D UIエレメントは3Dシーンにシームレスに統合され、空間的にインタラクティブな表示が可能になります。 これらはtransformインスペクタでワールド内に配置することができ、幅と高さをワールドピクセル（ワールド単位の100分の1）で指定する必要があります。 子UI要素の位置は、子UI要素とその親のレイアウト・プロパティによってすべて決定されます。
+
+![ui-3d](/images/studio/ui-3d.png)
+
+### オーバーレイUI
+
+スクリーンに固定されたUIでは、オーバーレイ要素はキャンバスの上に固定配置されます。 サイズと位置は表示ピクセル（例：`'125'`）またはパーセンテージ（例：`'30%'`）で指定できます。 トップレベルのオーバーレイUI要素のトランスフォームは、純粋にビューポート内の整理のためです。画面上の位置は、`position: 'absolute'`でコントロールします。 3Dと同様に、子要素は親要素に対して相対的に配置される。
+
+![ui-overlay](/images/studio/ui-overlay.png)
+
+## プロパティ
+
+UIコンポーネントには、設定可能なプロパティが多数用意されている。 ビューポートインスペクタでは、カテゴリーごとにグループ化されており、常に表示されているわけではありません。 セクションを追加するには、コンフィギュレーターの下部にある「Select Property」ドロップダウンをクリックします。 コードの実行時に指定できる個々のプロパティの完全なリストについては、[`Ui` API Documentation](/api/studio/ecs/ui/) を参照してください。
+
+### レイアウト
+
+レイアウト・コンフィギュレーターを使って、子要素の配置をコントロールします。 様々なアライメント・プロパティは、コンテンツやスクリーン・サイズの変化に対応できるダイナミックなメニューを可能にします。 子供たちが表示される順番は、階層における順番によって決定される。 Position Absolute（絶対位置）」に設定されたUIの子は、レイアウト構成を無視して親からの相対位置に固定されます。
+
+![ui-layout](/images/studio/ui-layout.gif)
+
+### Text
+
+テキストはどのUI要素にも追加できる。 テキストセクションでは、内容、フォント、サイズ、色、配置を設定できます。 要素の幅を超えるテキストは自動的に改行されます。
+
+![ui-text](/images/studio/ui-text.png)
+
+### 背景とボーダー
+
+UI要素の視覚的なスタイルは、BackgroundセクションとBorderセクションによって制御されます。 ここで色や透明度を設定し、ウェブURLやプロジェクトアセットから画像を適用することができる。
+
+![ui-background-border](/images/studio/ui-background-border.png)
+
+## 交流
+
+イベント・リスナー付きのカスタム・コンポーネントを使用して、機能的なボタンを作成できます。 UI要素は、クリック／タップ・イベントとホバー・ステートをサポートします。 サポートされるイベントの包括的なリストとサンプルコードについては、[Input Events API Documentation](/api/studio/events/input/)を参照してください。 これらはオーバーレイと3D UIエレメントで動作する。
+
+クリックは、ポインターの位置で一番上にある要素に対してのみ行われます。 レイヤリングは階層の順序によって制御され、後の兄弟が前の兄弟の上に現れる。 正確にコントロールするには、コンフィギュレーターの上部にある「Stacking Order」オプションを使用して、UIエレメントのグループをカスタムオーダーで並べます。
+
+装飾フレーム、インビジブルフレーム、フルスクリーンレイアウト専用フレームで「Ignore Raycast」プロパティを有効にすると、フレームの下にあるインタラクティブな要素へのユーザー入力がブロックされるのを防ぐことができます。
+
+![ui-interaction](/images/studio/ui-interaction.gif)
+
+## フォント
+
+### デフォルトフォント
+
+ビルトインフォントのセレクションは、どの8th Wallプロジェクトでも使用可能です。
+
+<div class="font-preview">
+    #### Nunito
+    ![Nunito.png](/images/studio/fonts/Nunito.png)
+    #### Akidenz Grotesk
+    ![AkidenzGrotesk.png](/images/studio/fonts/AkidenzGrotesk.png)
+    #### Baskerville
+    ![Baskerville.png](/images/studio/fonts/Baskerville.png)
+    #### Futura
+    ![Futura.png](/images/studio/fonts/Futura.png)
+    #### Gotham
+    ![Gotham.png](/images/studio/fonts/Gotham.png)
+    #### Helvetica
+    ！[Helvetica.png](/images/studio/fonts/Helvetica.png)
+    #### Nanum Pen Script
+    ![NanumPenScript.png](/images/studio/fonts/NanumPenScript.png)
+    #### Press Start 2P
+    ![PressStart2P.png](/images/studio/fonts/PressStart2P.png)
+    #### Times
+    ![Times.png](/images/studio/fonts/Times.png)
+    #### Inconsolata
+    ![Inconsolata.png](/images/studio/fonts/Inconsolata.png)
+</div>
+
+### カスタムフォント
+
+また、TTFファイルを介してカスタムフォントをアップロードし、UIエレメントで使用することもできます。 フォントファイルをアセットにアップロードして、プロジェクト内のあらゆるUIで自動的に利用できるようにしましょう。

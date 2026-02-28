@@ -1,0 +1,37 @@
+---
+id: Quaternion
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Quaternion
+
+## Beschreibung
+
+Diese Komponente steuert, wie das Objekt gedreht wird.
+
+## Eigenschaften
+
+| Eigenschaft | Typ    | Standard | Beschreibung  |
+| ----------- | ------ | -------- | ------------- |
+| x           | Nummer | 0        | x-Koordinate  |
+| y           | Nummer | 0        | y-Koordinate  |
+| z           | Nummer | 0        | z-Koordinate  |
+| w           | Nummer | 0        | w-Koordinate  |
+
+## Funktionen
+
+<ComponentFunctions
+    name="Quaternion"
+    properties={{
+        x: 0,
+        y: 0,
+        z: 0,
+        w: 0
+    }}
+    mutate={`cursor.x = 1;
+    cursor.y = 1;
+    cursor.z = 1;
+    cursor.w = 1;
+    return false;`}
+/>

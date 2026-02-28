@@ -1,0 +1,65 @@
+---
+id: component-functions
+description: >-
+  Les composants peuvent être ajoutés, modifiés et supprimés au moment de
+  l'exécution.
+sidebar_position: 45
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Fonctions des composants
+
+## Introduction
+
+{frontMatter.description} Les composants intégrés et les composants personnalisés utilisent la même interface pour gérer les données des composants.
+
+## Référencement d'un composant personnalisé
+
+L'exemple suivant montre comment partager une référence à un composant personnalisé entre différents fichiers de code.
+
+:::tip
+Veillez à exporter le composant **avant** d'essayer de l'importer ou de l'utiliser où que ce soit.
+:::
+
+```tsx title="/custom-component.ts"
+import * as ecs from '@8thwall/ecs'
+
+const CustomComponent = ecs.registerComponent({
+  ...
+})
+
+export {CustomComponent}
+```
+
+```tsx title="/another-component.ts"
+import * as ecs from '@8thwall/ecs'
+import {CustomComponent} from './custom-component'
+
+ecs.registerComponent({
+  name: 'Another Custom Component',
+  stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+    ecs.defineState('default')
+      .initial()
+      .onEnter(() => {
+        const entity = world.createEntity()
+
+        CustomComponent.set(world, entity, {
+          displayName: 'Jini'
+        })
+      })
+  },
+})
+```
+
+## Fonctions
+
+Les fonctions des composants permettent d'effectuer différentes actions sur un composant et ses données en relation avec une entité.
+
+<ComponentFunctions
+  name="CylinderGeometry"
+  properties={{ radius: 1, height: 1 }}
+  mutate={`cursor.radius += 1;
+   cursor.height *= 2;
+   return false;`}
+/>

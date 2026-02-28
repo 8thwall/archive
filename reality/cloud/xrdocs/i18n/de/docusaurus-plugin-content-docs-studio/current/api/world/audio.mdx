@@ -1,0 +1,84 @@
+---
+id: audio
+description: Diese Bibliothek enthält Funktionen für die Audiowiedergabe.
+---
+
+# Audio
+
+## Beschreibung
+
+{frontMatter.description}
+
+## Audio
+
+| Eigenschaft         | Typ     | Standard   | Beschreibung                                                                                                                                                                                                                                                                                                                             |
+| ------------------- | ------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| url (erforderlich)  | String  | ''         | Quelle URL                                                                                                                                                                                                                                                                                                                               |
+| Band                | Nummer  | 1          | Wie laut der Ton abgespielt werden soll. Ein Wert zwischen 0 und 1                                                                                                                                                                                                                                                                       |
+| Schleife            | boolean | false      | Ob der Ton nach Beendigung des Vorgangs neu gestartet wird                                                                                                                                                                                                                                                                               |
+| pausiert            | boolean | false      | Ob der Ton gerade pausiert wird                                                                                                                                                                                                                                                                                                          |
+| Stellplatz          | Nummer  | 1          | Der Faktor, der verwendet wird, um die Tonhöhe des Audios zu ändern. 1 ist die Standardeinstellung.                                                                                                                                                                                                                                      |
+| Standort            | boolean | false      | ob der Ton an einer bestimmten Stelle abgespielt wird                                                                                                                                                                                                                                                                                    |
+| refDistance         | Nummer  | 1          | **Wird nur angewandt, wenn positional true ist.** Der Wert, der angibt, ab welcher Entfernung die Lautstärke von dieser Quelle abnimmt, wenn sich der Zuhörer entfernt. Muss ein nicht-negativer Wert sein.                                                                                                                              |
+| distanceModel       | String  | Invers     | \*\*Der Algorithmus, der verwendet wird, um die Lautstärke mit zunehmender Entfernung zwischen dieser Audioquelle und dem Zuhörer zu reduzieren. Mögliche Werte sind "linear", "invers" und "exponentiell".                                                                                                                              |
+| rolloffFactor       | Nummer  | 1          | **Wird nur angewendet, wenn positional true ist.** Wie schnell die Lautstärke mit zunehmender Entfernung zwischen dieser Audioquelle und dem Zuhörer reduziert wird. Der zulässige Wertebereich ändert sich je nach distanceModel wie folgt: linear: 0 bis 1, invers: 0 bis Unendlich, exponentiell: 0 bis Unendlich                     |
+| maxDistance         | Nummer  | 10000      | **Wird nur angewandt, wenn positional wahr ist** und distanceModel gleich linear ist. Der maximale Abstand zwischen dieser Audioquelle und dem Zuhörer. Danach wird das Volumen nicht mehr reduziert. Muss ein positiver Wert sein.                                                                                                      |
+
+## Ton
+
+| Eigenschaft   | Typ                     | Beschreibung                                           |
+| ------------- | ----------------------- | ------------------------------------------------------ |
+| ID            | eid                     | Das Fest des Klangs.                                   |
+| audioNode     | Audio / LageAudio       | AudioNode                                              |
+| Element       | HTMLAudioElement        | Das HTML-Audio-Element.                                |
+| Controller    | AbortController         | Der Audio-AbortController.                             |
+| url           | String                  | Die Quell-URL                                          |
+| pausiert      | boolean                 | Ob der Ton angehalten ist oder gerade abgespielt wird. |
+
+## Eigenschaften
+
+| Eigenschaft | Typ                                                                   | Beschreibung                                                                                 |
+| ----------- | --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Hörer       | [AudioListener](https://threejs.org/docs/#api/en/audio/AudioListener) | Ein virtueller Hörer für alle positionalen und nicht-positionalen Audioeffekte in der Szene. |
+
+## Funktionen
+
+### stummschalten
+
+Ton der Szene stummschalten.
+
+```ts
+world.audio.mute() // -> void
+```
+
+### stummschalten
+
+Ton der Szene aufheben.
+
+```ts
+world.audio.unmute() // -> void
+```
+
+### pause
+
+Ton der Szene anhalten.
+
+```ts
+world.audio.pause() // -> void
+```
+
+### spielen
+
+Ton der Szene abspielen.
+
+```ts
+world.audio.play() // -> void
+```
+
+### setVolume
+
+Legen Sie die Lautstärke für den Ton der Szene fest. \*\*Der Parameter sollte einen Wert zwischen 0 und 1 haben.
+
+```ts
+world.audio.setVolume(newVolume: Zahl) // -> void
+```

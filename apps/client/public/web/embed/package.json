@@ -1,0 +1,33 @@
+{
+  "name": "@8thwall/embed8",
+  "version": "1.2.0",
+  "description": "Widget to embed AR experiences within your website. No app download required.",
+  "private": false,
+  "scripts": {
+    "test": "npm run build && open index.html",
+    "build": "webpack",
+    "deploy": "npm run build && cp dist/embed8.js ../cdn/share/embed8.js && ../cdn/upload -m embed8",
+    "clean": "rm -r dist/*",
+    "serve": "./node_modules/.bin/webpack-dev-server"
+  },
+  "keywords": [
+    "webar",
+    "ar",
+    "augmentedreality"
+  ],
+  "files": [
+    "dist/embed8.js",
+    "index.js"
+  ],
+  "author": "The 8th Wall Team",
+  "license": "MIT",
+  "devDependencies": {
+    "css-loader": "^2.0.1",
+    "html-loader": "^0.5.5",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.9.0"
+  }
+}

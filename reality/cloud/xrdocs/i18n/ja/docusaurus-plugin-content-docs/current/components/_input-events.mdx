@@ -1,0 +1,249 @@
+import {EventExample} from '@site/src/components/event-example'
+
+## 種類
+
+### ポジション
+
+| プロパティ    | タイプ    | 説明                                                 |
+| -------- | ------ | -------------------------------------------------- |
+| x        | 整数     | スクリーン上のx座標で、0から1の間で正規化される。                         |
+| y        | 整数     | スクリーン上のy座標で、0から1の間で正規化される。                         |
+
+### UIHoverEvent
+
+| プロパティ    | タイプ     | 説明                                                 |
+| -------- | ------- | -------------------------------------------------- |
+| x        | 整数      | スクリーン上のx座標で、0から1の間で正規化される。                         |
+| y        | 整数      | スクリーン上のy座標で、0から1の間で正規化される。                         |
+| targets  | eid[]   | ターゲット UI 要素                                        |
+
+### タッチイベント
+
+| プロパティ         | タイプ      | 説明                                                                                           |
+| ------------- | -------- | -------------------------------------------------------------------------------------------- |
+| pointerId     | 整数       | ブラウザが提供するポインタの一意なID。                                                                         |
+| position      | Position | 画面上のタッチされた位置座標を0から1の間で正規化したもの。                                                               |
+| worldPosition | Vector3  | touchedEventが当たった位置。 [SCREEN_TOUCH_START]でのみ使用可能です。                                          |
+| target        | eid      | 最初にオブジェクトに触れた場合                                                                              |
+| start         | Position | タッチイベントが画面上で開始された位置座標で、0から1の間で正規化される。                                                        |
+| change        | Position | 画面上の最後の変化からタッチが行われた位置座標で、0から1の間で正規化される。                                                      |
+
+### ジェスチャーイベント
+
+| プロパティ         | タイプ     | 説明                                                                   |
+| ------------- | ------- | -------------------------------------------------------------------- |
+| タッチカウント       | 整数      | ジェスチャーに貢献したポイントの数。                                                   |
+| 位置            | ポジション   | 画面上のタッチされた位置座標を0から1の間で正規化したもの。                                       |
+| 開始位置          | ポジション   | イベントが開始された位置座標で、0から1の間で正規化される。                                       |
+| 位置変更          | ポジション   | 0から1の間で正規化された、最後の変更以降の位置座標。                                          |
+| 広がり           | フロート    | 中心点からのポインター間の平均位置。                                                   |
+| スタート・スプレッド    | フロート    | 最初のスプレッドを開始した。                                                       |
+| スプレッド変更       | フロート    | 前回変更時からのスプレッドの値。                                                     |
+| ネクストタッチカウント   | 整数      | 結局、次のジェスチャーに関与するポインターの数                                              |
+
+### ゲームパッド・イベント
+
+| プロパティ         | タイプ                                                                  | 概要             |
+| ------------- | -------------------------------------------------------------------- | -------------- |
+| ゲームパッド        | [ゲームパッド](https://developer.mozilla.org/en-US/docs/Web/API/Gamepad)   | ゲームパッドオブジェクト   |
+
+## イベント
+
+### UI_CLICK
+
+同じUI要素に対してプレス(`UI_PRESSED`)とリリース(`UI_RELEASED`)の両方が発生した場合に発せられる。 このイベントは、完全なクリックまたはタップジェスチャを表します。 これは、両方のインタラクションが重なった要素にディスパッチされ、通常、ボタンの有効化やアクションのトリガーなど、ユーザーの意図を確認するために使用される。
+このイベントは、開始(押された)と終了(リリースされた)eidの共通の祖先の最下位に発送されます。 マウスの動きはクリックイベントには影響しません。
+
+イベントのペイロードは `Position` 型である。
+
+#### 例
+
+<EventExample
+  ns="ecs.input"
+  event="UI_CLICK"
+  callbackBody={`console.log('UI click: ', event.data.x, event.data.y)`}
+/>
+
+### UI_PRESSED
+
+ユーザーがUIエレメント上でタッチまたはポインターを下に動かすインタラクションを開始したときに発せられる。 直接押された要素にのみディスパッチされ、親要素にはバブルしない。 このイベントは、ユーザー入力の開始時に即時の視覚的フィードバックやインタラクション状態（ボタンのハイライトやアニメーションなど）をトリガーするのに便利です。
+
+イベントのペイロードは `TouchEvent` 型である。
+
+#### 例
+
+<EventExample
+  ns="ecs.input"
+  event="UI_PRESSED"
+  callbackBody={`console.log('UI pressed: ', event.data.position)`}
+/>
+
+### UI_RELEASED
+
+UI_PRESSED\`の後にポインタがリフトされたときに発せられる。 UI_PRESSEDの後にポインタがリフトされたときに発せられる。 ポインタが解放された場所に関係なく、常に最初に押されたのと同じUI要素にディスパッチされる。 これにより開発者は、ポインタが元のターゲットから離れたとしても、プレス操作の完了に反応することができる。 これにより開発者は、ポインタが元のターゲットから離れたとしても、プレス操作の完了に反応することができる。
+
+イベントのペイロードは `TouchEvent` 型である。
+
+#### 例
+
+<EventExample
+  ns="ecs.input"
+  event="UI_RELEASED"
+  callbackBody={`console.log('UI released: ', event.data.position)`}
+/>
+
+### UI_HOVER_START
+
+マウスが UI 要素の上にマウスポインターを合わせ始めたときに発生します。
+
+イベントのペイロードは `HoverEvent` 型である。
+
+#### 例
+
+<EventExample
+  ns="ecs.input"
+  event="UI_HOVER_START"
+  callbackBody={`console.log('UI hover start: ', event.data.x, event.data.y)`}
+/>
+
+### UI_HOVER_END
+
+マウスが UI 要素上にホバリングを停止した場合に発生します。
+
+イベントのペイロードは `HoverEvent` 型である。
+
+#### 例
+
+<EventExample
+  ns="ecs.input"
+  event="UI_HOVER_END"
+  callbackBody={`console.log('UI hover end: ', event.data.x, event.data.y)`}
+/>
+
+:::note
+
+- 複数のタッチポイントを同時にアクティブにすることができる。
+- 一度に1つのタッチジェスチャー（シングルまたはマルチタッチ）のみがアクティブとして認識されます。
+  :::
+  :::
+  :::
+
+:::info
+タッチイベントにターゲットがある場合、そのターゲット上で発せられ、親要素に伝搬し、最終的にはグローバルレベルにまで伝搬する。 つまり、親オブジェクトのタッチリスナーは、そのすべての子エレメントからのイベントを捕捉することになる。
+:::
+
+### スクリーン・タッチ・スタート
+
+ユーザーが最初にスクリーンまたはターゲット・オブジェクトをタッチまたはクリックしたときに発する。
+
+イベントのペイロードは `TouchEvent` 型である。
+
+#### 例
+
+<EventExample
+  ns="ecs.input"
+  event="SCREEN_TOUCH_START"
+  callbackBody={`console.log('Screen touch start: ', event.data.position)`}
+/>
+
+### スクリーン_タッチ_移動
+
+イベントのペイロードは `TouchEvent` 型である。
+
+ユーザーが画面上でクリックしたり、ドラッグしたり、指を動かしたりしたときに発する。
+
+#### 例
+
+<EventExample
+  ns="ecs.input"
+  event="SCREEN_TOUCH_MOVE"
+  callbackBody={`console.log('Screen touch move: ', event.data.position)`}
+/>
+
+### スクリーン_タッチ_終了
+
+ユーザーがクリックを止めたり、画面から指を離したりしたときに発する。
+
+イベントのペイロードは `TouchEvent` 型である。
+
+#### 例
+
+<EventExample
+  ns="ecs.input"
+  event="SCREEN_TOUCH_END"
+  callbackBody={`console.log('Screen touch end: ', event.data.position)`}
+/>
+
+:::info
+ジェスチャー・イベントは、ユーザーが携帯電話の画面上で「ジェスチャー」をしたときに発せられる。 ジェスチャーとは、複数の指を必要とする動作のこと。 ジェスチャー・イベントは、ユーザーが携帯電話の画面上で「ジェスチャー」をしたときに発せられる。 ジェスチャーとは、複数の指を必要とする動作のこと。 ユーザーが "ズーム "アクション（2本の指が互いに離れていく）で開始し、スクリーンにもう1本指を加えた場合、"ズーム "ジェスチャーは終了し、3本の指で新しいジェスチャーが開始されます。
+:::
+
+### GESTURE_START
+
+ユーザーがクリックを止めたり、画面から指を離したりしたときに発する。
+
+イベントのペイロードは `GestureEvent` 型である。
+
+#### 例
+
+<EventExample
+  ns="ecs.input"
+  event="GESTURE_START"
+  callbackBody={`console.log('Gesture start: ', event.data.touchCount, event.data.position)`}
+/>
+
+### GESTURE_MOVE
+
+ユーザーが画面上で指を動かしたときに発する。
+
+イベントのペイロードは `GestureEvent` 型である。
+
+#### 例
+
+<EventExample
+  ns="ecs.input"
+  event="GESTURE_MOVE"
+  callbackBody={`console.log('Gesture move: ', event.data.touchCount, event.data.position)`}
+/>
+
+### GESTURE_END
+
+以前のジェスチャーチェックから指の本数が変わったときに発する。
+
+イベントのペイロードは `GestureEvent` 型である。
+
+#### 例
+
+<EventExample
+  ns="ecs.input"
+  event="GESTURE_END"
+  callbackBody={`console.log('Gesture end: ', event.data.touchCount, event.data.position)`}
+/>
+
+### ゲームパッド接続
+
+ゲームパッドがデバイスに接続されているときに発する。
+
+イベントのペイロードは `GamepadEvent` 型である。
+
+#### 例
+
+<EventExample
+  ns="ecs.input"
+  event="GAMEPAD_CONNECTED"
+  callbackBody={`console.log('Gamepad connected: ', event.data.gamepad)`}
+/>
+
+### ゲームパッド切断
+
+ゲームパッドがデバイスから切り離されたときに発する。
+
+イベントのペイロードは `GamepadEvent` 型である。
+
+#### 例
+
+<EventExample
+  ns="ecs.input"
+  event="GAMEPAD_DISCONNECTED"
+  callbackBody={`console.log('Gamepad disconnected: ', event.data.gamepad)`}
+/>

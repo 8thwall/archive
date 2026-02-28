@@ -1,0 +1,40 @@
+---
+id: shadow-material
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Matériau d'ombre
+
+## Description
+
+Ce composant crée un matériau, qui ne rend que les ombres, sur une entité avec une géométrie.
+
+## Propriétés
+
+| Propriété           | Type                  | Défaut  | Description                                                                                                |
+| ------------------- | --------------------- | ------- | ---------------------------------------------------------------------------------------------------------- |
+| r                   | nombre                | 0       | Valeur du canal rouge du matériau [0...255]                                                                |
+| g                   | nombre                | 0       | Valeur du canal vert du matériau [0...255]                                                                 |
+| b                   | nombre                | 0       | Valeur du canal bleu du matériau [0...255]                                                                 |
+| opacité             | nombre                | 0       | alpha/transparence globale du matériau [0...1]                                                             |
+| côté                | chaîne de caractères  | front". | Quels côtés des faces seront rendus. Choisissez entre le recto, le verso ou le double.                     |
+| test de profondeur  | booléen               | vrai    | Test de profondeur ou non lors du rendu de ce matériau                                                     |
+| depthWrite          | booléen               | vrai    | La question de savoir si le rendu de ce matériau a un impact sur le tampon de profondeur                   |
+
+## Fonctions
+
+<ComponentFunctions
+    name="ShadowMaterial"
+    properties={{
+        r: 0,
+        g: 0,
+        b: 0,
+        opacity: 0.5,
+    }}
+    mutate={`cursor.opacity = 0.5 ;
+    cursor.r = 128 ;
+    cursor.g = 128 ;
+    cursor.b = 128 ;
+    return false;`}
+/>

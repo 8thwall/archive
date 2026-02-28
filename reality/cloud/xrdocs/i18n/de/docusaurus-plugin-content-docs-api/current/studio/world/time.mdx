@@ -1,0 +1,54 @@
+---
+id: time
+description: Diese Bibliothek enthält Eigenschaften und Funktionen für die Zeitverwaltung.
+---
+
+# Zeit
+
+## Beschreibung
+
+{frontMatter.description}
+
+## Eigenschaften
+
+### welt.zeit.verstrichen
+
+Die Anzahl der Millisekunden, die die Welt gelaufen ist, ohne die Zeit, in der die Welt pausiert war.
+
+### welt.zeit.delta
+
+Die Anzahl der Millisekunden seit dem vorherigen Frame, ohne Zeitsprünge aufgrund von Pausen.
+
+### welt.zeit.absolut
+
+Die Anzahl der Millisekunden, die seit der Erstellung der Welt verstrichen sind.
+
+### world.time.absoluteDelta
+
+Die Anzahl der Millisekunden seit dem letzten Bild, einschließlich großer Zeitsprünge, wenn die Welt nach einer Unterbrechung fortgesetzt wird.
+
+## Funktionen
+
+### setTimeout
+
+Führt eine Funktion einmal nach einer bestimmten Verzögerung aus.
+
+```ts
+world.time.setTimeout(callback: function, delay: number) // -> Zeitüberschreitung
+```
+
+### clearTimeout
+
+Stoppt eine zuvor eingestellte Zeitüberschreitung oder ein Intervall und verhindert die Ausführung der angegebenen Funktion, wenn die Verzögerung noch nicht abgelaufen ist.
+
+```ts
+world.time.clearTimeout(timeout: Timeout) // -> void
+```
+
+### setIntervall
+
+Führt eine Funktion wiederholt in bestimmten Zeitabständen aus.
+
+```ts
+world.time.setInterval(callback: function, interval: number) // -> Intervall
+```

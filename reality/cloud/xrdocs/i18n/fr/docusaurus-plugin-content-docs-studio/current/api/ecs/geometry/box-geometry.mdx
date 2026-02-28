@@ -1,0 +1,29 @@
+---
+id: box-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# BoxGeometry
+
+## Description
+
+Ce composant établit la géométrie d'une entité.
+
+## Propriétés
+
+| Propriété     | Type   | Défaut  | Description                        |
+| ------------- | ------ | ------- | ---------------------------------- |
+| largeur       | nombre | 1       | Largeur des côtés sur l'axe X.     |
+| hauteur       | nombre | 1       | Hauteur des côtés sur l'axe Y.     |
+| profondeur    | nombre | 1       | Profondeur des côtés sur l'axe Z.  |
+
+## Fonctions
+
+<ComponentFunctions
+    name="BoxGeometry"
+    properties={{width: 1, height: 2, depth: 1}}
+    mutate={`cursor.width += 1;
+    cursor.height *= 2;
+    return false;`}
+/>

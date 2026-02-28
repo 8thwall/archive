@@ -1,0 +1,66 @@
+@use '../styles/brand-colors';
+@use '../styles/constants';
+
+.toolTip {
+  position: relative;
+  display: inline-block;
+}
+
+.toolTipText {
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: -.24px;
+  line-height: 1.429;
+  visibility: hidden;
+  width: 20rem;
+  background-color: brand-colors.$brand-black;
+  color: brand-colors.$white;
+  text-align: left;
+  border-radius: 6px;
+  padding: 17px 1rem;
+  position: absolute;
+  z-index: 1;
+  bottom: 124%;
+  margin-left: -10rem;
+  
+  /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.toolTip:hover .toolTipText {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* arrow at the bottom of the tooltip bubble */
+.toolTip::after {
+  content: " ";
+  position: absolute;
+  top: -24%; /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: brand-colors.$brand-black transparent transparent transparent;
+
+  /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+  visibility: hidden;
+  opacity: 0;
+}
+
+.toolTip:hover::after {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 1s;
+}
+
+@media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+  .toolTipText {
+    padding: 14px;
+    font-size: 14px;
+    width: 16rem;
+    margin-left: -4rem;
+  }
+}

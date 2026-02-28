@@ -1,0 +1,59 @@
+---
+id: collider
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import ColliderTable from "../../../gen/tables/Collider.md"
+
+# Collider
+
+## Beschreibung
+
+Diese Komponente erstellt einen Physik-Collider für eine Entität.
+
+## ColliderShape
+
+| Typ         | Beschreibung   |
+| ----------- | -------------- |
+| Box         | Box            |
+| Sphäre      | Sphäre         |
+| Flugzeug    | Flugzeug       |
+| Kapsel      | Kapsel         |
+| Kegel       | Kegel          |
+| Zylinder    | Zylinder       |
+
+## ColliderType
+
+| Typ         | Beschreibung                                                                                                                                                                                                                                                                           |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Statisch    | Gilt für ein Objekt, das sich bei der Simulation nicht bewegt und sich so verhält, als hätte es eine unendliche Masse                                                                                                                                                                  |
+| Dynamisch   | Gilt für ein vollständig simuliertes, reales Objekt, das von Kräften, Schwerkraft und Kollisionen betroffen ist.                                                                                                                                                                       |
+| Kinematisch | Gilt für ein Objekt, dessen Bewegung nicht von Kräften beeinflusst wird, sondern vollständig vom Benutzer programmatisch gesteuert wird. Im Gegensatz zu statischen Körpern können sich kinematische Körper bewegen und andere dynamische Körper durch Kollisionen beeinflussen.       |
+
+## Eigenschaften
+
+<ColliderTable />
+
+## Funktionen
+
+<ComponentFunctions
+    name="Collider"
+    properties={{
+        shape: 'ecs.ColliderShape.Sphere',
+        type: 'ecs.ColliderType.Static',
+        radius: 1,
+        mass: 0,
+        eventOnly: false,
+        gravityFactory: 1,
+        lockXAxis: false,
+        lockYAxis: false,
+        lockZAxis: false,
+        friction: 0.5,
+        restitution: 0,
+        linearDamping: 0,
+        angularDamping: 0,
+    }}
+    mutate={`cursor.mass = 5;
+    cursor.friction = 0.8;
+    return false;`}
+/>

@@ -1,0 +1,52 @@
+---
+id: camera
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Cámara
+
+## Descripción
+
+This component allows the user to view the world through the entity.
+
+## Propiedades
+
+### World Effects
+
+| Propiedad | Tipo   | Por defecto      | Descripción                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| --------- | ------ | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| escala    | string | 'receptivo'      | Either 'responsive' or 'absolute'. responsive will return values so that the camera on frame 1 is at the origin defined via [XR8.XrController.updateCameraProjectionMatrix()](https://www.8thwall.com/docs/api/xrcontroller/updatecameraprojectionmatrix/). absolute will return the camera, image targets, etc in meters. When using absolute the x-position, z-position, and rotation of the starting pose will respect the parameters set in [XR8.XrController.updateCameraProjectionMatrix()](https://www.8thwall.com/docs/api/xrcontroller/updatecameraprojectionmatrix/) once scale has been estimated. La posición y dependerá de la altura física de la cámara desde el plano del suelo. |
+
+### Face Effects
+
+| Propiedad      | Tipo    | Por defecto | Descripción                                                                                                                                            |
+| -------------- | ------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| nearClip       | number  | 0,1         | La distancia desde la cámara del plano de clip cercano, es decir, la distancia más cercana a la cámara a la que son visibles los objetos de la escena. |
+| farClip        | number  | 1000        | La distancia desde la cámara del plano del clip lejano, es decir, la distancia más lejana a la cámara a la que son visibles los objetos de la escena.  |
+| Face           | boolean | true        | Whether to show face mesh geometry.                                                                                                                    |
+| Eyes           | boolean | false       | Whether to show eye mesh geometry.                                                                                                                     |
+| Iris           | boolean | false       | Whether to show iris mesh geometry.                                                                                                                    |
+| Boca           | boolean | false       | Whether to show mouth mesh geometry.                                                                                                                   |
+| maxDetections  | number  | 1           | El número máximo de caras a detectar. Las opciones disponibles son 1, 2 ó 3.                                                                           |
+| enableEars     | boolean | false       | If true, runs ear detection simultaneously with Face Effects and returns ear attachment points.                                                        |
+
+## Funciones
+
+<ComponentFunctions
+    name="Camera"
+    properties={{
+        scale: "responsive",
+        nearClip: 0.1,
+        farClip: 1000,
+        Face: true,
+        Eyes: false,
+        Iris: false,
+        Mouth: false,
+        maxDetections: 1,
+        enableEars: false
+    }}
+    mutate={`cursor.scale = 'absolute';
+    cursor.nearClip = 0.5;
+    return false;`}
+/>

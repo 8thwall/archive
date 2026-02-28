@@ -1,0 +1,34 @@
+---
+id: scale
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Skala
+
+## Beschreibung
+
+Diese Komponente steuert, wie das Objekt skaliert wird.
+
+## Eigenschaften
+
+| Eigenschaft | Typ    | Standard | Beschreibung                        |
+| ----------- | ------ | -------- | ----------------------------------- |
+| x           | Nummer | 0        | Skalierungsfaktor in X-Richtung.    |
+| y           | Nummer | 0        | Skalierungsfaktor in Y-Richtung.    |
+| z           | Nummer | 0        | Skalierungsfaktor in Z-Richtung.    |
+
+## Funktionen
+
+<ComponentFunctions
+    name="Scale"
+    properties={{
+        x: 0,
+        y: 0,
+        z: 0
+    }}
+    mutate={`cursor.x = 2;
+    cursor.y = 2;
+    cursor.z = 2;
+    return false;`}
+/>

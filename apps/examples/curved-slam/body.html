@@ -1,0 +1,45 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<a-scene
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="colorManagement: true;"
+  xrweb>
+  
+  <a-assets>
+    <img id="logo" src="./assets/Media/scaredy-cat-stout.png">
+  </a-assets>
+
+  <a-camera position="0 1.5 0"></a-camera>
+
+  <a-light type="ambient" intensity="0.25"></a-light>
+
+  <xrextras-named-image-target id="bottle" name="scaredy-cat-stout">
+    <xrextras-curved-target-container pumpkin-spawn color="#FF9B00"></xrextras-curved-target-container>
+    <xrextras-target-mesh material="src: #logo; transparent: true;"></xrextras-target-mesh>
+    <a-sphere scale="0.25 0.25 0.25" material="shader: flat; color: #FFE000;"></a-sphere>
+  </xrextras-named-image-target>
+
+  <a-entity
+    light="
+      type: point;
+      intensity: 0.8;
+      castShadow: true;
+      shadowMapHeight:1024;
+      shadowMapWidth:1024;
+      color: #FF9B00"
+    xrextras-attach="target: bottle; offset: 0 1 0;"
+    shadow>
+  </a-entity>
+
+  <a-box
+    position="0 -0.5 0"
+    rotation="-90 0 0"
+    height="100"
+    width="100"
+    material="color: #000; transparent: true; opacity: 0.5; shader: shadow"
+    shadow>
+  </a-box>
+  
+</a-scene>

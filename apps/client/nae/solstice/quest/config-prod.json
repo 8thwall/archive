@@ -1,0 +1,16 @@
+{
+  "projectUrl": "https://www.intothescaniverse.com/",
+  "shell": "quest",
+  "android": {
+    "packageName": "com.the8thwall.intothescaniverse",
+    "minSdkVersion": 32,
+    "targetSdkVersion": 32,
+    "resourceDir": "res/",
+    "oculusSplashScreen": "res/mipmap-xxxhdpi/ic_launcher.png"
+  },
+  "appInfo": {
+    "workspace": "niantic",
+    "appName": "intothescaniverse",
+    "refHead": "production"
+  }
+}

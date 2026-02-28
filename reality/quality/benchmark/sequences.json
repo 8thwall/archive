@@ -1,0 +1,1370 @@
+{
+  "318-cambride-8-iphone-13-walk-left-right": {
+    "fps": 51.989
+  },
+  "318-cambride-8-iphone-13-wave-left-right": {
+    "fps": 48.061
+  },
+  "318-cambridge-1m-s21-1": {
+    "fps": 29.226
+  },
+  "318-cambridge-1m-s21-2": {
+    "fps": 29.241
+  },
+  "318-cambridge-8-foward-back": {
+    "fps": 60.017
+  },
+  "318-cambridge-8-right-left": {
+    "fps": 60.017
+  },
+  "318-cambridge-8-s10": {
+    "fps": 24.305
+  },
+  "318-cambridge-8-stationary": {
+    "fps": 60.017
+  },
+  "318-cambridge-back-lounge-1-iphone12-pro": {
+    "fps": 60.018
+  },
+  "318-cambridge-back-lounge-2-iphone12-pro": {
+    "fps": 59.978
+  },
+  "318-cambridge-back-lounge-3-iphone12-pro": {
+    "fps": 55.747
+  },
+  "318-cambridge-back-lounge-4-iphone12-pro": {
+    "fps": 60.006
+  },
+  "318-cambridge-back-lounge-5-iphone12-pro": {
+    "fps": 60.008
+  },
+  "318-cambridge-back-lounge-7-iphone12-pro": {
+    "fps": 60.0
+  },
+  "318-cambridge-back-lounge-8-iphone12-pro": {
+    "fps": 60.005
+  },
+  "318-cambridge-back-lounge-9-iphone12-pro": {
+    "fps": 60.002
+  },
+  "318-cambridge-back-lounge-foward-back": {
+    "fps": 59.554
+  },
+  "318-cambridge-back-lounge-foward-lookback": {
+    "fps": 60.018
+  },
+  "318-cambridge-back-lounge-right-foward": {
+    "fps": 59.489
+  },
+  "318-cambridge-ottoman-foward-back": {
+    "fps": 59.292
+  },
+  "318-cambridge-portal-hunt-foward-left-right": {
+    "fps": 60.017
+  },
+  "318-cambridge-portal-hunt-stationary": {
+    "fps": 59.62
+  },
+  "APPLE_IPHONE_7-amity-10.9x12.9-0.2835-0.7165-0-1-600": {
+    "fps": 57.654
+  },
+  "APPLE_IPHONE_7-saxjensen-21.0x9.3cm-0.0357-0.9643-0-1-600": {
+    "fps": 59.501
+  },
+  "OnePlus6T-dumelaBrew-15.3x10-0.1375-0.8625-600": {
+    "fps": 29.851
+  },
+  "android_js_issues1_log.1626472680020": {
+    "fps": 29.683
+  },
+  "android_js_issues2_log.1626472601432": {
+    "fps": 28.485
+  },
+  "android_js_issues3_log.1626472519735": {
+    "fps": 28.842
+  },
+  "cone-teaParty-dynamic.log": {
+    "fps": 29.916
+  },
+  "cone-teaParty-phone.log": {
+    "fps": 29.901
+  },
+  "cone-teaParty-stationary.log": {
+    "fps": 29.752
+  },
+  "cone-teaParty-zoomed.log": {
+    "fps": 29.61
+  },
+  "cylinder-19Crime-dynamic.log": {
+    "fps": 29.951
+  },
+  "cylinder-19Crime-phone.log": {
+    "fps": 29.951
+  },
+  "cylinder-19Crime-stationary.log": {
+    "fps": 30.001
+  },
+  "cylinder-19Crime-zoomed.log": {
+    "fps": 29.901
+  },
+  "desk-rotations-js-log.1624655683347": {
+    "fps": 33.971
+  },
+  "desk-swirl-js-log.1624655283667": {
+    "fps": 35.114
+  },
+  "desk_xrot_quick2_arkit_log.1625850865-1800": {
+    "fps": 59.931
+  },
+  "desk_xrot_quick_arkit_log.1625784682-1800": {
+    "fps": 59.931
+  },
+  "dino": {
+    "fps": 60.017
+  },
+  "diving-gear-1": {
+    "fps": 59.819
+  },
+  "erratic-movement-1-iphone-12": {
+    "fps": 59.729
+  },
+  "erratic-movement-2-iphone-12": {
+    "fps": 59.783
+  },
+  "erratic-movement-3-iphone-12": {
+    "fps": 57.636
+  },
+  "erratic-movement-4-iphone-12": {
+    "fps": 59.178
+  },
+  "erratic-movement-5-iphone-12": {
+    "fps": 59.784
+  },
+  "erratic-movement-6-iphone-12": {
+    "fps": 59.732
+  },
+  "fishtank-log.1605552152-900": {
+    "fps": 59.369
+  },
+  "fishtank-log.1605552175-900": {
+    "fps": 59.831
+  },
+  "fishtank-log.1605558356-900": {
+    "fps": 59.964
+  },
+  "fishtank-log.1605558379-1800": {
+    "fps": 59.897
+  },
+  "flower_vid1.log": {
+    "fps": 29.654
+  },
+  "flower_vid2.log": {
+    "fps": 29.654
+  },
+  "flower_vid3.log": {
+    "fps": 29.951
+  },
+  "flower_vidTop.log": {
+    "fps": 29.22
+  },
+  "jitter-inplace-iphone12pro": {
+    "fps": 57.655
+  },
+  "joel2_arkit_log.1626456096-1800": {
+    "fps": 59.931
+  },
+  "joel4_arkit_log.1626460936-1800": {
+    "fps": 59.931
+  },
+  "joel_arkit_log.1626460979-1800": {
+    "fps": 59.932
+  },
+  "level0-still-0.15-meter-iphone-12-pro": {
+    "fps": 39.266,
+    "scale": 0.15
+  },
+  "level0-still-1.0-meter-iphone-12-pro": {
+    "fps": 26.207,
+    "scale": 1.0
+  },
+  "level1-x-1.2-meter-iphone-12": {
+    "fps": 46.145,
+    "scale": 1.2
+  },
+  "level1-x-1.2-meter-sm-g991u": {
+    "fps": 29.735,
+    "scale": 1.2
+  },
+  "level1-y-1.2-meter-iphone-12": {
+    "fps": 46.37,
+    "scale": 1.2
+  },
+  "level1-y-1.2-meter-sm-g991u": {
+    "fps": 29.265,
+    "scale": 1.2
+  },
+  "level1-z-0.3-meter-iphone-11-pro": {
+    "fps": 53.002,
+    "scale": 0.3
+  },
+  "level1-z-0.3-meter-iphone-12": {
+    "fps": 43.165,
+    "scale": 0.3
+  },
+  "level1-z-0.3-meter-pixel-5": {
+    "fps": 29.943,
+    "scale": 0.3
+  },
+  "level1-z-0.3-meter-pixel-6-pro": {
+    "fps": 37.461,
+    "scale": 0.3
+  },
+  "level1-z-0.3-meter-samsung-s10": {
+    "fps": 29.379,
+    "scale": 0.3
+  },
+  "level1-z-0.3-meter-samsung-s21": {
+    "fps": 29.876,
+    "scale": 0.3
+  },
+  "level1-z-0.4-meter-note9": {
+    "fps": 28.706,
+    "scale": 0.4
+  },
+  "level1-z-0.7-meter-iphone-11-pro": {
+    "fps": 54.535,
+    "scale": 0.7
+  },
+  "level1-z-0.7-meter-iphone-12": {
+    "fps": 50.458,
+    "scale": 0.7
+  },
+  "level1-z-0.7-meter-pixel-6-pro": {
+    "fps": 29.834,
+    "scale": 0.7
+  },
+  "level1-z-0.7-meter-samsung-s21": {
+    "fps": 28.557,
+    "scale": 0.7
+  },
+  "level1-z-1-1.0-meter-motog3": {
+    "fps": 6.144,
+    "scale": 1.0
+  },
+  "level1-z-1.0-meter-asus-a002a": {
+    "fps": 26.399,
+    "scale": 1.0
+  },
+  "level1-z-1.0-meter-be2026": {
+    "fps": 12.743,
+    "scale": 1.0
+  },
+  "level1-z-1.0-meter-frd-l14": {
+    "fps": 18.966,
+    "scale": 1.0
+  },
+  "level1-z-1.0-meter-ipad-3": {
+    "fps": 17.723,
+    "scale": 1.0
+  },
+  "level1-z-1.0-meter-iphone-8-plus": {
+    "fps": 58.636,
+    "scale": 1.0
+  },
+  "level1-z-1.0-meter-le2115": {
+    "fps": 28.986,
+    "scale": 1.0
+  },
+  "level1-z-1.0-meter-pixel-2": {
+    "fps": 23.332,
+    "scale": 1.0
+  },
+  "level1-z-1.0-meter-pixel-2-xl": {
+    "fps": 30.041,
+    "scale": 1.0
+  },
+  "level1-z-1.0-meter-pixel-3": {
+    "fps": 25.291,
+    "scale": 1.0
+  },
+  "level1-z-1.0-meter-pixel-4-xl": {
+    "fps": 29.001,
+    "scale": 1.0
+  },
+  "level1-z-1.0-meter-pixel-5": {
+    "fps": 26.162,
+    "scale": 1.0
+  },
+  "level1-z-1.0-meter-pixel-6": {
+    "fps": 21.129,
+    "scale": 1.0
+  },
+  "level1-z-1.0-meter-pixel-6-pro": {
+    "fps": 16.945,
+    "scale": 1.0
+  },
+  "level1-z-1.0-meter-sm-g935t": {
+    "fps": 8.995,
+    "scale": 1.0
+  },
+  "level1-z-1.0-meter-sm-g965u1": {
+    "fps": 29.197,
+    "scale": 1.0
+  },
+  "level1-z-1.0-meter-sm-g975f": {
+    "fps": 27.304,
+    "scale": 1.0
+  },
+  "level1-z-1.0-meter-sm-g977u": {
+    "fps": 30.055,
+    "scale": 1.0
+  },
+  "level1-z-1.0-meter-sm-n950u1": {
+    "fps": 29.711,
+    "scale": 1.0
+  },
+  "level1-z-1.0-meter-sm-n960u": {
+    "fps": 29.954,
+    "scale": 1.0
+  },
+  "level1-z-1.0-meter-sm-n975u1": {
+    "fps": 28.42,
+    "scale": 1.0
+  },
+  "level1-z-1.2-meter-iphone-12": {
+    "fps": 44.53,
+    "scale": 1.2
+  },
+  "level1-z-1.2-meter-sm-g991u": {
+    "fps": 29.893,
+    "scale": 1.2
+  },
+  "level1-z-1.3-meter-iphone-11-pro": {
+    "fps": 53.468,
+    "scale": 1.3
+  },
+  "level1-z-1.3-meter-iphone-12": {
+    "fps": 45.215,
+    "scale": 1.3
+  },
+  "level1-z-1.3-meter-pixel-6-pro": {
+    "fps": 31.515,
+    "scale": 1.3
+  },
+  "level1-z-1.3-meter-samsung-s21": {
+    "fps": 29.953,
+    "scale": 1.3
+  },
+  "level1-z-2-1.0-meter-motog3": {
+    "fps": 6.868,
+    "scale": 1.0
+  },
+  "level2-xy-loop-1.2-meter-iphone-12": {
+    "fps": 44.417,
+    "scale": 1.2
+  },
+  "level2-xy-loop-1.2-meter-sm-g991u": {
+    "fps": 29.828,
+    "scale": 1.2
+  },
+  "level2-xyz-iphone-12-pro-0.2-meter": {
+    "fps": 55.794,
+    "scale": 0.2
+  },
+  "level2-xyz-iphone-12-pro-0.4-meter": {
+    "fps": 55.864,
+    "scale": 0.4
+  },
+  "level2-xyz-iphone-12-pro-0.6-meter": {
+    "fps": 55.392,
+    "scale": 0.6
+  },
+  "level2-xyz-iphone-12-pro-0.8-meter": {
+    "fps": 59.783,
+    "scale": 0.8
+  },
+  "level2-xyz-iphone-12-pro-1.0-meter": {
+    "fps": 59.67,
+    "scale": 1.0
+  },
+  "level2-xyz-iphone-12-pro-1.4-meter": {
+    "fps": 59.671,
+    "scale": 1.4
+  },
+  "level2-xyz-iphone-12-pro-1.8-meter": {
+    "fps": 59.33,
+    "scale": 1.8
+  },
+  "level2-xz-0.4-meter-note9": {
+    "fps": 28.49,
+    "scale": 0.4
+  },
+  "level2-xz-1.2-meter-iphone-12": {
+    "fps": 45.001,
+    "scale": 1.2
+  },
+  "level2-xz-1.2-meter-sm-g991u": {
+    "fps": 29.898,
+    "scale": 1.2
+  },
+  "level2-yz-loop-1.2-meter-iphone-12": {
+    "fps": 49.471,
+    "scale": 1.2
+  },
+  "level2-yz-loop-1.2-meter-sm-g991u": {
+    "fps": 30.07,
+    "scale": 1.2
+  },
+  "level4-x-0.8-meter-iphone-13": {
+    "fps": 60.071,
+    "scale": 0.8
+  },
+  "level4-x-1-1.0-meter-iphone-13": {
+    "fps": 60.08,
+    "scale": 1.0
+  },
+  "level4-x-2-1.0-meter-iphone-13": {
+    "fps": 60.064,
+    "scale": 1.0
+  },
+  "level4-x-rotation-0.4-meter-note9": {
+    "fps": 23.082,
+    "scale": 0.4
+  },
+  "level4-y-0.8-meter-iphone-13": {
+    "fps": 60.062,
+    "scale": 0.8
+  },
+  "level4-y-1.0-meter-iphone-13": {
+    "fps": 60.074,
+    "scale": 1.0
+  },
+  "level4-z-0.8-meter-iphone-13": {
+    "fps": 60.087,
+    "scale": 0.8
+  },
+  "log.1530230262-600-office-desk-high-rotation": {
+    "fps": 18.346
+  },
+  "log.1530230312-600-office-tour": {
+    "fps": 17.925
+  },
+  "log.1530230354-600-purple-8": {
+    "fps": 18.457
+  },
+  "log.1530230399-600-carpet-zoom": {
+    "fps": 18.234
+  },
+  "log.1530230652-600-purple-checkerboard": {
+    "fps": 18.533
+  },
+  "log.1530292365-600-desk-top-low-motion": {
+    "fps": 18.573
+  },
+  "log.1530810389-600-office-windows-translation": {
+    "fps": 18.571
+  },
+  "log.1530810444-600-office-wall-translation": {
+    "fps": 18.514
+  },
+  "log.1531178078-600-lobby-tour": {
+    "fps": 17.822
+  },
+  "log.1531178169-600-carpet-spin-zoom": {
+    "fps": 17.824
+  },
+  "log.1531179601-600-cluttered-desk": {
+    "fps": 17.983
+  },
+  "log.1531181272-600-cluttered-desk-rotation": {
+    "fps": 18.049
+  },
+  "log.1531181325-600-carpet-y-translation": {
+    "fps": 18.088
+  },
+  "log.1531181380-600-table-top": {
+    "fps": 18.59
+  },
+  "log.1531181428-600-office-back-and-forth": {
+    "fps": 18.179
+  },
+  "log.1531181475-600-office-window-translation-slow": {
+    "fps": 18.478
+  },
+  "log.1531181533-600-office-wall-translation-slow": {
+    "fps": 17.872
+  },
+  "log.1531181584-600-ottoman-sofa": {
+    "fps": 18.069
+  },
+  "log.1531181629-600-ottoman-zoom": {
+    "fps": 18.67
+  },
+  "log.1531181681-600-office-low-to-ground": {
+    "fps": 18.327
+  },
+  "log.1531181735-600-office-xy-translation": {
+    "fps": 18.269
+  },
+  "log.1531181782-600-office-xyz-translation": {
+    "fps": 17.887
+  },
+  "log.1531182340-600-calave-walking": {
+    "fps": 18.23
+  },
+  "log.1531182392-600-tunnel-entrance": {
+    "fps": 17.928
+  },
+  "log.1531182433-600-tunnel-exit": {
+    "fps": 18.12
+  },
+  "log.1531182479-600-sidewalk-walking": {
+    "fps": 18.341
+  },
+  "log.1531186972-600-park-walking": {
+    "fps": 18.175
+  },
+  "log.1531187027-600-park-trees-playground": {
+    "fps": 18.065
+  },
+  "log.1531187096-600-field-trees": {
+    "fps": 18.398
+  },
+  "log.1531187246-600-field-grass": {
+    "fps": 18.379
+  },
+  "log.1531187332-600-fence-corridor": {
+    "fps": 17.903
+  },
+  "log.1531187489-600-bleacher-benches": {
+    "fps": 18.398
+  },
+  "log.1595633633-600": {
+    "fps": 59.514
+  },
+  "log.1595633669-600": {
+    "fps": 59.657
+  },
+  "log.1595633790-600": {
+    "fps": 59.514
+  },
+  "log.1595633980-600": {
+    "fps": 60.093
+  },
+  "log.1595634056-600": {
+    "fps": 60.072
+  },
+  "log.1595634317-600": {
+    "fps": 60.116
+  },
+  "log.1595634409-600": {
+    "fps": 59.514
+  },
+  "log.1595634445-600": {
+    "fps": 60.116
+  },
+  "log.1595634573-600": {
+    "fps": 59.514
+  },
+  "log.1595634620-600": {
+    "fps": 59.516
+  },
+  "log.1595974354-600": {
+    "fps": 29.95
+  },
+  "log.1595974731-600": {
+    "fps": 29.859
+  },
+  "log.1596052403-600": {
+    "fps": 29.797
+  },
+  "log.1596485433-600": {
+    "fps": 29.95
+  },
+  "log.1598563312-600": {
+    "fps": 60.018
+  },
+  "log.1598563413-600": {
+    "fps": 60.019
+  },
+  "log.1598563457-600": {
+    "fps": 60.018
+  },
+  "log.1598563480-600": {
+    "fps": 60.018
+  },
+  "log.1598563583-600": {
+    "fps": 60.019
+  },
+  "log.1599836944-600": {
+    "fps": 59.918
+  },
+  "log.1599836981-600": {
+    "fps": 60.018
+  },
+  "log.1599836996-600": {
+    "fps": 60.018
+  },
+  "log.1599837028-600": {
+    "fps": 60.018
+  },
+  "log.1599837046-600": {
+    "fps": 60.018
+  },
+  "log.1599837072-600": {
+    "fps": 60.018
+  },
+  "log.1599837095-600": {
+    "fps": 60.018
+  },
+  "log.1600118186-1800": {
+    "fps": 59.012
+  },
+  "log.1600118283-1800": {
+    "fps": 59.012
+  },
+  "log.1600118328-1800": {
+    "fps": 57.441
+  },
+  "log.1600185604-600": {
+    "fps": 60.018
+  },
+  "log.1600185621-600": {
+    "fps": 60.018
+  },
+  "log.1600196466-600": {
+    "fps": 60.018
+  },
+  "log.1600196479-600": {
+    "fps": 60.018
+  },
+  "log.1600196494-600": {
+    "fps": 60.018
+  },
+  "log.1600196511-600": {
+    "fps": 60.018
+  },
+  "log.1605128342-1800": {
+    "fps": 29.901
+  },
+  "log.1605134833-900": {
+    "fps": 59.435
+  },
+  "log.1605134858-1800": {
+    "fps": 59.93
+  },
+  "log.1619225490-1800_azure_sidewalk1_arkit": {
+    "fps": 59.976
+  },
+  "log.1619225722-1800_architecture_good": {
+    "fps": 60.009
+  },
+  "log.1619226013-1800_azure_sidewalk2_arkit": {
+    "fps": 60.01
+  },
+  "log.1619226432-1800_grocery_arkit": {
+    "fps": 59.976
+  },
+  "log.1619226869-1800_garage1_arkit": {
+    "fps": 59.976
+  },
+  "log.1619226917-1800_garage2_arkit": {
+    "fps": 59.976
+  },
+  "log.1619469690-1800_elevator_entrance_arkit": {
+    "fps": 59.931
+  },
+  "log.1619469967-1800_mccovey_arkit": {
+    "fps": 59.931
+  },
+  "log.1619470105-1800_arden_apt_arkit": {
+    "fps": 59.931
+  },
+  "log.1619470253-1800_mailroom_arkit": {
+    "fps": 59.931
+  },
+  "log.1619470318-1800_garbage2_arkit": {
+    "fps": 59.931
+  },
+  "log.1619470356-1800_garbage1_arkit": {
+    "fps": 59.932
+  },
+  "log.1619470442-1800_garage3_arkit": {
+    "fps": 59.932
+  },
+  "log.1619470538-1800_azure_arkit": {
+    "fps": 59.932
+  },
+  "log.1619470538-1800_garage1_arkit": {
+    "fps": 59.932
+  },
+  "log.1619470579-1800_azure2_arkit": {
+    "fps": 59.932
+  },
+  "log.1619470579-1800_garage2_arkit": {
+    "fps": 59.932
+  },
+  "log.1619470653-1800_shared_space_arkit": {
+    "fps": 59.931
+  },
+  "log.1619470698-1800_desk_arkit": {
+    "fps": 59.932
+  },
+  "log.1619470778-1800_ottoman_arkit": {
+    "fps": 59.965
+  },
+  "log.1619470818-1800_ottoman_arkit": {
+    "fps": 59.936
+  },
+  "log.1619563538665": {
+    "fps": 55.711
+  },
+  "log.1619563589533": {
+    "fps": 32.904
+  },
+  "log.1619563661396": {
+    "fps": 51.857
+  },
+  "log.1620422605012_desk-shake": {
+    "fps": 27.334
+  },
+  "log.1620423228412_white-gravel-hand-shake": {
+    "fps": 29.992
+  },
+  "log.1620688480-1800-quick-movement5": {
+    "fps": 59.964
+  },
+  "log.1620688523-1800-quick-movement9": {
+    "fps": 59.965
+  },
+  "log.1620688818-900-quick-movement1": {
+    "fps": 59.931
+  },
+  "log.1620688865-1800-quick-movement2": {
+    "fps": 59.931
+  },
+  "log.1620688988-1800-quick-movement4": {
+    "fps": 59.931
+  },
+  "log.1620689189-1800-quick-movement3": {
+    "fps": 59.965
+  },
+  "log.1620689237-1800-quick-movement8": {
+    "fps": 59.965
+  },
+  "log.1620689322-1800-quick-movement6": {
+    "fps": 59.965
+  },
+  "log.1620689411-1800-quick-movement7": {
+    "fps": 59.965
+  },
+  "log.1621035247477-pan-wide-shake": {
+    "fps": 25.891
+  },
+  "log.1621035316242-pan-narrow-shake": {
+    "fps": 29.888
+  },
+  "log.1621035370526-sit-down-pan-cover": {
+    "fps": 28.726
+  },
+  "log.1621375795890_brown-deck-loop": {
+    "fps": 45.517
+  },
+  "log.1621375887248_brown-deck-shake": {
+    "fps": 43.664
+  },
+  "log.1621376153703_brown-deck-hand": {
+    "fps": 44.825
+  },
+  "log.1621376252523_brown-deck-hand-2": {
+    "fps": 43.355
+  },
+  "log.1621616884119_hand-cover-1": {
+    "fps": 46.374
+  },
+  "log.1622667725903_concrete-office": {
+    "fps": 29.81
+  },
+  "log.1622667956618_concrete-red-conference-table": {
+    "fps": 29.897
+  },
+  "log.1622668125338_sitting-area-rug": {
+    "fps": 29.882
+  },
+  "log.1622744284403_back-forth-1": {
+    "fps": 30.018
+  },
+  "log.1622744361340_back-forth-2": {
+    "fps": 29.809
+  },
+  "log.1623196616779-portal-office1-js": {
+    "fps": 40.215
+  },
+  "log.1623196821424-portal-office2-js": {
+    "fps": 18.62
+  },
+  "log.1623196821424_portal_office2": {
+    "fps": 18.62
+  },
+  "log.1623196884670-portal-office3-js": {
+    "fps": 8.068
+  },
+  "log.1623197072554-portal-sidewalk-js": {
+    "fps": 27.013
+  },
+  "log.1623877659645-office-voyager": {
+    "fps": 29.451
+  },
+  "log.1623878333079-loop-twice-mid-office": {
+    "fps": 29.944
+  },
+  "log.1624297879443-chair-spin-1": {
+    "fps": 29.316
+  },
+  "log.1624298032943-chair-spin-2": {
+    "fps": 29.971
+  },
+  "log.1624655283667-desk-swirl-js": {
+    "fps": 35.114
+  },
+  "log.1624655683347-normal-js": {
+    "fps": 33.971
+  },
+  "log.1625261484512-chair-spin-clockwise": {
+    "fps": 29.974
+  },
+  "log.1625261665353-mostly-ground": {
+    "fps": 29.97
+  },
+  "log.1625766967-1800-desk-arkit": {
+    "fps": 59.931
+  },
+  "log.1625767040-1800-floor-arkit": {
+    "fps": 59.931
+  },
+  "log.1625767085-1800-round-table": {
+    "fps": 59.931
+  },
+  "log.1625767124-1800-square-table": {
+    "fps": 59.932
+  },
+  "log.1625767185-1800-apollo2-arkit": {
+    "fps": 59.931
+  },
+  "log.1625767246-1800-apollo-arkit": {
+    "fps": 59.965
+  },
+  "log.1625784682-1800-quick-arkit": {
+    "fps": 59.931
+  },
+  "log.1625850865-1800-quick-arkit2": {
+    "fps": 59.931
+  },
+  "log.1626456096-1800-updown-then-strafe": {
+    "fps": 59.931
+  },
+  "log.1626460936-1800-dwell-near-desks": {
+    "fps": 59.931
+  },
+  "log.1626460979-1800-to-entrance-lookaround-back": {
+    "fps": 59.932
+  },
+  "log.1626472519735-walk-to-entrance-double-spin": {
+    "fps": 28.842
+  },
+  "log.1626472601432-walk-to-entrance": {
+    "fps": 28.485
+  },
+  "log.1626472680020-spin-360": {
+    "fps": 29.683
+  },
+  "log.1626907184370-ccw-spin-pair-2": {
+    "fps": 40.4
+  },
+  "log.1626907186013-ccw-spin-pair-1": {
+    "fps": 29.976
+  },
+  "log.1633643765-1800-shared-space": {
+    "fps": 59.871
+  },
+  "log.1633645576-1800-keyboard": {
+    "fps": 59.87
+  },
+  "log.1633648450-900-office-entrance": {
+    "fps": 59.836
+  },
+  "log.1634081859-600-leafy-wall-left-right": {
+    "fps": 29.958
+  },
+  "log.1634081891-1800_green_wall_arkit": {
+    "fps": 59.935
+  },
+  "log.1634081892-600-red-wall-right-left": {
+    "fps": 29.953
+  },
+  "log.1634081917-600-walk-along-wall-then-back": {
+    "fps": 29.953
+  },
+  "log.1634081950-600-alley-walk": {
+    "fps": 29.948
+  },
+  "log.1634151867-600-computer-desk": {
+    "fps": 29.958
+  },
+  "log.1634155956-600-computer-desk-close": {
+    "fps": 29.958
+  },
+  "log.1634156920-600-start-close": {
+    "fps": 29.958
+  },
+  "log.1634223700-1800-vertical-kleenex-1": {
+    "fps": 59.769
+  },
+  "log.1634225817-1800-vertical-kleenex-2": {
+    "fps": 59.805
+  },
+  "log.1634225852-1800-vertical-kleenex-3": {
+    "fps": 59.805
+  },
+  "log.1634225898-1800-vertical-kleenex-4": {
+    "fps": 59.805
+  },
+  "log.1635878257492-office-y-translate": {
+    "fps": 52.956
+  },
+  "log.1635879124310-office-x-translate": {
+    "fps": 30.626
+  },
+  "log.1635879141853-office-x-translate-left": {
+    "fps": 33.989
+  },
+  "log.1635879161821-office-z-translate": {
+    "fps": 34.07
+  },
+  "log.1636419135504-tully-pixel4-1": {
+    "fps": 26.049
+  },
+  "log.1636419163040-tully-iphone12pro": {
+    "fps": 46.176
+  },
+  "log.1636419432244-tully-pixel4-2": {
+    "fps": 29.758
+  },
+  "log.1636419445587-tully-pixel4-3": {
+    "fps": 29.943
+  },
+  "log.1636419459115-tully-pixel4-4": {
+    "fps": 29.857
+  },
+  "log.1637276120162-ground-wave-1-meter": {
+    "scale": 1.0
+  },
+  "log.1637276120162-ground-wave-1-meter-iphone-x": {
+    "fps": 40.017,
+    "scale": 1.0
+  },
+  "log.1637283296199-ground-wave-pause-1-meter": {
+    "scale": 1.0
+  },
+  "log.1637283296199-ground-wave-pause-1-meter-iphone-x": {
+    "fps": 29.738,
+    "scale": 1.0
+  },
+  "log.1637608890676-ground-still-1-meter": {
+    "scale": 1.0
+  },
+  "log.1637608890676-ground-still-1-meter-iphone-x": {
+    "fps": 29.517,
+    "scale": 1.0
+  },
+  "log.1637625452-600-outdoor-brick-path": {
+    "fps": 29.958
+  },
+  "log.1637625541-600-outdoor-amphi-park": {
+    "fps": 29.953
+  },
+  "log.1638235398626-office-2-meters-1": {
+    "fps": 52.86,
+    "scale": 2.0
+  },
+  "log.1638235439359-office-2-meters-2": {
+    "fps": 52.47,
+    "scale": 2.0
+  },
+  "log.1638235588899-office-1.5-meters-1": {
+    "fps": 49.079,
+    "scale": 1.5
+  },
+  "log.1638235634170-office-1.5-meters-2": {
+    "fps": 46.959,
+    "scale": 1.5
+  },
+  "log.1638258285416-purplerug-1.5-meters-1": {
+    "fps": 47.173,
+    "scale": 1.5
+  },
+  "log.1638258328923-purplerug-1.5-meters-2": {
+    "fps": 47.338,
+    "scale": 1.5
+  },
+  "log.1639437639852-ground-wave-1-meter-oneplus-9": {
+    "fps": 29.458,
+    "scale": 1.0
+  },
+  "log.1639438716158-ground-walk-1.4-meter-oneplus-9": {
+    "fps": 29.651,
+    "scale": 1.4
+  },
+  "log.1639438922578-ground-wave-.1-meter-oneplus-9": {
+    "fps": 29.84,
+    "scale": 0.1
+  },
+  "log.1639439342148-ground-wave-1-meter-galaxy-s7": {
+    "fps": 15.985,
+    "scale": 1.0
+  },
+  "log.1639439496654-ground-wave-1-meter-iphone-12": {
+    "fps": 51.158,
+    "scale": 1.0
+  },
+  "log.1639439656709-ground-wave-.2-meter-iphone-12": {
+    "fps": 48.062,
+    "scale": 0.2
+  },
+  "log.1639439826159-ground-walk-1.3-meter-iphone-12": {
+    "fps": 47.556,
+    "scale": 1.3
+  },
+  "log.1639439979557-ground-walk-1.3-meter-iphone-8-plus": {
+    "fps": 41.919,
+    "scale": 1.3
+  },
+  "log.1639440065792-ground-wave-1-meter-iphone-8-plus": {
+    "fps": 42.927,
+    "scale": 1.0
+  },
+  "log.1639440144412-ground-wave-.2-meter-iphone-8-plus": {
+    "fps": 43.012,
+    "scale": 0.2
+  },
+  "log.1639440456133-ground-wave-.2-meter-galaxy-s7": {
+    "fps": 15.491,
+    "scale": 0.2
+  },
+  "log.1639440893206-ground-walk-1.2-meter-galaxy-s7": {
+    "fps": 14.701,
+    "scale": 1.2
+  },
+  "log.1641336373777-8y-1.1-meter-iphone-7": {
+    "fps": 25.96,
+    "scale": 1.1
+  },
+  "log.1641336397069-8z-1.1-meter-iphone-7": {
+    "fps": 28.409,
+    "scale": 1.1
+  },
+  "log.1641336431425-8x-1.1-meter-iphone-7": {
+    "fps": 28.346,
+    "scale": 1.1
+  },
+  "log.1641336616073-8y-1.1-meter-pixel-3xl": {
+    "fps": 27.205,
+    "scale": 1.1
+  },
+  "log.1641336643035-8x-1.1-meter-pixel-3xl": {
+    "fps": 29.105,
+    "scale": 1.1
+  },
+  "log.1641336667915-8z-1.1-meter-pixel-3xl": {
+    "fps": 28.652,
+    "scale": 1.1
+  },
+  "log.1641336788764-8y-1.1-meter-samsung-s21": {
+    "fps": 30.032,
+    "scale": 1.1
+  },
+  "log.1641336805540-8x-1.1-meter-samsung-s21": {
+    "fps": 29.737,
+    "scale": 1.1
+  },
+  "log.1641336832058-8z-1.1-meter-samsung-s21": {
+    "fps": 29.973,
+    "scale": 1.1
+  },
+  "log.1641336946378-8y-1.1-meter-oneplus-n10": {
+    "fps": 7.678,
+    "scale": 1.1
+  },
+  "log.1641336973271-8x-1.1-meter-oneplus-n10": {
+    "fps": 15.8,
+    "scale": 1.1
+  },
+  "log.1641336988698-8z-1.1-meter-oneplus-n10": {
+    "fps": 14.321,
+    "scale": 1.1
+  },
+  "log.1641337219863-8y-1.1-meter-iphone-12": {
+    "fps": 48.496,
+    "scale": 1.1
+  },
+  "log.1641337247024-8x-1.1-meter-iphone-12": {
+    "fps": 47.252,
+    "scale": 1.1
+  },
+  "log.1641337268449-8z-1.1-meter-iphone-12": {
+    "fps": 49.78,
+    "scale": 1.1
+  },
+  "log.1641337384332-8y-1.1-meter-samsung-s10plus": {
+    "fps": 14.707,
+    "scale": 1.1
+  },
+  "log.1641337401468-8x-1.1-meter-samsung-s10plus": {
+    "fps": 29.544,
+    "scale": 1.1
+  },
+  "log.1641337422260-8z-1.1-meter-samsung-s10plus": {
+    "fps": 29.026,
+    "scale": 1.1
+  },
+  "log.1642014778614-8x-.2-meter-samsung-s10plus": {
+    "fps": 29.843,
+    "scale": 0.2
+  },
+  "log.1642014970648-8y-.2-meter-samsung-s10plus": {
+    "fps": 29.709,
+    "scale": 0.2
+  },
+  "log.1642015041203-8z-.2-meter-samsung-s10plus": {
+    "fps": 29.807,
+    "scale": 0.2
+  },
+  "log.1642015185887-8x-.7-meter-iphone-12": {
+    "fps": 51.207,
+    "scale": 0.7
+  },
+  "log.1642015245910-8y-.7-meter-iphone-12": {
+    "fps": 51.759,
+    "scale": 0.7
+  },
+  "log.1642015308353-8z-.7-meter-iphone-12": {
+    "fps": 52.136,
+    "scale": 0.7
+  },
+  "log.1643321414062_imu-aligned-1D-2D": {
+    "fps": 43.82
+  },
+  "log.1643394968203_xyz-movement-1": {
+    "fps": 52.568
+  },
+  "log.1643395055255_xyz-movement-2": {
+    "fps": 46.562
+  },
+  "log.1643413101191_imu-1-iphone-12-pro": {
+    "fps": 51.637
+  },
+  "log.1643413101210_imu-1-s21": {
+    "fps": 29.361
+  },
+  "log.1643413123123_imu-2-iphone-12-pro": {
+    "fps": 49.594
+  },
+  "log.1643413124240_imu-2-s21": {
+    "fps": 30.023
+  },
+  "log.1647457178463-level1-z-1.1-meter-iphone-12-pro-1": {
+    "fps": 46.106,
+    "scale": 1.1
+  },
+  "log.1647457209556-level1-z-1.1-meter-iphone-12-pro-2": {
+    "fps": 47.185,
+    "scale": 1.1
+  },
+  "log.1647457234072-level1-z-1.1-meter-iphone-12-pro-3": {
+    "fps": 49.902,
+    "scale": 1.1
+  },
+  "log.1647457269666-level1-z-1.1-meter-iphone-12-pro-4": {
+    "fps": 47.494,
+    "scale": 1.1
+  },
+  "log.1647457299936-level1-z-1.1-meter-iphone-12-pro-5": {
+    "fps": 48.075,
+    "scale": 1.1
+  },
+  "log.1647457329878-level1-z-1.1-meter-iphone-12-pro-6": {
+    "fps": 47.512,
+    "scale": 1.1
+  },
+  "log.1647457441776-level1-z-1.1-meter-iphone-12-pro-7": {
+    "fps": 52.485,
+    "scale": 1.1
+  },
+  "log.1647457477720-level1-z-1.1-meter-iphone-12-pro-8": {
+    "fps": 53.128,
+    "scale": 1.1
+  },
+  "log.1647457510310-level1-z-1.1-meter-iphone-12-pro-9": {
+    "fps": 51.242,
+    "scale": 1.1
+  },
+  "office-rotate-up-js-log.1624655429749": {
+    "fps": 30.3
+  },
+  "pier1-anchor-iphone12-pro": {
+    "fps": 59.425
+  },
+  "pier1-anchor2-iphone12-pro": {
+    "fps": 59.797
+  },
+  "pier1-mt-vision-iphone-12-pro": {
+    "fps": 59.768
+  },
+  "pier1-mt-vision2-iphone12-pro": {
+    "fps": 59.775
+  },
+  "pier1-shelf-iphone-12-pro": {
+    "fps": 59.778
+  },
+  "pier1-staircase-approximate-coordinates-iphone-12-pro": {
+    "fps": 59.485
+  },
+  "pier1-staircase-precise-coordinates-iphone-12-pro": {
+    "fps": 59.764
+  },
+  "pitch-4points-sm-g991u": {
+    "fps": 29.723
+  },
+  "pitch-cam-axis-sm-g991u": {
+    "fps": 29.963
+  },
+  "pitch-inplace-0.71m-sm-g991u": {
+    "fps": 29.617
+  },
+  "pitch-inplace-0.82m-iphone12promax": {
+    "fps": 59.851
+  },
+  "pitch-inplace-0.82m-oneplus9pro": {
+    "fps": 25.566
+  },
+  "pitch-inplace-0.88m-pixel-3-xl": {
+    "fps": 28.719
+  },
+  "pitch-tripod-0.82-sm-g991u": {
+    "fps": 29.887
+  },
+  "planar-crystalDew-dynamic.log": {
+    "fps": 29.654
+  },
+  "planar-crystalDew-orbit.log": {
+    "fps": 29.901
+  },
+  "planar-crystalDew-phone.log": {
+    "fps": 29.46
+  },
+  "planar-crystalDew-stationary.log": {
+    "fps": 29.557
+  },
+  "planar-crystalDew-zoomed.log": {
+    "fps": 29.752
+  },
+  "portal_office1_js_log.1623196616779": {
+    "fps": 40.215
+  },
+  "portal_office2_js_log.1623196821424": {
+    "fps": 18.62
+  },
+  "portal_office3_js_log.1623196884670": {
+    "fps": 8.068
+  },
+  "portal_sidewalk_js_log.1623197072554": {
+    "fps": 27.013
+  },
+  "s10-log.1626889877350-inside-office": {
+    "fps": 29.981
+  },
+  "s10-log.1626889963776-outside-office-2": {
+    "fps": 29.698
+  },
+  "s10-log.1626889994986-outside-office": {
+    "fps": 29.595
+  },
+  "s10-log.1626900504859": {
+    "fps": 29.842
+  },
+  "sfo-entrance-lost-3-nodes-iphone-12-pro": {
+    "fps": 59.794
+  },
+  "sfo-entrance-vase-iphone-12-pro": {
+    "fps": 59.795
+  },
+  "sfo-ferry-viewer-iphone-12-pro": {
+    "fps": 55.999
+  },
+  "sfo-hallway-frames-iphone12-pro": {
+    "fps": 59.885
+  },
+  "sfo-kitchen-iphone-12-pro": {
+    "fps": 59.837
+  },
+  "sfo-lounge-iphone-12-pro": {
+    "fps": 59.827
+  },
+  "sfo-niantic-framed-logo-iphone-12-pro": {
+    "fps": 59.8
+  },
+  "sfo-pokemon-sitting-area-iphone-12-pro": {
+    "fps": 59.778
+  },
+  "sfo-team-instinct-iphone12-pro": {
+    "fps": 59.786
+  },
+  "sfo-window-lounge-iphone-12-pro": {
+    "fps": 59.827
+  },
+  "teaParty1.log": {
+    "fps": 29.802
+  },
+  "tilt_up_android_js_log.1626476306951": {
+    "fps": 29.663
+  },
+  "tony-work-desk.1620258704962": {
+    "fps": 54.579
+  },
+  "tyrell-datarecorder-Pixel3XL-log.1593618460-600": {
+    "fps": 59.791
+  },
+  "tyrell-datarecorder-iPhone11Pro-log.1593563843-600": {
+    "fps": 60.019
+  },
+  "virtuale-datarecorder-Pixel3XL-log.1593813095-600": {
+    "fps": 59.558
+  },
+  "virtuale-datarecorder-iPhone11Pro-log.1593813249-600": {
+    "fps": 60.018
+  },
+  "xrot_apollo2_arkit_log.1625767185-1800": {
+    "fps": 59.931
+  },
+  "xrot_apollo_arkit_log.1625767246-1800": {
+    "fps": 59.965
+  },
+  "xrot_desk_arkit_log.1625766967-1800": {
+    "fps": 59.931
+  },
+  "xrot_floor_arkit_log.1625767040-1800": {
+    "fps": 59.931
+  },
+  "xrot_round_table_arkit_log.1625767085-1800": {
+    "fps": 59.931
+  },
+  "xrot_square_table_arkit_log.1625767124-1800": {
+    "fps": 59.932
+  },
+  "yaw-cam-axis-sm-g991u": {
+    "fps": 29.797
+  },
+  "yaw-tripod-0.81m-sm-g991u": {
+    "fps": 30.017
+  }
+}

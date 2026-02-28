@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/rrweb@latest/dist/rrweb.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/rrweb@latest/dist/rrweb.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/rrweb/dist/plugins/console-replay.min.js"></script>
+<script>
+  fetch('http://localhost:3003/recording')
+    .then(res => res.json())
+    .then(({recordings}) => {
+      // Get the first of the recordings
+      fetch(`http://localhost:3003/recording/${recordings[0].id}/log`)
+        .then(res => res.json())
+        .then(({logs}) => {
+          const parsedLogs = logs.map(l => JSON.parse(l.content))
+          const replayer = new rrweb.Replayer(parsedLogs, {
+            UNSAFE_replayCanvas: true,
+            plugins: [
+              rrwebConsoleReplay.getReplayConsolePlugin({
+                level: ['info', 'log', 'warn', 'error'],
+              }),
+            ],
+          })
+          replayer.play()
+        })
+    })
+</script>

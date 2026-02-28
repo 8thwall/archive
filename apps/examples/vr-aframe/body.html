@@ -1,0 +1,92 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after asdf app.js is loaded. -->
+
+<a-scene 
+  physics
+  vr-mode-ui
+  device-orientation-permission-ui
+  renderer="colorManagement: true; 
+            physicallyCorrectLights: true; 
+            highRefreshRate: true; 
+            alpha: true;">
+  
+  <a-assets>
+    <img id="boxTexture" src="./assets/side-black.png">
+  </a-assets>
+  
+  <!-- Lights -->
+  <a-light type="ambient" intensity="1.0"></a-light>
+  <a-entity 
+    light="type:directional; 
+           castShadow:true; 
+           color:white; 
+           shadowMapHeight:2048;
+           shadowMapWidth:2048;
+           intensity:1.5" 
+    position="5 10 7"
+    shadow>
+  </a-entity>
+  
+  <!-- Camera -->
+  <a-camera position="0 1.5 2"></a-camera>
+  
+  <!-- Action -->
+  <a-entity 
+    id="leftController" 
+    add-cube-on-button-press
+    static-body="shape: sphere; sphereRadius: 0.05;" 
+    hand-controls="hand: left;" 
+    sphere-collider="objects: .throwable" 
+    grab>
+  </a-entity>
+  
+  <a-entity 
+    id="rightController" 
+    add-cube-on-button-press 
+    static-body="shape: sphere; sphereRadius: 0.05;" 
+    hand-controls="hand: right;" 
+    sphere-collider="objects: .throwable" 
+    grab>
+  </a-entity>
+  
+  <!-- Scene -->
+  <a-sky color="#464766"></a-sky>
+  <a-box 
+    position="0 -1 0" 
+    static-body scale="10 2 10" 
+    color="#2D2E43" 
+    shadow 
+    metalness="0.8" 
+    roughness="0.8">
+  </a-box>
+  
+  <a-box 
+    position="0 0.625 -0.67" 
+    depth="0.3" 
+    static-body 
+    scale="1.25 1.25 1.25" 
+    material="color: #9880B2" 
+    shadow>
+  </a-box>
+  
+  <a-text
+    value="Press Any Button to Spawn Cube"
+    align="center"
+    anchor="center"
+    font="exo2bold"
+    color="#000"
+    position="0 1.15 -0.475"
+    scale="0.31 0.31 0.31">
+  </a-text>
+  
+  <a-box 
+    class="throwable" 
+    dynamic-body="mass: 1" 
+    position="0.0 4.0 -0.67" 
+    scale="0.2 0.2 0.2" 
+    src="#boxTexture" 
+    color="#AD50FF" 
+    shadow>
+  </a-box>
+
+</a-scene>

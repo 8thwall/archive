@@ -1,0 +1,50 @@
+.coloredMsgContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  font-size: 16px;
+  padding: 1em;
+  margin: 1.5em 0;
+}
+
+.coloredMsgContainer p {
+  margin: 0;
+  font-size: 1em;
+}
+
+.coloredMsg-purple {
+  border: 1px solid #AD50FF;
+  background: #FBF6FF;
+  color: #AD50FF;
+}
+
+.coloredMsg-blueberry {
+  border: 1px solid #57BFFF;
+  background: #57BFFF0D;
+  color: #408CBA;
+}
+
+.coloredMsg-mint {
+  border: 1px solid #00EDAF;
+  background: #00EDAF0D;
+  color: #009770;
+}
+
+.coloredMsg-mango {
+  border: 1px solid #FFC828;
+  background: #FFC8280D;
+  color: #9F5C00;
+}
+
+.coloredMsg-cherry {
+  border: 1px solid #DD0065;
+  background: #DD00650D;
+  color: #DD0065;
+}
+
+.coloredMsgIcon {
+  margin-top: 0.125em;
+  min-width: 20px;
+  min-height: 20px;
+}

@@ -1,0 +1,56 @@
+---
+id: material
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Material
+
+## Descripción
+
+This component creates a material on an entity with geometry.
+
+## Propiedades
+
+| Propiedad          | Tipo    | Por defecto | Descripción                                                                                                              |
+| ------------------ | ------- | ----------- | ------------------------------------------------------------------------------------------------------------------------ |
+| r                  | number  | 0           | Red channel value of the material [0...255]                                                                              |
+| g                  | number  | 0           | Green channel value of the material [0...255]                                                                            |
+| b                  | number  | 0           | Blue channel value of the material [0...255]                                                                             |
+| textureSrc         | string  | ""          | The color map source, modulated by color (if set)                                                                        |
+| roughness          | number  | 0           | How rough the material appears [0...1]                                                                                   |
+| roughnessMap       | string  | ""          | Green channel of this texture map resource the roughness, multiplied by the roughness number.                            |
+| metalness          | number  | 0           | How metallic the material appears [0...1]                                                                                |
+| metalnessMap       | string  | ""          | Blue channel of this texture resource affects how metal the material appears.                                            |
+| normalScale        | number  | 0           | How much the normal map (if set) affects the material [0...1]                                                            |
+| normalMap          | string  | ""          | Normal map source of the texture.                                                                                        |
+| opacity            | number  | 0           | Overall alpha/transparency of the material [0...1]                                                                       |
+| opacityMap         | string  | ""          | Alpha/transparency mapped via a texture resource.                                                                        |
+| emissiveIntensity  | number  | 0           | Overall intensity of the emissive map [0...1]                                                                            |
+| emissiveMap        | string  | ""          | Emissive strength mapped as a texture resource. Modulated by emissive color and intensity.                               |
+| emissiveR          | number  | 0           | Red channel emissive color of the material [0...255]                                                                     |
+| emissiveG          | number  | 0           | Green channel emissive color of the material [0...255]                                                                   |
+| emissiveB          | number  | 0           | Blue channel emissive color of the material [0...255]                                                                    |
+| side               | string  | ""          | Which sides of faces will be rendered. Choose from front, back, or double.                                               |
+| blending           | string  | ""          | Blending to use when displaying objects with this material. Choose from no, normal, additive, subtractive, and multiply. |
+| repeatX            | number  | 0           | How many times a texture is repeated across a material on the X axis.                                                    |
+| repeatY            | number  | 0           | How many times a texture is repeated across a material on the Y axis.                                                    |
+| offsetX            | number  | 0           | How much a texture is offset across a material on the X axis.                                                            |
+| offsetY            | number  | 0           | How much a texture is offset across a material on the Y axis.                                                            |
+| depthTest          | boolean | true        | Whether to test depth when rendering this material                                                                       |
+| depthWrite         | boolean | true        | Whether rendering this material impacts the depth buffer                                                                 |
+| wireframe          | boolean | false       | Render geometry as wireframe.                                                                                            |
+
+## Funciones
+
+<ComponentFunctions
+    name="Material"
+    properties={{
+        r: 255,
+        g: 0,
+        b: 0,
+    }}
+    mutate={`cursor.roughness = 0.8;
+    cursor.wireframe = true;
+    return false;`}
+/>

@@ -1,0 +1,39 @@
+---
+id: requirements
+sidebar_position: 2
+---
+
+# 必要条件
+
+## ウェブブラウザ
+
+モバイルブラウザは、8th Wallウェブ体験をサポートするために以下の機能を必要とします：
+
+- WebGL (`canvas.getContext('webgl') || canvas.getContext('webgl2')`)
+- getUserMedia (`navigator.mediaDevices.getUserMedia`)
+- deviceorientation (`window.DeviceOrientationEvent` - _SLAMが有効な場合のみ必要_)
+- Web-Assembly / WASM (`window.WebAssembly`)
+
+**注：\*** 第8回ウォールウェブの経験は、**https**経由で閲覧する必要があります。 \*\*カメラにアクセスするためにブラウザが要求するものです。
+
+### iOS
+
+- **Safari**（iOS11以上）
+- SFSafariViewController Webビューを使用する**アプリ**（iOS 13以上）
+  - Apple は iOS 13 で SFSafariViewController に `getUserMedia()` サポートを追加した。 8th Wallは、SFSafariViewControllerウェブビューを使用するiOS 13アプリ内で動作します。
+  - 例Twitter、Slack、Discord、Gmail、ハングアウトなど。
+- WKWebViewウェブビューを使用する**アプリ/ブラウザ** (iOS 14.3+)
+
+### アンドロイド
+
+- **ブラウザ**は、WebARに必要な機能をネイティブにサポートしていることが知られています：
+  - クローム
+  - ファイアフォックス
+  - サムスン・インターネット
+  - マイクロソフト・エッジ
+- WebAR に必要な機能をサポートしていることが知られている Web View を使用している **アプリ**：
+  - Twitter、WhatsApp、Slack、Gmail、ハングアウト、Reddit、LinkedInなど。
+
+## エンジン
+
+- **VPS**にはエンジンv27.4.7+が必要です。

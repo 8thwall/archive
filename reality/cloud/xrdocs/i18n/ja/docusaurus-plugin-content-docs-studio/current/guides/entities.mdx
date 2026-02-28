@@ -1,0 +1,97 @@
+---
+id: entities
+description: エンティティは、それ自体では動作や外観を持たず、単にコンポーネントをアタッチできるコンテナとして機能する。
+---
+
+# エンティティ
+
+## はじめに
+
+{frontMatter.description}
+
+## エンティティの作成
+
+次のコードは、コンポーネントなしで新しいエンティティを作成する方法を示しています。
+
+### 例
+
+```ts
+import * as ecs from '@8thwall/ecs'
+
+const eid = world.createEntity()
+```
+
+## エンティティの削除
+
+次のコードは、id を指定して既存のエンティティを削除する方法を示しています：
+
+### 例
+
+```ts
+import * as ecs from '@8thwall/ecs'
+
+world.deleteEntity(eid)
+```
+
+## エンティティにコンポーネントを追加する
+
+次のコードは、実行時に組み込みコンポーネントをエンティティに追加する方法を示しています。
+
+### 例
+
+```ts
+const box = world.createEntity()
+
+ecs.BoxGeometry.set(world, box, {
+    width: 1,
+    height: 1,
+    depth: 1,
+})
+
+ecs.Material.set(world, box, {
+    r: 255,
+    g: 255,
+    b: 255,
+})
+```
+
+## リレーションシップの作成と変更
+
+次のコードは、組み込みヘルパー・メソッドを使用してエンティティ間の関係を作成または変更する方法を示しています。
+
+### 例
+
+```ts
+//
+const foo = world.createEntity()
+const bar = world.createEntity()
+
+// fooをbarの子に設定する
+world.setParent(foo, bar)
+
+// barの親を取得。（eidを返し、<= 0は未定義）
+world.getParent(bar)
+
+// fooの子を取得。（Generatorを返す）
+world.getChildren(foo)
+```
+
+## ヘルパー機能
+
+エンティティのトランスフォームと対話するためのヘルパー関数がいくつかあります。
+
+:::tip
+エンティティは親に対して相対的に配置される。 getWorldTransform()\`関数は、ワールド空間におけるオブジェクトのトランスフォームを取得します。
+:::
+
+```ts
+world.setScale(eid, 1, 1, 1)
+world.setPosition(eid, 1, 1, 1)
+world.setQuaternion(eid, 0, 0, 0, 1)
+world.normalizeQuaternion(eid)
+
+const tempMatrix = ecs.math.mat4.i()
+world.getWorldTransform(eid1, tempMatrix)
+
+world.setTransform(eid2, tempMatrix)
+```

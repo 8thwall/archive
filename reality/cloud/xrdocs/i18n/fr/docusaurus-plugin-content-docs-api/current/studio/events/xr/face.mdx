@@ -1,0 +1,336 @@
+---
+id: face
+sidebar_position: 5
+---
+
+import {EventExample} from '@site/src/components/event-example'
+
+# Événements à effets de visage
+
+## Les types
+
+### TransformObject {#TransformObject}
+
+| Propriété                   | Type           | Description                                                                  |
+| --------------------------- | -------------- | ---------------------------------------------------------------------------- |
+| position                    | `{x, y, z}`    | La position 3D de la face située.                                            |
+| rotation                    | `{w, x, y, z}` | L'orientation locale en 3D de la face localisée.                             |
+| échelle                     | `Nombre`       | Facteur d'échelle à appliquer aux objets attachés à cette face.              |
+| largeur mise à l'échelle    | `Nombre`       | Largeur approximative de la tête dans la scène, multipliée par l'échelle.    |
+| hauteur mise à l'échelle    | `Nombre`       | Hauteur approximative de la tête dans la scène, multipliée par l'échelle.    |
+| profondeur mise à l'échelle | `Nombre`       | Profondeur approximative de la tête dans la scène, multipliée par l'échelle. |
+
+## Evénements
+
+### FACE_LOADING
+
+Cet événement est émis par Face Effects lorsque le chargement commence pour des ressources AR supplémentaires.
+
+#### Propriétés
+
+| Propriété          | Type          | Description                                                                                                                     |
+| ------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| maxDetections      | `Nombre`      | Nombre maximal de visages pouvant être traités simultanément.                                                                   |
+| pointsParDetection | `Nombre`      | Nombre de sommets qui seront extraits par face.                                                                                 |
+| indices            | `[{a, b, c}]` | Index dans le tableau des sommets qui forment les triangles du maillage demandé, comme spécifié avec meshGeometry on configure. |
+| uvs                | `[{u, v}]`    | les positions uv dans une carte de texture correspondant aux points de vertex renvoyés.                                         |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="FACE_LOADING" target="world.events.globalId" callbackBody={`console.log('Face loading')`} />
+
+### FACE_SCANNING
+
+Cet événement est émis par Face Effects lorsque toutes les ressources AR du visage ont été chargées et que le balayage a commencé.
+
+#### Propriétés
+
+| Propriété          | Type          | Description                                                                                                                     |
+| ------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| maxDetections      | `Nombre`      | Nombre maximal de visages pouvant être traités simultanément.                                                                   |
+| pointsParDetection | `Nombre`      | Nombre de sommets qui seront extraits par face.                                                                                 |
+| indices            | `[{a, b, c}]` | Index dans le tableau des sommets qui forment les triangles du maillage demandé, comme spécifié avec meshGeometry on configure. |
+| uvs                | `[{u, v}]`    | les positions uv dans une carte de texture correspondant aux points de vertex renvoyés.                                         |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="FACE_SCANNING" target="world.events.globalId" callbackBody={`console.log('Face scanning')`} />
+
+### FACE_FOUND
+
+Cet événement est émis par Face Effects lorsqu'un visage est trouvé pour la première fois.
+
+#### Propriétés
+
+| Propriété            | Type                                  | Description                                                                                                                                                                                                  |
+| -------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id                   | `Nombre`                              | Un identifiant numérique de la face localisée                                                                                                                                                                |
+| transformer          | [`TransformObject`](#TransformObject) | Informations sur la transformation de la face localisée.                                                                                                                                                     |
+| sommets              | `[{x, y, z}]`                         | Position des points du visage par rapport à la transformation.                                                                                                                                               |
+| normales             | `[{x, y, z}]`                         | Direction normale des sommets, par rapport à la transformation.                                                                                                                                              |
+| points d'attachement | `{ nom, position : {x,y,z} }`         | Voir [`XR8.FaceController.AttachmentPoints`](https://www.8thwall.com/docs/api/facecontroller/attachmentpoints/) pour la liste des points d'attache disponibles. `position` est relative à la transformation. |
+| uvsInCameraFrame     | `[{u, v}]`                            | La liste des positions uv dans l'image de la caméra correspondant aux points de vertex renvoyés.                                                                                                             |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="FACE_FOUND" target="world.events.globalId" callbackBody={`console.log('Face found')`} />
+
+### FACE_UPDATED
+
+Cet événement est émis par Face Effects lorsque des visages sont trouvés par la suite.
+
+#### Propriétés
+
+| Propriété            | Type                                  | Description                                                                                                                                                                                |
+| -------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id                   | `Nombre`                              | Un identifiant numérique de la face localisée                                                                                                                                              |
+| transformer          | [`TransformObject`](#TransformObject) | Informations sur la transformation de la face localisée.                                                                                                                                   |
+| sommets              | `[{x, y, z}]`                         | Position des points du visage par rapport à la transformation.                                                                                                                             |
+| normales             | `[{x, y, z}]`                         | Direction normale des sommets, par rapport à la transformation.                                                                                                                            |
+| points d'attachement | `{ nom, position : {x,y,z} }`         | Voir [`XR8.FaceController.AttachmentPoints`](https://www.8thwall.com/docs/api/facecontroller/attachmentpoints/) pour la liste des points d'attache disponibles. Le nom du point d'attache. |
+| uvsInCameraFrame     | `[{u, v}]`                            | La liste des positions uv dans l'image de la caméra correspondant aux points de vertex renvoyés.                                                                                           |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="FACE_UPDATED" target="world.events.globalId" callbackBody={`console.log('Face updated: ', event.data.transform)`} />
+
+### FACE_LOST
+
+Cet événement est émis par Face Effects lorsqu'un visage n'est plus suivi.
+
+#### Propriétés
+
+| Propriété | Type     | Description                              |
+| --------- | -------- | ---------------------------------------- |
+| id        | `Nombre` | Identifiant numérique de la face perdue. |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="FACE_LOST" target="world.events.globalId" callbackBody={`console.log('Face lost')`} />
+
+### FACE_BLINKED
+
+Cet événement est émis par Face Effects lorsque les yeux d'un visage suivi clignotent.
+
+#### Propriétés
+
+| Propriété | Type     | Description                                   |
+| --------- | -------- | --------------------------------------------- |
+| id        | `Nombre` | Un identifiant numérique de la face localisée |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="FACE_BLINKED" target="world.events.globalId" callbackBody={`console.log('Blinked')`} />
+
+### DISTANCE_INTERPUPILLAIRE_DU_VISAGE
+
+Cet événement est émis par Face Effects lorsque la distance en millimètres entre les centres de chaque pupille d'un visage suivi est détectée pour la première fois.
+
+#### Propriété
+
+| Propriété                | Type     | Description                                                                |
+| ------------------------ | -------- | -------------------------------------------------------------------------- |
+| id                       | `Nombre` | Un identifiant numérique de la face localisée.                             |
+| distance interpupillaire | `Nombre` | Distance approximative en millimètres entre les centres de chaque pupille. |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="FACE_INTERPUPILLARY_DISTANCE" target="world.events.globalId" callbackBody={`console.log('Interpupillary distance: ', event.data.interpupillaryDistance)`} />
+
+### FACE_LEFT_EYEBROW_LOWERED
+
+Cet événement est émis par Face Effects lorsque la distance en millimètres entre les centres de chaque pupille d'un visage suivi est détectée pour la première fois.
+
+#### Propriété
+
+| Propriété | Type     | Description                                    |
+| --------- | -------- | ---------------------------------------------- |
+| id        | `Nombre` | Un identifiant numérique de la face localisée. |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="FACE_LEFT_EYEBROW_LOWERED" target="world.events.globalId" callbackBody={`console.log('Left eyebrow lowered')`} />
+
+### VISAGE_GAUCHE_SOURCILS_RELEVÉS
+
+Cet événement est émis par Face Effects lorsque le sourcil gauche d'un visage suivi est relevé par rapport à sa position initiale lorsque le visage a été trouvé.
+
+#### Propriétés
+
+| Propriété | Type     | Description                                    |
+| --------- | -------- | ---------------------------------------------- |
+| id        | `Nombre` | Un identifiant numérique de la face localisée. |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="FACE_LEFT_EYEBROW_RAISED" target="world.events.globalId" callbackBody={`console.log('Left eyebrow raised')`} />
+
+### VISAGE_GAUCHE_YEUX_FERMÉS
+
+Cet événement est émis par Face Effects lorsque l'œil gauche d'un visage suivi se ferme.
+
+#### Propriété
+
+| Propriété | Type     | Description                                    |
+| --------- | -------- | ---------------------------------------------- |
+| id        | `Nombre` | Un identifiant numérique de la face localisée. |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="FACE_LEFT_EYE_CLOSED" target="world.events.globalId" callbackBody={`console.log('Left eye closed')`} />
+
+### VISAGE_GAUCHE_YEUX_OUVERTS
+
+Cet événement est émis par Face Effects lorsque l'œil gauche d'un visage suivi s'ouvre.
+
+#### Propriétés
+
+| Propriété | Type     | Description                                    |
+| --------- | -------- | ---------------------------------------------- |
+| id        | `Nombre` | Un identifiant numérique de la face localisée. |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="FACE_LEFT_EYE_OPENED" target="world.events.globalId" callbackBody={`console.log('Left eye opened')`} />
+
+### VISAGE_GAUCHE_YEUX_CLIN D'ŒIL
+
+Cet événement est émis par Face Effects lorsque l'œil gauche d'un visage suivi se ferme et s'ouvre dans un délai de 750 ms alors que l'œil droit reste ouvert.
+
+#### Propriétés
+
+| Propriété | Type     | Description                                    |
+| --------- | -------- | ---------------------------------------------- |
+| id        | `Nombre` | Un identifiant numérique de la face localisée. |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="FACE_LEFT_EYE_WINKED" target="world.events.globalId" callbackBody={`console.log('Left eye winked')`} />
+
+### FACE_MOUTH_CLOSED
+
+Cet événement est émis par Face Effects lorsque la bouche d'un visage suivi se ferme.
+
+#### Propriétés
+
+| Propriété | Type     | Description                                    |
+| --------- | -------- | ---------------------------------------------- |
+| id        | `Nombre` | Un identifiant numérique de la face localisée. |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="FACE_MOUTH_CLOSED" target="world.events.globalId" callbackBody={`console.log('Mouth closed')`} />
+
+### FACE_MOUTH_OPENED
+
+Cet événement est émis par Face Effects lorsque la bouche d'un visage suivi s'ouvre.
+
+#### Propriétés
+
+| Propriété | Type     | Description                                    |
+| --------- | -------- | ---------------------------------------------- |
+| id        | `Nombre` | Un identifiant numérique de la face localisée. |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="FACE_MOUTH_OPENED" target="world.events.globalId" callbackBody={`console.log('Mouth opened')`} />
+
+### FACE_RIGHT_EYEBROW_LOWERED
+
+Cet événement est émis par Face Effects lorsque le sourcil droit d'un visage suivi est abaissé à sa position initiale lorsque le visage a été trouvé.
+
+#### Propriétés
+
+| Propriété | Type     | Description                                    |
+| --------- | -------- | ---------------------------------------------- |
+| id        | `Nombre` | Un identifiant numérique de la face localisée. |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="FACE_RIGHT_EYEBROW_LOWERED" target="world.events.globalId" callbackBody={`console.log('Right eyebrow lowered')`} />
+
+### VISAGE_DROIT_SOURCILS_RELEVÉS
+
+Cet événement est émis par Face Effects lorsque le sourcil droit d'un visage suivi est relevé par rapport à sa position initiale lorsque le visage a été trouvé.
+
+#### Propriété
+
+| Propriété | Type     | Description                                    |
+| --------- | -------- | ---------------------------------------------- |
+| id        | `Nombre` | Un identifiant numérique de la face localisée. |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="FACE_RIGHT_EYEBROW_RAISED" target="world.events.globalId" callbackBody={`console.log('Right eyebrow raised')`} />
+
+### FACE_RIGHT_EYE_CLOSED
+
+Cet événement est émis par Face Effects lorsque l'œil droit d'un visage suivi se ferme.
+
+#### Propriété
+
+| Propriété | Type     | Description                                    |
+| --------- | -------- | ---------------------------------------------- |
+| id        | `Nombre` | Un identifiant numérique de la face localisée. |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="FACE_RIGHT_EYE_CLOSED" target="world.events.globalId" callbackBody={`console.log('Right eye closed')`} />
+
+### FACE_DROITE_YEUX_OUVERTS
+
+Cet événement est émis par Face Effects lorsque l'œil droit d'un visage suivi s'ouvre.
+
+#### Propriétés
+
+| Propriété | Type     | Description                                    |
+| --------- | -------- | ---------------------------------------------- |
+| id        | `Nombre` | Un identifiant numérique de la face localisée. |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="FACE_RIGHT_EYE_OPENED" target="world.events.globalId" callbackBody={`console.log('Right eye opened')`} />
+
+### VISAGE_DROIT_YEUX_CLIN D'ŒIL
+
+Cet événement est émis par Face Effects lorsque l'œil droit d'un visage suivi se ferme et s'ouvre dans un délai de 750 ms alors que l'œil gauche reste ouvert.
+
+#### Propriétés
+
+| Propriété | Type     | Description                                    |
+| --------- | -------- | ---------------------------------------------- |
+| id        | `Nombre` | Un identifiant numérique de la face localisée. |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="FACE_RIGHT_EYE_WINKED" target="world.events.globalId" callbackBody={`console.log('Right eye winked')`} />
+
+### FACE_EAR_POINT_FOUND
+
+Cet événement est émis par Face Effects lorsqu'un point d'oreille est trouvé.
+
+#### Propriété
+
+| Propriété | Type     | Description                                                                                                                                     |
+| --------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| id        | `Nombre` | Un identifiant numérique de la face localisée                                                                                                   |
+| point     | `Chaîne` | Nom du point d'oreille. L'un des éléments suivants : `Lobe gauche`, `Canal gauche`, `Hélix gauche`, `Lobe droit`, `Canal droit`, `Hélix droit`. |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="FACE_EAR_POINT_FOUND" target="world.events.globalId" callbackBody={`console.log('Ear point found: ', event.data.point)`} />
+
+### FACE_EAR_POINT_LOST
+
+Cet événement est émis par Face Effects lorsqu'un point d'oreille est perdu.
+
+#### Propriétés
+
+| Propriété | Type     | Description                                                                                                                                     |
+| --------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| id        | `Nombre` | Un identifiant numérique de la face localisée                                                                                                   |
+| point     | `Chaîne` | Nom du point d'oreille. L'un des éléments suivants : `Lobe gauche`, `Canal gauche`, `Hélix gauche`, `Lobe droit`, `Canal droit`, `Hélix droit`. |
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="FACE_EAR_POINT_LOST" target="world.events.globalId" callbackBody={`console.log('Ear point lost: ', event.data.point)`} />

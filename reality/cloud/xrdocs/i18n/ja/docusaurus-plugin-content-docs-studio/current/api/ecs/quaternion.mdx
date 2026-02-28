@@ -1,0 +1,37 @@
+---
+id: quaternion
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# クォータニオン
+
+## 商品説明
+
+このコンポーネントは、エンティティの回転方法を制御する。
+
+## プロパティ一覧
+
+| Property | Type   | 初期値     | 商品説明  |
+| -------- | ------ | ------- | ----- |
+| x        | 番号     | 0       | x座標   |
+| y        | 番号     | 0       | y座標   |
+| z        | 番号     | 0       | z座標   |
+| w        | 番号     | 0       | W座標   |
+
+## 関数一覧
+
+<ComponentFunctions
+    name="Quaternion"
+    properties={{
+        x: 0,
+        y: 0,
+        z: 0,
+        w: 0
+    }}
+    mutate={`cursor.x = 1;
+    cursor.y = 1;
+    cursor.z = 1;
+    cursor.w = 1;
+    return false;`}
+/>

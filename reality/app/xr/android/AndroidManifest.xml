@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.the8thwall.xr.android" xmlns:tools="http://schemas.android.com/tools">
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.CAMERA" />
+
+  <uses-sdk android:minSdkVersion="1" android:targetSdkVersion="27" tools:overrideLibrary="com.google.ar.core" />
+
+  <application>
+  <meta-data android:name="com.google.ar.core" android:value="optional" />
+  <service android:name="com.the8thwall.reality.app.analytics.android.XRAnalyticsIntentService" />
+  <service android:name="com.the8thwall.reality.app.validation.android.XRAppValidationIntentService" />
+  <service android:name="com.the8thwall.reality.app.validation.android.XRAppValidationService"
+      android:permission="android.permission.BIND_JOB_SERVICE"/>
+  </application>
+</manifest>

@@ -1,0 +1,57 @@
+---
+id: lighting
+description: >-
+  Que vous recherchiez un aspect très réaliste ou stylisé, l'éclairage peut
+  faire une différence significative dans la façon dont votre scène est
+  ressentie et interagit avec les utilisateurs.
+---
+
+# Eclairage
+
+## Introduction
+
+L'éclairage joue un rôle crucial dans l'amélioration de l'attrait visuel de toute scène. Elle ajoute de la profondeur, du réalisme et de l'atmosphère, rendant les expériences plus immersives, plus engageantes et plus attrayantes sur le plan visuel. {frontMatter.description}
+
+## Ajout d'une lumière
+
+Les lumières et les ombres peuvent être ajoutées à une entité par l'intermédiaire de l'interface Studio ou du code. Dans Studio, vous pouvez le faire en cliquant sur le bouton (+) dans la hiérarchie ou en sélectionnant "Nouveau composant" dans l'inspecteur pour une entité choisie. Les composants Lumière et Ombre offrent tous deux divers paramètres de personnalisation.
+
+#### Types de lampes
+
+**Directionnel:**
+Une lumière qui est émise dans une direction spécifique. Cette lumière se comportera comme si elle était infiniment éloignée et que les rayons produits à partir d'elle étaient tous parallèles. Le cas d'utilisation le plus courant est la simulation de la lumière du jour ; le soleil est suffisamment éloigné pour que sa position puisse être considérée comme infinie, et tous les rayons lumineux qui en proviennent sont parallèles.
+
+**Point:**
+Une lumière qui rayonne dans toutes les directions à partir d'un seul point. Un exemple courant est la reproduction de la lumière à partir d'une ampoule nue.
+
+**Ambiance:**
+Cette lumière éclaire uniformément tous les objets de la scène, créant ainsi un éclairage global.
+
+![light-component.png](/images/studio/light-component.png)
+
+### Exemple
+
+L'exemple suivant montre comment attribuer une lumière à une entité au moment de l'exécution :
+
+```ts
+ecs.Light.set(world, component.eid, {
+    type: 'point'
+})
+```
+
+## Ajout d'ombres
+
+\*\*Pour activer les ombres, ajoutez le composant Ombre à l'objet et configurez ses propriétés en conséquence.
+
+![shadow-component.png](/images/studio/shadow-component.png)
+
+### Exemple
+
+L'exemple suivant montre comment définir une ombre sur une entité au moment de l'exécution.
+
+```ts
+ecs.Shadow.set(world, component.eid, {
+  castShadow: true,
+  receiveShadow: true
+})
+```

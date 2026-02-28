@@ -1,0 +1,13 @@
+{
+  "type": "module",
+  "dependencyId": "ad1b9c1d-f0c6-47f4-b30b-b6442223fee8",
+  "moduleId": "83148975-05a5-447f-835a-17b38c98aeda",
+  "alias": "shared-ar",
+  "target": {
+    "type": "version",
+    "level": "major",
+    "major": 2,
+    "minor": 1,
+    "patch": 0
+  }
+}

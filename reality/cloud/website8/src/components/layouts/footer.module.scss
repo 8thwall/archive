@@ -1,0 +1,133 @@
+@use '../../styles/brand-colors';
+@use '../../styles/constants';
+
+.footer {
+  flex-grow: 1;
+
+  p {
+    color: brand-colors.$gray4;
+  }
+
+  a {
+    color: brand-colors.$gray1;
+  }
+}
+
+.siteMap {
+  * {
+    padding: 0;
+  }
+
+  ul {
+    width: 10rem;
+    margin: 0;
+  }
+
+  p {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    font-size: 1.2rem;
+    list-style: none;
+    margin-bottom: 1em;
+  }
+
+  li {
+    list-style: none;
+
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+.siteMapLogo {
+  display: inline-block;
+  text-align: left;
+  min-width: 9rem;
+  margin: 0;
+}
+
+.footerSocialLinks {
+  text-align: left;
+  width: 24rem;
+  margin-bottom: 1.5rem;
+
+  p {
+    margin: 0;
+  }
+}
+
+.footerLinks {
+  width: 40rem;
+  margin-bottom: 2rem;
+
+  p {
+    line-height: 1.5rem;
+    margin-bottom: 0;
+
+    &:not(:last-child) {
+      margin-bottom: 0.25rem;
+    }
+  }
+}
+
+.copyright {
+  color: brand-colors.$gray3;
+}
+
+.legalLinks {
+  width: 30em;
+
+  a {
+    white-space: nowrap;
+  }
+}
+
+.footerLogos {
+  width: fit-content;
+  position: absolute;
+  left: 50%;
+  padding: 0;
+  margin-left: 10rem;
+
+  a:not(:last-child) {
+    margin-right: 2rem;
+  }
+}
+
+/* Tablet size and below -- based on bootstrap's lg breakpoint. */
+@media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+  .footerSocialLinks {
+    width: 100%;
+  }
+
+  .footerLinks {
+    width: 100%;
+  }
+
+  .footerLogos {
+    left: auto;
+    right: 1.5rem;
+    margin-left: 0;
+  }
+}
+
+/* Mobile size and below -- based on bootstrap's md breakpoint. */
+@media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+  .siteMap {
+    margin-bottom: 1rem;
+  }
+
+  .siteMapLogo {
+    margin-top: 2rem;
+  }
+
+  .footerLogos {
+    position: static;
+    margin-bottom: 1rem;
+  }
+
+  .legalLinks {
+    width: 100%;
+  }
+}

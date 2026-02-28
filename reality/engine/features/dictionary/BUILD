@@ -1,0 +1,31 @@
+package(
+    default_visibility = [
+        "//reality/engine/features:__subpackages__",
+        "//reality/quality/training:__subpackages__",
+    ],
+)
+
+exports_files(
+    [
+        "agate-keyframe-dictionary-32-n0.capnpbin",
+        "agate-keyframe-dictionary-32-n1.capnpbin",
+        "agate-keyframe-dictionary-32-n2.capnpbin",
+        "agate-keyframe-dictionary-32-n3.capnpbin",
+        "agate-keyframe-dictionary-64-n0.capnpbin",
+        "agate-keyframe-dictionary-64-n1.capnpbin",
+        "agate-keyframe-dictionary-64-n2.capnpbin",
+        "agate-keyframe-dictionary-64-n3.capnpbin",
+        "agate-keyframe-dictionary-128-n0.capnpbin",
+        "agate-keyframe-dictionary-128-n1.capnpbin",
+        "agate-keyframe-dictionary-128-n2.capnpbin",
+        "agate-keyframe-dictionary-128-n3.capnpbin",
+        "agate-keyframe-dictionary-256-n0.capnpbin",
+        "agate-keyframe-dictionary-256-n1.capnpbin",
+        "agate-keyframe-dictionary-256-n2.capnpbin",
+        "agate-keyframe-dictionary-256-n3.capnpbin",
+        "agate-keyframe-pca-32d.capnpbin",
+        "agate-keyframe-multi-pca-32d.capnpbin",
+        "agate-keyframe-binary-pca-32d.capnpbin",
+        "agate-keyframe-binary-multi-pca-32d.capnpbin",
+    ],
+)

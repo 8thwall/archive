@@ -1,0 +1,57 @@
+---
+id: requirements
+sidebar_position: 2
+---
+
+# Requisitos
+
+## Marca de la 8ª Pared
+
+1. La pantalla de bienvenida predeterminada se muestra al principio de cada experiencia o juego creado con la 8ª Pared. No se puede personalizar.
+2. Todos los proyectos deben mostrar el distintivo [Powered by 8th Wall](https://8th.io/poweredby) en la página de carga del juego o experiencia.
+
+:::tip
+Para eliminar la pantalla de bienvenida predeterminada y la insignia "Powered by 8th Wall" de su proyecto, [adquiera una suscripción de marca blanca](/account/projects/white-label/) desde el panel de control del proyecto. Consulte la [Página de precios](https://8thwall.com/pricing) para obtener más información sobre las suscripciones de Marca Blanca.
+:::
+
+| Pantalla de bienvenida predeterminada                                                                | Pantalla de carga                                                                                      |
+| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| <img width="300" alt="Splash Screen" src={require('/images/quickstart/splash-screen.png').default}/> | <img width="300" alt="Loading Screen" src={require('/images/quickstart/loading-screen.png').default}/> |
+
+## Requisitos del navegador {#browser-requirements}
+
+:::info
+Las experiencias web de 8th Wall deben visualizarse a través de **https**. Esto es **requerido** por los navegadores para el **acceso a la cámara**.
+:::
+
+Los navegadores móviles requieren la siguiente funcionalidad para soportar las experiencias web de 8th Wall:
+
+- **WebGL** (canvas.getContext('webgl') || canvas.getContext('webgl2'))
+- **getUserMedia** (navigator.mediaDevices.getUserMedia - **sólo necesario si AR está activado**)
+- **orientación del dispositivo** (window.DeviceOrientationEvent - **sólo necesario si SLAM/VPS está activado**)
+- **Web-Assembly/WASM** (window.WebAssembly)
+
+Esto se traduce en la siguiente compatibilidad para dispositivos iOS y Android:
+
+- iOS:
+  - **Safari** (iOS 11+)
+  - **Aplicaciones** que utilizan vistas web **SFSafariViewController** (iOS 13+)
+    - Apple añadió soporte para getUserMedia() a SFSafariViewController en iOS 13.  8th Wall funciona en aplicaciones iOS 13 que utilizan vistas web SFSafariViewController.
+    - Ejemplos: Twitter, Slack, Discord, Gmail, Hangouts, etc.
+  - **Aplicaciones/navegadores** que utilizan vistas web **WKWebView** (iOS 14.3+)
+    - Ejemplos:
+      - Cromo
+      - Firefox
+      - Microsoft Edge
+      - Facebook
+      - Facebook Messenger
+      - Instagram
+      - y más...
+- Android:
+  - **Navegadores** conocidos por soportar de forma nativa las características requeridas para WebAR:
+    - **Cromo**
+    - **Firefox**
+    - **Samsung Internet**
+    - **Microsoft Edge**
+  - **Aplicaciones** que utilizan Web Views conocidas por soportar las características requeridas para WebAR:
+    - Twitter, WhatsApp, Slack, Gmail, Hangouts, Reddit, LinkedIn, etc.

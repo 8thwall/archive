@@ -1,0 +1,27 @@
+---
+id: image-target
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import ImageTargetTable from "../../../gen/tables/ImageTarget.md"
+
+# イメージターゲット
+
+## 説明
+
+このコンポーネントは、エンティティのトランスフォームをXRの画像に追従させる。 画像が見つかったり失われたりするたびに、表示されたり隠れたりする。
+
+## プロパティ
+
+<ImageTargetTable />
+
+## 機能
+
+<ComponentFunctions
+    name="ImageTarget"
+    properties={{
+        name: '',
+    }}
+    mutate={`cursor.name = 'target';
+    return false;`}
+/>

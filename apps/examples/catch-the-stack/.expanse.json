@@ -1,0 +1,2802 @@
+{
+  "entrySpaceId": "9bcdcb58-b425-4b36-9f5e-c8de5f40e3bf",
+  "inputs": {
+    "default": [
+      {
+        "name": "moveLeft",
+        "bindings": [
+          {
+            "input": "keyboard:ArrowLeft",
+            "modifiers": []
+          },
+          {
+            "input": "keyboard:KeyA",
+            "modifiers": []
+          },
+          {
+            "input": "gamepad:button:14",
+            "modifiers": []
+          },
+          {
+            "input": "gamepad:axis:left:left",
+            "modifiers": []
+          }
+        ]
+      },
+      {
+        "name": "moveRight",
+        "bindings": [
+          {
+            "input": "keyboard:ArrowRight",
+            "modifiers": []
+          },
+          {
+            "input": "keyboard:KeyD",
+            "modifiers": []
+          },
+          {
+            "input": "gamepad:button:15",
+            "modifiers": []
+          },
+          {
+            "input": "gamepad:axis:left:right",
+            "modifiers": []
+          }
+        ]
+      }
+    ]
+  },
+  "objects": {
+    "0afafde1-af4c-416a-923c-0cb58dff1950": {
+      "components": {},
+      "geometry": null,
+      "id": "0afafde1-af4c-416a-923c-0cb58dff1950",
+      "material": null,
+      "name": "Main Menu Text",
+      "order": 1.1076033957616462,
+      "parentId": "fb241ca6-4f9c-4486-be2a-ec468ae1d446",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "color": "#000000",
+        "fontSize": 15,
+        "height": 14,
+        "text": "Main Menu",
+        "textAlign": "center",
+        "width": 80
+      }
+    },
+    "0ca69126-eea3-4cff-98c4-d74ba29ea2b6": {
+      "audio": {
+        "loop": true,
+        "paused": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Audio/intro-music.mp3"
+        },
+        "volume": 0.2
+      },
+      "components": {},
+      "geometry": null,
+      "id": "0ca69126-eea3-4cff-98c4-d74ba29ea2b6",
+      "material": null,
+      "name": "Intro Music",
+      "order": 4.361993261729944,
+      "parentId": "216fd8ac-43d4-46b4-903e-3db890815f19",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "0d1a4d37-0781-449c-b128-204e448d2a9e": {
+      "audio": {
+        "paused": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Audio/item-collected.mp3"
+        },
+        "volume": 1
+      },
+      "components": {},
+      "geometry": null,
+      "id": "0d1a4d37-0781-449c-b128-204e448d2a9e",
+      "material": null,
+      "name": "Item Collected Sound",
+      "order": 3.2415459785533267,
+      "parentId": "216fd8ac-43d4-46b4-903e-3db890815f19",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "0d268e07-5569-48c1-908f-3de563afe22e": {
+      "components": {},
+      "geometry": null,
+      "id": "0d268e07-5569-48c1-908f-3de563afe22e",
+      "material": null,
+      "name": "2",
+      "order": 5.5787506103515625,
+      "parentId": "3e3610dd-25b2-4281-b6d6-e5fdd603e42b",
+      "position": [
+        0,
+        63.411509452047426,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        3.0999999046325684,
+        3.0999999046325684,
+        3.0999999046325684
+      ],
+      "ui": {
+        "alignContent": "flex-start",
+        "alignItems": "flex-start",
+        "alignSelf": "",
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "backgroundSize": "contain",
+        "borderColor": "#000000",
+        "borderRadius": 0,
+        "borderRadiusBottomLeft": "",
+        "borderRadiusBottomRight": "",
+        "borderRadiusTopLeft": "",
+        "borderRadiusTopRight": "",
+        "borderWidth": 0,
+        "bottom": "",
+        "color": "#ffffff",
+        "columnGap": "",
+        "direction": "ltr",
+        "display": "",
+        "fixedSize": false,
+        "flex": 0,
+        "flexBasis": "",
+        "flexDirection": "row",
+        "flexGrow": 0,
+        "flexShrink": 0,
+        "flexWrap": "nowrap",
+        "font": {
+          "type": "font",
+          "font": "Nunito"
+        },
+        "fontSize": 16,
+        "gap": "",
+        "height": "1536",
+        "image": {
+          "type": "asset",
+          "asset": "assets/VerticalScroll/scroll_2.jpg"
+        },
+        "justifyContent": "flex-start",
+        "left": "",
+        "margin": "",
+        "marginBottom": "",
+        "marginLeft": "",
+        "marginRight": "",
+        "marginTop": "",
+        "maxHeight": "",
+        "maxWidth": "",
+        "minHeight": "",
+        "minWidth": "",
+        "nineSliceBorderBottom": "0",
+        "nineSliceBorderLeft": "0",
+        "nineSliceBorderRight": "0",
+        "nineSliceBorderTop": "0",
+        "nineSliceScaleFactor": 1,
+        "opacity": 1,
+        "overflow": "",
+        "padding": "",
+        "paddingBottom": "",
+        "paddingLeft": "",
+        "paddingRight": "",
+        "paddingTop": "",
+        "position": "static",
+        "right": "",
+        "rowGap": "",
+        "text": "",
+        "textAlign": "center",
+        "top": "",
+        "type": "3d",
+        "video": {
+          "type": "url",
+          "url": ""
+        },
+        "width": "1024"
+      }
+    },
+    "0f34b8f3-f9c1-41c3-8fdc-d8a138b94ef6": {
+      "components": {},
+      "geometry": null,
+      "id": "0f34b8f3-f9c1-41c3-8fdc-d8a138b94ef6",
+      "material": null,
+      "name": "Play Again Text",
+      "order": -0.949879790894268,
+      "parentId": "6d45826c-f5ff-4367-9517-bedf37cba450",
+      "position": [
+        -2.2108570510403205e-41,
+        -2.220446049250313e-16,
+        -5.551115123125783e-17
+      ],
+      "rotation": [
+        0,
+        4.591774807899561e-41,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "color": "#000000",
+        "fontSize": 15,
+        "height": 14,
+        "text": "Play Again",
+        "textAlign": "center",
+        "width": 80
+      }
+    },
+    "12badcdc-9762-4971-aca1-1e92ea24b957": {
+      "components": {},
+      "geometry": null,
+      "hidden": false,
+      "id": "12badcdc-9762-4971-aca1-1e92ea24b957",
+      "material": null,
+      "name": "Score Board",
+      "order": 1.8858337022318565,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "position": [
+        0,
+        5.178692147263435,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "198f8178-01eb-4dce-a476-5b82812a29c6": {
+      "components": {},
+      "geometry": null,
+      "id": "198f8178-01eb-4dce-a476-5b82812a29c6",
+      "material": null,
+      "name": "Score",
+      "order": 0.0046089265306870075,
+      "parentId": "482953c7-1157-4d43-ba29-ab5c00704f93",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "bottom": "",
+        "color": "#ffffff",
+        "flexWrap": "nowrap",
+        "fontSize": 24,
+        "height": 36,
+        "left": "",
+        "margin": "",
+        "marginBottom": 20,
+        "marginLeft": 8,
+        "marginRight": 8,
+        "marginTop": 20,
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "paddingRight": 0,
+        "paddingTop": 0,
+        "position": "absolute",
+        "right": "",
+        "text": "0",
+        "textAlign": "left",
+        "top": "",
+        "type": "overlay",
+        "width": 100
+      }
+    },
+    "1ee0aedb-1407-4e38-a4ab-82465d30af63": {
+      "components": {},
+      "geometry": null,
+      "id": "1ee0aedb-1407-4e38-a4ab-82465d30af63",
+      "material": null,
+      "name": "4",
+      "order": 5.5787506103515625,
+      "parentId": "89c5fac9-9e24-4568-a211-9849ee86a698",
+      "position": [
+        0,
+        47.19749511805057,
+        -1.2
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "alignContent": "flex-start",
+        "alignItems": "flex-start",
+        "alignSelf": "",
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "backgroundSize": "contain",
+        "borderColor": "#000000",
+        "borderRadius": 0,
+        "borderRadiusBottomLeft": "",
+        "borderRadiusBottomRight": "",
+        "borderRadiusTopLeft": "",
+        "borderRadiusTopRight": "",
+        "borderWidth": 0,
+        "bottom": "",
+        "color": "#ffffff",
+        "columnGap": "",
+        "direction": "ltr",
+        "display": "",
+        "fixedSize": false,
+        "flex": 0,
+        "flexBasis": "",
+        "flexDirection": "row",
+        "flexGrow": 0,
+        "flexShrink": 0,
+        "flexWrap": "nowrap",
+        "font": {
+          "type": "font",
+          "font": "Nunito"
+        },
+        "fontSize": 16,
+        "gap": "",
+        "height": "1536",
+        "image": {
+          "type": "asset",
+          "asset": "assets/VerticalScroll/scroll_4.jpg"
+        },
+        "justifyContent": "flex-start",
+        "left": "",
+        "margin": "",
+        "marginBottom": "",
+        "marginLeft": "",
+        "marginRight": "",
+        "marginTop": "",
+        "maxHeight": "",
+        "maxWidth": "",
+        "minHeight": "",
+        "minWidth": "",
+        "nineSliceBorderBottom": "0",
+        "nineSliceBorderLeft": "0",
+        "nineSliceBorderRight": "0",
+        "nineSliceBorderTop": "0",
+        "nineSliceScaleFactor": 1,
+        "opacity": 1,
+        "overflow": "",
+        "padding": "",
+        "paddingBottom": "",
+        "paddingLeft": "",
+        "paddingRight": "",
+        "paddingTop": "",
+        "position": "static",
+        "right": "",
+        "rowGap": "",
+        "text": "",
+        "textAlign": "center",
+        "top": "",
+        "type": "3d",
+        "video": {
+          "type": "url",
+          "url": ""
+        },
+        "width": "1024"
+      }
+    },
+    "1eea111b-1128-4e59-adb9-f9b35c372c5c": {
+      "components": {},
+      "geometry": null,
+      "id": "1eea111b-1128-4e59-adb9-f9b35c372c5c",
+      "material": null,
+      "name": "Bonus",
+      "order": 1.0269987445897901,
+      "parentId": "482953c7-1157-4d43-ba29-ab5c00704f93",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "alignItems": "flex-start",
+        "bottom": "",
+        "color": "#ffffff",
+        "flexDirection": "row-reverse",
+        "flexWrap": "wrap",
+        "fontSize": 32,
+        "height": 34,
+        "justifyContent": "center",
+        "left": "50%",
+        "margin": "",
+        "marginBottom": 20,
+        "marginLeft": -50,
+        "marginRight": -50,
+        "marginTop": 20,
+        "paddingBottom": 0,
+        "paddingTop": 0,
+        "position": "absolute",
+        "right": "",
+        "text": "1x",
+        "top": "",
+        "type": "overlay",
+        "width": 100
+      }
+    },
+    "203a18ec-24b6-439b-99bd-57a82de9180d": {
+      "components": {
+        "3054923c-0dc7-4e8f-abf0-ef6de05c793c": {
+          "id": "3054923c-0dc7-4e8f-abf0-ef6de05c793c",
+          "name": "GameManager",
+          "parameters": {
+            "baseOfStack": {
+              "type": "entity",
+              "id": "9fba66d4-c3a6-4e13-91b9-1f95f63931c2"
+            },
+            "bonusDisplay": {
+              "type": "entity",
+              "id": "1eea111b-1128-4e59-adb9-f9b35c372c5c"
+            },
+            "camera": {
+              "type": "entity",
+              "id": "a608ddd9-9379-464d-966f-5d8d8674c83c"
+            },
+            "desktopVerticalScroll": {
+              "type": "entity",
+              "id": "3e3610dd-25b2-4281-b6d6-e5fdd603e42b"
+            },
+            "gameOver": {
+              "type": "entity",
+              "id": "575bf1c2-9ec8-4821-9741-99f3d8f48ba1"
+            },
+            "gameOverMainMenuButton": {
+              "type": "entity",
+              "id": "fb241ca6-4f9c-4486-be2a-ec468ae1d446"
+            },
+            "gameOverPlayAgainButton": {
+              "type": "entity",
+              "id": "6d45826c-f5ff-4367-9517-bedf37cba450"
+            },
+            "gameOverScoreText": {
+              "type": "entity",
+              "id": "5e5d6bdd-4e6f-4d47-bd8c-73596e8191c1"
+            },
+            "gameOverTitle": {
+              "type": "entity",
+              "id": "a8cfaea3-2721-41a0-a89e-fe3773d6968f"
+            },
+            "highScoreDisplay": {
+              "type": "entity",
+              "id": "c573ad94-5e5e-478e-b1d4-d2589fa5bd59"
+            },
+            "itemScoreText": {
+              "type": "entity",
+              "id": "e72d7283-4327-4c8c-bf74-1da695f61cd5"
+            },
+            "mobileVerticalScroll": {
+              "type": "entity",
+              "id": "89c5fac9-9e24-4568-a211-9849ee86a698"
+            },
+            "pointDisplay": {
+              "type": "entity",
+              "id": "198f8178-01eb-4dce-a476-5b82812a29c6"
+            },
+            "pointValue": {
+              "type": "entity",
+              "id": "198f8178-01eb-4dce-a476-5b82812a29c6"
+            },
+            "scoreBoardFrame": {
+              "type": "entity",
+              "id": "482953c7-1157-4d43-ba29-ab5c00704f93"
+            },
+            "gameOverTitleShadow": {
+              "type": "entity",
+              "id": "c61351bd-2ede-4035-a3e5-d9cfa40e8a8c"
+            },
+            "gameOverScoreTextShadow": {
+              "type": "entity",
+              "id": "e14fe275-fcbb-4704-8909-5f818fa1e38e"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "203a18ec-24b6-439b-99bd-57a82de9180d",
+      "material": null,
+      "name": "Game Manager",
+      "order": 0.8858337022318566,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "216fd8ac-43d4-46b4-903e-3db890815f19": {
+      "components": {
+        "d85a3cd9-f7c9-4e48-8090-b5799f183392": {
+          "id": "d85a3cd9-f7c9-4e48-8090-b5799f183392",
+          "name": "audio-controller",
+          "parameters": {
+            "bgMusic": {
+              "type": "entity",
+              "id": "83760528-1b38-44dd-bb1e-17c9dd4b28fd"
+            },
+            "gameOverSound": {
+              "type": "entity",
+              "id": "3e451817-1f30-4fbc-aeec-124869e5f393"
+            },
+            "introMusic": {
+              "type": "entity",
+              "id": "0ca69126-eea3-4cff-98c4-d74ba29ea2b6"
+            },
+            "itemCollectedSound": {
+              "type": "entity",
+              "id": "0d1a4d37-0781-449c-b128-204e448d2a9e"
+            },
+            "streakBonusSound": {
+              "type": "entity",
+              "id": "57d4311c-5928-4e64-b643-bb97058df01b"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "216fd8ac-43d4-46b4-903e-3db890815f19",
+      "material": null,
+      "name": "Audio Controller",
+      "parentId": "d5d92687-81bc-4bfd-91cc-6c1061e6a04a",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "376b29f9-ed0e-4652-9ed6-6e1a8bc30710": {
+      "components": {},
+      "geometry": null,
+      "id": "376b29f9-ed0e-4652-9ed6-6e1a8bc30710",
+      "material": null,
+      "name": "3",
+      "order": 5.5787506103515625,
+      "parentId": "89c5fac9-9e24-4568-a211-9849ee86a698",
+      "position": [
+        0,
+        31.83919717370142,
+        -1.2
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "alignContent": "flex-start",
+        "alignItems": "flex-start",
+        "alignSelf": "",
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "backgroundSize": "contain",
+        "borderColor": "#000000",
+        "borderRadius": 0,
+        "borderRadiusBottomLeft": "",
+        "borderRadiusBottomRight": "",
+        "borderRadiusTopLeft": "",
+        "borderRadiusTopRight": "",
+        "borderWidth": 0,
+        "bottom": "",
+        "columnGap": "",
+        "direction": "ltr",
+        "display": "",
+        "fixedSize": false,
+        "flex": 0,
+        "flexBasis": "",
+        "flexDirection": "row",
+        "flexGrow": 0,
+        "flexShrink": 0,
+        "flexWrap": "nowrap",
+        "gap": "",
+        "height": "1536",
+        "image": {
+          "type": "asset",
+          "asset": "assets/VerticalScroll/scroll_3.jpg"
+        },
+        "justifyContent": "flex-start",
+        "left": "",
+        "margin": "",
+        "marginBottom": "",
+        "marginLeft": "",
+        "marginRight": "",
+        "marginTop": "",
+        "maxHeight": "",
+        "maxWidth": "",
+        "minHeight": "",
+        "minWidth": "",
+        "nineSliceBorderBottom": "0",
+        "nineSliceBorderLeft": "0",
+        "nineSliceBorderRight": "0",
+        "nineSliceBorderTop": "0",
+        "nineSliceScaleFactor": 1,
+        "opacity": 1,
+        "overflow": "",
+        "padding": "",
+        "paddingBottom": "",
+        "paddingLeft": "",
+        "paddingRight": "",
+        "paddingTop": "",
+        "position": "static",
+        "right": "",
+        "rowGap": "",
+        "top": "",
+        "type": "3d",
+        "video": {
+          "type": "url",
+          "url": ""
+        },
+        "width": "1024"
+      }
+    },
+    "3796c355-c66f-470d-b28b-414d62882198": {
+      "components": {},
+      "geometry": null,
+      "hidden": false,
+      "id": "3796c355-c66f-470d-b28b-414d62882198",
+      "material": null,
+      "name": "InstructionUI",
+      "order": 2.645158833873573,
+      "parentId": "9bcdcb58-b425-4b36-9f5e-c8de5f40e3bf",
+      "position": [
+        0,
+        -0.12987087165643219,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#f7c059",
+        "backgroundOpacity": 1,
+        "borderColor": "#9e9e9e",
+        "borderRadius": 18,
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "height": 80,
+        "paddingBottom": 0,
+        "paddingLeft": 10,
+        "paddingRight": 0,
+        "paddingTop": 8,
+        "type": "3d",
+        "width": 150
+      }
+    },
+    "3e3610dd-25b2-4281-b6d6-e5fdd603e42b": {
+      "components": {},
+      "geometry": null,
+      "hidden": true,
+      "id": "3e3610dd-25b2-4281-b6d6-e5fdd603e42b",
+      "material": null,
+      "name": "DesktopVerticalScroll",
+      "order": 4.8858337022318565,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "position": [
+        0,
+        2.4131576701888777,
+        -1.2
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "3e451817-1f30-4fbc-aeec-124869e5f393": {
+      "audio": {
+        "paused": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Audio/game-over.mp3"
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "id": "3e451817-1f30-4fbc-aeec-124869e5f393",
+      "material": null,
+      "name": "Game Over Sound",
+      "order": 0.5538190415110213,
+      "parentId": "216fd8ac-43d4-46b4-903e-3db890815f19",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "47699d9e-18a5-4f88-a4f9-b8be92e8f74a": {
+      "components": {},
+      "geometry": null,
+      "id": "47699d9e-18a5-4f88-a4f9-b8be92e8f74a",
+      "light": {
+        "type": "ambient"
+      },
+      "material": null,
+      "name": "Ambient Light",
+      "order": 8.885833702231857,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "482953c7-1157-4d43-ba29-ab5c00704f93": {
+      "components": {},
+      "geometry": null,
+      "id": "482953c7-1157-4d43-ba29-ab5c00704f93",
+      "material": null,
+      "name": "Frame",
+      "order": 3.456678092690464,
+      "parentId": "12badcdc-9762-4971-aca1-1e92ea24b957",
+      "position": [
+        0,
+        -5.178692147263435,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "flexDirection": "row",
+        "background": "#191d38",
+        "backgroundOpacity": 0.5,
+        "bottom": "",
+        "height": 64,
+        "left": "",
+        "position": "absolute",
+        "right": "",
+        "top": "",
+        "type": "overlay",
+        "width": "100%",
+        "backgroundSize": "contain",
+        "paddingTop": "",
+        "alignItems": "flex-end",
+        "justifyContent": "flex-start"
+      }
+    },
+    "54387b54-f940-4b75-8820-ba529b70205a": {
+      "components": {},
+      "geometry": null,
+      "id": "54387b54-f940-4b75-8820-ba529b70205a",
+      "material": null,
+      "name": "PlayButtonText",
+      "order": 0.4679756487703559,
+      "parentId": "86a8fe06-b3f9-4e00-8b8b-3944127ccc07",
+      "position": [
+        0,
+        -0.759896441507894,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "alignItems": "flex-start",
+        "background": "#000000",
+        "backgroundOpacity": 0,
+        "borderRadius": 18,
+        "color": "#000000",
+        "flexDirection": "row",
+        "fontSize": 15,
+        "height": 15,
+        "justifyContent": "flex-start",
+        "paddingBottom": 0,
+        "paddingTop": 0,
+        "text": "Play",
+        "textAlign": "center",
+        "type": "3d",
+        "width": 100,
+        "position": "absolute",
+        "top": "",
+        "left": "",
+        "bottom": "",
+        "right": ""
+      }
+    },
+    "575bf1c2-9ec8-4821-9741-99f3d8f48ba1": {
+      "components": {},
+      "geometry": null,
+      "hidden": false,
+      "id": "575bf1c2-9ec8-4821-9741-99f3d8f48ba1",
+      "material": null,
+      "name": "Game Over",
+      "order": 2.8858337022318565,
+      "parentId": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "position": [
+        -1.0865226062976905e-15,
+        -5.000000034243358,
+        8.872130312290302
+      ],
+      "rotation": [
+        0,
+        1,
+        0,
+        6.123233995736767e-17
+      ],
+      "scale": [
+        1.000000135344216,
+        1.0000000068486716,
+        1.0000001284955422
+      ]
+    },
+    "57d4311c-5928-4e64-b643-bb97058df01b": {
+      "audio": {
+        "paused": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Audio/streak-bonus.mp3"
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "id": "57d4311c-5928-4e64-b643-bb97058df01b",
+      "material": null,
+      "name": "Streak Bonus Sound",
+      "order": 1.7356966948871173,
+      "parentId": "216fd8ac-43d4-46b4-903e-3db890815f19",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "5e5d6bdd-4e6f-4d47-bd8c-73596e8191c1": {
+      "components": {},
+      "geometry": null,
+      "hidden": false,
+      "id": "5e5d6bdd-4e6f-4d47-bd8c-73596e8191c1",
+      "material": null,
+      "name": "Score",
+      "order": 0.9618250174725609,
+      "parentId": "a80b0c38-37cf-4cea-b0f1-210a94994403",
+      "position": [
+        4.7132712754968816e-24,
+        7.290226759365889,
+        -4.427895022169331
+      ],
+      "rotation": [
+        0,
+        -1.2325951735913806e-32,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        0.9999999999999998
+      ],
+      "ui": {
+        "color": "#000000",
+        "fontSize": 64,
+        "height": 10,
+        "text": "Score: ",
+        "type": "3d",
+        "width": 800,
+        "position": "absolute",
+        "top": 180,
+        "left": 0,
+        "bottom": "",
+        "right": ""
+      }
+    },
+    "61e11c39-b5b6-4c0e-82c2-97dde0c9b63c": {
+      "components": {},
+      "geometry": null,
+      "id": "61e11c39-b5b6-4c0e-82c2-97dde0c9b63c",
+      "material": null,
+      "name": "2",
+      "order": 5.5787506103515625,
+      "parentId": "89c5fac9-9e24-4568-a211-9849ee86a698",
+      "position": [
+        0,
+        16.51345859137925,
+        -1.2
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "alignContent": "flex-start",
+        "alignItems": "flex-start",
+        "alignSelf": "",
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "backgroundSize": "contain",
+        "borderColor": "#000000",
+        "borderRadius": 0,
+        "borderRadiusBottomLeft": "",
+        "borderRadiusBottomRight": "",
+        "borderRadiusTopLeft": "",
+        "borderRadiusTopRight": "",
+        "borderWidth": 0,
+        "bottom": "",
+        "color": "#ffffff",
+        "columnGap": "",
+        "direction": "ltr",
+        "display": "",
+        "fixedSize": false,
+        "flex": 0,
+        "flexBasis": "",
+        "flexDirection": "row",
+        "flexGrow": 0,
+        "flexShrink": 0,
+        "flexWrap": "nowrap",
+        "font": {
+          "type": "font",
+          "font": "Nunito"
+        },
+        "fontSize": 16,
+        "gap": "",
+        "height": "1536",
+        "image": {
+          "type": "asset",
+          "asset": "assets/VerticalScroll/scroll_2.jpg"
+        },
+        "justifyContent": "flex-start",
+        "left": "",
+        "margin": "",
+        "marginBottom": "",
+        "marginLeft": "",
+        "marginRight": "",
+        "marginTop": "",
+        "maxHeight": "",
+        "maxWidth": "",
+        "minHeight": "",
+        "minWidth": "",
+        "nineSliceBorderBottom": "0",
+        "nineSliceBorderLeft": "0",
+        "nineSliceBorderRight": "0",
+        "nineSliceBorderTop": "0",
+        "nineSliceScaleFactor": 1,
+        "opacity": 1,
+        "overflow": "",
+        "padding": "",
+        "paddingBottom": "",
+        "paddingLeft": "",
+        "paddingRight": "",
+        "paddingTop": "",
+        "position": "static",
+        "right": "",
+        "rowGap": "",
+        "text": "",
+        "textAlign": "center",
+        "top": "",
+        "type": "3d",
+        "video": {
+          "type": "url",
+          "url": ""
+        },
+        "width": "1024"
+      }
+    },
+    "64ebec11-9827-4383-a375-becca90363c1": {
+      "components": {
+        "dfaa7934-831e-4a23-abbe-5476810585fb": {
+          "id": "dfaa7934-831e-4a23-abbe-5476810585fb",
+          "name": "main-menu",
+          "parameters": {
+            "backButton": {
+              "type": "entity",
+              "id": "0dbda327-6240-4d31-8322-8e88f80ce101"
+            },
+            "backgroundDesktopImage": {
+              "type": "entity",
+              "id": "9c950cba-1a8b-46e8-846d-0f05e8ad28d2"
+            },
+            "backgroundMobileImage": {
+              "type": "entity",
+              "id": "be389a91-4b2d-45b5-970f-cbbd5f756d91"
+            },
+            "gyroscopeButton": {
+              "type": "entity",
+              "id": "e5a8e2eb-3d77-401d-945b-ba6b7ca8377b"
+            },
+            "gyroscopeError": {
+              "type": "entity",
+              "id": "e5a8e2eb-3d77-401d-945b-ba6b7ca8377b"
+            },
+            "howToPlayText": {
+              "type": "entity",
+              "id": "e6dc395f-cba4-42bd-bd9c-7698be278400"
+            },
+            "instructionButton": {
+              "type": "entity",
+              "id": "45c78926-3a14-4197-9dd1-e8c289558dbd"
+            },
+            "instructionText": {
+              "type": "entity",
+              "id": "9019f7a0-f768-46d7-9e38-fc52eca214b2"
+            },
+            "instructionUI": {
+              "type": "entity",
+              "id": "3796c355-c66f-470d-b28b-414d62882198"
+            },
+            "mainMenuUI": {
+              "type": "entity",
+              "id": "681779e5-8bfc-4093-9bbe-19e1f623c5d8"
+            },
+            "playButton": {
+              "type": "entity",
+              "id": "86a8fe06-b3f9-4e00-8b8b-3944127ccc07"
+            },
+            "playButtonText": {
+              "type": "entity",
+              "id": "11d5d755-aa71-4515-98de-5d156d439e1a"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "64ebec11-9827-4383-a375-becca90363c1",
+      "material": null,
+      "name": "MainMenuManager",
+      "order": 0.6451588338735733,
+      "parentId": "9bcdcb58-b425-4b36-9f5e-c8de5f40e3bf",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "681779e5-8bfc-4093-9bbe-19e1f623c5d8": {
+      "components": {},
+      "geometry": null,
+      "hidden": false,
+      "id": "681779e5-8bfc-4093-9bbe-19e1f623c5d8",
+      "material": null,
+      "name": "MainMenuUI",
+      "order": 1.6451588338735732,
+      "parentId": "9bcdcb58-b425-4b36-9f5e-c8de5f40e3bf",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "6d45826c-f5ff-4367-9517-bedf37cba450": {
+      "components": {},
+      "geometry": null,
+      "id": "6d45826c-f5ff-4367-9517-bedf37cba450",
+      "material": null,
+      "name": "Play Again Container",
+      "order": 0.5087103894532543,
+      "parentId": "575bf1c2-9ec8-4821-9741-99f3d8f48ba1",
+      "position": [
+        0,
+        4.953854214896744,
+        1.199467420578003
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        3,
+        3,
+        3
+      ],
+      "ui": {
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "alignItems": "center",
+        "background": "#fca809",
+        "backgroundOpacity": 1,
+        "backgroundSize": "contain",
+        "borderRadius": 18,
+        "flexDirection": "row",
+        "flexWrap": "nowrap",
+        "gap": 6,
+        "height": 36,
+        "justifyContent": "center",
+        "padding": "10",
+        "type": "3d",
+        "width": 100
+      }
+    },
+    "729478ae-d067-4e0c-a753-66c2e9efb625": {
+      "components": {},
+      "geometry": {
+        "depth": 1,
+        "height": 1,
+        "type": "box",
+        "width": 1
+      },
+      "id": "729478ae-d067-4e0c-a753-66c2e9efb625",
+      "material": {
+        "color": "#aa8db4",
+        "type": "basic"
+      },
+      "name": "Box",
+      "order": 1.4038940050501252,
+      "position": [
+        0,
+        0.5,
+        0
+      ],
+      "prefab": true,
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "76906c8c-0904-4850-b76b-1dde3f05fb77": {
+      "camera": {
+        "type": "perspective"
+      },
+      "components": {},
+      "geometry": null,
+      "id": "76906c8c-0904-4850-b76b-1dde3f05fb77",
+      "material": null,
+      "name": "Camera",
+      "order": 4.645158833873573,
+      "parentId": "9bcdcb58-b425-4b36-9f5e-c8de5f40e3bf",
+      "position": [
+        0,
+        1,
+        2
+      ],
+      "rotation": [
+        0,
+        -1,
+        0,
+        6.123233995736766e-17
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "80e9d70d-0e05-4954-99b1-5a3f226022c4": {
+      "components": {},
+      "geometry": null,
+      "id": "80e9d70d-0e05-4954-99b1-5a3f226022c4",
+      "material": null,
+      "name": "4",
+      "order": 5.5787506103515625,
+      "parentId": "3e3610dd-25b2-4281-b6d6-e5fdd603e42b",
+      "position": [
+        0,
+        158.34,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        3.0999999046325684,
+        3.0999999046325684,
+        3.0999999046325684
+      ],
+      "ui": {
+        "alignContent": "flex-start",
+        "alignItems": "flex-start",
+        "alignSelf": "",
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "backgroundSize": "contain",
+        "borderColor": "#000000",
+        "borderRadius": 0,
+        "borderRadiusBottomLeft": "",
+        "borderRadiusBottomRight": "",
+        "borderRadiusTopLeft": "",
+        "borderRadiusTopRight": "",
+        "borderWidth": 0,
+        "bottom": "",
+        "color": "#ffffff",
+        "columnGap": "",
+        "direction": "ltr",
+        "display": "",
+        "fixedSize": false,
+        "flex": 0,
+        "flexBasis": "",
+        "flexDirection": "row",
+        "flexGrow": 0,
+        "flexShrink": 0,
+        "flexWrap": "nowrap",
+        "font": {
+          "type": "font",
+          "font": "Nunito"
+        },
+        "fontSize": 16,
+        "gap": "",
+        "height": "1536",
+        "image": {
+          "type": "asset",
+          "asset": "assets/VerticalScroll/scroll_4.jpg"
+        },
+        "justifyContent": "flex-start",
+        "left": "",
+        "margin": "",
+        "marginBottom": "",
+        "marginLeft": "",
+        "marginRight": "",
+        "marginTop": "",
+        "maxHeight": "",
+        "maxWidth": "",
+        "minHeight": "",
+        "minWidth": "",
+        "nineSliceBorderBottom": "0",
+        "nineSliceBorderLeft": "0",
+        "nineSliceBorderRight": "0",
+        "nineSliceBorderTop": "0",
+        "nineSliceScaleFactor": 1,
+        "opacity": 1,
+        "overflow": "",
+        "padding": "",
+        "paddingBottom": "",
+        "paddingLeft": "",
+        "paddingRight": "",
+        "paddingTop": "",
+        "position": "static",
+        "right": "",
+        "rowGap": "",
+        "text": "",
+        "textAlign": "center",
+        "top": "",
+        "type": "3d",
+        "video": {
+          "type": "url",
+          "url": ""
+        },
+        "width": "1024"
+      }
+    },
+    "83760528-1b38-44dd-bb1e-17c9dd4b28fd": {
+      "audio": {
+        "loop": true,
+        "paused": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Audio/background-music.mp3"
+        },
+        "volume": 0.1
+      },
+      "components": {},
+      "geometry": null,
+      "id": "83760528-1b38-44dd-bb1e-17c9dd4b28fd",
+      "material": null,
+      "name": "Background Music",
+      "order": 5.436700090898101,
+      "parentId": "216fd8ac-43d4-46b4-903e-3db890815f19",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "86a8fe06-b3f9-4e00-8b8b-3944127ccc07": {
+      "components": {},
+      "geometry": null,
+      "hidden": false,
+      "id": "86a8fe06-b3f9-4e00-8b8b-3944127ccc07",
+      "material": null,
+      "name": "PlayButton",
+      "order": 1.2177382508103598,
+      "parentId": "681779e5-8bfc-4093-9bbe-19e1f623c5d8",
+      "position": [
+        0,
+        0.5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "alignItems": "center",
+        "background": "#fca809",
+        "backgroundOpacity": 1,
+        "borderColor": "#000000",
+        "borderRadius": 16,
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "gap": "6",
+        "height": 36,
+        "justifyContent": "center",
+        "padding": "10",
+        "text": "",
+        "type": "3d",
+        "width": 100
+      }
+    },
+    "89c5fac9-9e24-4568-a211-9849ee86a698": {
+      "components": {},
+      "geometry": null,
+      "hidden": false,
+      "id": "89c5fac9-9e24-4568-a211-9849ee86a698",
+      "material": null,
+      "name": "MobileVerticalScroll",
+      "order": 4.8858337022318565,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "position": [
+        0,
+        3.7158053159881783,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "9c950cba-1a8b-46e8-846d-0f05e8ad28d2": {
+      "components": {},
+      "geometry": null,
+      "hidden": false,
+      "id": "9c950cba-1a8b-46e8-846d-0f05e8ad28d2",
+      "material": null,
+      "name": "CloudsDesktop",
+      "order": 6.645158833873573,
+      "parentId": "9bcdcb58-b425-4b36-9f5e-c8de5f40e3bf",
+      "position": [
+        0.46624932339971936,
+        2,
+        -1.223335862159729
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "alignItems": "flex-start",
+        "backgroundOpacity": 1,
+        "backgroundSize": "contain",
+        "flexDirection": "row",
+        "flexWrap": "nowrap",
+        "height": 1024,
+        "image": {
+          "type": "asset",
+          "asset": "assets/clouds_horizontal.jpg"
+        },
+        "justifyContent": "flex-start",
+        "paddingBottom": 0,
+        "paddingTop": 0,
+        "type": "3d",
+        "width": 1536
+      }
+    },
+    "9fba66d4-c3a6-4e13-91b9-1f95f63931c2": {
+      "collider": {
+        "geometry": {
+          "type": "box",
+          "depth": 6,
+          "height": 1.5,
+          "width": 6
+        },
+        "lockXAxis": true,
+        "lockYAxis": true,
+        "lockZAxis": true,
+        "mass": 0
+      },
+      "components": {
+        "078bd381-d8e9-483c-9ce4-661895cc38c9": {
+          "id": "078bd381-d8e9-483c-9ce4-661895cc38c9",
+          "name": "StackMovementController",
+          "parameters": {
+            "camera": {
+              "type": "entity",
+              "id": "a608ddd9-9379-464d-966f-5d8d8674c83c"
+            },
+            "step": 0.25
+          }
+        },
+        "515eb2af-5878-494e-8f68-34d3a8c3b56d": {
+          "id": "515eb2af-5878-494e-8f68-34d3a8c3b56d",
+          "name": "StackItemCollider",
+          "parameters": {
+            "bottomBun": {
+              "type": "entity",
+              "id": "9fba66d4-c3a6-4e13-91b9-1f95f63931c2"
+            }
+          }
+        }
+      },
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/bun-bottom.glb"
+        }
+      },
+      "id": "9fba66d4-c3a6-4e13-91b9-1f95f63931c2",
+      "name": "Bottom Bun",
+      "order": 6.8858337022318565,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "position": [
+        -0.4197487368713926,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "a596a2bd-f9e2-4130-ab12-e74e9c281a48": {
+      "components": {},
+      "geometry": null,
+      "id": "a596a2bd-f9e2-4130-ab12-e74e9c281a48",
+      "material": null,
+      "name": "6",
+      "order": 5.5787506103515625,
+      "parentId": "3e3610dd-25b2-4281-b6d6-e5fdd603e42b",
+      "position": [
+        0,
+        252.9582714259665,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        3.0999999046325684,
+        3.0999999046325684,
+        3.0999999046325684
+      ],
+      "ui": {
+        "alignContent": "flex-start",
+        "alignItems": "flex-start",
+        "alignSelf": "",
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "backgroundSize": "contain",
+        "borderColor": "#000000",
+        "borderRadius": 0,
+        "borderRadiusBottomLeft": "",
+        "borderRadiusBottomRight": "",
+        "borderRadiusTopLeft": "",
+        "borderRadiusTopRight": "",
+        "borderWidth": 0,
+        "bottom": "",
+        "color": "#ffffff",
+        "columnGap": "",
+        "direction": "ltr",
+        "display": "",
+        "fixedSize": false,
+        "flex": 0,
+        "flexBasis": "",
+        "flexDirection": "row",
+        "flexGrow": 0,
+        "flexShrink": 0,
+        "flexWrap": "nowrap",
+        "font": {
+          "type": "font",
+          "font": "Nunito"
+        },
+        "fontSize": 16,
+        "gap": "",
+        "height": "1536",
+        "image": {
+          "type": "asset",
+          "asset": "assets/VerticalScroll/scroll_6.jpg"
+        },
+        "justifyContent": "flex-start",
+        "left": "",
+        "margin": "",
+        "marginBottom": "",
+        "marginLeft": "",
+        "marginRight": "",
+        "marginTop": "",
+        "maxHeight": "",
+        "maxWidth": "",
+        "minHeight": "",
+        "minWidth": "",
+        "nineSliceBorderBottom": "0",
+        "nineSliceBorderLeft": "0",
+        "nineSliceBorderRight": "0",
+        "nineSliceBorderTop": "0",
+        "nineSliceScaleFactor": 1,
+        "opacity": 1,
+        "overflow": "",
+        "padding": "",
+        "paddingBottom": "",
+        "paddingLeft": "",
+        "paddingRight": "",
+        "paddingTop": "",
+        "position": "static",
+        "right": "",
+        "rowGap": "",
+        "text": "",
+        "textAlign": "center",
+        "top": "",
+        "type": "3d",
+        "video": {
+          "type": "url",
+          "url": ""
+        },
+        "width": "1024"
+      }
+    },
+    "a5e7cbfc-db39-4131-9473-4c0be7a678ec": {
+      "components": {},
+      "geometry": {
+        "height": 10,
+        "type": "plane",
+        "width": 10
+      },
+      "hidden": true,
+      "id": "a5e7cbfc-db39-4131-9473-4c0be7a678ec",
+      "material": {
+        "color": "#FFFFFF",
+        "type": "basic"
+      },
+      "name": "Plane",
+      "order": 7.8858337022318565,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        -0.7071068286895729,
+        0,
+        0,
+        0.7071067336835191
+      ],
+      "scale": [
+        1,
+        1.0000000500651627,
+        1.0000000500651627
+      ]
+    },
+    "a608ddd9-9379-464d-966f-5d8d8674c83c": {
+      "camera": {
+        "type": "perspective",
+        "xr": {
+          "desktop": "3D",
+          "xrCameraType": "3dOnly",
+          "headset": "disabled"
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "id": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "material": null,
+      "name": "Camera",
+      "order": 10.885833702231857,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "position": [
+        0,
+        5.8,
+        8.872129172261253
+      ],
+      "rotation": [
+        0,
+        1,
+        0,
+        -6.123233995736766e-17
+      ],
+      "scale": [
+        0.9999998646558023,
+        0.9999999931513284,
+        0.9999998715044741
+      ]
+    },
+    "a6ba8d64-7669-47b1-80e6-3dcad08622aa": {
+      "components": {},
+      "geometry": null,
+      "id": "a6ba8d64-7669-47b1-80e6-3dcad08622aa",
+      "material": null,
+      "name": "GyroErrorText",
+      "order": 1.2844995360931333,
+      "parentId": "e5a8e2eb-3d77-401d-945b-ba6b7ca8377b",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#000000",
+        "backgroundSize": "contain",
+        "color": "#000000",
+        "font": {
+          "type": "font",
+          "font": "Nunito"
+        },
+        "fontSize": 14,
+        "height": "100%",
+        "text": "Failed to get gyroscope permissions, using touch and drag controls!",
+        "width": "100%",
+        "verticalTextAlign": "center"
+      }
+    },
+    "a7afb19e-60fd-44cb-bb58-5eb99112b38a": {
+      "components": {},
+      "geometry": null,
+      "id": "a7afb19e-60fd-44cb-bb58-5eb99112b38a",
+      "material": null,
+      "name": "5",
+      "order": 5.5787506103515625,
+      "parentId": "89c5fac9-9e24-4568-a211-9849ee86a698",
+      "position": [
+        0,
+        62.394955323239,
+        -1.2
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "alignContent": "flex-start",
+        "alignItems": "flex-start",
+        "alignSelf": "",
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "backgroundSize": "contain",
+        "borderColor": "#000000",
+        "borderRadius": 0,
+        "borderRadiusBottomLeft": "",
+        "borderRadiusBottomRight": "",
+        "borderRadiusTopLeft": "",
+        "borderRadiusTopRight": "",
+        "borderWidth": 0,
+        "bottom": "",
+        "color": "#ffffff",
+        "columnGap": "",
+        "direction": "ltr",
+        "display": "",
+        "fixedSize": false,
+        "flex": 0,
+        "flexBasis": "",
+        "flexDirection": "row",
+        "flexGrow": 0,
+        "flexShrink": 0,
+        "flexWrap": "nowrap",
+        "font": {
+          "type": "font",
+          "font": "Nunito"
+        },
+        "fontSize": 16,
+        "gap": "",
+        "height": "1536",
+        "image": {
+          "type": "asset",
+          "asset": "assets/VerticalScroll/scroll_5.jpg"
+        },
+        "justifyContent": "flex-start",
+        "left": "",
+        "margin": "",
+        "marginBottom": "",
+        "marginLeft": "",
+        "marginRight": "",
+        "marginTop": "",
+        "maxHeight": "",
+        "maxWidth": "",
+        "minHeight": "",
+        "minWidth": "",
+        "nineSliceBorderBottom": "0",
+        "nineSliceBorderLeft": "0",
+        "nineSliceBorderRight": "0",
+        "nineSliceBorderTop": "0",
+        "nineSliceScaleFactor": 1,
+        "opacity": 1,
+        "overflow": "",
+        "padding": "",
+        "paddingBottom": "",
+        "paddingLeft": "",
+        "paddingRight": "",
+        "paddingTop": "",
+        "position": "static",
+        "right": "",
+        "rowGap": "",
+        "text": "",
+        "textAlign": "center",
+        "top": "",
+        "type": "3d",
+        "video": {
+          "type": "url",
+          "url": ""
+        },
+        "width": "1024"
+      }
+    },
+    "a8cfaea3-2721-41a0-a89e-fe3773d6968f": {
+      "components": {},
+      "geometry": null,
+      "id": "a8cfaea3-2721-41a0-a89e-fe3773d6968f",
+      "material": null,
+      "name": "Well Done",
+      "order": 2.990833526292839,
+      "parentId": "a80b0c38-37cf-4cea-b0f1-210a94994403",
+      "position": [
+        -0.01030846405774355,
+        8.261443709998451,
+        -4.408157659307697
+      ],
+      "rotation": [
+        0,
+        -1.2325951735913806e-32,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        0.9999999999999998
+      ],
+      "ui": {
+        "color": "#000000",
+        "fontSize": 72,
+        "height": 10,
+        "text": "Well Done!",
+        "type": "3d",
+        "width": 800,
+        "position": "absolute",
+        "top": 50,
+        "left": "",
+        "bottom": "",
+        "right": ""
+      }
+    },
+    "ab595551-7fb3-4bfc-a934-4f5ecb51d722": {
+      "components": {},
+      "disabled": true,
+      "geometry": null,
+      "id": "ab595551-7fb3-4bfc-a934-4f5ecb51d722",
+      "light": {
+        "type": "directional"
+      },
+      "material": null,
+      "name": "Directional Light",
+      "order": 3.645158833873573,
+      "parentId": "9bcdcb58-b425-4b36-9f5e-c8de5f40e3bf",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "ac1989e3-3b71-49e2-a05f-e682aeb18c36": {
+      "components": {},
+      "geometry": null,
+      "id": "ac1989e3-3b71-49e2-a05f-e682aeb18c36",
+      "light": {
+        "intensity": 1,
+        "type": "directional"
+      },
+      "material": null,
+      "name": "Directional Light",
+      "order": 9.885833702231857,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "position": [
+        20,
+        20,
+        10
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "be389a91-4b2d-45b5-970f-cbbd5f756d91": {
+      "components": {},
+      "geometry": null,
+      "hidden": false,
+      "id": "be389a91-4b2d-45b5-970f-cbbd5f756d91",
+      "material": null,
+      "name": "CloudsMobile",
+      "order": 7.645158833873573,
+      "parentId": "9bcdcb58-b425-4b36-9f5e-c8de5f40e3bf",
+      "position": [
+        0.4662493169307709,
+        1.3753107786178589,
+        -6.679880275339891
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "alignItems": "flex-start",
+        "backgroundOpacity": 1,
+        "backgroundSize": "contain",
+        "flexDirection": "row",
+        "flexWrap": "nowrap",
+        "height": 1536,
+        "image": {
+          "type": "asset",
+          "asset": "assets/clouds_vertical.jpg"
+        },
+        "justifyContent": "flex-start",
+        "paddingBottom": 0,
+        "paddingTop": 0,
+        "type": "3d",
+        "width": 1024
+      }
+    },
+    "bedebb97-431b-446b-be65-5afd6c5899f1": {
+      "components": {},
+      "geometry": null,
+      "id": "bedebb97-431b-446b-be65-5afd6c5899f1",
+      "material": null,
+      "name": "1",
+      "order": 5.578750553347785,
+      "parentId": "89c5fac9-9e24-4568-a211-9849ee86a698",
+      "position": [
+        0,
+        1.1595788909426528,
+        -1.2
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "backgroundOpacity": 1,
+        "backgroundSize": "contain",
+        "height": 1536,
+        "image": {
+          "type": "asset",
+          "asset": "assets/VerticalScroll/scroll_1.jpg"
+        },
+        "type": "3d",
+        "width": 1024
+      }
+    },
+    "c573ad94-5e5e-478e-b1d4-d2589fa5bd59": {
+      "components": {},
+      "geometry": null,
+      "hidden": false,
+      "id": "c573ad94-5e5e-478e-b1d4-d2589fa5bd59",
+      "material": null,
+      "name": "High Score",
+      "order": 2.438133858889886,
+      "parentId": "482953c7-1157-4d43-ba29-ab5c00704f93",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "bottom": "",
+        "color": "#ffffff",
+        "fontSize": 16,
+        "height": 18,
+        "left": "",
+        "margin": "",
+        "marginBottom": 8,
+        "marginLeft": 8,
+        "marginRight": 8,
+        "marginTop": 8,
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "paddingRight": 0,
+        "paddingTop": "",
+        "position": "absolute",
+        "right": "",
+        "text": "0",
+        "textAlign": "left",
+        "top": "",
+        "type": "overlay",
+        "width": 150
+      }
+    },
+    "c9e309d8-47cf-4513-9712-16845f45d838": {
+      "components": {},
+      "geometry": null,
+      "id": "c9e309d8-47cf-4513-9712-16845f45d838",
+      "material": null,
+      "name": "6",
+      "order": 5.5787506103515625,
+      "parentId": "89c5fac9-9e24-4568-a211-9849ee86a698",
+      "position": [
+        0,
+        77.66134918179074,
+        -1.2
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "alignContent": "flex-start",
+        "alignItems": "flex-start",
+        "alignSelf": "",
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "backgroundSize": "contain",
+        "borderColor": "#000000",
+        "borderRadius": 0,
+        "borderRadiusBottomLeft": "",
+        "borderRadiusBottomRight": "",
+        "borderRadiusTopLeft": "",
+        "borderRadiusTopRight": "",
+        "borderWidth": 0,
+        "bottom": "",
+        "color": "#ffffff",
+        "columnGap": "",
+        "direction": "ltr",
+        "display": "",
+        "fixedSize": false,
+        "flex": 0,
+        "flexBasis": "",
+        "flexDirection": "row",
+        "flexGrow": 0,
+        "flexShrink": 0,
+        "flexWrap": "nowrap",
+        "font": {
+          "type": "font",
+          "font": "Nunito"
+        },
+        "fontSize": 16,
+        "gap": "",
+        "height": "1536",
+        "image": {
+          "type": "asset",
+          "asset": "assets/VerticalScroll/scroll_6.jpg"
+        },
+        "justifyContent": "flex-start",
+        "left": "",
+        "margin": "",
+        "marginBottom": "",
+        "marginLeft": "",
+        "marginRight": "",
+        "marginTop": "",
+        "maxHeight": "",
+        "maxWidth": "",
+        "minHeight": "",
+        "minWidth": "",
+        "nineSliceBorderBottom": "0",
+        "nineSliceBorderLeft": "0",
+        "nineSliceBorderRight": "0",
+        "nineSliceBorderTop": "0",
+        "nineSliceScaleFactor": 1,
+        "opacity": 1,
+        "overflow": "",
+        "padding": "",
+        "paddingBottom": "",
+        "paddingLeft": "",
+        "paddingRight": "",
+        "paddingTop": "",
+        "position": "static",
+        "right": "",
+        "rowGap": "",
+        "text": "",
+        "textAlign": "center",
+        "top": "",
+        "type": "3d",
+        "video": {
+          "type": "url",
+          "url": ""
+        },
+        "width": "1024"
+      }
+    },
+    "e15eeab8-ccfd-478b-83d6-5a2fa43c1474": {
+      "components": {},
+      "geometry": null,
+      "id": "e15eeab8-ccfd-478b-83d6-5a2fa43c1474",
+      "material": null,
+      "name": "3",
+      "order": 5.5787506103515625,
+      "parentId": "3e3610dd-25b2-4281-b6d6-e5fdd603e42b",
+      "position": [
+        0,
+        110.76492585971,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        3.0999999046325684,
+        3.0999999046325684,
+        3.0999999046325684
+      ],
+      "ui": {
+        "alignContent": "flex-start",
+        "alignItems": "flex-start",
+        "alignSelf": "",
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "backgroundSize": "contain",
+        "borderColor": "#000000",
+        "borderRadius": 0,
+        "borderRadiusBottomLeft": "",
+        "borderRadiusBottomRight": "",
+        "borderRadiusTopLeft": "",
+        "borderRadiusTopRight": "",
+        "borderWidth": 0,
+        "bottom": "",
+        "color": "#ffffff",
+        "columnGap": "",
+        "direction": "ltr",
+        "display": "",
+        "fixedSize": false,
+        "flex": 0,
+        "flexBasis": "",
+        "flexDirection": "row",
+        "flexGrow": 0,
+        "flexShrink": 0,
+        "flexWrap": "nowrap",
+        "font": {
+          "type": "font",
+          "font": "Nunito"
+        },
+        "fontSize": 16,
+        "gap": "",
+        "height": "1536",
+        "image": {
+          "type": "asset",
+          "asset": "assets/VerticalScroll/scroll_3.jpg"
+        },
+        "justifyContent": "flex-start",
+        "left": "",
+        "margin": "",
+        "marginBottom": "",
+        "marginLeft": "",
+        "marginRight": "",
+        "marginTop": "",
+        "maxHeight": "",
+        "maxWidth": "",
+        "minHeight": "",
+        "minWidth": "",
+        "nineSliceBorderBottom": "0",
+        "nineSliceBorderLeft": "0",
+        "nineSliceBorderRight": "0",
+        "nineSliceBorderTop": "0",
+        "nineSliceScaleFactor": 1,
+        "opacity": 1,
+        "overflow": "",
+        "padding": "",
+        "paddingBottom": "",
+        "paddingLeft": "",
+        "paddingRight": "",
+        "paddingTop": "",
+        "position": "static",
+        "right": "",
+        "rowGap": "",
+        "text": "",
+        "textAlign": "center",
+        "top": "",
+        "type": "3d",
+        "video": {
+          "type": "url",
+          "url": ""
+        },
+        "width": "1024"
+      }
+    },
+    "e56c3263-1aa4-4f08-8fd2-2ea821beb1e0": {
+      "components": {},
+      "geometry": null,
+      "hidden": false,
+      "id": "e56c3263-1aa4-4f08-8fd2-2ea821beb1e0",
+      "material": null,
+      "name": "Logo",
+      "order": 8.645158833873573,
+      "parentId": "9bcdcb58-b425-4b36-9f5e-c8de5f40e3bf",
+      "position": [
+        0,
+        1.3944255815163116,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "ui": {
+        "backgroundOpacity": 1,
+        "backgroundSize": "contain",
+        "height": 50,
+        "image": {
+          "type": "asset",
+          "asset": "assets/logo.png"
+        },
+        "type": "3d",
+        "width": 100
+      }
+    },
+    "e5a8e2eb-3d77-401d-945b-ba6b7ca8377b": {
+      "components": {},
+      "geometry": null,
+      "hidden": true,
+      "id": "e5a8e2eb-3d77-401d-945b-ba6b7ca8377b",
+      "material": null,
+      "name": "GyroError",
+      "order": 5.645158833873573,
+      "parentId": "9bcdcb58-b425-4b36-9f5e-c8de5f40e3bf",
+      "position": [
+        0,
+        -0.1,
+        0.1
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "alignItems": "center",
+        "background": "#fd7e08",
+        "backgroundOpacity": 1,
+        "borderRadius": 18,
+        "flexDirection": "row",
+        "flexWrap": "wrap",
+        "gap": "6",
+        "height": 80,
+        "justifyContent": "center",
+        "opacity": 0.98,
+        "padding": "10",
+        "text": "",
+        "type": "3d",
+        "width": 155,
+        "stackingOrder": 0,
+        "fontSize": 1
+      }
+    },
+    "e6dc395f-cba4-42bd-bd9c-7698be278400": {
+      "components": {},
+      "geometry": null,
+      "id": "e6dc395f-cba4-42bd-bd9c-7698be278400",
+      "material": null,
+      "name": "HowToPlay",
+      "order": 0.4679756487703559,
+      "parentId": "3796c355-c66f-470d-b28b-414d62882198",
+      "position": [
+        0,
+        -0.13002556985146185,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#000000",
+        "backgroundOpacity": 0,
+        "borderRadius": 18,
+        "color": "#000000",
+        "flexDirection": "row",
+        "fontSize": 10,
+        "height": 60,
+        "paddingBottom": 0,
+        "paddingTop": 0,
+        "text": "How To Play:\n\nUse the left and right arrow keys to control the stack\n\nCatch all the toppings and avoid the bun!",
+        "textAlign": "left",
+        "type": "3d",
+        "width": 130
+      }
+    },
+    "e72d7283-4327-4c8c-bf74-1da695f61cd5": {
+      "components": {},
+      "geometry": null,
+      "hidden": true,
+      "id": "e72d7283-4327-4c8c-bf74-1da695f61cd5",
+      "material": null,
+      "name": "Item Score Text",
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "position": [
+        0,
+        2.667707235513568,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "color": "#ffffff",
+        "font": {
+          "type": "font",
+          "font": "Nunito"
+        },
+        "fontSize": 76,
+        "height": 10,
+        "text": "+500",
+        "type": "3d",
+        "width": 900
+      }
+    },
+    "fb241ca6-4f9c-4486-be2a-ec468ae1d446": {
+      "components": {},
+      "geometry": null,
+      "id": "fb241ca6-4f9c-4486-be2a-ec468ae1d446",
+      "material": null,
+      "name": "Main Menu Container",
+      "order": 0.5087103894532543,
+      "parentId": "575bf1c2-9ec8-4821-9741-99f3d8f48ba1",
+      "position": [
+        0,
+        3.6982583272485012,
+        1.199467420578003
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        3,
+        3,
+        3
+      ],
+      "ui": {
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "alignItems": "center",
+        "background": "#fca809",
+        "backgroundOpacity": 1,
+        "backgroundSize": "contain",
+        "borderRadius": 18,
+        "flexDirection": "row",
+        "flexWrap": "nowrap",
+        "gap": 6,
+        "height": 36,
+        "justifyContent": "center",
+        "padding": "10",
+        "type": "3d",
+        "width": 100
+      }
+    },
+    "fc7805f0-f28f-4cab-b915-51bb2775a4cb": {
+      "components": {},
+      "geometry": null,
+      "id": "fc7805f0-f28f-4cab-b915-51bb2775a4cb",
+      "material": null,
+      "name": "1",
+      "order": 5.578750553347785,
+      "parentId": "3e3610dd-25b2-4281-b6d6-e5fdd603e42b",
+      "position": [
+        0,
+        15.944432233594505,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        3.0999999046325684,
+        3.0999999046325684,
+        3.0999999046325684
+      ],
+      "ui": {
+        "backgroundOpacity": 1,
+        "backgroundSize": "contain",
+        "height": 1536,
+        "image": {
+          "type": "asset",
+          "asset": "assets/VerticalScroll/scroll_1.jpg"
+        },
+        "type": "3d",
+        "width": 1024
+      }
+    },
+    "fde99840-7c1f-4bd3-b3a2-2bd0a5ed0db6": {
+      "components": {},
+      "geometry": null,
+      "id": "fde99840-7c1f-4bd3-b3a2-2bd0a5ed0db6",
+      "material": null,
+      "name": "5",
+      "order": 5.5787506103515625,
+      "parentId": "3e3610dd-25b2-4281-b6d6-e5fdd603e42b",
+      "position": [
+        0,
+        205.83056528178471,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        3.0999999046325684,
+        3.0999999046325684,
+        3.0999999046325684
+      ],
+      "ui": {
+        "alignContent": "flex-start",
+        "alignItems": "flex-start",
+        "alignSelf": "",
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "backgroundSize": "contain",
+        "borderColor": "#000000",
+        "borderRadius": 0,
+        "borderRadiusBottomLeft": "",
+        "borderRadiusBottomRight": "",
+        "borderRadiusTopLeft": "",
+        "borderRadiusTopRight": "",
+        "borderWidth": 0,
+        "bottom": "",
+        "color": "#ffffff",
+        "columnGap": "",
+        "direction": "ltr",
+        "display": "",
+        "fixedSize": false,
+        "flex": 0,
+        "flexBasis": "",
+        "flexDirection": "row",
+        "flexGrow": 0,
+        "flexShrink": 0,
+        "flexWrap": "nowrap",
+        "font": {
+          "type": "font",
+          "font": "Nunito"
+        },
+        "fontSize": 16,
+        "gap": "",
+        "height": "1536",
+        "image": {
+          "type": "asset",
+          "asset": "assets/VerticalScroll/scroll_5.jpg"
+        },
+        "justifyContent": "flex-start",
+        "left": "",
+        "margin": "",
+        "marginBottom": "",
+        "marginLeft": "",
+        "marginRight": "",
+        "marginTop": "",
+        "maxHeight": "",
+        "maxWidth": "",
+        "minHeight": "",
+        "minWidth": "",
+        "nineSliceBorderBottom": "0",
+        "nineSliceBorderLeft": "0",
+        "nineSliceBorderRight": "0",
+        "nineSliceBorderTop": "0",
+        "nineSliceScaleFactor": 1,
+        "opacity": 1,
+        "overflow": "",
+        "padding": "",
+        "paddingBottom": "",
+        "paddingLeft": "",
+        "paddingRight": "",
+        "paddingTop": "",
+        "position": "static",
+        "right": "",
+        "rowGap": "",
+        "text": "",
+        "textAlign": "center",
+        "top": "",
+        "type": "3d",
+        "video": {
+          "type": "url",
+          "url": ""
+        },
+        "width": "1024"
+      }
+    },
+    "a80b0c38-37cf-4cea-b0f1-210a94994403": {
+      "id": "a80b0c38-37cf-4cea-b0f1-210a94994403",
+      "position": [
+        1.5196494679202284e-25,
+        5.6,
+        1.0188133605976308
+      ],
+      "rotation": [
+        0,
+        1.2325951735913806e-32,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1.0000000000000002
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "575bf1c2-9ec8-4821-9741-99f3d8f48ba1",
+      "components": {},
+      "ui": {
+        "borderColor": "#000000",
+        "borderWidth": 5,
+        "width": 800,
+        "height": 600,
+        "type": "3d",
+        "background": "#f7c059",
+        "backgroundOpacity": 1,
+        "borderRadius": 18
+      },
+      "name": "Frame",
+      "order": -2.284445288580083
+    }
+  },
+  "spaces": {
+    "88453035-dc0f-486d-868a-8ff7c2fda864": {
+      "activeCamera": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "id": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "includedSpaces": [
+        "d5d92687-81bc-4bfd-91cc-6c1061e6a04a"
+      ],
+      "name": "MainScene",
+      "sky": {
+        "type": "color",
+        "color": "#599ab8"
+      }
+    },
+    "9bcdcb58-b425-4b36-9f5e-c8de5f40e3bf": {
+      "activeCamera": "76906c8c-0904-4850-b76b-1dde3f05fb77",
+      "id": "9bcdcb58-b425-4b36-9f5e-c8de5f40e3bf",
+      "includedSpaces": [
+        "d5d92687-81bc-4bfd-91cc-6c1061e6a04a"
+      ],
+      "name": "MainMenu",
+      "sky": {
+        "type": "color",
+        "color": "#599ab8"
+      }
+    },
+    "d5d92687-81bc-4bfd-91cc-6c1061e6a04a": {
+      "activeCamera": "567a834b-e1ff-43c6-b71e-cd8891a500ec",
+      "id": "d5d92687-81bc-4bfd-91cc-6c1061e6a04a",
+      "name": "Audio"
+    }
+  },
+  "runtimeVersion": {
+    "type": "version",
+    "level": "patch",
+    "major": 2,
+    "minor": 0,
+    "patch": 1
+  },
+  "historyVersion": "mgv6u9ix"
+}

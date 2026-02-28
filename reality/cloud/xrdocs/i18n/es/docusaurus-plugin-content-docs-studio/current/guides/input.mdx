@@ -1,0 +1,134 @@
+---
+id: input
+description: Esta sección explica cómo configurar las entradas para su proyecto.
+---
+
+# Entrada
+
+## Introducción
+
+{frontMatter.description} Las entradas se refieren a los distintos métodos a través de los cuales los usuarios interactúan con la aplicación. Actualmente, los métodos de entrada admitidos son el tacto, el teclado, el ratón y el gamepad.
+
+Véase [world.input](/api/studio/world/input/) para la api.
+
+## Gestor de entradas
+
+En Studio, hay Entradas y Acciones - el Gestor de Entradas establece la correspondencia entre ellas. Una acción es una abstracción sobre la fuente de entrada(s) que recibe. Son más útiles para representar entradas como conceptos "lógicos" (por ejemplo, "saltar") que como entradas "físicas" (por ejemplo, "barra espaciadora del teclado pulsada").
+
+![input-manager.png](/images/studio/input-manager.png)
+
+### Mapas de acción
+
+Puede gestionar los Mapas de Acción a través del Gestor de Entradas en la Configuración del Espacio (el estado por defecto del Inspector cuando no hay ninguna entidad seleccionada).
+
+#### Añadir un mapa de acción
+
+Los mapas de acciones son conjuntos de acciones que pueden intercambiarse mediante programación. Para crear un nuevo mapa de acción, haga clic en el menú desplegable del mapa de acción y, a continuación, en Crear nuevo mapa de acción. A continuación, escribe el nombre del mapa de acción y guárdalo. Los mapas de acción pueden renombrarse, duplicarse y eliminarse. El mapa de acciones por defecto sólo puede duplicarse.
+
+![input-add-action-map.png](/images/studio/input-add-action-map.png)
+
+:::info
+El Mapa de Acción actualmente seleccionado es el Mapa de Acción que estará activo por defecto.
+:::
+
+#### Plantillas de mapas de acción
+
+Al seleccionar Crear nuevo mapa de acción, aparecerán varias plantillas de mapas de acción. Las plantillas Fly Controller y Orbit Controls se utilizan para sus respectivos componentes.
+
+![input-action-map-templates.png](/images/studio/input-action-map-templates.png)
+
+### Añadir una acción
+
+Las acciones son una capa de abstracción de las entradas del usuario. Para añadir una acción al mapa de acciones, haga clic en el botón (+) Nueva acción y escriba el nombre de la acción.
+
+![input-add-action.png](/images/studio/input-add-action.png)
+
+### Vinculación a una acción
+
+Los enlaces permiten asociar las entradas a una acción. Para añadir un enlace, haga clic en el botón Añadir enlace y seleccione la entrada que desea enlazar a la acción en el menú desplegable. Hay fijaciones para muchos tipos de entradas, como el teclado, el ratón y el gamepad. Se pueden asignar varias entradas a una misma acción. Para eliminar una encuadernación, haga clic en la papelera situada junto a la encuadernación que desea eliminar.
+
+![input-add-bindings.png](/images/studio/input-add-bindings.png)
+
+### Modificadores de acción
+
+Los modificadores son una entrada adicional que se puede asignar a un enlace para activar la acción. Para crear un enlace con un modificador, haga clic en el botón Con modificador. El modificador se selecciona con el primer desplegable y la vinculación se selecciona con el segundo desplegable.
+
+![input-add-modifier.png](/images/studio/input-add-modifier.png)
+
+## Ejemplos
+
+### Detectar una acción en tick
+
+```ts
+ecs.registerComponent({
+  name: 'player-controller',
+  tick: (world, component) => {
+    if (world.input.getAction('jump')) {
+      // Maneja la lógica de salto aquí
+    }
+  },
+})
+```
+
+### Detección de una acción en una máquina de estados
+
+```ts
+stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+  ecs.defineState('default').initial().onTick(() => {
+    if (world.input.getAction('jump')) {
+      // Maneja la lógica de salto aquí
+    }
+  })
+}
+```
+
+### Pasar de un mapa de acción a otro
+
+:::info
+Al establecer un nuevo mapa de acción, el nuevo mapa no se activa hasta el siguiente tick.
+:::
+
+#### En garrapata
+
+```ts
+tick: (mundo, componente) => {
+  if (mundo.input.getAction('menu')) {
+    world.input.setActiveMap(world.input.getActiveMap() === 'player' ? menu' : 'player')
+    return
+  }
+  if (world.input.getAction('jump')) {
+    // Maneja la lógica de salto aquí
+  }
+}
+```
+
+#### En una máquina de estados
+
+```ts
+stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+  const switchMap = ecs.defineTrigger()
+
+  ecs.defineState('default')
+  .initial()
+  .onEnter(() => {
+    world.input.setActiveMap('player')
+  })
+  .onTick(() => {
+    if (world.input.getAction('menu')) {
+      switchMap.trigger()
+      return
+    }
+    // Maneja la lógica del movimiento aquí
+  }).onTrigger(switchMap, 'menu')
+
+  ecs.defineState('menu').onEnter(() => {
+        world.input.setActiveMap('menu')
+  }).onTick(() => {
+    if (world.input.getAction('menu')) {
+      switchMap.trigger()
+      return
+    }
+    // Maneja la lógica del menú aquí
+  }).onTrigger(switchMap, 'default')
+}
+```

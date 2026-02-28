@@ -1,0 +1,57 @@
+@use '../styles/brand-colors';
+
+.main {
+  max-width: 991px;
+  margin: auto;
+  width: 100%;
+}
+
+.content {
+  width: 100%;
+}
+
+.header {
+  border-bottom: 0;
+  padding: 0 0 1rem 0;
+  width: 100%;
+}
+
+.faqOpener {
+  margin: 0;
+}
+
+.faqButton {
+  white-space: normal;
+  background-color: white;
+  color: brand-colors.$brand-purple;
+  padding: 0.688rem 1rem;
+  border-color: #F3F2F4;
+  position: relative;
+  scroll-margin-top: calc(82px + 2rem);  // header total height + extra offset for shadow
+}
+
+.faqButton::after {
+  content: '';
+  mask-image: url('../../img/chevron-down-solid.svg');
+  -webkit-mask-image: url('../../img/chevron-down-solid.svg');
+  transition: all .35s;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  background-color: brand-colors.$gray4;
+  display: inline-block;
+  top: calc(50% - 0.6rem);
+  right: 1rem;
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+}
+
+.faqButtonContent {
+  max-width: calc(100% - 2rem);
+  font-weight: bold;
+  font-family: 'Nunito', sans-serif;
+}
+
+.faqButton[aria-expanded="true"]::after {
+  transform: rotate(-.5turn);
+}

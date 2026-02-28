@@ -1,0 +1,123 @@
+---
+id: vps
+sidebar_position: 3
+---
+
+import {EventExample} from '@site/src/components/event-example'
+
+# Eventos VPS
+
+## Tipos {#types}
+
+### LocationObject {#LocationObject}
+
+| Propiedad | Tipo    | Descripción                                                                 |
+| --------- | ------- | --------------------------------------------------------------------------- |
+| id        | Cadena  | Un id para esta Ubicación del Proyecto que es estable dentro de una sesión. |
+| nombre    | Cadena  | Nombre de la ubicación del proyecto.                                        |
+| imageUrl  | Cadena  | URL de una imagen representativa de este proyecto Ubicación.                |
+| título    | Cadena  | Título de la ubicación del proyecto.                                        |
+| lat       | "Número | Latitud de la ubicación de este proyecto.                                   |
+| lng       | "Número | Longitud de la ubicación de este proyecto.                                  |
+
+### PositionAttributeObject {#PositionAttributeObject}
+
+| Propiedad | Tipo             | Descripción                                   |
+| --------- | ---------------- | --------------------------------------------- |
+| nombre    | Cadena           | El nombre del objeto                          |
+| matriz    | `Float32Array()` | Los datos brutos de la geometría de la malla. |
+| itemSize  | `Integer`        | Número de elementos del objeto                |
+
+### ColorAttributeObject {#ColorAttributeObject}
+
+| Propiedad | Tipo             | Descripción                                   |
+| --------- | ---------------- | --------------------------------------------- |
+| nombre    | Cadena           | El nombre del objeto                          |
+| matriz    | `Float32Array()` | Los datos brutos de la geometría de la malla. |
+| itemSize  | `Integer`        | Número de elementos del objeto                |
+
+### GeometryObject {#GeometryObject}
+
+| Propiedad | Tipo                                                                                                           | Descripción                                                |
+| --------- | -------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| índice    | Cadena                                                                                                         | Un id para esta malla que es estable dentro de una sesión. |
+| atributos | `[`[`PositionAttributeObject`](#PositionAttributeObject)`,` [`ColorAttributeObject`](#ColorAttributeObject)`]` | Los datos brutos de la geometría de la malla.              |
+
+## Eventos
+
+### REALIDAD_LOCALIZACION_ENCONTRADA
+
+Este evento se emite cuando se encuentra por primera vez una Ubicación de Proyecto.
+
+#### Propiedades
+
+| Propiedad | Tipo           | Descripción                                                                      |
+| --------- | -------------- | -------------------------------------------------------------------------------- |
+| nombre    | Cadena         | El nombre de la ubicación del proyecto.                                          |
+| posición  | `{x, y, z}`    | La posición 3d de la Ubicación del Proyecto localizada.                          |
+| rotación  | `{w, x, y, z}` | La orientación local 3d (cuaternión) de la Localización del Proyecto localizada. |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="REALITY_LOCATION_FOUND" target="world.events.globalId" callbackBody={`console.log('Location found: ', event.data.name)`} />
+
+### REALIDAD_LOCALIZACION_PERDIDA
+
+Este evento se emite cuando una Ubicación de Proyecto deja de ser rastreada.
+
+#### Propiedades
+
+| Propiedad | Tipo           | Descripción                                                                      |
+| --------- | -------------- | -------------------------------------------------------------------------------- |
+| nombre    | Cadena         | El nombre de la ubicación del proyecto.                                          |
+| posición  | `{x, y, z}`    | La posición 3d de la Ubicación del Proyecto localizada.                          |
+| rotación  | `{w, x, y, z}` | La orientación local 3d (cuaternión) de la Localización del Proyecto localizada. |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="REALITY_LOCATION_LOST" target="world.events.globalId" callbackBody={`console.log('Location lost: ', event.data.name)`} />
+
+### EXPLORACIÓN_DE_LOCALIZACIÓN_REAL
+
+Este evento se emite cuando todas las Ubicaciones de Proyecto han sido cargadas para su escaneo.
+
+#### Propiedades
+
+| Propiedad | Tipo                    | Descripción                                                       |
+| --------- | ----------------------- | ----------------------------------------------------------------- |
+| lugares   | `Array<LocationObject>` | Una matriz de objetos que contiene información sobre la ubicación |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="REALITY_LOCATION_SCANNING" target="world.events.globalId" callbackBody={`console.log('Locations scanning: ', event.data.locations)`} />
+
+### MALLA_REALIDAD_ENCONTRADA
+
+Este evento se emite cuando se encuentra una malla por primera vez, ya sea después del inicio o después de un `recenter()`.
+
+#### Propiedades
+
+| Propiedad | Tipo                                | Descripción                                                                                                             |
+| --------- | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| id        | Cadena                              | Un id para esta malla que es estable dentro de una sesión.                                                              |
+| posición  | `{x, y, z}`                         | La posición 3d de la Ubicación del Proyecto localizada.                                                                 |
+| rotación  | `{w, x, y, z}`                      | La orientación local 3d (cuaternión) de la Localización del Proyecto localizada.                                        |
+| geometría | [`GeometryObject`](#GeometryObject) | Un objeto que contiene datos de geometría de malla sin procesar. Los atributos contienen atributos de posición y color. |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="REALITY_MESH_FOUND" target="world.events.globalId" callbackBody={`console.log('Mesh found: ', event.data.id)`} />
+
+### REALITY_MESH_LOST
+
+Este evento se emite cuando se llama a `recenter()`.
+
+#### Propiedades
+
+| Propiedad | Tipo   | Descripción                                                |
+| --------- | ------ | ---------------------------------------------------------- |
+| id        | Cadena | Un id para esta malla que es estable dentro de una sesión. |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="REALITY_MESH_LOST" target="world.events.globalId" callbackBody={`console.log('Mesh lost: ', event.data.id)`} />

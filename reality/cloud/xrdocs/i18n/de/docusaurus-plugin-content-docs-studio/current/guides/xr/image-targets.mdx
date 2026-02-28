@@ -1,0 +1,108 @@
+---
+id: image-targets
+description: >-
+  Mit Bildzielen können Sie eine flache, zylindrische oder konische Form als
+  Auslöser oder Marker für die Überlagerung von AR-Inhalten festlegen.
+---
+
+# Bild-Ziele
+
+## Einführung
+
+{frontMatter.description}
+
+<br></br>
+<br></br>
+
+![](/images/studio/image-target-intro.gif)
+
+---
+
+## Aktivieren von Bildzielen
+
+Um Bildziele in Ihrem Projekt zu aktivieren, müssen Sie eine Weltkamera verwenden.
+
+1. Wählen Sie die **Kamera** in Ihrer Szene  
+2. Setzen Sie den **Typ** auf `World`.
+
+```mdx-code-block
+<img src={require('/images/studio/image-target-enable.png').default} width="400px"/>
+```
+
+---
+
+## Hinzufügen von Bildzielen
+
+### Hochladen des Bildziels
+
+Suchen Sie das Feld **Bildziele** unten links in der Studio-Oberfläche. Klicken Sie auf das Symbol **( + )**, um ein flaches, zylindrisches oder konisches Bildziel hinzuzufügen.
+
+```mdx-code-block
+<img src={require('/images/studio/image-target-upload.png').default} width="400px"/>
+```
+
+### Konfigurieren des Bildziels
+
+Passen Sie den Tracking-Bereich und die Metadaten des Bildziels an.
+
+```mdx-code-block
+<img src={require('/images/studio/image-target-config.png').default} width="400px"/>
+```
+
+### Testen des Bildziels
+
+Scannen Sie den QR-Code, um die Qualität und die Verfolgung Ihres hochgeladenen Bildziels zu testen.
+
+```mdx-code-block
+<img src={require('/images/studio/image-target-test.png').default} width="400px"/>
+```
+
+### Hinzufügen der Bild-Ziel-Entität
+
+Sie können ein Bildziel zu Ihrer Szene hinzufügen, indem Sie eine **Bildziel**-Entität erstellen.\
+Klicken Sie dazu in der Szenenhierarchie auf **( + )** und wählen Sie **Bildziel**.\
+Klicken Sie dazu in der Szenenhierarchie auf **( + )** und wählen Sie **Bildziel**.
+
+```mdx-code-block
+<img src={require('/images/studio/image-target-add.png').default} width="400px"/>
+```
+
+### Verknüpfung des Bildziels
+
+Verknüpfen Sie die Bildziel-Entität mit einem hochgeladenen Bildziel.
+
+```mdx-code-block
+<img src={require('/images/studio/image-target-link.png').default} width="400px"/>
+```
+
+---
+
+## Verwendung von Bild-Zielscheiben
+
+Wenn Sie ein Bildziel zu Ihrem Projekt hinzufügen, wird ein Bildzielnetz angezeigt, so dass Sie andere 3D-Inhalte an dem Bildziel ausrichten und positionieren können.
+
+---
+
+## Bildziele simulieren
+
+Mit dem **Simulator** von Studio können Sie Ihre Bildzielerfahrung aus der Ferne testen, indem Sie die Bewegung mit **WASD**-Steuerungen simulieren.
+
+### Verwendung des Simulators mit Bildzielen
+
+Um die Bewegung und die Platzierung von Inhalten um ein der Szene hinzugefügtes Bildziel zu simulieren:
+
+1. Stellen Sie sicher, dass Ihre **Kameraeinstellungen** auf **Welt** eingestellt sind.
+2. Drücken Sie **Play**, um den Simulator zu öffnen
+3. Verwenden Sie die **Umgebungsoptionen des Simulators** (Auswahlfeld unten links), um das gewünschte Bildziel zu finden.
+4. Verwenden Sie die **WASD-Tastaturkürzel**, um Bewegungen zu simulieren. _(Sie müssen zuerst auf das Simulator-Panel klicken, bevor Sie die Tastatur benutzen können)_
+
+**Bewegungstasten:**
+
+- W" = Vorwärts  
+- `A` = Links  
+- `S` = Rückwärts  
+- `D` = Rechts  
+- `Q` = Aufwärts  
+- `E` = Abwärts
+
+Wenn Sie sich mit der WASD-Taste um das Zielbild herum bewegen, wird das Ereignis **Bild gefunden** ausgelöst, um eine erfolgreiche Verfolgung des Zielbildes zu simulieren.

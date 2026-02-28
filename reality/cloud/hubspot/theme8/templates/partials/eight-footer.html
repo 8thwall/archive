@@ -1,0 +1,433 @@
+<!--
+    templateType: global_partial
+    label: 8W Footer
+-->
+<style>
+  .footer {
+    padding: 4em 2em;
+    flex-grow: 1;
+    background: #2D2E43;
+    font-size: 16px;
+  }
+  .footer p {
+    color: #8083A2;
+  }
+  .footer a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 400;
+  }
+  .footer li {
+    list-style-type: none;
+    font-size: 1em;
+    margin-bottom: 0.5em;
+  }
+  
+  .footerContainer {
+    width: calc(100% - 2 * 4rem);
+    max-width: 70em;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  .justifyCenter {
+    justify-content: center;
+  }
+  
+  .siteMap {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-content: center;
+    gap: 1em;
+  }
+  .siteMap > * {
+    padding: 0;
+  }
+  .siteMap ul {
+    margin: 0;
+  }
+  .siteMap p {
+    list-style: none;
+    margin-bottom: 1em;
+  }
+  .siteMap li {
+    list-style: none;
+    white-space: nowrap;
+  }
+  .siteMap li:not(:last-child) {
+    margin-bottom: 0.5em;
+  }
+  
+  .siteMapLogo {
+    display: inline-block;
+    text-align: left;
+    min-width: 9em;
+    margin: 0;
+    flex: 0 0 16.666667%;
+    max-width: 16.666667%;
+  }
+  
+  .footerSocialLinks {
+    display: flex;
+    align-items: center;
+    text-align: left;
+  }
+  .footerSocialLinks p {
+    margin: 0;
+    font-size: 1em;
+  }
+  
+  .footerMain {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+  }
+
+
+  .footerLogo {
+    max-height: 3.5em;
+    height: auto;
+    margin-bottom: 2.5em;
+  }
+  
+  .footerLinks {
+    width: 40rem;
+  }
+  .footerLinks p {
+    margin-bottom: 0;
+  }
+  .footerLinks p:not(:last-child) {
+    margin-bottom: 0.25em;
+  }
+  .footerLinks a {
+    white-space: nowrap;
+  }
+  
+  .copyright {
+    color: #b5b8d0;
+  }
+  
+  .footerLogos {
+    display: flex;
+    align-items: flex-end;
+    gap: 1em;
+  }
+
+  .footerSiteMapHeading {
+    font-size: 1.25em;
+    margin-bottom: 1.125em;
+  }
+
+  
+  .legalLinks {
+    width: 30em;
+    font-size: 0.875em;
+  }
+
+  .legalLinksContainer {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .localeSocialRow {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .localeContainer {
+    min-width: 14rem;
+    margin-right: 2.5em;
+    color: #fff;
+    position: relative;
+  }
+
+  .localeBtn {
+    min-width: 13em;
+    background: #464766;
+    font-family: Nunito, sans-serif;
+    border-radius: 4px;
+    padding: 0.25em 1em;
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 0.75em;
+  }
+
+  .localeDropdown {
+    width: 100%;
+    position: absolute;
+    bottom: 2.5em;
+    z-index: 5;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 4px;
+    background: #464766;
+    border: 1px solid #464766;
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .localeDropdown.show {
+    display: flex;
+  }
+
+  .localeDropdown li {
+    font-family: Nunito, sans-serif;
+    padding: 0.5em 1em;
+    width: 100%;
+    margin: 0;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .localeDropdown li:hover {
+    background: #8083a232;
+    text-decoration: none;
+    color: #fff;
+  }
+
+  #dropdownIcon {
+  }
+
+  .chevronFlip {
+    -moz-transform:rotate(180deg);
+    -webkit-transform:rotate(180deg);
+    transform:rotate(180deg);
+  }
+
+  .header__language-switcher--label-current::after {
+    border-top: 6px solid #b5b8d0;
+  }
+  
+  @media screen and (max-width: 1200px) {
+    .footer {
+      padding: 1.5em;
+    }
+    .footerContainer {
+      flex-direction: column;
+      width: 100%;
+      max-width: none;
+      margin: 0;
+    }
+    .siteMap {
+      margin-bottom: 1em;
+      grid-template-columns: 1fr 1fr;
+    }
+    .footerSocialLinks {
+      width: 100%;
+    }
+    .footerLinks {
+      width: 100%;
+      margin-bottom: 2em;
+      white-space: normal;
+    }
+    .footerLogos {
+      align-items: baseline
+    }
+    
+    .legalLinksContainer {
+      flex-direction: column;
+    }
+    .legalLinks {
+      width: 100%;
+    }
+
+    .localeSocialRow {
+      flex-direction: column;
+      gap: 1em;
+    }
+    .localeContainer {
+      width: 100%;
+      margin-bottom: 1em;
+      margin-right: 0;
+    }
+    .localeDropdown {
+      bottom: 1em;
+    }
+  }
+  
+  @media screen and (max-width: 1024px) {
+    .siteMapLogo {
+      flex: 0 0 100%;
+      max-width: 100%;
+      margin-top: 2em;
+    }
+  }
+</style>
+
+<script>
+  function onDropdownClick() {
+    document.getElementById("localeDropdown").classList.toggle("show");
+    document.getElementById("dropdownIcon").classList.toggle("chevronFlip");
+  }
+
+  window.addEventListener("click", function(event) {
+    if (!event.target.matches('.localeBtn')) {
+      var dropdowns = document.getElementsByClassName("localeDropdown");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        var chevron = event.target.children[1]
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+          chevron.classList.remove('chevronFlip');
+        }
+      }
+    }
+  });
+
+  async function onLocaleClick(locale) {
+    const userSession = await window.UserSessionProvider.get()
+
+    if (userSession) {
+      await userSession.updateUserAttributes({locale})
+    }
+
+    // Set the cookie
+    const encodedLocale = encodeURIComponent(locale)
+    document.cookie = `_locale=${encodedLocale};path=/`
+
+    const url = new URL(window.location.href)
+    const params = new URLSearchParams(window.location.search)
+    const languageParam = params.get('lang')
+
+    // Set URL param "lang" as needed
+    if (languageParam && locale !== languageParam) {
+      url.searchParams.set('lang', locale)
+    }
+
+    window.location.href = url.href
+  };
+</script>
+
+<section class="footer">
+  <div class="footerContainer"> 
+    <div class="siteMapLogo">
+      <img src='{{ get_asset_url('/theme8/images/8th-Wall-Horizontal-Logo-White.svg') }}' alt='8th Wall Logo'
+           class="footerLogo"/>
+    </div>
+
+    <div class='footerMain'>
+      <div class="siteMap">
+        <ul>
+          <p class="footerSiteMapHeading">{% text "footer_col1_8w" label="Column 1 Heading - 8th Wall", value="8th Wall" no_wrapper=true %}</p>
+          <li><a href='/webar'>{% text "footer_col1_webar" label="Column 1 Link - Why WebAR", value={{theme_translations.footer_whyWebar.message}} no_wrapper=true %}</a></li>
+          <li><a href='/products-web'>{% text "footer_col1_product" label="Column 1 Link - Product", value={{theme_translations.footer_product.message}} no_wrapper=true %}</a></li>
+          <li><a href='/products/niantic-studio'>{% text "footer_col1_niantic_studio" label="Column 1 Link - Niantic Studio", value={{theme_translations.footer_niantic_studio.message}} no_wrapper=true %}</a></li>
+          <li><a href='/pricing'>{% text "footer_col1_pricing" label="Column 1 Link - Pricing", value={{theme_translations.footer_pricing.message}} no_wrapper=true %}</a></li>
+          <li><a href='/login'>{% text "footer_col1_login" label="Column 1 Link - Login", value={{theme_translations.footer_login.message}} no_wrapper=true %}</a></li>
+        </ul>
+
+        <ul>
+          <p class="footerSiteMapHeading">{% text "footer_col2_learn" label="Column 2 Heading - Learn", value={{theme_translations.footer_learn.message}} no_wrapper=true %}</p>
+          <li><a href='/projects'>{% text "footer_col2_projects" label="Column 2 Link - Project Library", value={{theme_translations.footer_projectLibrary.message}} no_wrapper=true %}</a></li>
+          <li><a href='/discover'>{% text "footer_col2_discover" label="Column 2 Link - Discover", value={{theme_translations.footer_discover.message}} no_wrapper=true %}</a></li>
+          <li><a href='https://docs.8thwall.com/'>{% text "footer_col2_docs" label="Column 2 Link - Documentation", value={{theme_translations.footer_documentation.message}} no_wrapper=true %}</a></li>
+          <li><a href='/tutorials'>{% text "footer_col2_tutorials" label="Column 2 Link - Tutorials", value={{theme_translations.footer_tutorials.message}} no_wrapper=true %}</a></li>
+          <li><a href='https://github.com/8thwall/web'>{% text "footer_col2_github" label="Column 2 Link - Github", value={{theme_translations.footer_github.message}} no_wrapper=true %}</a></li>
+        </ul>
+
+        <ul>
+          <p class="footerSiteMapHeading">{% text "footer_col3_comm" label="Column 3 Heading - Community", value={{theme_translations.footer_community.message}} no_wrapper=true %}</p>
+          <li><a href="https://www.8thwall.com/forum">{% text "footer_col3_forum" label="Column 3 Link - Forum", value={{theme_translations.footer_forum.message}} no_wrapper=true %}</a></li>
+          <li><a href='/blog'>{% text "footer_col3_blog" label="Column 3 Link - Blog", value={{theme_translations.footer_blog.message}} no_wrapper=true %}</a></li>
+          <li><a href='/resources'>{% text "footer_col3_resources" label="Column 3 Link - Resources", value={{theme_translations.footer_resources.message}} no_wrapper=true %}</a></li>
+          <li><a href='https://8th.io/discord'>{% text "footer_col3_discord" label="Column 3 Link - Discord", value={{theme_translations.footer_discord.message}} no_wrapper=true %}</a></li>
+          <li><a href='https://nianticlabs.com/security'>{% text "footer_col3_security" label="Column 3 Link - Security", value={{theme_translations.footer_security.message}} no_wrapper=true %}</a></li>
+          <li><a href='/community'>{% text "footer_col3_security" label="Column 3 Link - Community Hub", value={{theme_translations.footer_community_hub.message}} no_wrapper=true %}</a></li>
+        </ul>
+
+        <ul>
+          <p class="footerSiteMapHeading">{% text "footer_col4_company" label="Column 4 Heading - Company", value={{theme_translations.footer_company.message}} no_wrapper=true %}</p>
+          <li><a href='/company'>{% text "footer_col4_about" label="Column 4 Link - About", value={{theme_translations.footer_about.message}}no_wrapper=true %}</a></li>
+          <li><a href='/partners'>{% text "footer_col4_partners" label="Column 4 Link - Partners", value={{theme_translations.footer_partners.message}} no_wrapper=true %}</a></li>
+          <li><a href='/careers'>{% text "footer_col4_careers" label="Column 4 Link - Careers", value={{theme_translations.footer_careers.message}} no_wrapper=true %}</a></li>
+          <li><a href='/press'>{% text "footer_col4_press" label="Column 4 Link - Press", value={{theme_translations.footer_press.message}} no_wrapper=true %}</a></li>
+          <li><a href='/faq'>{% text "footer_col1_faq" label="Column 1 Link - FAQ", value={{theme_translations.footer_faq.message}} no_wrapper=true %}</a></li>
+        </ul>
+      </div>
+
+      <div class='localeSocialRow'>
+        <div class="localeContainer" onclick="onDropdownClick()">
+          <div class="localeBtn">
+            {% set locale_dict = {
+              "en_US": "English",
+              "ja": "日本語",
+              "fr": "Français",
+              "de": "Deutsch",
+              "es_MX": "Español",
+              }
+            %}
+            {% set hs_to_8w_locale_dict = {
+              "en_US": "en-US",
+              "ja": "ja-JP",
+              "fr": "fr-FR",
+              "de": "de-DE",
+              "es_MX": "es-MX",
+              }
+            %}
+            {{ locale_dict[locale] }}
+            <svg id="dropdownIcon" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" fill="#b5b8d0"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"/></svg>
+          </div>
+          <ul id="localeDropdown" class="localeDropdown">
+            {% for lang_key, lang_name in locale_dict.items() %}
+              <li onclick="onLocaleClick('{{ hs_to_8w_locale_dict[lang_key] }}')">{{ lang_name }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="footerSocialLinks">
+          <p>
+            <a href='https://www.youtube.com/8thwall'>YouTube</a>
+            &nbsp;|&nbsp;
+            <a href='https://www.facebook.com/the8thwall'>Facebook</a>
+            &nbsp;|&nbsp;
+            <a href='https://www.instagram.com/8thwall/'>Instagram</a>
+            &nbsp;|&nbsp;
+            <a href='https://www.linkedin.com/company/8thwall/'>LinkedIn</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="footerLinks">
+        <p class="copyright">{% text "copyright" label="Copyright", value={{theme_translations.footer_copyright.message}} no_wrapper=true %}</p>
+        <p class="legalLinks">
+          {% widget_block rich_text "right_column" overrideable=True, label="Right Column" no_wrapper=true %}
+          {% widget_attribute "html" %}
+          Our <a href='/terms'>Terms &amp; Conditions</a>,
+          <a href='/privacy'>Privacy Policy</a>,
+          <a href='/copyright-dispute-policy'>Copyright Dispute Policy</a>, and
+          <a href='/guidelines'>Content Guidelines</a>
+          {% end_widget_attribute %}
+          {% end_widget_block %}
+        </p>
+      </div>
+    </div>
+
+    <div class='footerLogos'>
+      <a href='http://www.thevrara.com/' target='_blank' rel='noopener noreferrer'>
+        <picture>
+          <source type='image/webp' srcSet='{{ get_asset_url('/theme8/images/VR_AR_logo_3x.png') }}' />
+          <img style="max-width: 17em;" src='{{ get_asset_url('/theme8/images/VR_AR_logo_3x.png') }}'
+               alt='VR/AR Association member' />
+        </picture>
+      </a>
+      <a href='http://www.iab.com/' target='_blank' rel='noopener noreferrer'>
+        <img style="max-width: 17em;" src='{{ get_asset_url('/theme8/images/iab-member-logo.svg') }}'
+             alt='iAB member' />
+      </a>
+    </div>
+  </div>
+</section>

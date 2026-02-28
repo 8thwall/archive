@@ -1,0 +1,32 @@
+{
+  "name": "modules8",
+  "version": "1.0.0",
+  "description": "",
+  "author": "8th Wall Team",
+  "license": "ISC",
+  "scripts": {
+    "copy": "cp dist/modules8.js ~/repo/prod8/cdn/web-stamped/hosting/modules8.js && echo 'Now you can send a PR to prod8.'",
+    "build": "webpack",
+    "clean": "rm -rf dist/*",
+    "watch": "echo \"Test page will be available at: https://localhost:9006/test/\" && npx webpack-dev-server"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/plugin-proposal-export-default-from": "^7.14.5",
+    "@babel/plugin-proposal-export-namespace-from": "^7.14.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.15.6",
+    "@babel/plugin-proposal-optional-chaining": "^7.14.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.15.4",
+    "@babel/plugin-transform-object-assign": "^7.14.5",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-typescript": "^7.15.0",
+    "babel-loader": "^8.0.6",
+    "ts-essentials": "^9.0.0",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.11.2"
+  }
+}

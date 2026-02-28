@@ -1,0 +1,26 @@
+---
+id: polyhedron-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# 多面体幾何学
+
+## 商品説明
+
+このコンポーネントは、エンティティのジオメトリを確立する。
+
+## プロパティ一覧
+
+| Property | Type   | 初期値     | 商品説明                |
+| -------- | ------ | ------- | ------------------- |
+| radius   | 番号     | 1       | 正四面体の半径。            |
+
+## 関数一覧
+
+<ComponentFunctions
+    name="PolyhedronGeometry"
+    properties={{ radius: 1 }}
+    mutate={`cursor.radius += 1;
+    return false;`}
+/>

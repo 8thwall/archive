@@ -1,0 +1,47 @@
+#!/bin/bash
+# A script for running presubmit checks on modified files.
+#
+# Usage:
+#   ./presubmit [modified files]
+#
+# The main driver for this script is //bzl/presubmit/presubmit.ts. This script ensures that the
+# build target for presubmit.ts is up to date, rebuilds it if needed, and then invokes it.
+#
+# Presubmit checks are defined in PRESUBMIT.json files in the source tree. For each modified file,
+# we crawl the source tree up toward the repo root. When a PRESUBMIT.json file is encountered, the
+# presubmit tasks specified in that file are run. If the PRESUBMIT.json file has "inherit: true"
+# specified, we keep traversing up the source tree until the next PRESUBMIT.json is found. If any
+# PRESUBMIT.json file has "inherit: false" set, then we stop traversing and ignore higher level
+# PRESUBMIT.json files.
+
+# Find the root of the repo for running scripts in bazel-bin.
+REPO_ROOT=$(bazel info workspace)
+
+# Check if the presubmit script needs to be rebuilt.
+bazel build //bzl/presubmit:presubmit --check_up_to_date &> /dev/null
+
+if [[ $? -gt 0 ]]
+then
+  # If presubmit script is out of date, rebuild it.
+  echo -n Building presubmit utility ...
+  bazel build //bzl/presubmit:presubmit &> /dev/null
+  # If the build failed, bail.
+  if [[ $? -gt 0 ]]
+  then
+    echo ' FAILED'
+    exit 1
+  fi
+  echo ' SUCCESS'
+fi
+
+# We now have an up-to-date presubmit script. Run it with the args to this script.
+echo Running presubmit ...
+${REPO_ROOT}/bazel-bin/bzl/presubmit/presubmit $@
+
+if [[ $? -gt 0 ]]
+then
+  echo FAILED
+  exit 1
+else
+  echo SUCCESS
+fi

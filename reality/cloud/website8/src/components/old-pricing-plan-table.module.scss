@@ -1,0 +1,93 @@
+
+  @use '../styles/brand-colors';
+  @use '../styles/constants';
+  
+  .tableContainer {
+    display: flex;
+    overflow: hidden;
+    border-radius: 8px;
+    border-style: solid;
+    border-color: brand-colors.$gray2;
+    border-width: 1px;
+    max-width: 80rem;
+    align-items: stretch;
+    filter: drop-shadow(2px 2px 10px rgba(brand-colors.$gray4, 0.1));
+
+    @media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT){
+      border: none;
+      filter: none;
+    }
+  }
+
+  .tablePlanRow {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .tableSubHead {
+    width: 100%;
+  }
+
+  .tableSubHeadCell {
+    flex: 1;
+    padding: 0.7em 0;
+    text-align: center;
+    max-width: 50%;
+    font-size: 1em;
+    @media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT){
+      font-size: 0.8em;
+    }
+  }
+
+  .tableSubHeadGray {
+    color: brand-colors.$gray4;
+    background-color: brand-colors.$gray0;
+    border-color: brand-colors.$gray2;
+    border-style: solid;
+    border-width: 0;
+    border-width: 0;
+    @media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT){
+      border-width: 1px 0 0 1px;
+      border-radius: 4px 0 0 0;
+    }
+  }
+
+  .tableSubHeadHighlight {
+    color: brand-colors.$brand-highlight;
+    border-width: 0 0 0 1px;
+    border-style: solid;
+    border-color: brand-colors.$gray2;
+    background-color: #AD50FF0D;
+    border-radius: 0;
+    @media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT){
+      border-width: 1px 1px 0 1px;
+      border-radius: 0 4px 0 0;
+      width: 100%;
+      min-width: 172px;
+    }
+  }
+
+  .cardButtonSection {
+    margin-bottom: 1.5em;
+  }
+  
+  .cardButton {
+    background-color: brand-colors.$white;
+    color: brand-colors.$gray4;
+    border: 1px solid  brand-colors.$gray2;
+    font-weight: 700;
+    padding: 0.5em;
+    flex: 1 !important;
+    &:active, &:focus, &:global(.active) {
+      color: brand-colors.$brand-purple;
+      border: 1px solid brand-colors.$brand-purple;
+      box-shadow: none;
+      outline: none;
+    }
+    &:first-child {
+      border-radius: 0 0 0 4px;
+    }
+    &:last-child {
+      border-radius: 0 0 4px 0;
+    }
+  }

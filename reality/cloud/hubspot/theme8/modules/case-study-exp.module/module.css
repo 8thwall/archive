@@ -1,0 +1,43 @@
+.expSection {
+  display: flex;
+  gap: 4em;
+  align-items: center;
+}
+
+.caseStudyVideo {
+  max-width: 100%;
+  max-height: 50em;
+  border-radius: 13px;
+}
+
+.caseStudyVideoContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.expText {
+  flex: 1;
+  font-family: Nunito, sans-serif;
+  font-size: 1.25rem;
+}
+
+@media screen and (max-width: 991px) {
+  .expSection {
+    gap: 2em;
+  }
+
+  .caseStudyVideo {
+    max-width: 80%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .expSection {
+    flex-direction: column-reverse;
+  }
+
+  .caseStudyVideo {
+    max-width: 100%;
+  }
+}

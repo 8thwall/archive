@@ -1,0 +1,28 @@
+---
+id: cone-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# ConeGeometry
+
+## Description
+
+Ce composant établit la géométrie d'une entité.
+
+## Propriétés
+
+| Propriété | Type   | Défaut  | Description                              |
+| --------- | ------ | ------- | ---------------------------------------- |
+| rayon     | nombre | 1       | Rayon de l'extrémité inférieure du cône. |
+| hauteur   | nombre | 1       | Hauteur du cône.                         |
+
+## Fonctions
+
+<ComponentFunctions
+    name="ConeGeometry"
+    properties={{ radius: 1, height: 1 }}
+    mutate={`cursor.radius += 1;
+    cursor.height *= 2;
+    return false;`}
+/>

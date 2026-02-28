@@ -1,0 +1,32 @@
+---
+id: map
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import MapTable from "../../../gen/tables/Map.md"
+
+# 地図
+
+## 説明
+
+このコンポーネントは全体的なマップ構成を表す。
+
+## プロパティ
+
+<MapTable />
+
+## 機能
+
+<ComponentFunctions
+    name="Map"
+    properties={{
+        latitude: 37.7955281,
+        longitude: -122.3934225,
+        radius: 500,
+        spawnLocations: false,
+        useGPS: true,
+    }}
+    mutate={`cursor.latitude = 37.4419;
+    cursor.longitude = -122.1430;
+    return false;`}
+/>

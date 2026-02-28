@@ -1,0 +1,19 @@
+{
+  "page.title": "Recursos",
+  "card.heading.docs": "Docs",
+  "card.description.docs": "Aprenda a desarrollar con 8th Wall y acceda a la documentación detallada de la API JavaScript de 8th Wall.",
+  "card.heading.forum": "Foro",
+  "card.description.forum": "Únete al foro de discusión de 8th Wall. Obtén ayuda, haz preguntas y comparte proyectos.",
+  "card.heading.tutorials": "Tutoriales",
+  "card.description.tutorials": "Domine el desarrollo de 8th Wall con útiles consejos rápidos y tutoriales en vídeo detallados de nuestro equipo de asistencia.",
+  "card.heading.project_library": "Biblioteca de proyectos",
+  "card.description.project_library": "Empiece a utilizar 8th Wall viendo el código y clonando proyectos de ejemplo de la biblioteca de proyectos de 8th Wall.",
+  "card.heading.questions": "¿Aún tiene preguntas?",
+  "card.description.questions": "Envíe un correo electrónico a support@8thwall.com para ponerse en contacto con un miembro de nuestro equipo y le responderemos en breve.",
+  "card.heading.courses": "Cursos",
+  "card.description.courses": "Aprenda 8th Wall desde la base con cursos prácticos completos.",
+  "card.heading.community": "Comunidad",
+  "card.description.community": "Conéctese con desarrolladores, participe en debates y obtenga consejos de expertos sobre cómo innovar con 8th Wall.",
+  "card.heading.blog": "Blog",
+  "card.description.blog": "Lea los últimos anuncios, encuentre inspiración y destaque"
+}

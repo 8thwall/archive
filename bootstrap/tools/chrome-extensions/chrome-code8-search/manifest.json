@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "8th Wall Code Search",
+  "version": "1.4",
+  "description": "GitHub code search of 8th Wall repositories",
+  "omnibox": {
+    "keyword": "cs"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["tabs"],
+  "icons": {
+    "16": "8thwall.png",
+    "48": "8thwall.png",
+    "128": "8thwall.png"
+  }
+}

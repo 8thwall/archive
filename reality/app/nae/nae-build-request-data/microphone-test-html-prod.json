@@ -1,0 +1,13 @@
+{
+  "projectUrl": "https://8w.8thwall.app/microphone-test/",
+  "shell": "html",
+  "appInfo": {
+    "workspace": "8w",
+    "appName": "microphone-test",
+    "refHead": "production"
+  },
+  "appUuid": "d48adfb5-6fe9-4974-8301-cabbc17eee54",
+  "exportType": "zip",
+  "requestRef": "lucas-default",
+  "repoId": "cc.12.app.d48adfb5-6fe9-4974-8301-cabbc17eee54"
+}

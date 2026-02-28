@@ -1,0 +1,36 @@
+{
+  "projectUrl": "https://8w.8thwall.app/catch-the-stack/",
+  "shell": "ios",
+  "apple": {
+    "teamIdentifier": "<REMOVED_BEFORE_OPEN_SOURCING>",
+    "signingType": "development"
+  },
+  "appInfo": {
+    "appDisplayName": "Catch the Stack",
+    "bundleIdentifier": "com.the8thwall.catch-the-stack",
+    "naeBuildMode": "static",
+    "workspace": "8w",
+    "appName": "catch-the-stack",
+    "refHead": "production",
+    "permissions": {
+      "camera": {
+        "requestStatus": "REQUESTED",
+        "usageDescription": "Test camera placeholder, it is good you are seeing it!"
+      },
+      "location": {
+        "requestStatus": "REQUESTED",
+        "usageDescription": "Test location placeholder, it is good you are seeing it!"
+      },
+      "microphone": {
+        "requestStatus": "REQUESTED",
+        "usageDescription": "Test microphone placeholder, it is good you are seeing it!"
+      }
+    }
+  },
+  "appUuid": "42ae06a3-19ce-4589-982a-5d6c8ef2a596",
+  "exportType": "ipa",
+  "iconId": "4sf2pnwzgtcjcc2b736e0sqyhg47rqhg3w0ny8fjmk9uhmnlp3xlhftw",
+  "launchScreenIconId": "4sf2pnwzgtcjcc2b736e0sqyhg47rqhg3w0ny8fjmk9uhmnlp3xlhftw",
+  "requestRef": "lucas-default",
+  "repoId": "cc.2.app.6b5b70d5-c269-4955-92b5-c36bcc4706cc"
+}

@@ -1,0 +1,57 @@
+---
+id: maps
+description: Map objects provide interactive, real-world 3D maps for integrating geospatial data into AR and 3D experiences.
+---
+
+# Maps
+
+## Introduction
+{frontMatter.description} They allow you to anchor content to specific real-world locations.
+
+The feature includes built-in terrain, cityscapes, and real-world structures, enabling accurate placement of virtual objects within a mapped environment. This functionality supports location-based applications, including Visual Positioning System (VPS) experiences and real-world AR interactions.
+
+![](/images/studio/maps-intro.gif)
+
+## Adding a Map
+You can add a map to your scene by creating a Map entity. To do this, click ( + ) in the Scene Hierarchy and select Map.
+
+![](/images/studio/maps-add.png)
+
+## Map Configurations
+
+### Center and Radius
+By default, the map center is set to the device’s GPS location. If needed, you can manually configure the latitude, longitude, and radius to specify a custom location.
+
+You can select the “Use GPS” checkbox to use the device GPS at runtime.
+
+### Map Themes
+You can customize the map’s appearance by selecting from 20 preset themes. Alternatively, you can adjust individual properties to create a custom theme.
+
+### Features
+The map is made up of the following layers:
+- Land: The base of the map, areas where there are no other features.
+- Building: Buildings on the map. These can rise above the map.
+- Park: Green spaces (natural and man-made).
+- Parking: Parking lots.
+- Transit: Railroad lines and other transit platforms (e.g. train or ferry).
+- Road: Roads of various sizes.
+- Sand: Beaches and deserts.
+- Water: Bodies of water and waterways.
+
+These can each be toggled and customized using the Map inspector. For the full list of configurable properties, see the [`MapTheme` API reference](/api/studio/ecs/map-theme).
+
+## Map Points
+Map points are objects anchored to a specified latitude and longitude. By adding an asset as a child of a map point, you can lock it to the latitude and longitude of the map point, where it will move and scale as the Map's coordinates and radius change.
+
+You can create a single map point by clicking "New Map Point" in the Inspector Panel and specifying the latitude and longitude. You can also select a VPS Location as the coordinate source.
+
+If you check the "Spawn Locations" checkbox, Studio will procedurally generate a map point at every VPS location in the world. See the [Map Explorer sample project](https://www.8thwall.com/8thwall/map-explorer) for an example of how to spawn custom entities on each visible POI.
+
+![](/images/studio/map-points.gif)
+
+## Simulator
+You can test your map experience using the Simulator. The second dropdown at the top of the window allows you to change the simulated latitude and longitude, enabling you to test your experience in different locations. You can also navigate to any location or map point in your project.
+
+Selecting "None" in the dropdown simulates the absence of location data.
+
+![](/images/studio/maps-simulator.png)

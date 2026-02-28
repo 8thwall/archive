@@ -1,0 +1,651 @@
+---
+id: lightship-vps
+---
+
+# VPS Lightship
+
+## Visión general de Lightship VPS {#lightship-vps-overview}
+
+Con el Sistema de Posicionamiento Visual (VPS) de Niantic, los desarrolladores pueden crear ricas experiencias de AR de localización 
+que superponen contenido virtual al mundo físico. Los contenidos WebAR pueden anclarse a ubicaciones del mundo real 
+, lo que permite a los objetos virtuales interactuar con su entorno físico. Esto hace que la experiencia de la realidad aumentada de 
+resulte más personal, significativa y envolvente, y da a los usuarios nuevas razones para explorar 
+el mundo que les rodea.
+
+**Nota: La localización VPS no es actualmente previsualizable en el
+[Simulator](/legacy/getting-started/quick-start-guide/#simulator).**
+
+**Nota:** El VPS y el Navegador Geoespacial (GSB) requieren actualmente una **suscripción al plan Pro**.  Estas funciones de
+no están disponibles en el plan Básico (Gratuito).
+
+## Gestión de ubicaciones {#managing-locations}
+
+Se puede acceder al navegador geoespacial desde el proyecto seleccionando el icono del mapa en el menú de la izquierda de
+(marcado como nº 1 en la imagen siguiente). En esta página encontrará una vista de mapa (#2)
+que puede utilizar para buscar ubicaciones activadas por VPS. Al seleccionar una ubicación
+activada por VPS se mostrará la malla 3D de la ubicación (#3) para que pueda verificar que ha seleccionado la
+ubicación correcta y añadirla a su proyecto (#4).
+
+![ConsoleGSB](/images/console-geospatial-browser.jpg)
+
+Cuando añada una Ubicación activada por VPS a su proyecto, verá la Ubicación en la tabla "Ubicaciones del proyecto
+" en el Navegador Geoespacial (anotada como #1 en la imagen de abajo). Una vez que tenga una
+Ubicación en la tabla "Ubicaciones del proyecto" puede utilizar el botón "Descargar" (#2) para descargar una versión GLB o
+OBJ (conmutador mostrado como #3) de la malla 3D y abrirla en aplicaciones de software 3D de terceros,
+como Blender, o importarla directamente a su proyecto 8th Wall. Cuando haga referencia a Ubicaciones en 
+su código de proyecto tendrá que copiar el campo "Nombre" (#4) de la tabla "Ubicaciones del proyecto".
+
+![ConsoleGSBManageWayspots](/images/console-geospatial-browser-manage-wayspots.jpg)
+
+Si la ubicación que desea utilizar en su proyecto no está disponible como Ubicación VPS, puede crear
+la ubicación siguiendo las instrucciones de la sección
+[Crear nueva ubicación](#create-new-location).
+
+## Crear nueva ubicación {#create-new-location}
+
+1. Haga clic en un punto abierto del mapa para seleccionar dónde desea crear una nueva Ubicación VPS. Consulte
+   [Requisitos de la Ubicación VPS](#location-requirements) para obtener más información sobre cómo elegir un buen lugar para
+   crear una Ubicación VPS.
+
+![ConsoleCreateWayspot](/images/console-create-wayspot.png)
+
+2. Los espacios de trabajo de los planes `Pro` o `Enterprise` tendrán la opción de **Crear ubicación pública** o 
+   **Crear ubicación privada**. Las Ubicaciones Públicas son accesibles para todos los desarrolladores y personas que utilicen
+   sus proyectos, mientras que las Ubicaciones Privadas sólo serán visibles y accesibles para tu espacio de trabajo y
+   sus proyectos. Crear una Ubicación Pública es la opción correcta para la mayoría de los proyectos; Ubicaciones Privadas
+   es una característica premium para desarrolladores que necesitan crear experiencias especiales de VPS
+   de acceso controlado o temporales. Haga clic en el botón **Crear ubicación pública** o en el botón **Crear ubicación privada**
+   para iniciar el proceso de creación de la ubicación.
+
+3. **Comprobar si hay duplicados**: Antes de crear una nueva Ubicación, es necesario que compruebe que su Ubicación
+   no existe ya. Compare su Ubicación deseada con otras que ya estén en el mapa para asegurarse
+   de que no está creando un duplicado. Si no se trata de una Ubicación duplicada, debe marcar la casilla **Mi
+   Ubicación no es un duplicado** y hacer clic en el botón **Siguiente** para continuar.
+
+![ConsoleCreateWayspotNoDuplicate](/images/console-create-wayspot-nodupe.png)
+
+4. **Añadir información de localización**: Los metadatos de localización serán visibles para los desarrolladores que utilicen el navegador geoespacial
+   y podrán ser visibles para los usuarios finales. Recuerda que el equipo de Confianza y Seguridad de Niantic utiliza
+   la información que proporcionas para determinar si la Ubicación cumple nuestros criterios para hacerse pública
+   disponible. Una vez que haya añadido la siguiente información para la Ubicación que está intentando crear,
+   haga clic en el botón **Submit**:
+
+- Título (125 caracteres)
+- Descripción (250 caracteres)
+- Categoría (1 o más)
+- Imagen (si está disponible)
+
+5. Su ubicación debería añadirse inmediatamente a la pestaña de envíos de ubicaciones del navegador geoespacial
+   con su tipo ("Público" o "Privado") y el estado ("No activado"). Estará disponible
+   para su escaneo en unos minutos y se podrá solicitar la activación del VPS una vez que esté completamente escaneado.
+
+## Scaniverse para desarrolladores de Niantic {#scaniverse-for-niantic-developers}
+
+Scaniverse para desarrolladores de Niantic integra a la perfección
+el navegador geoespacial (GSB) con la galardonada experiencia de escaneado de Scaniverse. Esta dirección
+agiliza considerablemente los flujos de trabajo de los desarrolladores en torno a la navegación por el mapa, la adición de ubicaciones y, por supuesto, la exploración de
+:
+
+- Hemos adaptado el navegador geoespacial (GSB) para dispositivos móviles, de modo que pueda utilizarse eficazmente en
+  Scaniverse para navegar por el mapa, inspeccionar ubicaciones, añadir ubicaciones y solicitar la activación de VPS.
+- Hemos sustituido el flujo de inicio de sesión de la aplicación Wayfarer por un simple código QR que vincula Scaniverse con tu cuenta de 
+  8th Wall.
+- Hemos adoptado la interfaz de usuario de Scaniverse para facilitar la creación y carga de escaneados.
+- Hemos habilitado la localización de pruebas en ubicaciones activadas por VPS dentro de Scaniverse
+- Hemos integrado nuestras últimas mejoras en el filtrado de mapas para que le resulte más fácil que nunca encontrar la ubicación o ubicaciones de 
+  que está buscando.
+
+### Vinculación de Scaniverse con el navegador geoespacial (GSB) {#linking-scaniverse-with-the-geospatial-browser}
+
+**Requisito**: Instalar Scaniverse desde iOS [App Store](https://apps.apple.com/us/app/scaniverse-3d-scanner/id1541433223). Pronto habrá compatibilidad con dispositivos Android.
+
+1. Accede a tu cuenta de 8th Wall desde tu ordenador. Abra el **Explorador geoespacial (GSB)**, seleccione cualquier ubicación
+   en el mapa y, a continuación, seleccione **Ver detalles**. En la esquina inferior derecha de la tarjeta de detalles de la ubicación
+   , pulse **Generar código QR**. Aparecerá un código QR.
+
+![Scaniverse1](/images/scaniverse1.png)
+
+2. Escanea el **código QR** con tu aplicación Cámara. Abre la aplicación Cámara de tu teléfono y apunta al código QR. 
+
+3. Pulse sobre el enlace **Scaniverse** que aparece. Esto vinculará Scaniverse con tu cuenta de desarrollador de 8th Wall
+   . Sólo hay que hacerlo una vez. 
+   :::info
+   **Asegúrese de permitir que www.8thwall.com utilice
+   su ubicación actual cuando se le solicite; esto es necesario para el correcto funcionamiento de la interfaz GSB.**
+   :::
+
+![Scaniverse2](/images/scaniverse2.png)
+
+4. Una vez que haya vinculado Scaniverse a GSB, podrá volver a la pantalla GSB en cualquier momento
+   pulsando el **botón GSB** en la cinta inferior de la aplicación Scaniverse. Tenga en cuenta que puede desvincular
+   Scaniverse de GSB en cualquier momento accediendo al menú **Configuración** y desactivando la opción **Modo desarrollador de Niantic
+   **.
+
+5. Todos los escaneos que hayas realizado fuera del Modo Desarrollador de Niantic seguirán siendo accesibles cuando
+   vincule/desvincule Scaniverse con GSB. 
+
+![Scaniverse3](/images/scaniverse3.png)
+
+### Navegar por el mapa GSB en Scaniverse
+
+1. Pulsando sobre el icono **Persona** podrá seleccionar su 8º Espacio de Trabajo en la Pared.
+
+2. Si pulsa el botón **cargar** podrá seleccionar la ubicación de los escaneos que desea cargar. Tenga en cuenta que
+   sólo los escaneos que se originan desde el Modo Desarrollador de Niantic (utilizando las opciones Añadir Escaneos o Escaneo de Prueba) pueden
+   ser cargados a Niantic para propósitos de desarrollo VPS.
+
+3. Si pulsa el botón **Plus** podrá crear nuevas ubicaciones y realizar exploraciones de prueba.
+
+4. Si pulsa el botón **Capas**, se activará la vista por satélite del mapa.
+
+5. Al tocar el botón **Reticule**, el mapa se centrará en su ubicación.
+
+6. Si pulsa el botón **Brújula**, el mapa volverá a su orientación por defecto, norte arriba.
+
+7. El botón **Controles** le permitirá aplicar filtros a las localidades que aparecen en el mapa
+   en función de su tamaño, categoría o estado de activación.
+
+8. El botón **Lupa** le permitirá buscar en el mapa.
+
+9. Al pulsar el botón **X** se cerrará el GSB y volverá a la pantalla de inicio de Scaniverse.
+
+![Scaniverse4](/images/scaniverse4.jpg)
+
+10. Al seleccionar una ubicación en el mapa aparecerá una pantalla de **Previsualización**, en la que se puede pulsar para obtener más detalles
+    .
+
+11. Si ha seleccionado una localización activada por VPS, puede pulsar el botón **Probar VPS** para verificar que la localización
+    funciona.
+
+12. Para crear una exploración y añadirla a una ubicación concreta, pulse el botón **Añadir exploraciones** de la ubicación correspondiente en
+    . Tenga en cuenta que debe estar cerca de la ubicación para que la opción Añadir exploraciones esté disponible.
+
+![Scaniverse5](/images/scaniverse5.png)
+
+### Crear y cargar escaneos
+
+1. El botón **Grabar** se utiliza para iniciar y detener el proceso de escaneado.
+
+2. El botón **Pausa** puede utilizarse para suspender temporalmente el proceso de escaneado si se desea.
+
+3. La pantalla **Tiempo** indica la duración de la exploración actual. Se requiere una duración mínima de 15 segundos
+   para que un escaneo sea viable para su carga con fines de desarrollo VPS. Lo ideal es una exploración de 30-60 segundos
+   (las exploraciones de más de 60 segundos se dividen en varias partes para procesarlas en
+   ).
+
+4. Si pulsa el botón **X** volverá a la pantalla de inicio de Scaniverse.
+
+![Scaniverse6](/images/scaniverse6.png)
+
+5. Cuando haya completado un escaneo, podrá inspeccionar una **Malla de Revisión** de la escena que
+   capturó.
+
+6. Si está satisfecho con su escaneado, puede cargarlo inmediatamente pulsando el botón **Cargar escaneado de
+   **.
+
+7. También puede elegir **Descargar más tarde** si desea utilizar una conexión WiFi (recomendado).
+
+8. Si no está satisfecho con su escaneado, puede descartarlo pulsando el botón **Borrar**.
+
+![Scaniverse7](/images/scaniverse7.png)
+
+## Instalación de Niantic Wayfarer {#installing-niantic-wayfarer}
+
+Para escanear nuevas ubicaciones VPS o añadir escaneos a ubicaciones previamente activadas, necesitarás
+instalar la aplicación Niantic Wayfarer en tu teléfono.  Consulte a continuación las instrucciones de instalación y uso
+. 
+
+### iOS {#ios}
+
+La app Niantic Wayfarer requiere iOS 12 o posterior y un iPhone 8 o posterior. No es necesario un dispositivo LiDAR
+.
+
+Para instalar la aplicación Niantic Wayfarer, visita
+[Testflight for Niantic Wayfarer](https://testflight.apple.com/join/VXu1F2jf)
+([8th.io/wayfarer-ios](https://8th.io/wayfarer-ios))
+en tu dispositivo iOS.
+
+## Uso de Niantic Wayfarer {#using-niantic-wayfarer}
+
+Puedes añadir exploraciones a [Ubicaciones públicas](#location-types) así como crear
+[Exploraciones de prueba](#test-scans) con la aplicación Niantic Wayfarer.
+
+Una vez que haya instalado la aplicación, inicie sesión con sus credenciales de 8th Wall pulsando el botón _Iniciar sesión con
+8th Wall_.
+
+Si tiene acceso a varios espacios de trabajo, seleccione un espacio de trabajo pulsando el desplegable _8th Wall Workspace_
+en la página de perfil.
+
+| Página de acceso                                      | Página de perfil                                          |
+| ----------------------------------------------------- | --------------------------------------------------------- |
+| ![wayfarer app login](/images/wayfarer-app-login.jpg) | ![wayfarer app profile](/images/wayfarer-app-profile.jpg) |
+
+En la página _Mapa_, seleccione una Ubicación VPS para añadir una exploración a una Ubicación pública (1), o seleccione _Exploración_ para añadir una exploración de prueba a su espacio de trabajo (2).
+
+Realice un escaneado de la zona utilizando la [técnica de escaneado] recomendada (#scanning-technique).
+
+| Mapa de la página                                   | Página de exploración                               |
+| --------------------------------------------------- | --------------------------------------------------- |
+| ![wayfarer add scan](/images/wayfarer-add-scan.jpg) | ![wayfarer scanning](/images/wayfarer-scanning.jpg) |
+
+Una vez finalizado el escaneado, seleccione público o de prueba y, a continuación, cárguelo.
+
+| Tipo de exploración                                   | Carga de escáneres                                        |
+| ----------------------------------------------------- | --------------------------------------------------------- |
+| ![wayfarer scan type](/images/wayfarer-scan-type.jpg) | ![wayfarer scan upload](/images/wayfarer-scan-upload.jpg) |
+
+El procesamiento de las exploraciones puede tardar entre 15 y 30 minutos. Una vez procesadas, las exploraciones aparecerán en el navegador geoespacial.
+
+Las cuestiones relacionadas con el escaneado o el tratamiento deben dirigirse a [support@nianticspatial.com](mailto://support@nianticspatial.com).
+
+Puedes encontrar más información sobre cómo utilizar la aplicación Wayfarer en la [documentación de Lightship](https://lightship.dev/docs/ardk/vps/generating_scans.html#using-the-niantic-wayfarer-app).
+
+## Técnica de escaneado {#scanning-technique}
+
+Las ubicaciones activadas por VPS escaneadas no deben tener más de 10 metros de diámetro alrededor de la ubicación.
+Por ejemplo, una estatua típica funcionaría como una Ubicación activada por VPS. Un edificio entero, sin embargo,
+no lo haría. Una cara o puerta/entrada a un edificio podría funcionar. Recomendamos empezar por
+con zonas más pequeñas (por ejemplo, un escritorio, una estatua o un mural).
+
+Antes de escanear, sea consciente de su entorno y asegúrese de que tiene derecho a acceder a la ubicación
+que está escaneando.
+
+1. Compruebe el área que se va a explorar y los alrededores del objeto explorado para determinar si hay 
+   algún obstáculo y para seleccionar una ruta de exploración. Es necesario planificar la ruta que pretende 
+   utilizar para la exploración antes de iniciar el procedimiento.
+
+2. Asegúrate de que tu cámara está enfocada. El movimiento de la cámara puede afectar negativamente a la reconstrucción 3D. Mantén 
+   tu teléfono lo más cerca posible de tu costado para evitar el desenfoque. Camine alrededor del objeto que está escaneando en 
+   en lugar de quedarse parado en un lugar y mover el teléfono.
+
+3. Camine a un ritmo lento y natural. Muévase lenta y suavemente durante la exploración. Los cambios bruscos de dirección 
+   son un no-no definitivo. Muévete lenta y suavemente con los pies en el suelo. Si escanea en 
+   en un entorno oscuro, es aún más importante moverse lenta y suavemente. Mueva el teléfono 
+   con usted mientras se mueve (piense en caminar como un cangrejo).
+
+4. VPS La ubicación debe ser siempre el punto central. Para que podamos construir el mapa, es importante 
+   centrarse en la Localización VPS y capturar la órbita completa de 360° de la misma. Si no es seguro o no es posible 
+   obtener una cobertura de 360°, capture todo lo que pueda.
+
+5. Varía la distancia/ángulo (0-10 m o 0-35 pies). Para que el mapa 3D funcione bien en diferentes escenarios de 
+   , es importante que capturemos el entorno que rodea la Localización y dispongamos de una variedad de 
+   escaneos diferentes. Es importante variar la distancia y los ángulos al explorar la Ubicación.
+
+Vídeo de la técnica recomendada de escaneado de ubicaciones VPS:
+
+```mdx-code-block
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FYS3fe5drf0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+```
+
+#### Cosas que hay que evitar al escanear {#things-to-avoid-while-scanning}
+
+1. Evite escanear cuando el entorno no sea seguro, por ejemplo, en medio de la carretera o en un parque infantil 
+   con niños.
+
+2. Evite escanear cuando la Localización esté demasiado lejos (>10m o 35ft) o sea demasiado grande para enfocarla con su cámara 
+   .
+
+3. Evite escanear mientras pasea o hace footing. Es importante mantener la ubicación 
+   como punto central en todo momento.
+
+4. Evita apuntar con el teléfono a objetos muy brillantes, como una luz fluorescente o el sol.
+
+5. Evite no moverse o moverse demasiado rápido mientras explora. Los movimientos bruscos provocarán desplazamientos en la reconstrucción de 
+   .
+
+6. Evita escanear si el teléfono se calienta demasiado. Si la temperatura del dispositivo aumenta demasiado, el rendimiento de 
+   se reducirá considerablemente, lo que afectará negativamente a la exploración.
+
+7. Evite subir escaneos que parezcan incompletos o poco representativos de lo que intenta escanear en 
+   .
+
+## Escaneos de prueba {#test-scans}
+
+Las exploraciones de prueba son una malla única, disponible para un solo espacio de trabajo, para desarrollar y probar experiencias VPS
+. Aunque las exploraciones de prueba son una gran solución para desarrollar y probar experiencias VPS
+mientras se nomina o activa una Ubicación pública, no están autorizadas para su uso en proyectos publicados de
+.
+
+Las exploraciones de prueba se crean con la aplicación Niantic Wayfarer. Asegúrate de haber iniciado sesión en Wayfarer con las credenciales de
+8th Wall y de haber seleccionado el espacio de trabajo correcto en la página Perfil. La prueba de escaneado
+sólo estará disponible en el espacio de trabajo 8th Wall seleccionado en el momento de escanear y cargar
+. Las exploraciones no se pueden mover a otro espacio de trabajo o cuenta de Lightship.
+
+En la aplicación Wayfarer, selecciona _Escanear_ y [haz un escaneo del área](#using-niantic-wayfarer).
+
+Las exploraciones de prueba deben durar 60 segundos o menos; cada 60 segundos se genera una nueva malla, por lo que la exploración de
+durante 120 segundos dará lugar a 2 exploraciones de prueba. Todas las exploraciones de prueba son
+[unaligned](#location-alignment).
+
+Una vez procesada, puede previsualizar la malla y añadirla a su proyecto desde la pestaña _Test Scans_ del navegador geoespacial
+.
+
+![Test scans tab](/images/private-scans-tab.jpg)
+
+Si el escaneado de prueba no se procesa, es posible que tenga que volver a escanear. Póngase en contacto con
+[support@nianticspatial.com](mailto://support@nianticspatial.com) para obtener más información.
+
+## Tipos de ubicación {#location-types}
+
+En el Navegador Geoespacial, verá cuatro tipos diferentes de Ubicaciones:
+
+| Tipo      | Icono                                            | Descripción                                                                                                                                                                                                                                                                                                 |
+| --------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Público   | ![WSPublic](/images/wayspot-type-public.png)     | Las ubicaciones "públicas" han sido aprobadas por el equipo de confianza y seguridad de Niantic y han cumplido los criterios de seguridad y accesibilidad pública requeridos. Estas Ubicaciones pueden utilizarse en proyectos publicados.                                                                  |
+| Pendiente | ![WSPending](/images/wayspot-type-pending.png)   | "Pendientes" Las ubicaciones están siendo revisadas por el equipo de Confianza y Seguridad de Niantic para determinar si cumplen los criterios requeridos de seguridad y accesibilidad pública. \*\*Las ubicaciones pendientes pueden escanearse y activarse mientras se espera a que finalice la revisión. |
+| Rechazado | ![WSRejected](/images/wayspot-type-rejected.png) | Las Ubicaciones "Rechazadas" pueden no haber superado la revisión de Confianza y Seguridad de Niantic, ser un duplicado de una Ubicación existente o previamente rechazada, o no estar permitidas por Niantic por otro motivo. Estas ubicaciones no pueden añadirse a los proyectos.                        |
+| Prueba    | ![WSTest](/images/wayspot-type-private.png)      | "Solo podrás acceder a las ubicaciones de prueba desde tu espacio de trabajo si escaneas la ubicación con la aplicación Wayfarer de Niantic. Las ubicaciones de prueba están pensadas para su uso durante el desarrollo y no pueden incluirse en un proyecto publicado.                                     |
+
+Para preguntas o problemas relacionados con la creación de Ubicaciones VPS, o para comprobar el estado de las Ubicaciones existentes y ya existentes, póngase en contacto con [support@nianticspatial.com](mailto://support@nianticspatial.com)
+
+## Ubicación Estado {#location-status}
+
+En el Navegador Geoespacial, verá cinco estados diferentes para las Ubicaciones VPS:
+
+| Estado      | Icono                                                       | Descripción                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ----------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| No activado | ![WSNotActivated](/images/wayspot-status-not-activated.png) | Las ubicaciones con el estado "No activado" no han recibido ninguna exploración. Para poder solicitar la activación, es necesario enviar un mínimo de 10 escaneos viables de la ubicación. Después de enviar un escaneado, el estado de la ubicación cambiará a "Escaneando".                                                                                                                                                    |
+| Escaneado   | ![WSScanning](/images/wayspot-status-scanning.png)          | Las ubicaciones con el estado "Escaneando" han recibido al menos un escaneado. Para poder solicitar la activación, es necesario enviar un mínimo de 10 escaneos viables de la ubicación.                                                                                                                                                                                                                                         |
+| Tratamiento | ![WSProcessing](/images/wayspot-status-processing.png)      | Las ubicaciones con el estado "En proceso" han recibido una solicitud de activación y mostrarán el estado "En proceso" hasta que el proceso de activación haya finalizado. \*\*Normalmente, una solicitud de activación se completa en 4 horas. Recibirás un correo electrónico cuando el proceso haya finalizado.                                                                                                               |
+| Activo      | ![WSActive](/images/wayspot-status-active.png)              | Las ubicaciones con un estado "Activo" están disponibles para ser utilizadas en proyectos para crear contenido WebAR utilizando VPS para Web.                                                                                                                                                                                                                                                                                    |
+| Fallido     | ![WSFailed](/images/wayspot-status-failed.png)              | Las ubicaciones con el estado "Fallido" han encontrado un problema durante el proceso de activación. Esto puede deberse a varios factores, como la inadecuación de la ubicación para el VPS, escaneos insuficientes o datos corruptos. Desafortunadamente esto significa que esta Ubicación no puede ser usada para crear contenido WebAR usando VPS. Le animamos a que busque una nueva ubicación para su proyecto del 8º Muro. |
+
+Si tiene preguntas o problemas relacionados con la exploración de ubicaciones, la activación o el estado, póngase en contacto con [support@nianticspatial.com](mailto://support@nianticspatial.com)
+
+## Requisitos de localización {#location-requirements}
+
+A la hora de elegir cualquier ubicación para su uso con VPS, tenga en cuenta lo siguiente:
+
+- El VPS funciona mejor en lugares con un aspecto definido y uniforme (por ejemplo, una playa de arena o
+  un patio abarrotado de gente con muebles móviles no funcionarán bien).
+- No se recomiendan las ubicaciones dominadas por elementos reflectantes o transparentes (por ejemplo, ventanas y espejos)
+  .
+- Cuanto más grande sea la experiencia, más escaneado tendrá que hacer para capturar el espacio; el tamaño máximo recomendado actualmente en
+  para una experiencia VPS es de 400 m^2 (20 x 20 m), aunque se pueden soportar experiencias mayores en
+  con un escaneado cuidadoso.
+
+### Requisitos de ubicación pública {#public-location-requirements}
+
+**Las ubicaciones públicas** son accesibles a todos los desarrolladores y personas que utilizan sus proyectos y aplicaciones. Cuando
+añada una nueva Ubicación Pública, tenga en cuenta las siguientes directrices:
+
+- Los Lugares Públicos deben ser lugares u objetos físicos permanentes, tangibles e identificables.
+- Las ubicaciones públicas deben ser seguras y accesibles al público peatonal.
+- Asegúrese de incluir información precisa en el título, la descripción y la foto para ayudar a sus usuarios
+  a encontrar la ubicación.
+
+### Requisitos para la ubicación privada {#private-location-requirements}
+
+**Localizaciones Privadas** son una característica premium para desarrolladores que necesitan crear experiencias VPS especiales
+de acceso controlado o temporales. Sólo son visibles y accesibles para el espacio de trabajo
+que los creó. Al crear una nueva Ubicación Privada, tenga en cuenta lo siguiente:
+
+- Las Ubicaciones Privadas sólo pueden ser descubiertas por el espacio de trabajo que las creó, por lo que sólo pueden ser exploradas y localizadas en
+  por los miembros y usuarios de los proyectos de ese espacio de trabajo.
+- Las ubicaciones privadas son una buena opción si va a construir una experiencia especial de acceso controlado
+  (por ejemplo, en su propiedad privada o en la de su cliente).
+- Las ubicaciones privadas también son una opción si está creando una experiencia en un lugar público que
+  tiene temporalmente un aspecto diferente (por ejemplo, un concierto, una exposición en un museo u otro evento especial).
+
+## Ubicación Cantidades {#location-quantities}
+
+No hay límite en el número de ubicaciones que pueden asociarse a un proyecto de 8th Wall.
+Las ubicaciones se localizan en el servidor a través del servicio VPS.
+
+## Ubicación Eventos {#location-events}
+
+8th Wall emite eventos en distintas fases del ciclo de vida de la ubicación del proyecto (por ejemplo, escaneado, encontrado,
+actualizado, perdido, etc.). Consulte la referencia de la API para obtener instrucciones específicas sobre la gestión de estos eventos
+en su aplicación web:
+
+- [Eventos AFrame](/legacy/api/aframeevents)
+- [Eventos PlayCanvas](/legacy/api/playcanvasevents/playcanvas-image-target-events)
+- [Eventos despachados XrController](/legacy/api/xrcontroller/pipelinemodule/#dispatched-events)
+
+## Ubicación Calidad {#location-quality}
+
+Una vez que se ha activado el VPS de una ubicación, Niantic proporciona una calificación de calidad en el navegador geoespacial.
+Los detalles de la ubicación muestran _Calidad regular_ o _Calidad buena_.
+
+La calidad de localización se refiere a la capacidad de localización de la ubicación en cualquier momento. Las ubicaciones con varios escaneos
+en todo tipo de iluminación tienden a tener una mayor calidad. Las ubicaciones con un mínimo de escaneos requeridos o una
+mayoría de escaneos en un tipo de iluminación tienden a tener una calidad inferior.
+
+La calificación de la calidad es un proceso automatizado y puede no reflejar el rendimiento real de la Ubicación.
+La mejor manera de determinar la calidad es probarlo uno mismo.
+
+## Ubicación Alineación {#location-alignment}
+
+La advertencia de no alineado puede ocurrir por varias razones y significa que la localización contra la malla no puede
+ser garantizada. Aunque la malla puede funcionar bien para la localización, la advertencia indica que la malla es
+experimental y debe utilizarse bajo su propia responsabilidad.
+
+Nota: Todas las exploraciones de **prueba** están desalineadas.
+
+## Habilitación de Lightship VPS {#enabling-lightship-vps}
+
+Para habilitar VPS en tu proyecto WebAR, necesitarás establecer `enableVPS` a `true`.
+
+Para los proyectos A-Frame, establezca `enableVps: true` en el componente `xrweb` en la página `<a-scene>`.
+
+Para proyectos no-AFrame, establezca `enableVps: true` en la llamada a `XR8.XrController.configure()` antes de
+al arranque del motor.
+
+#### Ejemplo - AFrame {#example---aframe}
+
+```html
+<a-scene
+  coaching-overlay
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  ...
+  xrweb="enableVps: true;">
+```
+
+#### Ejemplo - Sin marco {#example---non-aframe}
+
+```javascript
+XR8.XrController.configure({enableVps: true})
+// A continuación, inicie el motor de la 8ª Pared
+```
+
+## Desarrollo de experiencias VPS a medida
+
+Las escenas VPS a medida están diseñadas para una única ubicación y utilizan una malla de referencia del navegador geoespacial para alinear el contenido de RA.
+
+Parte 1: Añadir ubicación a la escena
+
+1. Abra el navegador geoespacial (icono de mapa 🗺 a la izquierda)
+2. Encuentre una ubicación activada por VPS (o [nomine/active la suya](https://www.8thwall.com/docs/web/#scanning-wayspots))
+3. Añadir la ubicación al proyecto
+
+![](https://static.8thwall.app/assets/geospatial-browser-jmcd7ic3ob.png)
+
+Parte 2: Utilizar Location GLB como referencia para una animación AR personalizada
+
+4. Descargue el GLB de referencia de la parte derecha de la fila.
+5. Use esto en su software de modelado 3D (Blender, Maya, A-Frame, etc) para posicionar el contenido AR relativo al origen de la malla.
+
+![](https://i.giphy.com/media/dOFnRHGzZghGjecdeq/giphy.gif)
+
+\*IMPORTANTE El origen de este modelo 3D es el origen de la Localización. NO RESTABLEZCA EL ORIGEN O SU CONTENIDO NO ESTARÁ ALINEADO.
+
+_OPCIONALMENTE_: Si la malla descargada del navegador geoespacial no tiene la calidad suficiente para utilizarla en una animación, física u oclusor,
+puede considerar realizar un escaneado con una aplicación de terceros como Scaniverse y alinear esa malla de alta calidad con la descargada del navegador geoespacial
+.
+
+6. Importar animación GLB en Cloud Editor y añadir a escena
+7. Añada el componente named-location a la página `<a-entity>` de su activo. El atributo "name" se refiere al "nombre" de la ubicación del proyecto en el navegador geoespacial.
+
+¡Tachán! 🪄 Tu animación debe aparecer alineada con la Localización en el mundo real.
+
+Parte 3: Añadir oclusión y sombras
+
+1. En tu escena, añade `<a-entity named-location="name: LOCATIONNAME"><a-entity>`
+2. Añade tres `<a-entity>` dentro de este elemento como sus hijos. Estas serán tu malla oclusora, malla sombra y animación VPS.
+3. En el primer `<a-entity>`, añade `xrextras-hider-material` y `gltf-model="#vps-mesh"`. "`#vps-mesh`" debería referirse
+   a una versión de su GLB de referencia a la que se le han eliminado las texturas y se ha diezmado la geometría.
+4. En el segundo `<a-entity>`, añade `shadow-shader`, `gltf-model="#vps-mesh"`, y `shadow="cast: false"`. 
+   El sombreador de sombra aplica un material de sombra a la malla de referencia con un desplazamiento de polígonos para evitar la lucha Z. 
+   Puede elegir si desea que la malla vps proyecte una sombra sobre el mundo real con `shadow="cast: true"`.
+5. En el tercer `<a-entity>`, añade `gltf-model="#vps-anim"`, `reflections="type: realtime"`, `play-vps-animation` y `shadow="receive:false"`. 
+   `play-vps-animation` espera hasta que el `vps-coaching-overlay` haya desaparecido antes de reproducir la animación VPS.
+
+### _Instalación de desarrollo de escritorio remoto_
+
+![](https://i.giphy.com/media/cBr0UnA7jjqAzAOGTi/giphy.gif)
+
+A menudo resulta útil utilizar el inspector de A-Frame para posicionar el contenido de forma remota en el escritorio. 
+Para configurar la escena de este proyecto para el desarrollo de escritorio remoto, desactive los siguientes componentes 
+añadiendo una letra al principio (es decir, "Znamed-location"):
+
+- `xrweb` -> `Zxrweb`
+- `xrextras-loading` -> `Zxrextras-loading`
+- `named-location` -> `Znamed-location`
+- `xrextras-hider-material` -> `Zxrextras-hider-material`
+
+Ahora puede abrir el [A-Frame Inspector](https://aframe.io/docs/1.3.0/introduction/visual-inspector-and-dev-tools.html)
+(Mac: ctrl + opt + i, PC: ctrl + alt + i) y posicionar el contenido relativo a la malla VPS importada desde el Navegador Geoespacial.
+Recuerde: se trata de un _inspector_. Deberá copiar los valores de transformación en su código.
+
+Opcionalmente, puede reposicionar temporalmente el `<a-entity named-location>` al centro de la escena
+para ayudar con la velocidad de iteración. NOTA: reajuste `<a-entity named-location>` a `position="0 0 0"` para asegurarse de que el contenido de VPS
+se alinea correctamente.
+
+### _Instalación de desarrollo móvil remoto_
+
+![](https://i.giphy.com/media/ZVQCdOhIHx10Dsrxnf/giphy.gif)
+
+A menudo es útil utilizar el inspector A-Frame para simular VPS de forma remota en su dispositivo móvil. 
+Para configurar la escena de este proyecto para el desarrollo móvil remoto, desactive los siguientes componentes 
+añadiendo una letra al principio (es decir, "Znamed-location"):
+
+- `named-location` -> `Znamed-location`
+- `xrextras-hider-material` -> `Zxrextras-hider-material`
+
+A continuación, tendrá que desactivar VPS y activar la escala absoluta. Esto garantizará que la malla de referencia
+tenga el tamaño correcto para una simulación precisa:
+
+`xrweb="enableVps: false; scale: absolute;"`
+
+Debe reposicionar temporalmente el `<a-entity named-location>` al centro de la escena
+para ayudar con la velocidad de iteración. Intenta alinear la base de tu malla de referencia con `y="0"` (el suelo).
+NOTA: Antes de desplegar su proyecto VPS, restablezca `<a-entity named-location>` a `position="0 0 0"` 
+para asegurarse de que el contenido VPS está alineado correctamente.
+
+## Desarrollo de experiencias VPS procedimentales
+
+Las escenas VPS procedimentales están diseñadas para utilizar cualquier Ubicación detectada (en contraposición a Ubicaciones de Proyecto específicas). Una vez detectada, la malla de la Ubicación 
+está a su disposición para generar experiencias VPS generadas procedimentalmente.
+
+El motor de 8th Wall emite dos eventos relacionados con el procedimiento:
+
+- [xrmeshfound](https://www.8thwall.com/docs/web/#xrmeshfound): se emite cuando se encuentra una malla por primera vez, ya sea después del inicio o después de un recenter()
+- [xrmeshlost](https://www.8thwall.com/docs/web/#xrmeshlost): emitido cuando se llama a recenter().
+
+Después de detectar una malla, el motor de 8th Wall continuará rastreando contra esa malla hasta que se llame a recenter().
+
+## PREGUNTAS FRECUENTES SOBRE VPS {#lightship-vps-faq}
+
+#### ¿Qué es Lightship VPS? {#what-is-lightship-vps}
+
+Lightship VPS (Visual Positioning System) es un servicio en la nube que permite a las aplicaciones localizar el dispositivo de un usuario de 
+en ubicaciones del mundo real, lo que permite a los usuarios interactuar con contenidos de RA persistentes y 
+impulsar nuevas experiencias inmersivas. VPS determina la posición y orientación (pose) del dispositivo mediante 
+haciendo referencia a los datos de mapas que existen en la nube de Niantic.
+
+#### ¿Cómo funciona el VPS? {#how-does-vps-work}
+
+Cuando un dispositivo hace una llamada al servicio VPS, éste recibe una imagen de consulta del dispositivo 
+del usuario junto con su ubicación aproximada (a partir del GPS) como datos de entrada e intenta localizarlo utilizando el mapa o mapas 
+que existan en esa ubicación. Si la localización se realiza correctamente, el servicio devuelve la posición y orientación (pose) del dispositivo 
+correspondientes a la marca de tiempo de la imagen que se transmitió 
+. Dado que existe un retardo entre el momento en que se captura una imagen de consulta VPS y el momento en que se recibe una respuesta 
+del servicio VPS, el dispositivo necesita disponer de un sistema de seguimiento del movimiento en 
+para mantenerse localizado con precisión mientras se mueve. Cuando el servicio VPS devuelve una estimación de pose al dispositivo 
+, la diferencia de pose del sistema de seguimiento del dispositivo se añade a la respuesta de localización 
+para que VPS pueda "seguir" el movimiento del dispositivo mientras espera la respuesta del servidor 
+a la consulta VPS.
+
+#### ¿Qué es una exploración? {#what-is-a-scan}
+
+Los escaneos AR de jugadores, desarrolladores y topógrafos son el ingrediente fundamental utilizado para crear el 
+Niantic Map: El mapa 3D del mundo de Niantic. Los escaneos AR se registran y cargan utilizando el marco de escaneado AR 
+de Niantic, que es un módulo utilizado dentro de Pokemon Go, Ingress y la aplicación Wayfarer. Cada exploración AR 
+consiste en una serie de fotogramas de vídeo con datos de apoyo procedentes de acelerómetros y sensores GPS 
+que construyen un modelo 3D del mundo a partir de múltiples imágenes 2D. Niantic utiliza los escáneres de realidad aumentada para crear mapas y mallas de lugares del mundo real en 
+.
+
+#### ¿Qué es un mapa? {#what-is-a-map}
+
+En la jerga de VPS, un mapa es el artefacto de datos que se utiliza para localizar su dispositivo cuando se llama a la API de VPS 
+. Un mapa puede considerarse como una función que toma una imagen de consulta como entrada y devuelve 
+posición y orientación (pose) como salida. El mapa que corresponde a un lugar determinado se crea 
+a partir de las exploraciones que se cargaron en ese lugar. Los mapas VPS no son legibles.
+
+#### ¿Qué es una malla? {#what-is-a-mesh}
+
+En lenguaje VPS, una malla es un modelo 3D de un lugar u objeto del mundo real. Las mallas proporcionan una representación detallada 
+de un espacio físico u objeto, y son útiles para comprender cómo es un lugar 
+, como referencia para la creación de contenidos de realidad aumentada y para crear efectos de física y oclusión. Al igual que los mapas de 
+, las mallas que corresponden a un lugar determinado se crean a partir de las exploraciones que se cargaron en 
+ese lugar. Las mallas son legibles tanto por humanos como por máquinas.
+
+#### ¿Dónde puedo utilizar VPS? {#where-can-i-use-vps}
+
+VPS está disponible en más de 150.000 lugares del mundo real, y cada día se añaden más lugares. En 
+para que una ubicación esté disponible en VPS, debe cargarse una cantidad suficiente de datos de escaneado AR en 
+esa ubicación y debe completarse el proceso de activación de VPS. Los desarrolladores pueden añadir nuevas ubicaciones a 
+el mapa y solicitar la activación de VPS de ubicaciones totalmente escaneadas mediante el navegador geoespacial.
+
+#### ¿Cómo funciona la activación del VPS? {#how-does-vps-activation-work}
+
+Para que una ubicación pueda optar a la activación del VPS, debe tener cargados al menos 10 escaneos que superen los controles de calidad mínimos de 
+, y la diferencia de tiempo entre el escaneo más antiguo y el más reciente en la ubicación 
+debe ser de al menos 5 horas. Estos requisitos garantizan que los mapas y mallas resultantes sean de 
+calidad suficiente y capturen variaciones suficientes para que los usuarios puedan localizarlos con fiabilidad. 
+El proceso de activación de VPS se ejecuta en la infraestructura de mapeado de RA de Niantic e implica muchos pasos complejos 
+. Del conjunto de exploraciones elegibles en la ubicación, un algoritmo selecciona la mayoría de las exploraciones para 
+utilizarlas para construir mapas y mallas, y el puñado restante para validarlas y medir la calidad de la localización
+. El proceso de activación de una ubicación se ejecuta en los servidores de Niantic y normalmente 
+tarda entre 1 y 2 horas en completarse.
+
+#### ¿Puedo encontrar mis escaneos una vez realizada la activación del VPS? {#can-i-find-my-scans-after-vps-activation-is-done}
+
+Durante el proceso de activación, los mapas y mallas creados a partir de las exploraciones cargadas se fusionan
+para incorporar la mayor cantidad de información posible. El producto final, que los desarrolladores utilizan en 
+para crear contenidos y los usuarios para localizarlos, se compone de exploraciones de muchas fuentes diferentes de
+. Los datos de escaneado se mezclan para crear una representación más completa del lugar, 
+por lo que no existe una relación unívoca entre los escaneados que se cargan en un lugar y los mapas y mallas
+que se crean una vez que se activa el VPS.
+
+#### ¿Puedo añadir más exploraciones a una ubicación que ya está activada? {#can-i-add-more-scans-to-a-location-thats-already-activated}
+
+En algunos casos, es posible que los desarrolladores deseen añadir exploraciones adicionales a un lugar previamente activado en 
+para mejorar la calidad y la cobertura de los mapas y mallas del lugar. En 
+para que una Ubicación pueda ser "reactivada", debe haber tenido al menos 5 escaneos adicionales 
+cargados desde la última vez que fue activada. Cabe destacar que aún no es posible añadir nuevas exploraciones 
+a un mapa fusionado existente, sino que el proceso de reactivación requiere la construcción de un nuevo mapa fusionado 
+que incorpore las nuevas exploraciones en el contexto de las ya existentes.
+
+#### ¿Cómo solicito la activación del VPS de una nueva ubicación? {#how-do-i-request-vps-activation-of-a-new-location}
+
+Una vez que una ubicación tiene suficientes escaneos cargados para cumplir los requisitos de activación del VPS (al menos 10 escaneos totales en 
+con al menos 5 horas de diferencia entre el escaneo más antiguo y el más reciente), los desarrolladores pueden 
+solicitar la activación del VPS seleccionando la ubicación en la aplicación Wayfarer o en el navegador geoespacial y 
+pulsando el botón "activar". Esto añadirá la ubicación a la cola de activación. Normalmente, una solicitud de activación de 
+se completa en 2 horas. Los promotores también tienen la opción de solicitar a 
+la reactivación de una ubicación existente una vez que se hayan cargado 5 escaneos adicionales.
+
+#### ¿Funciona el VPS de noche o con mal tiempo? {#does-vps-work-at-night-or-in-poor-weather-conditions}
+
+El VPS funciona mejor cuando hay buena visibilidad. Para maximizar las probabilidades de éxito de las experiencias con 
+VPS, lo mejor es cargar muchas exploraciones de RA que cubran una amplia gama de condiciones diferentes de 
+(por ejemplo, diferentes horas del día, diferentes condiciones meteorológicas, etc.). Por ejemplo, si 
+está construyendo una experiencia en un lugar en el que llueve mucho, contar con algunos escaneos de un día lluvioso 
+es muy útil.
+
+#### ¿Necesitan el escaneado AR y el VPS teléfonos con sensores LiDAR? {#do-ar-scanning-and-vps-require-phones-with-lidar-sensors}
+
+El escaneado AR y el VPS no requieren LiDAR.

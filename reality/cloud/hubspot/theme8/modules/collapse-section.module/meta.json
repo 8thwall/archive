@@ -1,0 +1,9 @@
+{
+  "global" : false,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE" ],
+  "icon" : "fontawesome-5.14.0:Question%20Circle:SOLID",
+  "host_template_types" : [ "PAGE" ],
+  "module_id" : 131230355828,
+  "label" : "Collapsible Section",
+  "is_available_for_new_content" : true
+}

@@ -1,0 +1,59 @@
+---
+id: world-tracking-issues
+description: Je rencontre des problèmes avec le suivi mondial.
+---
+
+# Questions relatives à la traçabilité dans le monde
+
+## Introduction
+
+{frontMatter.description}
+
+## Pourquoi cela se produit-il ?
+
+Le système 8th Wall's World Tracking s'appuie sur l'analyse en temps réel du flux de la caméra de l'appareil, identifiant les **points de caractéristiques** qui sont des détails uniques et traçables utilisés pour déterminer où se trouve le "sol" ou **plan de sol**.
+
+Il est **basé uniquement sur le sol**, recalculant continuellement un plan horizontal unique (**Y = 0**) à partir de l'ensemble le plus stable de points caractéristiques visibles à tout moment. Si la surface est trop uniforme ou manque de caractéristiques distinctes, le suivi peut être perdu ou le sol peut être redéfini de manière incorrecte.
+
+Contrairement à ARKit ou ARCore, qui peuvent suivre plusieurs surfaces, 8th Wall détecte et met à jour un plan de sol de manière dynamique. Le **processus de détection des caractéristiques fonctionne en niveaux de gris**, en utilisant les différences de contraste et de texture entre les zones claires et sombres plutôt que la couleur. Les surfaces à fort contraste et riches en détails donnent les meilleurs résultats, tandis que les surfaces lisses et peu contrastées, quelle que soit leur couleur, donnent des résultats médiocres.
+
+Les causes courantes d'un mauvais suivi sont les suivantes
+
+- Motifs répétitifs tels que murs de briques, planches de bois ou carreaux de sol
+- Faible contraste de niveaux de gris, comme les moquettes unies, le béton lisse ou les sols d'une seule couleur.
+- Surfaces brillantes, réfléchissantes ou translucides
+- Mouvement rapide de la caméra ou flou de bougé
+- Changements soudains d'éclairage
+- Plusieurs surfaces en vue, par exemple une table et le sol ensemble
+- Espaces étroits ou encombrés avec peu d'espace libre
+
+## Comment le réparer ?
+
+1. **Choisir une surface riche en fonctionnalités**
+   - Utilisez des surfaces aux motifs irréguliers et aux contrastes clairs et foncés variés, comme les fissures dans le béton, l'herbe, le gravier ou les tapis à motifs.
+
+2. **Éviter les motifs répétitifs**
+   - Des éléments d'apparence similaire, tels que des briques ou des planches, peuvent perturber la détection.
+
+3. **Assurer un bon éclairage**
+   - L'éclairage doit être uniforme, sans éblouissement ni ombres lourdes.
+
+4. **Minimiser les mouvements rapides de la caméra**
+   - Déplacez-vous lentement, surtout au démarrage, afin d'établir un suivi stable.
+
+5. **Ne garder qu'une seule surface en vue**
+   - Cadrer la surface cible sans que d'autres plans horizontaux n'interfèrent.
+
+6. **Donner suffisamment d'espace au contenu AR**
+   - Utilisez un espace suffisamment grand pour votre contenu, sans obstacles proches.
+
+7. **Re scan si nécessaire**
+   - Pointez la caméra sur une surface riche en caractéristiques pendant quelques secondes ou appelez `XR8.XrController.recenter()` pour réinitialiser le suivi.
+
+## Comment améliorer l'expérience de l'utilisateur final ?
+
+1. **Ajouter un bouton Re Center**
+   - Permet aux utilisateurs de réinitialiser le suivi à la vue actuelle de la caméra, ce qui est utile s'ils ont commencé sur une mauvaise surface, sans avoir à recharger la page.
+
+2. **Positionner le contenu entièrement au-dessus de Y = 0**
+   - Veiller à ce que les modèles soient entièrement placés au-dessus du sol. Ajuster les points de pivot ou repositionner les modèles de manière à ce qu'aucune partie n'apparaisse sous le sol.

@@ -1,0 +1,191 @@
+---
+id: schema
+description: Un esquema de componente define los datos que contiene un componente.
+toc_max_heading_level: 3
+sidebar_position: 42
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import EcsTypes from '/src/components/_ecs-types.mdx'
+
+# Esquema
+
+{frontMatter.description} Cuando defina un esquema, proporcionará un objeto que contiene pares clave/valor donde la clave es el nombre de la propiedad y el valor es un [tipo ECS](/api/studio/ecs/#types) que especifica el tipo de datos que contendrá esa propiedad.
+
+<EcsTypes />
+
+## Ejemplo
+
+El siguiente ejemplo muestra el esquema de un componente personalizado.
+
+```ts
+schema: {
+  target: ecs.eid,             // Unique entity reference for the NPC (Entity ID)
+  speed: ecs.f32,              // Movement speed of the NPC (32-bit float)
+  strength: ecs.f64,           // Strength level for the NPC (64-bit float)
+  level: ecs.i32,              // Character level of the NPC (32-bit integer)
+  armor: ecs.ui8,              // Armor rating of the NPC (0-255, 8-bit unsigned integer)
+  experience: ecs.ui32,        // Experience points of the NPC (32-bit unsigned integer)
+  guildName: ecs.string,       // Name of the Guild NPC belongs to. (String)
+  isHostile: ecs.boolean       // Boolean indicating if the NPC is hostile to the player (Boolean)
+}
+```
+
+Se pueden proporcionar valores por defecto, pero no son obligatorios. Si no se proporcionan valores por defecto, los números serán por defecto `0`, los booleanos serán por defecto `false`, las cadenas serán por defecto `''`, y las referencias a entidades serán por defecto unset. No hay forma de establecer un valor por defecto para una referencia de entidad a nivel de componente.
+
+```ts
+schemaDefaults: {
+  speed: 3.14,
+  strength: 5.8,
+  level: 10,
+  armor: 255,
+  experience: 12,
+  guildName: 'Niantic Crew'
+  isHostile: false
+}
+```
+
+## Campos personalizados del editor {#custom-editor-fields}
+
+La visualización y la funcionalidad de sus componentes en el editor de entidades pueden personalizarse de varias maneras. Todo esto se hace utilizando comentarios dentro del esquema donde los campos se marcan con `// @`.
+
+### Etiquetas
+
+A veces las etiquetas en el editor deben ser más descriptivas que sus nombres en el código.
+
+```ts
+schema: {
+   // @label Foo
+   bar: ecs.eid,
+},
+```
+
+### Referencias de activos
+
+Si necesita hacer referencia a un activo en el proyecto.
+
+```ts
+schema: {
+   // @asset
+   yetiModel: ecs.string,
+}
+```
+
+### Mín y Máx
+
+Si necesita bloquear valores para que no superen una determinada cantidad cuando se modifican en la interfaz.
+*No afecta a los cambios de la variable en tiempo de ejecución.*
+
+```ts
+schema: {
+   // @min 0
+   // @max 128
+   goldCoins: ecs.i32,
+}
+```
+
+### Condiciones
+
+Las propiedades pueden configurarse para que sólo se muestren en función de los valores de otras propiedades.
+
+```ts
+schema: {
+   // 'from' will only show if autoFrom set false:
+   autoFrom: ecs.boolean,
+   // @condition autoFrom=false
+   from: ecs.f32,
+
+   // 'easingFunction' will show if either easeIn or easeOut set:
+   easeIn: ecs.boolean,
+   easeOut: ecs.boolean,
+   // @condition easeIn=true|easeOut=true
+   easingFunction: ecs.string,
+
+   // 'targetX' only shows if no target set:
+   target: ecs.eid,
+   // @condition target=null
+   targetX: ecs.f32,
+}
+```
+
+### Enumeraciones
+
+Las propiedades de cadena pueden limitarse a una lista de conjuntos:
+
+```ts
+schema: {
+   // @enum Quadratic, Cubic, Quartic, Quintic, Sinusoidal, Exponential
+   easingFunction: ecs.string,
+}
+```
+
+### Grupos
+
+Ciertos grupos de propiedades pueden ser instruidos para ser tratados especialmente en el editor. Los grupos se configuran de la siguiente manera:
+
+* El inicio y el final del grupo se marcan con // @group start … y // @grupo fin
+* Las condiciones se pueden aplicar a todo el grupo con // @group condition
+* Actualmente se admiten dos tipos de grupo: vector3 y color
+
+#### Etiquetas
+
+Se pueden seguir utilizando etiquetas personalizadas para campos individuales:
+
+```ts
+schema: {
+   // @group start orient:vector3
+   // @label Pitch
+   orientPitch: ecs.f32,
+   // @label Yaw
+   orientYaw: ecs.f32,
+   // @label Roll
+   orientRoll: ecs.f32,
+   // @group end
+}
+```
+
+#### Vector3
+
+Los grupos de propiedades que representan vectores 3D pueden indicarse del siguiente modo:
+
+```ts
+schema: {
+ autoFrom: ecs.boolean,
+ // @group start from:vector3
+ // @group condition autoFrom=false
+ fromX: ecs.f32,
+ fromY: ecs.f32,
+ fromZ: ecs.f32,
+ // @group end
+}
+```
+
+#### Color
+
+Los colores pueden indicarse como en el siguiente ejemplo:
+
+```ts
+schema: {
+ // @group start background:color
+ bgRed: ecs.f32,
+ bgGreen: ecs.f32,
+ bgBlue: ecs.f32,
+ // @group end
+}
+```
+
+## Datos
+
+Datos es similar a Esquema, sin embargo hay dos diferencias notables.
+
+1. Los datos **no** pueden leerse o escribirse fuera del Componente en el que están definidos.
+2. Los datos **no** tienen valores por defecto, sin embargo se pueden establecer en el método del ciclo de vida 'add' para una funcionalidad similar.
+
+## Cursores
+
+Un Cursor es una referencia al esquema de otro Componente adjunto a una entidad. Puedes pensar en él como un puntero o manejador que te permite leer o escribir propiedades.
+
+Sin embargo, tenlo en cuenta:
+
+* Los cursores pueden volverse obsoletos si se utilizan de forma asíncrona (por ejemplo, dentro de setTimeout, o callbacks retardados). Utilice schemaAttribute y dataAttribute en su lugar en estos casos.
+* Los cursores proporcionan acceso en vivo a los datos de una entidad, lo que significa que modificar un cursor cambia directamente el valor en el mundo.

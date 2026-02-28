@@ -1,0 +1,46 @@
+@use '../styles/brand-colors';
+@use '../styles/constants';
+
+.button8 {
+  border-radius: 5rem;
+  border: none;
+  padding: 15px 40px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 4px;  // Margin should match width of box-shadow.
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(87, 191, 255, 0.8);  // Blueberry.
+  }
+}
+
+.primary {
+  @extend .button8;
+  color: white;
+  background: brand-colors.$purple-gradient;
+
+  &:hover {
+    background: brand-colors.$purple-gradient-hover;
+  }
+}
+
+.secondary {
+  @extend .button8;
+  color: brand-colors.$brand-purple;
+  background: white;
+
+  &:hover {
+    background: brand-colors.$gray1;
+  }
+}
+
+@media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+  .button8 {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}

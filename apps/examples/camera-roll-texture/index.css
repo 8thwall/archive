@@ -1,0 +1,33 @@
+#overlay {
+  z-index: 10;
+  pointer-events: none;
+  position:absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.custom-upload {
+  font-family: monospace;
+  position: absolute;
+  bottom: 2vmax;
+  left: 50vw;
+  width: 50vw;
+  transform: translate(-50%, 0);
+  display: block;
+  background-color: #323232;
+  color: #ccae3a;
+  border-radius: 1.5vmin;
+  padding: 0.6rem 0.8rem;
+  pointer-events: auto;
+  text-decoration: none !important;
+  text-align: center;
+  font-size: 5vmin;
+  font-weight: 400; 
+  font-style: normal;
+}
+
+input {
+  display: none !important;
+}

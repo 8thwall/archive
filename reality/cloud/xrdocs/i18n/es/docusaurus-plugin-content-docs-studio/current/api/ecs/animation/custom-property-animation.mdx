@@ -1,0 +1,50 @@
+---
+id: custom-property-animation
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# CustomPropertyAnimation
+
+## Descripción
+
+This component creates an animation on an entity.
+
+## Propiedades
+
+| Propiedad       | Tipo    | Por defecto   | Descripción                                                                                                            |
+| --------------- | ------- | ------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| attribute       | string  | ''            | Selected attribute to animate (e.g. position, scale, material)                                                         |
+| property        | string  | ''            | Individual property to animate (e.g. x, y, or z for a vector attribute)                                                |
+| target          | eid     | undefined     | The target object to animate. If not specified, the animation is run on the object that the component is attached to.  |
+| from            | object  | undefined     | The starting state of the animation                                                                                    |
+| to              | object  | undefined     | The ending state of the animation                                                                                      |
+| autoFrom        | boolean | false         | If enabled, ignore 'from' property and animate from the state of the object at the start of the animation.             |
+| duration        | number  | 0             | Length of time that the animation runs in milliseconds.                                                                |
+| loop            | boolean | false         | If enabled, repeat the animation.                                                                                      |
+| reverse         | boolean | false         | Whether to play in reverse, if loop set.                                                                               |
+| easeIn          | boolean | false         | If enabled, easing function will be applied over time instead of straight interpolation                                |
+| easeOut         | boolean | false         | If enabled, easing function will be applied over time instead of straight interpolation                                |
+| easingFunction  | string  | ''            | Choose from Quadratic (default), Cubic, Quartic, Quintic, Sinusoidal, Exponential, Circular, Elastic, Back, and Bounce |
+
+## Funciones
+
+<ComponentFunctions
+    name="CustomPropertyAnimation"
+    properties={{
+        attribute: "attribute",
+        property: "property",
+        from: { x: 0, y: 0, z: 0 },
+        to: { x: 10, y: 10, z: 10 },
+        autoFrom: false,
+        duration: 1000,
+        loop: false,
+        reverse: false,
+        easeIn: false,
+        easeOut: false,
+        easingFunction: "Cubic"
+    }}
+    mutate={`cursor.duration = 1000;
+    cursor.loop = true;
+    return false;`}
+/>

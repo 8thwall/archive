@@ -1,0 +1,79 @@
+---
+id: audio
+description: オーディオは、あらゆるシーンで完全な没入感を生み出すために不可欠です。 深み、感情、雰囲気を加え、交流をより魅力的で記憶に残るものにする。
+---
+
+# オーディオ
+
+## はじめに
+
+{frontMatter.description} リアルなサウンドスケープを目指すにせよ、様式化されたオーディオエフェクトを目指すにせよ、よく練られたオーディオデザインは、シーンのインパクトとムードを大幅に高め、ユーザーをより深く体験に引き込みます。
+
+プロパティと関数については、[World](/api/studio/world/audio)と[Audio Component](/api/studio/ecs/audio/)のAPIを参照してください。
+
+## オーディオの追加
+
+オーディオは、Studioインターフェースまたはコードでエンティティに追加できます。 スタジオでの追加は、'New Component' ボタンで行います。 オーディオ・コンポーネントには様々な再生設定があります。
+
+#### 対応フォーマット
+
+Studioは以下のオーディオファイル形式をサポートしています：.mp3、.m4a、.wav、.ogg、.aac
+
+#### オーディオの種類
+
+**Global:**音量を変えずに世界中で演奏される音。
+
+**Positional:**世界のある位置で演奏され、距離に応じて音量が変化する音。
+
+![audio-component.png](/images/studio/audio-component.png)
+
+### 効果音の再生
+
+あなたのゲームには効果音が必要でしょう。 サウンドを再生するには、Audioコンポーネントがエンティティにアタッチされている必要があります。 続いて、効果音を再生するためのエンティティを作成し、再生が終わったらそれをクリーンアップします。
+
+```tsx title="/sound-effect.ts"
+import * as ecs from '@8thwall/ecs'
+
+const SoundEffectComponent = ecs.registerComponent({
+  name: 'Sound Effect',
+  stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+    ecs.defineState('default')
+      .initial()
+      .onEnter(() => {
+        ecs.Audio.set(world, eid, {
+          url: 'assets/blaster.mp3',
+          volume: 1,
+          loop: false,
+          paused: false,
+          positional: true,
+          refDistance: 1,
+          distanceModel: 'Inverse',
+          rolloffFactor: 1,
+        })
+      })
+      .listen(eid, ecs.events.AUDIO_END, () => {
+        world.deleteEntity(eid)
+      })
+  },
+})
+
+export {SoundEffectComponent}
+```
+
+```tsx title="/sound-effect-on-click.ts"
+import * as ecs from '@8thwall/ecs'
+import {SoundEffectComponent} from './sound-effect'
+
+ecs.registerComponent({
+  name: 'Play Sound Effect on Click',
+  stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+    ecs.defineState('default')
+      .initial()
+      .listen(eid, ecs.input.SCREEN_TOUCH_START, () => {
+        const ent = world.createEntity()
+
+        SoundEffectComponent.set(world, ent)
+      })
+  },
+})
+```

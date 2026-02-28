@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="module">
+            const randomArray = new Uint8Array(4000)
+            crypto.getRandomValues(randomArray)
+            const url = URL.createObjectURL(new Blob([randomArray], {type: 'audio/wav'}))
+            const audioElement = await new Audio(url)
+    </script>
+</head>
+<body></body>
+</html>

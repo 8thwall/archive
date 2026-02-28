@@ -1,0 +1,11 @@
+{
+  "inherit": false,
+  "tasks": [
+    {
+      "task": "BUILDIFIER"
+    },
+    {
+      "task": "CLANG_FORMAT"
+    }
+  ]
+}

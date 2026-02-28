@@ -1,0 +1,139 @@
+---
+id: world
+description: このライブラリには、ワールドに関連するプロパティと関数が含まれています。
+---
+
+# 世界
+
+## 説明
+
+{frontMatter.description}
+
+## プロパティ
+
+| プロパティ      | タイプ  | 説明                 |
+| ---------- | ---- | ------------------ |
+| すべてのエンティティ | セット  | すべてのシーンエンティティのセット。 |
+
+## 機能
+
+### createEntity
+
+新しいエンティティを作成する。 オプションでプレハブエンティティまたはプレハブ名を指定すると、そのプレハブのインスタンスを生成します。
+
+```ts
+world.createEntity(prefabOrPrefabName?: Eid | string) // -> eid
+```
+
+### 削除エンティティ
+
+既存のエンティティを削除する。
+
+```ts
+world.deleteEntity(eid) // -> void
+```
+
+### ゲットチャイルドレン
+
+エンティティの子を取得します。
+
+```ts
+world.getChildren(eid) // -> ジェネレーター<Eid>
+```
+
+### ゲットペアレント
+
+エンティティの親を取得する。
+
+```ts
+world.getParent(eid) // -> eid
+```
+
+### セットペアレント
+
+エンティティの親を設定する。
+
+```ts
+world.setParent(eid, parent: eid) // -> void
+```
+
+### ゲットワールドトランスフォーム
+
+エンティティのワールドトランスフォームを取得する。 \*\*ターゲットのworldTransformを第2パラメータにコピーする。
+
+```ts
+world.getWorldTransform(eid, transform: Mat4) // -> void
+```
+
+### setTransform
+
+エンティティのトランスフォームを設定する。
+
+```ts
+world.setTransform(eid, transform: Mat4) // -> void
+```
+
+### setPosition
+
+エンティティの位置を設定する。
+
+```ts
+world.setPosition(eid, x: number, y: number, z: number) // -> void
+```
+
+### セットペアレント
+
+エンティティの回転を設定する。
+
+```ts
+world.setQuaternion(eid, x: 数, y: 数, z: 数, w: 数) // -> void
+```
+
+### セットスケール
+
+エンティティのスケールを設定する。
+
+```ts
+world.setScale(eid, x: number, y: number, z: number) // -> void
+```
+
+### 正規化クォータニオン
+
+エンティティのクォータニオンを正規化する。
+
+```ts
+world.normalizeQuaternion(eid) // -> void
+```
+
+### GetInstanceEntity
+
+ルートインスタンス、およびソースプレファブまたはプレファブ子エンティティが与えられたプレファブインスタンス階層から、対応するインスタンスエンティティを取得します。
+
+```ts
+world.getInstanceEntity(prefabInstance: Eid, prefabSourceEntity: Eid) // -> Eid
+```
+
+### レイキャスト
+
+位置と方向からレイキャストを行う。
+
+```ts
+world.raycast(origin: Vec3, direction: Vec3, near: number = 0, far: number = Infinity) // -> IntersectionResult[].
+```
+
+### レイキャスト・フロム
+
+エンティティの位置と前方方向からレイキャストを行う。
+
+```ts
+world.raycastFrom(eid: Eid, near: number = 0, far: number = Infinity) // -> IntersectionResult[].
+```
+
+## 交差点結果
+
+| プロパティ     | タイプ          | 説明                                                      |
+| --------- | ------------ | ------------------------------------------------------- |
+| イード？      | イード          | 被弾した物体のイード。                                             |
+| ポイント      | ベック3         | 交差点が発生したワールドスペース内の場所。                                   |
+| 距離        | 番号           | スタート地点からヒット地点までの距離。                                     |
+| スリーデータ    | 交差点          | three.jsの交差点データ。                                        |

@@ -1,0 +1,572 @@
+<!--
+    templateType: global_partial
+    label: 8W Header
+-->
+<style>
+  .header {
+    font-size: 16px;
+    background: #ffffff;
+    position: sticky;
+    z-index: 11;
+    padding: 16px 32px 16px 48px;
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navLogo {
+    height: 37px;
+    margin-bottom: 2.5rem;
+    margin: 0;
+  }
+
+  .dropDownIcon {
+    max-height: 4.5em;
+    height: auto;
+    margin-bottom: 2.5rem;
+    margin: 0;
+  }
+
+  .navButton {
+    display: none;
+    background: transparent;
+    border: 2px solid #d5d7e4;
+    border-radius: 4px;
+    padding: 0.5em 1em;
+  }
+
+  .navButtonIcon {
+    width: 2em;
+    height: 2em;
+  }
+
+  .navButton:hover {
+    border: 2px solid #B5B8D0;
+    cursor: pointer;
+  }
+
+  .navLinks {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 1em;
+    width: 80%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navLinks li {
+    list-style-type: none;
+    flex: 1 1 0;
+    text-align: center;
+    position: relative;
+  }
+
+  .header a {
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .startFree {
+    padding: 0.25em 1.5em;
+    border: 1px solid #7611B6;
+    color: #7611B6;
+    background: transparent;
+    border-radius: 8px;
+    white-space: nowrap;
+    transition: all .2s;
+  }
+
+  .startFree:hover {
+    color: #fff;
+    background-color: #7611B6;
+  }
+
+  .headerLink {
+    color: #2D2E43;
+    white-space: nowrap;
+    font-weight: 700;
+  }
+
+  a.headerLink:hover {
+    color: #B5B8D0;
+  }
+
+  .headerLink:hover + .headerMenu, .headerMenu:hover {
+    display: flex;
+  }
+
+  .headerMenu {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    min-width: 10em;
+    background: white;
+    border: 1px solid rgba(34, 36, 38, .15);
+    border-radius: 6px;
+    padding: 1em 0;
+    align-items: stretch;
+    left: 50%;
+    transform: translate(-50%, 0%);
+  }
+
+  .headerMenu.active {
+    display: flex;
+  }
+
+  .menuLink {
+    padding: 0.5em 1.5em;
+    text-align: left;
+    color: #464766;
+    font-weight: 600;
+  }
+
+  .menuLink:hover {
+    background: rgba(0,0,0,.05);
+    color: inherit;
+    font-weight: 600;
+  }
+
+  .projectLibraryLink, .projectLibraryLink:hover {
+    color: #AD50FF;
+  }
+
+  @media screen and (max-width: 1160px) {
+    .header {
+      flex-direction: column;
+      padding: 16px 24px;
+    }
+
+    .navButton {
+      display: flex;
+      align-items: center;
+    }
+
+    .navLogoContainer {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navLinks {
+      flex-direction: column;
+      width: 100%;
+      display: none;
+      overflow: hidden;
+    }
+
+    .navLinks li:not(.hidden){
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .headerMenu {
+      position: static;
+      transform: none;
+    }
+
+    .menuLink {
+      text-align: center;
+    }
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .profileDropdownTrigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .profileDropdownTrigger p {
+    font-family: Nunito, sans-serif;
+  }
+
+  .profilePic {
+    display: inline;
+    margin-right: 5px;
+    border-radius: 50%;
+    pointer-events: none;
+    vertical-align: middle;
+    overflow: hidden;
+    width: 2.25em;
+    height: 2.25em;
+  }
+
+  .profilePhoto {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  .profileMonogram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    font-weight: 700;
+  }
+
+  .profileName {
+    color: #2D2E43;
+    font-weight: 700;
+    display: inline;
+    padding: 0 0.5vw;
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 10px;
+    pointer-events: none;
+    white-space: nowrap;
+    max-width: 12em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .profileDropdownIcon {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #000;
+    display: inline;
+  }
+
+  .signout {
+    color: #2D2E43;
+    white-space: nowrap;
+    font-weight: 700;
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+  }
+
+  .signout:hover {
+    background: rgba(0,0,0,.05);
+    border: none;
+    color: inherit;
+    white-space: nowrap;
+    font-weight: 700;
+  }
+
+  @media screen and (max-width: 1160px) {
+    .navLinks {
+      gap: 1.25em;
+    }
+
+    .profileName {
+      max-width: none;
+    }
+  }
+</style>
+
+<nav class="header">
+  <div class="navLogoContainer">
+    <a href="/">
+      <img
+           src='{{ get_asset_url('/theme8/images/8th-Wall-Horizontal-Logo-Purple.svg') }}'
+           alt='8th Wall Logo'
+           class="navLogo"
+           />
+    </a>
+    <div class="navButton">
+      <svg class="navButtonIcon" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" fill="#B5B8D0"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
+    </div>
+  </div>
+
+  <ul id="header-menu" class="navLinks loggedOut">
+    <li>
+      <div class="headerLink">
+        <span class="headerLink">{% text "nav_products" label="Products Tab", value={{theme_translations.header_product.message}} no_wrapper=true %}</span>
+        <img
+          src='{{ get_asset_url('/theme8/images/module-icons/chevrondown.svg') }}'
+          alt='8th Wall Logo'
+          class="dropDownIcon"
+        />
+      </div>
+      <div class="headerMenu">
+        <a class="menuLink" href="/products/niantic-studio">{% text "nav_products_niantic_studio" label="Niantic Studio Button", value={{theme_translations.header_niantic_studio.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/products/world-ar">{% text "nav_products_world_ar" label="World AR Button", value={{theme_translations.header_world_ar.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/products/location-ar">{% text "nav_products_location_ar" label="Location AR Button", value={{theme_translations.header_location_ar.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/products/image-targets">{% text "nav_products_image_targets" label="Image Targets Button", value={{theme_translations.header_image_targets.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/products/human-ar">{% text "nav_products_human_ar" label="Human AR button", value={{theme_translations.header_human_ar.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/products/headsets">{% text "nav_products_headsets" label="Headsets button", value={{theme_translations.header_headsets.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/products/cloud-editor">{% text "nav_products_cloud_editor" label="Cloud Editor Button", value={{theme_translations.header_cloud_editor.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/products">{% text "nav_products_all_products" label="All Products Button", value={{theme_translations.header_all_products.message}} no_wrapper=true %}</a>
+      </div>
+    </li>
+    <li>
+      <div class="headerLink">
+        <span class="headerLink">{% text "nav_community" label="Community Tab", value={{theme_translations.header_community.message}} no_wrapper=true %}</span>
+        <img src='{{ get_asset_url('/theme8/images/module-icons/chevrondown.svg') }}'
+          alt='8th Wall Logo'
+          class="dropDownIcon"
+        />
+      </div>
+      <div class="headerMenu">
+        <a class="menuLink" href="/discover/view-all?try=true&?q=featured-game">{% text "nav_community_why_webar" label="Made by Community Button", value={{theme_translations.header_made_by_community.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="https://8th.io/discord">{% text "nav_community_discord" label="Discord Button", value={{theme_translations.header_discord.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="https://8th.io/gamejam">{% text "nav_community_game_jams" label="Game Jams Button", value={{theme_translations.header_game_jams.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/community/education">{% text "nav_community_education" label="Education Button", value={{theme_translations.header_education.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="https://events.8thwall.com/events/#/list">{% text "nav_community_events" label="Events Button", value={{theme_translations.header_events.message}} no_wrapper=true %}</a>
+      </div>
+    </li>
+    <li>
+      <div class="headerLink">
+        <span class="headerLink">{% text "nav_industry" label="Industry Solutions Tab", value={{theme_translations.header_industrySolutions.message}} no_wrapper=true %}</span>
+        <img src='{{ get_asset_url('/theme8/images/module-icons/chevrondown.svg') }}'
+          alt='8th Wall Logo'
+          class="dropDownIcon"
+        />
+      </div>
+      <div class="headerMenu">
+        <a class="menuLink" href="/webar">{% text "nav_industry_solutions_why_webar" label="Why WebAR Button", value={{theme_translations.header_whyWebar.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/case-studies">{% text "nav_industry_solutions_case_studies" label="Case Studies Button", value={{theme_translations.header_case_studies.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/industry-solutions">{% text "nav_industry_solutions_industries" label="Industries Button", value={{theme_translations.header_industries.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/discover">{% text "nav_discover" label="Discover Button", value={{theme_translations.header_discover.message}} no_wrapper=true %}</a>
+      </div>
+    </li>
+    <li>
+      <div class="headerLink">
+        <span class="headerLink">{% text "nav_resources" label="Resources Button", value={{theme_translations.header_resources.message}} no_wrapper=true %}</span>
+        <img
+          src='{{ get_asset_url('/theme8/images/module-icons/chevrondown.svg') }}'
+          alt='8th Wall Logo'
+          class="dropDownIcon"
+        />
+      </div>
+      <div class="headerMenu">
+        <a class="menuLink projectLibraryLink" href="/projects">
+          {% text "nav_learn_project_library" label="Project Library Button", value={{theme_translations.header_projectLibrary.message}} no_wrapper=true %}
+          <img
+            src='{{ get_asset_url('/theme8/images/module-icons/rocket.svg') }}'
+            alt='8th Wall Logo'
+            class="dropDownIcon"
+          />
+        </a>
+        <a class="menuLink" href="/docs">{% text "nav_resources_documentation" label="Documentation Button", value={{theme_translations.header_documentation.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/forum">{% text "nav_resources_forum" label="Forum Button", value={{theme_translations.header_forum.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/tutorials">{% text "nav_resources_tutorials" label="Tutorials Button", value={{theme_translations.header_tutorials.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/blog">{% text "nav_resources_blog" label="Blog Button", value={{theme_translations.header_blog.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/partners">{% text "nav_partners" label="Find a Partner", value={{theme_translations.header_findPartner.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/resources">{% text "nav_resources_all_resources" label="All Resources Button", value={{theme_translations.header_allResources.message}} no_wrapper=true %}</a>
+      </div>
+    </li>
+    <li><a class="headerLink" href="/pricing">{% text "nav_pricing" label="Pricing Button", value={{theme_translations.header_pricing.message}}  no_wrapper=true %}</a></li>
+    <li><a class="startFree" href="/get-started">{% text "nav_start_free" label="Start Free Button", value={{theme_translations.header_startFree.message}}  no_wrapper=true %}</a></li>
+    <li><a class="headerLink" href="/login">{% text "nav_login" label="Login Button", value={{theme_translations.header_login.message}}  no_wrapper=true %}</a></li>
+  </ul>
+
+  <ul id="header-menu" class="navLinks loggedIn hidden">
+    <li><a class="headerLink" href="/docs">{% text "nav_product" label="Documentation Button", value={{theme_translations.header_documentation.message}} no_wrapper=true %}</a></li>
+    <li>
+      <a class="headerLink" href="/projects">
+        {% text "nav_learn_project_library" label="Project Library Button", value={{theme_translations.header_projectLibrary.message}} no_wrapper=true %}
+        <img
+          src='{{ get_asset_url('/theme8/images/module-icons/rocket.svg') }}'
+          alt='8th Wall Logo'
+          class="dropDownIcon"
+        />
+      </a>
+    </li>
+    <li>
+      <div class="headerLink">
+        <span class="headerLink">{% text "nav_product" label="Product Button", value={{theme_translations.header_product.message}} no_wrapper=true %}</span>
+          <img
+            src='{{ get_asset_url('/theme8/images/module-icons/chevrondown.svg') }}'
+            alt='8th Wall Logo'
+            class="dropDownIcon"
+          />
+      </div>
+      <div class="headerMenu">
+        <a class="menuLink" href="/discover">{% text "nav_product_discover" label="Discover Button", value={{theme_translations.header_discover.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/products">{% text "nav_product_features" label="Features Button", value={{theme_translations.header_features.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/industry-solutions">{% text "nav_product_industries" label="Industries Button", value={{theme_translations.header_industries.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/pricing">{% text "nav_product_pricing" label="Pricing Button", value={{theme_translations.header_pricing.message}} no_wrapper=true %}</a>
+      </div>
+    </li>
+    <li>
+      <div class="headerLink">
+        <span class="headerLink">{% text "nav_resources" label="Resources Button", value={{theme_translations.header_resources.message}} no_wrapper=true %}</span>
+        <img
+          src='{{ get_asset_url('/theme8/images/module-icons/chevrondown.svg') }}'
+          alt='8th Wall Logo'
+          class="dropDownIcon"
+        />
+      </div>
+      <div class="headerMenu">
+        <a class="menuLink" href="/forum">{% text "nav_resources_forum" label="Forum Button", value={{theme_translations.header_forum.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/tutorials">{% text "nav_resources_tutorials" label="Tutorials Button", value={{theme_translations.header_tutorials.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/blog">{% text "nav_resources_blog" label="Blog Button", value={{theme_translations.header_blog.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="https://8th.io/discord">{% text "nav_resources_discord" label="Discord Button", value={{theme_translations.header_discord.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="https://8th.io/gamejam">{% text "nav_resources_game_jams" label="Game Jams Button", value={{theme_translations.header_game_jams.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/community/education">{% text "nav_resources_education" label="Education Button", value={{theme_translations.header_education.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="https://events.8thwall.com/events/#/list">{% text "nav_resources_events" label="Events Button", value={{theme_translations.header_events.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/discover/view-all?try=true&?q=featured-game">{% text "nav_resources_made_by_community" label="Made by Community Button", value={{theme_translations.header_made_by_community.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/resources">{% text "nav_all_resources" label="All Resources Button", value={{theme_translations.header_allResources.message}} no_wrapper=true %}</a>
+      </div>
+    </li>
+    <li id='userProfile'>
+      <div class="headerLink profileDropdownTrigger">
+        <div class="profilePic">
+          <img alt='User avatar' class="profilePhoto"/>
+          <div class="profileMonogram"></div>
+        </div>
+        <p class="profileName"></p>
+        <div class="profileDropdownIcon"></div>
+      </div>
+      <div id="profileMenu" class="headerMenu">
+        <a class="menuLink" href="/workspaces">{% text "nav_workspaces" label="Workspaces Button", value={{theme_translations.header_workspaces.message}} no_wrapper=true %}</a>
+        <a class="menuLink" href="/profile">{% text "nav_profile" label="Profile Button", value={{theme_translations.header_profile.message}} no_wrapper=true %}</a>
+        <button class="menuLink signout" type="button">{% text "nav_sign_out" label="Sign Out Button", value={{theme_translations.header_signOut.message}} no_wrapper=true %}</button>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<script>
+  var navLinks = document.getElementsByClassName("navLinks")[0];
+  var navButton = document.getElementsByClassName("navButton")[0];
+
+  document.addEventListener('DOMContentLoaded', function() {
+    navButton.addEventListener("click", function() {
+      navLinks.classList.toggle("active");
+      if (navLinks.style.display === "flex") {
+        navLinks.style.display = "none";
+      } else {
+        navLinks.style.display = "flex";
+      }
+    });
+
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 1160) {
+        navLinks.style.removeProperty("display");
+      }
+    });
+  });
+
+</script>
+
+<script>
+  const hideLoggedOutElements = () => {
+    const elementsToRemove = document.getElementsByClassName('loggedOut')
+    while (elementsToRemove.length) {
+      const element = elementsToRemove[0]
+      element.remove()
+    }
+  }
+
+  // Color of Monogram Profile Background
+  const hexColorByString = (str) => {
+    if (str.length === 0) {
+      return '#ffffff'
+    }
+    let hash = 0
+    for (let i = 0; i < str.length; i++) {
+      hash = str.charCodeAt(i) + ((hash << 5) - hash)
+      hash &= hash
+    }
+    let color = '#'
+    for (let i = 0; i < 3; i++) {
+      const value = (hash >> (i * 8)) & 255
+      color += value.toString(16).padStart(2, '0')
+    }
+    return color
+  }
+
+  // Color of Monogram Profile Letter
+  const getContrastFontColor = (backgroundColor) => {
+    const RED_MASK = 0xFF0000
+    const GREEN_MASK = 0x00FF00
+    const BLUE_MASK = 0x0000FF
+    let backgroundColorInt = backgroundColor
+    if (typeof backgroundColor === 'string') {
+      const colorHexStr = backgroundColor.charAt(0) === '#'
+        ? backgroundColor.substring(1)
+        : backgroundColor
+      backgroundColorInt = parseInt(colorHexStr, 16)
+    }
+
+    /* eslint-disable no-bitwise */
+    const red = (backgroundColorInt & RED_MASK) >> 16
+    const green = (backgroundColorInt & GREEN_MASK) >> 8
+    const blue = backgroundColorInt & BLUE_MASK
+    return ((red * 0.299) + (green * 0.587) + (blue * 0.114)) > 186
+      ? '#000000'
+      : '#FFFFFF'
+    /* eslint-enable no-bitwise */
+  }
+
+  const showLoggedInElements = (userSession) => {
+    const loggedInHeader = document.getElementsByClassName('loggedIn')[0]
+    loggedInHeader.classList.remove('hidden')
+
+    const userAttributes = userSession.getCurrentUserAttributes()
+    const userProfileElement = document.getElementById('userProfile')
+    window.dataLayer.push({userId: userAttributes.uuid})
+
+    // Profile Picture
+    const profilePicContainer = userProfileElement.getElementsByClassName('profilePic')[0]
+    const profilePhoto = profilePicContainer.getElementsByClassName('profilePhoto')[0]
+    const profileMonogram = profilePicContainer.getElementsByClassName('profileMonogram')[0]
+    if (userAttributes?.profilePhotoUrl) {
+      profileMonogram.remove()
+      profilePhoto.src = userAttributes.profilePhotoUrl
+    } else { // If no profile photo exists, set monogram
+      profilePhoto.remove()
+      const monogramBg = hexColorByString(userAttributes.givenName + " " + userAttributes.familyName)
+      const monogramColor = getContrastFontColor(monogramBg)
+      profileMonogram.style.background = monogramBg
+      profileMonogram.style.color = monogramColor
+      const monogramTextNode = document.createTextNode(userAttributes.profilePhotoMonogram);
+      profileMonogram.appendChild(monogramTextNode);
+    }
+
+    // Profile Name
+    const userNameElement = userProfileElement.getElementsByClassName('profileName')[0]
+    userNameElement.appendChild(document.createTextNode(userAttributes.givenName + " " + userAttributes.familyName))
+
+    // Sign-out Button
+    const signOutButton = userProfileElement.getElementsByClassName('signout')[0]
+    signOutButton.onclick = () => {
+      userSession.signOut()
+      window.location.reload()
+    }
+
+    const menuTrigger = userProfileElement.getElementsByClassName('profileDropdownTrigger')[0]
+    menuTrigger.onclick = () => {
+      const menuElement = document.getElementById('profileMenu')
+      const isActive = menuElement.classList.contains('active')
+      if (isActive) {
+        menuElement.classList.remove('active')
+      } else {
+        menuElement.classList.add('active')
+      }
+    }
+
+    userProfileElement.classList.remove('hidden')
+  }
+
+  const fetchUserAttributes = async () => {
+    const userSession = await window.UserSessionProvider.get()
+    if (userSession) {
+      hideLoggedOutElements()
+      showLoggedInElements(userSession)
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    fetchUserAttributes()
+  })
+</script>

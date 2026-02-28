@@ -1,0 +1,78 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<!-- Add the tap-place component to the scene so it has an effect -->
+<a-scene
+  xrextras-gesture-detector
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="colorManagement: true"
+  xrweb="allowedDevices: any">
+
+  <a-assets>
+    <a-asset-item id="car" src="../../assets/place-model/car.glb"></a-asset-item>
+    <a-asset-item id="car-transparent" src="../../assets/place-model/car-transparent.glb"></a-asset-item>
+    <img id="icon" src="../../assets/place-model/images/rectangle-icon.png">
+  </a-assets>
+
+  <!-- The raycaster will emit mouse events on scene objects specified with the cantap class -->
+  <a-camera
+    id="camera"
+    position="0 8 0"
+    cursor="fuse: false; rayOrigin: mouse;">
+  </a-camera>
+  
+  <a-entity 
+    id="cursor"
+    tap-place-cursor
+    gltf-model="#car-transparent"
+    scale="2 2 2"
+    reflections="type: static">
+      <a-plane
+        rotation="-90 0 0"
+        scale="1.6 3.3 1"
+        material="src: #icon; opacity: 0.5; roughness: 0.8; metalness: 0;">
+      </a-plane>
+  </a-entity>
+  
+  <a-entity
+    light="
+      type: directional;
+      intensity: 0.8;
+      castShadow: true;
+      shadowMapHeight:2048;
+      shadowMapWidth:2048;
+      shadowCameraTop: 20;
+      shadowCameraBottom: -20;
+      shadowCameraRight: 20;
+      shadowCameraLeft: -20;
+      target: #model"
+    xrextras-attach="target: model; offset: 8 15 4"
+    position="1 4.3 2.5"
+    shadow>
+  </a-entity>
+
+  <a-light type="ambient" intensity="0.5"></a-light>
+
+  <a-entity
+    id="model"
+    gltf-model="#car"
+    scale="2 2 2"
+    visible="false"
+    shadow="receive: false"
+    xrextras-hold-drag
+    xrextras-two-finger-rotate
+    xrextras-pinch-scale
+    reflections="type: realtime">
+  </a-entity>
+
+  <!-- Adding the cantap class allows the ground to be clicked -->
+  <a-box
+    id="ground"
+    scale="1000 2 1000"
+    position="0 -1 0"
+    material="shader: shadow; transparent: true; opacity: 0.4"
+    shadow>
+  </a-box>
+</a-scene>

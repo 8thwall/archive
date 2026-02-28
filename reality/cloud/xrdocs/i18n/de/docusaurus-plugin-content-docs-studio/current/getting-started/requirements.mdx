@@ -1,0 +1,39 @@
+---
+id: requirements
+sidebar_position: 2
+---
+
+# Anforderungen
+
+## Web-Browser
+
+Mobile Browser benötigen die folgenden Funktionen, um 8th Wall Web-Erlebnisse zu unterstützen:
+
+- WebGL (`canvas.getContext('webgl') || canvas.getContext('webgl2')`)
+- getUserMedia (`navigator.mediaDevices.getUserMedia`)
+- Geräteausrichtung (`window.DeviceOrientationEvent` - _nur erforderlich, wenn SLAM aktiviert ist_)
+- Web-Assembly / WASM (`Window.WebAssembly`)
+
+**HINWEIS:** 8th Wall Web-Erfahrungen müssen über **https** aufgerufen werden. \*\*Dies wird von Browsern für den Zugriff auf die Kamera benötigt.
+
+### iOS
+
+- **Safari** (iOS 11+)
+- **Apps**, die SFSafariViewController-Webansichten verwenden (iOS 13+)
+  - Apple hat in iOS 13 die Unterstützung von "getUserMedia()" zu SFSafariViewController hinzugefügt. 8th Wall funktioniert in iOS 13-Apps, die SFSafariViewController-Webansichten verwenden.
+  - Beispiele: Twitter, Slack, Discord, Gmail, Hangouts und mehr.
+- **Anwendungen/Browser**, die WKWebView-Webansichten verwenden (iOS 14.3+)
+
+### Android
+
+- **Browser**, von denen bekannt ist, dass sie die für WebAR erforderlichen Funktionen von Haus aus unterstützen:
+  - Chrom
+  - Firefox
+  - Samsung Internet
+  - Microsoft Edge
+- **Anwendungen**, die Webansichten verwenden, von denen bekannt ist, dass sie die für WebAR erforderlichen Funktionen unterstützen:
+  - Twitter, WhatsApp, Slack, Gmail, Hangouts, Reddit, LinkedIn und mehr.
+
+## Motor
+
+- **VPS** erfordert Engine v27.4.7+

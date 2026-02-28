@@ -1,0 +1,63 @@
+---
+id: component-functions
+description: コンポーネントは実行時に追加、変更、削除できる。
+sidebar_position: 45
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# コンポーネント機能
+
+## はじめに
+
+{frontMatter.description} 組み込みコンポーネントとカスタムコンポーネントは、コンポーネントデータの管理に同じインターフェイスを使用します。
+
+## カスタムコンポーネントの参照
+
+次の例は、異なるコード・ファイル間でカスタム・コンポーネントへの参照を共有する方法を示しています。
+
+:::tip
+コンポーネントをインポートまたは使用する前に、必ずコンポーネントをエクスポートしてください。
+:::
+
+```tsx title="/custom-component.ts"
+import * as ecs from '@8thwall/ecs'
+
+const CustomComponent = ecs.registerComponent({
+  ...
+})
+
+export {CustomComponent}
+```
+
+```tsx title="/another-component.ts"
+import * as ecs from '@8thwall/ecs'
+import {CustomComponent} from './custom-component'
+
+ecs.registerComponent({
+  name: 'Another Custom Component',
+  stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+    ecs.defineState('default')
+      .initial()
+      .onEnter(() => {
+        const entity = world.createEntity()
+
+        CustomComponent.set(world, entity, {
+          displayName: 'Jini'
+        })
+      })
+  },
+})
+```
+
+## 機能
+
+コンポーネント関数を使用すると、エンティティに関連するコンポーネントとそのデータに対して、さまざまなアクションを実行できます。
+
+<ComponentFunctions
+  name="円柱幾何学"
+  properties={{ radius: 1, height: 1 }}
+  mutate={`cursor.radius += 1;
+   cursor.height *= 2;
+   return false;`}
+/>

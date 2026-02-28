@@ -1,0 +1,14 @@
+{
+  "version.label": {
+    "message": "次のページ",
+    "description": "The label for version current"
+  },
+  "sidebar.apiSidebar.category.Getting Started": {
+    "message": "はじめに",
+    "description": "The label for category Getting Started in sidebar apiSidebar"
+  },
+  "sidebar.apiSidebar.category.Development": {
+    "message": "開発",
+    "description": "The label for category Development in sidebar apiSidebar"
+  }
+}

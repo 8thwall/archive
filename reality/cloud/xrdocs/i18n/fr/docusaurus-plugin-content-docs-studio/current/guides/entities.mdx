@@ -1,0 +1,99 @@
+---
+id: entities
+description: >-
+  Une entité en soi n'a pas de comportement ni d'apparence ; elle agit
+  simplement comme un conteneur auquel des composants peuvent être attachés.
+---
+
+# Entités
+
+## Introduction
+
+{frontMatter.description}
+
+## Création d'une entité
+
+Le code suivant montre comment créer une nouvelle entité sans aucun composant
+
+### Exemple
+
+```ts
+import * as ecs from '@8thwall/ecs'
+
+const eid = world.createEntity()
+```
+
+## Suppression d'une entité
+
+Le code suivant montre comment supprimer une entité existante en fonction de son identifiant :
+
+### Exemple
+
+```ts
+import * as ecs from '@8thwall/ecs'
+
+world.deleteEntity(eid)
+```
+
+## Ajout de composants à une entité
+
+Le code suivant montre comment ajouter un composant intégré à une entité au moment de l'exécution.
+
+### Exemple
+
+```ts
+const box = world.createEntity()
+
+ecs.BoxGeometry.set(world, box, {
+    width : 1,
+    height : 1,
+    depth : 1,
+})
+
+ecs.Material.set(world, box, {
+    r : 255,
+    g : 255,
+    b : 255,
+})
+```
+
+## Créer et modifier des relations
+
+Le code suivant montre comment utiliser les méthodes d'aide intégrées pour créer ou modifier les relations entre les entités.
+
+### Exemple
+
+```ts
+// Les entités sont automatiquement des enfants de World.
+const foo = world.createEntity()
+const bar = world.createEntity()
+
+// Faites de foo un enfant de bar.
+world.setParent(foo, bar)
+
+// Récupère le parent de bar (renvoie un eid où <= 0 est indéfini)
+world.getParent(bar)
+
+// Récupère les enfants de foo (renvoie un Generator)
+world.getChildren(foo)
+```
+
+## Fonctions d'assistance
+
+Il existe un certain nombre de fonctions d'aide pour interagir avec la transformation d'une entité.
+
+:::tip
+Les entités sont positionnées par rapport à leur parent. La fonction `getWorldTransform()` récupère la transformation de l'objet dans l'espace mondial, en tenant compte de toutes les transformations des parents.
+:::
+
+```ts
+world.setScale(eid, 1, 1, 1)
+world.setPosition(eid, 1, 1, 1)
+world.setQuaternion(eid, 0, 0, 0, 1)
+world.normalizeQuaternion(eid)
+
+const tempMatrix = ecs.math.mat4.i()
+world.getWorldTransform(eid1, tempMatrix)
+
+world.setTransform(eid2, tempMatrix)
+```

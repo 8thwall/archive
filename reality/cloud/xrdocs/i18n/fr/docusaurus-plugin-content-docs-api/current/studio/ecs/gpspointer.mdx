@@ -1,0 +1,27 @@
+---
+id: gps-pointer
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import GpsPointerTable from "../../../gen/tables/GpsPointer.md"
+
+# GpsPointer
+
+## Description
+
+Ce composant contrôle la façon dont l'entité est tournée en fonction des entrées GPS.
+
+## Propriétés {#properties}
+
+<GpsPointerTable />
+
+## Fonctions
+
+<ComponentFunctions
+    name="GpsPointer"
+    properties={{
+        faceGpsDirection: true,
+    }}
+    mutate={`cursor.faceGpsDirection = false ;
+    return false;`}
+/>

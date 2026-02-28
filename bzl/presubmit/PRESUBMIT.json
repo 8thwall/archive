@@ -1,0 +1,15 @@
+{
+  "inherit": false,
+  "tasks": [
+    {
+      "task": "BUILD",
+      "targets": ["//bzl/presubmit:presubmit"]
+    },
+    {
+      "task": "BUILDIFIER"
+    },
+    {
+      "task": "CLANG_FORMAT"
+    }
+  ]
+}

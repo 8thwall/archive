@@ -1,0 +1,71 @@
+---
+id: spaces
+description: >-
+  Un espace est un moyen d'organiser les entités et de procéder à une
+  configuration globale.
+---
+
+# Espaces
+
+## Introduction
+
+{frontMatter.description} La création de jeux et d'expériences WebXR immersives nécessite souvent plusieurs environnements, transitions et espaces structurés pour les différentes parties du parcours de l'utilisateur. Spaces vous permet désormais de construire et de gérer plusieurs zones distinctes au sein d'un même projet. Vous pouvez considérer les espaces comme des scènes ou des environnements dans d'autres moteurs de jeu ou outils de conception. Pour faire simple, les espaces sont des cadres 3D dans lesquels vous pouvez placer des actifs, des éclairages, des caméras et des interactions de jeu.
+
+![](/images/studio/spaces-intro.gif)
+
+## Ajouter un espace
+
+Lorsque vous démarrez un nouveau projet dans 8th Wall Studio, vous verrez un espace par défaut avec une caméra et une lumière. L'ajout d'un nouvel espace est simple : il suffit de sélectionner le menu déroulant en haut du panneau de hiérarchie, de nommer l'espace et de commencer à le concevoir.
+
+Note : Les espaces ont été introduits dans notre version 2025-février-13. Les projets créés avant cette version n'ont pas d'espace, mais vous pouvez créer des espaces en utilisant le menu déroulant Espace en haut de la hiérarchie. Toutes les entités du projet seront désormais désignées dans l'espace créé.
+
+![](/images/studio/spaces-add.png)
+
+## Espaces inclus
+
+Vous pouvez spécifier qu'un espace inclut d'autres espaces. L'inclusion d'un espace signifie que tous ses objets seront chargés lorsque l'espace qui l'inclut sera chargé. Vous pouvez ajouter des espaces supplémentaires à votre espace actif en utilisant le configurateur d'espace dans l'onglet Paramètres de l'inspecteur.
+
+![](/images/studio/spaces-settings.png)
+
+Notes :
+
+* L'inclusion d'un espace supplémentaire signifie que tous les objets de cet espace et de tout espace qu'il inclut (et ainsi de suite).
+* Lorsque vous passez d'un espace à l'autre, le ou les espaces inclus qui sont partagés entre les deux ne verront pas leurs objets désapparaître et réapparaître.
+
+## Chargement d'un espace
+
+Un nouvel espace chargé remplacera l'ancien espace en tant qu'espace actif. world.spaces.loadSpace charge un espace spécifié par un identifiant ou un nom. Les objets de l'ancien espace (et de tous les espaces inclus) seront supprimés et les nouveaux espaces (et tous les espaces inclus) seront créés.
+
+Le chargement d'un espace met l'objet dans son état initial. Si vous rechargez un Espace précédemment chargé, toutes les mises à jour précédentes seront effacées.
+
+Les objets éphémères restent également chargés lorsque l'on passe d'un espace à l'autre. Pour décharger les objets éphémères lors des modifications de l'espace, il faut les rattacher à un objet graphique.
+
+![](/images/studio/spaces-loading.gif)
+
+## Objets persistants
+
+Vous pouvez facilement configurer des objets pour qu'ils soient conservés entre les Espaces. Par exemple, vous pouvez avoir un personnage principal qui doit se déplacer d'un niveau à l'autre. En utilisant la bascule de persistance dans l'inspecteur de l'objet ou le composant Persistant ou en utilisant ecs.Persistent pour désigner cet objet comme devant rester chargé lorsqu'un nouvel espace est chargé.
+
+![](/images/studio/spaces-persistent.png)
+
+Remarque : la persistance ne doit être définie que pour les objets de niveau racine. Le transfert d'objets persistants vers d'autres objets en cours d'exécution peut entraîner des comportements inattendus dans Live Sync.
+
+## Réglages de l'espace
+
+Dans l'onglet Paramètres de l'inspecteur, vous pouvez configurer la caméra active et la boîte à ciel d'un espace particulier, et vous pouvez configurer l'espace d'entrée (ou l'espace de départ par défaut) dans la section Paramètres du projet.
+
+Caméra active : La caméra active d'un espace peut être n'importe quel objet caméra dans cet espace ou dans tout espace qu'il inclut.
+
+Skybox : Modifiez la boîte à images de votre espace. Les boîtes à ciel sont une enveloppe autour de l'ensemble de l'espace qui montre à quoi ressemble le monde au-delà de la géométrie. Si votre projet est configuré pour utiliser la RA sur un appareil compatible avec la RA, la Skybox ne sera pas rendue.
+
+Espace d'entrée : Vous pouvez rapidement définir un espace d'entrée (ou espace de départ par défaut) dans la section Paramètres du projet (panneau de droite).
+
+## Simulation de l'espace actif en mode Live Sync
+
+Le mode Live Sync (dans le panneau de droite Settings) permet de tester facilement et de manière modulaire l'espace actif. Lorsque la synchronisation en direct est activée, le simulateur en ligne charge l'espace actuellement actif dans la hiérarchie.
+
+Notes :
+
+* L'ouverture d'une instance du simulateur dans une nouvelle fenêtre (à l'aide du lien Nouvel onglet) ou l'utilisation du mode pop-out du simulateur chargera l'espace d'entrée, que la synchronisation en direct soit activée ou non.
+* Le fait de changer d'espace dans le menu déroulant de la hiérarchie modifie l'espace chargé dans le simulateur en mode Live Sync.
+* Si l'option Sauvegarder les modifications est activée, toutes les modifications effectuées dans la fenêtre de visualisation seront conservées entre les changements d'espace. Si l'option Sauvegarder les modifications est désactivée, le fait de changer d'espace réinitialise les modifications.

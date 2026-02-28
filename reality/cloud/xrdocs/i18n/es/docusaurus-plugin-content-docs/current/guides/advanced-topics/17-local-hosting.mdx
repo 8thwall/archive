@@ -1,0 +1,104 @@
+---
+id: local-hosting
+---
+
+# Hospedaje local
+
+A **Pro or Enterprise** plan is required to host WebAR projects on your own web servers.
+
+To purchase a Pro plan, please see https://www.8thwall.com/docs/guides/account-settings/#purchase-plan
+
+## Introducción {#getting-started}
+
+Siga la guía de inicio clonando proyectos de ejemplo autoalojados del [repositorio de GitHub de 8th Wall](https://github.com/8thwall/web).
+
+Para desarrollar localmente, necesita tener instalados Node.js y npm. Si aún no tiene instalados Node.js y npm, [obténgalos aquí](https://www.npmjs.com/get-npm).
+
+1. Descargue el código fuente del [repositorio de GitHub de 8th Wall](https://github.com/8thwall/web) y `cd` en un ejemplo de su elección (se recomienda aframe para principiantes).
+2. Sustituya la clave de aplicación en `index.html` por su [clave de aplicación de la página de configuración del proyecto](https://www.8thwall.com/docs/guides/projects/project-settings/#app-key) en la consola de 8th Wall.
+3. Autorice el acceso a su clave de aplicación en su dispositivo con la [autorizando el dispositivo](https://www.8thwall.com/docs/web/#device-authorization) o [agregando el dominio a la lista blanca](https://www.8thwall.com/docs/web/#connected-domains) (localhost/dirección IP).
+4. Entregue un directorio de proyecto en su red local a través de HTTPS con [http-server](https://github.com/http-party/http-server#readme). Consulte [Entregar proyectos por HTTPS](https://www.8thwall.com/docs/guides/advanced-topics/local-hosting/#serve-projects-over-https).
+5. Conéctese a su servidor desde su dispositivo, acepte las advertencias del certificado y los permisos de la cámara. Consulte [Ver proyecto en iOS](https://www.8thwall.com/docs/guides/advanced-topics/local-hosting/#view-project-on-ios) o [Ver proyecto en Android](https://www.8thwall.com/docs/guides/advanced-topics/local-hosting/#view-project-on-android).
+
+## Entregar proyectos por HTTPS {#serve-projects-over-https}
+
+Los navegadores requieren certificados HTTPS para acceder a la cámara. Utilice [http-server](https://github.com/http-party/http-server#readme) para entregar directorios de proyectos con HTTPS.
+
+En primer lugar, debe asegurarse de que [openssl](https://github.com/openssl/openssl) está instalado y de que dispone de los archivos key.pem y cert.pem. Puede generarlos utilizando este comando:
+
+```
+openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem
+```
+
+Luego de ingresar el comando, deberá responder algunas preguntas. Utilice 127.0.0.1 como valor para Nombre común si desea poder instalar el certificado en el almacén de certificados raíz de su sistema operativo o navegador para que sea de confianza.
+
+Esto genera un par cert-clave que será válido durante 3650 días (alrededor de 10 años).
+
+A continuación, puede ejecutar `http-server` con `-S` para habilitar SSL y `-C` para su archivo de certificado:
+
+```
+npx http-server [project-path] -S -C cert.pem
+```
+
+Ejemplo:
+
+```sh
+npx http-server gettingstarted/aframe/ -S -C cert.pem
+```
+
+![ServeLocally](/images/serve-locally.jpg)
+
+**NOTA**: La primera dirección IP que aparece es **127.0.0.1:8080** (que es el dispositivo loopback,
+también conocido como "localhost") y su teléfono móvil no podrá conectarse directamente a esa dirección IP.
+Utilice una de las otras direcciones IP.
+
+**USUARIOS DE WINDOWS**: Ejecute el comando http-server utilizando una ventana estándar de símbolo del sistema (cmd.exe). El script puede generar errores si se ejecuta desde PowerShell.
+
+Más información en la [documentación de http-server](https://github.com/http-party/http-server#tlsssl).
+
+## Ver proyecto en iOS {#view-project-on-ios}
+
+1. Abra **Safari en iOS 11 o versiones posteriores** y conéctese a una de las URL "Disponible en". Nota: Safari mostrará un mensaje
+   sobre los certificados SSL, pero se puede proceder con seguridad.
+
+**IMPORTANTE**: Asegúrese de copiar toda la URL "Disponible en" en su navegador y de incluir
+"**https://**" al principio y el número de puerto al final.
+
+Ejemplo: `https://10.0.0.99:8080`
+
+2. Haga clic en "visitar este sitio":
+
+![iOSConnect1](/images/ios-connect-1.jpg)
+
+3. Haga clic en "Mostrar detalles":
+
+![iOSConnect2](/images/ios-connect-2.jpg)
+
+4. Haga clic en "Visitar sitio":
+
+![iOSConnect3](/images/ios-connect-3.jpg)
+
+5. Por último, haga clic en "Permitir" para conceder permisos a la cámara y empezar a ver la experiencia de RA de muestra:
+
+![iOSConnect4](/images/ios-connect-4.jpg)
+
+## Ver proyecto en Android {#view-project-on-android}
+
+1. Abra **Chrome**, una **variante de Chrome** (por ejemplo, el navegador de Samsung) o **Firefox**.
+
+**IMPORTANTE**: Asegúrese de copiar toda la URL "Disponible en" en su navegador y de incluir
+"**https://**" al principio y el número de puerto al final.
+
+Ejemplo: `https://10.0.0.99:8080`
+
+2. Ejemplo de Chrome: El navegador mostrará un mensaje sobre que el certificado no es válido. Haga clic en `'CONFIGURACIÓN AVANZADA'` para continuar:
+
+```mdx-code-block
+<img src={require('/images/android-connect-1.jpg').default} width='280px' alt='AndroidConnect1'/>
+```
+
+3. Haga clic en "Continuar a... (no seguro)":
+
+```mdx-code-block
+<img src={require('/images/android-connect-2.jpg').default} width='280px' alt='AndroidConnect2'/>
+```

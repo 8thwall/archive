@@ -1,0 +1,40 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<img id="frame" src="./assets/frame.png" />
+
+<a-scene
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  xrextras-pause-on-hidden
+  renderer="maxCanvasWidth: 960; maxCanvasHeight: 960"
+  xrface="mirroredDisplay: true;  meshGeometry: eyes, face, mouth; cameraDirection: front; allowedDevices: any;">
+  <a-assets>
+    <a-asset-item id="head-occluder" src="./assets/Models/head-occluder.glb"></a-asset-item>
+  </a-assets>
+
+  <xrextras-resource id="blush-t" src="./assets/Textures/blush.png"></xrextras-resource>
+  <xrextras-resource id="alpha" src="./assets/Alpha/soft-eyes-mouth.png"> </xrextras-resource>
+  <xrextras-basic-material
+    id="blush"
+    tex="#blush-t"
+    alpha="#alpha"
+    opacity="0.9"></xrextras-basic-material>
+
+  <xrextras-capture-button></xrextras-capture-button>
+  <xrextras-capture-preview></xrextras-capture-preview>
+
+  <a-camera
+    look-controls="enabled: false"
+    wasd-controls="enabled: false"
+    position="0 1.6 0"></a-camera>
+
+  <xrextras-faceanchor>
+    <a-entity gltf-model="#head-occluder" position="0 0 0.02" xrextras-hider-material></a-entity>
+
+    <xrextras-face-mesh material-resource="#blush"></xrextras-face-mesh>
+  </xrextras-faceanchor>
+
+  <a-light type="directional" target="#face" position="0 1.8 3" intensity="0.8"></a-light>
+  <a-light type="ambient" intensity="0.8"></a-light>
+</a-scene>

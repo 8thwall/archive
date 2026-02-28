@@ -1,0 +1,46 @@
+<!-- module html  -->
+
+<style>
+.lessonCtaBlock li::before {
+  background: url({{ get_asset_url('/theme8/images/module-icons/black-checkmark.svg') }});
+  background-size: 100% 100%;
+}
+</style>
+
+{# Sets attributes used for the link field #}
+
+{% set href = module.link.url.href %}
+{% if module.link.url.type == "EMAIL_ADDRESS" %}
+  {% set href = "mailto:" + href %}
+{% endif %}
+{% set rel = [] %}
+{% if module.link.no_follow %}
+  {% do rel.append("nofollow") %}
+{% endif %}
+{% if module.link.open_in_new_tab %}
+  {% do rel.append("noopener") %}
+{% endif %}
+
+{# Sets styling classes for image position #}
+
+{% set containerClass = "lessonCtaContainer" %}
+{% if module.image_position %}
+{% set containerClass = "lessonCtaContainer lessonCtaContainerReverse" %}
+{% endif %}
+
+{# Card #}
+
+<div class="{{ containerClass }}">
+  <img draggable="false" class="lessonCtaImage" src="{{ module.image.src }}" alt="{{ module.image.alt }}"/>
+  <div class="lessonCtaBlock">
+    <h2 class="lessonCtaHeading">{{ module.heading }}</h2>
+    <p class="lessonCtaBodyText">{{ module.description }}</p>
+    {{module.bullets}}
+    <div class="lessonCtaBodyText">Time: {{ module.time }}</div>
+    <a class="lessonCtaLink lessonCtaBodyText"  href="{{ href }}"
+      {% if module.link.open_in_new_tab %}target="_blank"{% endif %}
+      {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}>
+      Read More
+    </a>
+  </div>
+</div>

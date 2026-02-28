@@ -1,0 +1,34 @@
+diff --git a/node_modules/react-elastic-carousel/dist/index.d.ts b/node_modules/react-elastic-carousel/dist/index.d.ts
+index 74de6eb..a9468ba 100644
+--- a/node_modules/react-elastic-carousel/dist/index.d.ts
++++ b/node_modules/react-elastic-carousel/dist/index.d.ts
+@@ -1,5 +1,7 @@
++/* eslint-disable */
+ /* eslint no-unused-vars: 0 */ // --> OFF
+ /* eslint no-undef: 0 */ // --> OFF
++
+ import * as React from "react";
+ 
+ export type RenderArrowProps = {
+@@ -106,10 +108,21 @@ export interface ReactElasticCarouselProps {
+   onPrevEnd?: (nextItemObject: ItemObject, currentPageIndex: number) => void;
+   // A callback for the "slider-container" resize
+   onResize?: (currentBreakpoint: Breakpoint) => void;
++  children: React.ReactNode;
+ }
+ 
++declare const consts: {
++  PREV: "PREV",
++  NEXT: "NEXT",
++  START: "flex-start",
++  CENTER: "center",
++  END: "flex-end"
++};
++
+ declare class ReactElasticCarousel extends React.Component<
+   ReactElasticCarouselProps
+ > {}
+ 
+ export default ReactElasticCarousel;
++
++export { consts };

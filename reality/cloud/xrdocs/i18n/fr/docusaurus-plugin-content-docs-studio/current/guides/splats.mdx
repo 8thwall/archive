@@ -1,0 +1,74 @@
+---
+id: splats
+description: >-
+  Le splatting gaussien vous permet de capturer l'essence d'une scène du monde
+  réel à l'aide de votre smartphone et de la restituer sous la forme d'un modèle
+  3D totalement immersif, visible dans WebAR.
+---
+
+# Éclaboussures
+
+## Introduction
+
+{frontMatter.description} Cette technique révolutionne la manière dont nous intégrons les objets et les lieux du monde réel dans les expériences numériques en utilisant des éclaboussures au lieu des maillages traditionnels.
+
+:::info Quelle est la différence avec une maille ?
+Contrairement aux maillages qui reposent sur des polygones et des textures connectés, les éclaboussures gaussiennes sont composées de millions de minuscules éclaboussures ou taches indépendantes. Ces éclaboussures se combinent pour créer un modèle 3D vibrant et immersif à 360 degrés, capturant les détails et les textures complexes du monde réel.
+:::
+
+![gaussian-splats.gif](/images/studio/gaussian-splats.gif)
+
+## Création de splats à l'aide de Scaniverse
+
+Capturer des splats gaussiens se fait sans effort avec l'appli Niantic Scaniverse™. Il vous suffit d'utiliser votre téléphone pour capturer une scène, revoir le splat et le modifier sur n'importe lequel de vos appareils. Cette accessibilité permet à tout un chacun de créer des modèles 3D très détaillés sans avoir besoin d'équipement spécialisé ou d'ordinateurs puissants.
+
+![creating-splats.jpg](/images/studio/creating-splats.jpg)
+
+## Exportation de splats à partir de Scaniverse
+
+Une fois que vous avez capturé et modifié votre splat, l'exporter en tant que fichier .SPZ est rapide et facile grâce à Niantic Scaniverse™. Après la capture et l'édition :
+
+1. Sélectionnez Partager.
+2. Sélectionnez Exporter le modèle.
+3. Sélectionner le format .SPZ.
+4. Enregistrez le fichier sur votre appareil.
+
+:::note
+Actuellement, seuls les splats .SPZ sont pris en charge.
+:::
+
+![exporting-splats.png](/images/studio/exporting-splats.png)
+
+## Importation de splats
+
+8th Wall Studio facilite l'importation de splats .SPZ.
+
+- Faites glisser le fichier dans la section Fichiers/Assets du volet gauche.
+- Vous pouvez également utiliser le bouton (+) pour télécharger le fichier.
+
+Une fois importés, vos splats s'intègrent parfaitement à vos projets, vous permettant de créer des expériences 3D hyperréalistes et immersives.
+
+:::note
+L'importation d'un splat peut prendre 1 à 2 minutes et la taille des fichiers est limitée à 100 Mo.
+:::
+
+:::danger
+Les grandes éclaboussures sont susceptibles d'affecter fortement les performances.
+:::
+
+![importing-splats-into-studio.jpg](/images/studio/importing-splats-into-studio.jpg)
+
+## Utilisation des splats
+
+Les splats sont un outil puissant lorsqu'ils sont combinés avec d'autres objets 3D, des plans au sol et des collisionneurs physiques, créant ainsi des expériences XR dynamiques qui s'intègrent profondément dans le monde réel. Qu'il s'agisse de visites virtuelles de lieux populaires ou de décors pour des jeux interactifs, les splats permettent de donner vie à vos visions créatives avec réalisme et immersion.
+
+![working-with-splats.gif](/images/studio/working-with-splats.gif)
+
+## Limites
+
+Bien que les éclaboussures gaussiennes offrent une fidélité visuelle exceptionnelle, elles présentent certaines limites :
+
+- Le rendu des splats peut être exigeant pour le CPU et le GPU. Les fichiers de grande taille, les splats multiples et les splats non recadrés peuvent avoir un impact négatif sur les performances. Il est recommandé de recadrer et d'éditer dans l'application Scaniverse pour optimiser les splats avant de les importer dans Studio.
+- La modification ou le recadrage des éclaboussures dans 8th Wall Studio n'est pas encore pris en charge. Finalisez toujours les éditions dans Scaniverse™ avant d'importer le fichier .SPZ dans Studio.
+- Actuellement, les objets splat n'interagissent pas avec les lumières et ne projettent pas d'ombres.
+- Les splats ne sont pas compatibles avec la caméra orthographique pour le moment.

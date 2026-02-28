@@ -1,0 +1,34 @@
+<!-- module html  -->
+
+{# Sets attributes used for the link field #}
+
+{% set href = module.link.url.href %}
+{% if module.link.url.type == "EMAIL_ADDRESS" %}
+  {% set href = "mailto:" + href %}
+{% endif %}
+{% set rel = [] %}
+{% if module.link.no_follow %}
+  {% do rel.append("nofollow") %}
+{% endif %}
+{% if module.link.open_in_new_tab %}
+  {% do rel.append("noopener") %}
+{% endif %}
+
+{# tutorialCard #}
+<div class="tutorialCardContainer">
+  <img draggable="false" class="tutorialImage" src="{{ module.image.src }}" alt="{{ module.image.alt }}">
+  <div class="tutorialCardBlock">
+    <h2 class="tutorialCardHeading">
+      {{ module.heading }}
+      <img draggable="false" class="tutorialCardIcon" src="{{ module.icon.src }}" alt="{{ module.icon.alt }}">
+    </h2>
+    <p class="tutorialCardDescription">
+      {{ module.description }}
+    </p>
+    <a class="tutorialCardLink"  href="{{ href }}"
+      {% if module.link.open_in_new_tab %}target="_blank"{% endif %}
+      {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}>
+      {{ module.link_text }}
+    </a>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<!--
+  templateType: section
+  label: Case Study Carousel
+  isAvailableForNewContent: false
+  description: "Carousel with scrolling for case studies"
+-->
+
+
+<style>
+  .carouselContainer {
+    overflow: scroll;
+    width: 1000px;
+    background: black;
+  }
+</style>
+
+<div class="carouselContainer">
+  {% dnd_section
+    background_linear_gradient={
+      "direction": "to right",
+      "colors": ["#7611B6", "#C86DD7"]
+    },
+    align_items="center",
+    vertical_alignment="MIDDLE"
+  %}
+    {% dnd_module
+      path="../modules/case-study-carousel-card",
+      offset=0,
+      width=2
+    %}
+    {% end_dnd_module %}
+    {% dnd_module
+      path="../modules/case-study-carousel-card",
+      offset=2,
+      width=2
+    %}
+    {% end_dnd_module %}
+    {% dnd_module
+      path="../modules/case-study-carousel-card",
+      offset=4,
+      width=2
+    %}
+    {% end_dnd_module %}
+    {% dnd_module
+      path="../modules/case-study-carousel-card",
+      offset=6,
+      width=2
+    %}
+    {% end_dnd_module %}
+  {% end_dnd_section %}  
+</div>

@@ -1,0 +1,28 @@
+---
+id: world
+description: ワールド・エフェクトを使えば、現実世界の環境と相互作用する体験を作り出すことができる。
+---
+
+# 世界
+
+## はじめに
+
+{frontMatter.description}
+![Face Effects](/images/studio/world-effects-cover.png)
+
+## ワールド・エフェクトを可能にする
+
+プロジェクトでワールドエフェクトを有効にするには、以下の手順に従ってください：
+
+1. シーン内のカメラを選択します。
+2. タイプを "ワールド "に設定する。
+
+```mdx-code-block
+<img src={require('/images/studio/change-camera-to-world.png').default} alt='Camera properties include the ability to change the type of Camera.'/>
+```
+
+3. (オプション）Shadowコンポーネントを持つPlaneを追加し、地面を表現します。
+
+:::info
+シーンの地面レベルは、カメラフィードからの相対的なY軸で0と定義されます。
+:::

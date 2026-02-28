@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!-- This tests mimics the behavior of an audio element in cloud studio. It creates a blob of wav
+format that holds a 2s long tone and passes it to be loaded, decoded, and played by an
+HTMLAudioElement. -->
+<html>
+<head>
+    <script type="module">
+        import {createWavBlob, generateSamplePCM} from './test-utils.js'
+
+        // Generate a stereo sine wave
+        const sampleRate = 44100 // Samples per second
+        const duration = 2 // Duration in seconds
+        const frequency = 440 // Frequency in Hz (A4 note)
+        const audioData = generateSamplePCM(sampleRate, duration, frequency)
+
+        const wavBlob = createWavBlob(audioData, sampleRate)
+        const audioURL = URL.createObjectURL(wavBlob)
+        const audioElement = new Audio(audioURL)
+        audioElement.addEventListener('canplaythrough', () => {
+            audioElement.play()
+        })
+
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                audioElement.stop()
+                resolve()
+            }, 3000)
+        })
+
+    </script>
+</head>
+<body></body>
+</html>

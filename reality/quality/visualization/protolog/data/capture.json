@@ -1,0 +1,71 @@
+{
+	"coordinates": "opengl",
+	"frameCount": 3,
+	"framerate": 15.0,
+	"frames": [
+		{
+			"image":"frame_0.jpg",
+			"intrinsics": [711,712,484,270,0],
+			"lightIntensity": 0.43,
+			"location": {
+				"altitude":8.86,
+				"altitudeAccuracy":3.79,
+				"latitude":22.44,
+				"longitude":114.00,
+				"positionAccuracy":3.79,
+				"positionTimestamp":1606298302.0
+			},
+			"pose": [-0.55,-0.32,-3.93,0,0,0,1.0],
+			"pose4x4":[1,0,0,0,0,-1,0,0,0,0,-1,0,-0.55,-0.32,-3.93,1.0],
+			"projection":[2.99,0,0,0,0,1.48,0,0,0,0,-1,-1,0,0,-0,0],
+			"resolution":[960,540],
+			"timestamp": 1606298302.0
+		},
+		{
+			"image":"frame_1.jpg",
+			"intrinsics": [711,712,484,270,0],
+			"lightIntensity": 0.44,
+			"location": {
+				"altitude":8.86,
+				"altitudeAccuracy":3.79,
+				"latitude":22.44,
+				"longitude":114.00,
+				"positionAccuracy":3.79,
+				"positionTimestamp":1606298302.0
+			},
+			"pose":[-0.55,-0.32,-4.01,1,0,0,0.0],
+			"pose4x4":[1,0,0,0,0,-1,0,0,0,0,-1,0,-0.55,-0.32,-4.01,1.0],
+			"projection":[2.99,0,0,0,0,1.48,0,0,0,0,-1,-1,0,0,-0,0],
+			"resolution":[960,540],
+			"timestamp": 1606298302.133
+		},
+		{
+			"image":"frame_2.jpg",
+			"intrinsics": [711,712,484,270,0],
+			"lightIntensity": 0.44,
+			"location": {
+				"altitude":8.86,
+				"altitudeAccuracy":3.79,
+				"latitude":22.44,
+				"longitude":114.00,
+				"positionAccuracy":3.79,
+				"positionTimestamp":1606298302.0
+			},
+			"pose":[-0.55,-0.35,-4.09,0,1,0,0.0],
+			"pose4x4":[-1,0,0,0,0,1,0,0,0,0,-1,0,-0.55,-0.35,-4.09,1.0],
+			"projection":[2.99,0,0,0,0,1.48,0,0,0,0,-1,-1,0,0,-0,0],
+			"resolution":[960,540],
+			"timestamp": 1606298302.266
+		}
+	],
+	"imageFormat":"jpg",
+	"imageQuality":90,
+	"manufacturer":"samsung",
+	"model":"SM-G9860",
+	"poi":"0cf17291a2974a30842f10b15d976599.11",
+	"resolution":[960,540],
+	"timestamp":1606298302.0,
+	"timezone":28800,
+	"autofocus": 0,
+	"uuid":"0xF5A7112F8EEF65A3BE9D5FCF3D7A459F"
+}

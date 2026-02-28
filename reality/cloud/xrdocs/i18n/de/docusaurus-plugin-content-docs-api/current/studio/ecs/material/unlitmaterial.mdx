@@ -1,0 +1,30 @@
+---
+id: unlit-material
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import UnlitMaterialTable from "../../../../gen/tables/UnlitMaterial.md"
+
+# UnbeleuchtetMaterial
+
+## Beschreibung
+
+Diese Komponente erzeugt ein Material, das von Beleuchtung oder Schatten auf einem Objekt mit Geometrie unbeeinflusst bleibt.
+
+## Eigenschaften {#properties}
+
+<UnlitMaterialTable />
+
+## Funktionen
+
+<ComponentFunctions
+    name="UnlitMaterial"
+    properties={{
+        color: '#FFFFFF',
+        opacity: 1,
+        side: 'double'
+    }}
+    mutate={`cursor.opacity = 0.5;
+    cursor.color = '#808080';
+    return false;`}
+/>

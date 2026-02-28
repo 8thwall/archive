@@ -1,0 +1,152 @@
+---
+id: models
+description: >-
+  Studio ermöglicht es Ihnen, 3D-Objekte über die Mesh-Komponente in Ihre
+  Projekte zu integrieren und so auf einfache Weise immersive und interaktive
+  Erlebnisse zu schaffen. Sie können grundlegende Formen mit integrierten
+  Primitiven hinzufügen oder benutzerdefinierte 3D-Modelle importieren.
+---
+
+# Modelle
+
+![models.png](/images/studio/models.png)
+
+## Einführung
+
+Studio unterstützt mehrere 3D-Modellformate für Ihre Objekte, wobei jedes Objekt jeweils einen Modelltyp verwendet.
+Sie können mit einfachen Primitiven für grundlegende Formen arbeiten oder GLB-, FBX- und GLTF-Bündel importieren, wenn Sie detailliertere, hochwertige Darstellungen benötigen. Mit dem integrierten Asset-Editor können Sie Ihre Modelle direkt in der Engine bearbeiten und feinabstimmen, so dass Sie schnell iterieren können, ohne das Tool zu wechseln.
+
+:::note
+Während die Mesh-Komponente von Studio UI Primitive, Meshes und Gauß-Splats über eine einheitliche Schnittstelle konfiguriert, verwendet jeder Typ programmatisch eine eigene Komponente.
+:::
+
+## Primitive {#primitives}
+
+Primitive werden zur Darstellung von Volumen, einfachen Objekten oder als Platzhalter für zukünftige Spielelemente verwendet.
+Studio enthält mehrere integrierte Primitive wie Kugeln, Kästen und Ebenen, die schnell angepasst und im Editor positioniert werden können.
+Primitive haben Materialien, die auch zur Laufzeit dynamisch verändert werden können.
+
+![primitives.png](/images/studio/primitives.png)
+
+Die folgenden eingebauten Primitive sind verfügbar:
+
+| Typ               | Attribute                    |
+| ----------------- | ---------------------------- |
+| Sphäre            | `{radius}`                   |
+| Box               | `{width, height, depth}`     |
+| Flugzeug          | `{width, height}`            |
+| Kapsel            | `{radius, height}`           |
+| Kegel             | `{radius, height}`           |
+| Zylinder          | `{radius, height}`           |
+| Polyeder          | `{radius}`                   |
+| Kreis             | `{radius}`                   |
+| Ring              | `{innerRadius, outerRadius}` |
+| Torus             | `{radius, tubeRadius}`       |
+
+## Hinzufügen eines Primitivs
+
+Ein 3D-Modell kann dem Objekt über die Studio-Schnittstelle über die Mesh-Komponente oder im Code hinzugefügt werden. Das Hinzufügen in Studio erfolgt über die Schaltfläche (+) in der Hierarchie oder durch Hinzufügen von Geometrie zu einer benutzerdefinierten Komponente auf dem Objekt.
+
+### Beispiel
+
+```ts
+ecs.SphereGeometry.set(world, eid, {radius: 5})
+```
+
+## GLTF-Komponente
+
+### Unterstützte Formate
+
+#### GLTF und GLB
+
+GLTF- und GLB-Modelle werden unterstützt und sind ideal für die Arbeit mit 3D im Web.
+
+#### Asset-Bündel
+
+Während die meisten GLBs per Drag & Drop in das Studio gezogen werden können, erfordern GLTF-Dateien manchmal mehrere Datei-Uploads.
+Zur Abwicklung dieses Prozesses verwenden wir ein Anlagenbündel. Um ein neues Asset in Ihr Projekt hochzuladen, wählen Sie im unteren Teil des linken Fensters die Registerkarte Datei und klicken Sie auf das Plus-Symbol.
+Wählen Sie die Option "Neues Asset" und ziehen Sie dann alle Ihre Dateien per Drag & Drop.
+
+![new-asset-bundle-option.png](/images/studio/new-asset-bundle-option.png)
+
+![new-asset-bundle.png](/images/studio/new-asset-bundle.png)
+
+#### FBX
+
+FBX-Upload wird unterstützt, allerdings müssen die Modelle in 8th Wall Studio nach dem Upload in GLB konvertiert werden.
+\*\*Vergewissern Sie sich, dass die Texturen in die FBX-Datei eingebettet sind, bevor Sie sie in GLB konvertieren.
+
+![fbx-to-glb-converter.png](/images/studio/fbx-to-glb-converter.png)
+
+### Einstellung eines Modells
+
+Das folgende Beispiel zeigt, wie ein GLTF oder GLB auf eine Entität zur Laufzeit gesetzt werden kann.
+
+:::info
+Diese Methode erfordert, dass Sie Ihr benutzerdefiniertes Modell aus den Komponenteneigenschaften auswählen, sobald die Komponente auf Ihre Entität angewendet wird
+:::
+
+```ts
+import * as ecs from '@8thwall/ecs'
+
+ecs.registerComponent({
+    name: 'loaded-model',
+    schema: {
+        // @asset
+        model: ecs.string,
+    },
+    add: (world, component) => {
+        ecs.GltfModel.set(world, eid, {
+            url: component.schema.model,
+        })
+    }
+})
+```
+
+### Einstellen der Modelleigenschaften
+
+#### Modell-Eigenschaften
+
+Eigenschaften anzeigen [hier](/api/studio/ecs/gltf-model).
+
+#### Beispiel
+
+Das folgende Beispiel zeigt, wie man ein Model auf eine Entität zur Laufzeit setzt.
+
+```ts
+import * as ecs from '@8thwall/ecs'
+
+ecs.registerComponent({
+    name: 'loaded-model',
+    schema: {
+        // @asset
+        model: ecs.string,
+    },
+    add: (world, component) => {
+        ecs.GltfModel.set(world, eid, {
+            url: component.schema.model,
+            animationClip: 'clip1',
+            loop: true,
+            paused: false,
+            time: 0,
+            timeScale: 1,
+        })
+    }
+})
+```
+
+## Modelle und Physik
+
+### Primitive
+
+Kollider stellen physische Einheiten im Simulationsschritt dar, mit Attributen, die ihr Verhalten direkt beeinflussen. Die meisten Primitive haben Collider-Formen, die genau ihrem Volumen entsprechen, so dass es einfach ist, ein Primitiv wie einen Würfel zu erzeugen und physikalische Interaktionen hinzuzufügen.
+
+### Modelle
+
+Sie können aus Ihrem 3D-Modell einen benutzerdefinierten Kollider erzeugen, der dessen Form und Größe annähernd entspricht. Die besten Ergebnisse erzielen Sie, wenn Sie die einfachste Kolliderform verwenden, die Ihren Anforderungen entspricht. In den meisten Fällen kann dies mit Hilfe eines Primitivs erledigt werden.
+
+:::danger
+Die Generierung benutzerdefinierter Kollider kann aufgrund von Variationen in der Komplexität, Größe und Qualität der Modelle fehlschlagen. Verwenden Sie in diesem Fall Primitive (eine oder mehrere), um die gewünschte Form anzunähern, oder exportieren Sie eine saubere .glb-Datei aus einem 3D-Modellierungstool wie Blender.
+:::
+
+Weitere Informationen finden Sie im Physik-Leitfaden [hier](/studio/guides/physics/)

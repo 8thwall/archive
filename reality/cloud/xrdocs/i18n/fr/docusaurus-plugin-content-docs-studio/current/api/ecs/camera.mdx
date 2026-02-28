@@ -1,0 +1,52 @@
+---
+id: camera
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Appareil photo
+
+## Description
+
+Ce composant permet à l'utilisateur de voir le monde à travers l'entité.
+
+## Propriétés
+
+### Effets sur le monde
+
+| Propriété  | Type                 | Défaut       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ---------- | -------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| échelle    | chaîne de caractères | 'responsive' | Soit "réactif", soit "absolu". responsive renverra des valeurs telles que la caméra de l'image 1 soit à l'origine définie par [XR8.XrController.updateCameraProjectionMatrix()](https://www.8thwall.com/docs/api/xrcontroller/updatecameraprojectionmatrix/). absolute renvoie la caméra, les cibles de l'image, etc. en mètres. Lors de l'utilisation d'une valeur absolue, la position x, la position z et la rotation de la pose de départ respectent les paramètres définis dans [XR8.XrController.updateCameraProjectionMatrix()](https://www.8thwall.com/docs/api/xrcontroller/updatecameraprojectionmatrix/) une fois que l'échelle a été estimée. La position y dépend de la hauteur physique de la caméra par rapport au plan du sol. |
+
+### Effets de visage
+
+| Propriété               | Type    | Défaut  | Description                                                                                                                                                                         |
+| ----------------------- | ------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| nearClip                | nombre  | 0.1     | La distance entre la caméra et le plan du clip le plus proche, c'est-à-dire la distance la plus proche de la caméra à laquelle les objets de la scène sont visibles.                |
+| farClip                 | nombre  | 1000    | La distance entre la caméra et le plan de coupe éloigné, c'est-à-dire la distance la plus éloignée de la caméra à laquelle les objets de la scène sont visibles.                    |
+| Visage                  | booléen | vrai    | Indique si la géométrie du maillage de la face doit être affichée.                                                                                                                  |
+| Yeux                    | booléen | faux    | Indique s'il faut afficher la géométrie du maillage de l'œil.                                                                                                                       |
+| Iris                    | booléen | faux    | Indique si la géométrie du maillage de l'iris doit être affichée.                                                                                                                   |
+| Bouche                  | booléen | faux    | Affichage ou non de la géométrie du maillage de la bouche.                                                                                                                          |
+| maxDetections           | nombre  | 1       | Nombre maximal de visages à détecter. Les choix possibles sont 1, 2 ou 3.                                                                                                           |
+| activer les oreilles    | booléen | faux    | Si l'option est activée, la détection des oreilles s'effectue en même temps que les effets de visage et renvoie les points d'attache des oreilles.                                  |
+
+## Fonctions
+
+<ComponentFunctions
+    name="Camera"
+    properties={{
+        scale: "responsive",
+        nearClip: 0.1,
+        farClip: 1000,
+        Face: true,
+        Eyes: false,
+        Iris: false,
+        Mouth: false,
+        maxDetections: 1,
+        enableEars: false
+    }}
+    mutate={`cursor.scale = 'absolute';
+    cursor.nearClip = 0.5;
+    return false;`}
+/>

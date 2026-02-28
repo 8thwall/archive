@@ -1,0 +1,11 @@
+# Bekannte Probleme und Umgehungen
+
+- [Gerät nicht autorisiert](01-device-not-authorized.md)
+- [Bereich nicht autorisiert](02-domain-not-authorized.md)
+- [Ungültige App Key Fehlermeldung](03-invalid-app-key.md)
+- [Schwarze Texturen auf iOS-Geräten](04-ios-black-textures.md)
+- [Ladebildschirm Unendlicher Spinner](05-loading-infinite-spinner.md)
+- [6DoF Kamerabewegung funktioniert nicht](tracking-and-camera-issues/#camera-problem)
+- [Objekt verfolgt die Oberfläche nicht richtig](tracking-and-camera-issues/#tracking-problem)
+- [Verbindung zum Skript "serve" kann nicht hergestellt werden](07-serve-localhost.md)
+- [Ungültige Zeitstempel entdeckt](08-invalid-timestamps-detected.md)

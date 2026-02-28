@@ -1,0 +1,151 @@
+@use '../styles/constants';
+@use '../styles/brand-colors';
+
+.industryCarousel {
+  width: calc(100% - 5rem);
+  margin: 0 auto;
+  max-width: 80rem;
+
+  & :global(.rec-carousel .rec-slider-container) {
+    margin: 0;
+  }
+
+  & button:focus {
+    outline: 0;
+  }
+}
+
+.visuallyHidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.arrowButton {
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: brand-colors.$gray4;
+  font-size: 2rem;
+  min-width: 4rem;
+
+  &:disabled {
+    visibility: hidden;
+  }
+
+  &:hover {
+    color: brand-colors.$gray3;
+  }
+}
+
+.industryCard {
+  width: 20rem;
+  border-radius: 0.5em;
+  box-shadow: 1px 1px 10px #46476626;
+  transition: all 0.08s linear;
+  margin: 2em 0;
+  background-color: brand-colors.$white;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  & img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 0.5em 0.5em 0 0;
+    object-fit: cover;
+  }
+
+  & div {
+    padding: 1.4rem;
+    text-align: center;
+    font-family: 'Noto sans JP', sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 26px;
+    color: brand-colors.$brand-purple;
+    white-space: nowrap;
+  }
+
+  & a {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+  }
+}
+
+.carouselContainerSmall {
+  display: flex;
+  flex-direction: row;
+  column-gap: 1.5em;
+  overflow-x: scroll;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 3rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.carouselContainerSmall:after {
+  content: "";
+  padding-right: 2rem;
+}
+
+.exploreDeco {
+  width: 100vw;
+  position: absolute;
+  z-index: 0;
+  overflow: hidden;
+  top: 20%;
+
+  @media screen and (max-width: 2000px){
+    top: 30%;
+  }
+
+  @media screen and (max-width: 1440px){
+    top: 40%;
+  }
+}
+
+.exploreDecoImage {
+  width: 100vw;
+  min-width: constants.$SMALL_MONITOR_WIDTH_BREAKPOINT;
+  object-fit: cover;
+  filter: blur(0.1rem);
+}
+
+@media screen and (min-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+  .carouselContainerSmall {
+    display: none;
+  }
+}
+
+@media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+  .carouselContainer {
+    display: none;
+  }
+
+  .industryCard {
+    & img { 
+      width: 15rem;
+    }
+  }
+}
+
+
+@media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+  .industryCard {
+    & img { 
+      width: 13rem;
+    }
+  }
+}

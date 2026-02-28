@@ -1,0 +1,34 @@
+---
+id: scale
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# スケール
+
+## 商品説明
+
+このコンポーネントは、エンティティのスケーリング方法を制御します。
+
+## プロパティ一覧
+
+| Property | Type   | 初期値     | 商品説明                        |
+| -------- | ------ | ------- | --------------------------- |
+| x        | 番号     | 0       | X方向のスケーリング係数。               |
+| y        | 番号     | 0       | Y方向のスケーリング係数。               |
+| z        | 番号     | 0       | Z方向のスケーリング係数。               |
+
+## 関数一覧
+
+<ComponentFunctions
+    name="Scale"
+    properties={{
+        x: 0,
+        y: 0,
+        z: 0
+    }}
+    mutate={`カーソル.x = 2;
+    カーソル.y = 2;
+    カーソル.z = 2;
+    return false;`}
+/>

@@ -1,0 +1,42 @@
+<div class="textoverlay">
+  <span id="url">Calibrating...</span>
+</div>
+
+<div id="cameraFormating">
+  <div id="cameraFeed">
+      <canvas id="overlayView3d" style="display:block" align="center" width="480px" height="640px"></canvas>
+  </div>
+</div>
+
+<div class="calibrationInfo">
+  <div id = "progressBar">
+      <div id = "timeUntilNextCheck">Checking for board in 2000 ms</div>
+      <div style="width:0%; height:1.5em; background-color:#7611B7;" id = "timeUntilNextCheckBar"></div>
+  </div>
+
+  <p id = "calibrationInfoHeader">
+    Calibration Info:
+  </p>
+
+  <p id = "frameCount">
+    Frames: 0/10
+  </p>
+
+  <p id = "resolution">
+    Resolution:
+  </p>
+
+  <p id = "reprojectionError">
+    Reprojection Error: Calculating...
+  </p>
+
+  <p id = "focalLength">
+    Focal Length: Calculating...
+  </p>
+
+  <p id = "boardInfo">
+    Board Info:
+  </p>
+
+  <pre id="deviceInfo"></pre>
+</div>

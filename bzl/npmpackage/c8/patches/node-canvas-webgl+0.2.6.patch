@@ -1,0 +1,13 @@
+diff --git a/node_modules/node-canvas-webgl/lib/canvas.js b/node_modules/node-canvas-webgl/lib/canvas.js
+index 8d1e39b..9ced702 100644
+--- a/node_modules/node-canvas-webgl/lib/canvas.js
++++ b/node_modules/node-canvas-webgl/lib/canvas.js
+@@ -105,7 +105,7 @@ class NodeCanvasElement extends Canvas {
+       const _tetImage2D = ctx.texImage2D;
+       ctx.texImage2D = function (...args) {
+         let pixels = args[args.length - 1];
+-        if(pixels._image) pixels = pixels._image;
++        if(pixels && pixels._image) pixels = pixels._image;
+         if(pixels instanceof Image) {
+           const canvas = new Canvas(pixels.width, pixels.height);
+           canvas.getContext('2d').drawImage(pixels, 0, 0);

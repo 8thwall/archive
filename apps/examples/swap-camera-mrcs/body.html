@@ -1,0 +1,67 @@
+<!-- Copyright (c) 2021 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<div id="flipBg" class="absolute-fill"></div>
+
+<div id="over">
+  <span id="promptText"></span>
+  <img id="swap-cam-btn" src="./assets/icons/camera-flip.svg">
+  <img id="pauseBtn" src="./assets/icons/pause.svg" style="display: none;">
+  <img id="muteBtn" src="./assets/icons/sound.svg" style="display: none;">
+  <div id="gradient-box"></div>
+</div>
+
+<a-scene 
+  swap-cam
+  xrextras-gesture-detector
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="antialias: true; colorManagement: true; physicallyCorrectLights: true;"
+  xrweb>
+  
+  <xrextras-resource id="alpha-soft-eyes" src="./assets/textures/soft-eyes-mouth.png"></xrextras-resource>
+  <xrextras-resource id="swedenImg" src="./assets/textures/sweden.jpg"></xrextras-resource>
+  <xrextras-pbr-material id="paint" tex="#swedenImg" alpha="#alpha-soft-eyes" opacity="0.75">
+  </xrextras-pbr-material>
+
+  <a-camera
+    id="camera"
+    position="0 10 3"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;">
+  </a-camera>
+
+  <a-entity
+    light="type: directional;
+           intensity: 0.8;
+           castShadow: true;
+           shadowMapHeight:2048;
+           shadowMapWidth:2048;
+           shadowCameraTop: 10;
+           target: #holo;"
+    xrextras-attach="target: holo; offset: 0 15 0;"
+    shadow>
+  </a-entity>
+
+  <a-light type="ambient"></a-light>
+
+  <hcap-hologram
+    id="holo"
+    src="./assets/soccer.hcap"
+    size="6"
+    xrextras-hold-drag
+    xrextras-two-finger-rotate 
+    xrextras-pinch-scale="scale: 6">
+  </hcap-hologram>
+  
+  <a-entity
+    id="ground"
+    class="cantap"
+    geometry="primitive: box"
+    material="shader: shadow; transparent: true; opacity: 0.4"
+    scale="1000 2 1000"
+    position="0 -1 0"
+    shadow="cast: false">
+  </a-entity>
+</a-scene>

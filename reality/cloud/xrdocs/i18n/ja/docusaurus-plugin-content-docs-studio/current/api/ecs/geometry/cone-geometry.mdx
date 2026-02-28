@@ -1,0 +1,28 @@
+---
+id: cone-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# 円錐幾何学
+
+## 商品説明
+
+このコンポーネントは、エンティティのジオメトリを確立する。
+
+## プロパティ一覧
+
+| Property | Type   | 初期値     | 商品説明                           |
+| -------- | ------ | ------- | ------------------------------ |
+| radius   | 番号     | 1       | コーン下端の半径。                      |
+| height   | 番号     | 1       | コーンの高さ。                        |
+
+## 関数一覧
+
+<ComponentFunctions
+    name="ConeGeometry"
+    properties={{ radius: 1, height: 1 }}
+    mutate={`カーソル.半径 += 1;
+    カーソル.高さ *= 2;
+    return false;`}
+/>

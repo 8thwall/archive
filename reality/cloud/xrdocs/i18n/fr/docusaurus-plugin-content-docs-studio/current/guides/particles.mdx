@@ -1,0 +1,129 @@
+---
+id: particles
+description: >-
+  Les particules sont un outil puissant pour ajouter des effets dynamiques et
+  accrocheurs à n'importe quelle scène. Ils apportent de la vie et du mouvement,
+  en créant des éléments environnementaux réalistes tels que la fumée, le feu et
+  la pluie, ainsi que des effets stylisés tels que la magie, les étincelles ou
+  les explosions.
+---
+
+# Particules
+
+## Introduction
+
+{frontMatter.description} Qu'elles soient utilisées de manière subtile ou spectaculaire, les particules renforcent l'atmosphère et l'interactivité d'une scène, rendant les expériences plus captivantes et visuellement plus riches.
+
+## Ajout de particules
+
+Les particules peuvent être ajoutées à l'entité via l'interface Studio ou dans le code. Leur ajout dans Studio s'effectue via le bouton "Nouveau composant".
+
+![particle-new-component.jpg](/images/studio/particle-new-component.jpg)
+![particle-component.png](/images/studio/particle-component.png)
+
+### Exemple
+
+L'exemple suivant montre comment ajouter un émetteur de particules à une entité au moment de l'exécution.
+
+```ts
+ecs.ParticleEmitter.set(world, component.eid, {
+    stopped : false,
+    emitterLife : 10,
+    particlesPerShot : 5,
+    emitDelay : 1,
+    minimumLifespan : 1,
+    maximumLifespan : 3,
+    mass : 1,
+    gravity : 1,
+    scale : 1,
+    forceX : 0,
+    forceY : 60,
+    forceZ : 0,
+    spread : 120,
+    radialVelocity : 0,
+    spawnAreaType : 'point',
+    resourceType : 'model',
+    resourceUrl : 'https://static.8thwall.app/assets/Moon-lowpoly-v3-yg6nmdc1uj.glb',
+})
+```
+
+## Émissions
+
+Les attributs d'émission définissent la manière dont les particules sont placées dans le monde et certains des attributs globaux qui affectent toutes les particules de la même manière.
+
+- **Stopped:** Si cette option est cochée, l'émetteur n'émettra pas.
+- **Vie de l'émetteur:** Définit la durée de vie de l'émetteur.
+- **Particules par tir:** Combien de particules sont placées à chaque fois que l'émetteur se déclenche.
+- **Délai d'émission:** Délai entre les émissions en secondes.
+- **Lifespan:** Définit une plage représentant la durée pendant laquelle les particules restent dans la scène avant de disparaître.
+- **Masse:** La masse de chaque particule, qui n'a d'importance que pour la simulation de la physique.
+- **Gravité:** Ajoute une force vers le bas qui fait tomber les particules.
+- **Forces:** Forces simples dans les axes relatifs X, Y et Z qui sont appliquées à chaque particule.
+- **Etendue : **Il s'agit de l'angle de déplacement des particules par rapport à l'émetteur.
+- **Radial Velocity:** Si ce paramètre est supérieur à 0, le type de vitesse de l'émetteur devient radial. La vitesse radiale est calculée par rapport à l'observateur et les forces vectorielles sont influencées par la force radiale.
+
+### Type de frayère
+
+Les zones d'apparition modifient les coordonnées de départ des particules.
+
+- **Point:** Le spawn est défini sur les coordonnées de l'émetteur.
+- \*\*Définit une boîte à l'aide d'une largeur, d'une hauteur et d'une profondeur.
+- **Sphère:** Définit une zone de spawn d'une sphère avec un rayon défini.
+
+:::note
+Ces zones de spawn ne fonctionneront pas correctement si les dimensions sont fixées à 0.
+:::
+
+### Type de zone délimitée
+
+Les boîtes de délimitation déterminent les limites spatiales à l'intérieur desquelles les particules sont générées.
+
+- \*\*Définit une boîte à l'aide de la largeur, de la hauteur et de la profondeur.
+- **Sphère:** Définit une zone de spawn d'une sphère avec un rayon défini.
+
+:::note
+Ces zones de délimitation ne fonctionneront pas correctement si les dimensions sont fixées à 0 ou négatives. Si vous utilisez la zone de spawn, la zone de délimitation doit occuper un volume plus important que la zone de spawn.
+:::
+
+### Type de ressource
+
+Ce système est capable de rendre des actifs glb et des sprites simples. Choisissez un modèle pour la 3D ou un sprite pour les sprites 2D. Utilisez une URL accessible au public pour charger l'actif dans l'émetteur.
+
+- **Sprites:** Ils disposent d'options de mélange qui fonctionnent de manière similaire aux effets de calque de base de Photoshop. Ils sont très utiles pour créer des effets visuels tels que du feu, des étoiles ou de la fumée.
+- **Modèle:** Modèles 3D avec comportement des particules. Utile pour créer des effets volumétriques.
+
+### Simulation
+
+Ces paramètres affectent la manière dont les particules se comportent d'elles-mêmes après avoir été placées dans le monde.
+
+- **Couleur:** Si les sprites sont définis comme un type de ressource, ils peuvent changer de couleur. Saisissez une valeur hexagonale de la couleur de départ et de la couleur d'arrivée pour qu'elles changent progressivement.
+- **Dérive aléatoire:** Les particules dérivent de manière aléatoire en fonction du paramètre de dérive aléatoire.
+- **Collision:** Si des particules s'approchent l'une de l'autre, une force opposée sera appliquée entre elles.
+
+## Exemples
+
+### Particules de départ
+
+```ts
+ecs.ParticleEmitter.mutate(world, component.eid, (cursor) => {
+    cursor.stopped = false
+})
+```
+
+### Arrêter les particules
+
+```ts
+ecs.ParticleEmitter.mutate(world, component.eid, (cursor) => {
+    cursor.stopped = true
+})
+```
+
+### Modèles d'émission
+
+```ts
+ecs.ParticleEmitter.set(world, component.eid, {
+    stopped : false,
+    resourceType : 'model',
+    resourceUrl : 'assets/robot.glb',
+})
+```

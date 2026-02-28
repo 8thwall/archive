@@ -1,0 +1,27 @@
+---
+id: face-attachment
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import FaceAttachmentTable from "../../../gen/tables/FaceAttachment.md"
+
+# フェイス・アタッチメント
+
+## 説明
+
+このコンポーネントは、エンティティのトランスフォームを、XRで追跡された指定されたフェイスアタッチメントに追従させる。 顔を見つけたり失ったりすると、その実体を表示したり隠したりする。
+
+## 物件 {#properties}
+
+<FaceAttachmentTable />
+
+## 機能
+
+<ComponentFunctions
+    name="FaceAttachment"
+    properties={{
+        point: 'forehead',
+    }}
+    mutate={`cursor.point = 'rightEyebrowInner';
+    return false;`}
+/>

@@ -1,0 +1,40 @@
+---
+id: general
+---
+
+import {EventExample} from '@site/src/components/event-example'
+
+# 一般イベント
+
+## イベント
+
+### ACTIVE_SPACE_CHANGE
+
+[world.events.globalId](/api/studio/world/events/#properties)で、ワールドがSpaceをロードしたときに発行される（Spaceがロードされることは約束されない）。
+
+#### プロパティ
+
+いない。
+
+#### 例
+
+<EventExample ns="ecs.events" event="ACTIVE_SPACE_CHANGE" target="world.events.globalId" hasPayload={false} callbackBody={`console.log('Active space change')`} />
+
+### LOCATION_SPAWNED
+
+マップ上に VPS ロケーションがスポーンされると、マップ eid と [world.events.globalId](/api/studio/world/events/#properties) に発行される。
+
+#### Properties
+
+| プロパティ    | タイプ    | 説明                       |
+| -------- | ------ | ------------------------ |
+| id       | string | 場所の一意識別子                 |
+| imageUrl | ストリング  | ロケ地イメージ                  |
+| title    | string | 場所のタイトル                  |
+| lat      | number | 場所の緯度                    |
+| lng      | number | 場所の経度                    |
+| mapPoint | イード    | コンテンツの親となるマップポイントエンティティ。 |
+
+#### 例（グローバル）
+
+<EventExample ns="ecs.events" event="LOCATION_SPAWNED" callbackBody={`console.log('Location spawned: ', event.data.lat, event.data.lng)`} />

@@ -1,0 +1,10 @@
+{
+  "someData": "someValue",
+  "config": {
+    "url": "https://wwww.example.com",
+    "array": [
+      "value1",
+      "value2"
+    ]
+  }
+}

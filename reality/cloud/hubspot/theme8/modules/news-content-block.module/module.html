@@ -1,0 +1,30 @@
+{# Customized Styles #}
+
+{# Sets attributes used for the link field #}
+
+{% set href = module.link.url.href %}
+{% if module.link.url.type == "EMAIL_ADDRESS" %}
+  {% set href = "mailto:" + href %}
+{% endif %}
+{% set rel = [] %}
+{% if module.link.no_follow %}
+  {% do rel.append("nofollow") %}
+{% endif %}
+{% if module.link.open_in_new_tab %}
+  {% do rel.append("noopener") %}
+{% endif %}
+
+{% set containerClass = "productBlockContainer" %}
+
+{# HTML #}
+
+<div class="newsBlockContainer">
+  <img draggable="false" class="newsBlockImage" src="{{ module.image.src }}" alt="{{ module.image.alt }}" />
+  <div class="newsTextBlock">
+    <h3 class="newsHeading">{{ module.heading }}</h3>
+    <p class="newsBody">{{ module.text }}</p>
+    <a class="newsLink" href="{{ href }}"
+      {% if module.link.open_in_new_tab %}target="_blank"{% endif %}
+      {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}>{{ module.link_text }}</a>
+  </div>
+</div>

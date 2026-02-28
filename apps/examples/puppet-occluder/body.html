@@ -1,0 +1,63 @@
+<!-- Copyright (c) 2020 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene 
+  xrextras-almost-there
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="physicallyCorrectLights: true; colorManagement: true;"
+  xrface="mirroredDisplay: true; meshGeometry: face, eyes, mouth; cameraDirection: front; allowedDevices: any">
+
+  <a-assets>
+    <a-asset-item id="head-occluder" src="./assets/Models/head-occluder.glb"></a-asset-item>
+    <a-asset-item id="hat" src="./assets/Models/top-hat.glb"></a-asset-item>
+    <img id="body" src="./assets/Textures/elf-body.png">
+    <img id="box-tex" src="./assets/Textures/box.png">
+    
+    <video
+      id="video"
+      muted
+      autoplay
+      webkit-playsinline
+      playsinline
+      loop="true"
+      crossorigin="anonymous"
+      src="./assets/Videos/forest-sm.mp4">
+    </video>
+  </a-assets>
+  
+  <a-camera position="0 1 2"></a-camera>
+  
+  <xrextras-faceanchor>
+ 
+    <a-entity 
+      gltf-model="#head-occluder"
+      xrextras-hider-material
+      position="0 0 0.25">
+    </a-entity>
+    
+    <xrextras-face-mesh xrextras-hider-material></xrextras-face-mesh>
+    
+    <a-plane src="#body" transparent="true" material="shader: flat;" rotation="0 180 -5" position="0 -1.1 0"></a-plane>
+    
+    <a-entity 
+    gltf-model="#hat" 
+    position="0 0.3 0"
+    scale="0.75 0.75 0.75"
+    rotation="-10 0 0"></a-entity>
+    
+  </xrextras-faceanchor>
+  
+  <a-light type="directional" target="#face" position="0 1.8 3" intensity="1.0"></a-light>
+  <a-light type="ambient" intensity="2"></a-light>
+  
+  <a-entity 
+    geometry="primitive: box"
+    material="src: #box-tex"
+    position="0 0.4 0.3" scale="0.3 0.3 0.3">
+  </a-entity>
+  
+  <a-plane src="#video" position="0.5 1.6 0" height="9" width="16" scale="0.25 0.25 0.25"></a-plane>
+  <a-plane src="./assets/Textures/wood.jpg" material="shader:flat;" rotation="-60 0 0" position="0 0.3 0" height="3" width="3"></a-plane>
+  
+</a-scene>

@@ -1,0 +1,481 @@
+---
+id: vps
+description: >-
+  Grâce au système de positionnement visuel (VPS) de Niantic, les développeurs
+  peuvent créer de riches expériences de RA de localisation qui superposent du
+  contenu virtuel au monde physique. Le contenu WebAR peut être ancré dans le
+  monde réel, ce qui permet aux objets virtuels d'interagir avec leur
+  environnement physique.
+---
+
+# VPS
+
+## Introduction
+
+{frontMatter.description} L'expérience de la réalité augmentée devient ainsi plus personnelle, plus significative et plus immersive, et donne aux utilisateurs de nouvelles raisons d'explorer le monde qui les entoure.
+
+Dans Studio, plusieurs outils et fonctionnalités vous aident à créer des expériences de Location AR (ou VPS).
+
+- **Navigateur géospatial** : Recherchez, prévisualisez et sélectionnez différents lieux compatibles avec le SPV à l'aide du navigateur géospatial. Pour plus de détails, voir la section Utilisation du navigateur géospatial ci-dessous.
+- **Localisations dans Studio** : Dans la hiérarchie des scènes, les "emplacements" sont un type d'entité qui permet de positionner et de configurer le contenu en fonction du monde réel, lorsque des objets sont ajoutés en tant qu'objets enfants. Ces éléments de localisation servent de guide visuel pour positionner avec précision le contenu, les effets et les interactions dans votre scène, ou peuvent être utilisés comme texture/modèle 3D, inclus en tant qu'élément de la scène. Pour plus de détails, voir la section "Développer des expériences de RA sur place" ci-dessous.
+- **Simulateur AR de lieu** : Dans le menu d'options du simulateur, vous pouvez sélectionner le lieu ajouté à votre projet, et vous pouvez voir et vous déplacer dans votre expérience de réalité augmentée au fur et à mesure qu'elle se déroule. Plus de détails dans la section "Simulation d'expériences de RA sur le terrain" ci-dessous.
+
+![MainVPS](/images/studio/main-vps.gif)
+
+Pour créer de nouveaux lieux où vous souhaitez activer la RA de localisation, nous recommandons aux développeurs d'utiliser l'application **Scaniverse App**. Pour plus de détails sur l'utilisation de Scaniverse et la demande de nouveaux sites pour l'activation du SPV, voir la section Création de nouveaux sites activés pour le SPV ci-dessous.
+
+## Utilisation du navigateur géospatial
+
+Ce qui distingue Niantic VPS, c'est sa carte mondiale croissante de plus de 600 000 emplacements activés par VPS, élaborée à partir de millions de scans soumis par la communauté des développeurs et des joueurs de Niantic. Ces lieux centrés sur l'humain sont optimisés pour des interactions haute-fidélité et des expériences de RA immersives. Le maillage de chaque site est créé en combinant des dizaines de scans individuels pour former un modèle 3D détaillé et de haute qualité. Et comme de nouveaux lieux sont ajoutés chaque semaine, la carte ne cesse de s'étendre. Utilisez le navigateur géospatial disponible dans Studio pour rechercher ces emplacements.
+
+Le navigateur géospatial (GSB) est accessible à partir de votre projet en sélectionnant l'icône de carte en haut à droite de la fenêtre de visualisation. En utilisant le GSB élargi, vous pouvez effectuer des recherches pour trouver des lieux activés par le SPV. La sélection d'un lieu activé par VPS affichera le maillage 3D du lieu afin que vous puissiez vérifier que vous avez sélectionné le bon lieu et l'ajouter à votre projet.
+
+:::info
+\*\*Par défaut, TOUS les lieux, qu'ils soient activés ou en attente d'activation, s'affichent lors de la recherche initiale dans le navigateur géospatial. Utilisez l'option Filtre > Statut si vous souhaitez masquer les lieux qui ne sont pas encore activés.
+:::
+
+![VpsGsb](/images/studio/vps-gsb.gif)
+
+Si l'emplacement que vous souhaitez utiliser dans votre projet n'est pas disponible en tant qu'emplacement VPS, vous pouvez le créer en suivant les instructions de la section Créer un nouvel emplacement.
+
+Sélectionnez Ajouter un lieu dans la vue détaillée pour ajouter le lieu à votre projet.
+
+### Filtrage des lieux
+
+Dans le navigateur géospatial, vous verrez différents filtres de recherche que vous pouvez appliquer, comme la taille (zone jouable, catégorie et statut VPS).
+
+**Statut** : Fait référence à la capacité du lieu à se localiser à tout moment. Une fois qu'un lieu a été activé par le VPS, Niantic fournit une évaluation de la qualité dans le navigateur géospatial : Qualité moyenne ou Bonne qualité. Les sites disposant de plusieurs numérisations dans tous les types d'éclairage ont tendance à être de meilleure qualité. Par défaut, TOUS les lieux, qu'ils soient activés ou en attente d'activation, s'affichent lors de la recherche initiale dans le navigateur géospatial. Utilisez les options de filtrage de l'état si vous souhaitez masquer les lieux qui ne sont pas encore activés.
+
+Note : L'évaluation de la qualité est un processus automatisé et peut ne pas refléter la performance réelle du site. La meilleure façon de déterminer la qualité est de l'essayer soi-même.
+
+![GsbFilters](/images/studio/gsb-filters.png)
+
+### Détails de l'emplacement
+
+Lorsque vous sélectionnez un lieu dans le navigateur géospatial, vous pouvez en savoir plus sur son indice de qualité VPS, ainsi que sur le fait qu'il s'agisse d'un lieu accessible au public ou d'un lieu en attente.
+
+![GsbDetail](/images/studio/gsb-detail.png)
+
+**Type** : Dans le navigateur géospatial, vous verrez trois types de lieux différents.
+
+| Type        | Icône                                             | Description                                                                                                                                                                                                                                                                                                                                                      |
+| ----------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Public      | ![WSPublic](/images/wayspot-type-public.png)      | Les lieux "publics" ont été approuvés par l'équipe Trust & Safety de Niantic et répondent aux critères de sécurité et d'accessibilité au public. Ces lieux peuvent être utilisés dans des projets publiés.                                                                                                                                                       |
+| En attente  | ![WSPending](/images/wayspot-type-pending.png)    | Les emplacements "en attente" sont examinés par l'équipe Trust & Safety de Niantic afin de déterminer s'ils répondent aux critères de sécurité et d'accessibilité au public. \*\*Les localisations en attente peuvent être scannées et activées en attendant la fin de l'examen.                                                                                 |
+| Rejeté      | ![WSRejected](/images/wayspot-type-rejected.png)  | Les lieux "rejetés" peuvent avoir échoué à l'examen de confiance et de sécurité de Niantic, être un doublon d'un lieu existant ou précédemment rejeté, ou ne pas être autorisés par Niantic pour une autre raison. Ces lieux ne peuvent pas être ajoutés à des projets.                                                                                          |
+| Test        | ![WSTest](/images/wayspot-type-private.png)       | Les emplacements "test" ne sont accessibles à votre espace de travail qu'en scannant l'emplacement à l'aide de l'application Wayfarer de Niantic. Les lieux de test sont destinés à être utilisés pendant le développement et peuvent ne pas être inclus dans un projet publié.                                                                                  |
+
+Pour toute question ou problème lié à la création de sites VPS, ou pour vérifier le statut d'un site existant, veuillez contacter support@nianticspatial.com.
+
+**Statut de l'emplacement** : Dans le navigateur géospatial, vous verrez cinq statuts différents pour les emplacements des SPV :
+
+Dans le navigateur géospatial, vous verrez cinq statuts différents pour les emplacements VPS :
+
+| Statut            | Icône                                                        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ----------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Non activé        | ![WSNotActivated](/images/wayspot-status-not-activated.png)  | Les sites dont le statut est "Non activé" n'ont pas fait l'objet d'une analyse. Un minimum de 10 numérisations viables doit être soumis pour le lieu avant de pouvoir demander l'activation. Après l'envoi d'un scan, l'état de l'emplacement devient "Scanning".                                                                                                                                                                                                                              |
+| Numérisation      | ![WSScanning](/images/wayspot-status-scanning.png)           | Les sites dont le statut est "en cours d'analyse" ont fait l'objet d'au moins une analyse. Un minimum de 10 numérisations viables doit être soumis pour le lieu avant de pouvoir demander l'activation.                                                                                                                                                                                                                                                                                        |
+| Traitement        | ![WSProcessing](/images/wayspot-status-processing.png)       | Les sites dont le statut est "en cours de traitement" ont fait l'objet d'une demande d'activation et afficheront le statut "en cours de traitement" jusqu'à ce que le processus d'activation soit terminé. **En règle générale, une demande d'activation est traitée dans les 4 heures. Vous recevrez un courriel lorsque la procédure sera terminée.**                                                                                                                                        |
+| Actif             | ![WSActive](/images/wayspot-status-active.png)               | Les sites dont le statut est "actif" peuvent être utilisés dans des projets de création de contenu WebAR à l'aide de VPS for Web.                                                                                                                                                                                                                                                                                                                                                              |
+| Échec             | ![WSFailed](/images/wayspot-status-failed.png)               | Les sites dont le statut est "Échec" ont rencontré un problème au cours du processus d'activation. Cela peut résulter d'un certain nombre de facteurs, tels qu'une mauvaise adéquation de l'emplacement pour le SPV, des analyses insuffisantes ou des données corrompues. Malheureusement, cela signifie que cet emplacement ne peut pas être utilisé pour créer du contenu WebAR à l'aide d'un VPS. Nous vous encourageons à trouver un nouveau lieu à utiliser dans votre projet de 8e mur. |
+
+Pour toute question ou problème lié à la numérisation, à l'activation ou à l'état de la localisation, veuillez contacter [support@nianticspatial.com](mailto://support@nianticspatial.com)
+
+**Avertissement d'alignement** : L'avertissement de non-alignement peut survenir pour diverses raisons et signifie que la localisation par rapport au maillage ne peut être garantie. Bien que le maillage puisse fonctionner correctement pour la localisation, l'avertissement indique que le maillage est expérimental et qu'il doit être utilisé à vos risques et périls. Remarque : tous les balayages de test ne sont pas alignés.
+Si l'emplacement que vous souhaitez utiliser dans votre projet n'est pas disponible en tant qu'emplacement VPS, vous pouvez le créer en suivant les instructions de la section Créer un nouvel emplacement.
+
+## Développer les expériences VPS
+
+Lorsque vous ajoutez un lieu activé par VPS à votre projet, celui-ci apparaît dans la hiérarchie de la scène. Une fois que vous avez un lieu dans votre projet, vous pouvez inspecter les détails de ce lieu en utilisant le panneau de droite. Un maillage de l'emplacement apparaît pour vous permettre d'aligner et de positionner d'autres contenus 3D par rapport à l'emplacement.
+
+![AddLocation](/images/studio/vps-add-location.png)
+
+## Entités de localisation
+
+:::info
+\*\*Pour que les objets de la scène soient correctement alignés sur l'emplacement après la localisation, ils doivent être ajoutés en tant qu'enfants à l'entité Emplacement.
+:::
+
+Les sites constituent un type d'entité unique au sein de Studio. Ces emplacements sont accompagnés d'un maillage 3D visuel dans la fenêtre d'affichage à des fins de placement de contenu et de test, mais n'ajoutent pas réellement de maillage à votre projet.
+
+Dans la vue Inspecteur, vous pouvez voir les détails de l'emplacement comme le statut, le type, la qualité, les identifiants et le maillage GLB correspondant disponible pour le téléchargement. Pour en savoir plus sur l'utilisation du fichier Location GLB, voir ci-dessous.
+
+D'autres entités peuvent être ajoutées en tant qu'objets enfants à un objet Lieu. Pour tout contenu qui ne doit apparaître qu'après la localisation, vous devez l'ajouter en tant qu'entité enfant.
+
+:::warning
+\*\*Les composants par défaut de Studio, tels que Mesh, Physics Colliders, etc., ne seront pas compatibles avec l'entité Location. N'essayez pas de les ajouter directement à l'entité Location, car vous risquez de rencontrer des problèmes d'exécution avec l'activation du VPS, la localisation ou les interactions avec le contenu.
+:::
+
+### Localisation GLB
+
+Un objet Emplacement vous permet de télécharger directement un fichier GLB (maillage) que vous pouvez intégrer à votre scène en tant que ressource. Vous pouvez utiliser l'actif pour mettre en place des occluders, créer des effets de texture superposés ou créer des couches de physique. La fonction de téléchargement GLB vous donne la possibilité de télécharger avec ou sans texture.
+
+:::warning
+\*\*Certains sites dotés d'un système de paiement virtuel et disposant d'une grande superficie peuvent avoir des fichiers GLB très volumineux, supérieurs à 50 Mo. Cela peut poser des problèmes de performance, en particulier lorsqu'il y a beaucoup d'autres objets ou des objets de grande taille dans la scène. Tenez compte de la taille du fichier de téléchargement du BGL lorsque vous l'utilisez comme atout dans le cadre du projet.
+:::
+
+Dans certains cas, vous souhaiterez peut-être intégrer le GLB dans un outil d'édition 3D tiers tel que Maya ou Blender.
+
+\*\*IMPORTANT : L'origine de ce modèle 3D est l'origine de l'emplacement. Ne réinitialisez pas l'origine ou votre contenu ne sera pas aligné.
+
+## Lieu Événements
+
+8th Wall émet des événements à différentes étapes du cycle de vie de l'emplacement du projet (par exemple, numérisation, recherche, mise à jour, perte, etc.) Veuillez consulter [la référence de l'API] (/api/studio/events/xr/vps/) pour obtenir des instructions spécifiques sur la gestion de ces événements dans votre application web.
+
+## Permettre aux utilisateurs finaux de bénéficier de la géolocalisation
+
+Afin de permettre à VPS de fonctionner, les paramètres de votre caméra doivent être mis à jour.
+
+![VpsCameraSettings](/images/studio/vps-camera-settings.png)
+
+## Simulation de l'expérience de la réalité virtuelle
+
+Avec le simulateur dans Studio, vous pouvez tester vos expériences à distance sans jamais quitter votre bureau. Le simulateur de Studio vous permet de simuler des mouvements dans votre scène à l'aide de simples commandes WASD et d'orbite afin de voir comment les éléments WebAR interagissent avec l'environnement réel et de vous assurer que tout fonctionne comme prévu avant le déploiement. Cette capacité réduit le temps d'itération et facilite l'amélioration de l'expérience.
+
+:::warning
+\*\*Lorsque vous actualisez le simulateur sur un site, il se peut que vous voyiez un écran blanc. Si cela se produit, vous devrez actualiser à nouveau pour revenir à l'affichage de l'emplacement.
+:::
+
+### Utilisation du simulateur avec des sites compatibles avec le SPV
+
+Pour simuler le mouvement et le placement de contenu dans un lieu ajouté à votre scène :
+
+1. Assurez-vous que les paramètres de la caméra sont réglés sur Monde et que l'option VPS est activée. Voir les paramètres de la caméra pour VPS ci-dessus.
+2. Appuyez sur Play pour ouvrir le simulateur
+3. Utilisez les options de l'environnement du simulateur (sélecteur en bas à gauche) pour trouver l'emplacement du projet souhaité.
+4. Pour simuler le SPV, utilisez l'événement Localisation trouvée pour simuler une localisation réussie. IMPORTANT : les objets enfants de l'entité Location que vous simulez n'apparaîtront PAS tant que l'événement Location Found n'aura pas été déclenché. Vous pouvez utiliser d'autres événements de localisation et de maillage pour simuler d'autres scénarios (comme la perte de localisation). Pour plus d'informations sur les événements VPS, voir la section API sur les événements de localisation.
+5. La localisation non manuelle (désélection des événements manuels) n'est pas encore prise en charge par le simulateur, mais elle le sera bientôt.
+6. Les raccourcis clavier WASD et les commandes Orbit sont disponibles pour simuler les mouvements. Vous devez d'abord cliquer sur le panneau Simulateur, puis vous pouvez utiliser les raccourcis clavier et le contrôleur d'orbite.
+
+- W = Avant
+- A = Gauche
+- S = Retour
+- D = droite
+- Q = Haut
+- E = En bas
+
+![VpsSimulator](/images/studio/vps-simulator.gif)
+
+:::warning
+**Pour certains lieux, il se peut que le lieu n'apparaisse pas dans le simulateur. Certains maillages VPS sont décalés par rapport à l'origine, ou hors de vue initialement dans le simulateur. Utilisez les commandes d'orbite pour vous déplacer afin de trouver votre maillage de localisation dans le cas où vous verriez un écran noir.
+Pour plus de conseils, d'astuces et de problèmes connus, voir la section Questions connues et FAQ ci-dessous.**
+:::
+
+## Créer de nouveaux sites compatibles avec le SPV
+
+1. Cliquez sur un emplacement libre sur la carte pour sélectionner l'endroit où vous souhaitez créer un nouveau site VPS. Consultez la section Exigences relatives à l'emplacement du SPV pour en savoir plus sur le choix d'un bon emplacement pour créer un emplacement de SPV.
+2. Cliquez sur le bouton Créer un emplacement public pour lancer le processus de création de l'emplacement. Les emplacements publics sont accessibles à tous les développeurs et à toutes les personnes qui utilisent leurs projets. Lors de l'ajout d'un nouveau lieu public, veuillez tenir compte des lignes directrices suivantes :
+
+- Les lieux publics doivent être des lieux ou des objets permanents, physiques, tangibles et identifiables.
+- Les lieux publics doivent être sûrs et accessibles aux piétons.
+- Veillez à inclure des informations précises dans le titre, la description et la photo afin d'aider vos utilisateurs à trouver le lieu.
+
+:::info
+Les espaces de travail sur le **Pro plan** auront également l'option de **Créer un emplacement privé**. Les emplacements privés ne seront visibles et accessibles qu'à votre espace de travail et à
+ses projets. Les emplacements privés sont une fonctionnalité haut de gamme pour les développeurs qui ont besoin de créer des expériences VPS temporaires ou à accès contrôlé.
+:::
+
+![ConsoleCreateWayspot](/images/console-create-wayspot.png)
+
+3. **Vérifiez les doublons** : Avant de créer un nouveau site, vous devez vérifier que le site
+   n'existe pas déjà. Comparez l'emplacement souhaité à d'autres emplacements déjà présents sur la carte pour vous assurer
+   que vous ne créez pas de doublon. S'il ne s'agit pas d'un emplacement en double, vous devez cocher la case **Mon emplacement
+   n'est pas en double** et cliquer sur le bouton **Suivant** pour continuer.
+
+![ConsoleCreateWayspotNoDuplicate](/images/console-create-wayspot-nodupe.png)
+
+4. **Ajouter des informations de localisation** : Les métadonnées de localisation seront visibles pour les développeurs qui utilisent le navigateur géospatial
+   et peuvent être visibles pour les utilisateurs finaux. N'oubliez pas que l'équipe Trust & Safety de Niantic utilise
+   les informations que vous fournissez pour déterminer si l'emplacement répond à nos critères pour être rendu public
+   . Une fois que vous avez ajouté les informations suivantes pour le lieu que vous essayez de créer,
+   cliquez sur le bouton **Submit** :
+
+- Titre (125 caractères)
+- Description (250 caractères)
+- Catégorie (1 ou plus)
+- Image (si disponible)
+
+5. Utilisez l'application iOS Scaniverse pour terminer le processus de création de l'emplacement.
+
+## Scaniverse pour les développeurs de Niantic {#scaniverse-for-niantic-developers}
+
+Scaniverse pour les développeurs Niantic intègre de manière transparente
+le navigateur géospatial (GSB) avec l'expérience de numérisation primée de Scaniverse. Ce site
+rationalise considérablement les flux de travail des développeurs en ce qui concerne la navigation sur la carte, l'ajout d'emplacements et, bien sûr, la numérisation (
+) :
+
+- Nous avons rendu le navigateur géospatial (GSB) convivial pour les mobiles afin qu'il puisse être utilisé efficacement sur
+  a Scaniverse pour parcourir la carte, inspecter les emplacements, ajouter des emplacements et demander l'activation d'un SPV.
+- Flux de connexion simplifié à l'aide d'un simple code QR qui relie Scaniverse à votre compte 8th Wall.
+- Nous avons adopté l'interface utilisateur existante de Scaniverse pour faciliter la création et le téléchargement de scans.
+- Nous avons permis de tester la localisation dans les sites activés par le VPS au sein de Scaniverse.
+- Nous avons intégré les dernières améliorations apportées au filtrage des cartes afin qu'il soit plus facile que jamais de trouver le(s) site(s)
+  que vous recherchez.
+
+### Lien entre Scaniverse et le navigateur géospatial (GSB) {#linking-scaniverse-with-the-geospatial-browser}
+
+**Prérequis** : Installez Scaniverse à partir de l'[App Store] iOS (https://apps.apple.com/us/app/scaniverse-3d-scanner/id1541433223). La prise en charge des appareils Android est imminente.
+
+1. Connectez-vous à votre compte 8th Wall sur votre ordinateur. Ouvrez le **Geospatial Browser (GSB)**, sélectionnez n'importe quel emplacement
+   sur la carte, puis sélectionnez **View Details**. Dans le coin inférieur droit de la carte de détails de l'emplacement
+   , appuyez sur **Générer un code QR**. Un code QR s'affiche.
+
+![Scaniverse1](/images/scaniverse1.png)
+
+2. Scannez le **code QR** avec votre application Appareil photo. Ouvrez l'application Appareil photo sur votre téléphone et pointez-la sur le code QR.
+
+3. Tapez sur le lien **Scaniverse** qui apparaît. Cela permettra de relier Scaniverse à votre compte de développeur 8th Wall
+   . Cette opération ne doit être effectuée qu'une seule fois.
+   :::info
+   **Veillez à autoriser www.8thwall.com à utiliser
+   votre position actuelle lorsque vous y êtes invité ; cela est nécessaire au bon fonctionnement de l'interface GSB.**
+   :: :
+
+![Scaniverse2](/images/scaniverse2.png)
+
+4. Une fois que vous avez relié Scaniverse à GSB, vous pourrez revenir à l'écran GSB à tout moment
+   en appuyant sur le **bouton GSB** dans le ruban inférieur de l'application Scaniverse. Notez que vous pouvez déconnecter
+   Scaniverse de GSB à tout moment en allant dans le menu **Settings** et en désactivant l'option **Niantic
+   Developer Mode**.
+
+5. Tous les scans que vous avez pris en dehors du mode développeur de Niantic resteront accessibles lorsque
+   liera ou déliera Scaniverse avec GSB.
+
+![Scaniverse3](/images/scaniverse3.png)
+
+### Parcourir la carte du GSB dans Scaniverse
+
+1. En tapant sur l'icône **Personne**, vous pourrez sélectionner votre espace de travail du 8e mur.
+
+2. En cliquant sur le bouton **Télécharger**, vous pourrez sélectionner l'emplacement des scans à télécharger. Notez que
+   seuls les scans provenant du mode développeur de Niantic (en utilisant les options Add Scans ou Test Scan) peuvent être téléchargés vers Niantic à des fins d'activation du VPS.
+
+3. En cliquant sur le bouton **Plus**, vous pourrez créer de nouveaux emplacements et tester des balayages.
+
+4. En appuyant sur le bouton **Couches**, la vue satellite de la carte s'affiche.
+
+5. Le fait d'appuyer sur le bouton **Réticule** permet de centrer la carte sur votre position.
+
+6. Le fait d'appuyer sur le bouton **Compas** ramène la carte à son orientation par défaut, vers le nord.
+
+7. Le bouton **Contrôles** vous permet d'appliquer des filtres aux lieux qui apparaissent sur la carte
+   en fonction de leur taille, de leur catégorie ou de leur statut d'activation.
+
+8. Le bouton **Verre grossissante** vous permet d'effectuer une recherche sur la carte.
+
+9. En appuyant sur le bouton **X**, vous fermerez le GSB et reviendrez à l'écran d'accueil de Scaniverse.
+
+![Scaniverse4](/images/scaniverse4.jpg)
+
+10. La sélection d'un lieu sur la carte fait apparaître un écran **Preview**, sur lequel on peut appuyer pour obtenir plus de détails sur
+    .
+
+11. Si vous avez sélectionné une localisation activée par le SPV, vous pouvez cliquer sur le bouton **Tester le SPV** pour vérifier que la localisation de
+    fonctionne.
+
+12. Pour créer un scan à ajouter à un emplacement particulier, appuyez sur le bouton **Ajouter des scans** de l'emplacement
+    correspondant. Notez que vous devez vous trouver à proximité de l'emplacement pour que l'option Ajouter des scans soit disponible.
+
+![Scaniverse5](/images/scaniverse5.png)
+
+### Création et téléchargement de scans
+
+1. Le bouton **Enregistrer** permet de démarrer et d'arrêter le processus de numérisation.
+
+2. Le bouton **Pause** peut être utilisé pour suspendre temporairement le processus de numérisation.
+
+3. L'affichage **Temps** indique la durée du balayage en cours. Une durée minimale de 15 secondes
+   est requise pour qu'un scan puisse être téléchargé à des fins de développement du SPV. Une durée de balayage de 30 à 60
+   secondes est idéale (les balayages de plus de 60 secondes sont divisés en plusieurs parties à des fins de traitement
+   ).
+
+4. En appuyant sur le bouton **X**, vous retournerez à l'écran d'accueil de Scaniverse.
+
+![Scaniverse6](/images/scaniverse6.png)
+
+5. Lorsque vous avez terminé un balayage, vous pouvez inspecter un **Preview Mesh** de la scène que
+   vous avez capturée.
+
+6. Si vous êtes satisfait de votre scan, vous pouvez choisir de le télécharger immédiatement en cliquant sur le bouton **Upload
+   Scan**.
+
+7. Vous pouvez également choisir de **Télécharger plus tard** si vous souhaitez utiliser une connexion WiFi (recommandé).
+
+8. Si vous n'êtes pas satisfait de votre numérisation, vous pouvez la rejeter en appuyant sur le bouton **Effacer**.
+
+![Scaniverse7](/images/scaniverse7.png)
+
+Sur la page Carte, sélectionnez un emplacement VPS pour ajouter une analyse à un emplacement public (1) ou sélectionnez Analyse pour ajouter une analyse de test à votre espace de travail (2).
+
+Le traitement des scans peut prendre de 15 à 30 minutes. Une fois traités, les scans s'affichent dans le navigateur géospatial.
+
+Les questions relatives à la numérisation ou au traitement doivent être adressées à support@nianticspatial.com.
+
+## Technique de balayage {#scanning-technique}
+
+Les emplacements activés par le SPV scannés ne doivent pas dépasser un diamètre de 10 mètres autour de l'emplacement.
+Par exemple, une statue typique fonctionnerait comme un site activé par VPS. En revanche, un bâtiment entier,
+, ne le serait pas. Une face ou une porte/entrée dans un bâtiment pourrait faire l'affaire. Nous vous recommandons de commencer par
+pour les petites surfaces (par exemple, un bureau, une statue ou une peinture murale).
+
+Avant de scanner, soyez conscient de votre environnement et assurez-vous que vous avez le droit d'accéder au lieu
+que vous scannez.
+
+1. Vérifiez la zone à numériser et les environs de l'objet numérisé pour déterminer s'il
+   y a des obstacles et pour sélectionner un itinéraire de numérisation. Il est nécessaire de planifier l'itinéraire que vous avez l'intention d'utiliser
+   pour le balayage avant de commencer la procédure.
+
+2. Assurez-vous que la mise au point de votre appareil photo est correcte. Le tremblement de la caméra peut avoir un effet négatif sur la reconstruction en 3D. Maintenez
+   votre téléphone le plus près possible de votre corps pour éviter les flous. Marchez autour de l'objet que vous scannez à l'adresse
+   au lieu de rester à un endroit précis et de déplacer votre téléphone.
+
+3. Marcher à un rythme lent et naturel. Se déplacer lentement et sans à-coups pendant le balayage. Les changements brusques
+   de direction sont à proscrire. Déplacez-vous lentement et sans à-coups en gardant les pieds au sol. Si vous numérisez à l'adresse
+   dans un environnement sombre, il est encore plus important de se déplacer lentement et sans à-coups. Déplacez le téléphone
+   avec vous lorsque vous vous déplacez (pensez à la marche en crabe).
+
+4. L'emplacement du SPV doit toujours être le point central. Pour que nous puissions construire la carte, il est important
+   de se concentrer sur l'emplacement du SPV et de capturer l'orbite complète à 360° de celui-ci. S'il n'est pas sûr ou pas possible
+   d'obtenir une couverture à 360°, capturez autant que possible.
+
+5. Variez la distance et les angles (0-10m ou 0-35ft). Pour que la carte 3D fonctionne bien dans différents scénarios
+   , il est important que nous capturions l'environnement autour du lieu et que nous disposions d'une variété de
+   scans différents. Il est important de varier la distance et les angles de vue lors de l'analyse de l'emplacement.
+
+Vidéo de la technique recommandée de balayage de l'emplacement du SPV :
+
+```mdx-code-block
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FYS3fe5drf0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+```
+
+#### Choses à éviter lors de la numérisation de {#things-to-avoid-while-scanning}
+
+1. Évitez de scanner lorsque l'environnement n'est pas sûr, par exemple au milieu de la route ou dans une aire de jeux
+   avec des enfants.
+
+2. Évitez de scanner lorsque l'emplacement est trop éloigné (>10m ou 35ft) ou trop grand pour que votre appareil photo puisse faire la mise au point (
+   ).
+
+3. Évitez de scanner pendant que vous vous promenez ou que vous faites du jogging. Il est important de garder le site
+   comme point central à tout moment.
+
+4. Évitez de pointer votre téléphone vers des objets très lumineux tels qu'une lumière fluorescente ou le soleil.
+
+5. Évitez de ne pas bouger ou de bouger trop vite lorsque vous scannez. Les mouvements brusques entraînent des décalages dans la reconstruction du site
+   .
+
+6. Évitez de numériser si votre téléphone devient trop chaud. Si la température de l'appareil augmente trop, les performances de
+   seront fortement réduites, ce qui aura un effet négatif sur la numérisation.
+
+7. Évitez de télécharger des scans qui semblent incomplets ou qui ne sont pas représentatifs de ce que vous essayez de scanner sur
+   .
+
+## Problèmes connus et FAQ
+
+### VPS dans Studio Problèmes connus :
+
+- Pour certains lieux, il se peut que le lieu n'apparaisse pas initialement dans le simulateur. Certains maillages VPS sont décalés par rapport à l'origine et ne sont pas visibles au départ dans le simulateur. Utilisez les commandes Orbit ou les raccourcis clavier WASD pour vous déplacer afin de trouver votre maillage de localisation dans le cas où vous verriez un écran noir. Pour plus de détails, voir la section Simulation d'expériences de RA dans un lieu donné.
+- Lorsque vous actualisez le simulateur sur un site, il se peut que vous voyiez un écran blanc. Si cela se produit, vous pouvez actualiser une deuxième fois pour revenir à l'affichage de l'emplacement. Pour plus de détails, voir la section Simulation d'expériences de RA dans un lieu donné.
+- Pour certains sites compatibles avec le SPV, généralement ceux dont la surface est importante, la taille du fichier de maillage GLB correspondant peut être très importante, supérieure à 50 Mo. Cela peut poser des problèmes de performance, en particulier lorsqu'il y a beaucoup d'autres objets ou des objets de grande taille dans la scène. Tenez compte de la taille du fichier de téléchargement du BGL lorsque vous l'utilisez comme atout dans le projet. Pour plus de détails, voir la section Développer des expériences VPS.
+- Actuellement, le flux de travail Scaniverse Create Location n'est disponible que sur iOS. Android arrive bientôt. Pour plus de détails, voir la section Créer de nouveaux sites compatibles avec le SPV.
+
+#### Qu'est-ce que Lightship VPS ? {#what-is-lightship-vps}
+
+Lightship VPS (Visual Positioning System) est un service en nuage qui permet aux applications de localiser l'appareil d'un utilisateur
+dans des lieux réels, ce qui permet aux utilisateurs d'interagir avec du contenu AR persistant et
+, ce qui permet de nouvelles expériences immersives. VPS détermine la position et l'orientation de l'appareil (pose) en se référant à
+aux données cartographiques qui existent dans le nuage de Niantic.
+
+#### Comment fonctionne le VPS ? {#how-does-vps-work}
+
+Lorsqu'un appareil appelle le service VPS, le service reçoit une image de requête de l'appareil
+de l'utilisateur ainsi que sa position approximative (à partir du GPS) en tant qu'entrées et tente de le localiser à l'aide de la ou des cartes
+qui existent à cet endroit. Si la localisation est réussie, le service renvoie la position et l'orientation (pose) de l'appareil
+correspondant à l'horodatage de l'image transmise par
+. Comme il s'écoule un certain temps entre le moment où une image de requête VPS est capturée et celui où une réponse
+est reçue du service VPS, l'appareil doit disposer d'un système de suivi des mouvements à l'adresse
+afin de rester localisé avec précision lorsqu'il est en mouvement. Lorsque le service VPS renvoie une estimation de la position à l'appareil
+, la différence de position du système de suivi de l'appareil est ajoutée à la réponse de localisation
+afin que le VPS puisse "suivre" la façon dont l'appareil s'est déplacé en attendant la réponse du serveur
+à la requête du VPS.
+
+#### Qu'est-ce qu'un scan ? {#what-is-a-scan}
+
+Les scans AR des joueurs, des développeurs et des géomètres sont l'ingrédient fondamental utilisé pour créer la carte Niantic
+: La carte du monde en 3D de Niantic. Les scans AR sont enregistrés et téléchargés à l'aide du cadre de scannage AR
+de Niantic, un module utilisé dans Pokemon Go, Ingress et l'application Wayfarer. Chaque scan AR
+consiste en une série d'images vidéo avec des données d'accéléromètres et de capteurs GPS
+qui construisent un modèle 3D du monde à partir de plusieurs images 2D. Les scans AR sont utilisés par Niantic pour
+construire des cartes et des maillages de lieux réels.
+
+#### Qu'est-ce qu'une carte ? {#what-is-a-map}
+
+Dans le jargon du SPV, une carte est l'artefact de données utilisé pour localiser votre appareil lorsque l'API du SPV est appelée à l'adresse
+. Une carte peut être considérée comme une fonction qui prend une image d'interrogation en entrée et renvoie
+la position et l'orientation (pose) en sortie. La carte correspondant à un lieu donné est créée
+à partir des scans qui ont été téléchargés à cet endroit. Les cartes VPS ne sont pas lisibles par l'homme.
+
+#### Qu'est-ce qu'une maille ? {#what-is-a-mesh}
+
+Dans le langage du SPV, un maillage est un modèle 3D d'un lieu ou d'un objet réel. Les maillages fournissent une représentation détaillée
+d'un espace ou d'un objet physique, et sont utiles pour comprendre à quoi ressemble un lieu
+, comme référence pour la création de contenu AR, et pour créer des effets physiques et d'occlusion. Comme les cartes
+, les maillages qui correspondent à un lieu donné sont créés à partir des scans qui ont été téléchargés à
+ce lieu. Les maillages sont lisibles à la fois par l'homme et par la machine.
+
+#### Où puis-je utiliser un VPS ? {#where-can-i-use-vps}
+
+Le SPV est disponible dans plus de 150 000 lieux dans le monde réel, et de nouveaux lieux sont ajoutés chaque jour. Sur
+, pour qu'un lieu soit disponible sur VPS, une quantité suffisante de données de scan AR doit être téléchargée sur
+et le processus d'activation du VPS doit être achevé. Les développeurs peuvent ajouter de nouveaux lieux à
+et demander l'activation de VPS pour des lieux entièrement numérisés à l'aide du navigateur géospatial.
+
+#### Comment fonctionne l'activation d'un VPS ? {#how-does-vps-activation-work}
+
+Pour qu'un site soit éligible à l'activation du SPV, il doit avoir téléchargé au moins 10 scans qui passent les contrôles de qualité minimums de
+, et la différence de temps entre les scans les plus anciens et les plus récents sur le site
+doit être d'au moins 5 heures. Ces exigences garantissent que les cartes et les maillages obtenus sont d'une qualité
+suffisante et qu'ils capturent suffisamment de variations pour que les utilisateurs puissent effectuer une localisation fiable.
+Le processus d'activation des VPS s'appuie sur l'infrastructure de cartographie AR de Niantic et implique de nombreuses étapes complexes sur le site
+. À partir de l'ensemble des scans éligibles sur le site, un algorithme sélectionne la plupart des scans pour
+afin de les utiliser pour construire des cartes et des maillages, et la poignée restante pour la validation et la mesure de la qualité de la localisation
+. Le processus d'activation d'un lieu se déroule sur les serveurs de Niantic et prend généralement 1 à 2 heures sur le site
+.
+
+#### Puis-je retrouver mes scans après l'activation du VPS ? {#can-i-find-my-scans-after-vps-activation-is-done}
+
+Au cours du processus d'activation, les cartes et les maillages créés à partir des scans téléchargés sont fusionnés à l'adresse
+afin d'intégrer autant d'informations que possible. Le produit final, qui est utilisé
+par les développeurs pour créer du contenu et par les utilisateurs pour le localiser, se compose de scans provenant de nombreuses sources
+différentes. Les données des scanners sont mélangées pour créer une représentation plus complète du lieu,
+. Il n'y a donc pas de relation univoque entre les scanners qui sont téléchargés sur un lieu et les cartes et maillages
+qui sont créés une fois que le lieu est activé par le système VPS.
+
+#### Puis-je ajouter d'autres analyses à un site déjà activé ? {#can-i-add-more-scans-to-a-location-thats-already-activated}
+
+Dans certains cas, les développeurs peuvent souhaiter ajouter des balayages supplémentaires à un lieu précédemment activé sur
+afin d'améliorer la qualité et la couverture des cartes et des maillages du lieu. Sur
+, pour qu'un site soit éligible à la "réactivation", il doit avoir fait l'objet d'au moins 5 balayages supplémentaires
+depuis sa dernière activation. Au contraire, le processus de réactivation nécessite la construction d'une nouvelle carte fusionnée
+qui incorpore les nouveaux balayages dans le contexte des balayages existants.
+
+#### Comment puis-je demander l'activation d'un nouveau site ? {#how-do-i-request-vps-activation-of-a-new-location}
+
+Une fois qu'un lieu a téléchargé suffisamment de scans pour répondre aux exigences d'activation du SPV (au moins 10 scans
+au total avec une différence de temps d'au moins 5 heures entre les scans les plus anciens et les plus récents), les développeurs peuvent
+demander l'activation du SPV en sélectionnant le lieu dans l'application Wayfarer ou le navigateur géospatial et
+en appuyant sur le bouton "Activer". Cela ajoutera le lieu à la file d'attente d'activation. En général, une demande d'activation de
+est traitée dans les deux heures. Les développeurs ont également la possibilité de demander à
+la réactivation d'un lieu existant après le téléchargement de 5 scans supplémentaires.
+
+#### Le SPV fonctionne-t-il la nuit ou dans de mauvaises conditions météorologiques ? {#does-vps-work-at-night-or-in-poor-weather-conditions}
+
+Le SPV fonctionne mieux lorsqu'il y a une bonne visibilité. Afin de maximiser les chances de réussite de l'expérience
+VPS, il est préférable de télécharger de nombreuses analyses AR couvrant un large éventail de conditions différentes
+(par exemple, différentes heures de la journée, différentes conditions météorologiques, etc.) Par exemple, si vous
+construisez une expérience dans un endroit où il pleut beaucoup, il est très utile d'avoir des images d'un jour de pluie
+.
+
+#### La numérisation AR et le VPS nécessitent-ils des téléphones équipés de capteurs LiDAR ? {#do-ar-scanning-and-vps-require-phones-with-lidar-sensors}
+
+Le balayage AR et le VPS ne nécessitent pas de LiDAR.

@@ -1,0 +1,23 @@
+<!-- Copyright (c) 2020 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<div style="
+  z-index: 10;
+  width: 50vw;
+  position: absolute;
+  bottom: 2vw;
+  left: 2vw;">
+  <img id="icon" src="./assets/not-tracking.svg">
+</div>
+
+<a-scene 
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  xrface="cameraDirection: front; mirroredDisplay: true;">
+
+  <a-camera position="0 1 2"></a-camera>
+  
+  <a-entity face-events></a-entity>
+
+</a-scene>

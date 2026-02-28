@@ -1,0 +1,79 @@
+@use '../styles/brand-colors';
+@use '../styles/constants';
+
+.toggleContainer {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: fit-content;
+  color: brand-colors.$gray4;
+  border: 1px solid brand-colors.$gray2;
+  cursor: pointer;
+  border-radius: 16px;
+  margin: 0;
+
+  &.white {
+    background-color: brand-colors.$white;
+  }
+
+  &.moonlight {
+    background-color: brand-colors.$moonlight;
+  }
+
+  @media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+    width: 100%;
+  }
+
+}
+
+.toggleInput {
+  display: none;
+  &:checked + .toggleWrapper {
+    transform: translateX(100%)
+  }
+}
+
+.toggleWrapper {
+  position: absolute;
+  border-radius: 16px;
+  height: 100%;
+  width: 50%;
+  border-width: 5px;
+  border-style: solid;
+  transition: transform .3s;
+
+  &.white {
+    border-color: brand-colors.$white;
+  }
+  &.moonlight {
+    border-color: brand-colors.$moonlight;
+  }
+}
+
+.toggle {
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+
+  &.white {
+    border: 1px solid brand-colors.$gray2;
+    background-clip: padding-box;
+    background-color: brand-colors.$white;
+  }
+
+  &.blueberry {
+    background-color: rgba(87, 191, 255, 0.33);
+  }
+}
+
+.options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: brand-colors.$brand-black;
+  padding: 1em 2em;
+  text-align: center;
+  user-select: none;
+  white-space: wrap;
+  z-index: 1;
+}

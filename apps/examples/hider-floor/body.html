@@ -1,0 +1,54 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene 
+xrextras-tap-recenter
+landing-page
+xrextras-loading
+xrextras-runtime-error
+xrweb>
+  
+  <a-entity 
+    light="
+      type: directional; 
+      castShadow: true; 
+      color: white; 
+      intensity: 0.5" 
+    position="5 10 7">
+  </a-entity>
+  
+  <a-camera position="0 2 3"></a-camera>
+
+  <a-plane 
+    height="2000" 
+    width="2000" 
+    rotation="-90 0 0" 
+    position="0 0.025 0"
+    material="shader: shadow; opacity: 0.67"
+    shadow>
+  </a-plane>  
+  
+  <a-plane 
+    height="2000" 
+    width="2000" 
+    rotation="-90 0 0" 
+    xrextras-hider-material>
+  </a-plane>  
+  
+  <a-box 
+    animation="
+      property: position; 
+      to: 0 -0.4 0; 
+      dur: 2000; 
+      easing: easeInOutQuad; 
+      loop: true;
+      autoplay: true;
+      dir: alternate"
+    xrextras-spin="speed: 3000"
+    position="0 1 0" 
+    material="shader: flat; color: #FFBD49;"
+    src="./assets/side-black.png"
+    shadow>
+  </a-box>
+ 
+</a-scene>

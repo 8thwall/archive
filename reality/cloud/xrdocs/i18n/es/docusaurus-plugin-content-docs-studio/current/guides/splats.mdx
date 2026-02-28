@@ -1,0 +1,74 @@
+---
+id: splats
+description: >-
+  Gaussian splatting te permite capturar la esencia de una escena del mundo real
+  utilizando sólo tu smartphone y renderizarla como un modelo 3D totalmente
+  inmersivo, visualizable en WebAR.
+---
+
+# Splats
+
+## Introducción
+
+{frontMatter.description} Esta técnica revoluciona la forma de trasladar objetos y lugares del mundo real a experiencias digitales mediante el uso de splats en lugar de las tradicionales mallas.
+
+:::info ¿En qué se diferencia de una malla?
+A diferencia de las mallas, que se basan en polígonos y texturas conectados, los splats gaussianos se componen de millones de "splats" o manchas diminutas e independientes. Estas salpicaduras se combinan para crear un vibrante modelo 3D inmersivo de 360 grados, que captura intrincados detalles y texturas del mundo real.
+:::
+
+![gaussian-splats.gif](/images/studio/gaussian-splats.gif)
+
+## Creación de Splats con Scaniverse
+
+Capturar salpicaduras gaussianas no supone ningún esfuerzo con la aplicación Niantic Scaniverse™. Sólo tienes que utilizar tu teléfono para capturar una escena, revisar el splat y editarlo en cualquiera de tus dispositivos. Esta accesibilidad permite a cualquiera crear modelos 3D muy detallados sin necesidad de equipos especializados ni ordenadores potentes.
+
+![creating-splats.jpg](/images/studio/creating-splats.jpg)
+
+## Exportación de Splats desde Scaniverse
+
+Una vez que hayas capturado y editado tu splat, exportarlo como archivo .SPZ es rápido y sencillo a través de Niantic Scaniverse™. Después de capturar y editar:
+
+1. Selecciona Compartir.
+2. Seleccione Exportar modelo.
+3. Seleccione el formato .SPZ.
+4. Guarda el archivo en tu dispositivo.
+
+:::note
+Actualmente, sólo se admiten splats .SPZ.
+:::
+
+![exporting-splats.png](/images/studio/exporting-splats.png)
+
+## Importación de Splats
+
+8th Wall Studio facilita la importación de splats .SPZ.
+
+- Arrastre el archivo a la sección Archivos/Activos del panel izquierdo.
+- También puede utilizar el botón (+) para cargar el archivo.
+
+Una vez importados, los splats se integran perfectamente en sus proyectos, permitiéndole crear experiencias 3D hiperrealistas y envolventes.
+
+:::note
+Importar un splat puede llevar 1-2 minutos, y el tamaño de los archivos está limitado a 100 MB.
+:::
+
+:::danger
+Es probable que las salpicaduras grandes afecten mucho al rendimiento.
+:::
+
+![importing-splats-into-studio.jpg](/images/studio/importing-splats-into-studio.jpg)
+
+## Uso de Splats
+
+Los Splats son una poderosa herramienta cuando se combinan con otros objetos 3D, planos de tierra y colisionadores de física, creando experiencias XR dinámicas que conectan profundamente con el mundo real. Ya sea para visitas virtuales de lugares populares o como telón de fondo para juegos interactivos, los splats ayudan a dar vida a sus visiones creativas con realismo e inmersión.
+
+![working-with-splats.gif](/images/studio/working-with-splats.gif)
+
+## Limitaciones
+
+Aunque las salpicaduras gaussianas proporcionan una fidelidad visual excepcional, tienen algunas limitaciones:
+
+- La renderización de splats puede ser muy exigente para la CPU y la GPU. Los archivos de gran tamaño, los splats múltiples y los splats sin recortar pueden afectar negativamente al rendimiento. Se recomienda recortar y editar en la aplicación Scaniverse para optimizar los splats antes de importarlos a Studio.
+- Todavía no es posible editar o recortar los splats en 8th Wall Studio. Finalice siempre las ediciones en Scaniverse™ antes de importar el archivo .SPZ a Studio.
+- Actualmente, los activos splat no interactúan con las luces ni proyectan sombras.
+- Los splats no son compatibles con la cámara ortográfica por el momento.

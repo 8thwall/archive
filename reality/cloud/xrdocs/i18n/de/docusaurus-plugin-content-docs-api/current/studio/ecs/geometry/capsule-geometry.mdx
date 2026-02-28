@@ -1,0 +1,26 @@
+---
+id: capsule-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import CapsuleGeometryTable from "../../../../gen/tables/CapsuleGeometry.md"
+
+# CapsuleGeometry
+
+## Beschreibung
+
+Diese Komponente legt die Geometrie einer Entität fest.
+
+## Eigenschaften
+
+<CapsuleGeometryTable />
+
+## Funktionen
+
+<ComponentFunctions
+    name="CapsuleGeometry"
+    properties={{ radius: 1, height: 1 }}
+    mutate={`cursor.radius += 1;
+    cursor.height *= 2;
+    return false;`}
+/>

@@ -1,0 +1,9 @@
+{
+  "global" : false,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE" ],
+  "icon" : "fontawesome-5.14.0:Address%20Card:SOLID",
+  "host_template_types" : [ "PAGE" ],
+  "module_id" : 131230355824,
+  "label" : "Brand Logos",
+  "is_available_for_new_content" : false
+}

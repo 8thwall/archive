@@ -1,0 +1,118 @@
+
+# Put content here that can be re-used using gitlab reference tags
+# Do not make any changes directly to pipeline like adding jobs, stages, etc.
+# And instead rely on other pipelines to directly include the content they
+# want here
+
+.bazel_setup:
+  - echo "Executing .bazel_setup from ci-support/util.yml"
+  # The following is currently required when running bazel commands in monorepo,
+  # even for bazel commands unrelated to the android sdk rules
+  - bazel_setup_start_time=`date +%s`
+  - python3 -m venv venv
+  - source venv/bin/activate
+  - python3 -m pip install -U -r requirements.txt -q
+  - export ANDROID_HOME=/opt/niantic/public/android/SDK
+  - export ANDROID_SDKMANAGER_PATH=$ANDROID_HOME/cmdline-tools/bin
+  - export ANDROID_TOOLS_PATH=$ANDROID_HOME/tools/bin
+  - export ADB_BIN_PATH="${ANDROID_HOME}/platform-tools/adb"
+  - export PATH=${ANDROID_SDKMANAGER_PATH}:${ANDROID_TOOLS_PATH}:$(pwd)/ci-support:$PATH
+  - CPUS=$(($(nproc) / 2))
+  - ./ci-support/generate_ci_bazelrc.sh $CPUS ${MONOREPO_BAZEL_CACHE_SA}
+  - ./ci-support/generate_ci_bazelrc_downloader_config.sh # Redirect bazel to internal artifactory mirrors
+  - ./ci-support/generate_ci_disk_cache_config.sh # Generate user based disk cache
+  - if [[ "$OSTYPE" == *"darwin"* ]]; then sw_vers; fi;
+  - if [[ -d "/tmp/bazel_local_cache_niantic" ]]; then ls -ld /tmp/bazel_local_cache_niantic; else echo "Local bazel cache doesn't exist"; fi
+  - echo "Current user is $(whoami)"
+  - echo "Completed .bazel_setup in $((`date +%s`-bazel_setup_start_time)) seconds"
+
+.runner_cleanup:
+  - echo "Executing .runner_cleanup from ci-support/util.yml"
+  - runner_cleanup_start_time=`date +%s`
+  - if [ -e ~/.cleanup.sh ]; then ~/.cleanup.sh no-arxan-check; fi
+  - echo "Completed .cleanup.sh in $((`date +%s`-runner_cleanup_start_time)) seconds"
+
+# Usage in child pipelines should look like:
+#
+# include:
+#   - ci-support/util.yml
+#
+# my-job:
+#   before_script:
+#     - !reference [.global, before_script]
+#   after_script:
+#     - !reference [.global, after_script]
+#
+.global:
+  before_script_non_bazel:
+    - echo "Running common before_script from ci-support/util.yml"
+    - !reference [.runner_cleanup]
+    # start-of-main-output is used by the gitlab-job-output-simplifier (called in after_script)
+    # (it will discard all output that occurs before start-of-main-output for the simplified output)
+    - echo "<start-of-main-output>"
+  before_script:
+    - echo "Running common before_script from ci-support/util.yml"
+    - !reference [.runner_cleanup]
+    - !reference [.bazel_setup]
+    - echo "<start-of-main-output>"
+  after_script:
+    # This line is not necessary for before_script_non_bazel but also harmless in that case
+    - rm -f ci-support/ci_gen.bazelrc
+    - if [[ "$CI_JOB_STATUS" == "failed" ]]; then
+    # end-of-main-output is used by the gitlab-job-output-simplifier so it knows when it has
+    # downloaded the full job output
+    - echo "<end-of-main-output>"
+    - !reference [.bazel_setup]
+    - innersource/gitlab-job-output-simplifier/scripts/process-current-job-output.sh
+    - fi;
+
+# The purpose of this task is to reproduce the functionality of the gitlab setting "Auto-cancel redundant pipelines"
+# It is disabled right now to allow us to add exceptions to this logic (eg. dynamically generated yaml pipelines)
+#
+# Usage in child pipelines should look like:
+#
+# include:
+#   - ci-support/util.yml
+#
+# cancel-redundant-jobs:
+#   stage: build
+#   extends: .cancel-redundant-jobs
+#
+.cancel-redundant-jobs:
+  image: python:3.10
+  timeout: 10m
+  when: always
+  variables:
+    GIT_STRATEGY: none
+    GIT_SUBMODULE_STRATEGY: none
+  stage: .post
+  before_script: []
+  after_script: []
+  script:
+    - python3 -m venv venv; source venv/bin/activate; export PIP_DISABLE_PIP_VERSION_CHECK=1
+    # Use a fixed version of pip (23.3.1) for consistency
+    - python3 -m pip install pip==23.3.1; python3 -m pip install -Uv requests
+    - |
+      curl -s -o _getProjectFiles.py \
+        --connect-timeout 5 \
+        --max-time 10 \
+        --retry 5 \
+        --retry-delay 0 \
+        --retry-max-time 40 \
+        --header "PRIVATE-TOKEN:${BUILD_API_TOKEN}" \
+        https://gitlab.<REMOVED_BEFORE_OPEN_SOURCING>.com/api/v4/projects/4760/repository/files/dist%2F_getProjectFiles%2Epy/raw?ref=main
+    - python3 _getProjectFiles.py 4760 main redundant_job_canceler/run_redundant_job_canceler; bash ./_run_redundant_job_canceler.sh
+  dependencies: []
+  needs: []
+  allow_failure: true
+  interruptible: true
+  artifacts:
+    paths: [build/redundant-job-canceler.log]
+    expire_in: 1 week
+    when: always
+  retry: 2
+  tags: [watchdog-docker]
+  rules:
+    # In order for the scirpt to find previous pipelines, one
+    # of the following must be true
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" || $CI_PIPELINE_SOURCE == "parent_pipeline" || $CI_COMMIT_BRANCH != null

@@ -1,0 +1,28 @@
+{
+  "projectUrl": "https://joel.8thwall.app/face-pixelization/",
+  "shell": "ios",
+  "apple": {
+    "teamIdentifier": "<REMOVED_BEFORE_OPEN_SOURCING>",
+    "signingType": "development"
+  },
+  "appInfo": {
+    "appDisplayName": "Face Pixelization",
+    "bundleIdentifier": "com.the8w.face-pixelization",
+    "naeBuildMode": "static",
+    "workspace": "joel",
+    "appName": "face-pixelization",
+    "refHead": "production",
+    "permissions": {
+      "camera": {
+        "requestStatus": "REQUESTED",
+        "usageDescription": "Camera is required for face effects"
+      }
+    }
+  },
+  "appUuid": "9d722cd4-285c-41e0-9168-faa3d890be5a",
+  "exportType": "ipa",
+  "iconId": "2f4gvlr9mcjh3ll0wd6ug8ffcxdlv2z0m4ogdsqpu4ad54b5hokn8xfd",
+  "launchScreenIconId": "2f4gvlr9mcjh3ll0wd6ug8ffcxdlv2z0m4ogdsqpu4ad54b5hokn8xfd",
+  "requestRef": "lucas-default",
+  "repoId": "cc.10.app.9d722cd4-285c-41e0-9168-faa3d890be5a"
+}

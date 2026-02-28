@@ -1,0 +1,149 @@
+---
+id: load-screen
+---
+
+# Personnalisation de l'écran de chargement
+
+la bibliothèque [XRExtras](https://github.com/8thwall/web/tree/master/xrextras) de 8th Wall fournit des modules
+qui répondent aux besoins les plus courants des applications WebAR, notamment l'écran de chargement, les flux de liens sociaux
+et la gestion des erreurs.
+
+Le module `Loading` affiche une fenêtre de chargement et un message d'autorisation de la caméra pendant que les bibliothèques sont chargées sur
+et que la caméra démarre. C'est la première chose que voient vos utilisateurs lorsqu'ils entrent sur
+votre expérience WebAR.
+
+Cette section décrit comment personnaliser l'écran de chargement en fournissant des valeurs qui modifient la couleur
+, le spinner de chargement et l'animation de chargement pour qu'ils correspondent au design général de votre expérience.
+
+**Note:** Tous les projets doivent afficher le badge [Powered by 8th Wall](https://drive.google.com/drive/folders/1c9d23c5hS_HspHTUD7VceV6ocqdbPN7J?usp=sharing)
+sur la page de chargement. Il est inclus par défaut dans le `Module de chargement` et ne peut pas être supprimé.
+
+## ID / Classes à remplacer {#ids--classes-to-override}
+
+```mdx-code-block
+<table width="100%">
+  <thead>
+    <th style={{textAlign: 'center'}}>Écran de chargement</th>
+    <th style={{textAlign: 'center'}}>iOS (13+) Motion Sensor Prompt</th>
+  </thead>
+  <tbody>
+    {/* Images */}
+    <tr>
+      <td width="50%">
+        <img src={require('/images/load-screen-css.jpg').default} style={{display: 'block', maxWidth: '360px', margin: 'auto', height: 'auto'}}/>
+      </td>
+      <td width="50%">
+        <img src={require('/images/motion-prompt-css.jpg').default} style={{display: 'block', maxWidth: '360px', margin: 'auto', height: 'auto'}}/>
+      </td>
+    </tr>
+    {/* Key */}
+    <tr>
+      <td width="50%">
+        <ol>
+          <li>#requestingCameraPermissions</li>
+          <li>#requestingCameraIcon</li>
+          <li>#loadBackground</li>
+          <li>#loadImage</li>
+        </ol>
+      </td>
+      <td width="50%">
+        <ol>
+          <li>.prompt-box-8w</li>
+          <li>.prompt-button-8w</li>
+          <li>.button-primary-8w</li>
+        </ol>
+        <p>Pour personnaliser le texte, vous pouvez utiliser un MutationObserver. Veuillez vous référer à l'exemple de code ci-dessous.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+```
+
+## Paramètres du composant A-Frame {#a-frame-component-parameters}
+
+Si vous utilisez XRExtras avec un projet A-Frame, le module `xrextras-loading` permet de personnaliser facilement l'écran de chargement grâce aux paramètres suivants :
+
+| Paramètres                          | Type               | Description                                                                                                                                           |
+| ----------------------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| couleur d'arrière-plan de la caméra | Couleur hexagonale | Couleur de fond de la partie supérieure de l'écran de chargement, derrière l'icône de la caméra et le texte (voir ci-dessus). Écran de chargement #1) |
+| loadBackgroundColor                 | Couleur hexagonale | Couleur de fond de la partie inférieure de l'écran de chargement, derrière l'image `loadImage` (voir ci-dessus). Écran de chargement n° 3)            |
+| loadImage                           | identifiant        | L'identifiant d'une image.  L'image doit être un `<a-asset>` (voir ci-dessus. Écran de chargement n° 4)                                               |
+| loadAnimation                       | `Chaîne`           | Style d'animation de `loadImage`.  Choisissez entre `spin` (par défaut), `pulse`, `scale`, ou `none`                                                  |
+
+#### Exemple de composant de cadre A {#a-frame-component-example}
+
+```jsx
+<a-scene
+  tap-place
+  xrextras-almost-there
+  xrextras-loading="
+    loadBackgroundColor: #007AFF;
+    cameraBackgroundColor: #5AC8FA;
+    loadImage: #myCustomImage;
+    loadAnimation: pulse"
+  xrextras-runtime-error
+  xrweb>
+
+<a-assets>
+  <img id="myCustomImage" src="assets/my-custom-image.png">
+</a-assets>
+```
+
+#### Méthode Javascript/CSS {#javascriptcss-method}
+
+```javascript
+const load = () => {
+  XRExtras.Loading.showLoading()
+  console.log('customizing loading spinner')
+  const loadImage = document.getElementById("loadImage")
+  if (loadImage) {
+    loadImage.src = require("./assets/my-custom-image.png")
+  }
+}
+window.XRExtras ? load() : window.addEventListener('xrextrasloaded', load)
+```
+
+#### Exemple CSS {#css-example}
+
+```css
+#requestingCameraPermissions {
+  color : black !important ;
+  background-color : white !important ;
+}
+#requestingCameraIcon {
+  /* L'image passe du blanc au noir */
+  filter : invert(1) !important ;
+}
+
+.prompt-box-8w {
+  background-color : white !important ;
+  color : #00FF00 !important ;
+}
+.prompt-button-8w {
+  background-color : #0000FF !important ;
+}
+
+.button-primary-8w {
+  background-color : #7611B7 !important ;
+}
+```
+
+#### personnalisation du texte de l'invite du détecteur de mouvement pour iOS (13+) {#ios-13-motion-sensor-prompt-text-customization}
+
+```javascript
+let inDom = false
+const observer = new MutationObserver(() => {
+  if (document.querySelector('.prompt-box-8w')) {
+    if (!inDom) {
+      document.querySelector('.prompt-box-8w p').innerHTML = '<strong>Mon nouveau texte va ici</strong><br/><br/>Appuyez sur Approve pour continuer.'
+      document.querySelector('.prompt-button-8w').innerHTML = 'Deny'
+      document.querySelector('.button-primary-8w').innerHTML = 'Approve'
+    }
+    inDom = true
+  } else if (inDom) {
+    inDom = false
+    observer.disconnect()
+  }
+})
+observer.observe(document.body, {childList: true})
+```

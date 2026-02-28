@@ -1,0 +1,79 @@
+---
+id: global-behaviors
+description: ビヘイビアとは、ワールド上で1ティックごとに実行される関数のことである。
+---
+
+# グローバルな行動
+
+## はじめに
+
+{frontMatter.description} 一度に1つのEntityしか操作できないComponentと比較して、ビヘイビアはクエリを使用して一致するEntityを列挙し、グループとして操作できます。
+
+## 行動の定義
+
+次のコードは、カスタムビヘイビアを定義する方法の例です：
+
+```ts
+const behavior = (world) => {
+  if (world.time.elapsed % 5000 - world.time.delta < 0) {
+     const eid = world.createEntity()
+     Enemy.set(world, eid, {health: 100})
+  }
+}
+```
+
+## 行動の登録
+
+次のコードは、カスタムビヘイビアを登録する方法の例です：
+
+```ts
+ecs.registerBehavior(behavior)
+```
+
+## ビヘイビアを無効にする
+
+次のコードは、カスタムビヘイビアを無効にする方法の例です：
+
+```ts
+ecs.unregisterBehavior(behavior)
+```
+
+## ビヘイビア・クエリー
+
+ビヘイビアは、エンティティIDのリストを返すクエリを実行できます。
+
+```ts
+const query = ecs.defineQuery([Enemy, Health])
+
+const enemyDieBehavior = (world) => {
+  const enemies = query(world)
+
+  for (const enemyId of enemies) {
+    if (Health.get(world, enemyId).hp <= 0) {
+      world.destroyEntity(enemyId)
+    }
+  }
+}
+
+ecs.registerBehavior(enemyDieBehavior)
+```
+
+## システム
+
+ビヘイビアは、特定のクエリにマッチするエンティティ上で実行され、効率的なデータアクセスを可能にするシステムとして構造化することもできる。
+
+:::tip
+このアプローチでは、"敵 "や "ヘルス "といったデータがあらかじめフェッチされているため、パフォーマンスが向上し、反復が速くなる。
+:::
+
+```ts
+const enemyDieSystem = ecs.defineSystem([Enemy, Health], 
+  (world, eid, [enemy, health]) => {
+    if (health.hp <= 0) {
+      world.destroyEntity(eid)
+    }
+  }
+)
+
+ecs.registerBehavior(enemyDieSystem)
+```

@@ -1,0 +1,77 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene
+  xrextras-gesture-detector
+  landing-page="
+  mediaSrc: https://media.giphy.com/media/H5BcotxShNPRoFy1Ng/giphy.gif"
+  xrextras-loading
+  xrextras-runtime-error
+  xrweb>
+  
+  <a-assets>
+      <a-asset-item id="car" src="./assets/car.glb"></a-asset-item>
+  </a-assets>
+
+  <a-camera
+    id="camera"
+    position="0 8 8"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;">
+  </a-camera>
+  
+  <a-entity
+    xr-light
+    shadow
+    light="
+      type: directional;
+      intensity: 1;
+      castShadow: true;
+      shadowMapHeight: 1024;
+      shadowMapWidth: 1024;
+      shadowCameraTop: 10;
+      shadowBias: -0.001;
+      target: #model;"
+    position="5 5 5">
+  </a-entity>
+  
+  <a-entity
+    id="model"
+    gltf-model="#car"
+    class="cantap"
+    position="0 0 -4"
+    rotation="0 55 0"
+    scale="0.01 0.01 0.01"
+    xrextras-hold-drag
+    xrextras-two-finger-rotate
+    xrextras-pinch-scale
+    shadow>
+    <a-cone
+      position="-330.8 84.6 -65"
+      rotation="0 0 -90"
+      height="300"
+      radius-bottom="100"
+      radius-top="10"
+      material="color: #ffff6f; opacity: 0.8; shader: flat; transparent: true;">
+    </a-cone>
+    <a-cone
+      position="-330.8 84.6 66.1"
+      rotation="0 0 -90"
+      height="300"
+      radius-bottom="100"
+      radius-top="10"
+      material="color: #ffff6f; opacity: 0.8; shader: flat; transparent: true;">
+    </a-cone>
+  </a-entity>
+  
+  <a-entity
+    id="ground"
+    class="cantap"
+    geometry="primitive: box"
+    material="color: #000; transparent: true; opacity: 0.5; shader: shadow"
+    scale="1000 2 1000"
+    position="0 -1 0"
+    shadow>
+  </a-entity>
+  
+</a-scene>

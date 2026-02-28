@@ -1,0 +1,33 @@
+---
+id: map-theme
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import MapThemeTable from "../../../gen/tables/MapTheme.md"
+
+# MapTheme
+
+## Descripción
+
+Este componente representa el tema visual del mapa.
+
+## Propiedades
+
+<MapThemeTable />
+
+## Funciones
+
+<ComponentFunctions
+    name="MapTheme"
+    properties={{
+        landColor: '#AEC988',
+        buildingColor: '#EFEFEA',
+        parkColor: '#80B063',
+        buildingOpacity: 0.4,
+        buildingMinMeters: 6,
+        buildingMaxMeters: 50,
+    }}
+    mutate={`cursor.buildingColor = '#FFFFFF';
+    cursor.transitColor = '#000000';
+    return false;`}
+/>

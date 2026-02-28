@@ -1,0 +1,2 @@
+# In case developers want to have local jsons that aren't tracked by git
+*ignore*.json

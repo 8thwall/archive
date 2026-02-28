@@ -1,0 +1,162 @@
+[ {
+  "id" : "720bdff5-e7e8-951f-bef6-46217920c58d",
+  "name" : "brand_logos",
+  "display_width" : null,
+  "label" : "Brand Logos",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "5d72d199-ea1d-9091-7597-cee7640a1714",
+    "name" : "number_of_brands",
+    "display_width" : null,
+    "label" : "Number of Brands",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "1", "1" ], [ "2", "2" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "default" : "1"
+  }, {
+    "id" : "87ae84b4-3147-fee8-d790-7ea698b63bc0",
+    "name" : "brand_1",
+    "display_width" : null,
+    "label" : "Brand 1",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://7255816.fs1.hubspotusercontent-na1.net/hubfs/7255816/jumanji-logo.png",
+      "alt" : "jumanji-logo",
+      "loading" : "lazy",
+      "width" : 235,
+      "height" : 100,
+      "max_width" : 235,
+      "max_height" : 100
+    }
+  }, {
+    "id" : "204717a6-3f77-919b-cce0-2bac34734ed4",
+    "name" : "brand_2",
+    "display_width" : null,
+    "label" : "Brand 2",
+    "required" : false,
+    "locked" : false,
+    "visibility" : {
+      "controlling_field" : null,
+      "controlling_field_path" : "brand_logos.number_of_brands",
+      "controlling_value_regex" : "2",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    },
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://7255816.fs1.hubspotusercontent-na1.net/hubfs/7255816/unilever-logo.png",
+      "alt" : "unilever-logo",
+      "loading" : "lazy",
+      "width" : 500,
+      "height" : 553,
+      "max_width" : 500,
+      "max_height" : 553
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "default" : {
+    "number_of_brands" : "1",
+    "brand_1" : {
+      "size_type" : "auto",
+      "src" : "https://7255816.fs1.hubspotusercontent-na1.net/hubfs/7255816/jumanji-logo.png",
+      "alt" : "jumanji-logo",
+      "loading" : "lazy",
+      "width" : 235,
+      "height" : 100,
+      "max_width" : 235,
+      "max_height" : 100
+    },
+    "brand_2" : {
+      "size_type" : "auto",
+      "src" : "https://7255816.fs1.hubspotusercontent-na1.net/hubfs/7255816/unilever-logo.png",
+      "alt" : "unilever-logo",
+      "loading" : "lazy",
+      "width" : 500,
+      "height" : 553,
+      "max_width" : 500,
+      "max_height" : 553
+    }
+  }
+}, {
+  "id" : "4d681a08-2e97-d0a2-8b21-f5d46fb4625b",
+  "name" : "image",
+  "display_width" : null,
+  "label" : "Image",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "default" : {
+    "src" : "https://7255816.fs1.hubspotusercontent-na1.net/hubfs/7255816/jumanji-carousel.jpg",
+    "alt" : "jumanji-carousel",
+    "width" : 275,
+    "height" : 280,
+    "max_width" : 275,
+    "max_height" : 280
+  }
+}, {
+  "id" : "51a289c9-41ef-96e1-68e2-0b7433c649c7",
+  "name" : "quantity",
+  "display_width" : null,
+  "label" : "Statistic Quantity",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text",
+  "default" : "+22%"
+}, {
+  "id" : "d93617cb-9e95-e547-6ece-dfd46db826bc",
+  "name" : "stat_label",
+  "display_width" : null,
+  "label" : "Statistic Label",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text",
+  "default" : "conversion rate"
+}, {
+  "id" : "41cd3ea2-2990-e636-727b-8612d1176633",
+  "name" : "url",
+  "display_width" : null,
+  "label" : "Link URL",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION", "PHONE_NUMBER", "WHATSAPP_NUMBER", "PAYMENT" ],
+  "show_advanced_rel_options" : false,
+  "type" : "link",
+  "default" : {
+    "url" : {
+      "content_id" : null,
+      "href" : "https://8thwall.com",
+      "type" : "EXTERNAL"
+    },
+    "open_in_new_tab" : false,
+    "no_follow" : false
+  }
+} ]

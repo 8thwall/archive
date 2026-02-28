@@ -1,0 +1,85 @@
+.primaryButtonContainer {
+  display: flex;
+}
+
+.buttonLeft {
+  justify-content: flex-start;
+}
+
+.buttonCenter {
+  justify-content: center;
+}
+
+.buttonRight {
+  justify-content: flex-end;
+}
+
+.primaryButton {
+  font-size: 16px;
+  border: none;
+  padding: 0.75em 1em;
+  min-width: 5em;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.primary, .primary:focus {
+  background: #7611B6;
+  color: #ffffff;
+}
+
+.primary:hover {
+  background: #5C0D8F;
+  color: #FFFFFF;
+}
+
+.primary_round, .primary_round:focus {
+  background: #7611B6;
+  color: #ffffff;
+  border-radius: 5em;
+}
+
+.primary_round:hover {
+  background: #5C0D8F;
+  color: #ffffff;
+}
+
+.secondary {
+  background: #ffffff;
+  color: #7611B6;
+  border: 1px solid #7611B6;
+}
+
+.secondary:hover {
+  background: #B5B8D0;
+}
+
+.secondary_round {
+  background: #ffffff;
+  color: #7611B6;
+  border-radius: 5em;
+}
+
+.secondary_round:hover {
+  background: #B5B8D0;
+}
+
+.tertiary {
+  background: #D5D7E4;
+  color: #2D2E43;
+}
+
+.tertiary:hover {
+  background: #EBEBF1;
+}
+
+.tertiary_round {
+  background: #D5D7E4;
+  color: #2D2E43;
+  border-radius: 5em;
+}
+
+.tertiary_round:hover {
+  background: #EBEBF1;
+}

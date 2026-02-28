@@ -1,0 +1,567 @@
+{
+  "objects": {
+    "efad3679-0446-468f-8ca0-03c311a60a87": {
+      "id": "efad3679-0446-468f-8ca0-03c311a60a87",
+      "position": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": "PlayerNameUI",
+      "instanceData": {
+        "instanceOf": "7f14c7da-ddc2-427f-a85f-2118f88bcccc",
+        "deletions": {},
+        "children": {}
+      },
+      "parentId": "8eca7f6d-8957-4b3b-bd2f-70f7345992b5",
+      "components": {}
+    },
+    "7f14c7da-ddc2-427f-a85f-2118f88bcccc": {
+      "id": "7f14c7da-ddc2-427f-a85f-2118f88bcccc",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {},
+      "name": "BasicTextUI",
+      "order": 6.3896567973173966,
+      "ui": {
+        "text": "Player 1: XXXX",
+        "type": "3d",
+        "width": 500,
+        "textAlign": "center",
+        "verticalTextAlign": "center",
+        "fontSize": 36,
+        "height": 50
+      },
+      "prefab": true
+    },
+    "47699d9e-18a5-4f88-a4f9-b8be92e8f74a": {
+      "components": {},
+      "geometry": null,
+      "id": "47699d9e-18a5-4f88-a4f9-b8be92e8f74a",
+      "light": {
+        "type": "ambient"
+      },
+      "material": null,
+      "name": "Ambient Light",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "order": 0.4038940050501252
+    },
+    "729478ae-d067-4e0c-a753-66c2e9efb625": {
+      "components": {},
+      "geometry": {
+        "depth": 1,
+        "height": 1,
+        "type": "box",
+        "width": 1
+      },
+      "id": "729478ae-d067-4e0c-a753-66c2e9efb625",
+      "material": {
+        "color": "#ffffff",
+        "type": "basic",
+        "textureSrc": {
+          "type": "asset",
+          "asset": "assets/textures/Discord-Symbol-Blurple.png"
+        },
+        "repeatX": 1,
+        "offsetX": 0,
+        "repeatY": 1,
+        "wrap": "clamp",
+        "offsetY": 0,
+        "textureFiltering": "smooth",
+        "blending": "normal",
+        "side": "front",
+        "forceTransparent": true,
+        "mipmaps": false,
+        "wireframe": false
+      },
+      "name": "Box",
+      "position": [
+        0,
+        0.5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "bd42da3a-45d0-4855-93b4-b660e169e8ff",
+      "order": 1.4038940050501252
+    },
+    "a608ddd9-9379-464d-966f-5d8d8674c83c": {
+      "camera": {
+        "type": "perspective",
+        "xr": {
+          "desktop": "3D",
+          "xrCameraType": "3dOnly",
+          "headset": "disabled"
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "id": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "material": null,
+      "name": "Camera",
+      "position": [
+        0,
+        3,
+        4
+      ],
+      "rotation": [
+        0,
+        1,
+        0,
+        -6.123233995736766e-17
+      ],
+      "scale": [
+        0.9999998646558023,
+        0.9999999931513284,
+        0.9999998715044741
+      ],
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "order": 1.0308214152219775
+    },
+    "ac1989e3-3b71-49e2-a05f-e682aeb18c36": {
+      "components": {},
+      "geometry": null,
+      "id": "ac1989e3-3b71-49e2-a05f-e682aeb18c36",
+      "light": {
+        "intensity": 1,
+        "type": "directional"
+      },
+      "material": null,
+      "name": "Directional Light",
+      "position": [
+        20,
+        20,
+        10
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "order": 0.6644431107322474
+    },
+    "3d942af3-1ce5-4e0f-9520-cde6c86760e2": {
+      "id": "3d942af3-1ce5-4e0f-9520-cde6c86760e2",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "28bddffe-4284-4768-bf3a-5de51a792336": {
+          "id": "28bddffe-4284-4768-bf3a-5de51a792336",
+          "name": "discord-example",
+          "parameters": {}
+        }
+      },
+      "name": "Discord Example",
+      "order": 2.7959669239487446
+    },
+    "bd42da3a-45d0-4855-93b4-b660e169e8ff": {
+      "id": "bd42da3a-45d0-4855-93b4-b660e169e8ff",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "ff0832a2-d1fd-4ac7-ad88-1670aaf22865": {
+          "id": "ff0832a2-d1fd-4ac7-ad88-1670aaf22865",
+          "name": "rotate-animation",
+          "parameters": {
+            "duration": 25000,
+            "autoFrom": false,
+            "toY": 360,
+            "shortestPath": false,
+            "reverse": false,
+            "easeIn": false
+          }
+        }
+      },
+      "name": "Discord Box",
+      "order": 4.487376852653494
+    },
+    "0a0b89b8-28e0-4ec0-8ffa-1d3a2e246af8": {
+      "id": "0a0b89b8-28e0-4ec0-8ffa-1d3a2e246af8",
+      "position": [
+        0,
+        1.001,
+        0
+      ],
+      "rotation": [
+        -0.7071068,
+        0,
+        0,
+        0.7071068
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": {
+        "type": "plane",
+        "width": 1,
+        "height": 1
+      },
+      "material": {
+        "type": "hider"
+      },
+      "parentId": "bd42da3a-45d0-4855-93b4-b660e169e8ff",
+      "components": {},
+      "name": "Plane",
+      "order": 2.7670861593441023
+    },
+    "8eca7f6d-8957-4b3b-bd2f-70f7345992b5": {
+      "id": "8eca7f6d-8957-4b3b-bd2f-70f7345992b5",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "name": "ExampleDynamicUi",
+      "order": 7.823814634710605,
+      "disabled": true
+    },
+    "6a93aff8-352d-4d74-b718-ab223b0e3df9": {
+      "id": "6a93aff8-352d-4d74-b718-ab223b0e3df9",
+      "position": [
+        0,
+        1.5,
+        0
+      ],
+      "name": "ChannelNameUI",
+      "instanceData": {
+        "instanceOf": "7f14c7da-ddc2-427f-a85f-2118f88bcccc",
+        "deletions": {},
+        "children": {}
+      },
+      "parentId": "8eca7f6d-8957-4b3b-bd2f-70f7345992b5",
+      "components": {},
+      "order": 5.319401255843686,
+      "ui": {
+        "text": "Channel Name: XXXX",
+        "type": "3d",
+        "width": 500,
+        "textAlign": "center",
+        "verticalTextAlign": "center",
+        "fontSize": 36,
+        "height": 50
+      }
+    },
+    "33d8f381-bc18-4657-bd7e-b2b63db35b59": {
+      "id": "33d8f381-bc18-4657-bd7e-b2b63db35b59",
+      "position": [
+        0,
+        3,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "name": "Overlay UI",
+      "order": 6.076602458724434,
+      "ui": {
+        "type": "overlay",
+        "width": "100%",
+        "height": "100%"
+      }
+    },
+    "cf6c3095-35bd-4e18-a4a8-bc71f2d4f897": {
+      "id": "cf6c3095-35bd-4e18-a4a8-bc71f2d4f897",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "d2a8b0c8-9089-4c4c-aa9c-3aa7d28e9574",
+      "components": {},
+      "name": "Discord Banner",
+      "order": 1.9599205310205297,
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 0.5,
+        "type": "3d",
+        "position": "absolute",
+        "top": "",
+        "left": "2.5%",
+        "bottom": "2.5%",
+        "right": "",
+        "width": "100%",
+        "image": {
+          "type": "asset",
+          "asset": "assets/textures/Discord-Logo-Blurple.png"
+        },
+        "backgroundSize": "contain",
+        "height": "25%"
+      },
+      "disabled": true
+    },
+    "971074df-97b9-4c06-8f5d-f1dbd13129e3": {
+      "id": "971074df-97b9-4c06-8f5d-f1dbd13129e3",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "d2a8b0c8-9089-4c4c-aa9c-3aa7d28e9574",
+      "components": {},
+      "name": "Disclaimer Text",
+      "order": 0.055104754200794526,
+      "ui": {
+        "text": "Discord Activity Example - 8thwall Studio",
+        "type": "3d",
+        "position": "absolute",
+        "top": "",
+        "left": "",
+        "bottom": 0,
+        "right": "",
+        "width": "100%",
+        "height": "100%",
+        "fontSize": 18,
+        "verticalTextAlign": "center",
+        "textAlign": "left"
+      }
+    },
+    "d2a8b0c8-9089-4c4c-aa9c-3aa7d28e9574": {
+      "id": "d2a8b0c8-9089-4c4c-aa9c-3aa7d28e9574",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "33d8f381-bc18-4657-bd7e-b2b63db35b59",
+      "components": {},
+      "name": "LeftCorner",
+      "order": -1.2492654555318583,
+      "ui": {
+        "type": "3d",
+        "position": "absolute",
+        "top": "",
+        "left": "5%",
+        "bottom": "5%",
+        "right": "",
+        "width": "90%",
+        "height": "5%"
+      }
+    },
+    "9428be0b-41ce-4873-a872-6e39b9c58df5": {
+      "id": "9428be0b-41ce-4873-a872-6e39b9c58df5",
+      "position": [
+        0,
+        3,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": "PlayerNameUI (1)",
+      "instanceData": {
+        "instanceOf": "7f14c7da-ddc2-427f-a85f-2118f88bcccc",
+        "deletions": {},
+        "children": {}
+      },
+      "parentId": "8eca7f6d-8957-4b3b-bd2f-70f7345992b5",
+      "components": {},
+      "order": 8.159165031643415,
+      "ui": {
+        "text": "Player 2: XXXX",
+        "type": "3d",
+        "width": 500,
+        "textAlign": "center",
+        "verticalTextAlign": "center",
+        "fontSize": 36,
+        "height": 50
+      }
+    }
+  },
+  "spaces": {
+    "88453035-dc0f-486d-868a-8ff7c2fda864": {
+      "id": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "name": "Default",
+      "activeCamera": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "reflections": {
+        "type": "url",
+        "url": "https://cdn.8thwall.com/web/assets/envmap/basic_env_map-m9hqpneh.jpg"
+      },
+      "sky": {
+        "type": "gradient",
+        "colors": [
+          "#464766",
+          "#000000"
+        ],
+        "style": "radial"
+      }
+    }
+  },
+  "entrySpaceId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+  "runtimeVersion": {
+    "type": "version",
+    "level": "major",
+    "major": 2,
+    "minor": 0,
+    "patch": 0
+  },
+  "historyVersion": "mgmmzme3"
+}

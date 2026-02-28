@@ -1,0 +1,13 @@
+# Receptores de eventos AFrame
+
+Esta sección describe los eventos que escucha el componente A-Frame "xrweb
+
+Puedes emitir estos eventos en tu aplicación web para realizar diversas acciones:
+
+| Receptor de eventos                       | Descripción                                                                                                                                                                                                                                                                                                                       |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [hidecamerafeed](hidecamerafeed.md)       | Oculta la imagen de la cámara. El seguimiento no se detiene.                                                                                                                                                                                                                                      |
+| [recenter](recenter.md)                   | Vuelve a enviar la señal de la cámara a su origen. Si se proporciona un nuevo origen como argumento, el origen de la cámara se restablecerá a ese, y luego se recentrará.                                                                                                                         |
+| [screenshotrequest](screenshotrequest.md) | Emite una petición al motor para capturar una pantalla del lienzo AFrame. El motor emitirá un evento [`screenshotready`](/legacy/api/aframeevents/screenshotready) con la imagen comprimida en JPEG o [`screenshotterror`](/legacy/api/aframeevents/screenshoterror) si se ha producido un error. |
+| [showcamerafeed](showcamerafeed.md)       | Muestra la alimentación de la cámara.                                                                                                                                                                                                                                                                             |
+| [stopxr](stopxr.md)                       | Detener la sesión XR actual. Mientras está detenido, la alimentación de la cámara se detiene y el movimiento del dispositivo no se rastrea.                                                                                                                                                       |

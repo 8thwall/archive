@@ -1,0 +1,68 @@
+<!-- Copyright (c) 2020 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene 
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  xrextras-pause-on-hidden
+  renderer="maxCanvasWidth: 960; maxCanvasHeight: 960"
+  xrface="mirroredDisplay: true;
+          meshGeometry: eyes, face, mouth;
+          cameraDirection: front;
+          allowedDevices: any;">
+  
+  <a-assets>
+    <a-asset-item id="head-occluder" src="./assets/Models/head-occluder.glb"></a-asset-item>
+    <a-asset-item id="glasses" src="./assets/Models/stereo-glasses.glb"></a-asset-item>
+    <audio id="magical-music" preload="auto" class="a-sound" src="./assets/MagicalTransition.mp3" response-type="arraybuffer"></audio>
+  </a-assets>
+
+  <xrextras-resource id="tat-t" src="./assets/Textures/8-tat.png"></xrextras-resource>
+  <xrextras-resource id="alpha" src="./assets/Alpha/soft-eyes-mouth.png"> </xrextras-resource>
+  <xrextras-basic-material id="tattoo" tex="#tat-t" alpha="#alpha" opacity="0.9"></xrextras-basic-material>
+
+  <xrextras-capture-config></xrextras-capture-config>
+  <xrextras-capture-button></xrextras-capture-button>
+  <xrextras-capture-preview></xrextras-capture-preview>
+
+  <a-camera position="0 1 2">
+    <a-entity sound="src: #magical-music; loop: true; volume: 0.2;"></a-entity>
+  </a-camera>
+  
+  <xrextras-faceanchor>
+    
+    <a-entity gltf-model="#head-occluder" position="0 0 0.02" xrextras-hider-material></a-entity>
+    
+    <xrextras-face-mesh material-resource="#tattoo"></xrextras-face-mesh>
+    
+    <xrextras-face-attachment point="noseBridge">
+      <a-entity gltf-model="#glasses" scale="1.1 1.1 1.1" position="0 0.05 0">
+        <a-plane 
+          position="0.25 -0.01 0"
+          height="0.25"
+          width="0.4" 
+          side="back" 
+          depth-write="false"
+          color="#7611B6"
+          opacity="0.5"
+          roughness="0.25"
+        ></a-plane>
+        <a-plane 
+          position="-0.25 -0.01 0"
+          height="0.25" width="0.4" 
+          side="back" 
+          depth-write="false"
+          color="#FFC828"
+          opacity="0.5"
+          roughness="0.25"
+        ></a-plane>
+      </a-entity>
+    </xrextras-face-attachment>
+    
+  </xrextras-faceanchor>
+  
+  <a-light type="directional" target="#face" position="0 1.8 3" intensity="0.8"></a-light>
+  <a-light type="ambient" intensity="0.8"></a-light>
+  
+</a-scene>

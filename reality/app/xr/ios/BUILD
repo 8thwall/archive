@@ -1,0 +1,210 @@
+load("//bzl/apple:objc.bzl", "nia_objc_library")
+
+nia_objc_library(
+    name = "xr-ios",
+    srcs = [
+        "xr-ios.mm",
+    ],
+    hdrs = [
+        "xr-ios.h",
+    ],
+    copts = [
+        "-DOS_OBJECT_HAVE_OBJC_SUPPORT=1",
+    ],
+    sdk_frameworks = [
+        "UIKit",
+    ],
+    target_compatible_with = select({
+        "@niantic//bzl/conditions:ios": [],
+        "//conditions:default": ["@platforms//:incompatible"],
+    }),
+    visibility = [
+        "//visibility:public",
+    ],
+    deps = [
+        ":xr-ios-arkit",
+        ":xr-ios-c8",
+        ":xr-ios-interface",
+        ":xr-ios-remote-only",
+        "//c8:c8-log",
+        "//c8:exceptions",
+        "//c8:symbol-visibility",
+        "//c8/io:capnp-messages",
+        "//c8/pixels/opengl:gl-headers",
+        "//c8/protolog:xr-extern",
+        "//reality/app/analytics/ios:xr-analytics-ios",
+        "//reality/app/app:ios-app",
+        "//reality/app/validation/ios:xr-validation",
+        "//reality/engine/logging:xr-log-preparer",
+    ],
+)
+
+nia_objc_library(
+    name = "xr-ios-interface",
+    hdrs = [
+        "xr-ios-interface.h",
+    ],
+    target_compatible_with = select({
+        "@niantic//bzl/conditions:ios": [],
+        "//conditions:default": ["@platforms//:incompatible"],
+    }),
+    visibility = [
+        "//visibility:public",
+    ],
+    deps = [
+        "//c8/io:capnp-messages",
+        "//c8/pixels:pixel-buffer",
+        "//c8/protolog:xr-extern",
+        "//c8/protolog/api:log-request.capnp-cc",
+        "//c8/protolog/api:remote-request.capnp-cc",
+        "//reality/app/xr/common:camera-framework",
+        "//reality/engine/api:reality.capnp-cc",
+        "//reality/engine/executor:xr-engine",
+        "//reality/engine/logging:xr-log-preparer",
+    ],
+)
+
+nia_objc_library(
+    name = "xr-ios-arkit",
+    srcs = [
+        "xr-ios-arkit.mm",
+    ],
+    hdrs = [
+        "xr-ios-arkit.h",
+    ],
+    copts = [
+        "-Wno-unguarded-availability-new",
+        "-DOS_OBJECT_HAVE_OBJC_SUPPORT=1",
+    ],
+    sdk_frameworks = [
+        "ARKit",
+        "AVFoundation",
+        "CoreGraphics",
+        "CoreImage",
+        "CoreVideo",
+        "Metal",
+        "UIKit",
+    ],
+    target_compatible_with = select({
+        "@niantic//bzl/conditions:ios": [],
+        "//conditions:default": ["@platforms//:incompatible"],
+    }),
+    visibility = [
+        "//visibility:private",
+    ],
+    deps = [
+        ":c8-helpers",
+        ":xr-ios-interface",
+        "//c8:release-config",
+        "//c8/io:capnp-messages",
+        "//c8/pixels:pixel-buffer",
+        "//c8/pixels:pixel-transforms",
+        "//c8/protolog:api-limits",
+        "//c8/protolog:xr-requests",
+        "//c8/protolog/api:log-request.capnp-cc",
+        "//c8/stats:scope-timer",
+        "//c8/stats:self-timing-scope-lock",
+        "//reality/app/device:ios-device-info",
+        "//reality/app/sensors/arkit:ios-arkit-sensor",
+        "//reality/app/sensors/pose:ios-pose-sensor",
+        "//reality/engine/api:reality.capnp-cc",
+        "//reality/engine/executor:xr-engine",
+    ],
+)
+
+nia_objc_library(
+    name = "xr-ios-c8",
+    srcs = [
+        "xr-ios-c8.mm",
+    ],
+    hdrs = [
+        "xr-ios-c8.h",
+    ],
+    sdk_frameworks = [
+        "AVFoundation",
+        "CoreImage",
+        "CoreVideo",
+        "Metal",
+        "OpenGLES",
+        "UIKit",
+    ],
+    target_compatible_with = select({
+        "@niantic//bzl/conditions:ios": [],
+        "//conditions:default": ["@platforms//:incompatible"],
+    }),
+    visibility = [
+        "//visibility:private",
+    ],
+    deps = [
+        ":xr-ios-interface",
+        "//c8/io:capnp-messages",
+        "//c8/pixels:pixel-buffer",
+        "//c8/pixels:pixel-transforms",
+        "//c8/protolog:api-limits",
+        "//c8/protolog:xr-requests",
+        "//c8/protolog/api:log-request.capnp-cc",
+        "//c8/protolog/api:remote-request.capnp-cc",
+        "//c8/stats:scope-timer",
+        "//c8/stats:self-timing-scope-lock",
+        "//reality/app/device:ios-device-info",
+        "//reality/app/sensors/camera:ios-camera-sensor",
+        "//reality/app/sensors/pose:ios-pose-sensor",
+        "//reality/engine/api:reality.capnp-cc",
+        "//reality/engine/executor:xr-engine",
+    ],
+)
+
+nia_objc_library(
+    name = "xr-ios-remote-only",
+    srcs = [
+        "xr-ios-remote-only.mm",
+    ],
+    hdrs = [
+        "xr-ios-remote-only.h",
+    ],
+    visibility = [
+        "//visibility:private",
+    ],
+    deps = [
+        ":xr-ios-interface",
+        "//c8/protolog/api:log-request.capnp-cc",
+    ],
+)
+
+nia_objc_library(
+    name = "xr-ios-unity-render",
+    srcs = [
+        "xr-ios-unity-render.cc",
+    ],
+    tags = ["manual"],
+    visibility = [
+        "//visibility:public",
+    ],
+    deps = [
+        ":xr-ios",
+        "//bzl/unity:plugin-api",
+    ],
+)
+
+# START_AUTOGENERATED_RULES
+# Do not edit these rules manually, use inliner.
+cc_library(
+    name = "c8-helpers",
+    srcs = [
+        "c8-helpers.cc",
+    ],
+    hdrs = [
+        "c8-helpers.h",
+    ],
+    visibility = [
+        "//reality/app/sensors/arkit:__subpackages__",
+        "//reality/app/xr/ios:__subpackages__",
+    ],
+    deps = [
+        "//bzl/inliner:rules",
+        "//c8:hmatrix",
+        "//c8:hpoint",
+        "//c8:quaternion",
+    ],
+)
+# END_AUTOGENERATED_RULES

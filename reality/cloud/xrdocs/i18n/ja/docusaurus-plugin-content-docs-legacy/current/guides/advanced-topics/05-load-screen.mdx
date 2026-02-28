@@ -1,0 +1,150 @@
+---
+id: load-screen
+---
+
+# ロード画面のカスタマイズ
+
+8th Wallの[XRExtras](https://github.com/8thwall/web/tree/master/xrextras)ライブラリは、ロード画面、ソーシャルリンクアウト
+フロー、エラー処理など、WebARアプリケーションの最も一般的なニーズを処理するモジュール
+を提供します。
+
+Loading\\`モジュールは、ライブラリのロード中（
+）とカメラの起動中に、ロード中のオーバーレイとカメラのアクセス許可プロンプトを表示します。
+WebARエクスペリエンスに入ったとき、ユーザーが最初に目にするものです。 
+WebARエクスペリエンスに入ったとき、ユーザーが最初に目にするものです。
+
+このセクションでは、
+の色、ロード・スピナー、ロード・アニメーションを変更する値を提供することによって、ロード画面をカスタマイズする方法について説明します。
+
+\*\*すべてのプロジェクトは、ローディングページに [Powered by 8th Wall](https://drive.google.com/drive/folders/1c9d23c5hS_HspHTUD7VceV6ocqdbPN7J?usp=sharing)
+バッジを表示する必要があります。 これはデフォルトで`ロード・モジュール`に含まれており、削除することはできない。 これはデフォルトで`ロード・モジュール`に含まれており、削除することはできない。
+
+## {#ids--classes-to-override}をオーバーライドするID/クラス
+
+```mdx-code-block
+<table width="100%">
+  <thead>
+    <th style={{textAlign: 'center'}}>ローディング画面</th>
+    <th style={{textAlign: 'center'}}>iOS（13+）モーションセンサープロンプト</th>
+  </thead>
+  <tbody>
+    {/* 画像 */}
+    <tr>
+      <td width="50%">
+        <img src={require('/images/load-screen-css.jpg').default} style={{display: 'block', maxWidth: '360px', margin: 'auto', height: 'auto'}}/>
+      </td>
+      <td width="50%">
+        <img src={require('/images/motion-prompt-css.jpg').default} style={{display: 'block', maxWidth: '360px', margin: 'auto', height: 'auto'}}/>
+      </td>
+    </tr>
+    {/* キー */}
+    <tr>
+      <td width="50%">
+        <ol>
+          <li>#requestingCameraPermissions</li>
+          <li>#requestingCameraIcon</li>
+          <li>#loadBackground</li>
+          <li>#ロード画像</li>
+        </ol>
+      </td>
+      <td width="50%">
+        <ol>
+          <li>.prompt-box-8w</li>
+          <li>.prompt-button-8w</li>
+          <li>.button-primary-8w</li>
+        </ol>
+        <p>テキストをカスタマイズするには、MutationObserverを使用します。以下のコード例を参照してください。</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+```
+
+## A-Frame コンポーネントのパラメータ {#a-frame-component-parameters}
+
+A-Frame プロジェクトで XRExtras を使用している場合、`xrextras-loading` モジュールを使用すると、以下のパラメータを使ってロード画面を簡単にカスタマイズすることができます：
+
+| パラメータ      | タイプ     | 説明                                                                      |
+| ---------- | ------- | ----------------------------------------------------------------------- |
+| カメラの背景色    | ヘックスカラー | カメラアイコンとテキストの後ろにあるローディング画面上部の背景色（(上記参照。 ローディング画面#1) ローディング画面#1)         |
+| ロード背景色     | ヘックスカラー | loadImage \`の後ろにあるローディング画面下部の背景色（(上記参照。 ローディング画面#3) ローディング画面#3)         |
+| ロードイメージ    | 身分証明書   | 画像のID。  画像のID。  画像は`<a-asset>`である必要があります（(上記参照。 ローディング画面#4) ローディング画面#4) |
+| ロードアニメーション | 文字列     | loadImage` のアニメーションスタイル。  spin`（デフォルト）、`pulse`、`scale`、`none`から選択する。    |
+
+#### A-Frame コンポーネントの例 {#a-frame-component-example}
+
+```jsx
+<a-scene
+  tap-place
+  xrextras-almost-there
+  xrextras-loading="
+    loadBackgroundColor：#007AFF;
+    cameraBackgroundColor：#5AC8FA;
+    loadImage：#myCustomImage;
+    loadAnimation: pulse"
+  xrextras-runtime-error
+  xrweb>
+
+<a-assets>
+  <img id="myCustomImage" src="assets/my-custom-image.png">
+</a-assets>
+```
+
+#### Javascript/CSS メソッド {#javascriptcss-method}
+
+```javascript
+const load = () => {
+  XRExtras.Loading.showLoading()
+  console.log('ローディングスピナーのカスタマイズ')
+  const loadImage = document.getElementById("loadImage")
+  if (loadImage) {
+    loadImage.src = require("./assets/my-custom-image.png")
+  }.
+}
+window.XRExtras ? load() : window.addEventListener('xrextrasloaded', load)
+```
+
+#### CSSの例 {#css-example}
+
+```css
+#requestingCameraPermissions {
+  color: black !important;
+  background-color: white !important;
+}.
+#requestingCameraIcon {
+  /* これは画像を白から黒に変更します */
+  filter: invert(1) !important;
+}.
+
+.prompt-box-8w {
+  background-color: white !important;
+  color：#00FF00 !important;
+}.
+.prompt-button-8w {
+  background-color：#0000FF !important;
+}.
+
+.button-primary-8w {
+  background-color：#7611B7 !important;
+}.
+```
+
+#### iOS (13+) モーションセンサー プロンプト テキストのカスタマイズ {#ios-13-motion-sensor-prompt-text-customization}
+
+```javascript
+let inDom = false
+const observer = new MutationObserver(() => {
+  if (document.querySelector('.prompt-box-8w')){
+    if (!inDom) {
+      document.querySelector('.prompt-box-8w p').innerHTML =<strong>'My new text goes here</strong><br/><br/>Press Approve to continue.'
+      document.querySelector('.prompt-button-8w').innerHTML = '拒否'
+      document.querySelector('.button-primary-8w').innerHTML = '承認'
+    }
+    inDom = true
+  } else if (inDom) {
+    inDom = false
+    observer.disconnect()
+  }.
+})
+observer.observe(document.body, {childList: true})
+```

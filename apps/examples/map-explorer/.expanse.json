@@ -1,0 +1,699 @@
+{
+  "entrySpaceId": "17b75230-9a4d-458d-ab51-a2a1f30ae158",
+  "objects": {
+    "13313274-e05d-438e-9a3a-daef9db710a7": {
+      "components": {
+        "cc57a1a7-7777-4594-83fd-0af3deaececa": {
+          "id": "cc57a1a7-7777-4594-83fd-0af3deaececa",
+          "name": "gps-pointer",
+          "parameters": {
+            "driveClip": "walk",
+            "faceGpsDirection": true,
+            "idleClip": "idle",
+            "runClip": "walk",
+            "walkClip": "walk"
+          }
+        }
+      },
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "idle",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/doty.glb"
+        }
+      },
+      "id": "13313274-e05d-438e-9a3a-daef9db710a7",
+      "material": null,
+      "name": "Doty",
+      "parentId": "bdf03686-888e-4213-96d6-dd2a7521be9a",
+      "position": [
+        0,
+        0.01,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        3,
+        3,
+        3
+      ],
+      "shadow": {
+        "castShadow": true
+      }
+    },
+    "47699d9e-18a5-4f88-a4f9-b8be92e8f74a": {
+      "components": {},
+      "geometry": null,
+      "id": "47699d9e-18a5-4f88-a4f9-b8be92e8f74a",
+      "light": {
+        "intensity": 0.5,
+        "type": "ambient"
+      },
+      "material": null,
+      "name": "Ambient Light",
+      "order": 0.7512952613873962,
+      "parentId": "17b75230-9a4d-458d-ab51-a2a1f30ae158",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "72196343-c576-4354-a5ce-22edf1e51602": {
+      "components": {
+        "3c0c8bf1-5378-4550-a49d-449413b22200": {
+          "id": "3c0c8bf1-5378-4550-a49d-449413b22200",
+          "name": "World Map UI",
+          "parameters": {
+            "displayNameLabel": {
+              "type": "entity",
+              "id": "c2401e64-1c09-44d4-b1e6-7c29841cedba"
+            },
+            "startButton": {
+              "type": "entity",
+              "id": "77075213-602c-4680-a931-0e87100b23b6"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "72196343-c576-4354-a5ce-22edf1e51602",
+      "material": null,
+      "name": "UI",
+      "order": 2.376942892081094,
+      "parentId": "17b75230-9a4d-458d-ab51-a2a1f30ae158",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "alignItems": "center",
+        "left": "0",
+        "position": "absolute",
+        "top": "0",
+        "width": "100%",
+        "right": "0",
+        "bottom": "0",
+        "flexDirection": "column-reverse",
+        "justifyContent": "flex-start"
+      }
+    },
+    "77075213-602c-4680-a931-0e87100b23b6": {
+      "components": {},
+      "geometry": null,
+      "id": "77075213-602c-4680-a931-0e87100b23b6",
+      "material": null,
+      "name": "Button",
+      "order": 1.6621535070070437,
+      "parentId": "8e697308-5cc9-484e-a7a5-a6e5ca52b8b3",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "background": "#8000ff",
+        "backgroundOpacity": 1,
+        "borderRadius": 8,
+        "height": "42",
+        "width": "120",
+        "justifyContent": "center",
+        "alignItems": "center"
+      }
+    },
+    "84f7faaf-2d64-457a-bb0a-7a6f8e8c95a9": {
+      "camera": {
+        "type": "perspective",
+        "xr": {
+          "xrCameraType": "world",
+          "phone": "AR",
+          "desktop": "disabled",
+          "headset": "AR",
+          "world": {
+            "enableVps": true
+          }
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "id": "84f7faaf-2d64-457a-bb0a-7a6f8e8c95a9",
+      "material": null,
+      "name": "Camera",
+      "parentId": "bf4a3817-145c-4ec9-ae73-a168fceaaad3",
+      "position": [
+        0,
+        2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "order": 0.9611670638225083
+    },
+    "8a1917a1-1d81-4adc-96fe-a5d39f7c53d9": {
+      "components": {
+        "267b6606-3648-4de9-86b9-65b11143cd50": {
+          "id": "267b6606-3648-4de9-86b9-65b11143cd50",
+          "name": "Load Space on Click",
+          "parameters": {}
+        }
+      },
+      "geometry": null,
+      "id": "8a1917a1-1d81-4adc-96fe-a5d39f7c53d9",
+      "material": null,
+      "name": "Return to Map",
+      "parentId": "b47771ee-4cc1-43c5-ab51-183f2326e940",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "color": "#ffffff",
+        "font": {
+          "type": "font",
+          "font": "Nunito"
+        },
+        "fontSize": 18,
+        "height": "100%",
+        "text": "Return to Map",
+        "textAlign": "center",
+        "width": "100%",
+        "verticalTextAlign": "center"
+      },
+      "order": 4.469091577865768
+    },
+    "a608ddd9-9379-464d-966f-5d8d8674c83c": {
+      "camera": {
+        "type": "perspective",
+        "xr": {
+          "desktop": "3D",
+          "xrCameraType": "3dOnly",
+          "headset": "disabled"
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "id": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "material": null,
+      "name": "Camera",
+      "parentId": "b26349c8-dd15-458a-82b2-c78665e78cda",
+      "position": [
+        0,
+        1,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.9999998646558023,
+        0.9999999931513284,
+        0.9999998715044741
+      ]
+    },
+    "ac1989e3-3b71-49e2-a05f-e682aeb18c36": {
+      "components": {},
+      "geometry": null,
+      "id": "ac1989e3-3b71-49e2-a05f-e682aeb18c36",
+      "light": {
+        "intensity": 0.5,
+        "shadowBias": 0,
+        "shadowMapSize": [
+          2048,
+          2048
+        ],
+        "type": "directional",
+        "shadowCamera": [
+          -20,
+          20,
+          20,
+          -20,
+          0.5,
+          200
+        ]
+      },
+      "material": null,
+      "name": "Directional Light",
+      "order": 1.7512952613873962,
+      "parentId": "17b75230-9a4d-458d-ab51-a2a1f30ae158",
+      "position": [
+        0,
+        10,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "b26349c8-dd15-458a-82b2-c78665e78cda": {
+      "components": {
+        "2e12a955-cde2-4ef8-acc4-adc6f86e3579": {
+          "id": "2e12a955-cde2-4ef8-acc4-adc6f86e3579",
+          "name": "World Map Camera Controls",
+          "parameters": {
+            "rotationSensitivity": 8
+          }
+        }
+      },
+      "geometry": null,
+      "id": "b26349c8-dd15-458a-82b2-c78665e78cda",
+      "material": null,
+      "name": "Camera Rig",
+      "order": 3.751295261387396,
+      "parentId": "17b75230-9a4d-458d-ab51-a2a1f30ae158",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "bdf03686-888e-4213-96d6-dd2a7521be9a": {
+      "components": {
+        "35842ba5-0737-4615-979c-584c6faa1e32": {
+          "id": "35842ba5-0737-4615-979c-584c6faa1e32",
+          "name": "World Map",
+          "parameters": {
+            "ringB": 182,
+            "ringG": 17,
+            "ringR": 118,
+            "sphereB": 255,
+            "sphereG": 80,
+            "sphereR": 173,
+            "wasdMovement": false
+          }
+        }
+      },
+      "geometry": null,
+      "id": "bdf03686-888e-4213-96d6-dd2a7521be9a",
+      "map": {
+        "latitude": 37.7955281,
+        "longitude": -122.3934225,
+        "radius": 1000,
+        "spawnLocations": true,
+        "targetEntity": {
+          "type": "entity",
+          "id": ""
+        },
+        "useGps": true
+      },
+      "mapTheme": {
+        "buildingColor": "#E3D9C3",
+        "buildingOpacity": 0.4,
+        "landColor": "#F8F5EB",
+        "parkColor": "#3D8F43",
+        "parkingColor": "#E8E8DB",
+        "roadColor": "#CFBE99",
+        "sandColor": "#FFE5B3",
+        "transitColor": "#FFC758",
+        "waterColor": "#43BBD1"
+      },
+      "material": null,
+      "name": "Map",
+      "order": 2.751295261387396,
+      "parentId": "17b75230-9a4d-458d-ab51-a2a1f30ae158",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "c2401e64-1c09-44d4-b1e6-7c29841cedba": {
+      "components": {},
+      "geometry": null,
+      "id": "c2401e64-1c09-44d4-b1e6-7c29841cedba",
+      "material": null,
+      "name": "Title",
+      "order": 0.2040652205803275,
+      "parentId": "8e697308-5cc9-484e-a7a5-a6e5ca52b8b3",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "color": "#000000",
+        "font": {
+          "type": "font",
+          "font": "Nunito"
+        },
+        "fontSize": 20,
+        "height": "38",
+        "text": "Location Name",
+        "width": "100%",
+        "verticalTextAlign": "center"
+      }
+    },
+    "e1f9e4a4-b453-4abd-b64a-67d9b91ef8fd": {
+      "components": {},
+      "geometry": {
+        "height": 40,
+        "type": "plane",
+        "width": 40
+      },
+      "id": "e1f9e4a4-b453-4abd-b64a-67d9b91ef8fd",
+      "material": {
+        "color": "#000000",
+        "opacity": 0.4,
+        "type": "shadow"
+      },
+      "name": "Ground",
+      "parentId": "bdf03686-888e-4213-96d6-dd2a7521be9a",
+      "position": [
+        0,
+        0.01,
+        0
+      ],
+      "rotation": [
+        -0.707106799999999,
+        0,
+        0,
+        0.7071067623730954
+      ],
+      "scale": [
+        1,
+        1.0000000532124818,
+        1.0000000532124818
+      ],
+      "shadow": {
+        "receiveShadow": true
+      }
+    },
+    "8e697308-5cc9-484e-a7a5-a6e5ca52b8b3": {
+      "id": "8e697308-5cc9-484e-a7a5-a6e5ca52b8b3",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "72196343-c576-4354-a5ce-22edf1e51602",
+      "components": {},
+      "name": "Container",
+      "ui": {
+        "width": "100%",
+        "background": "#ffffff",
+        "backgroundOpacity": 1,
+        "maxWidth": "400",
+        "flexDirection": "column",
+        "alignItems": "center",
+        "justifyContent": "center",
+        "borderRadiusBottomLeft": "15",
+        "borderRadiusBottomRight": "15",
+        "gap": 2
+      },
+      "order": -2.4686857622730676
+    },
+    "48f462d8-ae54-47f8-b8ac-3350d8c17ef0": {
+      "id": "48f462d8-ae54-47f8-b8ac-3350d8c17ef0",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "bf4a3817-145c-4ec9-ae73-a168fceaaad3",
+      "components": {
+        "aad65e9b-5cfb-475c-a970-96d463833f57": {
+          "id": "aad65e9b-5cfb-475c-a970-96d463833f57",
+          "name": "Rainbow Shader",
+          "parameters": {}
+        }
+      },
+      "name": "Rainbow Location Shader",
+      "order": 2.9611670638225083
+    },
+    "6ec70e58-2667-4006-baaa-0c736310db55": {
+      "id": "6ec70e58-2667-4006-baaa-0c736310db55",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "77075213-602c-4680-a931-0e87100b23b6",
+      "components": {},
+      "name": "Text",
+      "ui": {
+        "font": {
+          "type": "font",
+          "font": "Nunito"
+        },
+        "text": "Start AR",
+        "fontSize": 18,
+        "height": "100%",
+        "verticalTextAlign": "center",
+        "width": "100%"
+      }
+    },
+    "defac3e5-2670-4a4a-a8d1-0d802088b7f1": {
+      "id": "defac3e5-2670-4a4a-a8d1-0d802088b7f1",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "bf4a3817-145c-4ec9-ae73-a168fceaaad3",
+      "components": {},
+      "name": "UI",
+      "ui": {
+        "position": "absolute",
+        "top": "0",
+        "right": "0",
+        "bottom": "0",
+        "left": "0",
+        "width": "100%",
+        "alignItems": "center",
+        "flexDirection": "column",
+        "justifyContent": "center"
+      }
+    },
+    "b47771ee-4cc1-43c5-ab51-183f2326e940": {
+      "id": "b47771ee-4cc1-43c5-ab51-183f2326e940",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "defac3e5-2670-4a4a-a8d1-0d802088b7f1",
+      "components": {},
+      "name": "Button",
+      "ui": {
+        "width": "200",
+        "background": "#8000ff",
+        "backgroundOpacity": 1,
+        "height": "40",
+        "borderRadius": 8,
+        "alignItems": "center",
+        "justifyContent": "center"
+      }
+    }
+  },
+  "spaces": {
+    "17b75230-9a4d-458d-ab51-a2a1f30ae158": {
+      "activeCamera": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "id": "17b75230-9a4d-458d-ab51-a2a1f30ae158",
+      "name": "World Map",
+      "sky": {
+        "type": "gradient",
+        "colors": [
+          "#8dedf6",
+          "#dbedf6"
+        ]
+      },
+      "includedSpaces": [],
+      "reflections": {
+        "type": "url",
+        "url": "https://cdn.8thwall.com/web/assets/envmap/basic_env_map-m9hqpneh.jpg"
+      },
+      "fog": {
+        "type": "exponential",
+        "density": 0.09,
+        "color": "#b4edf6"
+      }
+    },
+    "bf4a3817-145c-4ec9-ae73-a168fceaaad3": {
+      "activeCamera": "84f7faaf-2d64-457a-bb0a-7a6f8e8c95a9",
+      "id": "bf4a3817-145c-4ec9-ae73-a168fceaaad3",
+      "name": "AR Scene",
+      "reflections": {
+        "type": "url",
+        "url": "https://cdn.8thwall.com/web/assets/envmap/hilly_terrain_01_1k-m89fuwlx.hdr"
+      }
+    }
+  },
+  "runtimeVersion": {
+    "type": "version",
+    "level": "major",
+    "major": 2,
+    "minor": 0,
+    "patch": 0
+  },
+  "historyVersion": "mfegqk08"
+}

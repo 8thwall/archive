@@ -1,0 +1,13 @@
+{
+  "projectUrl": "https://8w.8thwall.app/gamejam-team2/",
+  "shell": "html",
+  "appInfo": {
+    "workspace": "8w",
+    "appName": "gamejam-team2",
+    "refHead": "production"
+  },
+  "appUuid": "66b89fca-0570-4616-a2b8-b7086280282b",
+  "exportType": "zip",
+  "requestRef": "lucas-default",
+  "repoId": "cc.3.app.66b89fca-0570-4616-a2b8-b7086280282b"
+}

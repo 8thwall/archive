@@ -1,0 +1,52 @@
+---
+id: audio
+description: このライブラリには、オーディオ再生を処理する関数が含まれている。
+---
+
+# オーディオ
+
+## 説明
+
+{frontMatter.description}
+
+## 機能
+
+### ミュート
+
+シーンオーディオをミュートする。
+
+```ts
+world.audio.mute() // -> void
+```
+
+### 消音
+
+シーンオーディオのミュートを解除する。
+
+```ts
+world.audio.unmute() // -> void
+```
+
+### ポーズ
+
+シーンオーディオを一時停止する。
+
+```ts
+world.audio.pause() // -> void
+```
+
+### プレー
+
+シーンオーディオを再生する。
+
+```ts
+world.audio.play() // -> void
+```
+
+### セットボリューム
+
+シーンオーディオの音量を設定します。 **パラメーターは0から1の間の値でなければならない。**
+
+```ts
+world.audio.setVolume(newVolume: number) // -> void
+```

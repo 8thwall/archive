@@ -1,0 +1,45 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<button id="inviteOverlay">
+  <img id="inviteIcon" src="./assets/invite.svg" width="25px" />
+</button>
+
+<a-scene
+  networked-scene="adapter: sharedar; connectOnLoad: false"
+  network-stats
+  connect
+  xrextras-loading
+  xrextras-runtime-error
+  xrextras-gesture-detector>
+  <a-assets>
+    <template id="avatar-template">
+      <a-sphere></a-sphere>
+    </template>
+
+    <template id="sphere-template">
+      <a-entity
+        class="cantap"
+        geometry="primitive: box"
+        position="0 0.5 0"
+        material="
+        color: #AD50FF; shader: flat; 
+        src: https://cdn.8thwall.com/web/assets/cube-texture.png"
+        color-changer></a-entity>
+    </template>
+  </a-assets>
+
+  <a-camera
+    id="camera"
+    position="0 2 2"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;">
+  </a-camera>
+
+  <!-- player entities -->
+  <a-entity networked="template: #avatar-template" xrextras-attach="target: camera"></a-entity>
+
+  <!-- sphere entity -->
+  <a-entity
+    id="sphere"
+    networked="template: #sphere-template; networkId: sphere; persistent: true; owner: scene"></a-entity>
+</a-scene>

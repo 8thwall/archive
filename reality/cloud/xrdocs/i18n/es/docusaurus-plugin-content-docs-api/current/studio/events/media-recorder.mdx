@@ -1,0 +1,124 @@
+---
+id: media-recorder
+---
+
+import {EventExample} from '@site/src/components/event-example'
+
+# Eventos de Media Recorder
+
+## Descripción
+
+Este grabador multimedia te permite realizar capturas de pantalla y grabar vídeo de tu proyecto de Studio en tiempo de ejecución.
+
+Los eventos de la grabadora multimedia se emiten en [world.events.globalId](/api/studio/world/events/#properties).
+
+## Eventos
+
+### RECORDER_SCREENSHOT_READY
+
+Se emite cuando la captura de pantalla está lista.
+
+#### Propiedades
+
+| Propiedad | Tipo | Descripción                              |
+| --------- | ---- | ---------------------------------------- |
+| gota      | Gota | La imagen JPEG de la captura de pantalla |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="RECORDER_SCREENSHOT_READY" target="world.events.globalId" callbackBody={`console.log('Screenshot blob: ', event.data.blob)`} />
+
+### RECORDER_VIDEO_STARTED
+
+Se emite cuando se inicia la grabación.
+
+#### Propiedades
+
+Ninguna.
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="RECORDER_VIDEO_STARTED" target="world.events.globalId" hasPayload={false} callbackBody={`console.log('Recording started')`} />
+
+### RECORDER_VIDEO_STOPPED
+
+Se emite cuando se detiene la grabación.
+
+#### Propiedades
+
+Ninguno.
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="RECORDER_VIDEO_STARTED" target="world.events.globalId" hasPayload={false} callbackBody={`console.log('Recording stopped')`} />
+
+### RECORDER_VIDEO_ERROR
+
+Se emite cuando se produce un error.
+
+#### Propiedades
+
+| Propiedad | Tipo   | Descripción                          |
+| --------- | ------ | ------------------------------------ |
+| mensaje   | cadena | El mensaje de error                  |
+| nombre    | cadena | El nombre del error                  |
+| pila      | cadena | El seguimiento de la pila de errores |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="RECORDER_VIDEO_ERROR" target="world.events.globalId" callbackBody={`console.log('Recorder error: ', event.data.message)`} />
+
+### RECORDER_VIDEO_READY
+
+Se emite cuando la grabación ha finalizado y el vídeo está listo.
+
+#### Propiedades
+
+| Propiedad | Tipo | Descripción                |
+| --------- | ---- | -------------------------- |
+| videoBlob | Gota | La mancha de vídeo grabada |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="RECORDER_VIDEO_READY" target="world.events.globalId" callbackBody={`console.log('Video ready: ', event.data.videoBlob)`} />
+
+### RECORDER_PREVIEW_READY
+
+Se emite cuando un vídeo previsualizable, pero no optimizado para compartir, está listo (sólo Android/Escritorio).
+
+#### Propiedades
+
+| Propiedad | Tipo | Descripción                            |
+| --------- | ---- | -------------------------------------- |
+| videoBlob | Gota | La mancha de vídeo de previsualización |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="RECORDER_PREVIEW_READY" target="world.events.globalId" callbackBody={`console.log('Preview ready: ', event.data.videoBlob)`} />
+
+### RECORDER_FINALIZE_PROGRESS
+
+Se emite cuando el grabador multimedia está avanzando en la exportación final (sólo Android/escritorio).
+
+#### Propiedades
+
+| Propiedad | Tipo   | Descripción                         |
+| --------- | ------ | ----------------------------------- |
+| progreso  | número | Progreso de la finalización (0 a 1) |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="RECORDER_FINALIZE_PROGRESS" target="world.events.globalId" callbackBody={`console.log('Finalize progress: ', event.data.progress * 100)`} />
+
+### MARCO_PROCESO_GRABADOR
+
+#### Propiedades
+
+| Propiedad       | Tipo      | Descripción                         |
+| --------------- | --------- | ----------------------------------- |
+| marco           | ImageData | El fotograma de vídeo procesado     |
+| marca de tiempo | número    | La marca de tiempo de la trama (ms) |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="RECORDER_PROCESS_FRAME" target="world.events.globalId" callbackBody={`console.log('Process frame: ', event.data.timestamp, event.data.frame)`} />

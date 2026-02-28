@@ -1,0 +1,9 @@
+{
+  "name": "hubspot",
+  "version": "1.0.0",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.477.0",
+    "@hubspot/api-client": "^10.2.0"
+  }
+}

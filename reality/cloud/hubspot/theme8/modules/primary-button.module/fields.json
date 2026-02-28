@@ -1,0 +1,60 @@
+[ {
+  "id" : "e1576b8c-27a7-c880-0ccb-d72fb450e4ac",
+  "name" : "link",
+  "display_width" : null,
+  "label" : "Link",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION", "PHONE_NUMBER", "WHATSAPP_NUMBER", "PAYMENT" ],
+  "show_advanced_rel_options" : false,
+  "type" : "link",
+  "default" : {
+    "url" : {
+      "content_id" : null,
+      "href" : "https://8thwall.com",
+      "type" : "EXTERNAL"
+    },
+    "open_in_new_tab" : false,
+    "no_follow" : false
+  }
+}, {
+  "id" : "e5073aa3-6499-3a32-7f3b-8a73f0144251",
+  "name" : "text",
+  "display_width" : null,
+  "label" : "Text",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text",
+  "default" : "Button Text"
+}, {
+  "id" : "e8cac807-6c10-1e66-fa89-98dbc6a833b2",
+  "name" : "color",
+  "display_width" : null,
+  "label" : "Color Scheme",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "primary", "Primary" ], [ "secondary", "Secondary" ], [ "tertiary", "Tertiary" ], [ "primary_round", "Primary Round" ], [ "secondary_round", "Secondary Round" ], [ "tertiary_round", "Tertiary Round" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "default" : "primary"
+}, {
+  "id" : "147a7688-3a25-295e-fcd3-49567c58c720",
+  "name" : "alignment",
+  "display_width" : null,
+  "label" : "Alignment",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "placeholder" : "",
+  "choices" : [ [ "buttonLeft", "Left" ], [ "buttonCenter", "Center" ], [ "buttonRight", "Right" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice"
+} ]

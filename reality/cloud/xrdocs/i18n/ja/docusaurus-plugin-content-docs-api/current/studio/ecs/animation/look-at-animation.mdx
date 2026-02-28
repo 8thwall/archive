@@ -1,0 +1,30 @@
+---
+id: look-at-animation
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import LookAtAnimationTable from "../../../../gen/tables/LookAtAnimation.md"
+
+# アニメーション
+
+## 説明
+
+このコンポーネントは、エンティティにアニメーションを作成します。
+
+## プロパティ
+
+<LookAtAnimationTable />
+
+## 機能
+
+<ComponentFunctions
+    name="LookAtAnimation"
+    properties={{
+        targetX: 0,
+        targetY: 0,
+        targetZ: 0
+    }}
+    mutate={`カーソル.ターゲットX = 10;
+    カーソル.ターゲットY = 5;
+    return false;`}
+/>

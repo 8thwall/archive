@@ -1,0 +1,28 @@
+---
+id: splat
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# スプラット
+
+## 商品説明
+
+このコンポーネントは、エンティティにガウススプラットを確立する。
+
+## プロパティ一覧
+
+| Property | Type   | 初期値     | 商品説明     |
+| -------- | ------ | ------- | -------- |
+| url      | ストリング  | ''      | ソースのURL。 |
+
+## 関数一覧
+
+<ComponentFunctions
+    name="Splat"
+    properties={{
+        url: "./assets/splat.spz"
+    }}
+    mutate={`cursor.url = './assets/new_splat.spz';
+    return false;`}
+/>

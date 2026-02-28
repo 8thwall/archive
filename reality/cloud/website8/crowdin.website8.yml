@@ -1,0 +1,16 @@
+project_id: 16 # https://<REMOVED_BEFORE_OPEN_SOURCING>.crowdin.com/u/projects/16
+pull_request_title: '[auto-commit][website8] Crowdin Translation Updates'
+pull_request_reviewers:
+  - "mralbean"
+  - "fantaisie64"
+  - "brandon-win"
+  - "ktddaeng"
+files:
+  - source: /src/i18n/en-US/*.json
+    ignore:
+      - /src/i18n/en-US/privacy-page.json
+    translation: /src/i18n/%locale%/%original_file_name%
+  - source: /src/docs/en-US/**/*.md
+    ignore:
+      - /src/docs/en-US/legal/**
+    translation: /src/docs/%locale%/**/%original_file_name%

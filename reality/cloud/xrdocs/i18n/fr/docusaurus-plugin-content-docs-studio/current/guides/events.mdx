@@ -1,0 +1,174 @@
+---
+id: events
+description: >-
+  Les événements permettent aux entités de communiquer entre elles grâce à un
+  système flexible d'écoute et d'envoi.
+---
+
+# Evénements
+
+## Introduction
+
+{frontMatter.description}
+
+## Écouteurs d'événements
+
+##### Auditeur {#listener}
+
+| Propriété        | Type                 | Description                                             |
+| ---------------- | -------------------- | ------------------------------------------------------- |
+| cible            | eid                  | Entité sur laquelle l'événement a été déclenché.        |
+| cible actuelle   | eid                  | Entité sur laquelle l'événement a été écouté.           |
+| nom              | chaîne de caractères | Nom de l'événement.                                     |
+| données          | tous                 | Données personnalisées de l'événement                   |
+
+### Création d'écouteurs d'événements
+
+#### addListener
+
+```ts
+world.events.addListener(target, name, listener)
+```
+
+##### Paramètres
+
+:::tip
+Il est possible de créer des récepteurs d'événements globaux en utilisant `world.events.globalId` comme cible.
+:::
+
+| Propriété | Type                                | Description                                                |
+| --------- | ----------------------------------- | ---------------------------------------------------------- |
+| cible     | eid                                 | Référence à l'entité cible.                                |
+| nom       | chaîne de caractères                | Nom de l'événement à écouter.                              |
+| auditeur  | [Listener](#listener)               | La fonction de rappel pour le déclenchement d'un événement |
+
+### Création de gestionnaires d'événements
+
+Lorsque l'on ajoute des récepteurs d'événements aux entités, il est essentiel de configurer correctement les gestionnaires pour s'assurer qu'ils fonctionnent comme prévu, en particulier lorsque des composants sont ajoutés à plusieurs entités. La création incorrecte d'un gestionnaire peut entraîner des références périmées et un comportement inattendu.
+
+Supposons que vous créiez un gestionnaire pour une entité NPC qui écoute un événement endommagé. Le gestionnaire doit mettre à jour certaines valeurs de schéma et de données lorsque l'événement se produit.
+
+#### Exemple incorrect
+
+<div class="code-invalid">
+
+```ts
+import * as ecs from '@8thwall/ecs'
+import { addCleanup, doCleanup } from './cleanup'
+
+ecs.registerComponent({
+  name : 'npc',
+  schema : {
+    isInjured: ecs.boolean,
+  },
+  data : {
+    bpm: ecs.f32,
+  },
+  add : (world, component) => {
+    // Création incorrecte du gestionnaire
+    const damagedHandler = (e) => {
+      component.schema.isInjured = true
+      component.data.bpm += 30
+    }
+    world.events.addListener(component.eid, 'damaged', damagedHandler)
+
+    const cleanup = () => {
+      world.events.removeListener(component.eid, 'damaged', damagedHandler)
+    }
+    addCleanup(component, cleanup)
+  },
+  remove : (world, component) => {
+    doCleanup(component)
+  },
+})
+```
+
+</div>
+
+Dans cet exemple :
+
+- Le gestionnaire damagedHandler fait directement référence à `component.schema` et `component.data`.
+- Si le composant est ajouté à plusieurs entités, la référence du composant dans le gestionnaire devient obsolète.
+- Cela peut amener le gestionnaire à opérer sur des données incorrectes, ce qui entraîne des bogues.
+
+#### Exemple correct
+
+Pour s'assurer que le gestionnaire opère sur les bonnes données d'entité, passez les `dataAttribute` et `schemaAttribute` du composant au gestionnaire et utilisez-les pour récupérer les curseurs à l'intérieur du gestionnaire.
+
+<div class="code-valid">
+
+```ts
+import * as ecs from '@8thwall/ecs'
+import { addCleanup, doCleanup } from './cleanup'
+
+// Fonction pour créer le gestionnaire de dommages
+const createDamagedHandler = (dataAttribute, schemaAttribute) => (e) => {
+  const dataCursor = dataAttribute.cursor(e.target)
+  const schemaCursor = schemaAttribute.cursor(e.target)
+  schemaCursor.isInjured = true
+  dataCursor.bpm += 30
+}
+
+ecs.registerComponent({
+  name : 'npc',
+  schema : {
+    isInjured: ecs.boolean,
+  },
+  data : {
+    bpm: ecs.f32,
+  },
+  add : (world, component) => {
+    // Création correcte du gestionnaire
+    const damagedHandler = createDamagedHandler(component.dataAttribute, component.schemaAttribute)
+    world.events.addListener(component.eid, 'damaged', damagedHandler)
+
+    const cleanup = () => {
+      world.events.removeListener(component.eid, 'damaged', damagedHandler)
+    }
+    addCleanup(component, cleanup)
+  },
+  remove : (world, component) => {
+    doCleanup(component)
+  },
+})
+```
+
+</div>
+
+### Suppression des récepteurs d'événements
+
+#### removeListener
+
+```ts
+world.events.removeListener(target, name, listener)
+```
+
+##### Paramètres
+
+| Propriété | Type                                | Description                                                |
+| --------- | ----------------------------------- | ---------------------------------------------------------- |
+| cible     | eid                                 | Référence à l'entité cible.                                |
+| nom       | chaîne de caractères                | Nom de l'événement à écouter.                              |
+| auditeur  | [Listener](#listener)               | La fonction de rappel pour le déclenchement d'un événement |
+
+## Répartiteurs d'événements
+
+### Envoi d'événements personnalisés
+
+#### Envoi
+
+:::info
+Lorsqu'un événement se produit sur une entité, les gestionnaires sont d'abord exécutés sur cette entité, puis sur son parent, et enfin sur les autres ancêtres.
+:::
+
+```ts
+world.events.dispatch(eidOfEnemy, "attack", {damage: 10})
+```
+
+## Nettoyage des auditeurs
+
+:::danger
+Veillez toujours à ce que les écouteurs soient correctement supprimés afin d'éviter les fuites de mémoire.
+:::
+
+Lorsqu'un composant est supprimé, ses auditeurs d'événements ne sont pas automatiquement nettoyés, vous devez donc les supprimer manuellement.

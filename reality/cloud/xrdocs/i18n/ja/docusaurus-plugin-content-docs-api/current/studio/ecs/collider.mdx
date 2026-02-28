@@ -1,0 +1,59 @@
+---
+id: collider
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import ColliderTable from "../../../gen/tables/Collider.md"
+
+# コライダー
+
+## 説明
+
+このコンポーネントは、エンティティに物理コライダーを確立します。
+
+## コライダーシェイプ
+
+| タイプ       | 説明           |
+| --------- | ------------ |
+| ボックス      | ボックス         |
+| スフィア      | スフィア         |
+| 飛行機       | 飛行機          |
+| カプセル      | カプセル         |
+| コーン       | コーン          |
+| シリンダー     | シリンダー        |
+
+## コライダー型
+
+| タイプ       | 概要                                                                                                     |
+| --------- | ------------------------------------------------------------------------------------------------------ |
+| スタティック    | シミュレーションでは動かず、あたかも質量が無限であるかのように振る舞う物体に適用される。                                                           |
+| ダイナミック    | 力、重力、衝突の影響を受ける、完全にシミュレートされた現実の物体に適用される。                                                                |
+| キネマティック   | 力の影響を受けず、ユーザーによって完全にプログラム制御されるオブジェクトに適用される。 静的ボディとは異なり、運動ボディは動くことができ、衝突によって他の動的ボディに影響を与えることができる。       |
+
+## プロパティ
+
+<ColliderTable />
+
+## 機能
+
+<ComponentFunctions
+    name="Collider"
+    properties={{
+        shape: 'ecs.ColliderShape.Sphere',
+        type: 'ecs.ColliderType.Static',
+        radius: 1,
+        mass: 0,
+        eventOnly: false,
+        gravityFactory: 1,
+        lockXAxis: false,
+        lockYAxis: false,
+        lockZAxis: false,
+        friction: 0.5,
+        restitution: 0,
+        linearDamping: 0,
+        angularDamping: 0,
+    }}
+    mutate={`cursor.mass = 5;
+    cursor.friction = 0.8;
+    return false;`}
+/>

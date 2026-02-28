@@ -1,0 +1,172 @@
+@use '../../styles/brand-colors';
+@use '../../styles/constants';
+
+.heroSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: brand-colors.$white;
+  padding: 5em 0 0 0;
+  position: relative;
+
+  a {
+    padding: 0.5rem;
+    color: brand-colors.$white;
+    border: 1px solid brand-colors.$white;
+    border-radius: 4px;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.heading {
+  font-size: 2.5em;
+  line-height: 4rem
+}
+
+.subHeading {
+  font-size: 1.5em;
+  margin-bottom: 3em;
+  font-weight: 500;
+}
+
+.titleContainer {
+  z-index: 1;
+  color: brand-colors.$white;
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+
+.cardContainer {
+  display: flex;
+  gap: 1.5em;
+  z-index: 3;
+  background: brand-colors.$brand-highlight;
+  color: brand-colors.$white;
+  width: 85%;
+  height: 15rem;
+  border-radius: 8px;
+  max-width: 1400px;
+  box-shadow: 4px 4px 15.2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.brandGuideCard {
+  padding: 2em 3em;
+}
+
+.brandGuideCard h2 {
+  font-size: 1.25em;
+  line-height: 1.5em;
+  margin-bottom: 1.25em;
+}
+
+.heroImg {
+  background: linear-gradient(
+    90deg,
+    brand-colors.$brand-highlight,
+    brand-colors.$brand-highlight 5%,
+    rgba(0,0,0,0) 10%),
+    url('../../../img/why-webar/webar-hero.jpeg') center;
+  background-size: cover;
+  height: 100%;
+  width: 65%;
+  border-radius: 0 8px 8px 0;
+}
+
+@media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+  .heroSection {
+    background: linear-gradient(0deg, #00000000 30%, #582E9E 30%);
+    padding: 5em 0 0 0;
+  }
+
+  .subHeading {
+    margin-bottom: 1.5em;
+  }
+
+  .cardContainer {
+    flex-direction: column-reverse;
+    height: 40rem;
+    width: 60%;
+  }
+
+  .brandGuideCard {
+    padding: 0 2em 3em 2em;
+
+  }
+
+  .heroImg {
+    width: 100%;
+    background: linear-gradient(
+      to bottom,
+    rgba(0,0,0,0),
+    rgba(0,0,0,0) 90%,
+    brand-colors.$brand-highlight 99%
+    ),
+    url('../../../img/why-webar/webar-hero.jpeg') center;
+    background-size: cover;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .titleContainer {
+    margin-right: 1.5em;
+    margin-left: 1.5em;
+  }
+}
+
+@media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+  .subHeading {
+    font-size: 1em;
+    margin-bottom: 2.5em;
+    font-weight: 500;
+  }
+
+  .cardContainer {
+    margin: 0 1.5em;
+    width: auto;
+  }
+
+  .brandGuideCard {
+    padding: 0 1em 3em 1em;
+
+    a {
+      text-align: center;
+      display: block;
+      width: 100%;
+    }
+  }
+}
+
+.heroDivider {
+  position: absolute;
+  top: -7em;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  // NOTE(Brandon): A workaround with a list of breakpoints to locate the curvy dividers.
+  @media screen and (min-width: 992px) {
+    background: linear-gradient(0deg, #00000000 60%, #582E9E 60%);
+    top: -30em;
+  }
+
+  @media screen and (min-width: 1200px) {
+    transform: scale(1, 0.8);
+  }
+
+  @media screen and (min-width: 1500px) {
+    top: -27em;
+    transform: scale(1, 0.5);
+  }
+
+  @media screen and (min-width: 3200px) {
+    top: -25em;
+    transform: scale(1, 0.45);
+  }
+}

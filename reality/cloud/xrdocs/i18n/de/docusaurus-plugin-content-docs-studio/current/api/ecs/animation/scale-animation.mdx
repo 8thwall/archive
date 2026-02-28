@@ -1,0 +1,48 @@
+---
+id: scale-animation
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# ScaleAnimation
+
+## Beschreibung
+
+Diese Komponente erstellt eine Animation für ein Objekt.
+
+## Eigenschaften
+
+| Eigenschaft        | Typ     | Standard      | Beschreibung                                                                                                                                       |
+| ------------------ | ------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ziel               | eid     | undefiniert   | Das Zielobjekt, das animiert werden soll. Wenn nicht angegeben, wird die Animation auf dem Objekt ausgeführt, an das die Komponente angehängt ist. |
+| von                | Objekt  | {0, 0, 0}     | Der Ausgangszustand der Animation.                                                                                                                 |
+| zu                 | Objekt  | {0, 0, 0}     | Der Endzustand der Animation.                                                                                                                      |
+| autoFrom           | boolean | false         | Wenn aktiviert, wird die Eigenschaft "von" ignoriert und die Animation beginnt mit dem Zustand des Objekts zu Beginn der Animation.                |
+| Dauer              | Nummer  | 1000          | Die Dauer der Animation in Millisekunden.                                                                                                          |
+| Schleife           | boolean | true          | Wenn aktiviert, wird die Animation wiederholt.                                                                                                     |
+| umkehren           | boolean | false         | Ob rückwärts abgespielt werden soll, wenn Schleife eingestellt ist.                                                                                |
+| easeIn             | boolean | false         | Wenn diese Funktion aktiviert ist, wird anstelle einer geraden Interpolation eine zeitliche Staffelung vorgenommen.                                |
+| easeOut            | boolean | false         | Wenn diese Funktion aktiviert ist, wird anstelle einer geraden Interpolation eine zeitliche Staffelung vorgenommen.                                |
+| easingFunction     | String  | Quadratisch   | Wählen Sie zwischen quadratisch, kubisch, quartisch, quintisch, sinusförmig, exponentiell, kreisförmig, elastisch, zurück und prellend             |
+
+## Funktionen
+
+<ComponentFunctions
+    name="ScaleAnimation"
+    properties={{
+        from: { x: 0, y: 0, z: 0 },
+        to: { x: 0, y: 0, z: 0 },
+        autoFrom: false,
+        duration: 1000,
+        loop: true,
+        reverse: false,
+        easeIn: false,
+        easeOut: false,
+        easingFunction: "Quadratic"
+    }}
+    mutate={`cursor.to.x = 2;
+    cursor.to.y = 2;
+    cursor.to.z = 2;
+    cursor.duration = 2000;
+    return false;`}
+/>

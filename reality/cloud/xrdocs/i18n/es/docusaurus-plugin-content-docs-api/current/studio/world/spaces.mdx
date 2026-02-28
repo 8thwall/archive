@@ -1,0 +1,44 @@
+---
+id: spaces
+description: Esta biblioteca incluye funciones para trabajar con Spaces.
+---
+
+# espacios
+
+## Descripción
+
+{frontMatter.description}
+
+## Funciones
+
+### loadSpace
+
+Carga un espacio especificado por un ID o un nombre. El nuevo espacio cargado sustituirá al anterior como espacio activo. Los objetos del antiguo Espacio (y de los Espacios incluidos) desaparecerán y se crearán los nuevos Espacios (y los Espacios incluidos). Arrojará un error si no hay coincidencias o si hay varias coincidencias con el ID o el nombre dados.
+
+```ts
+world.spaces.loadSpace(idOrName: string) // -> void
+```
+
+### listaEspacios
+
+Devuelve todos los SpaceData de Space.
+
+```ts
+world.spaces.listSpaces() // -> SpaceData[] | undefined
+```
+
+### getActiveSpace
+
+Devuelve el SpaceData del espacio activo.
+
+```ts
+world.spaces.getActiveSpace() // -> SpaceData | undefined
+```
+
+## SpaceData
+
+| Propiedad  | Tipo     | Descripción                                         |
+| ---------- | -------- | --------------------------------------------------- |
+| nombre     | cadena   | El nombre del espacio. Debe ser único               |
+| id         | cadena   | El espacio id                                       |
+| engendró   | booleano | Indica si el espacio está actualmente generado      |

@@ -1,0 +1,153 @@
+load("@bazel_skylib//lib:selects.bzl", "selects")
+load("//bzl/node:node-addon.bzl", "node_addon")
+load("//bzl/js:js.bzl", "js_library")
+
+non_angle_deps = select({
+    "//c8/pixels/opengl:without-angle": [
+        "//c8/pixels/opengl:client-gl",
+        "//c8/xrapi/openxr:gl-contexts",
+        "//c8/pixels/opengl:gl-extensions",
+    ],
+    "//conditions:default": [],
+})
+
+android_deps = select({
+    "//bzl/conditions:android": [
+        "//bzl/android:native-app-glue",
+    ],
+    "//conditions:default": [],
+})
+
+selects.config_setting_group(
+    name = "android-with-source-built-node",
+    match_all = [
+        "//bzl/conditions:android",
+        "//bzl/node:source-built-true",
+    ],
+)
+
+selects.config_setting_group(
+    name = "android-without-source-built-node",
+    match_all = [
+        "//bzl/conditions:android",
+        "//bzl/node:source-built-false",
+    ],
+)
+
+selects.config_setting_group(
+    name = "non-android-supported",
+    match_any = [
+        "//bzl/conditions:apple",
+        "//bzl/conditions:linux",
+        "//bzl/conditions:windows",
+    ],
+)
+
+selects.config_setting_group(
+    name = "non-android-with-angle",
+    match_all = [
+        ":non-android-supported",
+        "//c8/pixels/opengl:with-angle",
+    ],
+)
+
+node_addon(
+    name = "headless-gl-addon",
+    srcs = [
+        "src/native/bindings.cc",
+        "src/native/bindings.h",
+        "src/native/bindings-base.h",
+        "src/native/procs-base.h",
+        "src/native/procs-webgl.cc",
+        "src/native/procs-webgl.h",
+        "src/native/procs-webgl-base.h",
+        "src/native/procs-webgl2.cc",
+        "src/native/procs-webgl2.h",
+        "src/native/webgl.cc",
+        "src/native/webgl.h",
+        "src/native/webgl-base.cc",
+        "src/native/webgl-base.h",
+        "src/native/webgl2.cc",
+        "src/native/webgl2.h",
+    ] + select({
+        "//bzl/conditions:android": [
+            "src/native/android_main.cc",
+        ],
+        "//conditions:default": [],
+    }),
+    copts = [
+        "-Iexternal",
+    ],
+    target_compatible_with = select({
+        ":android-without-source-built-node": ["@platforms//:incompatible"],
+        ":android-with-source-built-node": [],
+        ":non-android-with-angle": [],
+        "//conditions:default": ["@platforms//:incompatible"],
+    }),
+    visibility = ["//visibility:public"],
+    deps = [
+        "//bzl/node:node-addons-extra",
+        "//c8:exceptions",
+        "//c8:c8-log",
+        "//c8/command:command-buffer",
+        "//c8/pixels/opengl:gl-headers",
+        "//c8/xrapi/openxr:gl-impl",
+        "@nodejs-nan",
+    ] + android_deps + non_angle_deps,
+)
+
+cc_library(
+    name = "headless-gl-bindings",
+    srcs = [
+        "src/native/bindings.cc",
+        "src/native/bindings-base.h",
+        "src/native/procs-base.h",
+        "src/native/procs-webgl.cc",
+        "src/native/procs-webgl.h",
+        "src/native/procs-webgl-base.h",
+        "src/native/procs-webgl2.cc",
+        "src/native/procs-webgl2.h",
+        "src/native/webgl.cc",
+        "src/native/webgl.h",
+        "src/native/webgl-base.cc",
+        "src/native/webgl-base.h",
+        "src/native/webgl2.cc",
+        "src/native/webgl2.h",
+    ],
+    hdrs = [
+        "src/native/bindings.h",
+    ],
+    copts = [
+        "-Iexternal",
+    ],
+    target_compatible_with = select({
+        "//c8/pixels/opengl:with-angle": [],  # Requires flag --//c8/pixels/opengl:angle
+        "//c8/pixels/opengl:without-angle": ["@platforms//os:android"],
+    }),
+    visibility = ["//visibility:public"],
+    deps = [
+        "//bzl/node:node-addons-extra",
+        "//c8:exceptions",
+        "//c8:c8-log",
+        "//c8/command:command-buffer",
+        "//c8/pixels/opengl:gl-headers",
+        "//c8/xrapi/openxr:gl-impl",
+        "@nodejs-nan",
+    ] + android_deps + non_angle_deps,
+)
+
+js_library(
+    name = "headless-gl",
+    srcs = [
+        "package.json",
+    ] + glob([
+        "index.js",
+        "src/javascript/*.js",
+        "src/javascript/**/*.js",
+    ]),
+    npm_rule = "@npm-rendering//:npm-rendering",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":headless-gl-addon",
+    ],
+)

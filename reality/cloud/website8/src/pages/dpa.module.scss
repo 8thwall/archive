@@ -1,0 +1,73 @@
+@use '../styles/brand-colors';
+@use '../styles/constants';
+
+.container {
+  margin-bottom: 4em;
+}
+
+.mainText {
+  color: '000';
+}
+
+.mainText>h1,
+.mainText>h2,
+.mainText>h3,
+.mainText>h4 {
+  font-family: 'Nunito', sans-serif;
+}
+
+.mainText>h1 {
+  color: brand-colors.$gray4;
+  font-size: 1.5em;
+  font-weight: 500;
+  line-height: 1.5em;
+}
+
+.mainText>h2 {
+  font-size: 1em;
+  text-align: center;
+  line-height: 1.5em;
+}
+
+.mainText>h3 {
+  font-size: 1em;
+  text-align: center;
+  font-style: italic;
+  font-weight: 900;
+}
+
+.mainText>h4 {
+  text-align: center;
+  font-size: 1em;
+  font-style: italic;
+  // margin: 0;
+}
+
+.mainText>ul {
+  padding-inline-start: 1.85rem;
+}
+
+.mainText>ul>li {
+  list-style: none;
+}
+
+.mainText>p:global(.parties) {
+  margin-bottom: 0;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+
+th,
+td {
+  border: 1px solid brand-colors.$brand-black;
+  padding: 0.5em;
+}
+
+thead,
+th {
+  background: brand-colors.$gray1;
+}

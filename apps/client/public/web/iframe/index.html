@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>iFrame test</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+
+    <!-- Send deviceorientation/devicemotion into a cross-domain iOS iframe -->
+    <script src="dist/iframe.js?id=my-iframe"></script>
+
+    <!-- <script>
+      // old method, will clean this up later...
+      const iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)
+      if (iOS) {
+        window.addEventListener("deviceorientation", function (event) {
+          const iframeElement = document.getElementById("my-iframe")
+          iframeElement.contentWindow.postMessage(
+            {
+              deviceOrientation8w: {
+                alpha: event.alpha,
+                beta: event.beta,
+                gamma: event.gamma
+              }
+            },
+            "*")
+        })
+
+        window.addEventListener("devicemotion", function (event) {
+          const iframeElement = document.getElementById("my-iframe")
+          iframeElement.contentWindow.postMessage(
+            {
+              deviceMotion8w: {
+                acceleration: {
+                  x: event.acceleration.x,
+                  y: event.acceleration.y,
+                  z: event.acceleration.z,
+                },
+                accelerationIncludingGravity: {
+                  x: event.accelerationIncludingGravity.x,
+                  y: event.accelerationIncludingGravity.y,
+                  z: event.accelerationIncludingGravity.z,
+                },
+                rotationRate: {
+                  alpha: event.rotationRate.alpha,
+                  beta: event.rotationRate.beta,
+                  gamma: event.rotationRate.gamma,
+                },
+              }
+            },
+            "*")
+        })
+      }
+    </script> -->
+  </head>
+
+  <body>
+    <iframe
+      id="my-iframe"
+      style="border: 0; width: 100%; height: 100%"
+      allow="camera;microphone;gyroscope;accelerometer;"
+      src="https://apps.8thwall.com/8w/tonytest">
+    </iframe>
+  </body>
+</html>

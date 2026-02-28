@@ -1,0 +1,105 @@
+@use '../styles/brand-colors';
+@use '../styles/constants';
+
+.container {
+  min-width: 14em;
+  margin-right: 2.5em;
+  position: relative;
+}
+
+.target {
+  height: 24px;
+  background-color: brand-colors.$gray5;
+  border-radius: 4px;
+  color: brand-colors.$white;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  cursor: pointer;
+  font-size: 12px;
+  padding-left: 0.5rem;
+  position: relative;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.chevron {
+  border-right: 1.5px solid brand-colors.$gray3;
+  border-bottom: 1.5px solid brand-colors.$gray3;
+  width: 0.5rem;
+  height: 0.5rem;
+  transform: translateY(-65%) rotate(45deg);
+  position: absolute;
+  right: 1em;
+  top: 50%;
+  pointer-events: none;
+}
+
+.chevronOpen {
+  transform: translateY(-10%) rotate(-135deg);
+}
+
+.menu {
+  user-select: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  max-height: 20rem;
+  overflow: auto;
+  background-color: brand-colors.$gray5;
+  border: 1px solid brand-colors.$gray5;
+  color: brand-colors.$white;
+  z-index: 10;
+  border-radius: 4px;
+  display: none;
+  bottom: calc(100% + 0.5rem),
+}
+
+.menuOpen {
+  display: block;
+}
+
+.menuOption {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  padding: 0.5rem 1rem;
+
+  &:hover {
+    background: rgba(brand-colors.$gray4, 0.2),
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid brand-colors.$gray5,
+  }
+
+  &[aria-selected=true]:after {
+    content: "";
+    z-Index: 5;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    background: brand-colors.$brand-highlight;
+    width: 12px;
+    height: 12px;
+    clip-path: path("m 0.445 6.111 a 0.5 0.5 0 0 1 1.1082 -1.1337 l 2.8883 2.6636 l 5.8793 -7.1223 a 0.5 0.5 0 0 1 1.2846 1.0599 l -6.4314 7.8021 q -0.561 0.5884 -1.096 0.1504 z");
+    transform: translateY(-50%);
+  }
+}
+
+.focusedOption {
+  background: rgba(brand-colors.$gray4, 0.2),
+}
+
+
+@media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+  .container {
+    margin-right: 0;
+    margin-bottom: 1em;
+    align-items: stretch;
+  }
+
+}

@@ -1,0 +1,47 @@
+include:
+  - ci-support/util.yml
+
+default:
+  before_script:
+    - !reference [.global, before_script]
+  after_script:
+    - !reference [.global, after_script]
+
+cancel-redundant-jobs:
+  stage: build
+  extends: .cancel-redundant-jobs
+
+.build-mr-template:
+  stage: build
+  interruptible: true
+  script: |2
+    git_fetch_start_time=`date +%s`
+    git fetch origin $CI_MERGE_REQUEST_DIFF_BASE_SHA
+    echo "Completed fetch in $((`date +%s`-git_fetch_start_time)) seconds"
+    python3 ci-support/build-mr.py $CI_COMMIT_SHA $CI_MERGE_REQUEST_DIFF_BASE_SHA
+    set +e
+    EXCLUDE_POSTGRES_TESTS=true node ./reality/scripts/unit-test-diff.js $CI_MERGE_REQUEST_DIFF_BASE_SHA | tee .unit-test-output.txt
+    if [[ "$?" -eq "0" ]]
+    then
+    bazel run //ci-support:clear-automated-mr-comments "🧪"
+    echo "Unit tests passed."
+    else
+    echo "Commenting on MR..."
+    >> .mr-comment.md echo "<details><summary>New unit test failures</summary>"
+    >> .mr-comment.md echo ""
+    >> .mr-comment.md echo "\`\`\`"
+    >> .mr-comment.md tail -n 20 <.unit-test-output.txt
+    >> .mr-comment.md echo "\`\`\`"
+    >> .mr-comment.md echo ""
+    >> .mr-comment.md echo "🧪 [Full output]($CI_JOB_URL)"
+    >> .mr-comment.md echo "</details>"
+    cat .mr-comment.md | bazel run //ci-support:post-mr-comment
+    exit 1
+    fi
+  rules:
+    - if: $CI_SUPPORT_TRIGGER == "build_mr_ci_trigger"
+
+ci-support:build-mr-m1:
+  extends: .build-mr-template
+  tags:
+    - m1

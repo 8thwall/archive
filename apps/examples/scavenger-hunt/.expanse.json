@@ -1,0 +1,1721 @@
+{
+  "objects": {
+    "47699d9e-18a5-4f88-a4f9-b8be92e8f74a": {
+      "components": {},
+      "geometry": null,
+      "id": "47699d9e-18a5-4f88-a4f9-b8be92e8f74a",
+      "light": {
+        "type": "ambient",
+        "intensity": 0.5
+      },
+      "material": null,
+      "name": "Ambient Light",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "5a1d9f92-a797-4904-ba29-5c97218e5a16",
+      "order": 0.10703658048463383
+    },
+    "a608ddd9-9379-464d-966f-5d8d8674c83c": {
+      "camera": {
+        "type": "perspective",
+        "xr": {
+          "desktop": "3D",
+          "xrCameraType": "3dOnly",
+          "headset": "disabled"
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "id": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "material": null,
+      "name": "Camera",
+      "position": [
+        0,
+        1,
+        -1.5000000000000004
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.9999998646558022,
+        0.9999999931513284,
+        0.999999871504474
+      ],
+      "parentId": "e9daffac-841f-4e40-9d23-d8d4c5da3ab3"
+    },
+    "ac1989e3-3b71-49e2-a05f-e682aeb18c36": {
+      "components": {},
+      "geometry": null,
+      "id": "ac1989e3-3b71-49e2-a05f-e682aeb18c36",
+      "light": {
+        "intensity": 0.5,
+        "type": "directional",
+        "castShadow": true,
+        "shadowMapSize": [
+          2048,
+          2048
+        ],
+        "shadowCamera": [
+          -5,
+          5,
+          5,
+          -5,
+          0.5,
+          25
+        ],
+        "shadowBias": 0,
+        "shadowRadius": 1,
+        "shadowNormalBias": -0.0005
+      },
+      "material": null,
+      "name": "Directional Light",
+      "position": [
+        0,
+        10,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "5a1d9f92-a797-4904-ba29-5c97218e5a16",
+      "order": 1.1070365804846338
+    },
+    "585366e6-405f-4387-a86f-f8f1bfff6e1c": {
+      "id": "585366e6-405f-4387-a86f-f8f1bfff6e1c",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "5a1d9f92-a797-4904-ba29-5c97218e5a16",
+      "components": {
+        "41504f14-084a-4a14-afee-cc464002c211": {
+          "id": "41504f14-084a-4a14-afee-cc464002c211",
+          "name": "World Map",
+          "parameters": {
+            "wasdMovement": false
+          }
+        }
+      },
+      "name": "Map",
+      "map": {
+        "latitude": 37.429632999999995,
+        "longitude": -122.14357,
+        "defaultPosition": {
+          "type": "entity"
+        },
+        "radius": 512,
+        "useWayspots": false,
+        "useGps": true
+      },
+      "mapTheme": {
+        "landColor": "#F8F5EB",
+        "buildingColor": "#E3D9C3",
+        "parkColor": "#3D8F43",
+        "roadColor": "#CFBE99",
+        "sandColor": "#FFE5B3",
+        "transitColor": "#FFC758",
+        "waterColor": "#43BBD1",
+        "parkingColor": "#E8E8DB",
+        "buildingOpacity": 0.4
+      },
+      "order": 2.1070365804846336
+    },
+    "5228601b-91cd-486f-8b73-d8e4b33809f5": {
+      "id": "5228601b-91cd-486f-8b73-d8e4b33809f5",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "baef0a4c-f5c0-4014-8036-43aae981ea9d",
+      "components": {},
+      "light": {
+        "type": "directional",
+        "shadowMapSize": [
+          2048,
+          2048
+        ]
+      },
+      "name": "Directional Light",
+      "order": 0.4158516387819068
+    },
+    "8ae1c0f4-192d-438d-a067-aea6f225047b": {
+      "id": "8ae1c0f4-192d-438d-a067-aea6f225047b",
+      "position": [
+        0,
+        0.01,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        3,
+        3,
+        3
+      ],
+      "geometry": null,
+      "material": {
+        "type": "basic",
+        "color": "#000000"
+      },
+      "parentId": "585366e6-405f-4387-a86f-f8f1bfff6e1c",
+      "components": {
+        "99d95488-23dd-4470-a74d-2970526e9e50": {
+          "id": "99d95488-23dd-4470-a74d-2970526e9e50",
+          "name": "gps-pointer",
+          "parameters": {
+            "faceGpsDirection": true,
+            "idleClip": "idle",
+            "walkClip": "walk",
+            "runClip": "walk",
+            "driveClip": "walk"
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/doty.glb"
+        },
+        "animationClip": "idle",
+        "loop": true
+      },
+      "name": "Doty",
+      "shadow": {
+        "castShadow": true
+      },
+      "order": 2.9627150110404097
+    },
+    "0eafa9a2-46dc-41bd-8695-e12a64188224": {
+      "id": "0eafa9a2-46dc-41bd-8695-e12a64188224",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "baef0a4c-f5c0-4014-8036-43aae981ea9d",
+      "components": {
+        "b40b81d1-e2aa-4135-bdeb-4335afcaf170": {
+          "id": "b40b81d1-e2aa-4135-bdeb-4335afcaf170",
+          "name": "location-anchor",
+          "parameters": {}
+        }
+      },
+      "name": "California Park Sign",
+      "location": {
+        "name": "california-p-4a18",
+        "poiId": "4a18141f761735ccab53505d8d001340.16",
+        "lat": 37.429632999999995,
+        "lng": -122.14357,
+        "title": "California Park Sign",
+        "anchorNodeId": "F29D36E8ABEE4F479FDD69E542323D1E",
+        "anchorSpaceId": "C0F75268570446D383EDF820E8544376",
+        "imageUrl": "https://lh3.googleusercontent.com/aN4o8tXc-YRCyesqU5p_MiMqEaOK9z60OR7Pot1ASF5IP2KcYMiTTlaccefGfwyhoNAHQ9Lnq1Z7xrD_iuqRDEVHCQ7Otw3rbiqzfFPang",
+        "anchorPayload": "ChUI4aKw/Oy2rKR1ELfrlo3K6qft4QEYkIHoxa8yKiYKFAjyu9rBvtX7p0cQn7unq67IzJ4eEgkKABIFJQAAgD8dAACAPzISEWZB6Kn9tkJAGVjX8sYwiV7A",
+        "visualization": "mesh"
+      },
+      "order": 1.415851638781907
+    },
+    "900e3c3e-3122-41cc-bb38-3ea81cf0176e": {
+      "id": "900e3c3e-3122-41cc-bb38-3ea81cf0176e",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        -0.9999999999907405
+      ],
+      "scale": [
+        0.29296875,
+        0.29296875,
+        0.29296875
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "585366e6-405f-4387-a86f-f8f1bfff6e1c",
+      "components": {
+        "294da56a-9925-4550-8e06-c97a87f784aa": {
+          "id": "294da56a-9925-4550-8e06-c97a87f784aa",
+          "name": "Scavenger Hunt Location",
+          "parameters": {
+            "spaceName": "California Park",
+            "thumbnailImage": "assets/Thumbnails/california-park.png",
+            "ringR": 118,
+            "ringG": 17,
+            "ringB": 182,
+            "sphereR": 173,
+            "sphereG": 80,
+            "sphereB": 255,
+            "displayName": "California Park Sign"
+          }
+        }
+      },
+      "name": "California Park",
+      "mapPoint": {
+        "latitude": 37.429632999999995,
+        "longitude": -122.14357,
+        "meters": 10,
+        "minScale": 0,
+        "defaultPosition": {
+          "type": "entity",
+          "id": "0eafa9a2-46dc-41bd-8695-e12a64188224"
+        }
+      },
+      "hidden": false,
+      "order": 0.4432372939746041
+    },
+    "cd066d59-376e-4e01-a5ad-fca5f5a9548a": {
+      "id": "cd066d59-376e-4e01-a5ad-fca5f5a9548a",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "12733561-bf21-4961-bec1-a33f306715df",
+      "components": {
+        "c81ddb89-82e7-426f-a599-7d70c725601f": {
+          "id": "c81ddb89-82e7-426f-a599-7d70c725601f",
+          "name": "Load Space on Click",
+          "parameters": {}
+        }
+      },
+      "name": "Return to Map",
+      "ui": {
+        "fontSize": 18,
+        "font": {
+          "type": "asset",
+          "asset": "assets/noto-sans-jp.font8"
+        },
+        "text": "Return to Map",
+        "color": "#ffffff",
+        "textAlign": "center",
+        "height": "25",
+        "width": "100%"
+      },
+      "order": 2.716716339268636
+    },
+    "e9daffac-841f-4e40-9d23-d8d4c5da3ab3": {
+      "id": "e9daffac-841f-4e40-9d23-d8d4c5da3ab3",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "5a1d9f92-a797-4904-ba29-5c97218e5a16",
+      "components": {
+        "be7ad451-d80d-4265-a44a-3c03f141ae37": {
+          "id": "be7ad451-d80d-4265-a44a-3c03f141ae37",
+          "name": "World Map Camera Controls",
+          "parameters": {
+            "rotationSensitivity": 8
+          }
+        }
+      },
+      "name": "Camera Rig",
+      "order": 6.214073160969267
+    },
+    "88f5c0a4-8e8d-41a7-92a7-92ab77c3f602": {
+      "id": "88f5c0a4-8e8d-41a7-92a7-92ab77c3f602",
+      "position": [
+        0,
+        0.010174579615821744,
+        0
+      ],
+      "rotation": [
+        -0.707106799999999,
+        0,
+        0,
+        0.7071067623730954
+      ],
+      "scale": [
+        1.0000000000000007,
+        1.0000000532124824,
+        1.0000000532124824
+      ],
+      "geometry": {
+        "type": "plane",
+        "width": 40,
+        "height": 40
+      },
+      "material": {
+        "type": "shadow",
+        "color": "#333333",
+        "opacity": 0.4
+      },
+      "parentId": "585366e6-405f-4387-a86f-f8f1bfff6e1c",
+      "components": {},
+      "name": "Ground",
+      "shadow": {
+        "receiveShadow": true
+      },
+      "order": 1.8864745879492082
+    },
+    "e076fef2-8ad6-42aa-abb5-55038a4a9051": {
+      "id": "e076fef2-8ad6-42aa-abb5-55038a4a9051",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "5a1d9f92-a797-4904-ba29-5c97218e5a16",
+      "components": {
+        "68d6c7eb-53ff-489b-bfa4-fba58a4f32be": {
+          "id": "68d6c7eb-53ff-489b-bfa4-fba58a4f32be",
+          "name": "World Map UI",
+          "parameters": {
+            "startButton": {
+              "type": "entity",
+              "id": "25380800-e0b4-456d-9fea-f48a84ec13c1"
+            },
+            "displayNameLabel": {
+              "type": "entity",
+              "id": "a4479f12-90fc-4cc5-95a7-eebd85bf2cdd"
+            }
+          }
+        }
+      },
+      "name": "UI",
+      "ui": {
+        "width": "100%",
+        "position": "absolute",
+        "top": "0",
+        "left": "0",
+        "flexDirection": "column",
+        "alignItems": "center",
+        "right": "0",
+        "bottom": "0"
+      },
+      "order": 1.957516173902989
+    },
+    "8f11e9c4-c164-4ab1-9951-549323bc00d8": {
+      "id": "8f11e9c4-c164-4ab1-9951-549323bc00d8",
+      "position": [
+        0,
+        2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "baef0a4c-f5c0-4014-8036-43aae981ea9d",
+      "components": {},
+      "name": "Camera",
+      "camera": {
+        "type": "perspective",
+        "xr": {
+          "xrCameraType": "world",
+          "phone": "AR",
+          "desktop": "3D",
+          "headset": "AR",
+          "world": {
+            "enableVps": true
+          }
+        }
+      },
+      "order": 1.1958517816250545
+    },
+    "a4479f12-90fc-4cc5-95a7-eebd85bf2cdd": {
+      "id": "a4479f12-90fc-4cc5-95a7-eebd85bf2cdd",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "700cbba3-f4b8-4e7b-80fd-7d42c9d71bcb",
+      "components": {},
+      "name": "Title",
+      "ui": {
+        "width": "100%",
+        "fontSize": 20,
+        "font": {
+          "type": "font",
+          "font": "Nunito"
+        },
+        "text": "Location Name",
+        "color": "#000000",
+        "height": "38"
+      },
+      "order": -2.57612822242262
+    },
+    "25380800-e0b4-456d-9fea-f48a84ec13c1": {
+      "id": "25380800-e0b4-456d-9fea-f48a84ec13c1",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "700cbba3-f4b8-4e7b-80fd-7d42c9d71bcb",
+      "components": {},
+      "name": "Button",
+      "ui": {
+        "background": "#8000ff",
+        "backgroundOpacity": 1,
+        "color": "#ffffff",
+        "height": "42",
+        "width": "120",
+        "borderRadius": 25,
+        "alignItems": "center",
+        "justifyContent": "center"
+      },
+      "order": -1.099470955099217
+    },
+    "8b5923eb-0eb6-489b-a58c-7ba64275a5e0": {
+      "id": "8b5923eb-0eb6-489b-a58c-7ba64275a5e0",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": {
+        "type": "hider"
+      },
+      "parentId": "0eafa9a2-46dc-41bd-8695-e12a64188224",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/Locations/california-park.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "california-park.glb",
+      "order": -1.165872038896081,
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "9aedb922-bf7e-4420-bea9-d5bbadf111e5": {
+      "id": "9aedb922-bf7e-4420-bea9-d5bbadf111e5",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "0eafa9a2-46dc-41bd-8695-e12a64188224",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/Animations/california-park-anim.glb"
+        },
+        "animationClip": "*",
+        "loop": true
+      },
+      "name": "california-park-anim.glb",
+      "order": 0.7614903204180228,
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "b993b7d1-c95c-4850-8294-12175bb3b1de": {
+      "id": "b993b7d1-c95c-4850-8294-12175bb3b1de",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "58bb1d97-bd80-4699-95d2-18c853d2c9ca",
+      "components": {},
+      "light": {
+        "type": "directional"
+      },
+      "name": "Directional Light",
+      "order": 0.933582850362225
+    },
+    "8d023eac-3d3f-488f-b899-69403034e281": {
+      "id": "8d023eac-3d3f-488f-b899-69403034e281",
+      "position": [
+        0,
+        2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "58bb1d97-bd80-4699-95d2-18c853d2c9ca",
+      "components": {},
+      "name": "Camera",
+      "camera": {
+        "type": "perspective",
+        "xr": {
+          "xrCameraType": "world",
+          "phone": "AR",
+          "desktop": "disabled",
+          "headset": "AR",
+          "world": {
+            "enableVps": true
+          }
+        }
+      },
+      "order": 1.933582850362225
+    },
+    "ec6e3108-532f-4857-8cd6-eb5d6cb97d3e": {
+      "id": "ec6e3108-532f-4857-8cd6-eb5d6cb97d3e",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "58bb1d97-bd80-4699-95d2-18c853d2c9ca",
+      "components": {
+        "5cb073fc-5b92-404c-8b04-dcd9ec4ee5a5": {
+          "id": "5cb073fc-5b92-404c-8b04-dcd9ec4ee5a5",
+          "name": "location-anchor",
+          "parameters": {}
+        }
+      },
+      "name": "College Ave Fountain",
+      "location": {
+        "name": "college-ave-3f31",
+        "poiId": "3f315606a15a37bab3e01ff06d29dad2.16",
+        "lat": 37.428419999999996,
+        "lng": -122.14583999999999,
+        "title": "College Ave Fountain",
+        "anchorNodeId": "6F99F4F76DD6444D97EB05953977FDBD",
+        "anchorSpaceId": "E572264883DD4B249A563498C0B8BD19",
+        "imageUrl": "https://lh3.googleusercontent.com/6IUTALMe5D55b9qS2srKjd6JU1I1NigZAS3OatUTLs0yj3nER4q3iqtbGIlpl-U0TLK5LeumrscpyRcC_IyGvlY2udQ5COPDRu2WZ80",
+        "anchorPayload": "ChUIrvOpvaj08KMJEKrHy62+yMeskwEY5uPbw68yKicKFQjvstK/3821ok0Ql9eXqJnn3f69ARIJCgASBSUAAIA/HQAAgD8yEhFcOlJu1rZCQBn82rkdVYlewA==",
+        "visualization": "mesh"
+      },
+      "order": 2.933582850362225,
+      "hidden": false
+    },
+    "2b0137a7-3fae-4db5-a2ef-8209ea89e837": {
+      "id": "2b0137a7-3fae-4db5-a2ef-8209ea89e837",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": {
+        "type": "hider"
+      },
+      "parentId": "ec6e3108-532f-4857-8cd6-eb5d6cb97d3e",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/Locations/college-ave-fountain.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "college-ave-fountain.glb",
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      },
+      "order": 0.32159493987128407,
+      "hidden": false
+    },
+    "1ad909d0-c243-4ebe-b172-1ce199a71285": {
+      "id": "1ad909d0-c243-4ebe-b172-1ce199a71285",
+      "position": [
+        0.995306285395361,
+        -0.1791272614389735,
+        -5.290751286238449
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "ec6e3108-532f-4857-8cd6-eb5d6cb97d3e",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/Animations/college-ave-fountain-anim.glb"
+        },
+        "animationClip": "*",
+        "loop": true
+      },
+      "name": "college-ave-fountain-anim.glb",
+      "order": -1.321594939871284,
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      },
+      "hidden": false
+    },
+    "54cee3d4-6ede-42c5-bb91-bbf36f0c1ce7": {
+      "id": "54cee3d4-6ede-42c5-bb91-bbf36f0c1ce7",
+      "position": [
+        -5.878868855062985,
+        0,
+        3.9559408698744587
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        -0.9999999999907405
+      ],
+      "scale": [
+        0.29296400296804065,
+        0.29296400296804065,
+        0.29296400296804065
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "585366e6-405f-4387-a86f-f8f1bfff6e1c",
+      "components": {
+        "5af37816-1d81-4096-a59d-2d8b0a7a5b1f": {
+          "id": "5af37816-1d81-4096-a59d-2d8b0a7a5b1f",
+          "name": "Scavenger Hunt Location",
+          "parameters": {
+            "displayName": "College Ave Fountain",
+            "spaceName": "College Ave Fountain",
+            "thumbnailImage": "assets/Thumbnails/college-ave-fountain.png",
+            "ringR": 118,
+            "ringG": 17,
+            "ringB": 182,
+            "sphereR": 173,
+            "sphereG": 80,
+            "sphereB": 255
+          }
+        }
+      },
+      "name": "College Ave Fountain",
+      "mapPoint": {
+        "latitude": 37.428419999999996,
+        "longitude": -122.14583999999999,
+        "meters": 10,
+        "minScale": 0,
+        "defaultPosition": {
+          "type": "entity",
+          "id": "ec6e3108-532f-4857-8cd6-eb5d6cb97d3e"
+        }
+      },
+      "hidden": false
+    },
+    "eb13b500-a407-4879-a27a-f1a93c580496": {
+      "id": "eb13b500-a407-4879-a27a-f1a93c580496",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "19067fb7-873b-4049-9825-603c767b8ce5",
+      "components": {},
+      "light": {
+        "type": "directional"
+      },
+      "name": "Directional Light",
+      "order": 0.7181047179159271
+    },
+    "5385d230-0755-40b2-b8c9-4c8f522a54b1": {
+      "id": "5385d230-0755-40b2-b8c9-4c8f522a54b1",
+      "position": [
+        0,
+        2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "19067fb7-873b-4049-9825-603c767b8ce5",
+      "components": {},
+      "name": "Camera",
+      "camera": {
+        "type": "perspective",
+        "xr": {
+          "xrCameraType": "world",
+          "phone": "AR",
+          "desktop": "disabled",
+          "headset": "AR",
+          "world": {
+            "enableVps": true
+          }
+        }
+      },
+      "order": 1.718104717915927
+    },
+    "2406f392-f315-4a55-9abd-f2dd992e155f": {
+      "id": "2406f392-f315-4a55-9abd-f2dd992e155f",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "19067fb7-873b-4049-9825-603c767b8ce5",
+      "components": {
+        "a510cddd-3047-43bb-933b-dfc75a76d12d": {
+          "id": "a510cddd-3047-43bb-933b-dfc75a76d12d",
+          "name": "location-anchor",
+          "parameters": {}
+        }
+      },
+      "name": "Concrete Circle",
+      "location": {
+        "name": "concrete-cir-11a8",
+        "poiId": "11a894dee5fa31ed97eb6641cb058788.16",
+        "lat": 37.426606,
+        "lng": -122.14449499999999,
+        "title": "Concrete Circle",
+        "anchorNodeId": "AA2D177F6C624A9EB16325BA00EE3B72",
+        "anchorSpaceId": "9BBCD6DC9E6E4E9A835B637825D01BF5",
+        "imageUrl": "https://lh3.googleusercontent.com/vvTK9NkDI2b1mBJR6sv4cvLMWVjp2RN_Lr5rPDsobHSm7JphnGp3ml8UEhJ_VAYMFub00ZqvAyia7wYqJ7pF5BQBljKjsggQWYwxIzkObw",
+        "anchorPayload": "ChUIu82b1uS0q6HtARCL2dGF38rGmwQY0tbMifswKicKFQiq29z4x82YpZ4BELHHldGLwPudchIJCgASBSUAAIA/HQAAgD8yEhGAzLG5mrZCQBlIIyhSP4lewA==",
+        "visualization": "mesh"
+      },
+      "order": 2.718104717915927
+    },
+    "4311e00b-3cc8-4264-bd43-878d9dd54b74": {
+      "id": "4311e00b-3cc8-4264-bd43-878d9dd54b74",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": {
+        "type": "hider"
+      },
+      "parentId": "2406f392-f315-4a55-9abd-f2dd992e155f",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/Locations/concrete-circle.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "concrete-circle.glb",
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      },
+      "order": 0.30221574719869304
+    },
+    "80cfc67d-8580-482b-b62a-61043b68ef5c": {
+      "id": "80cfc67d-8580-482b-b62a-61043b68ef5c",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "2406f392-f315-4a55-9abd-f2dd992e155f",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/Animations/concrete-circle-anim.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "concrete-circle-anim.glb",
+      "order": -1.302215747198693
+    },
+    "7e0d1798-568a-4c7c-b80e-4dfbc3eed8a0": {
+      "id": "7e0d1798-568a-4c7c-b80e-4dfbc3eed8a0",
+      "position": [
+        -2.3955743131753433,
+        0,
+        9.87179549632858
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        -0.9999999999907405
+      ],
+      "scale": [
+        0.2929569044761947,
+        0.2929569044761947,
+        0.2929569044761947
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "585366e6-405f-4387-a86f-f8f1bfff6e1c",
+      "components": {
+        "5af37816-1d81-4096-a59d-2d8b0a7a5b1f": {
+          "id": "5af37816-1d81-4096-a59d-2d8b0a7a5b1f",
+          "name": "Scavenger Hunt Location",
+          "parameters": {
+            "displayName": "Concrete Circle",
+            "spaceName": "Concrete Circle",
+            "thumbnailImage": "assets/Thumbnails/concrete-circle.png",
+            "ringR": 118,
+            "ringG": 17,
+            "ringB": 182,
+            "sphereR": 173,
+            "sphereG": 80,
+            "sphereB": 255
+          }
+        }
+      },
+      "name": "Concrete Circle",
+      "mapPoint": {
+        "latitude": 37.426606,
+        "longitude": -122.14449499999999,
+        "meters": 10,
+        "minScale": 0,
+        "defaultPosition": {
+          "type": "entity",
+          "id": "2406f392-f315-4a55-9abd-f2dd992e155f"
+        }
+      },
+      "hidden": false
+    },
+    "180d109f-1dee-47e7-bee2-27a9eacf99d2": {
+      "id": "180d109f-1dee-47e7-bee2-27a9eacf99d2",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "16fd55e0-eac7-4ff6-b598-8ba1bd62b5ac",
+      "components": {},
+      "light": {
+        "type": "directional"
+      },
+      "name": "Directional Light",
+      "order": 0.24343533182810706
+    },
+    "46ab187c-a808-498a-bb30-b64b85883b8d": {
+      "id": "46ab187c-a808-498a-bb30-b64b85883b8d",
+      "position": [
+        0,
+        2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "16fd55e0-eac7-4ff6-b598-8ba1bd62b5ac",
+      "components": {},
+      "name": "Camera",
+      "camera": {
+        "type": "perspective",
+        "xr": {
+          "xrCameraType": "world",
+          "phone": "AR",
+          "desktop": "disabled",
+          "headset": "AR",
+          "world": {
+            "enableVps": true
+          }
+        }
+      },
+      "order": 1.243435331828107
+    },
+    "4c536996-a5e0-4d64-9328-455c90684b13": {
+      "id": "4c536996-a5e0-4d64-9328-455c90684b13",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "16fd55e0-eac7-4ff6-b598-8ba1bd62b5ac",
+      "components": {
+        "c55248f5-2012-4cb9-8ac2-c8775d3c3e81": {
+          "id": "c55248f5-2012-4cb9-8ac2-c8775d3c3e81",
+          "name": "location-anchor",
+          "parameters": {}
+        }
+      },
+      "name": "Lost in My Abstract Garden",
+      "location": {
+        "name": "lost-in-my-a-1e45",
+        "poiId": "1e45d5e6510d31579c42e988d4f38b77.16",
+        "lat": 37.428768,
+        "lng": -122.142585,
+        "title": "Lost in My Abstract Garden",
+        "anchorNodeId": "B3A391C42EA14A1A94B026E4A0FBCB71",
+        "anchorSpaceId": "0881FDDBE3DE40B9A1601CBFDC4F1360",
+        "imageUrl": "https://lh3.googleusercontent.com/0mB1DueS5VFJne96XOUqrHqUodx1rRH2kGiksis3qDduZqP0vsi1qMmOxDoHSa8MBuzCMvZLvMXVB4Jr5vej46uRgkB1QLvTjBoxsHFy",
+        "anchorPayload": "ChQI0ZismY3OmaJEEIeZrcqr5ffCPxiT0YbuxDIqJgoUCLPHxqTspailGhCU4ZqhjvT+5XESCQoAEgUlAACAPx0AAIA/MhIRisVBhuK2QkAZe3iqySCJXsA=",
+        "visualization": "mesh"
+      },
+      "order": 2.243435331828107
+    },
+    "b7be545c-60b7-4e46-b12d-57e88ba69817": {
+      "id": "b7be545c-60b7-4e46-b12d-57e88ba69817",
+      "position": [
+        2.9931760718148093,
+        -1.711665862214569,
+        -3.7791159530785463
+      ],
+      "rotation": [
+        -0.010396450906500935,
+        -0.19182404803351294,
+        -0.008882917549422345,
+        0.9813340624784179
+      ],
+      "scale": [
+        1.0000000000000007,
+        1.0000000000000009,
+        1.0000000000000002
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "4c536996-a5e0-4d64-9328-455c90684b13",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/Animations/lost-in-my-abstract-garden-anim.glb"
+        },
+        "animationClip": "*",
+        "loop": true
+      },
+      "name": "lost-in-my-abstract-garden-anim.glb",
+      "order": 0.2812605165021502
+    },
+    "111f02c3-ba74-4fcc-be85-750855e04c36": {
+      "id": "111f02c3-ba74-4fcc-be85-750855e04c36",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": {
+        "type": "hider"
+      },
+      "parentId": "4c536996-a5e0-4d64-9328-455c90684b13",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/Locations/lost-in-my-abstract-garden.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "lost-in-my-abstract-garden.glb",
+      "order": -1.2812605165021502,
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "a8d65dd4-5cbc-4e88-ac4c-aa0729fb19f2": {
+      "id": "a8d65dd4-5cbc-4e88-ac4c-aa0729fb19f2",
+      "position": [
+        2.550962917269707,
+        0,
+        2.8210196256117004
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        -0.9999999999907405
+      ],
+      "scale": [
+        0.2929653648243813,
+        0.2929653648243813,
+        0.2929653648243813
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "585366e6-405f-4387-a86f-f8f1bfff6e1c",
+      "components": {
+        "5af37816-1d81-4096-a59d-2d8b0a7a5b1f": {
+          "id": "5af37816-1d81-4096-a59d-2d8b0a7a5b1f",
+          "name": "Scavenger Hunt Location",
+          "parameters": {
+            "displayName": "Lost In My Abstract Garden",
+            "spaceName": "Lost In My Abstract Garden",
+            "thumbnailImage": "assets/Thumbnails/lost-in-my-abstract-garden.png",
+            "ringR": 118,
+            "ringG": 17,
+            "ringB": 182,
+            "sphereR": 173,
+            "sphereG": 80,
+            "sphereB": 255
+          }
+        }
+      },
+      "name": "Lost In My Abstract Garden",
+      "mapPoint": {
+        "latitude": 37.428768,
+        "longitude": -122.142585,
+        "meters": 10,
+        "minScale": 0,
+        "defaultPosition": {
+          "type": "entity",
+          "id": "4c536996-a5e0-4d64-9328-455c90684b13"
+        }
+      },
+      "hidden": false
+    },
+    "700cbba3-f4b8-4e7b-80fd-7d42c9d71bcb": {
+      "id": "700cbba3-f4b8-4e7b-80fd-7d42c9d71bcb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "e076fef2-8ad6-42aa-abb5-55038a4a9051",
+      "components": {},
+      "name": "Container",
+      "ui": {
+        "alignItems": "center",
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "width": "100%",
+        "maxWidth": "400",
+        "borderRadiusBottomRight": "15",
+        "borderRadiusBottomLeft": "15",
+        "background": "#ffffff",
+        "backgroundOpacity": 1
+      },
+      "order": -4.682955456286011
+    },
+    "6a7f5b70-f682-44b5-9365-f8ea2476e236": {
+      "id": "6a7f5b70-f682-44b5-9365-f8ea2476e236",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "25380800-e0b4-456d-9fea-f48a84ec13c1",
+      "components": {},
+      "name": "Text",
+      "ui": {
+        "text": "Start AR",
+        "fontSize": 18,
+        "height": "28",
+        "font": {
+          "type": "asset",
+          "asset": "assets/noto-sans-jp.font8"
+        }
+      }
+    },
+    "e5d6ec8f-36be-49cb-bbf3-d9e2ea01e6e4": {
+      "id": "e5d6ec8f-36be-49cb-bbf3-d9e2ea01e6e4",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "73da7b6a-79a1-488c-9b86-a3008796eb7f",
+      "components": {},
+      "name": "UI",
+      "ui": {
+        "position": "absolute",
+        "top": "0",
+        "right": "0",
+        "bottom": "0",
+        "left": "0",
+        "alignItems": "center",
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "width": "100%"
+      }
+    },
+    "12733561-bf21-4961-bec1-a33f306715df": {
+      "id": "12733561-bf21-4961-bec1-a33f306715df",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "e5d6ec8f-36be-49cb-bbf3-d9e2ea01e6e4",
+      "components": {},
+      "name": "Button",
+      "ui": {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "width": "200",
+        "height": "40",
+        "borderRadius": 25,
+        "background": "#8000ff",
+        "backgroundOpacity": 1
+      }
+    },
+    "058080eb-0a55-42b2-9270-c02b7454401b": {
+      "id": "058080eb-0a55-42b2-9270-c02b7454401b",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "baef0a4c-f5c0-4014-8036-43aae981ea9d",
+      "components": {},
+      "light": {
+        "type": "ambient"
+      },
+      "name": "Ambient Light",
+      "order": 0.8737774581728601
+    },
+    "d0d1c776-ea25-478c-bfee-bed0a59cae2e": {
+      "id": "d0d1c776-ea25-478c-bfee-bed0a59cae2e",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "58bb1d97-bd80-4699-95d2-18c853d2c9ca",
+      "components": {},
+      "light": {
+        "type": "ambient"
+      },
+      "name": "Ambient Light",
+      "order": 1.3378185435456587
+    },
+    "c069bbfb-3570-4db2-9797-827ffe15cc73": {
+      "id": "c069bbfb-3570-4db2-9797-827ffe15cc73",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "19067fb7-873b-4049-9825-603c767b8ce5",
+      "components": {},
+      "light": {
+        "type": "ambient"
+      },
+      "name": "Ambient Light",
+      "order": 1.3271570768738905
+    },
+    "1d480593-3f33-4430-83f1-0adcda0090f3": {
+      "id": "1d480593-3f33-4430-83f1-0adcda0090f3",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "16fd55e0-eac7-4ff6-b598-8ba1bd62b5ac",
+      "components": {},
+      "light": {
+        "type": "ambient"
+      },
+      "name": "Ambient Light",
+      "order": 0.6151529977421606
+    }
+  },
+  "spaces": {
+    "5a1d9f92-a797-4904-ba29-5c97218e5a16": {
+      "id": "5a1d9f92-a797-4904-ba29-5c97218e5a16",
+      "name": "World Map",
+      "activeCamera": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "sky": {
+        "type": "gradient",
+        "colors": [
+          "#8dedf6",
+          "#dbedf6"
+        ]
+      },
+      "reflections": {
+        "type": "url",
+        "url": "https://cdn.8thwall.com/web/assets/envmap/basic_env_map-m9hqpneh.jpg"
+      },
+      "fog": {
+        "type": "exponential",
+        "density": 0.09,
+        "color": "#b4edf6"
+      }
+    },
+    "baef0a4c-f5c0-4014-8036-43aae981ea9d": {
+      "id": "baef0a4c-f5c0-4014-8036-43aae981ea9d",
+      "name": "California Park",
+      "activeCamera": "8f11e9c4-c164-4ab1-9951-549323bc00d8",
+      "includedSpaces": [
+        "73da7b6a-79a1-488c-9b86-a3008796eb7f"
+      ],
+      "reflections": {
+        "type": "url",
+        "url": "https://cdn.8thwall.com/web/assets/envmap/hilly_terrain_01_1k-m89fuwlx.hdr"
+      }
+    },
+    "73da7b6a-79a1-488c-9b86-a3008796eb7f": {
+      "id": "73da7b6a-79a1-488c-9b86-a3008796eb7f",
+      "name": "AR Scene",
+      "activeCamera": "65b94887-2c06-4e7e-8819-5d33031ac188",
+      "reflections": null
+    },
+    "58bb1d97-bd80-4699-95d2-18c853d2c9ca": {
+      "id": "58bb1d97-bd80-4699-95d2-18c853d2c9ca",
+      "name": "College Ave Fountain",
+      "includedSpaces": [
+        "73da7b6a-79a1-488c-9b86-a3008796eb7f"
+      ],
+      "activeCamera": "8d023eac-3d3f-488f-b899-69403034e281",
+      "reflections": {
+        "type": "url",
+        "url": "https://cdn.8thwall.com/web/assets/envmap/hilly_terrain_01_1k-m89fuwlx.hdr"
+      }
+    },
+    "19067fb7-873b-4049-9825-603c767b8ce5": {
+      "id": "19067fb7-873b-4049-9825-603c767b8ce5",
+      "name": "Concrete Circle",
+      "activeCamera": "5385d230-0755-40b2-b8c9-4c8f522a54b1",
+      "includedSpaces": [
+        "73da7b6a-79a1-488c-9b86-a3008796eb7f"
+      ],
+      "reflections": {
+        "type": "url",
+        "url": "https://cdn.8thwall.com/web/assets/envmap/hilly_terrain_01_1k-m89fuwlx.hdr"
+      }
+    },
+    "16fd55e0-eac7-4ff6-b598-8ba1bd62b5ac": {
+      "id": "16fd55e0-eac7-4ff6-b598-8ba1bd62b5ac",
+      "name": "Lost In My Abstract Garden",
+      "activeCamera": "46ab187c-a808-498a-bb30-b64b85883b8d",
+      "includedSpaces": [
+        "73da7b6a-79a1-488c-9b86-a3008796eb7f"
+      ],
+      "reflections": {
+        "type": "url",
+        "url": "https://cdn.8thwall.com/web/assets/envmap/small_cathedral_02_1k-m89fuwlx.hdr"
+      }
+    }
+  },
+  "entrySpaceId": "5a1d9f92-a797-4904-ba29-5c97218e5a16",
+  "runtimeVersion": {
+    "type": "version",
+    "level": "major",
+    "major": 2,
+    "minor": 0,
+    "patch": 0
+  },
+  "historyVersion": "mfegu3lg"
+}

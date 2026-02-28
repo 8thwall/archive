@@ -1,0 +1,326 @@
+---
+id: custom-components
+description: カスタムコンポーネントは、視覚的な外観、物理的なプロパティ、入力処理、またはカスタムゲームロジックを定義します。
+toc_max_heading_level: 5
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import EcsTypes from '/src/components/_ecs-types.mdx'
+
+# カスタム・コンポーネント
+
+## はじめに
+
+{frontMatter.description}
+
+## カスタムコンポーネントの作成
+
+カスタムコンポーネントを作成するには、以下の手順に従います：
+
+1. ファイルブラウザでプラスボタン（＋）をクリックする。
+2. 新規ファイル」→「新規コンポーネントファイル」をクリックし、名前を付ける（拡張子は任意）。
+   1. 新しいComponentファイルが生成され、デフォルトではプロジェクト内にTypeScriptが生成される。
+   2. 新しいComponentファイルには、カスタムComponentの登録に必要な定型コードが含まれます。
+
+## カスタムコンポーネントの登録
+
+次のコードは、新しく作成されたカスタムコンポーネントがコードエディターに表示される例です：
+
+### 例
+
+:::danger
+コンポーネント名の接頭辞に「debug-」を使用するのは避けること。 debug-'で始まるコンポーネント名は、内部デバッグのために予約されており、\*\*あなたのコードで使用すると正しく機能しません。
+:::
+
+```ts
+// これはコンポーネント・ファイルです。このファイルを使って、プロジェクトのカスタムコンポーネントを定義することができます。
+//
+
+import * as ecs from '@8thwall/ecs' // これがecsライブラリにアクセスする方法です。
+
+ecs.registerComponent({
+  name: 'Custom Component',
+  // schema：{
+  // },
+  // schemaDefaults：{
+  // },
+  // data：{
+  // },
+  // add: (world, component) => {
+  // },
+  // tick: (world, component) => {
+  // },
+  // remove: (world, component) => {
+  // },
+  // stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+  // ecs.defineState('default').initial()
+  // },
+})
+```
+
+## エンティティにカスタム・コンポーネントを追加する
+
+次の例は、既存のエンティティにカスタムコンポーネントを追加する方法を示しています。
+
+### 例
+
+:::tip
+コンポーネントをインポートまたは使用する前に、必ずコンポーネントをエクスポートしてください。
+:::
+
+```tsx title="/custom-component.ts"
+import * as ecs from '@8thwall/ecs'
+
+const CustomComponent = ecs.registerComponent({
+  name: 'Custom Component',
+  schema: {
+    displayName: ecs.string
+  },
+  schemaDefaults: {
+    displayName: 'Unnamed'
+  },
+})
+
+export {CustomComponent}
+```
+
+```tsx title="/another-component.ts"
+import * as ecs from '@8thwall/ecs'
+import {CustomComponent} from './custom-component'
+
+ecs.registerComponent({
+  name: 'Another Custom Component',
+  stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+    ecs.defineState('default')
+      .initial()
+      .onEnter(() => {
+        const entity = world.createEntity()
+
+        CustomComponent.set(world, entity, {
+          displayName: 'Jini'
+        })
+      })
+  },
+})
+```
+
+## 機能
+
+コンポーネント関数を使用すると、エンティティに関連するコンポーネントとそのデータに対して、さまざまなアクションを実行できます。
+
+<ComponentFunctions
+    name="CylinderGeometry"
+    properties={{ radius: 1, height: 1 }}
+    mutate={`カーソル.半径 += 1;
+    カーソル.高さ *= 2;
+    return false;`}
+/>
+
+## スキーマ
+
+スキーマは、コンポーネントの構造を定義するキーと値のペアのリストです。 キーはプロパティの名前であり、値はそのプロパティが保持するデータの種類を指定する[ECSタイプ](/api/studio/ecs/#types)である。
+
+<EcsTypes/>
+
+### 例
+
+次の例は、カスタム・コンポーネントのスキーマを示しています。
+
+```ts
+スキーマ：{
+  target: ecs.eid, // NPCのユニークなエンティティ参照（エンティティID）
+  speed: ecs.f32, // NPCの移動速度（32ビット浮動小数点）
+  strength: ecs.f64, // NPCの体力レベル（64ビット浮動小数点）
+  level: ecs.i32, // NPCのキャラクターレベル (32-bit integer)
+  armor: ecs.ui8, // NPCのアーマーレーティング (0-255, 8-bit unsigned integer)
+  experience: ecs.ui32, // NPCの経験点 (32-bit unsigned integer)
+  guildName: ecs.string, // NPCが所属するギルドの名前。(String)
+  isHostile: ecs.boolean // NPCがプレイヤーに敵対的かどうかを示すブール値 (Boolean)
+}.
+```
+
+```ts
+schemaDefaults：{
+  speed: 3.14,
+  strength: 5.8,
+  level: 10,
+  armor: 255,
+  experience：12,
+  guildName：'Niantic Crew'
+  isHostile: false
+}.
+```
+
+### カスタムエディターフィールド
+
+エンティティエディタでのコンポーネントの表示と機能は、さまざまな方法でカスタマイズできます。 これはすべてスキーマ内のコメントを使って行われ、フィールドには`//@`というマークが付けられる。
+
+#### ラベル
+
+エディター上のラベルは、コード上の名前よりも説明的でなければならないことがある。
+
+```ts
+スキーマ：{
+   // @label Foo
+   bar: ecs.eid,
+}、
+```
+
+#### 資産の参照
+
+プロジェクト内のアセットを参照する必要がある場合。
+
+```ts
+スキーマ：{
+   // @asset
+   yetiModel: ecs.string,
+}.
+```
+
+#### 最小＆最大
+
+インターフェイスで値を変更したときに、その値が一定量を超えないようにクランプする必要がある場合。
+\*実行時の変数の変更には影響しない。
+
+```ts
+スキーマ：{
+   // @min 0
+   // @max 128
+   goldCoins: ecs.i32,
+}.
+```
+
+#### 条件
+
+プロパティは、他のプロパティの値によってのみ表示されるように設定することができます。
+
+```ts
+スキーマ：{
+   // 'from' は autoFrom が false に設定された場合のみ表示される:
+   autoFrom: ecs.boolean,
+   // @condition autoFrom=false
+   from: ecs.f32,
+
+   // 'easingFunction' は easeIn か easeOut が設定された場合のみ表示される:
+   easeIn: ecs.boolean,
+   easeOut: ecs.boolean,
+   // @condition easeIn=true|easeOut=true
+   easingFunction: ecs.string,
+
+   // 'targetX' はターゲットが設定されていない場合のみ表示:
+   target: ecs.eid,
+   // @condition target=null
+   targetX: ecs.f32,
+}.
+```
+
+#### 列挙
+
+文字列プロパティは、セットリストに制限することができます：
+
+```ts
+スキーマ：{
+   // @enum Quadratic, Cubic, Quartic, Quintic, Sinusoidal, Exponential
+   easingFunction: ecs.string,
+}.
+```
+
+#### グループ
+
+特定のプロパティのグループをエディタで特別に扱うように指示することができる。 グループは以下のように設定される：
+
+- グループの開始と終了は // @group start …でマークされる。 および // @group end および // @group end
+- 条件は // @group 条件でグループ全体に適用できる。
+- 現在サポートされているグループは2種類：vector3とcolor
+
+##### ラベル
+
+カスタムラベルは、個々のフィールドに使用することができます：
+
+```ts
+スキーマ{
+   // @group start orient:vector3
+   // @label Pitch
+   orientPitch: ecs.f32,
+   // @label Yaw
+   orientYaw: ecs.f32,
+   // @label Roll
+   orientRoll: ecs.f32,
+   // @group end
+}.
+```
+
+##### ベクトル3
+
+3次元ベクトルを表すプロパティのグループは、以下のように示すことができる：
+
+```ts
+スキーマ：{
+ autoFrom: ecs.boolean,
+ // @group start from:vector3
+ // @group condition autoFrom=false
+ fromX: ecs.f32,
+ fromY: ecs.f32,
+ fromZ: ecs.f32,
+ // @group end
+}.
+```
+
+##### カラー
+
+色は次の例のように示すことができる：
+
+```ts
+スキーマ：{
+ // @group start background:color
+ bgRed: ecs.f32,
+ bgGreen: ecs.f32,
+ bgBlue: ecs.f32,
+ // @group end
+}.
+```
+
+## データ
+
+データはスキーマと似ているが、顕著な違いが2つある。
+
+1. データは、それが定義されているコンポーネントの外部で読み書きすることは\*\*できない。
+2. データには\*\*デフォルト値はありませんが、同様の機能を持つライフサイクルメソッド'add'で設定することができます。
+
+## カーソル
+
+カーソルは、エンティティにアタッチされた別のコンポーネントのスキーマへの参照です。 これは、プロパティの読み書きを可能にするポインタやハンドルのようなものだと考えることができる。
+
+しかし、心に留めておいてほしい：
+
+- カーソルは、非同期（例えば、setTimeout内部や遅延コールバックなど）で使用されると、古くなる可能性がある。 このような場合は、代わりにschemaAttributeとdataAttributeを使用してください。
+- カーソルは、エンティティ上のデータへのライブアクセスを提供します。つまり、カーソルを変更すると、ワールド内の値が直接変更されます。
+
+## ライフサイクル・メソッド
+
+| 方法    | 説明                                                                                                                                                |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 追加    | コンポーネントが初期化されたときに一度だけ呼び出されます。 初期状態の設定と変数のインスタンス化に使用する。                                                                                            |
+| 取り除く  | コンポーネントがエンティティから削除されたとき、またはエンティティがシーンから切り離されたときに呼び出されます。 エンティティに対する以前の変更をすべて取り消すために使用する。                                                          |
+| ダニ    | シーンのレンダー・ループまたはティックごとに呼び出される。 継続的な変更やチェックに使用される。                                                                                                  |
+
+### パラメータ
+
+| プロパティ   | タイプ                                 | 説明                         |
+| ------- | ----------------------------------- | -------------------------- |
+| 世界      | [世界](/api/studio/world)             | 世界への言及。                    |
+| コンポーネント | [ComponentObject](#componentobject) | 現在のコンポーネントへの参照。            |
+
+### ComponentObject
+
+:::warning
+タイマーやイベント・ハンドラなどの非同期コンテキストでは、eid、schema、data プロパティの代わりに schemaAttribute または dataAttribute を使用してください。
+:::
+
+| プロパティ           | タイプ             | 説明                                                 |
+| --------------- | --------------- | -------------------------------------------------- |
+| イード             | イード             | 現在のコンポーネントのエンティティID。                               |
+| スキーマ            | カーソル            | 現在のエンティティのスキーマへの参照                                 |
+| スキーマ属性          | コンポーネントオブジェクト   | ワールドスコープにおける現在のコンポーネントのスキーマへの参照。                   |
+| データ             | カーソル            | 現在のエンティティのデータへの参照                                  |
+| データ属性           | コンポーネントオブジェクト   | ワールドスコープにおける現在のコンポーネントのデータへの参照。                    |

@@ -1,0 +1,92 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<img
+  onclick="document.querySelector('a-scene').emit('recenter', {})"
+  class="recenterButton"
+  src="./assets/recenter.svg" />
+
+<a-scene
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  xrextras-gesture-detector
+  renderer="colorManagement: true"
+  xrweb="allowedDevices: any;"
+  openai-overlay="mode: toggle; chatModel: gpt-3.5-turbo; imageSize: 512x512">
+  <a-assets>
+    <a-asset-item id="chair" src="./assets/modern-chair.glb"></a-asset-item>
+    <a-asset-item id="tv" src="./assets/retro-tv.glb"></a-asset-item>
+  </a-assets>
+
+  <a-entity
+    light="
+      intensity: 0.35;
+      type: directional;
+      castShadow: true;
+      shadowMapHeight:2048;
+      shadowMapWidth:2048;
+      shadowRadius: 4;
+      target: #camera"
+    xrextras-attach="target: camera; offset: -8 15 4"
+    position="-1 4.3 2.5"
+    shadow>
+  </a-entity>
+  <a-light type="ambient" intensity="0.25"></a-light>
+
+  <a-camera id="camera" position="0 1.6 1.75"></a-camera>
+
+  <a-entity
+    openai-texture
+    gltf-model="#chair"
+    position="-0.6 0 -1"
+    rotation="0 55 0"
+    reflections="type: realtime"
+    shadow="receive: false"></a-entity>
+
+  <a-entity
+    tv-texture
+    gltf-model="#tv"
+    position="0.6 0 -1"
+    rotation="0 -55 0"
+    reflections="type: realtime"
+    shadow="receive: false"></a-entity>
+
+  <a-entity rotation="-90 0 0" position="-0.25 0.225 0">
+    <a-sphere
+      openai-texture
+      xrextras-spin="speed: 10000"
+      radius="0.22"
+      material="color: #43bbd1"
+      shadow></a-sphere>
+  </a-entity>
+
+  <a-box
+    openai-texture
+    position="0.35 0.18 0"
+    xrextras-spin="speed: 10000"
+    width="0.35"
+    height="0.35"
+    depth="0.35"
+    material="color: #FF4713"
+    shadow></a-box>
+
+  <a-troika-text
+    position="0 0.2 -0.4"
+    align="justify"
+    baseline="bottom"
+    wrap-count="20"
+    curve-radius="3"
+    max-width="2.75"
+    font-size="0.1"
+    outline-blur="0.03"
+    outline-opacity="0.3"
+    openai-text></a-troika-text>
+
+  <a-plane
+    height="2000"
+    width="2000"
+    rotation="-90 0 0"
+    material="shader: shadow; opacity: 0.4"
+    shadow>
+  </a-plane>
+</a-scene>

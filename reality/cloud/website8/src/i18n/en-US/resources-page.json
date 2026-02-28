@@ -1,0 +1,19 @@
+{
+  "page.title": "Resources",
+  "card.heading.docs": "Docs",
+  "card.description.docs": "Learn how to develop with 8th Wall and access detailed documentation for 8th Wall\u0027s JavaScript API.",
+  "card.heading.forum": "Forum",
+  "card.description.forum": "Join the 8th Wall Discourse forum. Get support, ask questions, and share projects.",
+  "card.heading.tutorials": "Tutorials",
+  "card.description.tutorials": "Master 8th Wall development with helpful quick tips and in-depth video tutorials from our support team.",
+  "card.heading.project_library": "Project Library",
+  "card.description.project_library": "Get started with 8th Wall by viewing code and cloning sample projects from the 8th Wall Project Library.",
+  "card.heading.questions": "Still have questions?",
+  "card.description.questions": "Email support@8thwall.com to contact a member of our team and we will respond shortly.",
+  "card.heading.courses": "Courses",
+  "card.description.courses": "Learn 8th Wall from bottom up with complete how to courses.",
+  "card.heading.community": "Community",
+  "card.description.community": "Connect with developers, engage in discussions, and get expert advice on innovating with 8th Wall.",
+  "card.heading.blog": "Blog",
+  "card.description.blog": "Read the latest announcements, find inspiration and get featured"
+}

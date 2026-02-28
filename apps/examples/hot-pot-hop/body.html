@@ -1,0 +1,170 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<!-- UI -->
+
+<span id="remaining-container">
+  <img src="https://static.8thwall.app/assets/crab-icon-deg91bo4w7.svg" />
+  <h3 id="remaining-text"></h3>
+</span>
+
+<div id="instruction-container" class="hidden">
+  <h2 id="instruction-text">TAP TO HOP</h2>
+  <h2 id="countdown-text">5</h2>
+  <h2 id="warning-text">DON'T BE SOUP</h2>
+</div>
+
+<div id="end-game-container" class="hidden">
+  <h3 id="outcome-text"></h3>
+  <h2 id="winner-text"></h2>
+</div>
+
+<div id="bottom-section">
+  <button id="play-again-btn" class="hidden">Play Again</button>
+</div>
+
+<!-- SCENE -->
+
+<a-scene
+  lobby-handler
+  game-starter
+  gameover-handler
+  landing-page
+  lobby-pages="
+    debug: false;
+    networkStats.enabled: true;
+    createGamePage.backgroundSrc: #backgroundSrc;
+    createGamePage.backgroundColor: #863314; 
+    createGamePage.titleSrc: #titleSrc;
+    createGamePage.mediaSrc: #mediaSrc;
+    lobbyPage.countdownTimerInSeconds: 3;
+    lobbyPage.minPlayers: 2;
+    lobbyPage.maxPlayers: 8;
+    lobbyPage.newTabNewUser: false;
+    lobbyPage.phonePermissionsToRequest: motion, camera;
+    createGamePage.buttonColor: rgba(210, 32, 35, 0.8);
+    createGamePage.textColor: #FFDF80;
+    createGamePage.buttonText: Start;
+    lobbyPage.primaryColor: #FFDF80;
+    lobbyPage.secondaryColor: #0F0B0B;
+    lobbyPage.tertiaryColor: #C92D23;
+    lobbyPage.actionColor: rgba(210, 32, 35, 0.8);
+    lobbyPage.backgroundColor: linear-gradient(#804119, #0F0B0B);  "
+  xrextras-loading="
+      cameraBackgroundColor: #C92D23; 
+      loadBackgroundColor: #0F0B0B;
+      loadImage: #loadingSpinnerSrc;
+      loadAnimation: pulse;"
+  xrextras-runtime-error
+  xrextras-gesture-detector
+  renderer="colorManagement:true"
+  gltf-model="dracoDecoderPath: https://cdn.8thwall.com/web/aframe/draco-decoder/"
+  networked-scene="connectOnLoad: false"
+>
+  <a-assets>
+    <!-- Assets for lobby pages -->
+    <a-asset-item id="titleSrc" src="./assets/art/hph-title.svg"></a-asset-item>
+    <a-asset-item id="mediaSrc" src="./assets/art/hph-media.png"></a-asset-item>
+    <a-asset-item
+      id="backgroundSrc"
+      src="./assets/art/flames-background.png"
+    ></a-asset-item>
+    <img id="loadingSpinnerSrc" src="./assets/art/crab-icon.svg" />
+
+    <!-- Player / Enemy Assets -->
+    <a-asset-item
+      id="crab-model"
+      src="./assets/models/characters/crab.glb"
+    ></a-asset-item>
+    <a-asset-item
+      id="spoon-model"
+      src="./assets/models/characters/spoon.glb"
+    ></a-asset-item>
+
+    <!-- Environment Assets -->
+    <a-asset-item
+      id="pot-model"
+      src="./assets/models/env/pot.glb"
+    ></a-asset-item>
+    <a-asset-item
+      id="lemon-model"
+      src="./assets/models/food/lemon-slice.glb"
+    ></a-asset-item>
+    <a-asset-item
+      id="lime-model"
+      src="./assets/models/food/lime-slice.glb"
+    ></a-asset-item>
+    <a-asset-item
+      id="grapefruit-model"
+      src="./assets/models/food/grapefruit-slice.glb"
+    ></a-asset-item>
+
+    <!-- Define the NAF avatar-template to represent each synced player in the game 
+    Learn more: https://github.com/networked-aframe/networked-aframe#creating-networked-entities -->
+    <template id="avatar-template">
+      <a-entity
+        gltf-model="#crab-model"
+        player-info
+        player-spawner
+        character-animator
+        death-animation
+        jump-controller="groundY: 2"
+        scale="0.4 0.4 0.4"
+        shadow="receive: false"
+      >
+      </a-entity>
+    </template>
+  </a-assets>
+
+  <a-camera position="0 6 6" id="camera"> </a-camera>
+
+  <a-entity
+    gltf-model="#pot-model"
+    scale="3 3 3"
+    shadow="receive: false"
+  ></a-entity>
+
+  <!-- Wooden spoon entity.
+  Enemy behavior runs locally and is not synced across clients -->
+  <a-entity
+    id="enemy"
+    position="1.75 2.35 10"
+    attack-pattern="enabled: false"
+    scale="7 7 7"
+    gltf-model="#spoon-model"
+    shadow="receive: false"
+  >
+  </a-entity>
+
+  <!-- Your player entity.
+  Remotely instantiated players will be a copy of this element due to its use of the networked component. -->
+  <a-entity
+    id="my-player"
+    basic-collider="enabled: true"
+    visible="false"
+    networked="template: #avatar-template"
+  >
+  </a-entity>
+
+  <a-entity
+    light="
+      type: directional; 
+      castShadow: true; 
+      color: white; 
+      intensity: 0.5"
+    position="5 10 7"
+  >
+  </a-entity>
+
+  <a-light type="ambient" intensity="0.3"></a-light>
+
+  <a-plane
+    id="ground"
+    rotation="-90 0 0"
+    width="50"
+    height="50"
+    material="shader: shadow; transparent: true; opacity: 0.4"
+    shadow
+  >
+  </a-plane>
+</a-scene>

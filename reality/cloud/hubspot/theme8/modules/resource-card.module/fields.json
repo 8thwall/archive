@@ -1,0 +1,97 @@
+[ {
+  "id" : "51cb7313-7f07-7719-d2ef-4419bff59e58",
+  "name" : "image",
+  "display_width" : null,
+  "label" : "Image",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "default" : {
+    "size_type" : "auto",
+    "src" : "https://7255816.fs1.hubspotusercontent-na1.net/hubfs/7255816/checkmark%20bullet.png",
+    "alt" : "checkmark bullet",
+    "loading" : "lazy",
+    "width" : 303,
+    "height" : 300,
+    "max_width" : 303,
+    "max_height" : 300
+  }
+}, {
+  "id" : "25488b46-549a-dfc9-101f-c10357794524",
+  "name" : "heading",
+  "display_width" : null,
+  "label" : "Heading",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text",
+  "default" : "Resource Header"
+}, {
+  "id" : "0e0ca870-5ec2-da79-6796-6b9a04ea5994",
+  "name" : "description",
+  "display_width" : null,
+  "label" : "Description",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "placeholder" : "",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text",
+  "default" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+}, {
+  "id" : "ecf00aae-36dd-d138-533a-0455480d2237",
+  "name" : "link_text",
+  "display_width" : null,
+  "label" : "Secondary Text",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "placeholder" : "Enter Secondary Text or Link Here",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text",
+  "default" : ""
+}, {
+  "id" : "375b9756-b2cd-e29c-618d-cffe0b7525a9",
+  "name" : "isLinkActive",
+  "display_width" : null,
+  "label" : "Make secondary text a link?",
+  "required" : false,
+  "locked" : false,
+  "display" : "toggle",
+  "type" : "boolean",
+  "default" : true
+}, {
+  "id" : "02d37ca1-5891-9293-eb46-7b7b3f3273a9",
+  "name" : "link",
+  "display_width" : null,
+  "label" : "Link URL",
+  "required" : false,
+  "locked" : false,
+  "visibility" : {
+    "controlling_field" : null,
+    "controlling_field_path" : "isLinkActive",
+    "controlling_value_regex" : "true",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION", "PHONE_NUMBER", "WHATSAPP_NUMBER", "PAYMENT" ],
+  "show_advanced_rel_options" : false,
+  "type" : "link",
+  "default" : {
+    "url" : {
+      "content_id" : null,
+      "href" : "https://8thwall.com",
+      "type" : "EXTERNAL"
+    },
+    "open_in_new_tab" : false,
+    "no_follow" : false
+  }
+} ]

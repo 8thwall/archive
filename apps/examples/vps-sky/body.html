@@ -1,0 +1,26 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene 
+landing-page
+vps-coaching-overlay
+xrextras-loading
+xrextras-runtime-error
+xrextras-gesture-detector
+renderer="colorManagement: true"
+xrconfig
+xrweb="enableVps: true"
+xrlayers
+localize-sky>
+
+  <a-assets>
+    <img id="skyTexture" src="./assets/space.png">
+  </a-assets>
+
+  <a-camera
+    position="0 2 2"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;"
+  ></a-camera>
+
+</a-scene>

@@ -1,0 +1,159 @@
+---
+id: entity
+description: このクラスは8th Wall Studioシーングラフの個々のエンティティを表し、コンポーネントアクセス、ステートコントロール、階層操作を提供します。
+sidebar_position: 500
+---
+
+# エンティティ
+
+## 説明
+
+{frontMatter.description}
+
+## プロパティ
+
+| プロパティ    | タイプ  | 説明              |
+| -------- | ---- | --------------- |
+| イード      | イード  | このエンティティの一意識別子。 |
+
+## コンポーネント・メソッド
+
+### 得る
+
+このエンティティのコンポーネントの現在のデータにアクセスする。
+
+```ts
+entity.get(component: RootAttribute<Schema>) // -> ReadData<Schema>
+```
+
+### がある。
+
+このエンティティにコンポーネントが存在するかどうかを調べます。
+
+```ts
+entity.has(component: RootAttribute<Schema>) // -> boolean
+```
+
+### セット
+
+このエンティティのコンポーネントにデータを適用する。
+
+```ts
+entity.set(component: RootAttribute<Schema>, data: ReadData<Schema>) // -> void
+```
+
+### 取り除く
+
+このエンティティからコンポーネントを削除する。
+
+```ts
+entity.remove(component: RootAttribute<Schema>) // -> void
+```
+
+### リセット
+
+このエンティティのコンポーネントをデフォルト値にリセットする。
+
+```ts
+entity.reset(component: RootAttribute<Schema>) // -> void
+```
+
+## 州の方法
+
+### 隠す
+
+このエンティティを隠す。
+
+```ts
+エンティティ.hide() // -> void
+```
+
+### ショー
+
+非表示の場合は表示する。
+
+```ts
+エンティティ.show() // -> void
+```
+
+### isHidden
+
+エンティティが現在非表示になっているかどうかをチェックする。
+
+```ts
+エンティティ.isHidden() // -> boolean
+```
+
+### 無効にする
+
+このエンティティを無効にする。
+
+```ts
+entity.disable() // -> void
+```
+
+### イネーブル
+
+このエンティティを有効にする。
+
+```ts
+entity.enable() // -> void
+```
+
+### 無効
+
+エンティティが現在無効かどうかをチェックする。
+
+```ts
+エンティティ.isDisabled() // -> boolean
+```
+
+### 削除
+
+このエンティティを世界から削除する。
+
+```ts
+エンティティ.delete() // -> void
+```
+
+### isDeleted
+
+エンティティが削除されたかどうかを確認する。
+
+```ts
+エンティティ.isDeleted() // -> boolean
+```
+
+## 階層メソッド
+
+### セットペアレント
+
+このエンティティの親を設定する。
+
+```ts
+entity.setParent(parent: Eid | undefined | null) // -> void
+```
+
+### ゲットチャイルドレン
+
+このエンティティの子供を取得する。
+
+```ts
+エンティティ.getChildren() // -> ジェネレータ<Eid>
+```
+
+### アドチャイルド
+
+このエンティティの親を取得する。
+
+```ts
+エンティティ.getParent() // -> Eid | 未定義
+```
+
+### アドチャイルド
+
+別のエンティティをこのエンティティの子にする。
+
+```ts
+entity.addChild(child: Eid) // -> void
+```

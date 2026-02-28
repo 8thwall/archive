@@ -1,0 +1,11 @@
+{
+  "inherit": true,
+  "tasks": [
+    {
+      "task": "TEST",
+      "targets": [
+        "//bzl/examples/... -//bzl/examples/unity/..."
+      ]
+    }
+  ]
+}

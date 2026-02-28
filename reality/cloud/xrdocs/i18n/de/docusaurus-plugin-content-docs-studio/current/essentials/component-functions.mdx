@@ -1,0 +1,65 @@
+---
+id: component-functions
+description: >-
+  Komponenten können während der Laufzeit hinzugefügt, geändert und entfernt
+  werden.
+sidebar_position: 45
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Funktionen der Komponenten
+
+## Einführung
+
+{frontMatter.description} Eingebaute Komponenten und benutzerdefinierte Komponenten verwenden dieselbe Schnittstelle für die Verwaltung von Komponentendaten.
+
+## Referenzieren einer benutzerdefinierten Komponente
+
+Das folgende Beispiel zeigt, wie ein Verweis auf eine benutzerdefinierte Komponente zwischen verschiedenen Codedateien ausgetauscht werden kann.
+
+:::tip
+Stellen Sie sicher, dass Sie die Komponente exportieren, **bevor** Sie versuchen, sie zu importieren oder irgendwo zu verwenden.
+:::
+
+```tsx title="/custom-component.ts"
+import * as ecs from '@8thwall/ecs'
+
+const CustomComponent = ecs.registerComponent({
+  ...
+})
+
+export {CustomComponent}
+```
+
+```tsx title="/another-component.ts"
+import * as ecs from '@8thwall/ecs'
+import {CustomComponent} from './custom-component'
+
+ecs.registerComponent({
+  name: 'Another Custom Component',
+  stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+    ecs.defineState('default')
+      .initial()
+      .onEnter(() => {
+        const entity = world.createEntity()
+
+        CustomComponent.set(world, entity, {
+          displayName: 'Jini'
+        })
+      })
+  },
+})
+```
+
+## Funktionen
+
+Mit Komponentenfunktionen können Sie verschiedene Aktionen für eine Komponente und ihre Daten in Bezug auf eine Entität durchführen.
+
+<ComponentFunctions
+  name="CylinderGeometry"
+  properties={{ radius: 1, height: 1 }}
+  mutate={`cursor.radius += 1;
+   cursor.height *= 2;
+   return false;`}
+/>

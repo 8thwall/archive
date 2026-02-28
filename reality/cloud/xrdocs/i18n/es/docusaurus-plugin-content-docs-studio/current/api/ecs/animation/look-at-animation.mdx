@@ -1,0 +1,34 @@
+---
+id: look-at-animation
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# LookAtAnimation
+
+## Descripción
+
+This component creates an animation on an entity.
+
+## Propiedades
+
+| Propiedad | Tipo   | Por defecto   | Descripción                                        |
+| --------- | ------ | ------------- | -------------------------------------------------- |
+| target    | eid    | undefined     | The target object to track.                        |
+| targetX   | number | 0             | The target x position (if no target is specified). |
+| targetY   | number | 0             | The target y position (if no target is specified). |
+| targetZ   | number | 0             | The target z position (if no target is specified). |
+
+## Funciones
+
+<ComponentFunctions
+    name="LookAtAnimation"
+    properties={{
+        targetX: 0,
+        targetY: 0,
+        targetZ: 0
+    }}
+    mutate={`cursor.targetX = 10;
+    cursor.targetY = 5;
+    return false;`}
+/>

@@ -1,0 +1,202 @@
+---
+id: input
+description: Esta biblioteca incluye funciones que gestionan la entrada de datos.
+---
+
+# entrada
+
+## Descripción
+
+{frontMatter.description}
+
+## Funciones
+
+### disablePointerLockRequest
+
+Desactiva la petición de bloqueo del puntero al hacer clic.
+
+```ts
+world.input.disablePointerLockRequest() // -> void
+```
+
+### enablePointerLockRequest
+
+Solicita al usuario el bloqueo del puntero al hacer clic en la pantalla.
+
+```ts
+world.input.enablePointerLockRequest() // -> void
+```
+
+### getAction
+
+Devuelve > 0 si la acción se ha activado. El valor suele oscilar entre 0 y 1. La excepción son la velocidad y el desplazamiento del ratón, que no están limitados.
+
+```ts
+world.input.getAction(actionName: string) // -> número
+```
+
+### getActiveMap
+
+Obtener el mapa de acciones activas.
+
+```ts
+world.input.getActiveMap() // -> string (Nombre del mapa de acción activo)
+```
+
+### setActiveMap
+
+Establece el mapa de acción activo. El nombre del mapa de acción por defecto es 'default'.
+
+```ts
+world.input.setActiveMap(mapName: string) // -> void
+```
+
+### getAxis
+
+Devuelve el valor del eje del gamepadIdx.
+
+```ts
+world.input.getAxis(gamepadIdx?: number) // -> number[]
+```
+
+### getButton
+
+Devuelve true mientras se mantiene pulsado el botón virtual identificado por buttonName.
+
+```ts
+world.input.getAxis(input: número, gamepadIdx?: número) // -> boolean
+```
+
+### getButtonDown
+
+Devuelve true durante el fotograma en el que el usuario pulsó el botón asignado al índice.
+
+```ts
+world.input.getAxis(input: número, gamepadIdx?: número) // -> boolean
+```
+
+### getButtonUp
+
+Devuelve true el primer fotograma en el que el usuario suelta el botón.
+
+```ts
+world.input.getAxis(input: número, gamepadIdx?: número) // -> boolean
+```
+
+### getGamepads
+
+Devuelve todos los gamepads conectados al dispositivo.
+
+```ts
+world.input.getGamepads() // -> Gamepad[]
+```
+
+### getKey
+
+Devuelve true mientras el usuario mantiene pulsada la tecla identificada por el nombre.
+
+```ts
+world.input.getKey(code: string) // -> booleano
+```
+
+### getKeyDown
+
+Devuelve true durante el fotograma en el que el usuario empieza a pulsar la tecla identificada por el nombre.
+
+```ts
+world.input.getKeyDown(code: string) // -> booleano
+```
+
+### getKeyUp
+
+Devuelve true durante el fotograma en el que el usuario suelta la tecla identificada por el nombre.
+
+```ts
+world.input.getKeyUp(code: string) // -> booleano
+```
+
+### getMouseButton
+
+Devuelve true mientras el usuario mantiene pulsado el botón del ratón identificado por el número de botón.
+
+| Número | Botón del ratón  |
+| ------ | ---------------- |
+| 0      | Clic izquierdo   |
+| 1      | Clic derecho     |
+| 2      | Clic central     |
+
+```ts
+world.input.getMouseButton(index: número) // -> booleano
+```
+
+### getMouseDown
+
+Devuelve true durante el fotograma en el que el usuario empieza a pulsar el botón del ratón.
+
+```ts
+world.input.getMouseDown(index: number) // -> boolean
+```
+
+### getMouseUp
+
+Devuelve true durante el fotograma en el que el usuario suelta el botón del ratón.
+
+```ts
+world.input.getMouseUp(index: number) // -> boolean
+```
+
+### getMousePosition
+
+Devuelve las coordenadas clientX y clientY del ratón.
+
+```ts
+world.input.getMousePosition() // -> [número, número]
+```
+
+### getMouseVelocity
+
+Devuelve la velocidad x e y del ratón.
+
+```ts
+world.input.getMouseVelocity() // -> [número, número]
+```
+
+### getMouseScroll
+
+Devuelve la velocidad x e y del desplazamiento del ratón.
+
+```ts
+world.input.getMouseScroll() // -> [número, número]
+```
+
+### getTouch
+
+Devuelve true mientras se toca la pantalla. Si se proporciona un identificador, devuelve true sólo si ese toque específico está activo.
+
+```ts
+world.input.getTouch(¿identificador?: número) // -> booleano
+```
+
+### getTouchDown
+
+Devuelve true durante el fotograma en el que comienza un toque. Si se proporciona un identificador, devuelve true sólo cuando comienza ese toque específico.
+
+```ts
+world.input.getTouchDown(¿identificador?: número) // -> booleano
+```
+
+### getTouchUp
+
+Devuelve true durante el fotograma en el que termina un toque. Si se proporciona un identificador, devuelve true sólo cuando termina ese toque específico.
+
+```ts
+world.input.getTouchUp(¿identificador?: número) // -> booleano
+```
+
+### getTouchIds
+
+Devuelve un array de identificadores de toques activos. Cada identificador representa un punto de contacto distinto actualmente en la pantalla.
+
+```ts
+world.input.getTouchIds() // -> número[]
+```

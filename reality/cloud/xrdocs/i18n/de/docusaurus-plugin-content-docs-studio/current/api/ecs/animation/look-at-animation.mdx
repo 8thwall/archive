@@ -1,0 +1,34 @@
+---
+id: look-at-animation
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# LookAtAnimation
+
+## Beschreibung
+
+Diese Komponente erstellt eine Animation für ein Objekt.
+
+## Eigenschaften
+
+| Eigenschaft | Typ    | Standard    | Beschreibung                                             |
+| ----------- | ------ | ----------- | -------------------------------------------------------- |
+| Ziel        | eid    | undefiniert | Das zu verfolgende Zielobjekt.                           |
+| ZielX       | Nummer | 0           | Die Ziel-X-Position (wenn kein Ziel angegeben ist).      |
+| ZielY       | Nummer | 0           | Die y-Position des Ziels (wenn kein Ziel angegeben ist). |
+| ZielZ       | Nummer | 0           | Die Ziel-Z-Position (wenn kein Ziel angegeben ist).      |
+
+## Funktionen
+
+<ComponentFunctions
+    name="LookAtAnimation"
+    properties={{
+        targetX: 0,
+        targetY: 0,
+        targetZ: 0
+    }}
+    mutate={`cursor.targetX = 10;
+    cursor.targetY = 5;
+    return false;`}
+/>

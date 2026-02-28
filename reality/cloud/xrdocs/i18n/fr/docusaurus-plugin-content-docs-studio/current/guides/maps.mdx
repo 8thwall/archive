@@ -1,0 +1,68 @@
+---
+id: maps
+description: >-
+  Les objets cartographiques fournissent des cartes 3D interactives et réelles
+  permettant d'intégrer des données géospatiales dans des expériences de réalité
+  augmentée et de 3D.
+---
+
+# Cartes
+
+## Introduction
+
+{frontMatter.description} Ils vous permettent d'ancrer le contenu à des endroits spécifiques du monde réel.
+
+Cette fonction comprend des terrains, des paysages urbains et des structures réelles intégrés, ce qui permet de placer avec précision des objets virtuels dans un environnement cartographié. Cette fonctionnalité prend en charge les applications basées sur la localisation, y compris les expériences du système de positionnement visuel (SPV) et les interactions AR dans le monde réel.
+
+![](/images/studio/maps-intro.gif)
+
+## Ajouter une carte
+
+Vous pouvez ajouter une carte à votre scène en créant une entité Map. Pour ce faire, cliquez sur ( + ) dans la hiérarchie de la scène et sélectionnez Map.
+
+![](/images/studio/maps-add.png)
+
+## Configurations cartographiques
+
+### Centre et rayon
+
+Par défaut, le centre de la carte est défini sur la position GPS de l'appareil. Si nécessaire, vous pouvez configurer manuellement la latitude, la longitude et le rayon pour spécifier un emplacement personnalisé.
+
+Vous pouvez cocher la case "Utiliser le GPS" pour utiliser le GPS de l'appareil au moment de l'exécution.
+
+### Thèmes de la carte
+
+Vous pouvez personnaliser l'apparence de la carte en choisissant parmi 20 thèmes prédéfinis. Vous pouvez également ajuster des propriétés individuelles pour créer un thème personnalisé.
+
+### Caractéristiques
+
+La carte est composée des couches suivantes :
+
+- Terre : La base de la carte, les zones où il n'y a pas d'autres caractéristiques.
+- Bâtiment : Bâtiments sur la carte. Ceux-ci peuvent s'élever au-dessus de la carte.
+- Parc : Espaces verts (naturels et artificiels).
+- Stationnement : Parkings.
+- Transport en commun : Lignes de chemin de fer et autres plates-formes de transport en commun (par exemple, train ou ferry).
+- Route : Routes de différentes tailles.
+- Le sable : Plages et déserts.
+- Eau : Les masses d'eau et les cours d'eau.
+
+Chacun de ces éléments peut être modifié et personnalisé à l'aide de l'inspecteur des cartes. Pour la liste complète des propriétés configurables, voir le [`MapTheme` API reference](/api/studio/ecs/map-theme).
+
+## Points de la carte
+
+Les points cartographiques sont des objets ancrés à une latitude et une longitude données. En ajoutant un objet comme enfant d'un point de la carte, vous pouvez le verrouiller à la latitude et à la longitude du point de la carte, où il se déplacera et changera d'échelle lorsque les coordonnées et le rayon de la carte changeront.
+
+Vous pouvez créer un seul point de carte en cliquant sur "Nouveau point de carte" dans le panneau de l'inspecteur et en spécifiant la latitude et la longitude. Vous pouvez également sélectionner un emplacement VPS comme source de coordonnées.
+
+Si vous cochez la case "Spawn Locations", Studio générera de manière procédurale un point de carte à chaque emplacement de VPS dans le monde. Voir le [Map Explorer sample project](https://www.8thwall.com/8thwall/map-explorer) pour un exemple de création d'entités personnalisées sur chaque POI visible.
+
+![](/images/studio/map-points.gif)
+
+## Simulateur
+
+Vous pouvez tester votre expérience de la carte en utilisant le simulateur. Le deuxième menu déroulant en haut de la fenêtre vous permet de modifier la latitude et la longitude simulées, ce qui vous permet de tester votre expérience dans différents endroits. Vous pouvez également naviguer vers n'importe quel endroit ou point de la carte dans votre projet.
+
+La sélection de "Aucun" dans la liste déroulante simule l'absence de données de localisation.
+
+![](/images/studio/maps-simulator.png)

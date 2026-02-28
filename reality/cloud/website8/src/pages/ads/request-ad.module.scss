@@ -1,0 +1,80 @@
+@use '../../styles/brand-colors';
+@use '../../styles/constants';
+
+.requestSection {
+  min-height: 872px;
+  background-color: brand-colors.$moonlight;
+  background-image: url('../../../img/embed-bg.png');
+  background-position: 0 340px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.requestContainer {
+  max-width: 1584px;
+  margin: 0 auto;
+}
+
+.emodoUpsell {
+  width: 400px;
+  min-width: 400px;
+  margin: 0 auto;
+  padding: 100px 0;
+}
+
+.emodoSocialProof {
+  background-color: brand-colors.$white;
+  border: 1px solid #AD50FF54;
+  border-radius: 6px;
+  padding: 32px;
+  text-align: center;
+}
+
+.emodoSocialProofPercent {
+  color: brand-colors.$brand-highlight;
+  font-size: 40px;
+}
+
+.emodoSocialProofDescription {
+  font-size: 18px;
+  margin: 0;
+  & span {
+    font-weight: 700;
+  }
+}
+
+.emodoSocialProofSource {
+  text-align: center;
+  font-size: 14px;
+  color: brand-colors.$gray5;
+  padding: 8px 32px;
+}
+
+@media screen and (max-width: constants.$SMALL_MONITOR_WIDTH_BREAKPOINT) {
+  .emodoUpsell {
+    width: 300px;
+    min-width: 300px;
+  }
+
+  .emodoSocialProof {
+    padding: 32px 18px 48px 18px;
+  }
+
+  .emodoSocialProofSource {
+    padding: 8px 16px;
+  }
+}
+
+@media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+  .emodoUpsell {
+    width: 275px;
+    min-width: 275px;
+  }
+}
+
+@media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+  .emodoUpsell {
+    display: none;
+  }
+}

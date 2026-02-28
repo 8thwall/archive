@@ -1,0 +1,6 @@
+"$schema" = "schemas/schema.json"
+[default]
+description = "All permissions for the native app export plugin"
+permissions = [
+  "allow-vibrate",
+]

@@ -1,0 +1,69 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<div id="splashimage">
+  <div id="start" style="display: none;">
+    <h2>Start AR</h2>
+  </div>
+</div>
+
+<!-- "xrweb" component has been removed from the a-scene, as we'll programatically add this later -->
+<!-- when the user clicks the "Start AR" button -->
+<a-scene
+  splash-image
+  xrextras-gesture-detector
+  landing-page
+  xrextras-loading
+  renderer="colorManagement: true">
+
+  <!-- We can define assets here to be loaded when A-Frame initializes -->
+  <a-assets>
+    <!-- Credit to Poly by Google for the model: https://poly.google.com/view/5ZMAz7_ucTn -->
+    <a-asset-item id="sandCastleModel" src="assets/sand-castle.glb"></a-asset-item>
+    <audio id="magical-music" preload="auto" class="a-sound" src="./assets/MagicalTransition.mp3" response-type="arraybuffer"></audio>
+  </a-assets>
+
+  <!-- The raycaster will emit mouse events on scene objects specified with the cantap class -->
+  <a-camera
+    id="camera"
+    position="0 8 8"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;">
+    <a-entity sound="src: #magical-music; loop: true; volume: 0.2;"></a-entity>
+  </a-camera>
+
+  <a-entity
+    light="
+      type: directional;
+      intensity: 0.8;
+      castShadow: true;
+      shadowMapHeight:2048;
+      shadowMapWidth:2048;
+      shadowCameraTop: 10;
+      target: #model;"
+    xrextras-attach="target: model; offset: 1 15 3;"
+    shadow>
+  </a-entity>
+
+  <a-light type="ambient" intensity="0.7"></a-light>
+
+  <a-entity 
+    id="model" 
+    gltf-model="#sandCastleModel" 
+    class="cantap" 
+    xrextras-hold-drag 
+    xrextras-two-finger-rotate 
+    xrextras-pinch-scale 
+    scale="3 3 3" 
+    shadow="receive: false">
+  </a-entity>
+
+  <a-plane
+    id="ground" 
+    rotation="-90 0 0" 
+    width="1000" 
+    height="1000" 
+    material="shader: shadow" 
+    shadow>
+  </a-plane>
+</a-scene>

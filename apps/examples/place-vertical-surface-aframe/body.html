@@ -1,0 +1,37 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<a-scene
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  xrweb>
+  
+  <!-- The raycaster will emit mouse events on scene objects specified with the cantap class -->
+  <a-camera id="camera" position="0 8 8"></a-camera>
+  
+  <a-box
+    id="box"
+    wall-from-floor
+    color="white"
+    width="5.5"
+    depth="0.25"
+    height="0.1">
+  </a-box>
+  
+  <a-entity
+    light="type: directional; intensity: 0.6;"
+    position="1 4.3 2.5">
+  </a-entity>
+  
+  <a-light type="ambient" intensity="1"></a-light>
+  
+  <a-entity
+    id="ground"
+    class="cantap"
+    geometry="primitive: box"
+    material="color: #fff; transparent: true; opacity: 0"
+    scale="1000 2 1000"
+    position="0 -1 0">
+  </a-entity>
+  
+</a-scene>

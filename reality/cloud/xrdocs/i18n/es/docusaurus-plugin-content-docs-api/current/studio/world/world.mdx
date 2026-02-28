@@ -1,0 +1,139 @@
+---
+id: world
+description: Esta biblioteca incluye propiedades y funciones relacionadas con el Mundo.
+---
+
+# mundo
+
+## Descripción
+
+{frontMatter.description}
+
+## Propiedades
+
+| Propiedad      | Tipo        | Descripción                                   |
+| -------------- | ----------- | --------------------------------------------- |
+| todasEntidades | Establecer  | Conjunto de todas las entidades de la escena. |
+
+## Funciones
+
+### crearEntidad
+
+Crear una nueva entidad. Si lo desea, puede especificar una entidad o un nombre de prefabricado para generar una instancia de ese prefabricado.
+
+```ts
+world.createEntity(prefabOrPrefabName?: Eid | string) // -> eid
+```
+
+### eliminarEntidad
+
+Eliminar una entidad existente.
+
+```ts
+world.deleteEntity(eid) // -> void
+```
+
+### getChildren
+
+Obtener los hijos de una entidad.
+
+```ts
+world.getChildren(eid) // -> Generador<Eid>
+```
+
+### getParent
+
+Obtener el padre de una entidad.
+
+```ts
+world.getParent(eid) // -> eid
+```
+
+### setParent
+
+Establece el padre de una entidad.
+
+```ts
+world.setParent(eid, parent: eid) // -> void
+```
+
+### getWorldTransform
+
+Obtiene la transformación mundial de una entidad. **Copia la worldTransform del objetivo en el segundo parámetro.**
+
+```ts
+world.getWorldTransform(eid, transform: Mat4) // -> void
+```
+
+### setTransform
+
+Establece la transformación de una entidad.
+
+```ts
+world.setTransform(eid, transform: Mat4) // -> void
+```
+
+### setPosition
+
+Establece la posición de una entidad.
+
+```ts
+world.setPosition(eid, x: número, y: número, z: número) // -> void
+```
+
+### setQuaternion
+
+Establece la rotación de una entidad.
+
+```ts
+world.setQuaternion(eid, x: número, y: número, z: número, w: número) // -> void
+```
+
+### setScale
+
+Establece la escala de una entidad.
+
+```ts
+world.setScale(eid, x: número, y: número, z: número) // -> void
+```
+
+### normalizarQuaternion
+
+Normaliza el cuaternión de una entidad.
+
+```ts
+world.normalizeQuaternion(eid) // -> void
+```
+
+### getInstanceEntity
+
+Obtiene la entidad de instancia correspondiente de una jerarquía de instancias de prefabricados dada la instancia raíz y un prefabricado de origen o una entidad hija de prefabricado.
+
+```ts
+world.getInstanceEntity(prefabInstance: Eid, prefabSourceEntity: Eid) // -> Eid
+```
+
+### raycast
+
+Realiza un Raycast desde una posición y dirección.
+
+```ts
+world.raycast(origin: Vec3, direction: Vec3, near: number = 0, far: number = Infinity) // -> IntersectionResult[]
+```
+
+### raycastDesde
+
+Realiza un Raycast a partir de la posición y dirección de avance de una entidad.
+
+```ts
+world.raycastFrom(eid: Eid, near: número = 0, far: número = Infinito) // -> IntersectionResult[]
+```
+
+## IntersectionResult
+
+| Propiedad  | Tipo         | Descripción                                                              |
+| ---------- | ------------ | ------------------------------------------------------------------------ |
+| ¿eid?      | Eid          | El eid del objeto golpeado.                                              |
+| punto      | Vec3         | La ubicación en el Espacio Mundial donde se produjo la intersección.     |
+| distancia  | número       | Distancia entre el punto de partida y el punto de impacto.               |
+| tresDatos  | Intersección | Los datos de la intersección three.js.                                   |

@@ -1,0 +1,70 @@
+.lessonCtaContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+  font-size: 16px;
+  align-items: center;
+  padding: 1em 0;
+}
+
+.lessonCtaContainerReverse {
+  flex-direction: row-reverse;
+}
+
+.lessonCtaImage {
+  border-radius: 8px;
+  width: 45%;
+  height: auto;
+}
+
+.lessonCtaBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.lessonCtaHeading {
+  font-size: 2.125em;
+  margin: 0;
+  font-weight: 900;
+}
+
+.lessonCtaBodyText {
+  margin: 0;
+  font-size: 1.25em;
+}
+
+.lessonCtaLink{
+  color: #7611B6;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.lessonCtaLink:hover {
+  color: #408CBA;
+}
+
+.lessonCtaBlock ul {
+  margin: 0;
+  padding: 0;
+}
+
+.lessonCtaBlock li {
+  list-style: none;
+  font-size: 1.25em;
+}
+
+.lessonCtaBlock li::before {
+  content: "";
+  padding-right: 2em;
+}
+
+@media screen and (max-width: 991px) {
+  .lessonCtaContainer, .lessonCtaContainerReverse {
+    flex-direction: column;
+  } 
+  
+  .lessonCtaImage {
+    width: 100%;
+  }
+}

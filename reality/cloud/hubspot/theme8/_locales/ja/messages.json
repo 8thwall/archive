@@ -1,0 +1,278 @@
+{
+  "header_industrySolutions": {
+    "message": "ソリューション",
+    "description": "A top-level button in the page header navigation. Clicking this will display a list of other links to click."
+  },
+  "header_whyWebar": {
+    "message": "WebAR を選ぶ理由",
+    "description": "A link under the \"Industry Solutions\" menu."
+  },
+  "header_retail": {
+    "message": "小売",
+    "description": "A link under the \"Industry Solutions\" menu."
+  },
+  "header_cpg": {
+    "message": "チャネルプロトコル",
+    "description": "A link under the \"Industry Solutions\" menu. This stands for \"Consumer Packaged Goods\""
+  },
+  "header_fashion": {
+    "message": "ファッション",
+    "description": "A link under the \"Industry Solutions\" menu."
+  },
+  "header_automotive": {
+    "message": "自動車",
+    "description": "A link under the \"Industry Solutions\" menu."
+  },
+  "header_entertainment": {
+    "message": "エンターテイメント",
+    "description": "A link under the \"Industry Solutions\" menu."
+  },
+  "header_qsr": {
+    "message": "QSR",
+    "description": "A link under the \"Industry Solutions\" menu. This stands for \"Quick Service Restaurant\""
+  },
+  "header_case_studies": {
+    "message": "ケーススタディ",
+    "description": "A link under the \"Industry Solutions\" menu."
+  },
+  "header_verticals": {
+    "message": "全業種",
+    "description": "A link under the \"Industry Solutions\" menu. \"Verticals\" in this context refers to \"vertical markets\", or a group of companies focused on a specific niche."
+  },
+  "header_industries": {
+    "message": "Industries",
+    "description": "A link under the \"Solutions\" menu."
+  },
+  "header_community": {
+    "message": "コミュニティ",
+    "description": "A top-level button in the page header navigation. Clicking this will display a list of other links to click."
+  },
+  "header_made_by_community": {
+    "message": "Made by Community",
+    "description": "A link under the \"Community\" menu."
+  },
+  "header_discord": {
+    "message": "Discord",
+    "description": "A link under the \"Community\" menu."
+  },
+  "header_game_jams": {
+    "message": "Game Jams",
+    "description": "A link under the \"Community\" menu."
+  },
+  "header_education": {
+    "message": "教育",
+    "description": "A link under the \"Community\" menu."
+  },
+  "header_events": {
+    "message": "イベント",
+    "description": "A link under the \"Community\" menu."
+  },
+  "header_product": {
+    "message": "製品",
+    "description": "A top-level link in the page header navigation. Clicking will display a list of 8th Wall's offerings."
+  },
+  "header_support": {
+    "message": "サポート",
+    "description": "A link under the \"Learn\" menu. Clicking will redirect to a resources page."
+  },
+  "header_niantic_studio": {
+    "message": "Studio",
+    "description": "A link under the \"Product\" menu."
+  },
+  "header_world_ar": {
+    "message": "ワールドAR",
+    "description": "A link under the \"Product\" menu."
+  },
+  "header_location_ar": {
+    "message": "場所 AR",
+    "description": "A link under the \"Product\" menu."
+  },
+  "header_image_targets": {
+    "message": "イメージターゲット",
+    "description": "A link under the \"Product\" menu."
+  },
+  "header_human_ar": {
+    "message": "ヒトAR",
+    "description": "A link under the \"Product\" menu."
+  },
+  "header_headsets": {
+    "message": "ヘッドセット",
+    "description": "A link under the \"Product\" menu."
+  },
+  "header_cloud_editor": {
+    "message": "クラウド・エディター",
+    "description": "A link under the \"Product\" menu."
+  },
+  "header_all_products": {
+    "message": "すべての製品",
+    "description": "A link under the \"Product\" menu."
+  },
+  "header_discover": {
+    "message": "ディスカバー",
+    "description": "A top-level link in the page header navigation. Clicking will redirect to page showcasing projects build using 8th Wall"
+  },
+  "header_findPartner": {
+    "message": "パートナーを探す",
+    "description": "A top-level link in the page header navigation."
+  },
+  "header_resources": {
+    "message": "リソース",
+    "description": "A top-level button in the page header navigation. Clicking will display a menu with other links to click."
+  },
+  "header_projectLibrary": {
+    "message": "プロジェクト・ ライブラリー",
+    "description": "A link under the \"Resources\" menu. Clicking will redirect to a page showcasing projects built by 8th Wall."
+  },
+  "header_blog": {
+    "message": "ブログ",
+    "description": "A link under the \"Resources\" menu. Clicking will redirect to 8th Wall's blog"
+  },
+  "header_allResources": {
+    "message": "すべてのリソース",
+    "description": "A link under the \"Resources\" menu. Clicking will redirect to a resources page."
+  },
+  "header_features": {
+    "message": "特徴",
+    "description": "A link under the \"Product\" menu. Clicking will redirect to a products web page."
+  },
+  "header_forum": {
+    "message": "フォーラム",
+    "description": "A link under the \"Learn\" menu. Clicking will redirect to 8th Wall's community forum."
+  },
+  "header_documentation": {
+    "message": "ドキュメント",
+    "description": "A link under the \"Learn\" menu. Clicking will redirect to 8th Wall's documentation page."
+  },
+  "header_tutorials": {
+    "message": "チュートリアル",
+    "description": "A link under the \"Learn\" menu. Clicking will redirect to a page with tutorials on how to use 8th Wall."
+  },
+  "header_pricing": {
+    "message": "価格",
+    "description": "A top-level link in the page header navigation. Clicking will redirect to 8th Wall's pricing page."
+  },
+  "header_startFree": {
+    "message": "無料で作成",
+    "description": "A top-level link in the page headernavigation. Clicking will redirect the user to 8th Wall's signup page."
+  },
+  "header_login": {
+    "message": "ログイン",
+    "description": "A top-level link in the page headernavigation. Clicking will redirect the user to 8th Wall's login page."
+  },
+  "header_workspaces": {
+    "message": "ワークスペース",
+    "description": "A link that appears only when a user is logged in. Clicking will redirect to a page listing the user's workspaces."
+  },
+  "header_profile": {
+    "message": "プロフィール",
+    "description": "A link that appears only when a user is logged in. Clicking will redirect to the user's profile settings page"
+  },
+  "header_signOut": {
+    "message": "アウト",
+    "description": "A link that appears only when a user is logged in. Clicking will sign the user out."
+  },
+  "footer_copyright": {
+    "message": "Copyright ©️ 2016-2025, 8th Wall, LLC.",
+    "description": "Text in the page footer. This is the copyright notice."
+  },
+  "footer_whyWebar": {
+    "message": "WebAR を選ぶ理由",
+    "description": "A link in the page footer."
+  },
+  "footer_product": {
+    "message": "製品",
+    "description": "A link in the page footer. Clicking will redirect to a page describing 8th Wall's offerings."
+  },
+  "footer_pricing": {
+    "message": "価格",
+    "description": "A link in the page footer. Clicking will redirect to 8th Wall's pricing page."
+  },
+  "footer_niantic_studio": {
+    "message": "Studio",
+    "description": "A link in the page footer. Clicking will redirect to 8th Wall's Studio page."
+  },
+  "footer_faq": {
+    "message": "FAQ",
+    "description": "A link in the page footer. Clicking will redirect to a page with frequently asked questions."
+  },
+  "footer_login": {
+    "message": "ログイン",
+    "description": "A category header in the page footer."
+  },
+  "footer_learn": {
+    "message": "学ぶ",
+    "description": "A link in the page footer."
+  },
+  "footer_projectLibrary": {
+    "message": "プロジェクト・ ライブラリー",
+    "description": "A link in the page footer. Clicking will redirect to a page showcasing projects built by 8th Wall"
+  },
+  "footer_discord": {
+    "message": "Discord",
+    "description": "A link in the page footer. Clicking will redirect to a Discord server for 8th Wall"
+  },
+  "footer_discover": {
+    "message": "ディスカバー",
+    "description": "A link in the page footer. Clicking will redirect to a page showcasing projects built using 8th Wall"
+  },
+  "footer_documentation": {
+    "message": "ドキュメント",
+    "description": "A link in the page footer. Clicking will redirect to 8th Wall's documentation page."
+  },
+  "footer_tutorials": {
+    "message": "チュートリアル",
+    "description": "A link in the page footer. Clicking will redirect to a tutorial page on how to use 8th Wall"
+  },
+  "footer_github": {
+    "message": "GitHub",
+    "description": "A link in the page footer. Clicking will redirect to 8th Wall's GitHub page"
+  },
+  "footer_community": {
+    "message": "コミュニティ",
+    "description": "A category header in the page footer."
+  },
+  "footer_forum": {
+    "message": "フォーラム",
+    "description": "A link in the page footer. Clicking will redirect to 8th Wall's community forum."
+  },
+  "footer_blog": {
+    "message": "ブログ",
+    "description": "A link in the page footer. Clicking will redirect to 8th Wall's blog"
+  },
+  "footer_resources": {
+    "message": "リソース",
+    "description": "A link in the page footer."
+  },
+  "footer_security": {
+    "message": "セキュリティ",
+    "description": "A link in the page footer. Clicking will redirect to a page that gives more information on Niantic's commitment to security."
+  },
+  "footer_community_hub": {
+    "message": "コミュニティ・ハブ",
+    "description": "A link in the page footer."
+  },
+  "footer_support": {
+    "message": "サポート",
+    "description": "A link in the page footer. Clicking will redirect to a page that gives more information on Niantic's commitment to security."
+  },
+  "footer_company": {
+    "message": "について",
+    "description": "A category header in the page footer."
+  },
+  "footer_about": {
+    "message": "会社概要",
+    "description": "A link in the page footer. Clicking will redirect to a page that gives more information about 8th Wall"
+  },
+  "footer_partners": {
+    "message": "パートナー",
+    "description": "A link in the page footer. Clicking will redirect to a page showcasing 8th Wall's business partners"
+  },
+  "footer_careers": {
+    "message": "キャリア",
+    "description": "A link in the page footer. Clicking will redirect to a page with job listings at 8th Wall."
+  },
+  "footer_press": {
+    "message": "プレス",
+    "description": "A link in the page footer. Clicking will redirect to a page with press / news information"
+  }
+}

@@ -1,0 +1,52 @@
+---
+id: audio
+description: Esta biblioteca incluye funciones que gestionan la reproducción de audio.
+---
+
+# audio
+
+## Descripción
+
+{frontMatter.description}
+
+## Funciones
+
+### silenciar
+
+Silencia el audio de la escena.
+
+```ts
+world.audio.mute() // -> void
+```
+
+### unmute
+
+Desactiva el audio de la escena.
+
+```ts
+world.audio.unmute() // -> void
+```
+
+### pausa
+
+Pausa el audio de la escena.
+
+```ts
+world.audio.pause() // -> void
+```
+
+### jugar
+
+Reproduce el audio de la escena.
+
+```ts
+world.audio.play() // -> void
+```
+
+### setVolume
+
+Ajusta el volumen del audio de la escena. **El parámetro debe ser un valor entre 0 y 1.**
+
+```ts
+world.audio.setVolume(newVolume: number) // -> void
+```

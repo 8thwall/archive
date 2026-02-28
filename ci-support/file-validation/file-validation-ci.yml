@@ -1,0 +1,26 @@
+
+include:
+  - ci-support/util.yml
+
+default:
+  before_script:
+    - !reference [.global, before_script]
+  after_script:
+    - !reference [.global, after_script]
+
+cancel-redundant-jobs:
+  stage: build
+  extends: .cancel-redundant-jobs
+
+ci-support:file-validation:
+  stage: build
+  interruptible: true
+  script:
+    - git submodule deinit --all -f
+    - bazelisk build //ci-support/file-validation:validate-mr
+    - git fetch origin $CI_MERGE_REQUEST_DIFF_BASE_SHA
+    - ./bazel-bin/ci-support/file-validation/validate-mr
+  rules:
+    - if: $CI_SUPPORT_TRIGGER == "file_validation_trigger"
+  tags:
+    - linux

@@ -1,0 +1,18 @@
+<!-- UI -->
+<div class="over">
+  <span id="promptText">
+    <svg width="100%">
+      <text class="svgStroke" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">Loading...</text>
+      <text class="svgText" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">Loading...</text>
+    </svg>
+  </span>
+  <div id="progressBar" style="display:none;">
+    <div id="playProgress"></div>
+    <div id="loadProgress"></div>
+  </div>
+  <img id="pauseBtn" src="./assets/icons/pause.svg" style="display: none;">
+  <img id="muteBtn" src="./assets/icons/sound.svg" style="display: none;">
+</div>
+
+<!-- The main canvas used for drawing by the app. -->
+<canvas id="camerafeed"></canvas>

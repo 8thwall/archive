@@ -1,0 +1,76 @@
+<!--
+    templateType: page
+    isAvailableForNewContent: true
+-->
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+{% dnd_area "dnd_area"
+  label="Main section",
+  class="body-container body-container--about"
+%}
+  {% include_dnd_partial
+    path="../sections/hero.html"
+  %}
+
+  {% dnd_section
+    vertical_alignment="TOP"
+  %}
+    {% dnd_column %}
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/centered-heading"
+          subheading="Everything you need to learn how to create interactive WebAR experiences using 8th Wall"
+          %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/tutorial-card"
+          image={
+            src: "{{ get_asset_url('/theme8/images/team-image.jpg') }}",
+            alt: "Example Picture"
+          },
+          icon={
+            src: "{{ get_asset_url('/theme8/images/module-icons/icon_magic.svg') }}",
+            alt: "Magic Wand Icon"
+          },
+        %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/tutorial-card"
+          icon={
+            src: "{{ get_asset_url('/theme8/images/module-icons/icon_play.svg') }}",
+            alt: "Play Button Icon"
+          },
+        %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/color-card"
+          image={
+            src: "{{ get_asset_url('/theme8/images/8cademyslide.png') }}",
+            alt: "8cademy Logo"
+          },
+          heading="Become a WebAR Pro with 8cademy"
+          description="Self-paced courses and videos that put your 8th Wall development knowledge to the test."
+          link_text="Start a course"
+        %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+    {% end_dnd_column %}
+  {% end_dnd_section %}
+
+  {% include_dnd_partial
+    path="../sections/more-resources-section.html"
+  %}
+
+  {% include_dnd_partial
+    path="../sections/free-trial-section.html"
+  %}
+
+{% end_dnd_area %}
+{% endblock body %}

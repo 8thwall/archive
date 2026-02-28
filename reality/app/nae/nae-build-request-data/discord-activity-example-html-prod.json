@@ -1,0 +1,13 @@
+{
+  "projectUrl": "https://8thwall.8thwall.app/discord-activity-example/",
+  "shell": "html",
+  "appInfo": {
+    "workspace": "8thwall",
+    "appName": "discord-activity-example",
+    "refHead": "production"
+  },
+  "appUuid": "16689196-ead6-4f08-b951-f45d0f58eb84",
+  "exportType": "zip",
+  "requestRef": "lucas-default",
+  "repoId": "cc.11.app.16689196-ead6-4f08-b951-f45d0f58eb84"
+}

@@ -1,0 +1,19 @@
+{
+  "page.title": "リソース",
+  "card.heading.docs": "ドキュメント",
+  "card.description.docs": "8th Wallを使った開発方法を学び、8th WallのJavaScript APIに関する詳細なドキュメントにアクセスすることができます。",
+  "card.heading.forum": "フォーラム",
+  "card.description.forum": "8th Wall Discourseフォーラムに参加してください。サポート、質問、プロジェクトの共有ができます。",
+  "card.heading.tutorials": "チュートリアル",
+  "card.description.tutorials": "サポートチームからの役立つクイックヒントや詳細なビデオチュートリアルで8th Wall開発をマスターしましょう。",
+  "card.heading.project_library": "プロジェクト・ライブラリー",
+  "card.description.project_library": "8th Wall プロジェクト・ライブラリーからコードを見たり、サンプルプロジェクトをクローンすることで、8th Wallをすぐに活用できます。",
+  "card.heading.questions": "ご質問はありますか？",
+  "card.description.questions": "support@8thwall.com までご連絡ください。すぐに対応いたします。",
+  "card.heading.courses": "コース",
+  "card.description.courses": "完全なハウツーコースで8th Wallをボトムアップから学びましょう。",
+  "card.heading.community": "コミュニティ",
+  "card.description.community": "開発者とつながり、ディスカッションに参加し、8th Wallを使ったイノベーションに関する専門家のアドバイスを得ることができます。",
+  "card.heading.blog": "ブログ",
+  "card.description.blog": "最新の発表を読み、インスピレーションを見つけ、特集を組もう"
+}

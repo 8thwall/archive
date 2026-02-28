@@ -1,0 +1,25 @@
+// SCSS Variables
+$primary-color: #9c27b0;
+$margin: 1rem;
+
+// SCSS Mixin
+@mixin purple-box {
+  background: $primary-color;
+  color: white;
+  padding: $margin;
+}
+
+// SCSS Test with nesting
+.scss-container {
+  margin: $margin * 2;
+  @include purple-box;
+
+  .scss-header {
+    margin: 0;
+  }
+
+  .nested-text {
+    margin-top: $margin;
+    opacity: 0.9;
+  }
+}

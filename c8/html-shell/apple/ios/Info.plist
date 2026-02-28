@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleIdentifier</key>
+    <string>com.nianticlabs.c8.html-shell.ios</string>
+    <key>CFBundleExecutable</key>
+    <string>HTMLShellIOS</string>
+    <key>CFBundleName</key>
+    <string>HTMLShellIOS</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0.0</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>CFBundleDisplayName</key>
+    <string>HTMLShellIOS</string>
+    <key>DTPlatformName</key>
+    <string>iphoneos</string>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+    </array>
+    <key>MinimumOSVersion</key>
+    <string>14.0</string>
+    <key>UILaunchStoryboardName</key>
+    <string>LaunchScreen</string>
+    <key>AppUrl</key>
+    <string>https://threejs.org/examples/webgl_morphtargets_horse.html</string>
+</dict>
+</plist>

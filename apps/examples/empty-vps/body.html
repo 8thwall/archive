@@ -1,0 +1,52 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene
+  landing-page
+  vps-coaching-overlay
+  xrextras-loading
+  xrextras-runtime-error
+  xrextras-gesture-detector
+  renderer="colorManagement: true"
+  xrweb="enableVps: true; allowedDevices: any">
+  <a-assets>
+    <!-- download the mesh from the geospatial browser and add it here -->
+    <a-asset-item id="vps-mesh" src=""></a-asset-item>
+    <!-- if you have a prebaked animation that interacts with the mesh, add it here -->
+    <a-asset-item id="vps-anim" src=""></a-asset-item>
+  </a-assets>
+
+  <a-camera
+    position="0 2 2"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;"></a-camera>
+
+  <!-- add a test scan or a public Location to the project from the geospatial browser
+  and replace the name with the 'name' of the Location -->
+  <a-entity named-location="name: my-location">
+    <!-- apply hider material to the mesh to realistically occlude content -->
+    <a-entity gltf-model="#vps-mesh" hider-material></a-entity>
+    <!-- apply shadow shader to the mesh to realistically receive shadows -->
+    <a-entity gltf-model="#vps-mesh" shadow-shader shadow="cast: false"></a-entity>
+    <!-- add content here; either prebaked or realtime animations -->
+    <!-- play-vps-animation waits for successful localization to begin the animation -->
+    <a-entity gltf-model="#vps-anim" play-vps-animation shadow="receive: false"></a-entity>
+  </a-entity>
+
+  <!-- lights -->
+  <a-entity
+    light="
+      type: directional;
+      intensity: 0.8;
+      castShadow: true;
+      shadowMapHeight:2048;
+      shadowMapWidth:2048;
+      shadowCameraTop: 10;
+      shadowCameraBottom: -10;
+      shadowCameraRight: 10;
+      shadowCameraLeft: -10;"
+    position="0 10 -6"
+    shadow>
+  </a-entity>
+  <a-light type="ambient" intensity="0.5"></a-light>
+</a-scene>

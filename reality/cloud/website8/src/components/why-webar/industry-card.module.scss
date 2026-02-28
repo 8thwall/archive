@@ -1,0 +1,40 @@
+@use '../../styles/constants';
+@use '../../styles/brand-colors';
+
+.card {
+  width: 20rem;
+  height: 22rem;
+  color: inherit;
+  text-decoration: none;
+  -webkit-transition: all 0.08s linear; /* Safari and Chrome */
+  -moz-transition: all 0.08s linear; /* Firefox */
+  -ms-transition: all 0.08s linear; /* IE 9 */
+  -o-transition: all 0.08s linear; /* Opera */
+  transition: all 0.08s linear;
+
+  &:hover {
+    color: inherit;
+    text-decoration: none;
+    -webkit-transform: scale(1.02); /* Safari and Chrome */
+    -moz-transform: scale(1.02); /* Firefox */
+    -ms-transform: scale(1.02); /* IE 9 */
+    -o-transform: scale(1.02); /* Opera */
+    transform: scale(1.02);
+  }
+}
+
+.title {
+  color: brand-colors.$brand-purple;
+}
+
+/* Mobile sizes and below */
+@media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+  .card {
+    width: 16rem;
+    height: 18rem;
+  }
+
+  .cardBody {
+    padding-top: 1rem;
+  }
+}

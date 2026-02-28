@@ -1,0 +1,29 @@
+---
+id: face
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import FaceTable from "../../../gen/tables/Face.md"
+
+# Visage
+
+## Description
+
+Ce composant fait en sorte que la transformation de l'entité suive un visage suivi dans XR. Il affichera et cachera l'entité au fur et à mesure que le visage est trouvé ou perdu.
+
+## Propriété
+
+<FaceTable />
+
+## Fonctions
+
+<ComponentFunctions
+    name="Face"
+    properties={{
+        id: 1,
+        addAttachmentState: false
+    }}
+    mutate={`cursor.id = 1;
+    cursor.addAttachmentState = true;
+    return false;`}
+/>

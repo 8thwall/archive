@@ -1,0 +1,17 @@
+{
+  "page.title": "AWE Portal Hunt",
+  "portal_section.description.introduction": "AWE Portal Hunt était une campagne de marketing expérientiel à engagement limité développée par 8th Wall pour l’Augmented World Expo 2019. Lorsque les participants scannaient chacun des « portails » de 2 m de haut placés dans le site, un petit jeu d’une autre dimension apparaissait. Chacun des 10 portails avait un style de jeu, un niveau de difficulté et une ambiance artistique propres à lui-même.",
+  "portal_section.description.logbook_leaderboard": "Un carnet de bord et un tableau de classement les reliaient tous deux. Le carnet de bord servait à suivre la progression et à lancer l’application, tandis que le tableau de classement était le centre social de l’expérience, permettant aux joueurs de trouver leurs amis et de tweeter leurs résultats. En franchissant les 10 portails, les joueurs obtenaient le statut d’« explorateur certifié », ce qui les propulsait au sommet du classement et leur permettait de participer à un tirage au sort pour gagner le grand prix (ici, des billets pour la conférence de l’année prochaine et un écran holographique fabriqué par Looking Glass Factory).",
+  "portal_section.description.stats": "La conférence n’a duré que trois jours, mais les chiffres générés par l’expérience Portal Hunt sont stupéfiants. Sur les 5 000 participants à la conférence, il y a eu 3 779 sessions de portail pour un total de 5 244 minutes de jeu. Cela représente 3 joueurs actifs pour chaque seconde de la conférence.",
+  "portal_section.heading.stats": "Statistiques",
+  "portal_section.stats.name.portals_opened": "Portails ouverts",
+  "portal_section.stats.name.uniques": "Uniques",
+  "portal_section.stats.name.time_spent": "Temps passé",
+  "portal_section.stats.value.time_spent": "87,4 heures",
+  "portal_section.stats.name.certified_explorers": "Explorateurs certifiés",
+  "portal_section.description.engagement": "Il n’est pas difficile de constater l’engagement des joueurs. Ils ont fait la queue, ont pris des photos des portails pour pouvoir y jouer plus tard, ont rencontré des inconnus pour relever des défis multijoueurs, ont cherché pendant des heures pour tous les trouver et ont même manqué des réunions à cause de l’événement. Il est rapidement apparu que la « chasse aux portails » était LA véritable activité sociale de la conférence.",
+  "portal_section.description.vindication": "Non seulement le projet a été un succès pour 8th Wall et l’AWE, mais il a également démontré que lorsque la RA est facile à utiliser et que tout le monde peut y jouer, les gens l’utilisent et y jouent.",
+  "brand_section.carousel.item.blurb.gemini": "2 joueurs requis",
+  "brand_section.carousel.control.previous": "Précédent",
+  "brand_section.carousel.control.next": "Suivant"
+}

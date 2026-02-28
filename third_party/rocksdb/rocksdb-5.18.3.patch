@@ -1,0 +1,127 @@
+diff --git db/db_impl_compaction_flush.cc db/db_impl_compaction_flush.cc
+index a42e60f85..acb73f865 100644
+--- db/db_impl_compaction_flush.cc
++++ db/db_impl_compaction_flush.cc
+@@ -990,7 +990,7 @@ Status DBImpl::CompactFilesImpl(
+   }
+ 
+   if (output_file_names != nullptr) {
+-    for (const auto newf : c->edit()->GetNewFiles()) {
++    for (const auto& newf : c->edit()->GetNewFiles()) {
+       (*output_file_names)
+           .push_back(TableFileName(c->immutable_cf_options()->cf_paths,
+                                    newf.second.fd.GetNumber(),
+@@ -1081,7 +1081,7 @@ void DBImpl::NotifyOnCompactionBegin(ColumnFamilyData* cfd,
+         }
+       }
+     }
+-    for (const auto newf : c->edit()->GetNewFiles()) {
++    for (const auto& newf : c->edit()->GetNewFiles()) {
+       info.output_files.push_back(TableFileName(
+           c->immutable_cf_options()->cf_paths, newf.second.fd.GetNumber(),
+           newf.second.fd.GetPathId()));
+@@ -1144,7 +1144,7 @@ void DBImpl::NotifyOnCompactionCompleted(
+         }
+       }
+     }
+-    for (const auto newf : c->edit()->GetNewFiles()) {
++    for (const auto& newf : c->edit()->GetNewFiles()) {
+       info.output_files.push_back(TableFileName(
+           c->immutable_cf_options()->cf_paths, newf.second.fd.GetNumber(),
+           newf.second.fd.GetPathId()));
+diff --git options/options_parser.cc options/options_parser.cc
+index 32cfb8d53..e010c8224 100644
+--- options/options_parser.cc
++++ options/options_parser.cc
+@@ -409,7 +409,7 @@ Status RocksDBOptionsParser::EndSection(
+       return s;
+     }
+   } else if (section == kOptionSectionVersion) {
+-    for (const auto pair : opt_map) {
++    for (const auto& pair : opt_map) {
+       if (pair.first == "rocksdb_version") {
+         s = ParseVersionNumber(pair.first, pair.second, 3, db_version);
+         if (!s.ok()) {
+diff --git util/channel.h util/channel.h
+index 0225482c0..2eaf02d0c 100644
+--- util/channel.h
++++ util/channel.h
+@@ -31,7 +31,7 @@ class channel {
+     return buffer_.empty() && eof_;
+   }
+ 
+-  size_t size() const {
++  size_t size() {
+     std::lock_guard<std::mutex> lk(lock_);
+     return buffer_.size();
+   }
+diff --git util/logging.h util/logging.h
+index f605d36a5..a7ee9ebb6 100644
+--- util/logging.h
++++ util/logging.h
+@@ -15,15 +15,59 @@
+ // Helper macros that include information about file name and line number
+ #define ROCKS_LOG_STRINGIFY(x) #x
+ #define ROCKS_LOG_TOSTRING(x) ROCKS_LOG_STRINGIFY(x)
++#if NDEBUG
++#define ROCKS_LOG_PREPEND_FILE_LINE(FMT) ("[%s:0] " FMT)
++#else
+ #define ROCKS_LOG_PREPEND_FILE_LINE(FMT) ("[%s:" ROCKS_LOG_TOSTRING(__LINE__) "] " FMT)
++#endif
+ 
+ inline const char* RocksLogShorterFileName(const char* file)
+ {
++#ifdef NDEBUG
++  return "";
++#else
+   // 15 is the length of "util/logging.h".
+   // If the name of this file changed, please change this number, too.
+   return file + (sizeof(__FILE__) > 15 ? sizeof(__FILE__) - 15 : 0);
++#endif
+ }
+ 
++
++#ifdef NDEBUG
++
++// Don't inclide file/line info in HEADER level
++#define ROCKS_LOG_HEADER(LGR, FMT, ...)                                          \
++  rocksdb::Log(InfoLogLevel::HEADER_LEVEL, LGR, FMT, ##__VA_ARGS__)
++
++#define ROCKS_LOG_DEBUG(LGR, FMT, ...)                                           \
++  rocksdb::Log(InfoLogLevel::DEBUG_LEVEL, LGR, ROCKS_LOG_PREPEND_FILE_LINE(FMT), \
++               "UNKNOWN", ##__VA_ARGS__)
++
++#define ROCKS_LOG_INFO(LGR, FMT, ...)                                            \
++  rocksdb::Log(InfoLogLevel::INFO_LEVEL, LGR, ROCKS_LOG_PREPEND_FILE_LINE(FMT),  \
++               "UNKNOWN", ##__VA_ARGS__)
++
++#define ROCKS_LOG_WARN(LGR, FMT, ...)                                            \
++  rocksdb::Log(InfoLogLevel::WARN_LEVEL, LGR, ROCKS_LOG_PREPEND_FILE_LINE(FMT),  \
++               "UNKNOWN", ##__VA_ARGS__)
++
++#define ROCKS_LOG_ERROR(LGR, FMT, ...)                                           \
++  rocksdb::Log(InfoLogLevel::ERROR_LEVEL, LGR, ROCKS_LOG_PREPEND_FILE_LINE(FMT), \
++               "UNKNOWN", ##__VA_ARGS__)
++
++#define ROCKS_LOG_FATAL(LGR, FMT, ...)                                           \
++  rocksdb::Log(InfoLogLevel::FATAL_LEVEL, LGR, ROCKS_LOG_PREPEND_FILE_LINE(FMT), \
++               "UNKNOWN", ##__VA_ARGS__)
++
++#define ROCKS_LOG_BUFFER(LOG_BUF, FMT, ...)                                      \
++  rocksdb::LogToBuffer(LOG_BUF, ROCKS_LOG_PREPEND_FILE_LINE(FMT),                \
++                       "UNKNOWN", ##__VA_ARGS__)
++
++#define ROCKS_LOG_BUFFER_MAX_SZ(LOG_BUF, MAX_LOG_SIZE, FMT, ...)                 \
++  rocksdb::LogToBuffer(LOG_BUF, MAX_LOG_SIZE, ROCKS_LOG_PREPEND_FILE_LINE(FMT),  \
++                       "UNKNOWN", ##__VA_ARGS__)
++#else
++
+ // Don't inclide file/line info in HEADER level
+ #define ROCKS_LOG_HEADER(LGR, FMT, ...)                                          \
+   rocksdb::Log(InfoLogLevel::HEADER_LEVEL, LGR, FMT, ##__VA_ARGS__)
+@@ -55,3 +99,5 @@ inline const char* RocksLogShorterFileName(const char* file)
+ #define ROCKS_LOG_BUFFER_MAX_SZ(LOG_BUF, MAX_LOG_SIZE, FMT, ...)                 \
+   rocksdb::LogToBuffer(LOG_BUF, MAX_LOG_SIZE, ROCKS_LOG_PREPEND_FILE_LINE(FMT),  \
+                        RocksLogShorterFileName(__FILE__), ##__VA_ARGS__)
++
++#endif

@@ -1,0 +1,205 @@
+stages:
+  - .pre
+  - build
+  - publish
+  - .post
+
+include:
+  - apps/client/nae/ci-jobs.yml
+  - ci-support/util.yml
+
+cancel-redundant-jobs:
+  stage: build
+  extends: .cancel-redundant-jobs
+
+solstice:build:staging:quest:
+  stage: build
+  interruptible: true
+  timeout: 300m
+  before_script:
+    - !reference [.global, before_script]
+  variables:
+    BAZEL_APK_OUTPUT: "bazel-bin/apps/client/nae/solstice/quest/solstice-release-staging.apk"
+    BUILD_OUTPUT: "build_staging_out.env"
+    CONFIG_FILE_PATH: "apps/client/nae/solstice/quest/config-staging.json"
+    START_DATE: "2024103000" # October 30, 2024
+    KEYSTORE_FILE: "solstice-upload-keystore.jks"
+    VERSION_CODE_INDEX_OFFSET: 0
+    BUILD_PREFIX: "staging"
+    APP_DISPLAY_NAME: "Into the Scaniverse"
+    NAE_SHELL_PLATFORM: "quest"
+  script:
+    - source apps/client/nae/solstice/quest/fetch-version.sh
+    - source apps/client/nae/build-release.sh
+  after_script:
+    - !reference [.global, after_script]
+    - rm -f $KEYSTORE_FILE
+  rules:
+    - if: $NAE_TRIGGER == "nae_nightly"
+    - if: $NAE_TRIGGER == "nae_release_tag"
+    - if: $NAE_TRIGGER == "nae_mr"
+      when: manual
+      allow_failure: true
+  needs:
+    - job: nae:pre:process_tag
+      optional: true
+  artifacts:
+    paths:
+      - $BAZEL_APK_OUTPUT
+      - $BUILD_OUTPUT
+    expire_in: 1 week
+    when: always
+  tags:
+    - m1
+
+solstice:build:prod:quest:
+  stage: build
+  interruptible: true
+  timeout: 300m
+  before_script:
+    - !reference [.global, before_script]
+  variables:
+    BAZEL_APK_OUTPUT: "bazel-bin/apps/client/nae/solstice/quest/solstice-release-prod.apk"
+    BUILD_OUTPUT: "build_prod_out.env"
+    CONFIG_FILE_PATH: "apps/client/nae/solstice/quest/config-prod.json"
+    START_DATE: "2024103000" # October 30, 2024
+    KEYSTORE_FILE: "solstice-upload-keystore.jks"
+    VERSION_CODE_INDEX_OFFSET: 1
+    BUILD_PREFIX: "prod"
+    APP_DISPLAY_NAME: "Into the Scaniverse"
+    NAE_SHELL_PLATFORM: "quest"
+  script:
+    - source apps/client/nae/solstice/quest/fetch-version.sh
+    - source apps/client/nae/build-release.sh
+  after_script:
+    - !reference [.global, after_script]
+    - rm -f $KEYSTORE_FILE
+  rules:
+    - if: $NAE_TRIGGER == "nae_nightly"
+    - if: $NAE_TRIGGER == "nae_release_tag"
+    - if: $NAE_TRIGGER == "nae_mr"
+      when: manual
+      allow_failure: true
+  needs:
+    - job: nae:pre:process_tag
+      optional: true
+  artifacts:
+    paths:
+      - $BAZEL_APK_OUTPUT
+      - $BUILD_OUTPUT
+    expire_in: 1 week
+    when: always
+  tags:
+    - m1
+
+solstice:publish:quest:meta_alpha_release:
+  stage: publish
+  timeout: 20m
+  before_script:
+    - !reference [.global, before_script]
+  interruptible: true
+  variables:
+    BAZEL_APK_OUTPUT: "bazel-bin/apps/client/nae/solstice/quest/solstice-release-staging.apk"
+    UPLOAD_OUTPUT: "upload_output.txt"
+    RELEASE_CHANNEL: "alpha"
+  script:
+    - source apps/client/nae/solstice/quest/publish-build.sh
+  after_script:
+    - !reference [.global, after_script]
+  rules:
+    - if: $NAE_TRIGGER == "nae_nightly"
+    - if: $NAE_TRIGGER == "nae_release_tag"
+    - if: $NAE_TRIGGER == "nae_mr"
+      when: never
+  needs:
+    - job: nae:pre:process_tag
+      optional: true
+    - job: solstice:build:staging:quest
+  artifacts:
+    paths:
+      - $UPLOAD_OUTPUT
+    expire_in: 1 week
+    when: always
+  tags:
+    - m1
+
+solstice:publish:quest:meta_rc_release:
+  stage: publish
+  timeout: 20m
+  before_script:
+    - !reference [.global, before_script]
+  interruptible: true
+  variables:
+    BAZEL_APK_OUTPUT: "bazel-bin/apps/client/nae/solstice/quest/solstice-release-prod.apk"
+    UPLOAD_OUTPUT: "upload_output.txt"
+    RELEASE_CHANNEL: "rc"
+  script:
+    - source apps/client/nae/solstice/quest/publish-build.sh
+  after_script:
+    - !reference [.global, after_script]
+  rules:
+    - if: $NAE_TRIGGER == "nae_nightly"
+    - if: $NAE_TRIGGER == "nae_release_tag"
+    - if: $NAE_TRIGGER == "nae_mr"
+      when: never
+  needs:
+    - job: nae:pre:process_tag
+      optional: true
+    - job: solstice:build:prod:quest
+  artifacts:
+    paths:
+      - $UPLOAD_OUTPUT
+    expire_in: 1 week
+    when: always
+  tags:
+    - m1
+
+solstice:post:staging:slack_bot:
+  stage: .post
+  interruptible: true
+  before_script:
+    - !reference [.global, before_script]
+  variables:
+    BUILD_OUTPUT: "build_staging_out.env"
+  script:
+    - export POST_STATUS_SLACK_WEBHOOK_URL=$SOLSTICE_SLACK_WEBHOOK_URL
+    - source apps/client/nae/slack-post-build.sh
+  after_script:
+    - !reference [.global, after_script]
+  rules:
+    - if: $NAE_TRIGGER == "nae_nightly"
+    - if: $NAE_TRIGGER == "nae_release_tag"
+    - if: $NAE_TRIGGER == "nae_mr"
+      when: manual
+      allow_failure: true
+  needs:
+    - job: nae:pre:process_tag
+      optional: true
+    - job: solstice:build:staging:quest
+  tags:
+    - m1
+
+solstice:post:prod:slack_bot:
+  stage: .post
+  interruptible: true
+  before_script:
+    - !reference [.global, before_script]
+  variables:
+    BUILD_OUTPUT: "build_prod_out.env"
+  script:
+    - export POST_STATUS_SLACK_WEBHOOK_URL=$SOLSTICE_SLACK_WEBHOOK_URL
+    - source apps/client/nae/slack-post-build.sh
+  after_script:
+    - !reference [.global, after_script]
+  rules:
+    - if: $NAE_TRIGGER == "nae_nightly"
+    - if: $NAE_TRIGGER == "nae_release_tag"
+    - if: $NAE_TRIGGER == "nae_mr"
+      when: manual
+      allow_failure: true
+  needs:
+    - job: nae:pre:process_tag
+      optional: true
+    - job: solstice:build:prod:quest
+  tags:
+    - m1

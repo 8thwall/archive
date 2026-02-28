@@ -1,0 +1,17 @@
+{
+  "page.title": "AWE Portal Hunt",
+  "portal_section.description.introduction": "AWE Portal Huntは、8th WallがAugmented World Expo 2019のために開発した限定の体験型マーケティングキャンペーンです。会場内に設置された高さ約2mの「ポータル」のそれぞれをプレイヤーがスキャンすると、異次元のショートゲームが出現する。10個のポータルは、それぞれ異なるゲームプレイスタイル、難易度、芸術的な体験を提供しました。",
+  "portal_section.description.logbook_leaderboard": "それらを結びつけるのが、ログブックとリーダーボードです。ログブックは進捗管理とアプリ起動の役割を果たし、リーダーボードはこの体験のソーシャルハブとして、プレイヤーは友達を見つけたり、自分の結果をツイートしたりすることができます。10個のポータルをすべてクリアすると、プレイヤーは「認定エクスプローラー」のステータスを獲得し、リーダーボードのトップに立ち、大賞（今回は来年のカンファレンスチケットとLooking Glass Factoryのホログラフィックディスプレイ）が当たる抽選に参加することができました。",
+  "portal_section.description.stats": "カンファレンスはわずか3日間でしたが、ポータルハントから出た数字は驚異的でした。5,000人を超えるカンファレンス参加者のうち、3,779のポータルセッションがあり、合わせて5,244分のポータルゲームプレイが行われました。これは、カンファレンスの1秒間に3人のアクティブプレーヤーがいたことになります。",
+  "portal_section.heading.stats": "数字で見る",
+  "portal_section.stats.name.portals_opened": "開かれたポータル数",
+  "portal_section.stats.name.uniques": "ユニーク数",
+  "portal_section.stats.name.time_spent": "費やされた時間",
+  "portal_section.stats.value.time_spent": "87.4時間",
+  "portal_section.stats.name.certified_explorers": "認定エクスプローラー",
+  "portal_section.description.engagement": "このような取り組みが行われることは、決して難しいことではありません。プレイヤーは列に並び、後で遊べるようにポータルの写真を撮り、知らない人と出会ってマルチプレイヤーチャレンジを行い、ポータルをすべて見つけるために何時間も探し、狩りのために会議を欠席することさえありました。「ポータルハント」がカンファレンスのソーシャルアクティビティであることは、すぐに明らかになりました。",
+  "portal_section.description.vindication": "このプロジェクトは、8th WallとAWE双方にとって成功であっただけでなく、ARが使いやすく、誰もが遊べるものであれば、人々は必ず使い、必ず遊ぶということを証明するものでした。",
+  "brand_section.carousel.item.blurb.gemini": "必要プレイヤー数：2名",
+  "brand_section.carousel.control.previous": "前へ",
+  "brand_section.carousel.control.next": "次へ"
+}

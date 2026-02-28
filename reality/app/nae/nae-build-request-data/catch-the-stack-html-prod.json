@@ -1,0 +1,13 @@
+{
+  "projectUrl": "https://8w.8thwall.app/catch-the-stack/",
+  "shell": "html",
+  "appInfo": {
+    "workspace": "8w",
+    "appName": "catch-the-stack",
+    "refHead": "production"
+  },
+  "appUuid": "42ae06a3-19ce-4589-982a-5d6c8ef2a596",
+  "exportType": "zip",
+  "requestRef": "lucas-default",
+  "repoId": "cc.2.app.6b5b70d5-c269-4955-92b5-c36bcc4706cc"
+}

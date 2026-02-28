@@ -1,0 +1,71 @@
+---
+id: light
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Lumière
+
+## Description
+
+Ce composant permet à une entité d'émettre de la lumière.
+
+## Propriétés
+
+| Propriété               | Type                         | Défaut         | Description                                                                                                                     |
+| ----------------------- | ---------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| type (obligatoire)      | chaîne de caractères         | directionnel   | Les types pris en charge sont les suivants : "directionnel", "ponctuel" et "ambiant".                                           |
+| ombre portée            | booléen                      | vrai           | Si la source lumineuse doit projeter des ombres.                                                                                |
+| l'intensité             | nombre                       | 0.5            | La force d'émission.                                                                                                            |
+| r                       | numéro (0-255)               | 255            | La quantité de rouge émise par la lumière.                                                                                      |
+| g                       | numéro (0-255)               | 255            | La quantité de vert que la lumière émet.                                                                                        |
+| b                       | numéro (0-255)               | 255            | La quantité de bleu émise par la lumière.                                                                                       |
+| shadowBias              | nombre                       | \-0.005        | Montant à ajouter ou à soustraire de la profondeur normalisée pour déterminer si une surface est dans l'ombre.                  |
+| shadowNormalBias        | nombre                       | 0              | Le décalage de la position utilisée pour interroger la carte des ombres par rapport à la normale de l'objet.                    |
+| rayon de l'ombre        | nombre                       | 1              | Le rayon de l'ombre                                                                                                             |
+| shadowAutoUpdate        | booléen                      | vrai           | L'ombre doit-elle être calculée et mise à jour automatiquement ?                                                                |
+| shadowBlurSamples       | nombre                       | 8              | Nombre d'échantillons à utiliser pour le calcul de la carte d'ombres virtuelles.                                                |
+| shadowMapSizeHeight     | nombre                       | 1024           | Hauteur de la carte des ombres. (Les valeurs **doivent** être des puissances de 2)                                              |
+| shadowMapSizeWidth      | nombre                       | 1024           | Largeur de la carte des ombres. (Les valeurs **doivent** être des puissances de 2)                                              |
+| shadowCameraNear        | nombre                       | 0.5            | Volet proche du tronc de la caméra pour le calcul des ombres                                                                    |
+| shadowCameraFar         | nombre                       | 200            | Plan éloigné du tronc de la caméra pour le calcul des ombres                                                                    |
+| shadowCameraLeft        | nombre                       | \-50           | Volet gauche du frustum de la caméra pour le calcul des ombres                                                                  |
+| shadowCameraRight       | nombre                       | 50             | Volet droit du frustum de la caméra pour le calcul des ombres                                                                   |
+| shadowCameraBottom      | nombre                       | \-50           | Volet inférieur du frustum de la caméra pour le calcul des ombres                                                               |
+| shadowCameraTop         | nombre                       | 50             | Volet supérieur du frustum de la caméra pour le calcul des ombres                                                               |
+| cibleX                  | nombre                       | 0              | Coordonnée X de la cible de la lumière (directionnel uniquement)                                                                |
+| cibleY                  | nombre                       | 0              | Coordonnée Y de la cible de la lumière (directionnel uniquement)                                                                |
+| cibleZ                  | nombre                       | 0              | Coordonnée Z de la cible de la lumière (directionnel uniquement)                                                                |
+
+## Fonctions
+
+<ComponentFunctions
+    name="Light"
+    properties={{
+        type: "directional",
+        castShadow: true,
+        intensity: 0.5,
+        r: 255,
+        g: 255,
+        b: 255,
+        shadowBias: -0.005,
+        shadowNormalBias: 0,
+        shadowRadius: 1,
+        shadowAutoUpdate: true,
+        shadowBlurSamples: 8,
+        shadowMapSizeHeight: 1024,
+        shadowMapSizeWidth: 1024,
+        shadowCameraNear: 0.5,
+        shadowCameraFar: 200,
+        shadowCameraLeft: -50,
+        shadowCameraRight: 50,
+        shadowCameraBottom: -50,
+        shadowCameraTop: 50,
+        targetX: 0,
+        targetY: 0,
+        targetZ: 0
+    }}
+    mutate={`cursor.intensity = 1.0 ;
+    cursor.castShadow = false ;
+    return false;`}
+/>

@@ -1,0 +1,34 @@
+---
+id: position
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Position
+
+## Descripción
+
+This component controls how the entity is positioned, **in local space**.
+
+## Propiedades
+
+| Propiedad | Tipo   | Por defecto | Descripción                                                  |
+| --------- | ------ | ----------- | ------------------------------------------------------------ |
+| x         | number | 0           | Negative X axis extends left. Positive X Axis extends right. |
+| y         | number | 0           | Negative Y axis extends down. Positive Y Axis extends up.    |
+| z         | number | 0           | Negative Z axis extends in. Positive Z Axis extends out.     |
+
+## Funciones
+
+<ComponentFunctions
+    name="Position"
+    properties={{
+        x: 0,
+        y: 0,
+        z: 0
+    }}
+    mutate={`cursor.x = 2;
+    cursor.y = 2;
+    cursor.z = 2;
+    return false;`}
+/>

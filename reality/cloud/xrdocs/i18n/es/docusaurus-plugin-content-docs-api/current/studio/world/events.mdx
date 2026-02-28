@@ -1,0 +1,42 @@
+---
+id: events
+description: Esta biblioteca incluye funciones que se encargan de la gestión de eventos.
+---
+
+# eventos
+
+## Descripción
+
+{frontMatter.description}
+
+## Propiedades {#properties}
+
+| Propiedad | Descripción                                          |
+| --------- | ---------------------------------------------------- |
+| globalId  | Se utiliza para enviar/escuchar eventos globalmente. |
+
+## Funciones {#functions}
+
+### addListener
+
+Registra un componente para escuchar un evento.
+
+```ts
+world.events.addListener(target: eid, name: string, listener: function) -> void
+```
+
+### removeListener
+
+Anular el registro de un oyente existente
+
+```ts
+world.events.removeListener(target: eid, name: string, listener: function) -> void
+```
+
+### enviar
+
+Se utiliza para emitir eventos que los oyentes pueden escuchar.
+
+```ts
+world.events.dispatch(target: eid, name: string, data: object /* (opcional) */) -> void
+```

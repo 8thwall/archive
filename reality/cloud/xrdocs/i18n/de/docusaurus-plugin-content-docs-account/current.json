@@ -1,0 +1,22 @@
+{
+  "version.label": {
+    "message": "Nächste",
+    "description": "The label for version current"
+  },
+  "sidebar.accountSidebar.category.Getting Started": {
+    "message": "Erste Schritte",
+    "description": "The label for category Getting Started in sidebar accountSidebar"
+  },
+  "sidebar.accountSidebar.category.Account Settings": {
+    "message": "Kontoeinstellungen",
+    "description": "The label for category Account Settings in sidebar accountSidebar"
+  },
+  "sidebar.accountSidebar.category.Projects": {
+    "message": "Projekte",
+    "description": "The label for category Projects in sidebar accountSidebar"
+  },
+  "sidebar.accountSidebar.category.Featured Projects": {
+    "message": "Ausgewählte Projekte",
+    "description": "The label for category Featured Projects in sidebar accountSidebar"
+  }
+}

@@ -1,0 +1,71 @@
+---
+id: light
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Light
+
+## Descripción
+
+This component makes an entity emit light.
+
+## Propiedades
+
+| Propiedad            | Tipo           | Por defecto       | Descripción                                                                                         |
+| -------------------- | -------------- | ----------------- | --------------------------------------------------------------------------------------------------- |
+| type (Required)      | string         | 'directional'     | Supported types are: 'directional', 'point' and 'ambient'                                           |
+| castShadow           | boolean        | true              | If the light source should cast shadows.                                                            |
+| intensity            | number         | 0.5               | The emission strength.                                                                              |
+| r                    | number (0-255) | 255               | The amount of red the light emits.                                                                  |
+| g                    | number (0-255) | 255               | The amount of green the light emits.                                                                |
+| b                    | number (0-255) | 255               | The amount of blue the light emits.                                                                 |
+| shadowBias           | number         | \-0.005           | How much to add or subtract from the normalized depth when deciding whether a surface is in shadow. |
+| shadowNormalBias     | number         | 0                 | How much the position used to query the shadow map is offset along the object normal.               |
+| shadowRadius         | number         | 1                 | The radius of the shadow                                                                            |
+| shadowAutoUpdate     | boolean        | true              | Should the shadow be automatically calculated and updated                                           |
+| shadowBlurSamples    | number         | 8                 | The amount of samples to use when calculating the Virtual Shadow Map.                               |
+| shadowMapSizeHeight  | number         | 1024              | The height of the Shadow Map. (Values **must** be powers of 2)                                      |
+| shadowMapSizeWidth   | number         | 1024              | The width of the Shadow Map. (Values **must** be powers of 2)                                       |
+| shadowCameraNear     | number         | 0.5               | Camera frustum near-pane for calculating shadows                                                    |
+| shadowCameraFar      | number         | 200               | Camera frustum far-pane for calculating shadows                                                     |
+| shadowCameraLeft     | number         | \-50              | Camera frustum left-pane for calculating shadows                                                    |
+| shadowCameraRight    | number         | 50                | Camera frustum right-pane for calculating shadows                                                   |
+| shadowCameraBottom   | number         | \-50              | Camera frustum bottom-pane for calculating shadows                                                  |
+| shadowCameraTop      | number         | 50                | Camera frustum top-pane for calculating shadows                                                     |
+| targetX              | number         | 0                 | The target X coordinate of the light (Directional only)                                             |
+| targetY              | number         | 0                 | The target Y coordinate of the light (Directional only)                                             |
+| targetZ              | number         | 0                 | The target Z coordinate of the light (Directional only)                                             |
+
+## Funciones
+
+<ComponentFunctions
+    name="Light"
+    properties={{
+        type: "directional",
+        castShadow: true,
+        intensity: 0.5,
+        r: 255,
+        g: 255,
+        b: 255,
+        shadowBias: -0.005,
+        shadowNormalBias: 0,
+        shadowRadius: 1,
+        shadowAutoUpdate: true,
+        shadowBlurSamples: 8,
+        shadowMapSizeHeight: 1024,
+        shadowMapSizeWidth: 1024,
+        shadowCameraNear: 0.5,
+        shadowCameraFar: 200,
+        shadowCameraLeft: -50,
+        shadowCameraRight: 50,
+        shadowCameraBottom: -50,
+        shadowCameraTop: 50,
+        targetX: 0,
+        targetY: 0,
+        targetZ: 0
+    }}
+    mutate={`cursor.intensity = 1.0;
+    cursor.castShadow = false;
+    return false;`}
+/>

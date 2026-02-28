@@ -1,0 +1,29 @@
+.heroHeading {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.heroHeading h1, .heroHeading  h3 {
+  margin: 0;
+  color: white;
+}
+
+.heroHeading h1 {
+  font-size: 2.5rem;
+  font-weight: 900;
+}
+
+.heroHeading h3 {
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 576px) {
+  .heroHeading h1 {
+    font-size: 1.5rem;
+  }
+
+  .heroHeading h3 {
+    font-size: 1rem;
+  }
+}

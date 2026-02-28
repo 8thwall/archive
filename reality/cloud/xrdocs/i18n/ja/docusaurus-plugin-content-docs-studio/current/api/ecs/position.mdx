@@ -1,0 +1,34 @@
+---
+id: position
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# ポジション
+
+## 商品説明
+
+このコンポーネントは、**ローカル空間**での、エンティティの位置決めをコントロールする。
+
+## プロパティ一覧
+
+| Property | Type   | 初期値     | 商品説明                                                  |
+| -------- | ------ | ------- | ----------------------------------------------------- |
+| x        | 番号     | 0       | 負のX軸は左に伸びる。 正のX軸は右に伸びる。                               |
+| y        | 番号     | 0       | 負のY軸は下に伸びている。 正のY軸は上に伸びる。                             |
+| z        | 番号     | 0       | 負のZ軸は内側に伸びる。 正のZ軸が伸びる。                                |
+
+## 関数一覧
+
+<ComponentFunctions
+    name="Position"
+    properties={{
+        x: 0,
+        y: 0,
+        z: 0
+    }}
+    mutate={`カーソル.x = 2;
+    カーソル.y = 2;
+    カーソル.z = 2;
+    return false;`}
+/>

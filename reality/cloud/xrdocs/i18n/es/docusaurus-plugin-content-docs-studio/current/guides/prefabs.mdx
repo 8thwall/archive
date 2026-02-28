@@ -1,0 +1,87 @@
+---
+id: prefabs
+description: >-
+  Los prefabricados son colecciones reutilizables de entidades a partir de las
+  cuales se pueden crear múltiples copias.
+---
+
+# Prefabricados
+
+## Introducción
+
+{frontMatter.description} Se almacenan en el archivo de expansión, pero pueden salir a la superficie como se desee. También existe una práctica API para trabajar con prefabricados en el ECS. Las prefabricadas de Studio tienen las siguientes características:
+
+1. Los componentes prefabricados pueden compartirse entre instancias
+2. Los componentes heredados pueden sustituirse en cada caso.
+3. Una instancia de prefabricado puede contener instancias de otros prefabricados
+4. Los prefabricados son accesibles y modificables en tiempo de ejecución
+
+## Uso de prefabricados
+
+En Studio, puedes configurar y personalizar Prefabs rápidamente utilizando la opción "Hacer Prefab" del botón derecho del ratón sobre una entidad o arrastrándola a la pestaña Prefab del directorio de archivos inferior izquierdo. Dentro de la pestaña Prefabricados, puede editar fácilmente su Prefabricado y sus componentes, actualizar su jerarquía, crear duplicados - de la misma manera que trabajaría con objetos en la jerarquía espacial.
+
+Las jerarquías prefabricadas se crean del mismo modo que las jerarquías de entidades. Si desea inspeccionar visualmente y editar los detalles de su Prefab en una vista aislada, simplemente haga doble clic en él o haga clic derecho para abrir el Editor de Prefab que le permite realizar ediciones de diseño directamente en la fuente. Las actualizaciones realizadas en la fuente serán automáticamente previsualizables en todas las instancias del Prefab en la escena.
+
+¿Listo para trabajar con tu nuevo Prefab en tu escena? Basta con arrastrar y soltar el prefabricado en la vista de la escena o en la jerarquía de espacios para crear una instancia del prefabricado. Hay dos conceptos clave a tener en cuenta cuando se trabaja con Prefab y sus instancias: **Herencia** y Anulaciones\*\*.
+
+### Herencia
+
+Las entidades pueden heredar componentes de los prefabricados. Después de añadir una instancia Prefab en su espacio, cualquier configuración que realice posteriormente en la fuente Prefab será automáticamente "heredada" por la instancia. Los cambios realizados en el prefabricado en tiempo de ejecución también se aplicarán a las instancias del prefabricado. Los componentes heredados sólo se almacenan en un lugar y se comparten entre instancias. Esto puede ser útil para datos estáticos que se comparten entre instancias, como datos de materiales, texturas o mallas.
+
+:::info
+El componente physics collider no es heredable en tiempo de ejecución.
+:::
+
+### Anulación de
+
+Cuando una instancia hereda un componente de un Prefab, éste puede ser sobrescrito con valores de componente específicos de la instancia. Para anular un componente (por ejemplo, material, animación, script de componente personalizado, etc.) basta con añadirlo o cambiarlo en la instancia. Al redefinir un componente en una instancia Prefab, permanecerá redefinido en el futuro.  Esto significa que los futuros cambios que realice en el mismo componente en su fuente Prefab no se heredarán.
+
+#### Restablecer anulaciones
+
+Si desea restablecer un componente anulado al valor heredado del prefabricado, puede hacer clic con el botón derecho del ratón sobre el componente en el Inspector y seleccionar "Restablecer anulaciones del prefabricado". Esto eliminará la anulación y devolverá el componente al valor original del prefabricado.
+
+## Instancias en tiempo de ejecución
+
+El motor de juego de Studio te permite dirigir Prefabs en tiempo de ejecución con un código mínimo. Puede generar mediante programación nuevas instancias en tiempo real basadas en Prefabs existentes, y puede realizar cambios y ediciones de instancias de Prefabs en tiempo de ejecución. También puede consultar todas las subentidades de las instancias Prefab en tiempo de ejecución en caso de que necesite realizar cambios en diferentes instancias que se generaron dinámicamente.
+
+### Instanciar un prefabricado
+
+Crear una nueva instancia de prefabricado utilizando un nombre de prefabricado o EID. Las Instancias Prefabricadas pueden utilizarse como cualquier otra Entidad. Una instancia prefabricada tendrá su posición a cero en Instatiation
+
+#### Uso del nombre prefabricado
+
+![Prefab Name](/images/studio/guides/prefabs/prefab-name.png)
+
+```ts
+ecs.registerComponent({
+  name: 'Spawn Prefab by Name',
+  stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+    ecs.defineState('default')
+      .initial()
+      .listen(eid, ecs.input.SCREEN_TOUCH_START, (e) => {
+        const newInstance = world.createEntity("Human")
+      })
+  },
+})
+```
+
+#### Utilización de la identificación electrónica prefabricada
+
+```ts
+ecs.registerComponent({
+  name: 'Spawn Prefab by EID',
+  schema: {
+    prefabToSpawn: ecs.eid,
+  },
+  stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+    ecs.defineState('default')
+      .initial()
+      .listen(eid, ecs.input.SCREEN_TOUCH_START, (e) => {
+        const {prefabToSpawn} = schemaAttribute.get(eid)
+
+        if (prefabToSpawn) {
+          const newInstance = world.createEntity(prefabToSpawn)
+      })
+  },
+})
+```

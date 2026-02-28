@@ -1,0 +1,86 @@
+---
+id: ui
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Ui
+
+## Description
+
+Ce composant établit une interface utilisateur en relation avec l'entité.
+
+## Propriétés
+
+Je vais créer une table dans le même format pour le schéma fourni :
+
+## Propriétés
+
+| Propriété                        | Type                  | Défaut  | Description                                                                                                                                                                                                             |
+| -------------------------------- | --------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type (obligatoire)               | chaîne de caractères  |         | Les types pris en charge sont : "overlay" et "3d                                                                                                                                                                        |
+| police                           | chaîne de caractères  |         | Police à utiliser                                                                                                                                                                                                       |
+| taille de la police              | f32                   |         | Taille du texte                                                                                                                                                                                                         |
+| position                         | chaîne de caractères  |         | Type de positionnement                                                                                                                                                                                                  |
+| opacité                          | f32                   | 1       | Opacité globale de l'objet                                                                                                                                                                                              |
+| capacité de l'arrière-plan       | f32                   | 0       | Opacité de l'arrière-plan                                                                                                                                                                                               |
+| taille de l'arrière-plan         | chaîne de caractères  |         | Taille de l'arrière-plan                                                                                                                                                                                                |
+| arrière-plan                     | chaîne de caractères  |         | Couleur d'arrière-plan                                                                                                                                                                                                  |
+| couleur                          | chaîne de caractères  |         | Couleur de premier plan (texte)                                                                                                                                                                                         |
+| texte                            | chaîne de caractères  | ""      | Contenu textuel de l'objet                                                                                                                                                                                              |
+| image                            | chaîne de caractères  | nul     | Ressources en images                                                                                                                                                                                                    |
+| fixedSize                        | booléen               |         | Détermine si la taille est fixe                                                                                                                                                                                         |
+| largeur                          | chaîne de caractères  | 100     | Largeur de l'objet                                                                                                                                                                                                      |
+| hauteur                          | chaîne de caractères  | 100     | Hauteur de l'objet                                                                                                                                                                                                      |
+| sommet                           | chaîne de caractères  |         | Position verticale par rapport au bord supérieur                                                                                                                                                                        |
+| gauche                           | chaîne de caractères  |         | Position horizontale par rapport au bord gauche                                                                                                                                                                         |
+| fond                             | chaîne de caractères  |         | Position verticale à partir du bord inférieur                                                                                                                                                                           |
+| droit                            | chaîne de caractères  |         | Position horizontale par rapport au bord droit                                                                                                                                                                          |
+| couleur de la bordure            | chaîne de caractères  |         | Couleur de la bordure                                                                                                                                                                                                   |
+| borderRadius                     | f32                   | 0       | Arrondit les angles de l'élément                                                                                                                                                                                        |
+| alignContent                     | chaîne de caractères  |         | Distribution de l'espace entre les éléments de contenu ; valeurs autorisées : "flex-start", "center", "flex-end", "stretch", "space-between", "space-around".                                                           |
+| alignItems                       | chaîne de caractères  |         | Alignement des éléments sur l'axe transversal ; valeurs autorisées : 'flex-start', 'center', 'flex-end', 'stretch', 'baseline'                                                                                          |
+| alignSelf                        | chaîne de caractères  |         | Alignement d'un élément flexible individuel ; valeurs autorisées : 'auto', 'flex-start', 'center', 'flex-end', 'stretch', 'baseline'                                                                                    |
+| largeur de la bordure            | f32                   | 0       | Largeur de la bordure                                                                                                                                                                                                   |
+| écart entre les colonnes         | chaîne de caractères  |         | Espace entre les colonnes                                                                                                                                                                                               |
+| direction                        | chaîne de caractères  |         | Direction du texte ; valeurs autorisées : "inherit", "LTR", "RTL                                                                                                                                                        |
+| affichage                        | chaîne de caractères  |         | Type d'affichage de l'élément ; valeurs autorisées : "flex", "none                                                                                                                                                      |
+| fléchir                          | f32                   |         | Flex croissance, rétrécissement, et abréviation de la base                                                                                                                                                              |
+| flexBasis                        | chaîne de caractères  |         | Taille principale initiale d'un élément de flexion                                                                                                                                                                      |
+| flexDirection                    | chaîne de caractères  |         | Direction des éléments flexibles dans le conteneur ; valeurs autorisées : "column", "column-reverse", "row", "row-reverse" : "colonne", "colonne-inversée", "ligne", "ligne-inversée".                                  |
+| flexGrow                         | f32                   |         | Définit la capacité de croissance d'un élément flexible                                                                                                                                                                 |
+| flexShrink                       | f32                   |         | Définit la capacité d'un élément flexible à se rétrécir                                                                                                                                                                 |
+| flexWrap                         | chaîne de caractères  |         | Indique si les éléments de flexion sont enveloppés ; valeurs autorisées : 'no-wrap', 'wrap', 'wrap-reverse'                                                                                                             |
+| écart                            | chaîne de caractères  |         | Écart entre les éléments flexibles                                                                                                                                                                                      |
+| justifyContent                   | chaîne de caractères  |         | Alignement des éléments sur l'axe principal ; valeurs autorisées : 'flex-start', 'center', 'flex-end', 'space-between', 'space-around', 'space-evenly'                                                                  |
+| marge                            | chaîne de caractères  |         | Marge autour de l'élément                                                                                                                                                                                               |
+| marginBottom                     | chaîne de caractères  |         | Marge inférieure                                                                                                                                                                                                        |
+| margeGauche                      | chaîne de caractères  |         | Marge gauche                                                                                                                                                                                                            |
+| marginRight                      | chaîne de caractères  |         | Marge droite                                                                                                                                                                                                            |
+| marginTop                        | chaîne de caractères  |         | Marge supérieure                                                                                                                                                                                                        |
+| maxHeight                        | chaîne de caractères  |         | Hauteur maximale de l'élément                                                                                                                                                                                           |
+| largeur maximale                 | chaîne de caractères  |         | Largeur maximale de l'élément                                                                                                                                                                                           |
+| minHeight                        | chaîne de caractères  |         | Hauteur minimale de l'élément                                                                                                                                                                                           |
+| largeur minimale                 | chaîne de caractères  |         | Largeur minimale de l'élément                                                                                                                                                                                           |
+| débordement                      | chaîne de caractères  |         | Comment est géré le contenu qui dépasse la taille de l'élément ; valeurs autorisées : "visible", "caché", "défilement" : "visible", "caché", "défiler                                                                   |
+| rembourrage                      | chaîne de caractères  |         | Rembourrage à l'intérieur de l'élément                                                                                                                                                                                  |
+| paddingBottom                    | chaîne de caractères  |         | Rembourrage inférieur                                                                                                                                                                                                   |
+| paddingLeft                      | chaîne de caractères  |         | Rembourrage à gauche                                                                                                                                                                                                    |
+| paddingRight                     | chaîne de caractères  |         | Rembourrage à droite                                                                                                                                                                                                    |
+| paddingTop                       | chaîne de caractères  |         | Rembourrage supérieur                                                                                                                                                                                                   |
+| rowGap                           | chaîne de caractères  |         | Espace entre les rangs                                                                                                                                                                                                  |
+| alignement du texte              | chaîne de caractères  |         | Alignement du texte dans l'élément ; valeurs autorisées : "left", "right", "center", "justify".                                                                                                                         |
+
+## Fonctions
+
+<ComponentFunctions
+    name="Ui"
+    properties={{
+        type: "overlay",
+        background: "#FFFFFF",
+    }}
+    mutate={`cursor.opacity = 0.5;
+    cursor.text = 'Hello World!';
+    cursor.width = 150;
+    return false;`}
+/>

@@ -1,0 +1,106 @@
+---
+id: world
+description: Cette bibliothèque comprend des propriétés et des fonctions liées au monde.
+---
+
+# monde
+
+## Description
+
+{frontMatter.description}
+
+## Propriétés
+
+| Propriété         | Type               | Description                                 |
+| ----------------- | ------------------ | ------------------------------------------- |
+| toutes lesEntités | Set (jeu de mots)  | Ensemble de toutes les entités de la scène. |
+
+## Fonctions
+
+### createEntity
+
+Créer une nouvelle entité.
+
+```ts
+world.createEntity() // -> eid
+```
+
+### deleteEntity
+
+Supprimer une entité existante.
+
+```ts
+world.deleteEntity(eid) // -> void
+```
+
+### getChildren
+
+Obtenir les enfants d'une entité.
+
+```ts
+world.getChildren(eid) // -> Générateur<Eid>
+```
+
+### getParent
+
+Obtenir le parent d'une entité.
+
+```ts
+world.getParent(eid) // -> eid
+```
+
+### setParent
+
+Définit le parent d'une entité.
+
+```ts
+world.setParent(eid, parent : eid) // -> void
+```
+
+### getWorldTransform
+
+Obtenir la transformation du monde d'une entité. **Copie la worldTransform de la cible dans le second paramètre.**
+
+```ts
+world.getWorldTransform(eid, transform : Mat4) // -> void
+```
+
+### setTransform
+
+Définir la transformation d'une entité.
+
+```ts
+world.setPosition(eid, transform : Mat4) // -> void
+```
+
+### setPosition
+
+Définir la position d'une entité.
+
+```ts
+world.setPosition(eid, x : number, y : number, z : number) // -> void
+```
+
+### setQuaternion
+
+Définit la rotation d'une entité.
+
+```ts
+world.setQuaternion(eid, x : number, y : number, z : number, w : number) // -> void
+```
+
+### setScale
+
+Définir l'échelle d'une entité.
+
+```ts
+world.setScale(eid, x : number, y : number, z : number) // -> void
+```
+
+### normalizeQuaternion
+
+Normalise le quaternion d'une entité.
+
+```ts
+world.normalizeQuaternion(eid) // -> void
+```

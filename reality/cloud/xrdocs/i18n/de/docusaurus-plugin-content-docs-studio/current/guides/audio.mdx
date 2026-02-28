@@ -1,0 +1,82 @@
+---
+id: audio
+description: >-
+  Audio ist ein wesentlicher Faktor für ein umfassendes Erlebnis in jeder Szene.
+  Sie verleiht Tiefe, Emotionen und Atmosphäre und macht Interaktionen
+  fesselnder und einprägsamer.
+---
+
+# Audio
+
+## Einführung
+
+{frontMatter.description} Ganz gleich, ob Sie realistische Klanglandschaften oder stilisierte Audioeffekte anstreben, ein gut durchdachtes Audiodesign verbessert die Wirkung und die Stimmung Ihrer Szene erheblich und zieht die Benutzer tiefer in das Erlebnis hinein.
+
+Siehe die [World](/api/studio/world/audio) und [Audio Component](/api/studio/ecs/audio/) APIs für Eigenschaften und Funktionen.
+
+## Hinzufügen von Audio
+
+Audio kann der Entität über die Studio-Schnittstelle oder im Code hinzugefügt werden. Das Hinzufügen von Komponenten in Studio erfolgt über die Schaltfläche "Neue Komponente". Die Audiokomponente bietet verschiedene Wiedergabeeinstellungen.
+
+#### Unterstützte Formate
+
+Studio unterstützt die folgenden Audiodateitypen: .mp3, .m4a, .wav, .ogg, und .aac
+
+#### Arten von Audio
+
+**Global:** Ein Ton, der in der ganzen Welt ohne Lautstärkeschwankungen gespielt wird.
+
+**Positional:** Ein Sound, der an einer bestimmten Position in der Welt gespielt wird und dessen Lautstärke sich je nach Entfernung ändert.
+
+![audio-component.png](/images/studio/audio-component.png)
+
+### Abspielen eines Soundeffekts
+
+Wahrscheinlich werden Sie in Ihrem Spiel Soundeffekte haben wollen. Um einen Ton abspielen zu können, muss eine Audiokomponente an eine Entität angehängt werden. Anschließend können Sie eine Entität erstellen, die den Soundeffekt abspielt, und ihn anschließend aufräumen.
+
+```tsx title="/sound-effect.ts"
+import * as ecs from '@8thwall/ecs'
+
+const SoundEffectComponent = ecs.registerComponent({
+  name: 'Sound Effect',
+  stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+    ecs.defineState('default')
+      .initial()
+      .onEnter(() => {
+        ecs.Audio.set(world, eid, {
+          url: 'assets/blaster.mp3',
+          volume: 1,
+          loop: false,
+          paused: false,
+          positional: true,
+          refDistance: 1,
+          distanceModel: 'Inverse',
+          rolloffFactor: 1,
+        })
+      })
+      .listen(eid, ecs.events.AUDIO_END, () => {
+        world.deleteEntity(eid)
+      })
+  },
+})
+
+export {SoundEffectComponent}
+```
+
+```tsx title="/sound-effect-on-click.ts"
+import * as ecs from '@8thwall/ecs'
+import {SoundEffectComponent} from './sound-effect'
+
+ecs.registerComponent({
+  name: 'Play Sound Effect on Click',
+  stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+    ecs.defineState('default')
+      .initial()
+      .listen(eid, ecs.input.SCREEN_TOUCH_START, () => {
+        const ent = world.createEntity()
+
+        SoundEffectComponent.set(world, ent)
+      })
+  },
+})
+```

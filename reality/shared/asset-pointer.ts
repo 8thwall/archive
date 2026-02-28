@@ -1,0 +1,1 @@
+../cloud/xrhome/src/shared/asset-pointer.ts

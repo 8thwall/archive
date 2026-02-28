@@ -1,0 +1,19 @@
+.caseStudyTagsList {
+  display: flex;
+  gap: 1em;
+  width: 100%;
+  flex-wrap: wrap;
+  font-family: Nunito, sans serif;
+}
+
+.caseStudyTag {
+  color: #464766;
+  background: #ebebf1;
+  border-radius: 4px;
+  min-width: 124px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1em;
+}

@@ -1,0 +1,278 @@
+{
+  "header_industrySolutions": {
+    "message": "Solutions",
+    "description": "A top-level button in the page header navigation. Clicking this will display a list of other links to click."
+  },
+  "header_whyWebar": {
+    "message": "Why WebAR",
+    "description": "A link under the \"Industry Solutions\" menu."
+  },
+  "header_retail": {
+    "message": "Retail",
+    "description": "A link under the \"Industry Solutions\" menu."
+  },
+  "header_cpg": {
+    "message": "CPG",
+    "description": "A link under the \"Industry Solutions\" menu. This stands for \"Consumer Packaged Goods\""
+  },
+  "header_fashion": {
+    "message": "Fashion",
+    "description": "A link under the \"Industry Solutions\" menu."
+  },
+  "header_automotive": {
+    "message": "Automotive",
+    "description": "A link under the \"Industry Solutions\" menu."
+  },
+  "header_entertainment": {
+    "message": "Entertainment",
+    "description": "A link under the \"Industry Solutions\" menu."
+  },
+  "header_qsr": {
+    "message": "QSR",
+    "description": "A link under the \"Industry Solutions\" menu. This stands for \"Quick Service Restaurant\""
+  },
+  "header_case_studies": {
+    "message": "Case Studies",
+    "description": "A link under the \"Industry Solutions\" menu."
+  },
+  "header_verticals": {
+    "message": "All Verticals",
+    "description": "A link under the \"Industry Solutions\" menu. \"Verticals\" in this context refers to \"vertical markets\", or a group of companies focused on a specific niche."
+  },
+  "header_industries": {
+    "message": "Industries",
+    "description": "A link under the \"Solutions\" menu."
+  },
+  "header_community": {
+    "message": "Community",
+    "description": "A top-level button in the page header navigation. Clicking this will display a list of other links to click."
+  },
+  "header_made_by_community": {
+    "message": "Made by Community",
+    "description": "A link under the \"Community\" menu."
+  },
+  "header_discord": {
+    "message": "Discord",
+    "description": "A link under the \"Community\" menu."
+  },
+  "header_game_jams": {
+    "message": "Game Jams",
+    "description": "A link under the \"Community\" menu."
+  },
+  "header_education": {
+    "message": "Education",
+    "description": "A link under the \"Community\" menu."
+  },
+  "header_events": {
+    "message": "Events",
+    "description": "A link under the \"Community\" menu."
+  },
+  "header_product": {
+    "message": "Product",
+    "description": "A top-level link in the page header navigation. Clicking will display a list of 8th Wall's offerings."
+  },
+  "header_support": {
+    "message": "Support",
+    "description": "A link under the \"Learn\" menu. Clicking will redirect to a resources page."
+  },
+  "header_niantic_studio": {
+    "message": "Studio",
+    "description": "A link under the \"Product\" menu."
+  },
+  "header_world_ar": {
+    "message": "World AR",
+    "description": "A link under the \"Product\" menu."
+  },
+  "header_location_ar": {
+    "message": "Location AR",
+    "description": "A link under the \"Product\" menu."
+  },
+  "header_image_targets": {
+    "message": "Image Targets",
+    "description": "A link under the \"Product\" menu."
+  },
+  "header_human_ar": {
+    "message": "Human AR",
+    "description": "A link under the \"Product\" menu."
+  },
+  "header_headsets": {
+    "message": "Headsets",
+    "description": "A link under the \"Product\" menu."
+  },
+  "header_cloud_editor": {
+    "message": "Cloud Editor",
+    "description": "A link under the \"Product\" menu."
+  },
+  "header_all_products": {
+    "message": "All Products",
+    "description": "A link under the \"Product\" menu."
+  },
+  "header_discover": {
+    "message": "Discover",
+    "description": "A top-level link in the page header navigation. Clicking will redirect to page showcasing projects build using 8th Wall"
+  },
+  "header_findPartner": {
+    "message": "Find a Partner",
+    "description": "A top-level link in the page header navigation."
+  },
+  "header_resources": {
+    "message": "Resources",
+    "description": "A top-level button in the page header navigation. Clicking will display a menu with other links to click."
+  },
+  "header_projectLibrary": {
+    "message": "Project Library",
+    "description": "A link under the \"Resources\" menu. Clicking will redirect to a page showcasing projects built by 8th Wall."
+  },
+  "header_blog": {
+    "message": "Blog",
+    "description": "A link under the \"Resources\" menu. Clicking will redirect to 8th Wall's blog"
+  },
+  "header_allResources": {
+    "message": "All Resources",
+    "description": "A link under the \"Resources\" menu. Clicking will redirect to a resources page."
+  },
+  "header_features": {
+    "message": "Features",
+    "description": "A link under the \"Product\" menu. Clicking will redirect to a products web page."
+  },
+  "header_forum": {
+    "message": "Forum",
+    "description": "A link under the \"Learn\" menu. Clicking will redirect to 8th Wall's community forum."
+  },
+  "header_documentation": {
+    "message": "Documentation",
+    "description": "A link under the \"Learn\" menu. Clicking will redirect to 8th Wall's documentation page."
+  },
+  "header_tutorials": {
+    "message": "Tutorials",
+    "description": "A link under the \"Learn\" menu. Clicking will redirect to a page with tutorials on how to use 8th Wall."
+  },
+  "header_pricing": {
+    "message": "Pricing",
+    "description": "A top-level link in the page header navigation. Clicking will redirect to 8th Wall's pricing page."
+  },
+  "header_startFree": {
+    "message": "Create for Free",
+    "description": "A top-level link in the page headernavigation. Clicking will redirect the user to 8th Wall's signup page."
+  },
+  "header_login": {
+    "message": "Log in",
+    "description": "A top-level link in the page headernavigation. Clicking will redirect the user to 8th Wall's login page."
+  },
+  "header_workspaces": {
+    "message": "Workspaces",
+    "description": "A link that appears only when a user is logged in. Clicking will redirect to a page listing the user's workspaces."
+  },
+  "header_profile": {
+    "message": "Profile",
+    "description": "A link that appears only when a user is logged in. Clicking will redirect to the user's profile settings page"
+  },
+  "header_signOut": {
+    "message": "Sign Out",
+    "description": "A link that appears only when a user is logged in. Clicking will sign the user out."
+  },
+  "footer_copyright": {
+    "message": "Copyright © 2016-2025, 8th Wall, LLC.",
+    "description": "Text in the page footer. This is the copyright notice."
+  },
+  "footer_whyWebar": {
+    "message": "Why WebAR",
+    "description": "A link in the page footer."
+  },
+  "footer_product": {
+    "message": "Product",
+    "description": "A link in the page footer. Clicking will redirect to a page describing 8th Wall's offerings."
+  },
+  "footer_pricing": {
+    "message": "Pricing",
+    "description": "A link in the page footer. Clicking will redirect to 8th Wall's pricing page."
+  },
+  "footer_niantic_studio": {
+    "message": "Studio",
+    "description": "A link in the page footer. Clicking will redirect to 8th Wall's Studio page."
+  },
+  "footer_faq": {
+    "message": "FAQ",
+    "description": "A link in the page footer. Clicking will redirect to a page with frequently asked questions."
+  },
+  "footer_login": {
+    "message": "Log in",
+    "description": "A category header in the page footer."
+  },
+  "footer_learn": {
+    "message": "Learn",
+    "description": "A link in the page footer."
+  },
+  "footer_projectLibrary": {
+    "message": "Project Library",
+    "description": "A link in the page footer. Clicking will redirect to a page showcasing projects built by 8th Wall"
+  },
+  "footer_discord": {
+    "message": "Discord",
+    "description": "A link in the page footer. Clicking will redirect to a Discord server for 8th Wall"
+  },
+  "footer_discover": {
+    "message": "Discover",
+    "description": "A link in the page footer. Clicking will redirect to a page showcasing projects built using 8th Wall"
+  },
+  "footer_documentation": {
+    "message": "Documentation",
+    "description": "A link in the page footer. Clicking will redirect to 8th Wall's documentation page."
+  },
+  "footer_tutorials": {
+    "message": "Tutorials",
+    "description": "A link in the page footer. Clicking will redirect to a tutorial page on how to use 8th Wall"
+  },
+  "footer_github": {
+    "message": "GitHub",
+    "description": "A link in the page footer. Clicking will redirect to 8th Wall's GitHub page"
+  },
+  "footer_community": {
+    "message": "Community",
+    "description": "A category header in the page footer."
+  },
+  "footer_forum": {
+    "message": "Forum",
+    "description": "A link in the page footer. Clicking will redirect to 8th Wall's community forum."
+  },
+  "footer_blog": {
+    "message": "Blog",
+    "description": "A link in the page footer. Clicking will redirect to 8th Wall's blog"
+  },
+  "footer_resources": {
+    "message": "Resources",
+    "description": "A link in the page footer."
+  },
+  "footer_security": {
+    "message": "Security",
+    "description": "A link in the page footer. Clicking will redirect to a page that gives more information on Niantic's commitment to security."
+  },
+  "footer_community_hub": {
+    "message": "Community Hub",
+    "description": "A link in the page footer."
+  },
+  "footer_support": {
+    "message": "Support",
+    "description": "A link in the page footer. Clicking will redirect to a page that gives more information on Niantic's commitment to security."
+  },
+  "footer_company": {
+    "message": "About",
+    "description": "A category header in the page footer."
+  },
+  "footer_about": {
+    "message": "About Us",
+    "description": "A link in the page footer. Clicking will redirect to a page that gives more information about 8th Wall"
+  },
+  "footer_partners": {
+    "message": "Partners",
+    "description": "A link in the page footer. Clicking will redirect to a page showcasing 8th Wall's business partners"
+  },
+  "footer_careers": {
+    "message": "Careers",
+    "description": "A link in the page footer. Clicking will redirect to a page with job listings at 8th Wall."
+  },
+  "footer_press": {
+    "message": "Press",
+    "description": "A link in the page footer. Clicking will redirect to a page with press / news information"
+  }
+}

@@ -1,0 +1,57 @@
+---
+id: lighting
+description: >-
+  Tanto si buscas un aspecto muy realista como uno estilizado, la iluminación
+  puede marcar una diferencia significativa en la sensación que transmite tu
+  escena y en la interacción con los usuarios.
+---
+
+# Iluminación
+
+## Introducción
+
+La iluminación desempeña un papel crucial a la hora de realzar el atractivo visual de cualquier escena. Añade profundidad, realismo y atmósfera, haciendo que las experiencias sean más envolventes, atractivas y visualmente convincentes. {frontMatter.description}
+
+## Añadir una luz
+
+Las luces y sombras pueden añadirse a una entidad a través de la interfaz de Studio o mediante código. En Studio, puede hacerlo pulsando el botón (+) en la Jerarquía o seleccionando "Nuevo componente" en el Inspector para una entidad elegida. Tanto los componentes de Luz como de Sombra ofrecen varios ajustes para su personalización.
+
+#### Tipos de luces
+
+**Direccional:**
+Luz que se emite en una dirección determinada. Esta luz se comportará como si estuviera infinitamente lejos y los rayos producidos por ella fueran todos paralelos. El caso de uso común para esto es simular la luz del día; el sol está lo suficientemente lejos como para que su posición pueda considerarse infinita, y todos los rayos de luz que proceden de él son paralelos.
+
+**Punto:**
+Luz que irradia en todas direcciones desde un único punto. Un ejemplo común es replicar la luz de una bombilla desnuda.
+
+**Ambient:**
+Esta luz ilumina uniformemente todos los objetos de la escena, creando una iluminación global.
+
+![light-component.png](/images/studio/light-component.png)
+
+### Ejemplo
+
+El siguiente ejemplo muestra cómo asignar una Luz a una entidad en tiempo de ejecución:
+
+```ts
+ecs.Light.set(world, component.eid, {
+    type: 'point'
+})
+```
+
+## Añadir sombras
+
+\*\*Para activar las sombras, añada el componente Sombra al objeto y configure sus propiedades en consecuencia.
+
+![shadow-component.png](/images/studio/shadow-component.png)
+
+### Ejemplo
+
+El siguiente ejemplo muestra cómo establecer un Sombra en una entidad en tiempo de ejecución.
+
+```ts
+ecs.Shadow.set(world, component.eid, {
+  castShadow: true,
+  receiveShadow: true
+})
+```

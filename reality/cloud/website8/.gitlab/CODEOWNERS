@@ -1,0 +1,6 @@
+######## Top Level ########
+# Files without other owners are caught by this rule.  Rules below override this rule. If you wish
+# to modify a file which is caught by this rule, it's likely that you should be finding an
+# appropriate owner for your file instead. First identify an appropriate owner, then send a
+# separate request to add the relevant path to CODEOWNERS, and then request review from that owner.
+/ @repo-8thwall-leads

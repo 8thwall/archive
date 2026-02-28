@@ -1,0 +1,28 @@
+branch-defaults:
+  default:
+    environment: Website8
+  gatsby:
+    environment: Website8-staging3
+  master:
+    environment: Website8
+  sulea:
+    environment: Website8
+deploy:
+  artifact: website8.zip
+environment-defaults:
+  Website8:
+    branch: null
+    repository: null
+global:
+  application_name: Website
+  default_ec2_keyname: <REMOVED_BEFORE_OPEN_SOURCING>
+  default_platform: arn:aws:elasticbeanstalk:us-west-2::platform/PHP 7.1 running on
+    64bit Amazon Linux/2.7.0
+  default_region: us-west-2
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: null
+  sc: git
+  workspace_type: Application

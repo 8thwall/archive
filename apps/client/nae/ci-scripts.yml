@@ -1,0 +1,45 @@
+# General CI scripts for NAE client apps
+# TODO(lreyna): Move logic to a python file to use with gitlab api
+.nae:defaults:
+  script:before:process_tag:
+    - echo "Processing tag $CI_COMMIT_TAG";
+    - touch tag_data.env;
+    - export NAE_TAG=$(echo $CI_COMMIT_TAG | cut -d '/' -f 1);
+    - |
+      if [[ $NAE_TAG == "nae" ]]; then
+        # Extract app name, tag type, and version from the tag
+        # Example tag: "nae/solstice/release/1.0.0"
+        export RELEASE_APPNAME=$(echo $CI_COMMIT_TAG | cut -d '/' -f 2);
+        export TAG_TYPE=$(echo $CI_COMMIT_TAG | cut -d '/' -f 3);
+        export RELEASE_VERSION=$(echo $CI_COMMIT_TAG | cut -d '/' -f 4);
+
+        if [[ $TAG_TYPE == "release" ]]; then
+          TRUSTED_TAGGERS="datchu;mc;emmamiddlemiss;lucasreyna;alvinportillo;cbartschat;josephosullivan";
+          TAG_MAP=$(git for-each-ref --format '%(refname) %(taggeremail)' refs/tags/${CI_COMMIT_TAG}  --sort=taggerdate);
+
+          echo "Checking if tagger is trusted from:\n$TAG_MAP";
+          THIS_TAGGER=$(echo $TAG_MAP | cut -d " " -f 2 | sed 's/[<>]//g' | cut -d '@' -f 1);
+          echo "Checking tagger $THIS_TAGGER";
+
+          TAGGER_AUTHORIZED=false;
+          TRUSTED_TAGGER_LIST=$(echo $TRUSTED_TAGGERS | tr ";" "\n");
+          for CURRENT_TRUSTED_TAGGER in $TRUSTED_TAGGER_LIST; do
+            if [[ "$CURRENT_TRUSTED_TAGGER" == "$THIS_TAGGER" ]]; then
+              echo "Tagger $THIS_TAGGER is trusted.";
+              TAGGER_AUTHORIZED=true;
+            fi
+          done
+
+          if [[ $TAGGER_AUTHORIZED == false ]]; then
+            echo "Tagger $THIS_TAGGER is not authorized to release to $RELEASE_CHANNEL.";
+            exit 2;
+          fi
+        fi
+
+        echo "NAE_TAG=$NAE_TAG" >> tag_data.env;
+        echo "RELEASE_APPNAME=$RELEASE_APPNAME" >> tag_data.env;
+        echo "TAG_TYPE=$TAG_TYPE" >> tag_data.env;
+        echo "RELEASE_VERSION=$RELEASE_VERSION" >> tag_data.env;
+      else
+        echo "Not a valid NAE tag";
+      fi

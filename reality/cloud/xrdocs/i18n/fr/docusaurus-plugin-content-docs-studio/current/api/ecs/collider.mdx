@@ -1,0 +1,70 @@
+---
+id: collider
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Collider
+
+## Description
+
+Ce composant établit un collisionneur physique sur une entité.
+
+## ColliderShape
+
+| Type       | Description   |
+| ---------- | ------------- |
+| Boîte      | Boîte         |
+| Sphère     | Sphère        |
+| Avion      | Avion         |
+| Capsule    | Capsule       |
+| Cône       | Cône          |
+| Cylindre   | Cylindre      |
+
+## Propriétés
+
+| Nom                       | Type              | Défaut                | Description                                                                                    |
+| ------------------------- | ----------------- | --------------------- | ---------------------------------------------------------------------------------------------- |
+| forme (obligatoire)       | ecs.ColliderShape | ecs.ColliderShape.Box | Les types pris en charge sont disponibles dans ecs.ColliderShape                               |
+| largeur                   | nombre            | 0                     | Largeur de la boîte ou du plan.                                                                |
+| hauteur                   | nombre            | 0                     | Hauteur d'une boîte, d'un plan, d'une capsule, d'un cône ou d'un cylindre.                     |
+| profondeur                | nombre            | 0                     | Profondeur de la forme de la boîte.                                                            |
+| rayon                     | nombre            | 0                     | Rayon des sphères, des capsules, des cônes ou des cylindres.                                   |
+| masse                     | nombre            | 0                     | Masse de l'entité. **Laisser 0 pour rendre statique**                                          |
+| eventOnly                 | booléen           | faux                  | L'objet doit-il uniquement envoyer des événements de collision et ne pas réagir physiquement ? |
+| gravityFactory            | nombre            | 1                     | Facteur de mise à l'échelle Gravité mondiale                                                   |
+| lockXAxis                 | booléen           | faux                  | Désactive la rotation sur l'axe X                                                              |
+| lockYAxis                 | booléen           | faux                  | Désactive la rotation sur l'axe Y                                                              |
+| verrouZAxis               | booléen           | faux                  | Désactive la rotation sur l'axe Z                                                              |
+| friction                  | nombre            | 0.5                   | L'importance du frottement de contact sur l'entité                                             |
+| restitution               | nombre            | 0                     | Le dynamisme de l'entité                                                                       |
+| amortissement linéaire    | nombre            | 0                     | La résistance de l'air lors d'un déplacement                                                   |
+| amortissement angulaire   | nombre            | 0                     | La résistance de l'air lors de la rotation                                                     |
+| friction d'essorage       | nombre            | 0                     | L'importance de la friction sur l'entité pendant la rotation                                   |
+
+## Fonctions
+
+<ComponentFunctions
+    name="Collider"
+    properties={{
+        shape: "ecs.ColliderShape.Box",
+        width: 0,
+        height: 0,
+        depth: 0,
+        radius: 0,
+        mass: 0,
+        eventOnly: false,
+        gravityFactory: 1,
+        lockXAxis: false,
+        lockYAxis: false,
+        lockZAxis: false,
+        friction: 0.5,
+        restitution: 0,
+        linearDamping: 0,
+        angularDamping: 0,
+        spinningFriction: 0
+    }}
+    mutate={`cursor.mass = 5;
+    cursor.friction = 0.8;
+    return false;`}
+/>

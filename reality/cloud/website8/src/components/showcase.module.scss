@@ -1,0 +1,75 @@
+@use '../styles/brand-colors';
+@use '../styles/constants';
+
+@keyframes fadeIn {
+  from {
+    opacity: 0
+  }
+
+  to {
+    opacity: 1
+  }
+}
+
+.carouselItem {
+  animation-name: fadeIn;
+  animation-duration: 0.6s;
+  padding: 0;
+  text-align: center;
+}
+
+.editorNav {
+  list-style: none;
+  padding-left: 1.5rem;
+
+  & a {
+    color: brand-colors.$gray4;
+    text-decoration: none;
+
+    &:hover {
+      color: brand-colors.$brand-black;
+      cursor: pointer;
+    }
+  }
+
+  & li {
+    margin-bottom: 1rem;
+
+    &>* {
+      display: block;
+      margin-left: .5rem;
+    }
+  }
+}
+
+.editorNavActive {
+  list-style-image: url('../../img/editor-nav-active-icon.svg');
+
+  &>a {
+    color: brand-colors.$brand-black;
+  }
+}
+
+.editorImage {
+  width: 60vw;
+  max-width: 50rem;
+  border-radius: 10px;
+
+  @media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+    width: 100%;
+    margin-bottom: 1em;
+  }
+}
+
+.editorCaption {
+  margin: 0 auto;
+  width: 60vw;
+  max-width: 50rem;
+  margin-top: 1em;
+  height: 6em;
+  text-align: left;
+
+  @media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+    width: 100%;
+  }
+}

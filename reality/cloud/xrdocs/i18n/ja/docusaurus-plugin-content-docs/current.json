@@ -1,0 +1,142 @@
+{
+  "version.label": {
+    "message": "次のページ",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Home": {
+    "message": "ホーム",
+    "description": "The label for category Home in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Getting Started": {
+    "message": "はじめに",
+    "description": "The label for category Getting Started in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Guides": {
+    "message": "ガイド",
+    "description": "The label for category Guides in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Projects": {
+    "message": "プロジェクト",
+    "description": "The label for category Projects in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Advanced Topics": {
+    "message": "アドバンス・トピックス",
+    "description": "The label for category Advanced Topics in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.API Reference": {
+    "message": "APIリファレンス",
+    "description": "The label for category API Reference in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.XR8": {
+    "message": "エックスアール8",
+    "description": "The label for category XR8 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.AccessPass": {
+    "message": "アクセスパス",
+    "description": "The label for category AccessPass in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.AFrame": {
+    "message": "Aフレーム",
+    "description": "The label for category AFrame in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.AFrame Events": {
+    "message": "AFrameイベント",
+    "description": "The label for category AFrame Events in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.AFrame Event Listeners": {
+    "message": "AFrameイベントリスナー",
+    "description": "The label for category AFrame Event Listeners in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Babylonjs": {
+    "message": "バビロンjs",
+    "description": "The label for category Babylonjs in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.CameraPipelineModule": {
+    "message": "カメラパイプラインモジュール",
+    "description": "The label for category CameraPipelineModule in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.CameraPixelArray": {
+    "message": "カメラピクセル配列",
+    "description": "The label for category CameraPixelArray in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.CanvasScreenshot": {
+    "message": "キャンバスのスクリーンショット",
+    "description": "The label for category CanvasScreenshot in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.CoachingOverlay": {
+    "message": "コーチングオーバーレイ",
+    "description": "The label for category CoachingOverlay in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.FaceController": {
+    "message": "フェイスコントローラ",
+    "description": "The label for category FaceController in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.GlTextureRenderer": {
+    "message": "GlTextureRenderer",
+    "description": "The label for category GlTextureRenderer in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.LayersController": {
+    "message": "LayersController",
+    "description": "The label for category LayersController in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.LandingPage": {
+    "message": "ランディングページ",
+    "description": "The label for category LandingPage in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.MediaRecorder": {
+    "message": "メディアレコーダー",
+    "description": "The label for category MediaRecorder in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.PlayCanvas": {
+    "message": "プレイキャンバス",
+    "description": "The label for category PlayCanvas in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.PlayCanvas Events": {
+    "message": "PlayCanvas イベント",
+    "description": "The label for category PlayCanvas Events in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.PlayCanvas Event Listeners": {
+    "message": "PlayCanvas イベントリスナー",
+    "description": "The label for category PlayCanvas Event Listeners in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Threejs": {
+    "message": "スリージェイエス",
+    "description": "The label for category Threejs in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.VPS": {
+    "message": "ブイピーエス",
+    "description": "The label for category VPS in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.VpsCoachingOverlay": {
+    "message": "VpsCoachingOverlay",
+    "description": "The label for category VpsCoachingOverlay in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.XrConfig": {
+    "message": "XrConfig",
+    "description": "The label for category XrConfig in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.XrController": {
+    "message": "XrController",
+    "description": "The label for category XrController in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.XrDevice": {
+    "message": "Xrデバイス",
+    "description": "The label for category XrDevice in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.XrPermissions": {
+    "message": "Xrパーミッション",
+    "description": "The label for category XrPermissions in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Troubleshooting": {
+    "message": "トラブルシューティング",
+    "description": "The label for category Troubleshooting in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.HandController": {
+    "message": "ハンドコントローラ",
+    "description": "The label for category HandController in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Modules": {
+    "message": "モジュール",
+    "description": "The label for category Modules in sidebar tutorialSidebar"
+  }
+}

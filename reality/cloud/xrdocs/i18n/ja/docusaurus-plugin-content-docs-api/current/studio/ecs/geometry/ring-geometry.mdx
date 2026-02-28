@@ -1,0 +1,26 @@
+---
+id: ring-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import RingGeometryTable from "../../../../gen/tables/RingGeometry.md"
+
+# リング幾何学
+
+## 説明
+
+このコンポーネントは、エンティティのジオメトリを確立する。
+
+## プロパティ
+
+<RingGeometryTable />
+
+## 機能
+
+<ComponentFunctions
+    name="RingGeometry"
+    properties={{ innerRadius: 1, outerRadius: 1 }}
+    mutate={`cursor.innerRadius += 0.5;
+    cursor.outerRadius += 1;
+    return false;`}
+/>

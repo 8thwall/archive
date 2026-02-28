@@ -1,0 +1,104 @@
+<!-- Overlay text -->
+<div id="overlay">
+  <h1 id="message"></h1>
+  <button id="shareBtn">Send ➜</button>
+
+  <form action="#" 
+    onsubmit="document.getElementById('nameInput').blur(); event.preventDefault(); return false;">
+      <input id="nameInput" type="text">
+  </form>
+</div>
+
+<!-- Scene-level customizations go here -->
+<a-scene
+  responsive-immersive
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="colorManagement:true"
+  gltf-model="dracoDecoderPath: https://cdn.8thwall.com/web/aframe/draco-decoder/"
+  xrweb="
+    allowedDevices: any;
+    defaultEnvironmentFogIntensity: 0; 
+    defaultEnvironmentFloorTexture: #groundTex; 
+    defaultEnvironmentFloorColor: #FFF;
+    defaultEnvironmentSkyBottomColor: #DBD9DF; 
+    defaultEnvironmentSkyTopColor: #ACD1E3;
+    defaultEnvironmentSkyGradientStrength: 0.3;">
+
+  <!-- We can define assets here to be loaded when A-Frame initializes -->
+  <a-assets>
+    <img id="groundTex" src="./assets/textures/snow.jpg">
+    <img id="purpleNoseTex" src="./assets/textures/purple-nose.jpg">
+    <img id="redNoseTex" src="./assets/textures/red-nose.jpg">
+    <a-asset-item id="reindeerModel" src="assets/models/reindeer-draco.glb"></a-asset-item>
+    <a-asset-item id="treeModel" src="assets/models/tree-draco.glb"></a-asset-item>
+  </a-assets>
+
+  <!-- The raycaster will emit mouse events on scene objects specified with the cantap class -->
+  <a-camera
+    id="camera"
+    position="0 4 5"
+    raycaster="objects: .cantap"
+    cursor="
+      fuse: false;
+      rayOrigin: mouse;">
+  </a-camera>
+
+  <!-- Shadows are drawn relative to the camera's position -->
+  <a-entity
+    light="
+      type: directional;
+      intensity: 0.8;
+      castShadow: true;
+      shadowMapHeight:1024;
+      shadowMapWidth:1024;
+      shadowCameraTop: 20;
+      shadowCameraBottom: -20;
+      shadowCameraRight: 20;
+      shadowCameraLeft: -20;
+      target: #camera"
+    xrextras-attach="target: camera; offset: 8 15 4"
+    position="1 4.3 2.5"
+    shadow>
+  </a-entity>
+
+  <a-light type="ambient" intensity="0.8"></a-light>
+
+  <!-- Character -->
+  <a-entity
+    id="character"
+    class="cantap"
+    character-tap
+    click-tap
+    click-move="speed:1.8"
+    move-controller="moveY: false"
+    look-controller
+    look-at-slerp
+    gltf-model="#reindeerModel"
+    animation-mixer="clip: idle; loop: repeat;"
+    scale="4 4 4"
+    shadow="receive:false"
+  ></a-entity>
+
+  <!-- Content within xrextras-opaque-background will only be rendered on Desktop + VR -->
+  <xrextras-opaque-background>
+    <a-entity 
+      gltf-model="#treeModel" 
+      position="-4 0 -6" 
+      rotation="0 45 0" 
+      scale="0.8 0.8 0.8" 
+      shadow="receive: false"
+    ></a-entity>
+  </xrextras-opaque-background>
+
+  <!-- Adding the cantap class allows the ground to be clicked -->
+  <a-box
+    id="ground"
+    class="cantap"
+    scale="1000 2 1000"
+    position="0 -0.99 0"
+    material="shader: shadow; transparent: true; opacity: 0.4"
+    shadow>
+  </a-box>
+</a-scene>

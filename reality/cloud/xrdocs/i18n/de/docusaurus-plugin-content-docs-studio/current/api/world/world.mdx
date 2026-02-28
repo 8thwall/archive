@@ -1,0 +1,106 @@
+---
+id: world
+description: Diese Bibliothek enthält Eigenschaften und Funktionen im Zusammenhang mit der Welt.
+---
+
+# Welt
+
+## Beschreibung
+
+{frontMatter.description}
+
+## Eigenschaften
+
+| Eigenschaft    | Typ   | Beschreibung                |
+| -------------- | ----- | --------------------------- |
+| allEntities    | Satz  | Menge aller Szenenobjekte.  |
+
+## Funktionen
+
+### createEntity
+
+Erstellen Sie eine neue Entität.
+
+```ts
+world.createEntity() // -> eid
+```
+
+### deleteEntity
+
+Eine bestehende Entität löschen.
+
+```ts
+world.deleteEntity(eid) // -> void
+```
+
+### getChildren
+
+Kinder einer Entität abrufen.
+
+```ts
+world.getChildren(eid) // -> Generator<Eid>
+```
+
+### getParent
+
+Ermittelt die Muttergesellschaft einer Entität.
+
+```ts
+world.getParent(eid) // -> eid
+```
+
+### setParent
+
+Legen Sie das Elternteil einer Entität fest.
+
+```ts
+world.setParent(eid, parent: eid) // -> void
+```
+
+### getWorldTransform
+
+Ermittelt die Welttransformation einer Entität. **Kopiert die WeltTransformation des Ziels in den zweiten Parameter**.
+
+```ts
+world.getWorldTransform(eid, transform: Mat4) // -> void
+```
+
+### setTransform
+
+Setzen der Transformation einer Entität.
+
+```ts
+world.setPosition(eid, transform: Mat4) // -> void
+```
+
+### setPosition
+
+Position eines Objekts festlegen.
+
+```ts
+world.setPosition(eid, x: Zahl, y: Zahl, z: Zahl) // -> void
+```
+
+### setQuaternion
+
+Festlegen der Rotation eines Objekts.
+
+```ts
+world.setQuaternion(eid, x: Zahl, y: Zahl, z: Zahl, w: Zahl) // -> void
+```
+
+### setScale
+
+Maßstab eines Objekts festlegen.
+
+```ts
+world.setScale(eid, x: Zahl, y: Zahl, z: Zahl) // -> void
+```
+
+### normalizeQuaternion
+
+Normalisiert die Quaternion einer Entität.
+
+```ts
+world.normalizeQuaternion(eid) // -> void
+```

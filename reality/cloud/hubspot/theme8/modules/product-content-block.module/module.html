@@ -1,0 +1,51 @@
+<!-- module html  -->
+
+<style>
+  .productTextBlock li::before {
+    background: url({{ get_asset_url('/theme8/images/module-icons/black-checkmark.svg') }});
+    background-size: 100% 100%;
+  }
+</style>
+
+{# Sets attributes used for the link field #}
+
+{% set href = module.link.url.href %}
+{% if module.link.url.type == "EMAIL_ADDRESS" %}
+  {% set href = "mailto:" + href %}
+{% endif %}
+{% set rel = [] %}
+{% if module.link.no_follow %}
+  {% do rel.append("nofollow") %}
+{% endif %}
+{% if module.link.open_in_new_tab %}
+  {% do rel.append("noopener") %}
+{% endif %}
+
+{# Sets styling classes for image position #}
+
+{% set containerClass = "productBlockContainer" %}
+{% if module.image_position %}
+{% set containerClass = containerClass ~ " productBlockReverse" %}
+{% endif %}
+
+{# Card #}
+
+<div class="{{ containerClass }}">
+  {% if module.media_type == "image" %}
+    <img draggable="false" class="productBlockImage" src="{{ module.image.src }}" alt="{{ module.image.alt }}">
+  {% endif %}
+  {% if module.media_type == "video" %}
+    <video class="productBlockVideo" autoPlay loop muted playsInline src="{{module.video}}"/>
+  {% endif %}
+  <div class="productTextBlock">
+    <h2 class="productBlockHeading">{{ module.heading }}</h2>
+    {{ module.text }}
+  {% if module.show_link %}
+    <a class="productBlockLink"  href="{{ href }}"
+      {% if module.link.open_in_new_tab %}target="_blank"{% endif %}
+      {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}>
+      {{ module.link_text }}
+    </a>
+  {% endif %}
+  </div>
+</div>

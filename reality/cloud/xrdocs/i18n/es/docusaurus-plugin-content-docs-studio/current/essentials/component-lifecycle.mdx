@@ -1,0 +1,61 @@
+---
+id: component-lifecycle
+description: >-
+  Los eventos de estilo de vida se pueden utilizar para desencadenar el
+  comportamiento de los componentes al añadirlos, marcarlos o eliminarlos.
+sidebar_position: 55
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Ciclo de vida de los componentes
+
+## Introducción
+
+{frontMatter.description}
+
+## Ejemplo
+
+```ts
+const MyComponent = ecs.registerComponent({
+  name: 'My Component',
+  add: (world, component) => {
+    console.log('My component was added to', component.eid) 
+  },
+  tick: (world, component) => {
+    console.log('My tick function is running on', component.eid) 
+  },
+  remove: (world, component) => {
+    console.log('My component was removed from', component.eid) 
+  },
+})
+```
+
+## Métodos
+
+| Método    | Descripción                                                                                                                                                                 |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| añadir    | Se ejecuta una vez cuando se inicializa el componente. Se utiliza para establecer el estado inicial e instanciar variables                                                  |
+| eliminar  | Llamado cuando el Componente es removido de la entidad o cuando la entidad es separada de la escena. Sirve para deshacer todas las modificaciones anteriores de la entidad. |
+| garrapata | Llamada en cada bucle de renderizado o tick de la escena. Se utiliza para cambios o comprobaciones continuas.                                                               |
+
+### Parámetros
+
+| Propiedad        | Tipo                                | Descripción                      |
+| ---------------- | ----------------------------------- | -------------------------------- |
+| en el mundo real | [Mundo](/api/studio/world)          | Referencia al mundo.             |
+| componente       | [ComponentObject](#componentobject) | Referencia al Componente actual. |
+
+### ComponentObject
+
+:::warning
+Utilice schemaAttribute o dataAttribute en lugar de las propiedades eid, schema o data en contextos asíncronos como temporizadores o controladores de eventos.
+:::
+
+| Propiedad       | Tipo            | Descripción                                                       |
+| --------------- | --------------- | ----------------------------------------------------------------- |
+| eid             | eid             | ID de entidad del componente actual                               |
+| esquema         | Cursor          | Referencia al esquema de la entidad actual                        |
+| esquemaAtributo | ComponentObject | Referencia al esquema del componente actual en el ámbito mundial. |
+| datos           | Cursor          | Referencia a los datos de la Entidad actual                       |
+| dataAttribute   | ComponentObject | Referencia a los datos del componente actual en World Scope.      |

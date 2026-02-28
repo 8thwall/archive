@@ -1,0 +1,25 @@
+---
+id: world
+sidebar_position: 4
+---
+
+import {EventExample} from '@site/src/components/event-example'
+
+# ワールド・エフェクト・イベント
+
+## イベント {#events}
+
+### リアリティ追跡ステータス
+
+このイベントは、エンジンが始動し、トラッキングの状態や理由が変化したときにWorld Effectsから発行される。
+
+#### プロパティ {#properties}
+
+| プロパティ | タイプ | 説明                                  |
+| ----- | --- | ----------------------------------- |
+| ステータス | 文字列 | `LIMITED`または`NORMAL`のいずれか。          |
+| 理由    | 文字列 | `INITIALIZING`または`UNDEFINED` のいずれか。 |
+
+#### 例
+
+<EventExample ns="ecs.events" event="REALITY_TRACKING_STATUS" target="world.events.globalId" callbackBody={`console.log('Tracking status: ', event.data.status)`} />

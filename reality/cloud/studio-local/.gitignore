@@ -1,0 +1,6 @@
+ecs-build/bazel-out
+ecs-build/lib
+ecs-build/bin
+dist
+external
+*.tgz

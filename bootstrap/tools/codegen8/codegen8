@@ -1,0 +1,105 @@
+#!/usr/bin/env python3
+
+import sys
+import datetime
+import os
+import re
+import pwd
+import os.path
+import subprocess
+from string import Template
+from contextlib import contextmanager
+
+if len(sys.argv) <= 1:
+    exit(0)
+
+filePath = sys.argv[1]
+fileName = os.path.basename(filePath)
+
+def tpl(tplFile):
+    def tplFunc(**kwargs):
+        return tplFile
+    return tplFunc
+
+def ccLibOrBin():
+    def tplFunc(**kwargs):
+        header = kwargs.get('ccHeader', '')
+        if os.path.isfile(header):
+            return 'code8-cc-library.tpl'
+        else:
+            return 'code8-cc-binary.tpl'
+    return tplFunc
+
+# Ordered set of regular expressions to search for template matches.
+TEMPLATE_MAPPING = [
+        (r'.*[-_]test\.(cc|cpp|c\+\+)$', tpl('code8-cc-test.tpl')),
+        (r'.*\.(cc|cpp|c\+\+)$', ccLibOrBin()),
+        (r'.*\.h$', tpl('code8-cc-header.tpl')),
+]
+
+# Check if the filename matches one of the template functions.
+#for regex, tplFunc in TEMPLATE_MAPPING:
+#    if re.match(regex, fileName):
+
+
+TEMPLATE_ENV = 'CODEGEN8_TEMPLATE_DIR'
+
+defaultTemplateDir = os.path.join(os.path.dirname(sys.argv[0]), 'templates')
+templateDir = os.environ.get('CODEGEN8_TEMPLATE_DIR', defaultTemplateDir)
+
+if not os.path.isdir(templateDir):
+    print("Could not find template directory. Set ENV[\"%s\"]" % TEMPLATE_ENV, file=sys.stderr)
+    exit(2)
+
+@contextmanager
+def pushd(directory):
+    current = os.getcwd()
+    os.chdir(directory)
+    yield
+    os.chdir(current)
+
+# Bazel command to get the workspace root.
+GET_WORKSPACE_CMD = ['bazel', 'info', 'workspace']
+
+variables = {}
+
+directory = os.path.dirname(filePath) or os.path.curdir
+
+# Try to find a bazel repo. Fail silently.
+repo = ''
+workspace = ''
+try:
+    with pushd(directory):
+        proc = subprocess.Popen(GET_WORKSPACE_CMD, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        workspace = proc.stdout.read().rstrip().decode("utf-8")
+        repo = os.path.basename(workspace)
+except FileNotFoundError:
+    pass
+
+
+pwdInfo = pwd.getpwuid(os.getuid())
+fileBase, fileExt = os.path.splitext(fileName)
+fileParts = re.split('[-_]', fileBase)
+fileCapWords = ''.join([x.capitalize() for x in fileParts])
+ccHeader = '%s.h' % fileBase
+relPath = os.path.relpath(directory, workspace or os.path.curdir)
+ccHeaderRelative = os.path.normpath(os.path.join(relPath, ccHeader))
+
+variables['ccClassName'] = fileCapWords
+variables['ccHeader'] = ccHeader
+variables['ccHeaderRelative'] = ccHeaderRelative
+variables['fileName'] = fileName
+variables['fileBase'] = fileBase
+variables['fileExt'] = fileExt
+variables['unixName'] = pwdInfo.pw_name
+variables['fullName'] = pwdInfo.pw_gecos
+variables['repo'] = repo
+variables['ccNamespace'] = repo[0] + repo[-1] if repo else 'foo'
+variables['year'] = str(datetime.datetime.today().year)
+
+for regex, tplFunc in TEMPLATE_MAPPING:
+    if re.match(regex, fileName):
+        tplFile = os.path.join(templateDir, tplFunc(**variables))
+        with open(tplFile, 'r') as f:
+            print(Template(f.read().rstrip()).safe_substitute(variables))
+        break

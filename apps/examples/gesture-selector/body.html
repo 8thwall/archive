@@ -1,0 +1,118 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene
+  xrextras-gesture-detector
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="colorManagement: true"
+  xrweb="allowedDevices: any">
+
+  <a-assets>
+    <a-asset-item id="barn" src="assets/barn.glb"></a-asset-item>
+    <a-asset-item id="tree" src="assets/tree.glb"></a-asset-item>
+    <a-asset-item id="wind-mill" src="assets/wind-mill.glb"></a-asset-item>
+    <a-asset-item id="building1" src="assets/building1.glb"></a-asset-item>
+    <a-asset-item id="building2" src="assets/building2.glb"></a-asset-item>
+    <a-asset-item id="building3" src="assets/building3.glb"></a-asset-item>
+  </a-assets>
+
+  <!-- The raycaster will emit mouse events on scene objects specified with the cantap class -->
+  <a-camera
+    id="camera"
+    position="0 4 4"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;">
+  </a-camera>
+
+  <a-entity
+    light="
+      type: directional;
+      shadowBias: -0.0001;
+      intensity: 0.9;
+      castShadow: true;
+      shadowMapHeight:4096;
+      shadowMapWidth:4096;
+      shadowCameraTop: 30;
+      shadowCameraBottom: -30;
+      shadowCameraRight: 30;
+      shadowCameraLeft: -30;
+      target: #camera;
+      shadowRadius: 2"
+    xrextras-attach="target: camera; offset: 8 15 4"
+    position="1 4.3 2.5"
+    shadow>
+  </a-entity>
+
+  <a-light type="ambient" intensity="0.7"></a-light>
+
+  <!-- models in scene -->
+  <a-entity
+    gltf-model="#barn"
+    class="cantap"
+    xrextras-hold-drag
+    gesture-selector="addHoldDrag: true; addTwoFingerRotate: true; addPinchScale: true; addHighlight: true"
+    shadow
+    position="0 0 0">
+  </a-entity>
+
+  <a-entity
+    gltf-model="#tree"
+    class="cantap"
+    gesture-selector="riseHeight: 0.3; addTwoFingerRotate: true; addPinchScale: true; addHighlight: true"
+    shadow
+    position="2 0 0.5">
+  </a-entity>
+
+  <a-entity
+    gltf-model="#tree"
+    class="cantap"
+    gesture-selector="riseHeight: 0.3; addTwoFingerRotate: true; addPinchScale: true; addHighlight: true"
+    shadow
+    position="1.5 0 0.5">
+  </a-entity>
+
+  <a-entity
+    gltf-model="#wind-mill"
+    class="cantap"
+    gesture-selector="addTwoFingerRotate: true; addPinchScale: true; addHighlight: true"
+    shadow
+    position="-1 0 -3">
+  </a-entity>
+
+  <a-entity
+    gltf-model="#building1"
+    class="cantap"
+    gesture-selector="addTwoFingerRotate: true; addPinchScale: true; addHighlight: true"
+    shadow
+    position="-2 0 0">
+  </a-entity>
+
+  <a-entity
+    gltf-model="#building2"
+    class="cantap"
+    gesture-selector="addTwoFingerRotate: true; addPinchScale: true; addHighlight: true"
+    shadow
+    position="2 0 -3">
+  </a-entity>
+
+  <a-entity
+    gltf-model="#building3"
+    class="cantap"
+    gesture-selector="addTwoFingerRotate: true; addPinchScale: true; addHighlight: true"
+    shadow
+    position="2 0 -1">
+  </a-entity>
+
+  <!-- ground plane -->
+  <a-plane
+    id="ground"
+    class="cantap"
+    rotation="-90 0 0"
+    width="1000"
+    height="1000"
+    material="shader: shadow"
+    shadow>
+  </a-plane>
+</a-scene>

@@ -1,0 +1,11 @@
+#openValue {
+  color: white;
+  font-family: monospace;
+  text-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+  z-index: 2;
+  position: absolute;
+  right: 3vw;
+  bottom: 3vw;
+  margin: 0;
+  font-size: 2em;
+}

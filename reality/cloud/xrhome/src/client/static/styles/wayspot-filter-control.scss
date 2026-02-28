@@ -1,0 +1,44 @@
+.active-filters-element {
+  border-radius: 1.0em;
+  color: white;
+  background: #464766;
+  padding: 0;
+  width: 0;
+}
+
+.filter-button-control > div {
+  transition-property: width padding-inline;
+  transition-duration: 0.3s;
+  transition-behaviour: ease-in-out;
+}
+
+.active-filters-element-visible {
+  width: 50%;
+  padding: 0.3em;
+  margin-inline: 0.2em;
+}
+
+.active-filters-element-visible-mobile {
+  height: 1.5em;
+  width: 1.5em;
+  border-radius: 100%;
+  position: absolute;
+  top: -0.45em;
+  right: -0.45em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-element {
+  width: 100%;
+}
+
+.icon-element-filters-active {
+  width: 50% !important;
+}
+
+.filter-button-active {
+  background: #CDCEF0;
+  border: 1px solid #464766;
+}

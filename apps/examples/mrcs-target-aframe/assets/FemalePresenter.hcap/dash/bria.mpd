@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!-- MPD file Generated with GPAC version 0.7.2-DEV-rev1143-g1c540fec-master  at 2019-09-03T21:55:10.590Z-->
+<MPD xmlns="urn:mpeg:dash:schema:mpd:2011" minBufferTime="PT1.500S" type="static" mediaPresentationDuration="PT0H0M11.733S" maxSegmentDuration="PT0H0M2.005S" profiles="urn:mpeg:dash:profile:full:2011">
+ <ProgramInformation moreInformationURL="http://gpac.io">
+  <Title>bria</Title>
+ </ProgramInformation>
+
+ <Period duration="PT0H0M11.733S">
+  <AdaptationSet segmentAlignment="true" maxWidth="1504" maxHeight="1504" maxFrameRate="30" par="1:1" lang="und">
+   <SegmentTemplate media="bria_dash_track1_$Time$.m4s" initialization="bria_dash_track1_init.mp4" timescale="30000" startNumber="1">
+    <SegmentTimeline>
+     <S t="0" d="60000" r="4"/>
+     <S d="51990"/>
+    </SegmentTimeline>
+   </SegmentTemplate>
+   <Representation id="1" mimeType="video/mp4" codecs="avc1.42C032" width="1504" height="1504" frameRate="30" sar="1:1" bandwidth="5022020">
+   </Representation>
+  </AdaptationSet>
+  <AdaptationSet segmentAlignment="true" lang="und">
+   <SegmentTemplate media="bria_dash_track2_$Time$.m4s" initialization="bria_dash_track2_init.mp4" timescale="48000" startNumber="1">
+    <SegmentTimeline>
+     <S t="0" d="95232"/>
+     <S d="96240" r="2"/>
+     <S d="95328"/>
+     <S d="78816"/>
+    </SegmentTimeline>
+   </SegmentTemplate>
+   <Representation id="2" mimeType="audio/mp4" codecs="mp4a.40.2" audioSamplingRate="48000" bandwidth="192000">
+    <AudioChannelConfiguration schemeIdUri="urn:mpeg:dash:23003:3:audio_channel_configuration:2011" value="2"/>
+   </Representation>
+  </AdaptationSet>
+ </Period>
+</MPD>

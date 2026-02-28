@@ -1,0 +1,49 @@
+---
+id: physics
+---
+
+import {EventExample} from '@site/src/components/event-example'
+
+# 物理学イベント
+
+## イベント
+
+### COLLISION_START_EVENT
+
+エンティティが他のエンティティとの衝突を開始したときに発せられる。
+
+#### プロパティ
+
+| プロパティ | タイプ | 概要             |
+| ----- | --- | -------------- |
+| other | イード | 衝突するエンティティのイード |
+
+#### 例
+
+<EventExample ns="ecs.physics" event="COLLISION_START_EVENT" callbackBody={`console.log('Collided with', event.data.other)`} />
+
+### COLLISION_END_EVENT
+
+エンティティが他のエンティティとの衝突を停止したときに発せられる。
+
+#### Properties
+
+| プロパティ | タイプ | 説明             |
+| ----- | --- | -------------- |
+| other | eid | 衝突するエンティティのイード |
+
+#### 例
+
+<EventExample ns="ecs.physics" event="COLLISION_END_EVENT" callbackBody={`console.log('Stopped colliding with', event.data.other)`} />
+
+### UPDATE_EVENT
+
+物理アップデートの直後、レンダリング前に[world.events.globalId](/api/studio/world/events/#properties)で発せられる。
+
+#### プロパティ
+
+いない。
+
+#### 例
+
+<EventExample ns="ecs.physics" event="UPDATE_EVENT" target="world.events.globalId" hasPayload={false} callbackBody={`console.log('Physics update')`} />

@@ -1,0 +1,109 @@
+@import 'settings';
+
+.web-dev-mode-view {
+  background: #ECECF2;
+  margin: 30px (-$pusher-horizontal-padding) 0px;
+  padding: 20px calc(20px + #{$pusher-horizontal-padding});
+  text-align: left;
+
+  .ui.checkbox {
+    display: block;
+    margin: 0 0 20px;
+  }
+
+  .ui.dropdown {
+    background: #D6D8E5;
+    border: none !important;
+    text-transform: capitalize;
+
+    .menu > div[role=option] {
+      text-transform: capitalize;
+    }
+  }
+
+  .ui.container {
+    text-align: center;
+  }
+
+  .scan-success {
+    margin: 0 auto;
+    height: 200px;
+    font-size: 16px;
+    line-height: 200px;
+    color: $brand-purple;
+    text-align: center;
+  }
+
+  .qr-container {
+    position: relative;
+    margin: 0 auto;
+    border-radius: 9px;
+    box-shadow: 2px 2px 18px 8px rgba(70,71,102,0.05);
+    height: 200px;
+    width: 200px;
+    background-color: white;
+    overflow: hidden; // Hide QR Code corners outside the rounding
+
+    @media screen and (max-width: $mobile-width-breakpoint) {
+      margin: 0 2em;
+    }
+
+    img {
+      display: block;
+      max-height: 100%;
+      max-width: 100%;
+    }
+  }
+
+  .ui.label:before {
+    transition: 0s;
+  }
+
+  .header-row {
+    margin-bottom: 2rem;
+    position: relative;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+
+    @media screen and (max-width: $mobile-width-breakpoint) {
+      flex-direction: column
+    }
+
+    h2 {
+      margin-bottom: 0;
+    }
+  }
+
+  .row {
+    .column {
+      padding-left: 3em;
+      padding-right: 3em;
+    }
+  }
+
+  .ui.label.pointing.left {
+    margin-left: 1em;
+  }
+
+  .ui.label, .ui.button:not(.primary) {
+    background-color: $gray-2;
+  }
+
+  .ui.label.authorized {
+    color: $brand-purple;
+  }
+
+  .ui.label, .ui.label:before, .ui.button {
+    transition: 0s background-color;
+  }
+}
+
+
+// TODO(christoph): Remove after SCOPED_URLS;
+.page {
+  .web-dev-mode-view {
+    margin: 1rem calc(-100vw + 100%);
+    padding: 1rem calc(100vw - 100%);
+  }
+}

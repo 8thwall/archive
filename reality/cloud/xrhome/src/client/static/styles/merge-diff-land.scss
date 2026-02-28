@@ -1,0 +1,284 @@
+@import 'settings';
+
+.merge-modal {
+  color: $brand-white;
+  background: $gray-6 !important;
+  padding: 1.2em 1.5em;
+
+  .split {
+    display: flex;
+    flex-direction: row;
+    padding: .5em;
+    align-items: flex-end;
+
+    :last-child {
+      text-align: right;
+    }
+
+    .accept-merge {
+      margin-left: 1em;
+      margin-right: 0;
+      background-color: $brand-highlight;
+    }
+
+    .radios {
+      text-align: left;
+      flex-grow: 2;
+
+      label {
+        color: $brand-white;
+      }
+
+    }
+
+    .mine-pane-message {
+      flex: 4 0 0;
+      text-align: center;
+      font-weight: bold;
+      font-style: italic;
+    }
+  }
+
+  .title-row {
+    background-color: $gray-6;
+    padding: 0 0 .5em;
+
+    .title-container {
+      position: relative;
+      color: white;
+      text-align: center;
+      margin: 0 0 1.2em;
+
+      svg {
+        position: absolute;
+        left: calc(50% - 4em);
+        font-size: 2em;
+        margin: 0;
+      }
+
+      h1 {
+        display: inline-block;
+        margin: 0;
+      }
+    }
+
+    .cancel {
+      color: $brand-white;
+      background-color: transparent;
+      padding-left: 0.25em;
+    }
+  }
+
+  .status-row {
+    background-color: $gray-4;
+    border-top-left-radius: .25em;
+    border-top-right-radius: .25em;
+    align-items: center;
+    padding: .75em 0.5em;
+
+    .title {
+      text-align: center;
+    }
+  }
+
+  .choice-row {
+    background-color: $gray-5;
+    align-items: center;
+    padding: 0 0 0 .5em;
+
+    .edit-div {
+      user-select: none;
+      .navigate-chunks {
+
+      }
+    }
+
+    .edit-button {
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
+    }
+
+    .cancel {
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
+      color: $brand-white;
+      background-color: transparent;
+    }
+  }
+
+  .edit-container {
+    height: 100%;
+  }
+
+  .right-pane-overlay {
+    :first-child {
+      float: left;
+      width: 50%;
+    }
+
+    :last-child {
+      float: right;
+      width: 50%;
+      text-align: center;
+      position: relative;
+      top: 50px;
+      z-index: 90;
+      height: 0;
+      font-weight: bold;
+    }
+  }
+}
+
+.land-modal {
+  .land-title {
+    position: relative;
+    margin: .5em 0;
+
+    svg {
+      position: absolute;
+      left: calc(50% - 5em);
+      font-size: 2em;
+      margin: 0;
+    }
+
+    h2 {
+      color: $brand-white !important;
+      text-align: center;
+      margin-bottom: 0;
+      margin-right: 0 !important;
+    }
+
+    .sub-title {
+      text-align: center;
+    }
+  }
+
+  .land-controls {
+    margin-top: 1em;
+    margin-left: 3em;
+    margin-right: 1em;
+    color: $brand-white !important;
+  }
+
+  .no-changes {
+    text-align: center !important;
+  }
+}
+
+.diff-viewer {
+  .codeMarker {
+    position: absolute;
+  }
+
+  .deletion {
+    background-color: $diff-line-deletion;
+  }
+
+  .addition {
+    background-color: $diff-line-addition;
+  }
+
+  .modification {
+    background-color: $diff-line-modification;
+  }
+
+  .mergeMarker {
+    background-color: $diff-line-conflict;
+  }
+
+  .mergeBody {
+    background-color: $diff-line-conflict-body;
+  }
+
+  .furled {
+    text-align: right !important;
+    background-color: $diff-line-furled;
+
+    &.ace_gutter-cell {
+      padding: 0 6px;
+
+      img {
+        height: 14px;
+        padding: 1px 0;
+      }
+    }
+
+    &:hover {
+      background-color: $diff-line-furled-highlight;
+      cursor: pointer;
+    }
+
+    &.furled-highlight {
+      background-color: $diff-line-furled-highlight;
+    }
+  }
+
+  .ace_marker-layer {
+    pointer-events: auto !important;
+
+    .furled {
+      text-align: left !important;
+      padding-left: 1em;
+      color: white;
+    }
+  }
+}
+.merge-diff-editor {
+  .codeMarker {
+    position: absolute;
+  }
+
+  .diff-left {
+    background-color: rgba($danger-red, 0.5);
+  }
+
+  .diff-right {
+    background-color: rgba($go-green, 0.5);
+  }
+}
+
+.land-item-row {
+  display: flex;
+  flex-direction: row;
+
+  .check-box {
+    flex: 0 0 auto;
+    margin-left: 1em;
+    margin-top: 1.5em;
+  }
+
+  .diff {
+    flex: 1 1 auto;
+  }
+
+}
+
+.public-profile-notification {
+  & > * {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  * {
+    color: $dark-blueberry;
+  }
+
+  i.info {
+    color: $blueberry !important;
+  }
+
+  &.dark, &.land{
+    * {
+      color: $brand-white;
+    }
+  }
+
+  &.margin-top-bottom {
+    margin: 1em 0;
+  }
+
+  &.margins {
+    margin: 1em;
+  }
+}

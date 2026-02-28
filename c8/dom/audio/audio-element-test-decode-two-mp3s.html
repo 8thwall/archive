@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="module">
+        import {createWavBlob, generateSamplePCM, createEmptyMP3Blob} from './test-utils.js';
+        // Test multiple mp3s decoding concurrently from different audio elements.
+        const audioElement = new Audio('test_files/attention.mp3');
+        audioElement.load()
+        const audioElement2 = new Audio('test_files/wingFlap.mp3');
+        audioElement2.load()
+    </script>
+</head>
+<body></body>
+</html>

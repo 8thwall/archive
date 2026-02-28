@@ -1,0 +1,137 @@
+---
+id: vps
+sidebar_position: 3
+---
+
+import {EventExample} from '@site/src/components/event-example'
+
+# VPS Events
+
+## Types {#types}
+
+### LocationObject {#LocationObject}
+
+| Property | Type     | Description                                                     |
+|----------|----------|-----------------------------------------------------------------|
+| id       | `String` | An id for this Project Location that is stable within a session |
+| name     | `String` | Project Location name.                                          |
+| imageUrl | `String` | URL to a representative image for this Project Location.        |
+| title    | `String` | Project Location title.                                         |
+| lat      | `Number` | Latitude of this Project Location.                              |
+| lng      | `Number` | Longitude of this Project Location.                             |
+
+### PositionAttributeObject {#PositionAttributeObject}
+| Property | Type             | Description                       |
+|----------|------------------|-----------------------------------|
+| name     | `String`         | The object name                   |
+| array    | `Float32Array()` | The raw mesh geometry data.       |
+| itemSize | `Integer`        | The number of items in the object |
+
+### ColorAttributeObject {#ColorAttributeObject}
+| Property | Type             | Description                       |
+|----------|------------------|-----------------------------------|
+| name     | `String`         | The object name                   |
+| array    | `Float32Array()` | The raw mesh geometry data.       |
+| itemSize | `Integer`        | The number of items in the object |
+
+### GeometryObject {#GeometryObject}
+| Property   | Type                                              | Description                                          |
+|------------|---------------------------------------------------|------------------------------------------------------|
+| index      | `String`                                          | An id for this mesh that is stable within a session. |
+| attributes | `[`[`PositionAttributeObject`](#PositionAttributeObject)`,`  [`ColorAttributeObject`](#ColorAttributeObject)`]` | The raw mesh geometry data. |
+
+## Events
+
+### REALITY_LOCATION_FOUND
+This event is emitted when a Project Location is first found.
+
+#### Properties
+| Property | Type           | Description                                                            |
+|----------|----------------|------------------------------------------------------------------------|
+| name     | `String`       | The Project Location name.                                             |
+| position | `{x, y, z}`    | The 3d position of the located Project Location.                       |
+| rotation | `{w, x, y, z}` | The 3d local orientation (quaternion) of the located Project Location. |
+
+#### Example
+
+<EventExample
+  ns='ecs.events'
+  event='REALITY_LOCATION_FOUND'
+  target='world.events.globalId'
+  callbackBody={`console.log('Location found: ', event.data.name)`}
+/>
+
+### REALITY_LOCATION_LOST
+This event is emitted when a Project Location is no longer being tracked.
+
+#### Properties
+| Property | Type           | Description                                                            |
+|----------|----------------|------------------------------------------------------------------------|
+| name     | `String`       | The Project Location name.                                             |
+| position | `{x, y, z}`    | The 3d position of the located Project Location.                       |
+| rotation | `{w, x, y, z}` | The 3d local orientation (quaternion) of the located Project Location. |
+
+#### Example
+
+<EventExample
+  ns='ecs.events'
+  event='REALITY_LOCATION_LOST'
+  target='world.events.globalId'
+  callbackBody={`console.log('Location lost: ', event.data.name)`}
+/>
+
+### REALITY_LOCATION_SCANNING
+This event is emitted when all Project Locations have been loaded for scanning.
+
+#### Properties
+| Property  | Type                                   | Description                                          |
+|-----------|----------------------------------------|-----------------------------------------------------|
+| locations | `Array<LocationObject>`  | An array of objects containing Location information |
+
+
+#### Example
+
+<EventExample
+  ns='ecs.events'
+  event='REALITY_LOCATION_SCANNING'
+  target='world.events.globalId'
+  callbackBody={`console.log('Locations scanning: ', event.data.locations)`}
+/>
+
+### REALITY_MESH_FOUND
+This event is emitted when a mesh is first found either after start or after a `recenter()`.
+
+#### Properties
+| Property | Type             | Description                                                                                    |
+|----------|------------------|------------------------------------------------------------------------------------------------|
+| id       | `String`         | An id for this mesh that is stable within a session.                                           |
+| position | `{x, y, z}`      | The 3d position of the located Project Location.                                               |
+| rotation | `{w, x, y, z}`   | The 3d local orientation (quaternion) of the located Project Location.                         |
+| geometry | [`GeometryObject`](#GeometryObject) | An object containing raw mesh geometry data. Attributes contain position and color attributes. |
+
+
+#### Example
+
+<EventExample
+  ns='ecs.events'
+  event='REALITY_MESH_FOUND'
+  target='world.events.globalId'
+  callbackBody={`console.log('Mesh found: ', event.data.id)`}
+/>
+
+### REALITY_MESH_LOST
+This event is emitted when `recenter()` is called.
+
+#### Properties
+| Property | Type     | Description                                          |
+|----------|----------|------------------------------------------------------|
+| id       | `String` | An id for this mesh that is stable within a session. |
+
+#### Example
+
+<EventExample
+  ns='ecs.events'
+  event='REALITY_MESH_LOST'
+  target='world.events.globalId'
+  callbackBody={`console.log('Mesh lost: ', event.data.id)`}
+/>

@@ -1,0 +1,109 @@
+---
+id: physics
+description: >-
+  Studio incorpora un sistema de física pensado para manejar interacciones
+  robustas y dinámicas en tu escena.
+---
+
+# Física
+
+## Introducción
+
+{frontMatter.description}
+
+## Añadir colisionadores
+
+:::note
+
+- Los colisionadores pueden anidarse en algunas configuraciones, pero no en otras. Por ejemplo, un colisionador estático dentro de un colisionador dinámico, o dos colisionadores dinámicos anidados, podrían comportarse mal.
+- A menos que tenga un componente Geometría que también sea una Forma de Colisionador válida, tendrá que especificar una forma manualmente. Por ejemplo, no existe un colisionador compatible con la primitiva tetraedro.
+- La generación de colisionadores de modelos GLTF para modelos complejos podría afectar al rendimiento.
+  :::
+
+### Ejemplo
+
+El siguiente ejemplo muestra cómo añadir un collider a una entidad en tiempo de ejecución.
+
+```ts
+ecs.Collider.set(world, component.eid, {
+    shape: ecs.ColliderShape.Sphere,
+    type: ecs.ColliderType.Dynamic,
+    radius: 1,
+    mass: 1,
+    eventOnly: false,
+    lockXAxis: false,
+    lockYAxis: false,
+    lockZAxis: false,
+    friction: 0.5,
+    restitution: 0.5,
+    linearDamping: 0,
+    angularDamping: 0,
+})
+```
+
+## Tipos de colisionadores estáticos, dinámicos y cinemáticos
+
+En la simulación física, los colisionadores definen la forma física de un objeto para la detección de colisiones. Pueden ser estáticos, dinámicos o cinemáticos en función de cómo interactúen con las fuerzas y el entorno.
+
+- **Estático:** Colisionador que no responde a fuerzas externas ni a simulaciones físicas. Permanece fija en su sitio, por lo que es ideal para objetos inamovibles como paredes, suelos o terrenos.
+- **Dinámico:** Un colisionador que responde a fuerzas externas como la gravedad, las colisiones o los impulsos. Es adecuado para objetos en movimiento como jugadores, enemigos o escombros.
+- **Cinemático:** Un colisionador cuyo movimiento no se ve afectado por las fuerzas, sino que está totalmente controlado programáticamente por el usuario. A diferencia de los cuerpos estáticos, los cuerpos cinemáticos pueden moverse y afectar a otros cuerpos dinámicos mediante colisiones.
+
+### Sólo evento
+
+El ajuste `eventOnly` convierte un colisionador en un área de disparo: ya no bloquea ni reacciona ante objetos físicos, sino que emite eventos de entrada y salida cuando otros cuerpos físicos interactúan con él.
+
+## Funciones
+
+Puedes aplicar directamente fuerzas (lineales y angulares) a cualquier entidad con un colisionador de física. Estas fuerzas se aplican en la siguiente actualización de la simulación física, que tiene lugar a intervalos regulares. La función acepta un vector 3D para definir la dirección y la magnitud de la fuerza.
+
+### Velocidad
+
+#### Lineal
+
+```ts
+ecs.physics.setLinearVelocity(world, component.eid, forceX, forceY, forceZ)
+```
+
+#### Angular
+
+```ts
+ecs.physics.setAngularVelocity(world, component.eid, forceX, forceY, forceZ)
+```
+
+### Fuerza y par
+
+#### Fuerza
+
+```ts
+ecs.physics.applyForce(world, component.eid, forceX, forceY, forceZ)
+```
+
+#### Par de apriete
+
+```ts
+ecs.physics.applyTorque(world, component.eid, torqueX, torqueY, torqueZ)
+```
+
+### Impulso
+
+:::tip
+Esta función se utiliza para aplicar una fuerza de impulso única a un colisionador físico, alterando su velocidad en función del vector de impulso dado.
+Este método es útil para eventos que requieren una respuesta rápida, de una sola acción, como saltar, dar un puñetazo o un empujón repentino.
+:::
+
+```ts
+ecs.physics.applyImpulse(world, component.eid, impulseX, impulseY, impulseZ)
+```
+
+### Gravedad
+
+#### Factor de gravedad
+
+En cada escena, la gravedad actúa como una fuerza constante conocida como "Gravedad Mundial". Esta fuerza afecta a todos los colisionadores de la escena que estén configurados como dinámicos. Para personalizar cómo la Gravedad Mundial afecta a un colisionador individual, proporcionamos un atributo llamado "Factor de Gravedad".
+
+#### Fijar la gravedad mundial
+
+```ts
+ecs.physics.setWorldGravity(mundo, gravedad)
+```

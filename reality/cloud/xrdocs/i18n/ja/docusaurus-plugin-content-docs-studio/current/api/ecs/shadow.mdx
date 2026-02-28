@@ -1,0 +1,31 @@
+---
+id: shadow
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# シャドウ
+
+## 商品説明
+
+このコンポーネントは、エンティティがシャドウをどのように処理するかを制御する。
+
+## プロパティ一覧
+
+| Property      | Type    | 初期値     | 商品説明                                 |
+| ------------- | ------- | ------- | ------------------------------------ |
+| キャストシャドウ      | ブーリアン   | false   | エンティティが影を落とすことができるかどうかを示す。           |
+| レシーブシャドウ      | ブーリアン   | false   | エンティティがシャドウを受信できるかどうかを示す。            |
+
+## 関数一覧
+
+<ComponentFunctions
+    name="Shadow"
+    properties={{
+        castShadow: false,
+        receiveShadow: false
+    }}
+    mutate={`cursor.castShadow = true;
+    cursor.receiveShadow = true;
+    return false;`}
+/>

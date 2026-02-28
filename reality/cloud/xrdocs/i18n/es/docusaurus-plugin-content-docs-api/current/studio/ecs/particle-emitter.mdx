@@ -1,0 +1,73 @@
+---
+id: particle-emitter
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Emisor de partículas
+
+## Descripción
+
+Este componente hace que una entidad emita partículas.
+
+## Propiedades
+
+| Propiedad            | Tipo          | Por defecto   | Descripción                                                                            |
+| -------------------- | ------------- | ------------- | -------------------------------------------------------------------------------------- |
+| parado               | booleano      | falso         | Estado de reproducción del emisor                                                      |
+| emisorVida           | número        | 0             | La vida útil del emisor en segundos                                                    |
+| particlesPerShot     | entero        | 20            | Partículas por emisión                                                                 |
+| emitDelay            | número        | 0.1           | El tiempo entre emisiones de partículas                                                |
+| vida útil mínima     | número        | 1             | Vida útil mínima de cada partícula                                                     |
+| vida útil máxima     | número        | 1             | Vida útil máxima de cada partícula                                                     |
+| masa                 | número        | 1             | Masa de cada partícula                                                                 |
+| gravedad             | número        | 0.2           | Factor de gravedad de cada partícula                                                   |
+| escala               | número        | 0.2           | Escala uniforme de cada partícula                                                      |
+| forceX               | número        | 5             | Fuerza aplicada a cada partícula en la dirección X                                     |
+| forceY               | número        | 12            | Fuerza aplicada a cada partícula en la dirección Y                                     |
+| forceZ               | número        | 5             | Fuerza aplicada a cada partícula en la dirección Z                                     |
+| difundir             | número        | 360           | Área y dirección en que cada partícula desova respecto a su origen                     |
+| radialVelocity       | número        | 5             | Cantidad de velocidad radial aplicada a cada partícula                                 |
+| spawnAreaType        | cadena        | punto         | Los tipos admitidos son: 'punto', 'caja' y 'esfera'.                                   |
+| spawnAreaWidth       | número        | 0             | Anchura de la caja del área de spawn (sólo Box)                                        |
+| spawnAreaHeight      | número        | 0             | Altura de la caja del área de spawn (sólo caja)                                        |
+| spawnAreaDepth       | número        | 0             | Profundidad de la caja del área de desove (sólo caja)                                  |
+| spawnAreaRadius      | número        | 0             | Radio de la esfera del área de spawn (sólo esfera)                                     |
+| boundingZoneType     | cadena        | Ninguno       | Los tipos admitidos son: 'ninguno', 'caja', 'esfera'                                   |
+| boundingZoneWidth    | número        | 0             | Anchura de la zona delimitadora (sólo Box)                                             |
+| boundingZoneHeight   | número        | 0             | Altura de la zona delimitadora (sólo Box)                                              |
+| boundingZoneDepth    | número        | 0             | Profundidad de la zona delimitadora (sólo Box)                                         |
+| boundingZoneRadius   | número        | 0             | Radio de la zona delimitadora (sólo esfera)                                            |
+| resourceType         | cadena        | sprite        | Los tipos admitidos son: 'sprite', y 'model'                                           |
+| resourceUrl          | cadena (URL)  | ''            | URL del recurso                                                                        |
+| blendingMode         | cadena        | Ninguno       | Los tipos admitidos son: "ninguno", "normal", "sumar", "multiplicar" y "restar".       |
+| animateColor         | booleano      | falso         | Determina si el color debe ser animado                                                 |
+| colorInicio          | cadena (Hex)  | indefinido    | El color inicial de cada partícula                                                     |
+| colorEnd             | cadena (Hex)  | indefinido    | El color final de cada partícula                                                       |
+| randomDrift          | booleano      | falso         | Activar la deriva aleatoria para cada partícula                                        |
+| randomDriftRange     | número        | indefinido    | Determina el rango de deriva aleatoria y la velocidad de cada partícula                |
+| colisiones           | booleano      | falso         | Determina si las partículas deben responder a las colisiones físicas                   |
+
+## Funciones
+
+<ComponentFunctions
+    name="ParticleEmitter"
+    properties={{
+        stopped: false,
+        emitterLife: 0,
+        particlesPerShot: 20,
+        emitDelay: 0.1,
+        minimumLifespan: 1,
+        maximumLifespan: 1,
+        mass: 1,
+        gravity: 0.2,
+        scale: 0.2,
+        forceX: 5,
+        forceY: 12,
+        forceZ: 5,
+        spread: 360,
+    }}
+    mutate={`cursor.emitDelay = 0.05;
+    cursor.particlesPerShot = 50;
+    return false;`}
+/>

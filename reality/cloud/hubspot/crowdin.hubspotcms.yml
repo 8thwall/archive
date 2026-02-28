@@ -1,0 +1,19 @@
+project_id: 6 # https://<REMOVED_BEFORE_OPEN_SOURCING>.crowdin.com/u/projects/6
+pull_request_title: '[auto-commit][hubspot][cms] Crowdin Translation Updates'
+pull_request_reviewers:
+  - "mralbean"
+  - "fantaisie64"
+  - "brandon-win"
+  - "ktddaeng"
+preserve_hierarchy: true
+files:
+  - source: /theme8/_locales/en-us/*.json
+    dest: /HubSpot CMS Theme8/%original_path%/%original_file_name%
+    translation: /theme8/_locales/%locale%/%original_file_name%
+    translation_replace: {
+      "de-DE": "de",
+      "es-MX": "es",
+      "fr-FR": "fr",
+      "ja-JP": "ja"
+    }
+    export_only_approved: true

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="module">
+        import {createWavBlob, generateSamplePCM} from './test-utils.js'
+
+        // Generate a stereo sine wave
+        const sampleRate = 44100 // Samples per second
+        const duration = 2 // Duration in seconds
+        const frequency = 440 // Frequency in Hz (A4 note)
+        const audioData = generateSamplePCM(sampleRate, duration, frequency)
+
+        const wavBlob = createWavBlob(audioData, sampleRate)
+        const audioURL = URL.createObjectURL(wavBlob)
+
+        // Create a second blob
+        const audioData2 = generateSamplePCM(sampleRate, duration, 490)
+        const wavBlob2 = createWavBlob(audioData2, sampleRate)
+
+        const audioURL2 = URL.createObjectURL(wavBlob2)
+
+        const audioElement = new Audio(audioURL)
+        const audioElement2 = new Audio(audioURL2)
+
+        audioElement.addEventListener('canplaythrough', () => {
+            audioElement2.addEventListener('canplaythrough', () => {
+                audioElement.play()
+                // let audioElement play for a second before playing the second audio element
+                setTimeout(() => {
+                    audioElement2.play()
+                }, 1000)
+                
+            })
+        })
+
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                audioElement.stop()
+                audioElement2.stop()
+                resolve()
+            }, 3000)
+        })
+    </script>
+</head>
+<body></body>
+</html>

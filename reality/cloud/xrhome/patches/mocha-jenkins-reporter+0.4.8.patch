@@ -1,0 +1,37 @@
+diff --git a/node_modules/mocha-jenkins-reporter/lib/jenkins.js b/node_modules/mocha-jenkins-reporter/lib/jenkins.js
+index 95a32bb..b8d65cb 100644
+--- a/node_modules/mocha-jenkins-reporter/lib/jenkins.js
++++ b/node_modules/mocha-jenkins-reporter/lib/jenkins.js
+@@ -93,7 +93,7 @@ function Jenkins(runner, options) {
+     var testSuite = {
+       'testsuite': [{
+         _attr: {
+-          name: currentSuite.suite.fullTitle(),
++          name: (options.junit_report_name ? (options.junit_report_name + '.') : '') + currentSuite.suite.fullTitle(),
+           tests: testCount,
+           errors: 0, /* not supported */
+           failures: currentSuite.failures,
+@@ -271,7 +271,7 @@ function Jenkins(runner, options) {
+     return path.relative(absoluteTestDir, test.file || '');
+   }
+ 
+-  function getClassName(test, suite) {
++  function getRawClassName(test, suite) {
+     if (options.jenkins_reporter_enable_sonar) {
+       // Inspired by https://github.com/pghalliday/mocha-sonar-reporter
+       var relativeFilePath = getRelativePath(test),
+@@ -289,6 +289,14 @@ function Jenkins(runner, options) {
+     return suite.fullTitle();
+   }
+ 
++  // NOTE(christoph): JUnit doesn't handle more than one '.' in class names, so we replace all
++  // but the first with '_'.
++  function getClassName(test, suite) {
++    const raw = getRawClassName(test, suite);
++    const [package, ...rest] = raw.split('.');
++    return `${package}.${rest.join('_')}`;
++  }
++
+   runner.on('start', function() {
+     var reportPath = options.junit_report_path;
+     var suitesName = options.junit_report_name || 'Mocha Tests';

@@ -1,0 +1,16 @@
+---
+sidebar_position: 1
+---
+# xr:projectwayspotfound
+
+## Description {#description}
+
+This event is emitted when a Project Location is first found.
+
+`xr:projectwayspotfound.detail : { name, position, rotation }`
+
+Property  | Description
+--------- | -----------
+name | The Project Location name.
+position: `{x, y, z}` | The 3d position of the located Project Location.
+rotation: `{w, x, y, z}` | The 3d local orientation (quaternion) of the located Project Location.

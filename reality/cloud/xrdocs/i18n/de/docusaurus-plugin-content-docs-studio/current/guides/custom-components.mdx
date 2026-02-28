@@ -1,0 +1,329 @@
+---
+id: custom-components
+description: >-
+  Benutzerdefinierte Komponenten können das visuelle Erscheinungsbild, die
+  physikalischen Eigenschaften, die Eingabeverarbeitung oder die
+  benutzerdefinierte Spiellogik definieren.
+toc_max_heading_level: 5
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import EcsTypes from '/src/components/_ecs-types.mdx'
+
+# Benutzerdefinierte Komponenten
+
+## Einführung
+
+{frontMatter.description}
+
+## Erstellen einer benutzerdefinierten Komponente
+
+Um eine benutzerdefinierte Komponente zu erstellen, gehen Sie folgendermaßen vor:
+
+1. Klicken Sie im Dateibrowser auf die Plus-Schaltfläche (+).
+2. Klicken Sie auf "Neue Datei" → "Neue Komponentendatei" und geben Sie ihr einen Namen (Dateierweiterung optional).
+   1. Es wird eine neue Komponentendatei, standardmäßig TypeScript, in Ihrem Projekt erzeugt.
+   2. Die neue Komponentendatei enthält den für die Registrierung der benutzerdefinierten Komponente erforderlichen Boilerplate-Code.
+
+## Registrieren einer benutzerdefinierten Komponente
+
+Der folgende Code ist ein Beispiel dafür, wie eine neu erstellte benutzerdefinierte Komponente im Code-Editor angezeigt wird:
+
+### Beispiel
+
+:::danger
+Vermeiden Sie die Verwendung von 'debug-' als Präfix für Komponentennamen. Komponentennamen, die mit 'debug-' beginnen, sind für interne Debugging-Zwecke reserviert und **werden bei Verwendung in Ihrem Code nicht korrekt funktionieren.**
+:::
+
+```ts
+// Dies ist eine Komponentendatei. Sie können diese Datei verwenden, um eine benutzerdefinierte Komponente für Ihr Projekt zu definieren.
+// Diese Komponente wird als benutzerdefinierte Komponente im Editor angezeigt.
+
+import * as ecs from '@8thwall/ecs' // So greifen Sie auf die ecs-Bibliothek zu.
+
+ecs.registerComponent({
+  name: 'Custom Component',
+  // schema: {
+  // },
+  // schemaDefaults: {
+  // },
+  // data: {
+  // },
+  // add: (world, component) => {
+  // },
+  // tick: (world, component) => {
+  // },
+  // remove: (world, component) => {
+  // },
+  // stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+  // ecs.defineState('default').initial()
+  // },
+})
+```
+
+## Hinzufügen von benutzerdefinierten Komponenten zu einer Entität
+
+Das folgende Beispiel zeigt, wie eine benutzerdefinierte Komponente zu einer bestehenden Entität hinzugefügt werden kann.
+
+### Beispiel
+
+:::tip
+Stellen Sie sicher, dass Sie die Komponente exportieren, **bevor** Sie versuchen, sie zu importieren oder irgendwo zu verwenden.
+:::
+
+```tsx title="/custom-component.ts"
+import * as ecs from '@8thwall/ecs'
+
+const CustomComponent = ecs.registerComponent({
+  name: 'Custom Component',
+  schema: {
+    displayName: ecs.string
+  },
+  schemaDefaults: {
+    displayName: 'Unnamed'
+  },
+})
+
+export {CustomComponent}
+```
+
+```tsx title="/another-component.ts"
+import * as ecs from '@8thwall/ecs'
+import {CustomComponent} from './custom-component'
+
+ecs.registerComponent({
+  name: 'Another Custom Component',
+  stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+    ecs.defineState('default')
+      .initial()
+      .onEnter(() => {
+        const entity = world.createEntity()
+
+        CustomComponent.set(world, entity, {
+          displayName: 'Jini'
+        })
+      })
+  },
+})
+```
+
+## Funktionen
+
+Mit Komponentenfunktionen können Sie verschiedene Aktionen für eine Komponente und ihre Daten in Bezug auf eine Entität durchführen.
+
+<ComponentFunctions
+    name="CylinderGeometry"
+    properties={{ radius: 1, height: 1 }}
+    mutate={`cursor.radius += 1;
+    cursor.height *= 2;
+    return false;`}
+/>
+
+## Schema
+
+Ein Schema ist eine Liste von Schlüssel-Werte-Paaren, die die Struktur einer Komponente definiert. Der Schlüssel ist der Name der Eigenschaft, und der Wert ist ein [ECS-Typ] (/api/studio/ecs/#types), der die Art der Daten angibt, die diese Eigenschaft enthalten wird.
+
+<EcsTypes/>
+
+### Beispiel
+
+Das folgende Beispiel zeigt das Schema einer benutzerdefinierten Komponente.
+
+```ts
+schema: {
+  target: ecs.eid, // Eindeutige Entitätsreferenz für den NSC (Entity ID)
+  speed: ecs.f32, // Bewegungsgeschwindigkeit des NSC (32-bit float)
+  strength: ecs.f64, // Stärkestufe des NSC (64-bit float)
+  level: ecs.i32, // Charakterstufe des NPCs (32-bit integer)
+  armor: ecs.ui8, // Rüstungswert des NPCs (0-255, 8-bit unsigned integer)
+  experience: ecs.ui32, // Erfahrungspunkte des NPCs (32-bit unsigned integer)
+  guildName: ecs.string, // Name der Gilde zu der der NPC gehört. (String)
+  isHostile: ecs.boolean // Boolescher Wert, der angibt, ob der NPC dem Spieler feindlich gesinnt ist (Boolean)
+}
+```
+
+```ts
+schemaDefaults: {
+  speed: 3.14,
+  strength: 5.8,
+  level: 10,
+  armor: 255,
+  experience: 12,
+  guildName: 'Niantic Crew'
+  isHostile: false
+}
+```
+
+### Benutzerdefinierte Felder im Editor
+
+Die Anzeige und Funktionalität Ihrer Komponenten im Entity-Editor kann auf verschiedene Weise angepasst werden. Dies geschieht über Kommentare innerhalb des Schemas, in denen die Felder mit `// @` gekennzeichnet sind.
+
+#### Etiketten
+
+Manchmal müssen Bezeichnungen im Editor aussagekräftiger sein als ihre Namen im Code.
+
+```ts
+schema: {
+   // @label Foo
+   bar: ecs.eid,
+},
+```
+
+#### Asset-Referenzen
+
+Wenn Sie auf ein Asset im Projekt verweisen müssen.
+
+```ts
+schema: {
+   // @asset
+   yetiModel: ecs.string,
+}
+```
+
+#### Min & Max
+
+Wenn Sie verhindern wollen, dass Werte bei Änderungen in der Schnittstelle einen bestimmten Wert überschreiten.
+\*Änderungen an der Variablen zur Laufzeit bleiben unberücksichtigt.
+
+```ts
+schema: {
+   // @min 0
+   // @max 128
+   goldCoins: ecs.i32,
+}
+```
+
+#### Bedingungen
+
+Eigenschaften können so eingestellt werden, dass sie nur in Abhängigkeit von den Werten anderer Eigenschaften angezeigt werden.
+
+```ts
+schema: {
+   // 'from' wird nur angezeigt, wenn autoFrom auf false gesetzt ist:
+   autoFrom: ecs.boolean,
+   // @condition autoFrom=false
+   from: ecs.f32,
+
+   // 'easingFunction' wird angezeigt, wenn entweder easeIn oder easeOut gesetzt ist:
+   easeIn: ecs.boolean,
+   easeOut: ecs.boolean,
+   // @condition easeIn=true|easeOut=true
+   easingFunction: ecs.string,
+
+   // 'targetX' wird nur angezeigt, wenn kein Ziel gesetzt ist:
+   target: ecs.eid,
+   // @condition target=null
+   targetX: ecs.f32,
+}
+```
+
+#### Aufzählungen
+
+Zeichenketteneigenschaften können auf eine bestimmte Liste beschränkt werden:
+
+```ts
+schema: {
+   // @enum Quadratic, Cubic, Quartic, Quintic, Sinusoidal, Exponential
+   easingFunction: ecs.string,
+}
+```
+
+#### Gruppen
+
+Bestimmte Gruppen von Eigenschaften können angewiesen werden, im Editor besonders behandelt zu werden. Gruppen werden wie folgt konfiguriert:
+
+- Der Anfang und das Ende der Gruppe sind mit // @group start …gekennzeichnet. und // @Gruppe Ende
+- Bedingungen können mit // @group condition auf die gesamte Gruppe angewendet werden
+- Derzeit werden zwei Arten von Gruppen unterstützt: vector3 und color
+
+##### Etiketten
+
+Benutzerdefinierte Bezeichnungen können weiterhin für einzelne Felder verwendet werden:
+
+```ts
+schema: {
+   // @group start orient:vector3
+   // @label Pitch
+   orientPitch: ecs.f32,
+   // @label Yaw
+   orientYaw: ecs.f32,
+   // @label Roll
+   orientRoll: ecs.f32,
+   // @group end
+}
+```
+
+##### Vektor3
+
+Gruppen von Eigenschaften, die 3D-Vektoren darstellen, können wie folgt angegeben werden:
+
+```ts
+schema: {
+ autoFrom: ecs.boolean,
+ // @group start from:vector3
+ // @group condition autoFrom=false
+ fromX: ecs.f32,
+ fromY: ecs.f32,
+ fromZ: ecs.f32,
+ // @group end
+}
+```
+
+##### Farbe
+
+Die Farben können wie im folgenden Beispiel angegeben werden:
+
+```ts
+schema: {
+ // @group start background:color
+ bgRed: ecs.f32,
+ bgGreen: ecs.f32,
+ bgBlue: ecs.f32,
+ // @group end
+}
+```
+
+## Daten
+
+Data ist ähnlich wie Schema, allerdings gibt es zwei bemerkenswerte Unterschiede.
+
+1. Daten können **nicht** außerhalb der Komponente, in der sie definiert sind, gelesen oder geschrieben werden.
+2. Für die Daten gibt es **keine** Standardwerte, sie können jedoch in der Lebenszyklusmethode "add" für eine ähnliche Funktionalität festgelegt werden.
+
+## Cursors
+
+Ein Cursor ist ein Verweis auf das Schema einer anderen Komponente, das mit einer Entität verbunden ist. Man kann es sich wie einen Zeiger oder Handle vorstellen, mit dem man Eigenschaften lesen oder schreiben kann.
+
+Aber denken Sie daran:
+
+- Cursors können veralten, wenn sie asynchron verwendet werden (z. B. innerhalb von setTimeout oder verzögerten Callbacks). Verwenden Sie in diesen Fällen stattdessen schemaAttribute und dataAttribute.
+- Cursor bieten einen Live-Zugriff auf die Daten einer Entität, was bedeutet, dass die Änderung eines Cursors direkt den Wert in der Welt ändert.
+
+## Lebenszyklus-Methoden
+
+| Methode | Beschreibung                                                                                                                                                                                               |
+| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| add     | Wird einmal aufgerufen, wenn die Komponente initialisiert wird. Zum Einrichten des Anfangszustands und zum Instanziieren von Variablen                                                                     |
+| remove  | Wird aufgerufen, wenn die Komponente von der Entität entfernt wird oder wenn die Entität von der Szene abgetrennt wird. Wird verwendet, um alle vorherigen Änderungen an der Entität rückgängig zu machen. |
+| tick    | Wird bei jeder Renderschleife oder jedem Tick der Szene aufgerufen. Wird für kontinuierliche Änderungen oder Kontrollen verwendet.                                                                         |
+
+### Parameter
+
+| Eigentum  | Typ                                   | Beschreibung                         |
+| --------- | ------------------------------------- | ------------------------------------ |
+| world     | [World](/api/studio/world)            | Hinweis auf die Welt.                |
+| component | [ComponentObject](#componentobject)   | Verweis auf die aktuelle Komponente. |
+
+### ComponentObject
+
+:::warning
+Verwenden Sie schemaAttribute oder dataAttribute anstelle von eid-, schema- oder data-Eigenschaften in asynchronen Kontexten wie Timern oder Event-Handlern.
+:::
+
+| Eigentum        | Typ               | Beschreibung                                                     |
+| --------------- | ----------------- | ---------------------------------------------------------------- |
+| eid             | eid               | Die Entitäts-ID der aktuellen Komponente                         |
+| Schema          | Cursor            | Verweis auf das Schema der aktuellen Entität                     |
+| schemaAttribute | KomponentenObjekt | Verweis auf das Schema der aktuellen Komponente im World Scope.  |
+| data            | Cursor            | Verweis auf die Daten der aktuellen Entität                      |
+| dataAttribute   | KomponentenObjekt | Verweis auf die Daten der aktuellen Komponente im World Scope.   |

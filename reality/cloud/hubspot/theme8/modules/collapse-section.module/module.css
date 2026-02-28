@@ -1,0 +1,54 @@
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  color: #7611B6;
+  background-color: #FFFFFF;
+  cursor: pointer;
+  padding: 1em;
+  width: 100%;
+  text-align: left;
+  font-size: 1.125em;
+  font-weight: 700;
+  border: 1px solid #f3f2f4;
+  border-radius: 8px;
+  font-family: "Nunito", sans serif;
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  align-items: center;
+  justify-content: space-between;
+  transition: border-color 0.2s ease-out;
+}
+
+.collapsibleGray, .collapsibelGray:hover {
+  background-color: #EBEBF1;
+}
+
+.collapsible:hover {
+  border: 1px solid #AD50FF;
+}
+
+.collapseIcon {
+  transition: all 0.2s linear;
+  -moz-transition: all .2s linear;
+  -webkit-transition: all .2s linear;
+}
+
+.chevronDown {
+  -moz-transform:rotate(-180deg);
+  -webkit-transform:rotate(-180deg);
+  transform:rotate(-180deg);
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  margin: 1em 0 0 0;
+  overflow: hidden;
+  max-height: 0px;
+  transition: max-height 0.2s ease-out;
+}
+
+@media screen and (max-width: 991px) {
+  .collapsible {
+    padding: 0.5em;
+  }
+}

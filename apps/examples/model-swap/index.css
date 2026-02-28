@@ -1,0 +1,24 @@
+#nextbutton {
+  width: 50vw;
+  height: auto;
+  position: absolute;
+  bottom: 6vh;
+  left: 25vw;
+  border: 0.2em solid white;
+  text-align: center;
+  color: #FFF;
+  border-radius: 100px;
+  background-image: url(./assets/images/one.jpg);
+  background-size: cover;
+}
+
+#nextbutton:active {
+  background-color: white;
+  color: #AD50FF;
+}
+
+h2 {
+  font-size: 1.3em;
+  text-align: center;
+  font-family: monospace;
+}

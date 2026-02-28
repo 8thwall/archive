@@ -1,0 +1,125 @@
+---
+id: assets
+---
+
+import {EventExample} from '@site/src/components/event-example'
+
+# 資産イベント
+
+アセット・イベントは、アセット・エンティティ上で発生し、[world.events.globalId](/api/studio/world/events/#properties)にバブルアップされます。
+
+## 3Dモデル
+
+### GLTF_MODEL_LOADED
+
+モデルがロードされたときに発行される
+
+#### プロパティ一覧
+
+| プロパティ | タイプ                                                    | 説明           |
+| ----- | ------------------------------------------------------ | ------------ |
+| model | [グループ](https://threejs.org/docs/#api/en/objects/Group) | three.jsグループ |
+
+#### 例
+
+<EventExample ns="ecs.events" event="GLTF_MODEL_LOADED" callbackBody={`console.log('Model loaded: ', event.data.model)`} />
+
+### GLTF_ANIMATION_FINISHED
+
+アニメーションクリップのすべてのループが終了したときに発行される。
+
+#### プロパティ
+
+| プロパティ | タイプ   | 説明         |
+| ----- | ----- | ---------- |
+| name  | ストリング | アニメーションの名前 |
+
+#### 例
+
+<EventExample ns="ecs.events" event="GLTF_ANIMATION_FINISHED" callbackBody={`console.log('Animation finished: ', event.data.name)`} />
+
+### GLTF_ANIMATION_LOOP
+
+アニメーションクリップの1つのループが終了したときに発せられる。
+
+#### プロパティ一覧
+
+| プロパティ | タイプ    | 説明         |
+| ----- | ------ | ---------- |
+| name  | string | アニメーションの名前 |
+
+#### 例
+
+<EventExample ns="ecs.events" event="GLTF_ANIMATION_LOOP" callbackBody={`console.log('Animation loop: ', event.data.name)`} />
+
+## ガウス・スプラット
+
+### SPLAT_MODEL_LOADED
+
+スプラットがロードされたときに発せられる
+
+#### プロパティ
+
+| プロパティ | タイプ                                                        | 概要                |
+| ----- | ---------------------------------------------------------- | ----------------- |
+| model | [Object3D](https://threejs.org/docs/#api/en/core/Object3D) | three.js Object3D |
+
+#### 例
+
+<EventExample ns="ecs.events" event="SPLAT_MODEL_LOADED" callbackBody={`console.log('Splat loaded: ', event.data.model)`} />
+
+## オーディオ
+
+### AUDIO_CAN_PLAY_THROUGH
+
+エンティティがAudioを再生する能力を持つときに発せられる。
+
+#### プロパティ一覧
+
+いない。
+
+#### 例
+
+<EventExample ns="ecs.events" event="AUDIO_CAN_PLAY_THROUGH" hasPayload={false} callbackBody={`console.log('Ready to play audio')`} />
+
+### AUDIO_END
+
+エンティティのオーディオ再生が終了したときに発せられる。
+
+#### プロパティ
+
+いない。
+
+#### 例
+
+<EventExample ns="ecs.events" event="AUDIO_END" hasPayload={false} callbackBody={`console.log('Finished playing audio')`} />
+
+## ビデオ
+
+### VIDEO_CAN_PLAY_THROUGH
+
+エンティティがビデオを再生する能力を持つときに発せられる。
+
+#### プロパティ
+
+| プロパティ | タイプ    | 説明     |
+| ----- | ------ | ------ |
+| src   | string | ビデオソース |
+
+#### 例
+
+<EventExample ns="ecs.events" event="VIDEO_CAN_PLAY_THROUGH" callbackBody={`console.log('Ready to play video: ', event.data.src)`} />
+
+### VIDEO_END
+
+エンティティでビデオの再生が終了したときに発行される。
+
+#### プロパティ
+
+| プロパティ | タイプ    | 商品説明   |
+| ----- | ------ | ------ |
+| src   | string | ビデオソース |
+
+#### 例
+
+<EventExample ns="ecs.events" event="VIDEO_END" callbackBody={`console.log('Finished playing video: ', event.data.src)`} />

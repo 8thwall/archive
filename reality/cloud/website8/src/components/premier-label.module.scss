@@ -1,0 +1,41 @@
+@use '../styles/brand-colors';
+@use '../styles/constants';
+
+.premierLabel {
+  width: 30%;
+  position: absolute;
+  white-space: nowrap;
+  text-indent: 2px;
+}
+
+.top {
+  top: 5px;
+}
+
+.bottom {
+  bottom: 5px;
+}
+
+.right {
+  right: 5px;
+}
+
+.left {
+  left: 5px;
+}
+
+.premierLabel p {
+  letter-spacing: 2px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: brand-colors.$brand-highlight !important;
+  border: 1px solid brand-colors.$brand-highlight;
+  text-align: center;
+  margin: 0;
+}
+
+@media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+  .premierLabel p {
+    font-size: 7px !important;
+  }
+}

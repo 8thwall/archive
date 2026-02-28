@@ -1,0 +1,172 @@
+---
+id: events
+description: イベントは、柔軟なリスナーとディスパッチシステムを通じて、エンティティが互いに通信する方法です。
+---
+
+# イベント
+
+## はじめに
+
+{frontMatter.description}
+
+## イベント・リスナー
+
+##### リスナー {#listener}
+
+| プロパティ        | タイプ     | 説明                              |
+| ------------ | ------- | ------------------------------- |
+| ターゲット        | イード     | イベントがディスパッチされたエンティティ。           |
+| カレントターゲット    | イード     | イベントがリッスンされたエンティティ。             |
+| 名称           | ストリング   | イベント名                           |
+| データ          | いずれも    | イベント・カスタム・データ                   |
+
+### イベント・リスナーの作成
+
+#### 追加リスナー
+
+```ts
+world.events.addListener(target, name, listener)
+```
+
+##### パラメータ
+
+:::tip
+world.events.globalId\\`をターゲットとして、グローバル・イベント・リスナーを作成することができる。
+:::
+
+| プロパティ   | タイプ                   | 説明                                          |
+| ------- | --------------------- | ------------------------------------------- |
+| ターゲット   | イード                   | ターゲット・エンティティへの参照。                           |
+| 名称      | ストリング                 | リッスンするイベント名。                                |
+| リスナー    | [リスナー](#listener)     | イベントがトリガーされたときのコールバック関数                     |
+
+### イベントハンドラの作成
+
+エンティティにイベントリスナーを追加する場合、特にコンポーネントが複数のエンティティに追加される場合は、意図したとおりに機能するようにハンドラを正しく設定することが重要です。 ハンドラーの不適切な作成は、陳腐な参照や予期せぬ動作につながる可能性がある。
+
+例えば、NPCエンティティのハンドラを作成し、破損イベントをリッスンするとします。 ハンドラは、イベントが発生したときに、いくつかのスキーマとデータ値を更新しなければならない。
+
+#### 誤った例
+
+<div class="code-invalid">
+
+```ts
+import * as ecs from '@8thwall/ecs'
+import { addCleanup, doCleanup } from './cleanup'
+
+ecs.registerComponent({
+  name: 'npc',
+  schema： {
+    isInjured: ecs.boolean,
+  }
+  data： {
+    bpm: ecs.f32,
+  }
+  add: (world, component) => {
+    // ハンドラの作成が正しくない
+    const damagedHandler = (e) => {
+      component.schema.isInjured = true
+      component.data.bpm += 30
+    }
+    world.events.addListener(component.eid, 'damaged', damagedHandler)
+
+    const cleanup = () => {
+      world.events.removeListener(component.eid, 'damaged', damagedHandler)
+    }
+    addCleanup(component, cleanup)
+  },
+  remove: (world, component) => {
+    doCleanup(component)
+  },
+})
+```
+
+</div>
+
+この例では
+
+- ハンドラ damagedHandler は `component.schema` と `component.data` を直接参照する。
+- コンポーネントが複数のエンティティに追加されると、ハンドラ内のコンポーネント参照は古くなります。
+- これは、ハンドラーが不正確なデータを操作する原因となり、バグを引き起こす可能性がある。
+
+#### 正しい例
+
+ハンドラが正しいエンティティデータを操作するようにするには、コンポーネントの `dataAttribute` と `schemaAttribute` をハンドラに渡し、ハンドラ内でカーソルをフェッチするためにそれらを使用する。
+
+<div class="code-valid">
+
+```ts
+import * as ecs from '@8thwall/ecs'
+import { addCleanup, doCleanup } from './cleanup'
+
+// ダメージハンドラを作成する関数
+const createDamagedHandler = (dataAttribute, schemaAttribute) => (e) => {
+  const dataCursor = dataAttribute.cursor(e.target)
+  const schemaCursor = schemaAttribute.cursor(e.target)
+  schemaCursor.isInjured = true
+  dataCursor.bpm += 30
+}
+
+ecs.registerComponent({
+  name: 'npc',
+  schema： {
+    isInjured: ecs.boolean,
+  },
+  data： {
+    bpm: ecs.f32,
+  },
+  add: (world, component) => {
+    // 正しいハンドラ作成
+    const damagedHandler = createDamagedHandler(component.dataAttribute, component.schemaAttribute)
+    world.events.addListener(component.eid, 'damaged', damagedHandler)
+
+    const cleanup = () => {
+      world.events.removeListener(component.eid, 'damaged', damagedHandler)
+    }
+    addCleanup(component, cleanup)
+  },
+  remove: (world, component) => {
+    doCleanup(component)
+  },
+})
+```
+
+</div>
+
+### イベントリスナーの削除
+
+#### removeListener
+
+```ts
+world.events.removeListener(target, name, listener)
+```
+
+##### パラメータ
+
+| プロパティ   | タイプ                   | 説明                                          |
+| ------- | --------------------- | ------------------------------------------- |
+| ターゲット   | イード                   | ターゲット・エンティティへの参照。                           |
+| 名称      | ストリング                 | リッスンするイベント名。                                |
+| リスナー    | [リスナー](#listener)     | イベントがトリガーされたときのコールバック関数                     |
+
+## イベント・ディスパッチャー
+
+### カスタムイベントのディスパッチ
+
+#### 派遣
+
+:::info
+あるエンティティにイベントが発生すると、まずそのエンティティのハンドラが実行され、次にその親のハンドラが実行され、さらに他の祖先のハンドラが実行される。
+:::
+
+```ts
+world.events.dispatch(eidOfEnemy, "attack", {damage: 10})
+```
+
+## リスナーの掃除
+
+:::danger
+メモリリークを避けるため、常にリスナーが適切に削除されていることを確認する。
+:::
+
+コンポーネントが削除されると、そのイベントリスナーは自動的にクリーンアップされないので、手動で削除する必要があります。

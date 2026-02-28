@@ -1,0 +1,19 @@
+# This patch is required to fix the issue with sequelize migration when using the latest version of
+# sequelize and postgres. The issue is that the dropTable method in the PostgresQueryInterface class
+# does not handle the case when options is not provided. This patch adds a check for options and sets
+# it to an empty object if it is not provided.
+
+# We can remove this patch once the sequelize library is updated to fix this issue.
+# https://github.com/sequelize/sequelize-typescript/issues/1186
+diff --git a/node_modules/sequelize/lib/dialects/postgres/query-interface.js b/node_modules/sequelize/lib/dialects/postgres/query-interface.js
+index 6c5927f..e99301c 100644
+--- a/node_modules/sequelize/lib/dialects/postgres/query-interface.js
++++ b/node_modules/sequelize/lib/dialects/postgres/query-interface.js
+@@ -148,6 +148,7 @@ class PostgresQueryInterface extends QueryInterface {
+     return this.sequelize.query(sql, __spreadProps(__spreadValues({}, options), { plain: false, raw: true, type: QueryTypes.SELECT }));
+   }
+   async dropTable(tableName, options) {
++    options = options || {};
+     await super.dropTable(tableName, options);
+     const promises = [];
+     const instanceTable = this.sequelize.modelManager.getModel(tableName, { attribute: "tableName" });

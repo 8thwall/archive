@@ -1,0 +1,107 @@
+---
+id: image-targets
+description: >-
+  Los objetivos de imagen le permiten establecer una forma plana, cilíndrica o
+  cónica como disparador o marcador para superponer contenido AR.
+---
+
+# Objetivos de imagen
+
+## Introducción
+
+{frontMatter.description}
+
+<br></br>
+<br></br>
+
+![](/images/studio/image-target-intro.gif)
+
+---
+
+## Activación de objetivos de imagen
+
+Para activar objetivos de imagen en su proyecto, debe utilizar una cámara World.
+
+1. Selecciona la **Cámara** de tu escena  
+2. Establece el **Tipo** a `Mundo`.
+
+```mdx-code-block
+<img src={require('/images/studio/image-target-enable.png').default} width="400px"/>
+```
+
+---
+
+## Añadir objetivos de imagen
+
+### Cargar la imagen de destino
+
+Localice el panel **Objetivos de imagen** en la parte inferior izquierda de la interfaz de Studio. Haga clic en **( + )** para añadir un objetivo de imagen plano, cilíndrico o cónico.
+
+```mdx-code-block
+<img src={require('/images/studio/image-target-upload.png').default} width="400px"/>
+```
+
+### Configuración del destino de la imagen
+
+Personalice la región de seguimiento y los metadatos del objetivo de imagen.
+
+```mdx-code-block
+<img src={require('/images/studio/image-target-config.png').default} width="400px"/>
+```
+
+### Prueba del objetivo de imagen
+
+Escanee el código QR para comprobar la calidad y el seguimiento del objetivo de la imagen cargada.
+
+```mdx-code-block
+<img src={require('/images/studio/image-target-test.png').default} width="400px"/>
+```
+
+### Añadir la entidad de destino de imagen
+
+Puedes añadir un objetivo de imagen a tu escena creando una entidad **Objetivo de imagen**.\
+Para ello, haga clic en **( + )** en la Jerarquía de escenas y seleccione **Objetivo de imagen**.
+
+```mdx-code-block
+<img src={require('/images/studio/image-target-add.png').default} width="400px"/>
+```
+
+### Enlazar el destino de la imagen
+
+Vincula la entidad de destino de imagen a un destino de imagen cargado.
+
+```mdx-code-block
+<img src={require('/images/studio/image-target-link.png').default} width="400px"/>
+```
+
+---
+
+## Uso de objetivos de imagen
+
+Cuando añada un objetivo de imagen a su proyecto, aparecerá una malla de objetivo de imagen para que pueda alinear y posicionar otros contenidos 3D contra el objetivo de imagen.
+
+---
+
+## Simulación de objetivos de imagen
+
+El **Simulador** de Studio te permite probar tu experiencia con el objetivo de imagen de forma remota simulando el movimiento mediante los controles **WASD**.
+
+### Uso del simulador con objetivos de imagen
+
+Para simular el movimiento y la colocación del contenido alrededor de un objetivo de imagen añadido a la escena:
+
+1. Asegúrate de que tu **Configuración de cámara** está en **Mundo**.
+2. Pulsa **Jugar** para abrir el Simulador
+3. Utilice las **Opciones de entorno del simulador** (selector inferior izquierdo) para encontrar el objetivo de imagen deseado.
+4. Utiliza los atajos de teclado **WASD** para simular el movimiento. _(Debe hacer clic primero en el panel Simulador antes de utilizar el teclado)_
+
+**Teclas de movimiento:**
+
+- `W` = Adelante  
+- `A` = Izquierda  
+- `S` = Hacia atrás  
+- `D` = Derecha  
+- `Q` = Arriba  
+- `E` = Abajo
+
+Moviéndose alrededor del objetivo de imagen con WASD se activará el evento **Imagen Encontrada** para simular un seguimiento exitoso del objetivo de imagen.

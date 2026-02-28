@@ -1,0 +1,48 @@
+#!/bin/bash
+# A script for translating modified files.
+#
+# Usage:
+#   ./translate -- \
+#   --dry-run \
+#   --base-directory-source=[directory for all source files] \
+#   --base-directory-output=[directory for all output locales] \
+#   --content-type=[json|md] \
+#   --locale-directory-specifier=[{language}-{country}] \
+#   --translation-engine=[mock|chatgpt] \
+#   --languages=[comma separated languages to translate] \
+#   --sources=[comma separated modified files]
+#
+# The main driver for this script is //ci-support/i18n/translate.ts. This script ensures that the
+# build target for translate.ts is up to date, rebuilds it if needed, and then invokes it.
+
+# Find the root of the repo for running scripts in bazel-bin.
+REPO_ROOT=$(bazel info workspace)
+
+# Check if the translate script needs to be rebuilt.
+bazel build //ci-support/i18n:translate --check_up_to_date &> /dev/null
+
+if [[ $? -gt 0 ]]
+then
+  # If translate script is out of date, rebuild it.
+  echo -n Building translate utility ...
+  bazel build //ci-support/i18n:translate &> /dev/null
+  # If the build failed, bail.
+  if [[ $? -gt 0 ]]
+  then
+    echo ' FAILED'
+    exit 1
+  fi
+  echo ' SUCCESS'
+fi
+
+# We now have an up-to-date translate script. Run it with the args to this script.
+echo Running translate ...
+${REPO_ROOT}/bazel-bin/ci-support/i18n/translate $@
+
+if [[ $? -gt 0 ]]
+then
+  echo FAILED
+  exit 1
+else
+  echo SUCCESS
+fi

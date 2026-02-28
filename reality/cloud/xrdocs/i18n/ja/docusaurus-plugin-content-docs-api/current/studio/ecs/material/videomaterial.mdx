@@ -1,0 +1,36 @@
+---
+id: video-material
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import VideoMaterialTable from "../../../../gen/tables/VideoMaterial.md"
+
+# ビデオ素材
+
+## 概要
+
+このコンポーネントを使用すると、エンティティにビデオテクスチャを追加できます。
+
+## 物件 {#properties}
+
+<VideoMaterialTable />
+
+## 機能
+
+テストしたいサンプルシーンを **Scenes in Build** にドラッグします。 **Home** シーンがリストの一番上にあることを確認します。 
+<ComponentFunctions
+    name="UnlitMaterial"
+    properties={{
+        r: 0,
+        g: 0,
+        b: 0,
+        textureSrc: '',
+        opacity: 1
+    }}
+    mutate={`cursor.r = 255;
+    cursor.g = 255;
+    cursor.b = 255;
+    cursor.textureSrc = 'assets/my-video.mp4';
+    cursor.opacity = 0.5;
+    return false;`}
+/>

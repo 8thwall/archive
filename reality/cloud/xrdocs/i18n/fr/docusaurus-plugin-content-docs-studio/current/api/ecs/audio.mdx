@@ -1,0 +1,47 @@
+---
+id: audio
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Audio
+
+## Description
+
+Ce composant permet aux entités de jouer des sons.
+
+## Propriétés
+
+| Propriété              | Type                  | Défaut    | Description                                                                                                                                                                                                                                                                                                                     |
+| ---------------------- | --------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| url (Obligatoire)      | chaîne de caractères  | ''        | Source URL                                                                                                                                                                                                                                                                                                                      |
+| volume                 | nombre                | 1         | Volume de l'audio qui sera joué. Une valeur comprise entre 0 et 1                                                                                                                                                                                                                                                               |
+| boucle                 | booléen               | faux      | Si l'audio redémarre après avoir terminé                                                                                                                                                                                                                                                                                        |
+| en pause               | booléen               | faux      | Si l'audio est actuellement en pause                                                                                                                                                                                                                                                                                            |
+| hauteur                | nombre                | 1         | Facteur utilisé pour modifier la hauteur du son. 1 est la hauteur par défaut.                                                                                                                                                                                                                                                   |
+| positionnel            | booléen               | faux      | Si l'audio est joué de manière positionnelle                                                                                                                                                                                                                                                                                    |
+| refDistance            | nombre                | 1         | \*\*La valeur indiquant la distance à laquelle le volume de cette source commencera à diminuer lorsque l'auditeur s'éloignera. Doit être une valeur non négative.                                                                                                                                                               |
+| modèle de distance     | chaîne de caractères  | inverse   | \*\*L'algorithme utilisé pour réduire le volume à mesure que la distance entre cette source audio et l'auditeur augmente. Les valeurs possibles sont "linéaire", "inverse" et "exponentiel".                                                                                                                                    |
+| Facteur d'atténuation  | nombre                | 1         | \*\*La vitesse à laquelle le volume est réduit lorsque la distance entre cette source audio et l'auditeur augmente. La plage de valeurs acceptables change en fonction du modèle de distance, comme le montrent les exemples suivants : linéaire : 0 à 1, inverse : 0 à l'infini, exponentiel : 0 à l'infini                    |
+| maxDistance            | nombre                | 10000     | **Appliqué uniquement si positional est vrai** et si distanceModel est égal à linear. La distance maximale entre cette source audio et l'auditeur. Le volume n'est pas réduit après ce point. Doit être une valeur positive.                                                                                                    |
+
+## Fonctions
+
+<ComponentFunctions
+    name="Audio"
+    properties={{
+        url: "",
+        volume: 1,
+        loop: false,
+        paused: false,
+        pitch: 1,
+        positional: false,
+        refDistance: 1,
+        distanceModel: "'inverse'",
+        rolloffFactor: 1,
+        maxDistance: 10000
+    }}
+    mutate={`cursor.volume = 0.5;
+    cursor.loop = true;
+    return false;`}
+/>

@@ -1,0 +1,28 @@
+---
+id: ring-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# RingGeometry
+
+## Beschreibung
+
+Diese Komponente legt die Geometrie einer Entität fest.
+
+## Eigenschaften
+
+| Eigenschaft    | Typ    | Standard | Beschreibung                           |
+| -------------- | ------ | -------- | -------------------------------------- |
+| innerRadius    | Nummer | 1        | Radius des inneren Lochs des Rings.    |
+| outerRadius    | Nummer | 1        | Radius der Außenkante des Rings.       |
+
+## Funktionen
+
+<ComponentFunctions
+    name="RingGeometry"
+    properties={{ innerRadius: 1, outerRadius: 1 }}
+    mutate={`cursor.innerRadius += 0.5;
+    cursor.outerRadius += 1;
+    return false;`}
+/>

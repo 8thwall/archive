@@ -1,0 +1,31 @@
+#positionOut, #recenterOut, #recenter, #recenterSmart {
+  background-color: black;
+  position: absolute;
+  padding: 1vmax;
+  color:white;
+  z-index: 50;
+  font-family: sans-serif;
+}
+
+#positionOut {
+  top: 2vmax;
+  left: 2vmax;
+}
+
+#recenterOut {
+  top: 2vmax;
+  right: 2vmax;
+  display: none;
+}
+
+#recenter {
+  bottom: 2vmax;
+  right: 2vmax;
+  pointer-events: auto;
+}
+
+#recenterSmart {
+  bottom: 2vmax;
+  left: 2vmax;
+  pointer-events: auto;
+}

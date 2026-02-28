@@ -1,0 +1,99 @@
+
+include:
+  - ci-support/util.yml
+
+default:
+  before_script:
+    - !reference [.global, before_script]
+  after_script:
+    - !reference [.global, after_script]
+
+variables:
+  UNITY_2021_VERSION: "2021.3.37f1"
+
+cancel-redundant-jobs:
+  stage: build
+  extends: .cancel-redundant-jobs
+
+.bzl:common:
+  stage: build
+  interruptible: true
+  timeout: 300m
+  script:
+    - ci-support/generate_ci_disk_cache_config.sh
+    - ci-support/generate_ci_bazelrc_downloader_config.sh
+    - echo "bazel ${CMD} --platforms=${PLATFORM} ${EXTRA_BUILD_FLAGS} -- //third_party/... //bzl/examples/... ${EXTRA_TARGETS_TO_SKIP}"
+    - bazel ${CMD} --platforms=${PLATFORM} ${EXTRA_BUILD_FLAGS} -- //third_party/... //bzl/examples/... ${EXTRA_TARGETS_TO_SKIP}
+  rules:
+    - if: $BZL_TRIGGER == "bzl_trigger"
+
+bzl:test:macos_m1:fastbuild:macos_m1:
+  extends: .bzl:common
+  variables:
+    CMD: "test"
+    PLATFORM: "@unity-version//:osx_arm64-unity-${UNITY_2021_VERSION}-platform"
+    EXTRA_BUILD_FLAGS: ""
+    EXTRA_TARGETS_TO_SKIP: ""
+  artifacts:
+    paths:
+      - bazel-out/darwin_arm64-fastbuild-ST-*/bin/bzl/examples/unity/
+    expire_in: 1 day
+    when: always
+  tags:
+    - m1
+
+bzl:test:macos_x86:fastbuild:macos_x86:
+  extends: .bzl:common
+  variables:
+    CMD: "test"
+    PLATFORM: "@unity-version//:osx_x86_64-unity-${UNITY_2021_VERSION}-platform"
+    EXTRA_BUILD_FLAGS: ""
+    EXTRA_TARGETS_TO_SKIP: "-//bzl/examples/android/... -//bzl/examples/ios/..."
+  artifacts:
+    paths:
+      - bazel-out/darwin-fastbuild-ST-*/bin/bzl/examples/unity/
+    expire_in: 1 day
+    when: always
+  tags:
+    - intel
+
+bzl:build:macos_m1:fastbuild:ios_arm64:
+  extends: .bzl:common
+  variables:
+    CMD: "build"
+    PLATFORM: "//bzl:ios_arm64" # TODO(AR-15493) Investigate specifying unity version with this build job
+    EXTRA_BUILD_FLAGS: ""
+    EXTRA_TARGETS_TO_SKIP: "-//bzl/examples/ios/xcode:hello-world -//bzl/examples/android/... -//third_party/zxing/zxing/... -//bzl/examples/pybind11/..."
+  artifacts:
+    paths:
+      - bazel-out/darwin_arm64-fastbuild-ST-*/bin/bzl/examples/unity/
+    expire_in: 1 day
+    when: always
+  tags:
+    - m1
+
+bzl:build:macos_m1:fastbuild:android_arm64:
+  extends: .bzl:common
+  variables:
+    CMD: "build"
+    PLATFORM: "//bzl:android_arm64" # TODO(AR-15493) Investigate specifying unity version with this build job
+    EXTRA_BUILD_FLAGS: ""
+    EXTRA_TARGETS_TO_SKIP: "-//bzl/examples/ios/... -//bzl/examples/js/... -//third_party/zxing/zxing/...  -//bzl/examples/pybind11/..."
+  artifacts:
+    paths:
+      - bazel-out/darwin_arm64-fastbuild-ST-*/bin/bzl/examples/unity/
+    expire_in: 1 day
+    when: always
+  tags:
+    - m1
+
+bzl:build:macos_m1:fastbuild:wasm32:
+  extends: .bzl:common
+  variables:
+    CMD: "test"
+    PLATFORM: "//bzl:wasm32"
+    # Enable exceptions.
+    EXTRA_BUILD_FLAGS: "--features=nodejs --copt=-fexceptions --copt=-UC8_NO_EXCEPT --copt=-UKJ_NO_EXCEPTIONS --linkopt=-sNO_DISABLE_EXCEPTION_CATCHING"
+    EXTRA_TARGETS_TO_SKIP: "-//bzl/examples/grpc/...  -//bzl/examples/proto/... -//bzl/examples/unity/... -//bzl/examples/ios/... -//bzl/examples/android/... -//bzl/examples/js/... -//third_party/cvlite/... -//third_party/libevent/... -//third_party/opencvcontrib/... -//third_party/zxing/... -//bzl/examples/pybind11/... -//third_party/capnpcs/..."
+  tags:
+    - m1

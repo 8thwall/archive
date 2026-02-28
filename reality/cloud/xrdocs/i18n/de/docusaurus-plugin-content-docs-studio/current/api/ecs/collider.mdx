@@ -1,0 +1,70 @@
+---
+id: collider
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Collider
+
+## Beschreibung
+
+Diese Komponente erstellt einen Physik-Collider für eine Entität.
+
+## ColliderShape
+
+| Typ         | Beschreibung   |
+| ----------- | -------------- |
+| Box         | Box            |
+| Sphäre      | Sphäre         |
+| Flugzeug    | Flugzeug       |
+| Kapsel      | Kapsel         |
+| Kegel       | Kegel          |
+| Zylinder    | Zylinder       |
+
+## Eigenschaften
+
+| Name                | Typ               | Standard               | Beschreibung                                                                                  |
+| ------------------- | ----------------- | ---------------------- | --------------------------------------------------------------------------------------------- |
+| Form (erforderlich) | ecs.ColliderShape | ecs.ColliderShape.Box  | Unterstützte Typen sind in ecs.ColliderShape verfügbar                                        |
+| width               | Nummer            | 0                      | Breite von Kasten- oder Flächenformen.                                                        |
+| height              | Nummer            | 0                      | Höhe von Kasten-, Ebenen-, Kapsel-, Kegel- oder Zylinderformen.                               |
+| Tiefe               | Nummer            | 0                      | Tiefe der Boxform.                                                                            |
+| radius              | Nummer            | 0                      | Radius von Kugel-, Kapsel-, Kegel- oder Zylinderformen.                                       |
+| Masse               | Nummer            | 0                      | Masse der Entität. **Lassen Sie 0 stehen, um statisch zu sein**                               |
+| eventOnly           | boolean           | false                  | Soll das Objekt nur Kollisionsereignisse versenden und nicht physisch reagieren               |
+| gravityFactory      | Nummer            | 1                      | Faktor für die Skalierung der Weltgravitation                                                 |
+| lockXAxis           | boolean           | false                  | Deaktiviert die Drehung auf der X-Achse                                                       |
+| lockYAxis           | boolean           | false                  | Deaktiviert die Drehung um die Y-Achse                                                        |
+| lockZAxis           | boolean           | false                  | Deaktiviert die Drehung auf der Z-Achse                                                       |
+| Reibung             | Nummer            | 0.5                    | Das Ausmaß der Kontaktreibung an der Einheit                                                  |
+| Rückerstattung      | Nummer            | 0                      | Die Sprunghaftigkeit der Entität                                                              |
+| linearDämpfung      | Nummer            | 0                      | Der Luftwiderstand während der Bewegung                                                       |
+| angularDamping      | Nummer            | 0                      | Der Luftwiderstand beim Drehen                                                                |
+| spinningFriction    | Nummer            | 0                      | Der Betrag der Reibung an der Einheit während des Drehens                                     |
+
+## Funktionen
+
+<ComponentFunctions
+    name="Collider"
+    properties={{
+        shape: "ecs.ColliderShape.Box",
+        width: 0,
+        height: 0,
+        depth: 0,
+        radius: 0,
+        mass: 0,
+        eventOnly: false,
+        gravityFactory: 1,
+        lockXAxis: false,
+        lockYAxis: false,
+        lockZAxis: false,
+        friction: 0.5,
+        restitution: 0,
+        linearDamping: 0,
+        angularDamping: 0,
+        spinningFriction: 0
+    }}
+    mutate={`cursor.mass = 5;
+    cursor.friction = 0.8;
+    return false;`}
+/>

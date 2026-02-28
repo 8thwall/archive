@@ -1,0 +1,27 @@
+---
+id: image-target
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import ImageTargetTable from "../../../gen/tables/ImageTarget.md"
+
+# ImageTarget
+
+## Descripción
+
+Este componente hace que la transformación de una entidad siga una imagen en XR. Se mostrará y ocultará según se encuentre o se pierda la imagen.
+
+## Propiedades
+
+<ImageTargetTable />
+
+## Funciones
+
+<ComponentFunctions
+    name="ImageTarget"
+    properties={{
+        name: '',
+    }}
+    mutate={`cursor.name = 'target';
+    return false;`}
+/>

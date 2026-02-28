@@ -1,0 +1,52 @@
+---
+id: audio
+description: Diese Bibliothek enthält Funktionen für die Audiowiedergabe.
+---
+
+# Audio
+
+## Beschreibung
+
+{frontMatter.description}
+
+## Funktionen
+
+### stummschalten
+
+Ton der Szene stummschalten.
+
+```ts
+world.audio.mute() // -> void
+```
+
+### stummschalten
+
+Ton der Szene aufheben.
+
+```ts
+world.audio.unmute() // -> void
+```
+
+### Pause
+
+Ton der Szene anhalten.
+
+```ts
+world.audio.pause() // -> void
+```
+
+### spielen
+
+Ton der Szene abspielen.
+
+```ts
+world.audio.play() // -> void
+```
+
+### setVolume
+
+Lautstärke der Szene einstellen. \*\*Der Parameter sollte einen Wert zwischen 0 und 1 haben.
+
+```ts
+world.audio.setVolume(newVolume: Zahl) // -> void
+```

@@ -1,0 +1,156 @@
+---
+id: transform
+description: このライブラリには、Transformsを扱うための関数が含まれています。
+---
+
+# 変える
+
+## 説明
+
+{frontMatter.description}
+
+## 機能
+
+### ゲットローカルポジション
+
+指定されたエンティティのローカル位置を返します。
+
+```ts
+transform.getLocalPosition(eid: Eid, out?: Vec3)：Vec3
+```
+
+### ローカルトランスフォーム
+
+指定されたエンティティのローカル変換行列を返します。
+
+```ts
+transform.getLocalTransform(eid: Eid, out?: Mat4)：Mat4
+```
+
+### ゲットワールドポジション
+
+指定されたエンティティのワールドポジションを返します。
+
+```ts
+transform.getWorldPosition(eid: Eid, out?: Vec3)：Vec3
+```
+
+### ゲットワールドトランスフォーム
+
+指定されたエンティティのワールド変換行列を返します。
+
+```ts
+transform.getWorldTransform(eid: Eid, out?: Mat4)：Mat4
+```
+
+### setLocalPosition
+
+指定されたエンティティのローカル位置を設定します。
+
+```ts
+transform.setLocalPosition(eid: Eid, position: Vec3Source): void
+```
+
+### setLocalTransform
+
+指定されたエンティティのローカル変換行列を設定します。
+
+```ts
+transform.setLocalTransform(eid: Eid, mat4: Mat4): void
+```
+
+### セットワールド・ポジション
+
+指定されたエンティティのワールドポジションを設定する。
+
+```ts
+transform.setWorldPosition(eid: Eid, position: Vec3Source): void
+```
+
+### セットワールド・トランスフォーム
+
+指定されたエンティティのワールド変換行列を設定します。
+
+```ts
+transform.setWorldTransform(eid: Eid, mat4: Mat4): void
+```
+
+### トランスレートワールド
+
+指定されたエンティティのワールド四元数を返します。
+
+```ts
+world.transform.getWorldQuaternion(eid: Eid, out?: Quat)：Quat
+```
+
+### ルックアット
+
+ルックアットワールド
+
+```ts
+world.transform.setWorldQuaternion(eid: Eid, rotation: QuatSource): void
+```
+
+### トランスレート・セルフ
+
+部分的なVec3Source入力を使用して、それ自身のローカル空間でエンティティを変換します。
+
+```ts
+transform.translateWorld(eid: Eid, translation: Partial<Vec3Source>): void
+```
+
+### 翻訳ローカル
+
+部分的なVec3Source入力を使用して、親のローカル空間でエンティティを変換します。
+
+```ts
+world.transform.translateLocal(eid: Eid, translation: Partial<Vec3Source>): void
+```
+
+### トランスレートワールド
+
+部分的なVec3Source入力を使用してワールド空間でエンティティを変換します。
+
+```ts
+world.transform.translateWorld(eid: Eid, translation: Partial<Vec3Source>): void
+```
+
+### 回転自己
+
+クオータニオンを使ってエンティティを自身の軸の周りに回転させる。
+
+```ts
+transform.lookAt(eid: Eid, other: Eid): void
+```
+
+### 回転ローカル
+
+四元数を使ってエンティティをローカル空間に対して相対的に回転させる。
+
+```ts
+transform.lookAtLocal(eid: Eid, position: Vec3Source): void
+```
+
+### ルックアット
+
+エンティティを他のエンティティに向ける。
+
+```ts
+transform.lookAtWorld(eid: Eid, position: Vec3Source): void
+```
+
+### ルックアットローカル
+
+エンティティをローカル空間のある位置に向ける。
+
+```ts
+ルックアットローカル
+```
+
+### ルックアットワールド
+
+エンティティをワールド空間のある位置に向ける。
+
+```ts
+world.transform.lookAtWorld(eid: Eid, position: Vec3Source): void
+```

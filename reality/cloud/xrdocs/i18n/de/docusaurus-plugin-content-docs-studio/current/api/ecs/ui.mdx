@@ -1,0 +1,86 @@
+---
+id: ui
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Ui
+
+## Beschreibung
+
+Diese Komponente stellt eine Benutzeroberfläche in Bezug auf die Entität her.
+
+## Eigenschaften
+
+Ich werde eine Tabelle im gleichen Format für das bereitgestellte Schema erstellen:
+
+## Eigenschaften
+
+| Eigenschaft             | Typ     | Standard | Beschreibung                                                                                                                                                  |
+| ----------------------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type (erforderlich)     | String  |          | Unterstützte Typen sind: Overlay" und "3d".                                                                                                                   |
+| Schriftart              | String  |          | Zu verwendende Schriftart                                                                                                                                     |
+| fontSize                | f32     |          | Größe des Textes                                                                                                                                              |
+| position                | String  |          | Art der Positionierung                                                                                                                                        |
+| Opazität                | f32     | 1        | Gesamtdeckkraft des Objekts                                                                                                                                   |
+| backgroundOpacity       | f32     | 0        | Deckkraft des Hintergrunds                                                                                                                                    |
+| backgroundSize          | String  |          | Größe des Hintergrunds                                                                                                                                        |
+| Hintergrund             | String  |          | Hintergrundfarbe                                                                                                                                              |
+| Farbe                   | String  |          | Farbe des Vordergrunds (Text)                                                                                                                                 |
+| Text                    | String  | ""       | Textinhalt des Objekts                                                                                                                                        |
+| bild                    | String  | null     | Bildquelle                                                                                                                                                    |
+| festeGröße              | boolean |          | Bestimmt, ob die Größe festgelegt ist                                                                                                                         |
+| width                   | String  | 100      | Breite des Objekts                                                                                                                                            |
+| height                  | String  | 100      | Höhe des Objekts                                                                                                                                              |
+| top                     | String  |          | Vertikale Position vom oberen Rand                                                                                                                            |
+| left                    | String  |          | Horizontale Position vom linken Rand                                                                                                                          |
+| unten                   | String  |          | Vertikale Position vom unteren Rand                                                                                                                           |
+| rechts                  | String  |          | Horizontale Position vom rechten Rand                                                                                                                         |
+| borderColor             | String  |          | Farbe des Rahmens                                                                                                                                             |
+| borderRadius            | f32     | 0        | Rundet die Ecken des Elements ab                                                                                                                              |
+| alignContent            | String  |          | Verteilung des Raums zwischen den Inhaltselementen; zulässige Werte: 'flex-start', 'center', 'flex-end', 'stretch', 'space-between', 'space-around'           |
+| alignItems              | String  |          | Ausrichtung der Elemente auf der Querachse; zulässige Werte: 'flex-start', 'center', 'flex-end', 'stretch', 'baseline'                                        |
+| alignSelf               | String  |          | Ausrichtung eines einzelnen Flex-Elements; zulässige Werte: 'auto', 'flex-start', 'center', 'flex-end', 'stretch', 'baseline'                                 |
+| borderWidth             | f32     | 0        | Breite des Rahmens                                                                                                                                            |
+| columnGap               | String  |          | Lücke zwischen den Spalten                                                                                                                                    |
+| Richtung                | String  |          | Textrichtung; erlaubte Werte: 'inherit', 'LTR', 'RTL'                                                                                                         |
+| Anzeige                 | String  |          | Anzeigetyp des Elements; zulässige Werte: 'flex', 'none'                                                                                                      |
+| flex                    | f32     |          | Flex grow, shrink und basis shorthand                                                                                                                         |
+| flexBasis               | String  |          | Ursprüngliche Hauptgröße eines Flex Items                                                                                                                     |
+| flexDirection           | String  |          | Richtung der Flex-Elemente im Container; zulässige Werte: 'column', 'column-reverse', 'row', 'row-reverse'                                                    |
+| flexGrow                | f32     |          | Definiert die Fähigkeit eines Flex Items zu wachsen                                                                                                           |
+| flexShrink              | f32     |          | Definiert die Fähigkeit eines Flexelements zu schrumpfen                                                                                                      |
+| flexWrap                | String  |          | Ob flex-Elemente umgebrochen werden; erlaubte Werte: 'no-wrap', 'wrap', 'wrap-reverse'                                                                        |
+| Lücke                   | String  |          | Lücke zwischen flexiblen Elementen                                                                                                                            |
+| justifyInhalt           | String  |          | Ausrichtung der Elemente auf der Hauptachse; zulässige Werte: 'flex-start', 'center', 'flex-end', 'space-between', 'space-around', 'space-evenly'             |
+| Marge                   | String  |          | Rand um das Element                                                                                                                                           |
+| marginBottom            | String  |          | Unterer Rand                                                                                                                                                  |
+| marginLeft              | String  |          | Linker Rand                                                                                                                                                   |
+| marginRight             | String  |          | Rechter Rand                                                                                                                                                  |
+| marginTop               | String  |          | Oberer Rand                                                                                                                                                   |
+| maxHeight               | String  |          | Maximale Höhe des Elements                                                                                                                                    |
+| maxBreite               | String  |          | Maximale Breite des Elements                                                                                                                                  |
+| minHeight               | String  |          | Mindesthöhe des Elements                                                                                                                                      |
+| minWidth                | String  |          | Mindestbreite des Elements                                                                                                                                    |
+| Überlauf                | String  |          | Wie Inhalte, die die Größe des Elements überschreiten, behandelt werden; zulässige Werte: 'visible', 'hidden', 'scroll'                                       |
+| Polsterung              | String  |          | Polsterung innerhalb des Elements                                                                                                                             |
+| paddingBottom           | String  |          | Untere Polsterung                                                                                                                                             |
+| paddingLeft             | String  |          | Linke Polsterung                                                                                                                                              |
+| paddingRight            | String  |          | Rechte Polsterung                                                                                                                                             |
+| paddingTop              | String  |          | Polsterung oben                                                                                                                                               |
+| rowGap                  | String  |          | Lücke zwischen den Reihen                                                                                                                                     |
+| textAlign               | String  |          | Ausrichtung des Textes innerhalb des Elements; zulässige Werte: 'left', 'right', 'center', 'justify'                                                          |
+
+## Funktionen
+
+<ComponentFunctions
+    name="Ui"
+    properties={{
+        type: "overlay",
+        background: "#FFFFFF",
+    }}
+    mutate={`cursor.opacity = 0.5;
+    cursor.text = 'Hello World!';
+    cursor.width = 150;
+    return false;`}
+/>

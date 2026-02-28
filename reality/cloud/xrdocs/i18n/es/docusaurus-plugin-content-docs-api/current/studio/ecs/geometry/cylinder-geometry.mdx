@@ -1,0 +1,26 @@
+---
+id: cylinder-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import CylinderGeometryTable from "../../../../gen/tables/CylinderGeometry.md"
+
+# CilindroGeometría
+
+## Descripción
+
+Este componente establece la geometría de una entidad.
+
+## Propiedades
+
+<CylinderGeometryTable />
+
+## Funciones
+
+<ComponentFunctions
+    name="CylinderGeometry"
+    properties={{ radius: 1, height: 1 }}
+    mutate={`cursor.radio += 1;
+    cursor.altura *= 2;
+    return false;`}
+/>

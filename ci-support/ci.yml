@@ -1,0 +1,121 @@
+populate-remote-cache/trigger:
+  stage: build
+  variables:
+    CI_SUPPORT_TRIGGER: "populate_remote_cache_trigger"
+  trigger:
+    include:
+      - ci-support/populate-remote-cache-ci.yml
+    strategy: depend
+  needs: []
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - ci-support/ci.yml
+        - ci-support/util.yml
+        - ci-support/populate-remote-cache-ci.yml
+        - .bazelversion
+    - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE == "nightly"
+
+cache-test-ci/trigger:
+  stage: build
+  variables:
+    CI_SUPPORT_TRIGGER: "cache_test_ci_trigger"
+    CI_HOST_PLATFORM: $CI_HOST_PLATFORM
+    BUILD_OPTIONS: $BUILD_OPTIONS
+  trigger:
+    include:
+      - ci-support/bazel-cache-tools/cache-test-ci.yml
+    strategy: depend
+  needs: []
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "trigger" && $TRIGGERER == "CACHE_TEST_CI"
+
+eslint-ci/trigger:
+  stage: build
+  variables:
+    CI_SUPPORT_TRIGGER: "eslint_ci_trigger"
+  trigger:
+    include:
+      - ci-support/eslint-ci.yml
+    strategy: depend
+  needs: []
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - ci-support/ci.yml
+        - ci-support/util.yml
+        - ci-support/eslint-ci.yml
+        - apps/**/*
+        - c8/**/*
+        - platform/gamesite/frontend/**/*
+        - reality/**/*
+        - rules/**/*
+        - scripts/**/*
+
+build-mr-ci/trigger:
+  stage: build
+  variables:
+    CI_SUPPORT_TRIGGER: "build_mr_ci_trigger"
+  trigger:
+    include:
+      - ci-support/ci.yml
+      - ci-support/util.yml
+      - ci-support/build-mr-ci.yml
+    strategy: depend
+  needs: []
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - ci-support/ci.yml
+        - ci-support/util.yml
+        - ci-support/build-mr-ci.yml
+        - ci-support/generate_ci_bazelrc.sh
+        - apps/**/*
+        - c8/**/*
+        - reality/**/*
+
+massf-xr8-deps-ci/trigger:
+  stage: build
+  variables:
+    CI_SUPPORT_TRIGGER: "massf_xr8_deps_ci_trigger"
+  trigger:
+    include:
+      - ci-support/ci.yml
+      - ci-support/util.yml
+      - ci-support/massf-xr8-deps-ci.yml
+    strategy: depend
+  needs: []
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - ci-support/ci.yml
+        - ci-support/util.yml
+        - ci-support/massf-xr8-deps-ci.yml
+        - c8/**/*.{cc,h}
+        - reality/**/*.{cc,h}
+
+crowdin-sync/trigger:
+  stage: build
+  variables:
+    CI_SUPPORT_TRIGGER: "crowdin-sync"
+  trigger:
+    include:
+      - ci-support/crowdin-sync/crowdin-sync.yml
+    strategy: depend
+  needs: []
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE == "crowdin"
+
+file-validation/trigger:
+  stage: build
+  variables:
+    CI_SUPPORT_TRIGGER: "file_validation_trigger"
+  trigger:
+    include:
+      - ci-support/ci.yml
+      - ci-support/util.yml
+      - ci-support/file-validation/file-validation-ci.yml
+    strategy: depend
+  needs: []
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"

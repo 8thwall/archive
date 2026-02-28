@@ -1,0 +1,62 @@
+---
+id: custom-components
+description: >-
+  Benutzerdefinierte Komponenten werden verwendet, um benutzerdefinierte
+  Spiellogik zu Ihren Entitäten hinzuzufügen.
+sidebar_position: 40
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Benutzerdefinierte Komponenten
+
+## Einführung
+
+{frontMatter.description}
+
+## Erstellen einer benutzerdefinierten Komponente
+
+Um eine benutzerdefinierte Komponente zu erstellen, gehen Sie folgendermaßen vor:
+
+1. Klicken Sie im Dateibrowser auf die Plus-Schaltfläche (+).
+2. Klicken Sie auf "Neue Datei" → "Neue Komponentendatei" und geben Sie ihr einen Namen (Dateierweiterung optional).
+   1. Es wird eine neue Komponentendatei, standardmäßig TypeScript, in Ihrem Projekt erzeugt.
+   2. Die neue Komponentendatei enthält den für die Registrierung der benutzerdefinierten Komponente erforderlichen Boilerplate-Code.
+
+## Registrieren einer benutzerdefinierten Komponente
+
+Der folgende Code ist ein Beispiel dafür, wie eine neu erstellte benutzerdefinierte Komponente im Code-Editor angezeigt wird:
+
+### Beispiel
+
+```ts
+// This is a component file. You can use this file to define a custom component for your project.
+// This component will appear as a custom component in the editor.
+
+import * as ecs from '@8thwall/ecs'  // This is how you access the ecs library.
+
+ecs.registerComponent({
+  name: 'Custom Component',
+  // schema: {
+  // },
+  // schemaDefaults: {
+  // },
+  // data: {
+  // },
+  // add: (world, component) => {
+  // },
+  // tick: (world, component) => {
+  // },
+  // remove: (world, component) => {
+  // },
+  // stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+  //   ecs.defineState('default').initial()
+  // },
+})
+```
+
+In diesem Beispiel können Sie [Schema](../schema), [eine Zustandsmaschine](../state-machines) oder [Lebenszyklus-Rückrufe](../component-lifecycle) hinzufügen.
+
+:::warning
+Komponentennamen, die mit 'debug-' beginnen, sind für interne Debugging-Zwecke reserviert und werden **im Editor nicht angezeigt.**
+:::

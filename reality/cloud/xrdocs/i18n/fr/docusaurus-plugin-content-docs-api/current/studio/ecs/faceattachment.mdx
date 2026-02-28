@@ -1,0 +1,27 @@
+---
+id: face-attachment
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import FaceAttachmentTable from "../../../gen/tables/FaceAttachment.md"
+
+# Attachement du visage
+
+## Description
+
+Ce composant fait en sorte que la transformation de l'entité suive l'attachement de face spécifié, suivi dans XR. Il affichera et cachera l'entité au fur et à mesure que le visage est trouvé ou perdu.
+
+## Propriétés {#properties}
+
+<FaceAttachmentTable />
+
+## Fonctions
+
+<ComponentFunctions
+    name="FaceAttachment"
+    properties={{
+        point: 'forehead',
+    }}
+    mutate={`cursor.point = 'rightEyebrowInner';
+    return false;`}
+/>

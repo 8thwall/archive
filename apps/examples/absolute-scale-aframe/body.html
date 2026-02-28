@@ -1,0 +1,58 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<div id="recenterButtonContainer" class="hidden">
+  <img src="./assets/recenter.png" />
+</div>
+
+<a-scene
+  recenter-button
+  responsive-immersive
+  coaching-overlay
+  landing-page
+  xrextras-gesture-detector
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="colorManagement: true"
+  xrweb="allowedDevices: any; scale: absolute">
+  <a-assets>
+    <a-asset-item id="chairModel" src="./assets/chair.glb"></a-asset-item>
+  </a-assets>
+
+  <a-camera
+    id="camera"
+    position="0 2 2"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;">
+  </a-camera>
+
+  <a-entity
+    xr-light
+    light="type: directional;
+      castShadow: true;
+      shadowMapHeight:2048;
+      shadowMapWidth:2048;
+      target: #chair;
+      shadowRadius: 2"
+    xrextras-attach="target: chair; offset: 0 15 0;"
+    shadow>
+  </a-entity>
+
+  <a-light type="ambient" intensity="0.7"></a-light>
+
+  <a-entity
+    id="chair"
+    gltf-model="#chairModel"
+    rotation="0 90 0"
+    xrextras-hold-drag="rise-height: 0"
+    xrextras-two-finger-rotate
+    shadow="receive: false">
+  </a-entity>
+
+  <a-plane
+    id="ground"
+    rotation="-90 0 0"
+    width="100"
+    height="100"
+    material="shader: shadow; opacity: 0.35;"
+    shadow></a-plane>
+</a-scene>

@@ -1,0 +1,80 @@
+diff --git a/node_modules/gatsby/cache-dir/get-page-data-parent-8w.js b/node_modules/gatsby/cache-dir/get-page-data-parent-8w.js
+new file mode 100644
+index 0000000..0e100a1
+--- /dev/null
++++ b/node_modules/gatsby/cache-dir/get-page-data-parent-8w.js
+@@ -0,0 +1,8 @@
++const getPageDataParent8w = () => {
++  // The 'page-data' folder is at root, ex: www.8thwall.com/page-data/index/page-data.json'
++  return ''
++}
++
++module.exports = {
++  getPageDataParent8w,
++}
+diff --git a/node_modules/gatsby/cache-dir/loader.js b/node_modules/gatsby/cache-dir/loader.js
+index 2caf7c8..264e3fb 100644
+--- a/node_modules/gatsby/cache-dir/loader.js
++++ b/node_modules/gatsby/cache-dir/loader.js
+@@ -2,6 +2,7 @@ import { createFromReadableStream } from "react-server-dom-webpack"
+ import prefetchHelper from "./prefetch"
+ import emitter from "./emitter"
+ import { setMatchPaths, findPath, findMatchPath } from "./find-path"
++import { getPageDataParent8w } from "./get-page-data-parent-8w"
+ 
+ /**
+  * Available resource loading statuses
+@@ -26,7 +27,7 @@ const stripSurroundingSlashes = s => {
+ const createPageDataUrl = rawPath => {
+   const [path, maybeSearch] = rawPath.split(`?`)
+   const fixedPath = path === `/` ? `index` : stripSurroundingSlashes(path)
+-  return `${__PATH_PREFIX__}/page-data/${fixedPath}/page-data.json${
++  return `${getPageDataParent8w()}/page-data/${fixedPath}/page-data.json${
+     maybeSearch ? `?${maybeSearch}` : ``
+   }`
+ }
+@@ -415,7 +416,7 @@ export class BaseLoader {
+             }
+ 
+             return this.memoizedGet(
+-              `${__PATH_PREFIX__}/page-data/sq/d/${staticQueryHash}.json`
++              `${getPageDataParent8w()}/page-data/sq/d/${staticQueryHash}.json`
+             )
+               .then(req => {
+                 const jsonPayload = JSON.parse(req.responseText)
+@@ -423,7 +424,7 @@ export class BaseLoader {
+               })
+               .catch(() => {
+                 throw new Error(
+-                  `We couldn't load "${__PATH_PREFIX__}/page-data/sq/d/${staticQueryHash}.json"`
++                  `We couldn't load "${getPageDataParent8w()}/page-data/sq/d/${staticQueryHash}.json"`
+                 )
+               })
+           })
+@@ -530,7 +531,7 @@ export class BaseLoader {
+             }
+ 
+             return this.memoizedGet(
+-              `${__PATH_PREFIX__}/page-data/sq/d/${staticQueryHash}.json`
++              `${getPageDataParent8w()}/page-data/sq/d/${staticQueryHash}.json`
+             )
+               .then(req => {
+                 const jsonPayload = JSON.parse(req.responseText)
+@@ -538,7 +539,7 @@ export class BaseLoader {
+               })
+               .catch(() => {
+                 throw new Error(
+-                  `We couldn't load "${__PATH_PREFIX__}/page-data/sq/d/${staticQueryHash}.json"`
++                  `We couldn't load "${getPageDataParent8w()}/page-data/sq/d/${staticQueryHash}.json"`
+                 )
+               })
+           })
+@@ -789,7 +790,7 @@ export class BaseLoader {
+   }
+ 
+   loadAppData(retries = 0) {
+-    return this.memoizedGet(`${__PATH_PREFIX__}/page-data/app-data.json`).then(
++    return this.memoizedGet(`${getPageDataParent8w()}/page-data/app-data.json`).then(
+       req => {
+         const { status, responseText } = req
+ 

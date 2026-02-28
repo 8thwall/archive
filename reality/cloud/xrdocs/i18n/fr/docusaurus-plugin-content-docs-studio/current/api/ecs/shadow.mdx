@@ -1,0 +1,31 @@
+---
+id: shadow
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Ombre
+
+## Description
+
+Ce composant contrôle la manière dont l'entité gère les ombres.
+
+## Propriétés
+
+| Propriété        | Type    | Défaut | Description                                        |
+| ---------------- | ------- | ------ | -------------------------------------------------- |
+| ombre portée     | booléen | faux   | Indique si une entité peut projeter des ombres.    |
+| recevoir l'ombre | booléen | faux   | Indique si une entité peut recevoir des ombres.    |
+
+## Fonctions
+
+<ComponentFunctions
+    name="Shadow"
+    properties={{
+        castShadow: false,
+        receiveShadow: false
+    }}
+    mutate={`cursor.castShadow = true;
+    cursor.receiveShadow = true;
+    return false;`}
+/>

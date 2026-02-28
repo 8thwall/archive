@@ -1,0 +1,26 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- head.html is optional; elements will be added to your html head before app.js is loaded. -->
+
+<!-- Use "8thwall:" meta tags to hook into 8th Wall's build process and developer tools. -->
+<meta name="8thwall:renderer" content="aframe:1.3.0">
+<meta name="8thwall:package" content="@8thwall.xrextras">
+<meta name="8thwall:package" content="@8thwall.landing-page">
+
+<!-- loading an external library via a CDN URL -->
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+<!-- a simple example of importing the default export using skypack -->
+<script type="module">
+  import confetti from 'https://cdn.skypack.dev/canvas-confetti';
+  window.confetti = confetti
+</script>
+
+<!-- a more advanced example of importing specific variables/functions using skypack -->
+<script type="module">
+  import {WebIO} from 'https://cdn.skypack.dev/@gltf-transform/core'
+  import {KHRONOS_EXTENSIONS} from 'https://cdn.skypack.dev/@gltf-transform/extensions'
+  import {textureResize} from 'https://cdn.skypack.dev/@gltf-transform/functions'
+  window.CoreWebIO = WebIO
+  window.KHRONOS_EXTENSIONS = KHRONOS_EXTENSIONS
+  window.textureResize = textureResize
+</script>

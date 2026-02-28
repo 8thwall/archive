@@ -1,0 +1,7 @@
+{
+    "require": {
+        "phpmailer/phpmailer": "~6.0",
+        "google/recaptcha": "^1.2",
+        "zendesk/zendesk_api_client_php": "^2.2"
+    }
+}

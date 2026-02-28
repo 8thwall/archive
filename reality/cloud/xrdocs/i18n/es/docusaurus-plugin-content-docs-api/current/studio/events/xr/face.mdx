@@ -1,0 +1,336 @@
+---
+id: face
+sidebar_position: 1
+---
+
+import {EventExample} from '@site/src/components/event-example'
+
+# Efectos faciales Eventos
+
+## Tipos
+
+### TransformObjeto {#TransformObject}
+
+| Propiedad    | Tipo           | Descripción                                                                          |
+| ------------ | -------------- | ------------------------------------------------------------------------------------ |
+| posición     | `{x, y, z}`    | La posición 3d de la cara localizada.                                                |
+| rotación     | `{w, x, y, z}` | La orientación local 3d de la cara localizada.                                       |
+| escala       | "Número        | Factor de escala que debe aplicarse a los objetos adjuntos a esta cara.              |
+| scaledWidth  | "Número        | Anchura aproximada de la cabeza en la escena cuando se multiplica por la escala.     |
+| scaledHeight | "Número        | Altura aproximada de la cabeza en la escena multiplicada por la escala.              |
+| scaledDepth  | "Número        | Profundidad aproximada de la cabeza en la escena cuando se multiplica por la escala. |
+
+## Eventos
+
+### CARGA FRONTAL
+
+Este evento es emitido por Face Effects cuando comienza la carga de recursos adicionales de Face AR.
+
+#### Propiedades
+
+| Propiedad          | Tipo          | Descripción                                                                                                                          |
+| ------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| maxDetecciones     | "Número       | Número máximo de caras que se pueden procesar simultáneamente.                                                                       |
+| puntosPorDetección | "Número       | Número de vértices que se extraerán por cara.                                                                                        |
+| índices            | `[{a, b, c}]` | Índices en la matriz de vértices que forman los triángulos de la malla solicitada, como se especifica con meshGeometry en configure. |
+| uvs                | `[{u, v}]`    | posiciones uv en un mapa de textura correspondiente a los puntos de vértice devueltos.                                               |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="FACE_LOADING" target="world.events.globalId" callbackBody={`console.log('Face loading')`} />
+
+### ESCANEO FACIAL
+
+Este evento es emitido por Face Effects cuando se han cargado todos los recursos de RA facial y ha comenzado el escaneado.
+
+#### Propiedades
+
+| Propiedad          | Tipo          | Descripción                                                                                                                          |
+| ------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| maxDetecciones     | "Número       | Número máximo de caras que se pueden procesar simultáneamente.                                                                       |
+| puntosPorDetección | "Número       | Número de vértices que se extraerán por cara.                                                                                        |
+| índices            | `[{a, b, c}]` | Índices en la matriz de vértices que forman los triángulos de la malla solicitada, como se especifica con meshGeometry en configure. |
+| uvs                | `[{u, v}]`    | posiciones uv en un mapa de textura correspondiente a los puntos de vértice devueltos.                                               |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="FACE_SCANNING" target="world.events.globalId" callbackBody={`console.log('Face scanning')`} />
+
+### FACE_FOUND
+
+Este evento es emitido por Face Effects cuando se encuentra una cara por primera vez.
+
+#### Propiedades
+
+| Propiedad        | Tipo                                  | Descripción                                                                                                                                                                                            |
+| ---------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id               | "Número                               | Un identificador numérico de la cara localizada                                                                                                                                                        |
+| transformar      | [`TransformObject`](#TransformObject) | Información de transformación de la cara localizada.                                                                                                                                                   |
+| vértices         | `[{x, y, z}]`                         | Posición de los puntos de la cara, relativa a la transformación.                                                                                                                                       |
+| normales         | `[{x, y, z}]`                         | Dirección normal de los vértices, relativa a la transformación.                                                                                                                                        |
+| attachmentPoints | `{ nombre, posición: {x,y,z} }`       | Consulte [`XR8.FaceController.AttachmentPoints`](https://www.8thwall.com/docs/api/facecontroller/attachmentpoints/) para ver la lista de puntos de fijación disponibles. Nombre del punto de fijación. |
+| uvsInCameraFrame | `[{u, v}]`                            | La lista de posiciones uv en el fotograma de la cámara correspondientes a los puntos de vértice devueltos.                                                                                             |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="FACE_FOUND" target="world.events.globalId" callbackBody={`console.log('Face found')`} />
+
+### FACE_UPDATED
+
+Este evento es emitido por Face Effects cuando se encuentran caras posteriormente.
+
+#### Propiedades
+
+| Propiedad        | Tipo                                  | Descripción                                                                                                                                                                                            |
+| ---------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id               | "Número                               | Un identificador numérico de la cara localizada                                                                                                                                                        |
+| transformar      | [`TransformObject`](#TransformObject) | Información de transformación de la cara localizada.                                                                                                                                                   |
+| vértices         | `[{x, y, z}]`                         | Posición de los puntos de la cara, relativa a la transformación.                                                                                                                                       |
+| normales         | `[{x, y, z}]`                         | Dirección normal de los vértices, relativa a la transformación.                                                                                                                                        |
+| attachmentPoints | `{ nombre, posición: {x,y,z} }`       | Consulte [`XR8.FaceController.AttachmentPoints`](https://www.8thwall.com/docs/api/facecontroller/attachmentpoints/) para ver la lista de puntos de fijación disponibles. Nombre del punto de fijación. |
+| uvsInCameraFrame | `[{u, v}]`                            | La lista de posiciones uv en el fotograma de la cámara correspondientes a los puntos de vértice devueltos.                                                                                             |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="FACE_UPDATED" target="world.events.globalId" callbackBody={`console.log('Face updated: ', event.data.transform)`} />
+
+### FACE_LOST
+
+Este evento es emitido por Face Effects cuando una cara deja de ser rastreada.
+
+#### Propiedades
+
+| Propiedad | Tipo    | Descripción                                           |
+| --------- | ------- | ----------------------------------------------------- |
+| id        | "Número | Identificación numérica de la cara que se ha perdido. |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="FACE_LOST" target="world.events.globalId" callbackBody={`console.log('Face lost')`} />
+
+### FACE_BLINKED
+
+Este evento es emitido por Face Effects cuando los ojos de una cara rastreada parpadean.
+
+#### Propiedades
+
+| Propiedad | Tipo    | Descripción                                     |
+| --------- | ------- | ----------------------------------------------- |
+| id        | "Número | Un identificador numérico de la cara localizada |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="FACE_BLINKED" target="world.events.globalId" callbackBody={`console.log('Blinked')`} />
+
+### DISTANCIA_INTERPUPILAR_CARA
+
+Este evento es emitido por Face Effects cuando se detecta por primera vez la distancia en milímetros entre los centros de cada pupila de una cara rastreada.
+
+#### Propiedades
+
+| Propiedad              | Tipo    | Descripción                                                          |
+| ---------------------- | ------- | -------------------------------------------------------------------- |
+| id                     | "Número | Id numérico de la cara localizada.                                   |
+| distancia interpupilar | "Número | Distancia aproximada en milímetros entre los centros de cada pupila. |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="FACE_INTERPUPILLARY_DISTANCE" target="world.events.globalId" callbackBody={`console.log('Interpupillary distance: ', event.data.interpupillaryDistance)`} />
+
+### CARA_CEJA_IZQUIERDA_BAJADA
+
+Este evento es emitido por Face Effects cuando se detecta por primera vez la distancia en milímetros entre los centros de cada pupila de una cara rastreada.
+
+#### Propiedades
+
+| Propiedad | Tipo    | Descripción                        |
+| --------- | ------- | ---------------------------------- |
+| id        | "Número | Id numérico de la cara localizada. |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="FACE_LEFT_EYEBROW_LOWERED" target="world.events.globalId" callbackBody={`console.log('Left eyebrow lowered')`} />
+
+### CARA_CEJA_IZQUIERDA_LEVANTADA
+
+Este evento es emitido por Face Effects cuando la ceja izquierda de una cara rastreada se levanta de su posición inicial cuando se encontró la cara.
+
+#### Propiedades
+
+| Propiedad | Tipo    | Descripción                        |
+| --------- | ------- | ---------------------------------- |
+| id        | "Número | Id numérico de la cara localizada. |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="FACE_LEFT_EYEBROW_RAISED" target="world.events.globalId" callbackBody={`console.log('Left eyebrow raised')`} />
+
+### CARA_IZQUIERDA_OJO_CERRADO
+
+Este evento es emitido por Face Effects cuando se cierra el ojo izquierdo de una cara rastreada.
+
+#### Propiedades
+
+| Propiedad | Tipo    | Descripción                        |
+| --------- | ------- | ---------------------------------- |
+| id        | "Número | Id numérico de la cara localizada. |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="FACE_LEFT_EYE_CLOSED" target="world.events.globalId" callbackBody={`console.log('Left eye closed')`} />
+
+### CARA_OJO_IZQUIERDO_ABIERTO
+
+Este evento es emitido por Face Effects cuando se abre el ojo izquierdo de una cara rastreada.
+
+#### Propiedades
+
+| Propiedad | Tipo    | Descripción                        |
+| --------- | ------- | ---------------------------------- |
+| id        | "Número | Id numérico de la cara localizada. |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="FACE_LEFT_EYE_OPENED" target="world.events.globalId" callbackBody={`console.log('Left eye opened')`} />
+
+### CARA_OJO_IZQUIERDO_GUIÑADO
+
+Este evento es emitido por Face Effects cuando el ojo izquierdo de una cara rastreada se cierra y se abre en un plazo de 750 ms mientras que el ojo derecho permanece abierto.
+
+#### Propiedades
+
+| Propiedad | Tipo    | Descripción                        |
+| --------- | ------- | ---------------------------------- |
+| id        | "Número | Id numérico de la cara localizada. |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="FACE_LEFT_EYE_WINKED" target="world.events.globalId" callbackBody={`console.log('Left eye winked')`} />
+
+### CARA_BOCA_CERRADA
+
+Este evento es emitido por Face Effects cuando se cierra la boca de una cara rastreada.
+
+#### Propiedades
+
+| Propiedad | Tipo    | Descripción                        |
+| --------- | ------- | ---------------------------------- |
+| id        | "Número | Id numérico de la cara localizada. |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="FACE_MOUTH_CLOSED" target="world.events.globalId" callbackBody={`console.log('Mouth closed')`} />
+
+### CARA_BOCA_ABIERTA
+
+Este evento es emitido por Face Effects cuando se abre la boca de una cara rastreada.
+
+#### Propiedades
+
+| Propiedad | Tipo    | Descripción                        |
+| --------- | ------- | ---------------------------------- |
+| id        | "Número | Id numérico de la cara localizada. |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="FACE_MOUTH_OPENED" target="world.events.globalId" callbackBody={`console.log('Mouth opened')`} />
+
+### FACE_RIGHT_EYEBROW_LOWERED
+
+Este evento es emitido por Face Effects cuando la ceja derecha de una cara rastreada se baja a su posición inicial cuando se encontró la cara.
+
+#### Propiedades
+
+| Propiedad | Tipo    | Descripción                        |
+| --------- | ------- | ---------------------------------- |
+| id        | "Número | Id numérico de la cara localizada. |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="FACE_RIGHT_EYEBROW_LOWERED" target="world.events.globalId" callbackBody={`console.log('Right eyebrow lowered')`} />
+
+### CARA_CEJA_DERECHA_LEVANTADA
+
+Este evento es emitido por Face Effects cuando la ceja derecha de una cara rastreada se levanta de su posición inicial cuando se encontró la cara.
+
+#### Propiedades
+
+| Propiedad | Tipo    | Descripción                        |
+| --------- | ------- | ---------------------------------- |
+| id        | "Número | Id numérico de la cara localizada. |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="FACE_RIGHT_EYEBROW_RAISED" target="world.events.globalId" callbackBody={`console.log('Right eyebrow raised')`} />
+
+### CARA_DERECHA_OJO_CERRADO
+
+Este evento es emitido por Face Effects cuando se cierra el ojo derecho de una cara rastreada.
+
+#### Propiedades
+
+| Propiedad | Tipo    | Descripción                        |
+| --------- | ------- | ---------------------------------- |
+| id        | "Número | Id numérico de la cara localizada. |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="FACE_RIGHT_EYE_CLOSED" target="world.events.globalId" callbackBody={`console.log('Right eye closed')`} />
+
+### CARA_DERECHA_OJO_ABIERTO
+
+Este evento es emitido por Face Effects cuando se abre el ojo derecho de una cara rastreada.
+
+#### Propiedades
+
+| Propiedad | Tipo    | Descripción                        |
+| --------- | ------- | ---------------------------------- |
+| id        | "Número | Id numérico de la cara localizada. |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="FACE_RIGHT_EYE_OPENED" target="world.events.globalId" callbackBody={`console.log('Right eye opened')`} />
+
+### CARA_DERECHA_OJO_GUIÑADO
+
+Este evento es emitido por Face Effects cuando el ojo derecho de una cara rastreada se cierra y se abre en un plazo de 750 ms mientras que el ojo izquierdo permanece abierto.
+
+#### Propiedades
+
+| Propiedad | Tipo    | Descripción                        |
+| --------- | ------- | ---------------------------------- |
+| id        | "Número | Id numérico de la cara localizada. |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="FACE_RIGHT_EYE_WINKED" target="world.events.globalId" callbackBody={`console.log('Right eye winked')`} />
+
+### FACE_EAR_POINT_FOUND
+
+Este evento es emitido por Face Effects cuando se encuentra un punto auricular.
+
+#### Propiedades
+
+| Propiedad | Tipo    | Descripción                                                                                                                                                        |
+| --------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id        | "Número | Un identificador numérico de la cara localizada                                                                                                                    |
+| punto     | Cadena  | Nombre del punto auricular. Uno de los siguientes: `Lóbulo izquierdo`, `Canal izquierdo`, `Hélice izquierda`, `Lóbulo derecho`, `Canal derecho`, `Hélice derecha`. |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="FACE_EAR_POINT_FOUND" target="world.events.globalId" callbackBody={`console.log('Ear point found: ', event.data.point)`} />
+
+### CARA_OREJA_PUNTO_PERDIDO
+
+Este evento es emitido por Face Effects cuando se pierde un punto auricular.
+
+#### Propiedades
+
+| Propiedad | Tipo    | Descripción                                                                                                                                                        |
+| --------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id        | "Número | Un identificador numérico de la cara localizada                                                                                                                    |
+| punto     | Cadena  | Nombre del punto auricular. Uno de los siguientes: `Lóbulo izquierdo`, `Canal izquierdo`, `Hélice izquierda`, `Lóbulo derecho`, `Canal derecho`, `Hélice derecha`. |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="FACE_EAR_POINT_LOST" target="world.events.globalId" callbackBody={`console.log('Ear point lost: ', event.data.point)`} />

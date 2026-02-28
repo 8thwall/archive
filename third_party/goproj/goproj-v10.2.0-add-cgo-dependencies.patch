@@ -1,0 +1,13 @@
+--- a/BUILD.bazel
++++ b/BUILD.bazel
+@@ -12,6 +12,10 @@ go_library(
+         "proj.go",
+     ],
+     cgo = True,
++    cdeps = [
++        "@com_github_osgeo_proj//:_proj",
++        "@com_github_sqlite_sqlite//:sqlite3"
++    ],
+     importpath = "github.com/twpayne/go-proj/v10",
+     importpath_aliases = ["github.com/twpayne/go-proj"],
+     visibility = ["//visibility:public"],

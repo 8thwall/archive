@@ -1,0 +1,18 @@
+<!--
+  templateType: section
+  label: Hero Section
+  isAvailableForNewContent: true
+  description: "Full width section with heading and subheading"
+-->
+
+{% dnd_section
+  background_color={{ context.background_color or "#7611B6" }},
+  vertical_alignment="MIDDLE"
+%}
+  {% dnd_module
+    path="../modules/hero-heading",
+    offset=0,
+    width=12
+  %}
+  {% end_dnd_module %}
+{% end_dnd_section %}

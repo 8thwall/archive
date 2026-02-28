@@ -1,0 +1,134 @@
+---
+id: input
+description: Cette section explique comment configurer les entrées pour votre projet.
+---
+
+# Entrée
+
+## Introduction
+
+{frontMatter.description} Les entrées font référence aux différentes méthodes par lesquelles les utilisateurs interagissent avec l'application. Actuellement, les méthodes d'entrée prises en charge sont le toucher, le clavier, la souris et la manette de jeu.
+
+Voir [world.input](/api/studio/world/input/) pour l'api.
+
+## Gestionnaire des entrées
+
+Dans Studio, il y a des entrées et des actions - le gestionnaire d'entrées établit la correspondance entre les deux. Une action est une abstraction de la source d'entrée(s) qu'elle reçoit. Ils sont plus utiles pour représenter les entrées sous forme de concepts "logiques" (par exemple, "sauter") plutôt que sous forme d'entrées "physiques" (par exemple, "barre d'espacement du clavier enfoncée").
+
+![input-manager.png](/images/studio/input-manager.png)
+
+### Cartes d'action
+
+Vous pouvez gérer les cartes d'action via le gestionnaire d'entrée dans les paramètres de l'espace (l'état par défaut de l'inspecteur lorsqu'aucune entité n'est sélectionnée).
+
+#### Ajouter une carte d'action
+
+Les cartes d'action sont des ensembles d'actions qui peuvent être échangées par programme. Pour créer une nouvelle carte d'action, cliquez sur le menu déroulant des cartes d'action, puis sur Créer une nouvelle carte d'action. Saisissez ensuite le nom de la carte d'action et enregistrez-la. Les cartes d'action peuvent être renommées, dupliquées et supprimées. La carte des actions par défaut ne peut être que dupliquée.
+
+![input-add-action-map.png](/images/studio/input-add-action-map.png)
+
+:::info
+La carte d'action actuellement sélectionnée est la carte d'action qui sera active par défaut.
+:::
+
+#### Modèles de cartes d'action
+
+Lorsque vous sélectionnez Créer une nouvelle carte d'action, plusieurs modèles de cartes d'action s'affichent. Les modèles Fly Controller et Orbit Controls sont utilisés pour leurs composants respectifs.
+
+![input-action-map-templates.png](/images/studio/input-action-map-templates.png)
+
+### Ajouter une action
+
+Les actions constituent une couche d'abstraction pour les entrées de l'utilisateur. Pour ajouter une action à la carte des actions, cliquez sur le bouton (+) Nouvelle action, puis saisissez le nom de votre action.
+
+![input-add-action.png](/images/studio/input-add-action.png)
+
+### Lier à une action
+
+Les liaisons sont la manière dont les entrées peuvent être associées à une action. Pour ajouter une liaison, cliquez sur le bouton Ajouter une liaison et sélectionnez l'entrée que vous souhaitez lier à l'action dans la liste déroulante. Il existe des fixations pour de nombreux types d'entrées, notamment le clavier, la souris et la manette de jeu. Plusieurs liaisons d'entrée peuvent être associées à une seule action. Pour supprimer une reliure, cliquez sur la corbeille en regard de la reliure à supprimer.
+
+![input-add-bindings.png](/images/studio/input-add-bindings.png)
+
+### Modificateurs d'action
+
+Les modificateurs sont une entrée supplémentaire que vous pouvez assigner à une liaison afin d'activer l'action. Pour créer une liaison avec un modificateur, cliquez sur le bouton Avec modificateur. Le modificateur est sélectionné à l'aide de la première liste déroulante et la liaison est sélectionnée à l'aide de la deuxième liste déroulante.
+
+![input-add-modifier.png](/images/studio/input-add-modifier.png)
+
+## Exemples
+
+### Détection d'une action en cours
+
+```ts
+ecs.registerComponent({
+  name : 'player-controller',
+  tick : (world, component) => {
+    if (world.input.getAction('jump')) {
+      // Gérer la logique de saut ici
+    }
+  },
+})
+```
+
+### Détection d'une action dans une machine à états
+
+```ts
+stateMachine : ({world, eid, schemaAttribute, dataAttribute}) => {
+  ecs.defineState('default').initial().onTick(() => {
+    if (world.input.getAction('jump')) {
+      // Gérer la logique de saut ici
+    }
+  })
+}
+```
+
+### Passer d'une carte d'action à l'autre
+
+:::info
+Lors de la définition d'une nouvelle carte d'action, la nouvelle carte n'est pas activée avant le prochain tic-tac.
+:::
+
+#### En tique
+
+```ts
+tick : (world, component) => {
+  if (world.input.getAction('menu')) {
+    world.input.setActiveMap(world.input.getActiveMap() === 'player' ? 'menu' : 'player')
+    return
+  }
+  if (world.input.getAction('jump')) {
+    // Gérer la logique de saut ici
+  }
+}
+```
+
+#### Dans une machine à états
+
+```ts
+stateMachine : ({world, eid, schemaAttribute, dataAttribute}) => {
+  const switchMap = ecs.defineTrigger()
+
+  ecs.defineState('default')
+  .initial()
+  .onEnter(() => {
+    world.input.setActiveMap('player')
+  })
+  .onTick(() => {
+    if (world.input.getAction('menu')) {
+      switchMap.trigger()
+      return
+    }
+    // Gérer la logique de mouvement ici
+  }).onTrigger(switchMap, 'menu')
+
+  ecs.defineState('menu').onEnter(() => {
+        world.input.setActiveMap('menu')
+  }).onTick(() => {
+    if (world.input.getAction('menu')) {
+      switchMap.trigger()
+      return
+    }
+    // Gérer la logique du menu ici
+  }).onTrigger(switchMap, 'default')
+}
+```

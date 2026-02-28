@@ -1,0 +1,47 @@
+---
+id: gltf-model
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# GltfModel
+
+## Beschreibung
+
+Diese Komponente erstellt eine benutzerdefinierte Geometrie für ein Objekt.
+
+## Eigenschaften
+
+| Eigenschaft           | Typ     | Standard | Beschreibung                                                                                                                                                                                  |
+| --------------------- | ------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| url (erforderlich)    | String  | ""       | Die Quellurl.                                                                                                                                                                                 |
+| animationClip         | String  | ""       | Der Name des Animationsclips, der an das abzuspielende Modell angehängt ist. Der Platzhalter "\*" wird ebenfalls akzeptiert und führt dazu, dass das Modell jede Animation durchläuft.        |
+| Schleife              | boolean | false    | Ob der Animationsclip nach Beendigung der Wiedergabe neu startet oder nicht                                                                                                                   |
+| pausiert              | boolean | false    | Ob der Animationsclip pausiert ist                                                                                                                                                            |
+| Zeit                  | Nummer  | 0        | Zeit in Sekunden, zu der der AnimationClip springen soll                                                                                                                                      |
+| timeScale             | Nummer  | 1        | Skalierungsfaktor für die Zeit. 0 bewirkt, dass die Animation pausiert. Negative Werte bewirken, dass die Animation rückwärts abgespielt wird.                                                |
+| Kollider              | boolean | false    | Ob die Animation den Physikkollider aktualisieren soll.                                                                                                                                       |
+| umkehren              | boolean | false    | Wenn diese Option gesetzt ist, wird die Animation rückwärts abgespielt, wenn die Vorwärtswiedergabe beendet ist (dies zählt als eine Schleifeniteration).                                     |
+| Wiederholungen        | Nummer  | \-1      | Wenn zusammen mit 'loop' gesetzt, die Anzahl der Wiederholungen der Schleife (-1 bedeutet Schleife für immer)                                                                                 |
+| crossFadeDuration     | Nummer  | 0        | Die Zeit in Sekunden, die für die Überblendung zwischen Animationen verwendet wird, wenn eine neue Animation gestartet wird (und eine bestehende Animation abgespielt wird)                   |
+
+## Funktionen
+
+<ComponentFunctions
+    name="GltfModel"
+    properties={{
+        url: './assets/doty.glb',
+        animationClip: 'idle',
+        loop: false,
+        paused: false,
+        time: 0,
+        timeScale: 1,
+        collider: false,
+        reverse: false,
+        repetitions: -1,
+        crossFadeDuration: 0
+    }}
+    mutate={`cursor.timeScale = 0.5;
+    cursor.loop = true;
+    return false;`}
+/>

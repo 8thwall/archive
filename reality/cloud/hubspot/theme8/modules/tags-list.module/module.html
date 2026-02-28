@@ -1,0 +1,11 @@
+{# Parse tags into array#}
+
+{% set rawTags = module.tags|split(",") %}
+
+{# HTML #}
+
+<div class="caseStudyTagsList" style="justify-content: {{module.align_content}};">
+  {% for tag in rawTags %}
+    <div class="caseStudyTag" >{{ tag }}</div>
+  {% endfor %}
+</div>

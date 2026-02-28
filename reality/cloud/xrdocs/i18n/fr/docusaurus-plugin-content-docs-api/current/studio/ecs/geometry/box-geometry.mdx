@@ -1,0 +1,26 @@
+---
+id: box-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import BoxGeometryTable from "../../../../gen/tables/BoxGeometry.md"
+
+# BoxGeometry
+
+## Description
+
+Ce composant établit la géométrie d'une entité.
+
+## Propriétés
+
+<BoxGeometryTable />
+
+## Fonctions
+
+<ComponentFunctions
+    name="BoxGeometry"
+    properties={{width: 1, height: 2, depth: 1}}
+    mutate={`cursor.width += 1 ;
+    cursor.height *= 2 ;
+    return false;`}
+/>

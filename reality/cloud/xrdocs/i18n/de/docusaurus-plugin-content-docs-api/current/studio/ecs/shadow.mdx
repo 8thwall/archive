@@ -1,0 +1,29 @@
+---
+id: shadow
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import ShadowTable from "../../../gen/tables/Shadow.md"
+
+# Schatten
+
+## Beschreibung
+
+Diese Komponente steuert, wie die Entität mit Schatten umgeht.
+
+## Eigenschaften
+
+<ShadowTable />
+
+## Funktionen
+
+<ComponentFunctions
+    name="Shadow"
+    properties={{
+        castShadow: false,
+        receiveShadow: false
+    }}
+    mutate={`cursor.castShadow = true;
+    cursor.receiveShadow = true;
+    return false;`}
+/>

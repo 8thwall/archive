@@ -1,0 +1,57 @@
+---
+id: lighting
+description: >-
+  Unabhängig davon, ob Sie ein sehr realistisches oder ein stilisiertes Aussehen
+  anstreben, kann die Beleuchtung einen erheblichen Einfluss darauf haben, wie
+  sich Ihre Szene anfühlt und wie sie auf den Benutzer wirkt.
+---
+
+# Beleuchtung
+
+## Einführung
+
+Die Beleuchtung spielt eine entscheidende Rolle bei der Verbesserung der visuellen Attraktivität jeder Szene. Sie verleiht dem Spiel mehr Tiefe, Realismus und Atmosphäre und macht das Erlebnis noch intensiver, fesselnder und visuell ansprechender. {frontMatter.description}
+
+## Hinzufügen einer Leuchte
+
+Lichter und Schatten können einem Objekt über die Studio-Schnittstelle oder über Code hinzugefügt werden. In Studio können Sie dies tun, indem Sie in der Hierarchie auf die Schaltfläche (+) klicken oder im Inspektor für eine ausgewählte Entität "Neue Komponente" auswählen. Sowohl die Licht- als auch die Schattenkomponente bieten verschiedene Einstellungsmöglichkeiten zur individuellen Anpassung.
+
+#### Arten von Lichtern
+
+**Gerichtetes Licht:**
+Ein Licht, das in eine bestimmte Richtung ausgestrahlt wird. Dieses Licht verhält sich so, als ob es unendlich weit entfernt wäre und die von ihm ausgehenden Strahlen alle parallel verlaufen. Die Sonne ist weit genug entfernt, dass ihre Position als unendlich angesehen werden kann, und alle von ihr ausgehenden Lichtstrahlen sind parallel.
+
+**Punkt:**
+Ein Licht, das von einem einzigen Punkt aus in alle Richtungen strahlt. Ein gängiges Beispiel ist die Nachbildung von Licht aus einer nackten Glühbirne.
+
+**Ambient:**
+Dieses Licht beleuchtet alle Objekte in der Szene gleichmäßig und erzeugt eine globale Beleuchtung.
+
+![light-component.png](/images/studio/light-component.png)
+
+### Beispiel
+
+Das folgende Beispiel zeigt, wie man einer Entität zur Laufzeit ein Licht zuweist:
+
+```ts
+ecs.Light.set(world, component.eid, {
+    type: 'point'
+})
+```
+
+## Hinzufügen von Schatten
+
+\*\*Um Schatten zu aktivieren, fügen Sie dem Objekt die Komponente Schatten hinzu und konfigurieren Sie seine Eigenschaften entsprechend.
+
+![shadow-component.png](/images/studio/shadow-component.png)
+
+### Beispiel
+
+Das folgende Beispiel zeigt, wie man einen Schatten auf eine Entität zur Laufzeit setzt.
+
+```ts
+ecs.Shadow.set(world, component.eid, {
+  castShadow: true,
+  receiveShadow: true
+})
+```

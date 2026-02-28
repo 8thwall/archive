@@ -1,0 +1,30 @@
+---
+id: world
+description: >-
+  Los efectos de mundo permiten crear experiencias que interactúan con el
+  entorno del mundo real.
+---
+
+# Mundo
+
+## Introducción
+
+{frontMatter.description}
+![Face Effects](/images/studio/world-effects-cover.png)
+
+## Habilitar los efectos mundiales
+
+Para activar los efectos de mundo en tu proyecto, sigue estos pasos:
+
+1. Seleccione la Cámara en su escena.
+2. Establezca el Tipo en "Mundo".
+
+```mdx-code-block
+<img src={require('/images/studio/change-camera-to-world.png').default} alt='Camera properties include the ability to change the type of Camera.'/>
+```
+
+3. (Opcional) Añada un Plano con un componente Sombra para representar el suelo.
+
+:::info
+El nivel del suelo en su escena se define como 0 en el eje Y, en relación con la alimentación de la cámara.
+:::

@@ -1,0 +1,29 @@
+---
+id: three
+description: このライブラリーはレンダリングエンジンへのインターフェースを提供する。
+---
+
+# みっつ
+
+## 説明
+
+{frontMatter.description}
+
+## プロパティ
+
+| プロパティ        | タイプ                  | 説明                             |
+| ------------ | -------------------- | ------------------------------ |
+| シーン          | Three                | three.js API のエントリポイント。        |
+| レンダラ         | WebGLRenderer        | three.jsのレンダラー。                |
+| アクティブカメラ     | Camera               | アクティブなカメラへのハンドル。               |
+| エンティティオブジェクト | `Map<eid, Object3D>` | エンティティのthree.jsオブジェクトへのマップ。    |
+
+## 機能
+
+### エンティティオブジェクト
+
+指定されたエンティティに対応する three.js Object3D を取得します。
+
+```ts
+world.three.entityToObject.get(eid: Eid) // -> Object3D
+```

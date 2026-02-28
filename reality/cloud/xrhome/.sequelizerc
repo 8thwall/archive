@@ -1,0 +1,8 @@
+const path = require('path');
+
+module.exports = {
+  'config': path.resolve('config', 'db.js'),
+  'models-path': path.resolve('storage', 'schema'),
+  'migrations-path': path.resolve('../../../../prod8/migrations/xrhome'),
+  'seeders-path': path.resolve('storage', 'seeders'),
+}

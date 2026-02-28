@@ -1,0 +1,30 @@
+---
+id: ui
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import UiTable from "../../../gen/tables/Ui.md"
+
+# ウイ
+
+## 説明
+
+このコンポーネントは、エンティティに関連するユーザインタフェースを確立する。
+
+## プロパティ
+
+<UiTable />
+
+## 機能
+
+<ComponentFunctions
+    name="Ui"
+    properties={{
+        type: "overlay",
+        background: "#FFFFFF",
+    }}
+    mutate={`cursor.opacity = 0.5;
+    cursor.text = 'Hello World!';
+    cursor.width = 150;
+    return false;`}
+/>

@@ -1,0 +1,60 @@
+$purpleLight: #AD50FF;
+$purpleDark: #7611B7;
+$purpleLight2: #dad1e4;
+$purpleLight3: #f3f2f4;
+$purple1: #c86dd7;// hsl 292 57 64
+$purple2: #7611b7;// hsl 277 83 39
+$red: #dd0065;
+$redBaked: #de478d;
+
+.usage-progress-bar {
+  .filledSecondary {
+    fill: #f3f2f4;
+
+    &.unlocked {
+      fill: $purpleLight3;
+    }
+  }
+  .filled {
+    fill: url(#mainGradient)
+  }
+
+  .overage {
+    fill: $redBaked;
+  }
+  .tick-bar {
+    fill: #ddd;
+  }
+  .tick-text {
+    fill: $purpleDark;
+    font-weight: 600;
+    font-size: 12px;
+  }
+  .tick-bar-current {
+    .tick-bar {
+      fill: $purpleDark;
+    }
+    .tick-text {
+      font-weight: 400;
+      fill: $purpleDark;
+      font-size: 11px;
+    }
+
+    &.tick-bar-overage {
+      .tick-bar {
+        fill: $red;
+      }
+      .tick-text {
+        fill: $red;
+        font-size: 11px;
+      }
+    }
+  }
+  .text {
+    fill: #818199;
+
+    .icon {
+      font-family: FontAwesome, Icons;
+    }
+  }
+}

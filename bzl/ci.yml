@@ -1,0 +1,44 @@
+bzl/trigger:
+  stage: build
+  variables:
+    BZL_TRIGGER: "bzl_trigger"
+  trigger:
+    include:
+      - bzl/bzl-ci.yml
+    strategy: depend
+  needs: []
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - .bazelrc
+        - bzl/**/*
+        - .bazelversion
+        - BUILD
+        - conanfile.txt
+        - platform_mappings
+        - presubmit
+        - PRESUBMIT.json
+        - requirements.txt
+        - third_party/**/*
+        - WORKSPACE
+        - ci-support/generate_ci_bazelrc.sh
+        - ci-support/generate_ci_bazelrc_ardk_next.sh
+        - ci-support/run_ci.py
+        - ci-support/strip_junit_sys_out.py
+        - ci-support/util.yml
+    - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE == "nightly"
+    - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE == "hourly"
+
+bzl/validity/trigger:
+  stage: build
+  variables:
+    BZL_TRIGGER: "bzl_validity_trigger"
+  trigger:
+    include:
+      - bzl/validity/validity-ci.yml
+    strategy: depend
+  needs: []
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE == "nightly"
+    - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE == "hourly"

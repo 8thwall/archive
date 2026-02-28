@@ -1,0 +1,59 @@
+---
+id: world-tracking-issues
+description: Ich habe Probleme mit World Tracking.
+---
+
+# Weltweite Tracking-Probleme
+
+## Einführung
+
+{frontMatter.description}
+
+## Warum ist das so?
+
+Das World Tracking von 8th Wall basiert auf der Echtzeit-Analyse des Kamerabildes des Geräts und identifiziert **Merkmalspunkte**, bei denen es sich um einzigartige, verfolgbare Details handelt, die zur Bestimmung des "Bodens" oder der **Bodenebene** verwendet werden.
+
+Es ist **nur** bodenbasiert und berechnet kontinuierlich eine einzige horizontale Ebene (**Y = 0**) aus der stabilsten Menge von Merkmalspunkten, die zu jedem Zeitpunkt sichtbar sind. Wenn die Oberfläche zu gleichmäßig ist oder keine ausgeprägten Merkmale aufweist, kann die Verfolgung verloren gehen oder der Boden falsch definiert werden.
+
+Anders als ARKit oder ARCore, die mehrere Oberflächen verfolgen können, erkennt und aktualisiert 8th Wall eine Grundfläche dynamisch. Die **Merkmalserkennungspipeline arbeitet in Graustufen** und verwendet Kontrast- und Texturunterschiede zwischen hellen und dunklen Bereichen anstelle von Farben. Kontrastreiche, detailreiche Oberflächen funktionieren am besten, während glatte, kontrastarme Oberflächen, unabhängig von der Farbe, schlechte Ergebnisse liefern.
+
+Häufige Ursachen für eine schlechte Verfolgung sind
+
+- Sich wiederholende Muster wie Ziegelwände, Holzdielen oder Bodenfliesen
+- Geringer Graustufenkontrast wie z. B. einfarbige Teppiche, glatter Beton oder einfarbige Böden
+- Glänzende, reflektierende oder durchscheinende Oberflächen
+- Schnelle Kamerabewegungen oder Bewegungsunschärfe
+- Plötzliche Änderungen der Beleuchtung
+- Mehrere Oberflächen im Blickfeld, z. B. ein Tisch und der Boden zusammen
+- Enge oder unübersichtliche Räume mit begrenzter Freifläche
+
+## Wie kann ich es reparieren?
+
+1. **Wählen Sie eine funktionsreiche Oberfläche**
+   - Verwenden Sie Oberflächen mit unregelmäßigen Mustern und unterschiedlichen Hell-Dunkel-Kontrasten, wie z. B. Risse in Beton, Gras, Kies oder gemusterte Teppiche.
+
+2. **Vermeiden Sie sich wiederholende Muster**
+   - Ähnlich aussehende Elemente wie Ziegelsteine oder Bretter können die Erkennung verwirren.
+
+3. **Auf gute Beleuchtung achten**
+   - Verwenden Sie eine gleichmäßige Beleuchtung ohne Blendung oder starke Schatten.
+
+4. **Schnelle Kamerabewegungen minimieren**
+   - Bewegen Sie sich langsam, vor allem beim Anfahren, um eine stabile Spur zu erhalten.
+
+5. **Nur eine Oberfläche im Blick behalten**
+   - Umfassen Sie die Zielfläche, ohne dass andere horizontale Ebenen stören.
+
+6. **Geben Sie AR-Inhalten genügend Raum**
+   - Verwenden Sie eine Fläche, die groß genug für Ihren Inhalt ist und keine Hindernisse in der Nähe aufweist.
+
+7. **bei Bedarf erneut scannen**
+   - Richten Sie die Kamera für ein paar Sekunden auf eine funktionsreiche Oberfläche oder rufen Sie `XR8.XrController.recenter()` auf, um die Verfolgung zurückzusetzen.
+
+## Wie kann ich die Endbenutzererfahrung verbessern?
+
+1. **Schaltfläche "Re Center" hinzufügen**
+   - Ermöglicht es Benutzern, die Verfolgung auf die aktuelle Kameraansicht zurückzusetzen, was hilfreich ist, wenn sie auf einer schlechten Oberfläche begonnen haben, ohne die Seite neu laden zu müssen.
+
+2. **Positionierung des Inhalts vollständig über Y = 0**
+   - Stellen Sie sicher, dass die Modelle vollständig über der Grundfläche liegen. Stellen Sie die Drehpunkte ein oder positionieren Sie die Modelle neu, so dass kein Teil unter dem Boden liegt.

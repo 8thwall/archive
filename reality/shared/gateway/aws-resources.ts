@@ -1,0 +1,1 @@
+../../cloud/aws/lambda/studio-deploy/shared/gateway/aws-resources.ts

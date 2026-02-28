@@ -1,0 +1,71 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+
+<!-- UI -->
+<div class="over">
+  <span id="promptText">Loading...</span>
+  <div id="progressBar">
+    <div id="playProgress"></div>
+    <div id="loadProgress"></div>
+  </div>
+  <img id="pauseBtn" class="media-btn" src="./assets/icons/pause.svg" style="display: none;">
+  <img id="muteBtn" class="media-btn" src="./assets/icons/sound.svg" style="display: none;">
+  <div id="gradient-box"></div>
+</div>
+
+<a-scene
+  responsive-immersive
+  xrextras-gesture-detector
+  landing-page="
+    mediaSrc: https://media.giphy.com/media/dMBxNuC5kJBRI38gDo/giphy.mp4;
+    logoSrc: https://www.tetavi.com/images/site/logo.png"
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="sortObjects: true"
+  light="defaultLightsEnabled: false"
+  xrweb="allowedDevices: any">
+  
+  <a-camera
+    id="camera"
+    position="0 1.5 2"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;">
+  </a-camera>
+
+  <!--
+    For inquiries regarding Tetavi volumetric capture services, contact Tetavi at hello@tetavi.com
+    
+    The Tetavi volumetric video for this demo is located in the assets folder
+    * Dancing Couple (contains sound)
+      Tetavi -> assets/Dancing-Hologram/Dancing.tetavi
+      MP4 -> assets/Dancing-Hologram/DancingTexture.mp4
+    
+    You can upload your own Tetavi volumetric videos by dropping the Tetavi + MP4 files in the 
+    assets folder or Assets + -> Upload...
+    
+    If you are hosting your own Tetavi + MP4 files, reference the file links using 'src' below
+  -->
+
+  <xrextras-resource id="tetaviFile" src="assets/Dancing-Hologram/Dancing.tetavi"></xrextras-resource>
+  <xrextras-resource id="mp4File" src="assets/Dancing-Hologram/DancingTexture.mp4"></xrextras-resource>
+
+  <tetavi-hologram
+    tetavi-file="#tetaviFile"
+    mp4-file="#mp4File"
+    touch-target-size="1.5 0.8"
+    touch-target-offset="-0.5 0.5"
+    xrextras-hold-drag="riseHeight: 0"
+    xrextras-pinch-scale
+    xrextras-two-finger-rotate>
+  </tetavi-hologram>
+
+   <a-box
+    id="ground"
+    class="cantap"
+    geometry="primitive: box"
+    scale="1000 2 1000"
+    position="0 -1 0"
+    visible="false">
+   </a-box>
+
+  
+</a-scene>

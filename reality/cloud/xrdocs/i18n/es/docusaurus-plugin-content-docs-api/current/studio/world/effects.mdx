@@ -1,0 +1,94 @@
+---
+id: effects
+description: >-
+  Esta biblioteca incluye funciones para actualizar efectos de mundo como el
+  skybox y la niebla.
+---
+
+# efectos
+
+## Descripción
+
+{frontMatter.description}
+
+## Tipos
+
+```
+type NoFog = {type: 'none'}
+
+type LinearFog = {
+  type: 'linear'
+  near: number
+  far: number
+  color: string
+}
+
+type ExponentialFog = {
+  type: 'exponential'
+  density: number
+  color: string
+}
+
+type Fog = NoFog | LinearFog | ExponentialFog
+```
+
+```
+type Color = {type: 'color', color?: string}
+
+type GradientStyle = 'linear' | 'radial'
+type Gradient = {
+  type: 'gradient'
+  style?: GradientStyle
+  colors?: string[]
+}
+type Image<T = Resource> = {type: 'image', src?: T}
+type NoSky = {type: 'none'}
+
+type Sky<T = Resource> = Color | Gradient | Image<T> | NoSky
+```
+
+## Funciones {#functions}
+
+### setFog
+
+Establece la niebla activa.
+
+```ts
+world.effects.setFog(fog: Fog) => void
+```
+
+#### Ejemplo
+
+```ts
+world.effects.setFog({type: 'linear', far: 1000, near: 0.1, color: 'ffffff'})
+```
+
+### getFog
+
+Consigue la niebla activa.
+
+```ts
+world.effects.getFog() => Fog | undefined
+```
+
+### setSky
+
+Fije el cielo activo.
+
+```ts
+world.effects.setSky(sky: Sky) => void
+```
+
+#### Ejemplo
+
+```ts
+world.effects.setSky({type: 'color', color: 'ffffff'})
+```
+
+### getSky
+
+Consigue el cielo activo.
+
+```ts
+world.effects.getSky() => Sky | undefined
+```

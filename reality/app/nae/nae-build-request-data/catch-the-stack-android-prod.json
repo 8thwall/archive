@@ -1,0 +1,23 @@
+{
+  "projectUrl": "https://8w.8thwall.app/catch-the-stack/",
+  "shell": "android",
+  "android": {
+    "packageName": "com.the8w.catch_the_stack",
+    "minSdkVersion": 26,
+    "targetSdkVersion": 34,
+    "resourceDir": "res/"
+  },
+  "appInfo": {
+    "bundleIdentifier": "com.the8w.catch_the_stack",
+    "appDisplayName": "Catch the Stack",
+    "naeBuildMode": "static",
+    "workspace": "8w",
+    "appName": "catch-the-stack",
+    "refHead": "production"
+  },
+  "appUuid": "42ae06a3-19ce-4589-982a-5d6c8ef2a596",
+  "exportType": "apk",
+  "iconId": "4sf2pnwzgtcjcc2b736e0sqyhg47rqhg3w0ny8fjmk9uhmnlp3xlhftw",
+  "requestRef": "paris-default",
+  "repoId": "cc.2.app.6b5b70d5-c269-4955-92b5-c36bcc4706cc"
+}

@@ -1,0 +1,71 @@
+---
+id: spaces
+description: >-
+  Un Espacio es una forma de organizar Entidades y realizar una configuración
+  global.
+---
+
+# Espacios
+
+## Introducción
+
+{frontMatter.description} La creación de juegos y experiencias WebXR envolventes requiere a menudo múltiples entornos, transiciones y espacios estructurados para las distintas partes del recorrido del usuario. Spaces le ofrece ahora la posibilidad de crear y gestionar varias áreas distintas dentro de un mismo proyecto. Puedes pensar en Spaces como en escenas o entornos de otros motores de juego o herramientas de diseño. En pocas palabras, los espacios son marcos 3D en los que puedes colocar recursos, iluminación, cámaras e interacciones de juego.
+
+![](/images/studio/spaces-intro.gif)
+
+## Añadir un espacio
+
+Cuando inicies un nuevo proyecto en 8th Wall Studio, verás un espacio predeterminado con una cámara y una luz. Añadir un nuevo Espacio es muy sencillo: sólo tiene que seleccionar el menú desplegable situado en la parte superior del Panel de jerarquía, asignarle un nombre y empezar a diseñar.
+
+Nota: Los espacios se introdujeron en nuestra versión 2025-Febrero-13. Los proyectos creados antes de esta versión no tendrán espacios, pero puede configurarlos utilizando el menú desplegable Espacio en la parte superior de la jerarquía. Todas las entidades del proyecto serán ahora designadas al Espacio creado.
+
+![](/images/studio/spaces-add.png)
+
+## Espacios incluidos
+
+Puede especificar un Espacio para incluir otros Espacios. Incluir un Espacio significa que todos sus objetos se cargarán cuando se cargue el Espacio que lo incluye. Puede añadir Espacios adicionales a su Espacio activo utilizando el configurador de Espacios de la pestaña Configuración del Inspector.
+
+![](/images/studio/spaces-settings.png)
+
+Notas:
+
+* Incluir un Espacio adicional significa que todos los objetos de ese Espacio y de cualquier Espacio que incluya (y así sucesivamente).
+* Cuando se cambia entre dos Espacios, los Espacios incluidos que son compartidos entre los dos no tendrán sus objetos despawned y respawned.
+
+## Cargar un espacio
+
+El espacio recién cargado sustituirá al anterior como espacio activo. world.spaces.loadSpace carga un Espacio especificado por un ID o un nombre. Los objetos del Espacio antiguo (y de los Espacios incluidos) desaparecerán y se crearán los Espacios nuevos (y los Espacios incluidos).
+
+Al cargar un Espacio, el objeto volverá a su estado inicial. Si recarga un Espacio previamente cargado, se borrarán todas las actualizaciones anteriores en tiempo de ejecución.
+
+Los objetos efímeros también permanecerán cargados al cambiar entre Espacios. Para descargar objetos efímeros en cambios de Espacio, emparente los objetos efímeros a un objeto gráfico.
+
+![](/images/studio/spaces-loading.gif)
+
+## Objetos persistentes
+
+Puedes configurar fácilmente los objetos para que se conserven entre Espacios. Por ejemplo, puedes tener un objeto personaje principal que debe moverse entre niveles. Utilizar el conmutador Persistencia en el Inspector del objeto o el componente Persistente o utilizar ecs.Persistent para designar ese objeto para que permanezca cargado mientras se carga un nuevo Espacio.
+
+![](/images/studio/spaces-persistent.png)
+
+Nota: La persistencia sólo debe establecerse en objetos de nivel raíz. La reasignación de objetos persistentes a otros objetos en tiempo de ejecución puede provocar comportamientos inesperados en Live Sync.
+
+## Ajustes espaciales
+
+En la pestaña Configuración del Inspector, puede configurar la Cámara Activa y el Skybox de un Espacio en particular, y puede configurar el Espacio de Entrada (o Espacio de inicio por defecto) en la sección Configuración del Proyecto.
+
+Cámara Activa: La cámara activa de un Espacio puede ser cualquier objeto cámara de ese Espacio o de cualquier Espacio que incluya.
+
+Skybox: Estiliza el Skybox de tu Espacio. Los Skyboxes son una envoltura alrededor de todo tu Espacio que muestra el aspecto del mundo más allá de tu geometría. Si tu proyecto está configurado para usar AR en un dispositivo compatible con AR, el Skybox no se renderizará.
+
+Espacio de Entrada: Puede configurar rápidamente un Espacio de entrada (o Espacio de inicio predeterminado) en la sección Configuración del proyecto (panel derecho).
+
+## Simulación del espacio activo en modo Live Sync
+
+El modo Live Sync (en el panel derecho de Ajustes) permite modular fácilmente las pruebas del Espacio activo. Cuando la Sincronización en Directo está activada, el Simulador en línea cargará el Espacio que esté activo en ese momento en la Jerarquía.
+
+Notas:
+
+* Al abrir una instancia del simulador en una nueva ventana (utilizando el enlace Nueva pestaña) o utilizando el modo emergente del Simulador, se cargará el Espacio de Entrada independientemente de que Live Sync esté activado.
+* Al cambiar de Espacio en el desplegable Jerarquía cambiará qué Espacio se carga en el Simulador en modo Sincronización en Directo.
+* Si Guardar ediciones está activado, cualquier edición en la ventana gráfica se conservará entre los cambios de espacio. Si Guardar ediciones está desactivado, al cambiar a Espacios se restablecerán las ediciones.

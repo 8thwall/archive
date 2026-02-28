@@ -1,0 +1,13 @@
+{
+  "type": "module",
+  "dependencyId": "191121a2-6c20-4a65-927d-a5cfaa4f9210",
+  "moduleId": "b6dd7aae-c75b-41f2-b3fa-2dd7204a3cbe",
+  "alias": "reflections",
+  "target": {
+    "type": "version",
+    "level": "major",
+    "major": 1,
+    "minor": 0,
+    "patch": 1
+  }
+}

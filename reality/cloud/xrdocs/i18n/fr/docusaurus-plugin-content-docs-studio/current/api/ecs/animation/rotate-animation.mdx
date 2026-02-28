@@ -1,0 +1,51 @@
+---
+id: rotate-animation
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# RotateAnimation
+
+## Description
+
+Ce composant crée une animation sur une entité.
+
+## Propriétés
+
+| Propriété              | Type                  | Défaut      | Description                                                                                                                                                        |
+| ---------------------- | --------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| cible                  | eid                   | indéfini    | L'objet cible à animer. Si elle n'est pas spécifiée, l'animation est exécutée sur l'objet auquel le composant est attaché.                                         |
+| deX                    | nombre                | 0           | La coordonnée X de départ de l'animation.                                                                                                                          |
+| deY                    | nombre                | 0           | La coordonnée Y de départ de l'animation.                                                                                                                          |
+| deZ                    | nombre                | 0           | La coordonnée Z de départ de l'animation.                                                                                                                          |
+| toX                    | nombre                | 0           | Coordonnée X de la cible pour l'animation.                                                                                                                         |
+| àY                     | nombre                | 0           | La coordonnée Y cible de l'animation.                                                                                                                              |
+| toZ                    | nombre                | 0           | La coordonnée Z cible de l'animation.                                                                                                                              |
+| autoFrom               | booléen               | faux        | Si cette option est activée, les propriétés 'fromX/Y/Z' sont ignorées et l'animation se fait à partir de l'état de l'objet au début de l'animation.                |
+| durée                  | nombre                | 1000        | Durée de l'animation en millisecondes.                                                                                                                             |
+| boucle                 | booléen               | vrai        | Si cette option est activée, l'animation est répétée.                                                                                                              |
+| inverser               | booléen               | faux        | Indique si la lecture doit se faire en sens inverse, si la boucle est réglée.                                                                                      |
+| easeIn                 | booléen               | faux        | Si cette option est activée, la fonction d'assouplissement sera appliquée dans le temps au lieu d'une interpolation directe.                                       |
+| facilitéSortie         | booléen               | faux        | Si cette option est activée, la fonction d'assouplissement sera appliquée dans le temps au lieu d'une interpolation directe.                                       |
+| easingFunction         | chaîne de caractères  | Quadratique | Choisissez parmi les options suivantes : quadratique, cubique, quartique, quintique, sinusoïdale, exponentielle, circulaire, élastique, retour et rebond.          |
+| chemin le plus court   | booléen               | faux        | Si cette option est activée, l'animation empruntera le chemin le plus court jusqu'à son terme.                                                                     |
+
+## Fonctions
+
+<ComponentFunctions
+    name="RotateAnimation"
+    properties={{
+        from : { x: 0, y: 0, z: 0 },
+        to : { x: 0, y: 0, z: 0 },
+        autoFrom : false,
+        duration : 1000,
+        loop : true,
+        reverse : false,
+        easeIn : false,
+        easeOut : false,
+        easingFunction : "Quadratic"
+    }}
+    mutate={`cursor.to.z = 90 ;
+    cursor.duration = 1500 ;
+    return false;`}
+/>

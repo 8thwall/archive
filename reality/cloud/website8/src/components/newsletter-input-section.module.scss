@@ -1,0 +1,70 @@
+@use '../styles/brand-colors';
+@use '../styles/constants';
+
+.gradientBackground {
+  background: brand-colors.$brand-purple;
+}
+
+.inputGroup {
+  max-width: 594px;
+}
+
+.input {
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  text-indent: 10px;
+  box-shadow: inset -8px 0 14px -8px #6A6CA5;
+  background-clip: border-box;
+
+  &:focus {
+    border: 1px solid brand-colors.$brand-purple;
+    box-shadow: none;
+  }
+
+  &::placeholder {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    opacity: .7;
+    color: brand-colors.$brand-purple;
+  }
+
+  &:focus::placeholder {
+    color: transparent;
+  }
+}
+
+.button {
+  background-color: white;
+  color: brand-colors.$brand-purple;
+  border: none;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  box-shadow: 0 2px 14px 0 #6A6CA5;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    color: brand-colors.$brand-purple;
+    background: brand-colors.$gray1;
+  }
+}
+
+@media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+  .input::placeholder {
+    font-size: 1rem;
+  }
+
+  .button {
+    padding: 0.5rem 1rem;
+  }
+}

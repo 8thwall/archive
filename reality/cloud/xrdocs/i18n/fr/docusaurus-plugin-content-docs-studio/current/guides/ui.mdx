@@ -1,0 +1,103 @@
+---
+id: ui
+description: >-
+  8th Wall Studio offre un système d'interface utilisateur intégré pour créer
+  des interfaces interactives et conviviales au sein de votre expérience.
+---
+
+# UI
+
+## Introduction
+
+{frontMatter.description} Le composant UI fournit une variété de blocs de construction avec des propriétés configurables allant du texte et des images à une mise en page flexible et à un style personnalisable. 
+
+## Ajout d'éléments d'interface utilisateur
+
+Plusieurs méthodes permettent d'introduire des éléments d'interface utilisateur :
+
+- **Nouvelle primitive:** Utilisez l'option (+) dans la hiérarchie pour ajouter des préréglages.
+- **Add Component:** Attachez des éléments d'interface utilisateur à une entité existante.
+- **Scripting:** Ajouter des éléments par programme à l'aide de l'API.
+
+![add-ui-elements.png](/images/studio/ui-add.png)
+
+:::note
+Les options de menu (+) sont toutes des préréglages du même composant d'interface utilisateur et peuvent être configurées de la même manière à l'aide de l'inspecteur d'interface utilisateur.
+:::
+
+### INTERFACE UTILISATEUR 3D
+
+Les éléments de l'interface utilisateur 3D s'intègrent de manière transparente dans votre scène 3D, ce qui permet des affichages interactifs dans l'espace. Ils peuvent être positionnés dans le monde avec l'inspecteur de transformation et nécessitent une largeur et une hauteur en pixels (1/100e d'unité mondiale), par exemple `'500'`. La position d'un élément d'interface utilisateur enfant est entièrement déterminée par les propriétés de mise en page de cet élément et de son parent.
+
+![ui-3d](/images/studio/ui-3d.png)
+
+### Interface utilisateur superposée
+
+Pour les interfaces utilisateur ancrées dans l'écran, les éléments superposés offrent un positionnement fixe au-dessus du canevas. La taille et le positionnement peuvent être spécifiés en pixels d'affichage (par exemple `'125'') ou en pourcentage (par exemple `'30%''). Le transfert des éléments de l'interface utilisateur de premier niveau est purement destiné à l'organisation dans la fenêtre de visualisation ; leur position à l'écran est contrôlée avec `position : 'absolute' `. Comme pour la 3D, les éléments enfants sont positionnés par rapport à leur parent.
+
+![ui-overlay](/images/studio/ui-overlay.png)
+
+## Propriétés
+
+Le composant UI est doté de nombreuses propriétés configurables. Dans l'inspecteur de la fenêtre de visualisation, ils sont regroupés par catégorie et ne sont pas toujours visibles. Pour ajouter une section, cliquez sur le menu déroulant "Select Property" en bas du configurateur. Pour la liste complète des propriétés individuelles qui peuvent être spécifiées à l'exécution dans le code, voir la [`Ui` API Documentation](/api/studio/ecs/ui/).
+
+### Mise en page
+
+Utilisez le configurateur de mise en page pour contrôler le positionnement des éléments enfants. Les différentes propriétés d'alignement permettent de créer des menus dynamiques capables de s'adapter aux changements de contenu et de taille d'écran. L'ordre d'apparition des enfants est déterminé par leur ordre dans la hiérarchie. Les enfants de l'interface utilisateur dont la position est définie sur "Position absolue" seront fixés par rapport au parent, sans tenir compte de la configuration de sa mise en page.
+
+![ui-layout](/images/studio/ui-layout.gif)
+
+### Texte
+
+Le texte peut être ajouté à n'importe quel élément de l'interface utilisateur. La section texte permet de configurer le contenu, la police, la taille, la couleur et l'alignement. Le texte qui dépasse la largeur de l'élément sera automatiquement remplacé par une nouvelle ligne.
+
+![ui-text](/images/studio/ui-text.png)
+
+### Arrière-plan et bordure
+
+Le style visuel d'un élément de l'interface utilisateur est contrôlé par les sections Arrière-plan et Bordure. Ici, les couleurs et la transparence peuvent être configurées, et une image peut être appliquée à partir d'une URL web ou de ressources du projet.
+
+![ui-background-border](/images/studio/ui-background-border.png)
+
+## Interaction
+
+Vous pouvez créer des boutons fonctionnels à l'aide d'un composant personnalisé doté d'un récepteur d'événements. Les éléments de l'interface utilisateur prennent en charge les événements de clic et de pression ainsi que les états de survol. Voir la [Documentation de l'API sur les événements d'entrée] (/api/studio/events/input/) pour une liste complète des événements pris en charge et des exemples de code. Ils fonctionnent avec des éléments d'interface utilisateur superposés et en 3D.
+
+Un clic ne se déclenche que sur l'élément le plus haut situé à l'emplacement du pointeur. La superposition est contrôlée par l'ordre hiérarchique, les frères et sœurs les plus récents apparaissant au-dessus des plus anciens. Pour un contrôle précis, utilisez l'option "Ordre d'empilement" en haut du configurateur pour disposer des groupes d'éléments de l'interface utilisateur dans un ordre personnalisé.
+
+Activez la propriété "Ignore Raycast" sur les cadres décoratifs, invisibles ou en plein écran pour éviter qu'ils n'empêchent la saisie de l'utilisateur d'atteindre les éléments interactifs qui peuvent se trouver en dessous.
+
+![ui-interaction](/images/studio/ui-interaction.gif)
+
+## Polices de caractères
+
+### Polices par défaut
+
+Une sélection de polices intégrées est disponible pour être utilisée dans n'importe quel projet 8th Wall.
+
+<div class="font-preview">
+    #### Nunito
+    ![Nunito.png](/images/studio/fonts/Nunito.png)
+    #### Akidenz Grotesk
+    ![AkidenzGrotesk.png](/images/studio/fonts/AkidenzGrotesk.png)
+    #### Baskerville
+    ![Baskerville.png](/images/studio/fonts/Baskerville.png)
+    #### Futura
+    ![Futura.png](/images/studio/fonts/Futura.png)
+    #### Gotham
+    ![Gotham.png](/images/studio/fonts/Gotham.png)
+    #### Helvetica
+    ![Helvetica.png](/images/studio/fonts/Helvetica.png)
+    #### Nanum Pen Script
+    ![NanumPenScript.png](/images/studio/fonts/NanumPenScript.png)
+    #### Press Start 2P
+    ![PressStart2P.png](/images/studio/fonts/PressStart2P.png)
+    #### Times
+    ![Times.png](/images/studio/fonts/Times.png)
+    #### Inconsolata
+    ![Inconsolata.png](/images/studio/fonts/Inconsolata.png)
+</div>
+
+### Polices de caractères personnalisées
+
+Vous pouvez également télécharger des polices personnalisées via des fichiers TTF pour les utiliser dans vos éléments d'interface utilisateur. Téléchargez des fichiers de polices dans vos ressources pour les rendre automatiquement disponibles pour toutes les interfaces utilisateur de votre projet.

@@ -1,0 +1,29 @@
+.contract-pdf-inner-modal {
+  padding: 1.25em 2.25em;
+
+  iframe {
+    position: relative;
+    height: 50vh;
+    width: 100%;
+    border: 1px solid rgb(245, 245, 248);
+    margin-bottom: 1em;
+  }
+
+  h1.ui.header {
+    margin-top: 0;
+  }
+
+  .ui.header {
+    padding: 0.5em 0;
+    margin-top: 1em;
+    border-bottom: none;
+  }
+
+  a {
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+}

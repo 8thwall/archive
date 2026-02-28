@@ -1,0 +1,87 @@
+---
+id: prefabs
+description: >-
+  Les préfabriqués sont des collections réutilisables d'entités à partir
+  desquelles vous pouvez créer plusieurs copies.
+---
+
+# Préfabriqués
+
+## Introduction
+
+{frontMatter.description} Ils sont stockés dans le fichier de l'étendue mais peuvent être remontés à la surface comme vous le souhaitez. Il existe également une API pratique pour travailler avec les préfabriqués dans l'ECS. Les préfabriqués de Studio présentent les caractéristiques suivantes :
+
+1. Les composants préfabriqués peuvent être partagés entre les instances
+2. Les composants hérités peuvent être remplacés au cas par cas.
+3. Une instance de préfabriqué peut contenir des instances d'autres préfabriqués
+4. Les préfabriqués sont accessibles et modifiables en cours d'exécution.
+
+## Utilisation des préfabriqués
+
+Dans Studio, vous pouvez configurer et personnaliser rapidement des préfabriqués en cliquant avec le bouton droit de la souris sur une entité ou en la faisant glisser dans l'onglet Préfabriqué du répertoire de fichiers situé en bas à gauche. Dans l'onglet Prefabs, vous pouvez facilement modifier votre Prefab et ses composants, mettre à jour sa hiérarchie, créer des doublons - de la même manière que vous travailleriez avec des objets dans la hiérarchie de l'espace.
+
+Les hiérarchies préfabriquées sont créées de la même manière que les hiérarchies d'entités. Si vous souhaitez inspecter et modifier visuellement les détails de votre préfabriqué dans une vue isolée, il vous suffit de double-cliquer dessus ou de cliquer avec le bouton droit de la souris pour ouvrir l'éditeur de préfabriqué, qui vous permet d'apporter des modifications à la conception directement à partir de la source. Les mises à jour apportées à la source seront automatiquement prévisualisables dans toutes les instances du préfabriqué dans la scène.
+
+Prêt à travailler avec votre nouveau préfabriqué dans votre scène ? Il suffit de glisser-déposer le préfabriqué dans la fenêtre de visualisation de la scène ou dans la hiérarchie de l'espace pour créer une instance de préfabriqué. Il y a deux concepts clés à noter lorsque l'on travaille avec les Prefab et leurs instances : **l'héritage** et **les surcharges**.
+
+### Héritage
+
+Les entités peuvent hériter des composants des préfabriqués. Après avoir ajouté une instance Prefab dans votre espace, toutes les configurations que vous ferez ultérieurement sur la source Prefab seront automatiquement "héritées" par l'instance. Les modifications apportées à la préfabrication lors de l'exécution s'appliquent également aux instances de la préfabrication. Les composants hérités ne sont stockés qu'à un seul endroit et sont partagés entre les instances. Cela peut s'avérer utile pour les données statiques partagées par plusieurs instances, telles que les données matérielles, les textures ou les maillages.
+
+:::info
+Le composant de collision physique n'est pas héritable au moment de l'exécution.
+:::
+
+### Surpassement
+
+Lorsqu'une instance hérite d'un composant d'un Prefab, celui-ci peut être remplacé par des valeurs de composant spécifiques à l'instance. Pour remplacer un composant (ex. matériau, animation, script de composant personnalisé, etc.), il suffit de l'ajouter ou de le modifier dans l'instance. En surchargeant un composant sur une instance de préfabriqué, il restera surchargé à l'avenir.  Cela signifie que les modifications futures que vous apporterez au même composant dans sa source Prefab ne seront pas héritées.
+
+#### Réinitialisation des dérogations
+
+Si vous souhaitez rétablir la valeur héritée d'un composant surchargé, vous pouvez cliquer avec le bouton droit de la souris sur le composant dans l'inspecteur et sélectionner "Réinitialiser les surcharges de la préfabrication". Cela supprimera l'annulation et ramènera le composant à la valeur originale du préfabriqué.
+
+## Instances d'exécution
+
+Le moteur de jeu de Studio vous permet de diriger les Prefabs au moment de l'exécution avec un minimum de code. Vous pouvez générer par programme de nouvelles instances en temps réel sur la base de préfabriqués existants, et vous pouvez modifier et éditer des instances de préfabriqués au moment de l'exécution. Vous pouvez également demander toutes les sous-entités des instances Prefab au moment de l'exécution, au cas où vous auriez besoin d'apporter des modifications à différentes instances générées dynamiquement.
+
+### Instancier un préfabriqué
+
+Créer une nouvelle instance de préfabriqué en utilisant un nom de préfabriqué ou un EID. Les instances préfabriquées peuvent être utilisées comme n'importe quelle autre entité. La position d'une instance préfabriquée est fixée à zéro lors de l'installation.
+
+#### Utilisation d'un nom préfabriqué
+
+![Prefab Name](/images/studio/guides/prefabs/prefab-name.png)
+
+```ts
+ecs.registerComponent({
+  name : 'Spawn Prefab by Name',
+  stateMachine : ({world, eid, schemaAttribute, dataAttribute}) => {
+    ecs.defineState('default')
+      .initial()
+      .listen(eid, ecs.input.SCREEN_TOUCH_START, (e) => {
+        const newInstance = world.createEntity("Human")
+      })
+  },
+})
+```
+
+#### Utilisation de l'EID préfabriquée
+
+```ts
+ecs.registerComponent({
+  name : 'Spawn Prefab by EID',
+  schema : {
+    prefabToSpawn: ecs.eid,
+  },
+  stateMachine : ({world, eid, schemaAttribute, dataAttribute}) => {
+    ecs.defineState('default')
+      .initial()
+      .listen(eid, ecs.input.SCREEN_TOUCH_START, (e) => {
+        const {prefabToSpawn} = schemaAttribute.get(eid)
+
+        if (prefabToSpawn) {
+          const newInstance = world.createEntity(prefabToSpawn)
+      })
+  },
+})
+```

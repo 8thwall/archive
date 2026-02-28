@@ -1,0 +1,21 @@
+body {
+  font-family: sans-serif;
+}
+
+#btn {
+  all: unset;
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  background: rgb(0, 122, 255);
+  color: white;
+  border-radius: 15px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#btn:active {
+  background-color: rgb(88, 86, 214);
+}

@@ -1,0 +1,28 @@
+---
+id: ring-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# RingGeometry
+
+## Description
+
+Ce composant établit la géométrie d'une entité.
+
+## Propriétés
+
+| Propriété       | Type   | Défaut  | Description                           |
+| --------------- | ------ | ------- | ------------------------------------- |
+| rayon intérieur | nombre | 1       | Rayon du trou intérieur de l'anneau.  |
+| outerRadius     | nombre | 1       | Rayon du bord extérieur de l'anneau.  |
+
+## Fonctions
+
+<ComponentFunctions
+    name="RingGeometry"
+    properties={{ innerRadius: 1, outerRadius: 1 }}
+    mutate={`cursor.innerRadius += 0.5;
+    cursor.outerRadius += 1;
+    return false;`}
+/>

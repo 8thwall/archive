@@ -1,0 +1,121 @@
+---
+id: materials
+description: En esta sección se explica cómo utilizar los materiales en Studio.
+---
+
+# Materiales
+
+## Introducción
+
+En esta sección se explica cómo utilizar los materiales en Studio.
+
+## Tipos de material
+
+### Material o Material estándar
+
+Un material estándar [PBR](https://learn.microsoft.com/en-us/azure/remote-rendering/overview/features/pbr-materials).
+
+Ver propiedades [aquí](/api/studio/ecs/material/basic-material).
+
+### Material no iluminado
+
+El material no se ve afectado por la iluminación ni las sombras.
+El color se mantiene consistente, sin soporte para Physical Based Rendering (PBR).
+
+Ver propiedades [aquí](/api/studio/ecs/material/unlit-material/).
+
+## Propiedades de los materiales
+
+Los materiales pueden configurarse mediante código o directamente en el componente Malla del editor.
+
+![material-properties.png](/images/studio/material-properties.png)
+
+### Configuración de materiales mediante código
+
+```ts
+ecs.Material.set(world, component.eid, {
+  r: 255,
+  g: 128,
+  b: 64,
+  roughness: 0.5,
+  metalness: 0.8,
+  opacity: 1.0,
+  side: "front"
+})
+
+ecs.UnlitMaterial.set(world, component.eid, {
+  r: 255,
+  g: 0,
+  b: 128,
+  opacity: 1.0,
+  side: "double"
+})
+```
+
+### Cargar una textura
+
+Cargar una textura requiere un asset o una url independiente que sirva una imagen.
+Puedes visitar la sección de la API sobre Material y Material no iluminado para obtener más información sobre los distintos tipos de mapas de textura compatibles.
+
+```ts
+import * as ecs from '@8thwall/ecs'
+
+ecs.registerComponent({
+    name: 'apply-texture-to-material',
+    schema: {
+        // @asset
+        myTexture: ecs.string,
+    },
+    add: (world, component) => {
+        const { myTexture } = component.schemaAttribute.get(component.eid)
+        ecs.assets.load({ url: myTexture })
+            .then((result) => {
+                ecs.Material.set(world, component.eid, {
+                    r: 255,
+                    g: 128,
+                    b: 64,
+                    textureSrc: `${result.remoteUrl}`,
+                    roughness: 0.5,
+                    metalness: 0.8,
+                    opacity: 1.0,
+                    side: "back"
+                })
+            })
+            .catch((error) => {
+                console.error('Failed to load texture:', error)
+            })
+    }
+})
+```
+
+## Materiales especiales
+
+### Material de sombra
+
+Material que sólo se renderiza cuando se proyecta una sombra sobre él.
+
+Nota: Para que esto funcione, se necesitan tres ajustes activados:
+
+1. Activar "sombras proyectadas" en las luces
+2. Activar "recibir sombras" en el objeto material de sombra
+3. El objeto que proyecta la sombra (la bola roja en la imagen inferior) también debe proyectar sombras.
+
+![shadow-material.png](/images/studio/shadow-material.png)
+
+```ts
+ecs.ShadowMaterial.set(world, component.eid, {r: 0, g: 250, b: 0, opacity: 1, side: 'front', depthTest: true, depthWrite: true})
+```
+
+### Material del ocultador
+
+Material que oculta cualquier objeto que se encuentre detrás de él.
+
+![hider-material.png](/images/studio/hider-material.png)
+
+Perspectiva de la cámara en tiempo de ejecución:
+
+![hider-material-result.png](/images/studio/hider-material-result.png)
+
+```ts
+ecs.HiderMaterial.set(world, component.eid)
+```

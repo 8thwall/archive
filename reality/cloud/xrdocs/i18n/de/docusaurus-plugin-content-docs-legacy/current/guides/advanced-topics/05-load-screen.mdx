@@ -1,0 +1,149 @@
+---
+id: load-screen
+---
+
+# Anpassen des Ladebildschirms
+
+Die [XRExtras](https://github.com/8thwall/web/tree/master/xrextras)-Bibliothek von 8th Wall bietet Module
+, die sich mit den häufigsten Anforderungen von WebAR-Anwendungen befassen, einschließlich des Ladebildschirms, der Abläufe von Social Link-out
+und der Fehlerbehandlung.
+
+Das Modul "Laden" zeigt ein Lade-Overlay und eine Abfrage der Kamerazulassung an, während die Bibliotheken
+geladen werden und die Kamera startet. Es ist das erste, was Ihre Benutzer sehen, wenn sie
+betreten.
+
+In diesem Abschnitt wird beschrieben, wie Sie den Ladebildschirm anpassen können, indem Sie Werte bereitstellen, die die Farbe von
+, den Ladespinner und die Ladeanimation ändern, um sie an das Gesamtdesign Ihrer Erfahrung anzupassen.
+
+**Hinweis:** Alle Projekte müssen das [Powered by 8th Wall](https://drive.google.com/drive/folders/1c9d23c5hS_HspHTUD7VceV6ocqdbPN7J?usp=sharing)
+Abzeichen auf der Ladeseite anzeigen. Es ist standardmäßig im "Lademodul" enthalten und kann nicht entfernt werden.
+
+## ID's / Klassen zum Überschreiben von {#ids--classes-to-override}
+
+```mdx-code-block
+<table width="100%">
+  <thead>
+    <th style={{textAlign: 'center'}}>Ladebildschirm</th>
+    <th style={{textAlign: 'center'}}>iOS (13+) Bewegungssensor Aufforderung</th>
+  </thead>
+  <tbody>
+    {/* Bilder */}
+    <tr>
+      <td width="50%">
+        <img src={require('/images/load-screen-css.jpg').default} style={{display: 'block', maxWidth: '360px', margin: 'auto', height: 'auto'}}/>
+      </td>
+      <td width="50%">
+        <img src={require('/images/motion-prompt-css.jpg').default} style={{display: 'block', maxWidth: '360px', margin: 'auto', height: 'auto'}}/>
+      </td>
+    </tr>
+    {/* Schlüssel */}
+    <tr>
+      <td width="50%">
+        <ol>
+          <li>#requestingCameraPermissions</li>
+          <li>#requestingCameraIcon</li>
+          <li>#loadBackground</li>
+          <li>#loadImage</li>
+        </ol>
+      </td>
+      <td width="50%">
+        <ol>
+          <li>.prompt-box-8w</li>
+          <li>.prompt-button-8w</li>
+          <li>.button-primary-8w</li>
+        </ol>
+        <p>Um den Text anzupassen, können Sie einen MutationObserver verwenden. Bitte beachten Sie das Codebeispiel unten.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+```
+
+## Parameter der A-Frame-Komponente {#a-frame-component-parameters}
+
+Wenn Sie XRExtras mit einem A-Frame-Projekt verwenden, können Sie mit dem Modul `xrextras-loading` den Ladebildschirm über die folgenden Parameter leicht anpassen:
+
+| Parameter             | Typ       | Beschreibung                                                                                                                   |
+| --------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| cameraBackgroundColor | Hex-Farbe | Hintergrundfarbe des oberen Bereichs des Ladebildschirms hinter dem Kamerasymbol und dem Text (siehe oben). Ladebildschirm #1) |
+| loadBackgroundColor   | Hex-Farbe | Hintergrundfarbe des unteren Bereichs des Ladebildschirms hinter dem `loadImage` (Siehe oben. Ladebildschirm #3)               |
+| loadImage             | ID        | Die ID eines Bildes.  Das Bild muss ein `<a-asset>` sein (siehe oben). Ladebildschirm #4)                                      |
+| loadAnimation         | `String`  | Animationsstil von `loadImage`.  Wählen Sie zwischen `spin` (Standard), `pulse`, `scale`, oder `none`.                         |
+
+#### Beispiel für eine A-Frame-Komponente {#a-frame-component-example}
+
+```jsx
+<a-scene
+  tap-place
+  xrextras-almost-there
+  xrextras-loading="
+    loadBackgroundColor: #007AFF;
+    cameraBackgroundColor: #5AC8FA;
+    loadImage: #myCustomImage;
+    loadAnimation: pulse"
+  xrextras-runtime-error
+  xrweb>
+
+<a-assets>
+  <img id="myCustomImage" src="assets/my-custom-image.png">
+</a-assets>
+```
+
+#### Javascript/CSS-Methode {#javascriptcss-method}
+
+```javascript
+const load = () => {
+  XRExtras.Loading.showLoading()
+  console.log('customizing loading spinner')
+  const loadImage = document.getElementById("loadImage")
+  if (loadImage) {
+    loadImage.src = require("./assets/my-custom-image.png")
+  }
+}
+window.XRExtras ? load() : window.addEventListener('xrextrasloaded', load)
+```
+
+#### CSS-Beispiel {#css-example}
+
+```css
+#requestingCameraPermissions {
+  color: black !important;
+  background-color: white !important;
+}
+#requestingCameraIcon {
+  /* Dies ändert das Bild von weiß zu schwarz */
+  filter: invert(1) !important;
+}
+
+.prompt-box-8w {
+  background-color: white !important;
+  color: #00FF00 !important;
+}
+.prompt-button-8w {
+  background-color: #0000FF !important;
+}
+
+.button-primary-8w {
+  background-color: #7611B7 !important;
+}
+```
+
+#### iOS (13+) Bewegungssensor Aufforderung zur Textanpassung {#ios-13-motion-sensor-prompt-text-customization}
+
+```javascript
+let inDom = false
+const observer = new MutationObserver(() => {
+  if (document.querySelector('.prompt-box-8w')) {
+    if (!inDom) {
+      document.querySelector('.prompt-box-8w p').innerHTML =<strong>'Mein neuer Text steht hier</strong><br/><br/>Drücken Sie Genehmigen, um fortzufahren.'
+      document.querySelector('.prompt-button-8w').innerHTML = 'Ablehnen'
+      document.querySelector('.button-primary-8w').innerHTML = 'Genehmigen'
+    }
+    inDom = true
+  } else if (inDom) {
+    inDom = false
+    observer.disconnect()
+  }
+})
+observer.observe(document.body, {childList: true})
+```

@@ -1,0 +1,70 @@
+---
+id: collider
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# コライダー
+
+## 商品説明
+
+このコンポーネントは、エンティティに物理コライダーを確立します。
+
+## コライダーシェイプ
+
+| Type      | 商品説明         |
+| --------- | ------------ |
+| ボックス      | ボックス         |
+| スフィア      | スフィア         |
+| 飛行機       | 飛行機          |
+| カプセル      | カプセル         |
+| コーン       | コーン          |
+| シリンダー     | シリンダー        |
+
+## プロパティ一覧
+
+| 名称               | Type              | 初期値                   | 商品説明                                                                  |
+| ---------------- | ----------------- | --------------------- | --------------------------------------------------------------------- |
+| 形状（必須）           | ecs.ColliderShape | ecs.ColliderShape.Box | サポートされている型はecs.ColliderShapeにあります。                                    |
+| width            | 番号                | 0                     | ボックスまたはプレーン形状の幅。                                                      |
+| height           | 番号                | 0                     | 箱形、平面、カプセル形、円錐形、円柱形の高さ。                                               |
+| 深さ               | 番号                | 0                     | ボックス形状の深さ。                                                            |
+| radius           | 番号                | 0                     | 球形、カプセル形、円錐形、円柱形の半径。                                                  |
+| 質量               | 番号                | 0                     | 実体の質量。 **静的**にするには0のままにする。                                            |
+| イベントのみ           | ブーリアン             | false                 | オブジェクトは衝突イベントのディスパッチのみを行い、物理的な応答は行わない方がよい。                            |
+| グラビティファクトリー      | 番号                | 1                     | 世界の重力を測定する係数                                                          |
+| ロックX軸            | ブーリアン             | false                 | X軸の回転を無効にする                                                           |
+| ロックYAxis         | ブーリアン             | false                 | Y軸の回転を無効にする                                                           |
+| ロックザクシス          | ブーリアン             | false                 | Z軸の回転を無効にする                                                           |
+| 摩擦               | 番号                | 0.5                   | 実体の接触摩擦の大きさ                                                           |
+| 損害賠償             | 番号                | 0                     | 実体の弾力性                                                                |
+| リニアダンピング         | 番号                | 0                     | 移動中の空気抵抗                                                              |
+| 角度減衰             | 番号                | 0                     | 回転中の空気抵抗                                                              |
+| 回転摩擦             | 番号                | 0                     | 回転中に実体にかかる摩擦の量                                                        |
+
+## 関数一覧
+
+<ComponentFunctions
+    name="Collider"
+    properties={{
+        shape: "ecs.ColliderShape.Box",
+        width: 0,
+        height: 0,
+        depth: 0,
+        radius: 0,
+        mass: 0,
+        eventOnly: false,
+        gravityFactory: 1,
+        lockXAxis: false,
+        lockYAxis: false,
+        lockZAxis: false,
+        friction: 0.5,
+        restitution: 0,
+        linearDamping: 0,
+        angularDamping: 0,
+        spinningFriction: 0
+    }}
+    mutate={`cursor.mass=5;
+    、cursor.friction=0.8;
+    return false;`}
+/>

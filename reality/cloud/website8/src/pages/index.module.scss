@@ -1,0 +1,39 @@
+@use '../styles/brand-colors';
+@use '../styles/constants';
+
+.solutionhighlights {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+  gap: 4rem;
+}
+
+.solutionhighlight {
+  img {
+    height: 56px;
+  }
+
+  p {
+    margin: 0 auto;
+    max-width: 311px;
+  }
+}
+
+@media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+  .solutionhighlights {
+    flex-direction: column;
+    gap: 5rem;
+  }
+
+  .solutionhighlight {
+    flex: 0 0 auto;
+
+    img {
+      height: 48px;
+    }
+    p {
+      max-width: 17rem;
+    }
+  }
+}

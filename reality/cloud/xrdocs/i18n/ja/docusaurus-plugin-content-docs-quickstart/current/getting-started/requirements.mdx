@@ -1,0 +1,57 @@
+---
+id: requirements
+sidebar_position: 2
+---
+
+# 必要条件
+
+## 第8回 ウォール・ブランディング
+
+1. デフォルトのスプラッシュ画面は、8th Wallを使用して作成された各体験やゲームの開始時に表示されます。 カスタマイズはできない。
+2. すべてのプロジェクトは、ゲームまたはエクスペリエンスのローディングページに[Powered by 8th Wall](https://8th.io/poweredby)バッジを表示する必要があります。
+
+:::tip
+デフォルトのスプラッシュスクリーンとPowered by 8th Wallバッジをプロジェクトから削除するには、プロジェクトダッシュボードから[ホワイトレーベルサブスクリプションを購入](/account/projects/white-label/)してください。 White Labelサブスクリプションの詳細については、[価格ページ](https://8thwall.com/pricing)をご参照ください。
+:::
+
+| デフォルトのスプラッシュ画面                                                                                       | ローディング画面                                                                                               |
+| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| <img width="300" alt="Splash Screen" src={require('/images/quickstart/splash-screen.png').default}/> | <img width="300" alt="Loading Screen" src={require('/images/quickstart/loading-screen.png').default}/> |
+
+## ブラウザ要件 {#browser-requirements}
+
+:::info
+第8回ウォールウェブの体験は、**https**でご覧ください。 これはブラウザーがカメラにアクセスするために**必要**なものです。
+:::
+
+モバイルブラウザは、8th Wallウェブ体験をサポートするために以下の機能を必要とします：
+
+- **WebGL** (canvas.getContext('webgl') || canvas.getContext('webgl2'))
+- **getUserMedia** (navigator.mediaDevices.getUserMedia - **ARが有効な場合のみ必要**)
+- **deviceorientation**（window.DeviceOrientationEvent - **SLAM/VPSが有効な場合のみ必要**）。
+- **Web-Assembly/WASM**（window.WebAssembly）。
+
+これは、iOSとAndroidデバイスの互換性を次のように換算している：
+
+- iOS：
+  - **Safari**（iOS11以上）
+  - **SFSafariViewController**ウェブビューを使用する**アプリ**（iOS 13以上）
+    - AppleはiOS 13でSFSafariViewControllerにgetUserMedia()のサポートを追加した。  8th Wallは、SFSafariViewControllerウェブビューを使用するiOS 13アプリ内で動作します。
+    - 例Twitter、Slack、Discord、Gmail、ハングアウトなど。
+  - **WKWebView** Webビューを使用する**アプリ/ブラウザ** (iOS 14.3+)
+    - 例を挙げよう：
+      - クローム
+      - ファイアフォックス
+      - マイクロソフト・エッジ
+      - フェイスブック
+      - フェイスブックメッセンジャー
+      - インスタグラム
+      - その他...
+- アンドロイドだ：
+  - **ブラウザ**は、WebARに必要な機能をネイティブにサポートしていることが知られています：
+    - \*\*クローム
+    - \*\*ファイアフォックス
+    - \*\*サムスン・インターネット
+    - \*\*マイクロソフト・エッジ
+  - WebAR に必要な機能をサポートしていることが知られている Web View を使用している **アプリ**：
+    - Twitter、WhatsApp、Slack、Gmail、ハングアウト、Reddit、LinkedInなど。

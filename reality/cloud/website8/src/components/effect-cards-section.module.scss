@@ -1,0 +1,87 @@
+@use '../styles/brand-colors';
+@use '../styles/constants';
+
+.exploreEffectWrapper {
+  max-width: 80rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  margin: 0 auto;
+  padding: 0 1em;
+}
+
+.exploreDeco {
+  width: 100vw;
+  position: absolute;
+  z-index: 0;
+  overflow: hidden;
+  top: 40%;
+}
+
+.exploreDecoImage {
+  width: 100vw;
+  min-width: constants.$SMALL_MONITOR_WIDTH_BREAKPOINT;
+  object-fit: cover;
+  filter: blur(0.2rem);
+}
+
+.exploreDecoBlue {
+  margin: 0 0 -7rem 0;
+
+  @media screen and (max-width: 2000px){
+    margin: 0 0 -5rem 0;
+  }
+  
+  @media screen and (max-width: constants.$SMALL_MONITOR_WIDTH_BREAKPOINT){
+    margin: 0 0 -2rem 0;
+  }
+}
+
+.effectsDivider {
+  margin: -2rem 0 -5rem 0;
+
+  @media screen and (max-width: 2400px){
+    margin: -2rem 0 -3rem 0;
+  }
+
+  @media screen and (max-width: 2000px){
+    margin: -1rem 0 -2.5rem 0;
+  }
+
+  @media screen and (max-width: 1440px){
+    margin: -0.5rem 0 -1rem 0;
+  }
+
+  @media screen and (max-width: constants.$SMALL_MONITOR_WIDTH_BREAKPOINT){
+    margin: 0 0 0 0;
+  }
+
+  @media screen and (max-width: 1024px){
+    margin: 0 0 0 0;
+  }
+
+  @media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+    margin: -2rem 0 0.5rem 0;
+  }
+
+  @media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+    margin: -1.5rem -2rem 0 -2rem;
+  }
+
+  @media screen and (max-width: 469px) {
+    margin: 0 -2rem 1rem -2rem;
+  }
+}
+
+@media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+  .exploreEffectWrapper {
+    max-width: 45rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+  .exploreEffectWrapper {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

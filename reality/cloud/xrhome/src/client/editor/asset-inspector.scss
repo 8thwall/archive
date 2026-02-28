@@ -1,0 +1,37 @@
+.asset-inspector {
+  position: relative;
+
+  .controls {
+    position: absolute;
+    top: 0;
+    right: 0;
+    max-height: 100%;
+    overflow: auto;
+    z-index: 1;
+    color: var(--text-color);
+    background-color: var(--pane-background);
+    border-bottom-left-radius: 0.5em;
+    width: 12em;
+
+    .file.pane {
+      padding-bottom: 0.75em;
+    }
+
+    .toggle {
+      display: block;
+      padding: 0.25em 0.75em;
+      width: 100%;
+      cursor: pointer;
+      user-select: none;
+      font-weight: bold;
+
+      .icon {
+        float: right;
+      }
+
+      &:hover, &:focus {
+        background-color: #0003;
+      }
+    }
+  }
+}

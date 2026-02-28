@@ -1,0 +1,74 @@
+{
+  "version.label": {
+    "message": "Siguiente",
+    "description": "The label for version current"
+  },
+  "sidebar.studioSidebar.category.Home": {
+    "message": "Inicio",
+    "description": "The label for category Home in sidebar studioSidebar"
+  },
+  "sidebar.studioSidebar.category.Guides": {
+    "message": "Guías",
+    "description": "The label for category Guides in sidebar studioSidebar"
+  },
+  "sidebar.studioSidebar.category.Additional APIs": {
+    "message": "API adicionales",
+    "description": "The label for category Additional APIs in sidebar studioSidebar"
+  },
+  "sidebar.studioSidebar.category.ecs": {
+    "message": "ecs",
+    "description": "The label for category ecs in sidebar studioSidebar"
+  },
+  "sidebar.studioSidebar.category.math": {
+    "message": "matemáticas",
+    "description": "The label for category math in sidebar studioSidebar"
+  },
+  "sidebar.studioSidebar.category.Getting Started": {
+    "message": "Primeros pasos",
+    "description": "The label for category Getting Started in sidebar studioSidebar"
+  },
+  "sidebar.studioSidebar.category.Essentials": {
+    "message": "Esenciales",
+    "description": "The label for category Essentials in sidebar studioSidebar"
+  },
+  "sidebar.studioSidebar.category.Entities and Components": {
+    "message": "Entidades y componentes",
+    "description": "The label for category Entities and Components in sidebar studioSidebar"
+  },
+  "sidebar.studioSidebar.category.Modules": {
+    "message": "Módulos",
+    "description": "The label for category Modules in sidebar studioSidebar"
+  },
+  "sidebar.studioSidebar.category.Backend Services": {
+    "message": "Servicios de backend",
+    "description": "The label for category Backend Services in sidebar studioSidebar"
+  },
+  "sidebar.studioSidebar.category.Backend Functions": {
+    "message": "Funciones de backend",
+    "description": "The label for category Backend Functions in sidebar studioSidebar"
+  },
+  "sidebar.studioSidebar.category.Best Practices": {
+    "message": "Buenas prácticas",
+    "description": "The label for category Best Practices in sidebar studioSidebar"
+  },
+  "sidebar.studioSidebar.category.XR": {
+    "message": "XR",
+    "description": "The label for category XR in sidebar studioSidebar"
+  },
+  "sidebar.studioSidebar.category.Asset Lab": {
+    "message": "Laboratorio de activos",
+    "description": "The label for category Asset Lab in sidebar studioSidebar"
+  },
+  "sidebar.studioSidebar.category.Troubleshooting": {
+    "message": "Solución de problemas",
+    "description": "The label for category Troubleshooting in sidebar studioSidebar"
+  },
+  "sidebar.studioSidebar.category.Native App Export": {
+    "message": "Exportación de aplicaciones nativas",
+    "description": "The label for category Native App Export in sidebar studioSidebar"
+  },
+  "sidebar.studioSidebar.category.8th Wall Desktop App": {
+    "message": "Aplicación de escritorio 8th Wall",
+    "description": "The label for category 8th Wall Desktop App in sidebar studioSidebar"
+  }
+}

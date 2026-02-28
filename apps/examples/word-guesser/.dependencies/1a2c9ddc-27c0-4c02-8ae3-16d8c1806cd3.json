@@ -1,0 +1,24 @@
+{
+  "type": "module",
+  "dependencyId": "54663445-c95f-4966-85a1-2936bea0ebda",
+  "moduleId": "87338298-41c7-48aa-b3c5-da06b12d920e",
+  "alias": "word-guesser-module",
+  "target": {
+    "type": "version",
+    "level": "patch",
+    "major": 1,
+    "minor": 0,
+    "patch": 0
+  },
+  "backendTemplates": [
+    {
+      "type": "function",
+      "entry": "index.ts",
+      "headers": {},
+      "envVariables": {},
+      "title": "Game Service",
+      "description": "",
+      "name": "game-service"
+    }
+  ]
+}

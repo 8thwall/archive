@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="module">
+        import {createWavBlob, generateSamplePCM} from './test-utils.js'
+
+        // Generate a stereo sine wave
+        const sampleRate = 44100 // Samples per second
+        const duration = 2 // Duration in seconds
+        const frequency = 440 // Frequency in Hz (A4 note)
+        const audioData = generateSamplePCM(sampleRate, duration, frequency)
+
+        const wavBlob = createWavBlob(audioData, sampleRate)
+        const audioURL = URL.createObjectURL(wavBlob)
+        const audioElement = new Audio(audioURL)
+        audioElement.addEventListener('canplaythrough', () => {
+            audioElement.play()
+        })
+
+        let endedCount = 0
+        audioElement.addEventListener('ended', () => {
+            endedCount++
+        })
+
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                audioElement.play()
+                resolve()
+            }, 1000)
+        })
+
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                audioElement.stop()
+                resolve()
+            }, 3000)
+        })
+
+        // TODO(divya): assert that endedCount is 1
+
+    </script>
+</head>
+<body></body>
+</html>

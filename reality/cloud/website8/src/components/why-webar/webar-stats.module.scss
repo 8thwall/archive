@@ -1,0 +1,41 @@
+@use '../../styles/constants';
+@use '../../styles/_brand-colors';
+
+.subtitle {
+  max-width: 52rem;
+}
+
+.divider {
+  border: solid 1px brand-colors.$brand-highlight
+}
+
+.stats {
+  max-width: 100rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+  justify-content: space-evenly;
+
+  @media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+    > *:not(:last-child) {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  @media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+  margin-top: 1.375rem;
+    > *:not(:last-child) {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .jumboText {
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 4.875rem;
+    @media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+      font-size: 2rem;
+      line-height: 2.875rem;
+    }
+  }
+}

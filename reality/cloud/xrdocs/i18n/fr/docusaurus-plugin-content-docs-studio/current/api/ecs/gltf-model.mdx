@@ -1,0 +1,47 @@
+---
+id: gltf-model
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# GltfModel
+
+## Description
+
+Ce composant établit une géométrie personnalisée sur une entité.
+
+## Propriétés
+
+| Propriété                | Type                  | Défaut   | Description                                                                                                                                                                                                 |
+| ------------------------ | --------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| url (Obligatoire)        | chaîne de caractères  | ""       | L'url de la source.                                                                                                                                                                                         |
+| animationClip            | chaîne de caractères  | ""       | Le nom du clip d'animation attaché au modèle à jouer. Le caractère générique `*` est également accepté et permet au modèle de jouer toutes les animations.                                                  |
+| boucle                   | booléen               | faux     | Si le clip d'animation redémarre après la fin de la lecture ou non                                                                                                                                          |
+| en pause                 | booléen               | faux     | Si le clip d'animation est mis en pause                                                                                                                                                                     |
+| temps                    | nombre                | 0        | Durée en secondes de l'animationClip à laquelle sauter                                                                                                                                                      |
+| échelle de temps         | nombre                | 1        | Facteur d'échelle pour le temps. 0 entraîne une pause dans l'animation. Les valeurs négatives entraînent la lecture de l'animation à l'envers.                                                              |
+| collisionneur            | booléen               | faux     | Indique si l'animation doit mettre à jour le collisionneur physique.                                                                                                                                        |
+| inverser                 | booléen               | faux     | Si cette option est activée, l'animation sera jouée en sens inverse lorsqu'elle aura fini de jouer en sens inverse (l'ensemble compte pour une itération de la boucle).                                     |
+| répétitions              | nombre                | \-1      | S'il est défini avec "loop", le nombre de fois que la boucle sera répétée (-1 signifie que la boucle sera répétée à l'infini).                                                                              |
+| durée du fondu enchaîné  | nombre                | 0        | Le temps en secondes qui sera consacré au mélange entre les animations lorsqu'une nouvelle animation est lancée (et qu'une animation existante est en cours de lecture).                                    |
+
+## Fonctions
+
+<ComponentFunctions
+    name="GltfModel"
+    properties={{
+        url : './assets/doty.glb',
+        animationClip : 'idle',
+        loop : false,
+        paused : false,
+        time : 0,
+        timeScale : 1,
+        collider : false,
+        reverse : false,
+        repetitions : -1,
+        crossFadeDuration : 0
+    }}
+    mutate={`cursor.timeScale = 0.5 ;
+    cursor.loop = true ;
+    return false;`}
+/>

@@ -1,0 +1,202 @@
+---
+id: input
+description: このライブラリには、入力管理を行う関数が含まれている。
+---
+
+# 入力
+
+## 説明
+
+{frontMatter.description}
+
+## 機能
+
+### disablePointerLockRequest
+
+クリック時のポインタロック要求を無効にする。
+
+```ts
+world.input.disablePointerLockRequest() // -> void
+```
+
+### enablePointerLockRequest
+
+画面がクリックされたときに、ユーザーからポインターのロックを要求する。
+
+```ts
+world.input.enablePointerLockRequest() // -> void
+```
+
+### getAction
+
+アクションがトリガーされた場合は > 0 を返す。 値は通常0から1。 例外はマウスの速度とスクロールで、上限はない。
+
+```ts
+world.input.getAction(actionName: string) // -> number
+```
+
+### getActiveMap
+
+アクティブ・アクション・マップを取得する。
+
+```ts
+world.input.getActiveMap() // -> 文字列（アクティブ・アクション・マップの名前）
+```
+
+### setActiveMap
+
+アクティブなアクションマップを設定します。 デフォルトのアクションマップの名前は「default」である。
+
+```ts
+world.input.setActiveMap(mapName: string) // -> void
+```
+
+### getAxis
+
+gamepadIdxの軸の値を返す。
+
+```ts
+world.input.getAxis(gamepadIdx?: number) // -> number[].
+```
+
+### getButton
+
+buttonName で指定した仮想ボタンが押されている間 true を返します。
+
+```ts
+world.input.getAxis(input: number, gamepadIdx?: number) // -> boolean
+```
+
+### getButtonDown
+
+ユーザがインデックスにマップされたボタンを押し下げたフレーム中に true を返します。
+
+```ts
+world.input.getAxis(input: number, gamepadIdx?: number) // -> boolean
+```
+
+### getButtonUp
+
+ユーザーがボタンを離した最初のフレームでtrueを返します。
+
+```ts
+world.input.getAxis(input: number, gamepadIdx?: number) // -> boolean
+```
+
+### getGamepads
+
+デバイスに接続されている全てのゲームパッドを返します。
+
+```ts
+world.input.getGamepads() // -> ゲームパッド[].
+```
+
+### getKey
+
+name で指定したキーを押している間、true を返す。
+
+```ts
+world.input.getKey(code: string) // -> boolean
+```
+
+### ゲットキーダウン
+
+ユーザが名前で指定されたキーを押し始めるフレーム中にtrueを返します。
+
+```ts
+world.input.getKeyDown(code: string) // -> boolean
+```
+
+### ゲットキーアップ
+
+ユーザが name で指定されたキーを離したフレーム中に true を返します。
+
+```ts
+world.input.getKeyUp(code: string) // -> boolean
+```
+
+### ゲットマウスボタン
+
+ボタン番号で指定されたマウスボタンを押し続けている間、trueを返します。
+
+| 番号     | マウスボタン  |
+| ------ | ------- |
+| 0      | 左クリック   |
+| 1      | 右クリック   |
+| 2      | 中央クリック  |
+
+```ts
+world.input.getMouseButton(index: number) // -> boolean
+```
+
+### ゲットマウスダウン
+
+ユーザがマウスボタンを押し下げたフレーム中にtrueを返します。
+
+```ts
+world.input.getMouseDown(index: number) // -> boolean
+```
+
+### ゲットマウスアップ
+
+ユーザがマウスボタンを離したフレームに true を返します。
+
+```ts
+world.input.getMouseUp(index: number) // -> boolean
+```
+
+### 取得マウス位置
+
+マウスのclientX座標とclientY座標を返します。
+
+```ts
+world.input.getMousePosition() // -> [数値, 数値].
+```
+
+### 取得マウス速度
+
+マウスのXY方向の速度を返します。
+
+```ts
+world.input.getMouseVelocity() // -> [数値, 数値].
+```
+
+### ゲットマウススクロール
+
+マウスのスクロールの x と y の速度を返します。
+
+```ts
+world.input.getMouseScroll() // -> [数値, 数値].
+```
+
+### ゲットタッチ
+
+スクリーンがタッチされている間、trueを返す。 スクリーンがタッチされている間、trueを返す。 識別子が提供された場合、その特定のタッチがアクティブである場合にのみtrueを返す。
+
+```ts
+world.input.getTouch(identifier?: 数字) // -> boolean
+```
+
+### ゲットタッチダウン
+
+タッチが始まるフレームの間、trueを返す。 識別子が指定された場合、その特定のタッチが始まったときのみtrueを返す。 識別子が指定された場合、その特定のタッチが始まったときのみtrueを返す。
+
+```ts
+world.input.getTouchDown(identifier?: number) // -> boolean
+```
+
+### ゲットタッチアップ
+
+タッチが終了するフレームの間、trueを返す。 識別子が指定された場合、その特定のタッチが終了したときのみtrueを返す。 識別子が指定された場合、その特定のタッチが終了したときのみtrueを返す。
+
+```ts
+world.input.getTouchUp(identifier?: 数字) // -> boolean
+```
+
+### getTouchIds
+
+アクティブなタッチ識別子の配列を返します。 各識別子は、現在画面上にある明確なタッチポイントを表す。 各識別子は、現在画面上にある明確なタッチポイントを表す。
+
+```ts
+world.input.getTouchIds() // -> number[].
+```

@@ -1,0 +1,40 @@
+---
+id: shadow-material
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# ShadowMaterial
+
+## Descripción
+
+Este componente crea un material, que sólo renderiza sombras, sobre una entidad con geometría.
+
+## Propiedades
+
+| Propiedad            | Tipo     | Por defecto  | Descripción                                                                         |
+| -------------------- | -------- | ------------ | ----------------------------------------------------------------------------------- |
+| r                    | número   | 0            | Valor del canal rojo del material [0...255]                                         |
+| g                    | número   | 0            | Valor del canal verde del material [0...255]                                        |
+| b                    | número   | 0            | Valor del canal azul del material [0...255]                                         |
+| opacidad             | número   | 0            | Alfa/transparencia general del material [0...1]                                     |
+| lateral              | cadena   | frente       | Qué lados de las caras se renderizarán. Elija entre frontal, trasera o doble.       |
+| depthTest            | booleano | verdadero    | Si se comprueba la profundidad al renderizar este material                          |
+| profundidadEscritura | booleano | verdadero    | Si el renderizado de este material afecta al búfer de profundidad                   |
+
+## Funciones
+
+<ComponentFunctions
+    name="ShadowMaterial"
+    properties={{
+        r: 0,
+        g: 0,
+        b: 0,
+        opacity: 0.5,
+    }}
+    mutate={`cursor.opacity = 0.5;
+    cursor.r = 128;
+    cursor.g = 128;
+    cursor.b = 128;
+    return false;`}
+/>

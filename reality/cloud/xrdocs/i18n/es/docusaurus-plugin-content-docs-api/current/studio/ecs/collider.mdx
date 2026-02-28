@@ -1,0 +1,59 @@
+---
+id: collider
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import ColliderTable from "../../../gen/tables/Collider.md"
+
+# Colisionador
+
+## Descripción
+
+Este componente establece un colisionador de física en una entidad.
+
+## ColliderShape
+
+| Tipo      | Descripción  |
+| --------- | ------------ |
+| Caja      | Caja         |
+| Esfera    | Esfera       |
+| Plano     | Plano        |
+| Cápsula   | Cápsula      |
+| Cono      | Cono         |
+| Cilindro  | Cilindro     |
+
+## ColliderType
+
+| Tipo        | Descripción                                                                                                                                                                                                                                                                                     |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Estático    | Se aplica a un objeto que no se mueve bajo simulación y se comporta como si tuviera masa infinita                                                                                                                                                                                               |
+| Dinámico    | Se aplica a un objeto real totalmente simulado al que afectan las fuerzas, la gravedad y las colisiones.                                                                                                                                                                                        |
+| Cinemática  | Se aplica a un objeto cuyo movimiento no se ve afectado por las fuerzas, sino que está totalmente controlado mediante programación por el usuario. A diferencia de los cuerpos estáticos, los cuerpos cinemáticos pueden moverse y afectar a otros cuerpos dinámicos mediante colisiones.       |
+
+## Propiedades
+
+<ColliderTable />
+
+## Funciones
+
+<ComponentFunctions
+    name="Collider"
+    properties={{
+        shape: 'ecs.ColliderShape.Sphere',
+        type: 'ecs.ColliderType.Static',
+        radius: 1,
+        mass: 0,
+        eventOnly: false,
+        gravityFactory: 1,
+        lockXAxis: false,
+        lockYAxis: false,
+        lockZAxis: false,
+        friction: 0.5,
+        restitution: 0,
+        linearDamping: 0,
+        angularDamping: 0,
+    }}
+    mutate={`cursor.mass = 5;
+    cursor.friction = 0.8;
+    return false;`}
+/>

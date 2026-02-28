@@ -1,0 +1,28 @@
+{
+  "projectUrl": "https://8thwall.staging.8thwall.app/face-effects/",
+  "shell": "ios",
+  "apple": {
+    "teamIdentifier": "<REMOVED_BEFORE_OPEN_SOURCING>",
+    "signingType": "development"
+  },
+  "appInfo": {
+    "appDisplayName": "Face Effects",
+    "bundleIdentifier": "com.the8thwall.face-effects",
+    "naeBuildMode": "static",
+    "workspace": "8thwall",
+    "appName": "face-effects",
+    "refHead": "staging",
+    "permissions": {
+      "camera": {
+        "requestStatus": "REQUESTED",
+        "usageDescription": "Camera access is required for face effects"
+      }
+    }
+  },
+  "appUuid": "be9a04fe-4c05-46cd-9daa-1ef762a5cdfe",
+  "exportType": "ipa",
+  "iconId": "4s2dk0hcwu37ox4iie68wk884nrejdo6sh9jpt0nyo30k74jrea4c6sm",
+  "launchScreenIconId": "4s2dk0hcwu37ox4iie68wk884nrejdo6sh9jpt0nyo30k74jrea4c6sm",
+  "requestRef": "lucas-default",
+  "repoId": "8w.face-effects"
+}

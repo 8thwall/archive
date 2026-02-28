@@ -1,0 +1,39 @@
+@use '../styles/constants';
+@use '../styles/brand-colors';
+
+.customerWork {
+  margin-top: 2rem;
+}
+
+.customerWorkHeader {
+  margin-bottom: 0.5rem;
+}
+
+.customerWorkSubHeader {
+  margin-bottom: 1.5rem;
+}
+
+.customerWorkText {
+  margin-bottom: 1rem;
+}
+
+.customerWorkDesc {
+  max-width: 600px;
+}
+
+@media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+  .customerWorkText {
+    margin-bottom: 0.6rem;
+  }
+
+  .customerWork {
+    margin-top: 3rem;
+  }
+
+}
+
+@media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+  .customerWorkDesc {
+    margin-top: 0;
+  }
+}

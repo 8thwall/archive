@@ -1,0 +1,26 @@
+[ {
+  "id" : "9ba36b2e-ca18-3b6b-ef5a-59f23b7267b5",
+  "name" : "heading",
+  "display_width" : null,
+  "label" : "Heading",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "placeholder" : "",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text",
+  "default" : "Page Content Heading"
+}, {
+  "id" : "7fa24ffa-d67a-d26e-5912-8946e73504d4",
+  "name" : "subheading",
+  "display_width" : null,
+  "label" : "Subheading",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text",
+  "default" : "This is the page content sub-heading"
+} ]

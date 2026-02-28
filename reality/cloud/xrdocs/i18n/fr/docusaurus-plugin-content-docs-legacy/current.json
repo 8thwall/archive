@@ -1,0 +1,146 @@
+{
+  "version.label": {
+    "message": "Suivant",
+    "description": "The label for version current"
+  },
+  "sidebar.legacySidebar.category.Home": {
+    "message": "Accueil",
+    "description": "The label for category Home in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.Getting Started": {
+    "message": "Pour commencer",
+    "description": "The label for category Getting Started in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.Guides": {
+    "message": "Guides",
+    "description": "The label for category Guides in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.Projects": {
+    "message": "Projets",
+    "description": "The label for category Projects in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.Lightship VPS": {
+    "message": "Lightship VPS",
+    "description": "The label for category Lightship VPS in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.Modules": {
+    "message": "Modules",
+    "description": "The label for category Modules in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.Advanced Topics": {
+    "message": "Sujets avancés",
+    "description": "The label for category Advanced Topics in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.API Reference": {
+    "message": "Référence API",
+    "description": "The label for category API Reference in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.XR8": {
+    "message": "XR8",
+    "description": "The label for category XR8 in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.AccessPass": {
+    "message": "AccessPass",
+    "description": "The label for category AccessPass in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.AFrame": {
+    "message": "Cadre AF",
+    "description": "The label for category AFrame in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.AFrame Events": {
+    "message": "Événements AFrame",
+    "description": "The label for category AFrame Events in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.AFrame Event Listeners": {
+    "message": "Écoute d'événements AFrame",
+    "description": "The label for category AFrame Event Listeners in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.Babylonjs": {
+    "message": "Babylonjs",
+    "description": "The label for category Babylonjs in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.CameraPipelineModule": {
+    "message": "Module CameraPipeline",
+    "description": "The label for category CameraPipelineModule in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.CameraPixelArray": {
+    "message": "CameraPixelArray",
+    "description": "The label for category CameraPixelArray in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.CanvasScreenshot": {
+    "message": "Capture d'écran",
+    "description": "The label for category CanvasScreenshot in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.CoachingOverlay": {
+    "message": "CoachingOverlay",
+    "description": "The label for category CoachingOverlay in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.FaceController": {
+    "message": "FaceController",
+    "description": "The label for category FaceController in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.GlTextureRenderer": {
+    "message": "GlTextureRenderer",
+    "description": "The label for category GlTextureRenderer in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.HandController": {
+    "message": "Contrôleur de main",
+    "description": "The label for category HandController in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.LayersController": {
+    "message": "Contrôleur de couches",
+    "description": "The label for category LayersController in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.LandingPage": {
+    "message": "Page d'atterrissage",
+    "description": "The label for category LandingPage in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.MediaRecorder": {
+    "message": "Enregistreur de médias",
+    "description": "The label for category MediaRecorder in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.PlayCanvas": {
+    "message": "PlayCanvas",
+    "description": "The label for category PlayCanvas in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.PlayCanvas Events": {
+    "message": "Événements PlayCanvas",
+    "description": "The label for category PlayCanvas Events in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.PlayCanvas Event Listeners": {
+    "message": "Écoute d'événements PlayCanvas",
+    "description": "The label for category PlayCanvas Event Listeners in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.Threejs": {
+    "message": "Threejs",
+    "description": "The label for category Threejs in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.VPS": {
+    "message": "VPS",
+    "description": "The label for category VPS in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.VpsCoachingOverlay": {
+    "message": "VpsCoachingOverlay",
+    "description": "The label for category VpsCoachingOverlay in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.XrConfig": {
+    "message": "XrConfig",
+    "description": "The label for category XrConfig in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.XrController": {
+    "message": "XrController",
+    "description": "The label for category XrController in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.XrPermissions": {
+    "message": "XrPermissions",
+    "description": "The label for category XrPermissions in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.XrDevice": {
+    "message": "Appareil Xr",
+    "description": "The label for category XrDevice in sidebar legacySidebar"
+  },
+  "sidebar.legacySidebar.category.Troubleshooting": {
+    "message": "Dépannage",
+    "description": "The label for category Troubleshooting in sidebar legacySidebar"
+  }
+}

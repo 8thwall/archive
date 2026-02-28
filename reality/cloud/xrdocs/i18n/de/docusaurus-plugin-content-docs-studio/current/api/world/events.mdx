@@ -1,0 +1,42 @@
+---
+id: events
+description: Diese Bibliothek enthält Funktionen für die Ereignisverwaltung.
+---
+
+# Veranstaltungen
+
+## Beschreibung
+
+{frontMatter.description}
+
+## Eigenschaften
+
+| Eigenschaft | Beschreibung                                         |
+| ----------- | ---------------------------------------------------- |
+| globalId    | Dient dazu, Ereignisse global zu versenden/zu hören. |
+
+## Funktionen
+
+### addListener
+
+Registriert eine Komponente zum Abhören eines Ereignisses.
+
+```ts
+world.events.addListener(target: eid, name: string, listener: function) -> void
+```
+
+### removeListener
+
+Deregistrierung eines vorhandenen Hörers
+
+```ts
+world.events.removeListener(target: eid, name: string, listener: function) -> void
+```
+
+### Versand
+
+Wird verwendet, um Ereignisse auszusenden, auf die die Zuhörer hören können.
+
+```ts
+world.events.dispatch(target: eid, name: string, data: object /* (optional) */) -> void
+```

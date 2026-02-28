@@ -1,0 +1,22 @@
+branch-defaults:
+  default:
+    environment: ConsoleRcProd
+environment-defaults:
+  Console-staging:
+    branch: null
+    repository: null
+global:
+  application_name: XrhomeProd
+  default_ec2_keyname: <REMOVED_BEFORE_OPEN_SOURCING>
+  default_platform: arn:aws:elasticbeanstalk:us-west-2::platform/Node.js running on
+    64bit Amazon Linux/4.4.4
+  default_region: us-west-2
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: null
+  sc: null
+  workspace_type: Application
+deploy:
+  artifact: console-server.zip

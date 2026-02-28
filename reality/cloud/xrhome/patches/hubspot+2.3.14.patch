@@ -1,0 +1,12 @@
+diff --git a/node_modules/hubspot/index.d.ts b/node_modules/hubspot/index.d.ts
+index 1c21e82..7130b3b 100644
+--- a/node_modules/hubspot/index.d.ts
++++ b/node_modules/hubspot/index.d.ts
+@@ -42,6 +42,7 @@ export interface BottleneckOptions {
+ }
+ 
+ export interface LimiterOptions {
++  checkLimit?: boolean
+   limiter?: BottleneckOptions
+ }
+ 

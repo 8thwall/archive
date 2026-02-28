@@ -1,0 +1,57 @@
+project_id : "18"  # 20 for Test, 18 for Prod
+api_token : "<REMOVED_BEFORE_OPEN_SOURCING>"
+base_path : "."
+base_url : "https://<REMOVED_BEFORE_OPEN_SOURCING>.crowdin.com/api/v2"
+preserve_hierarchy: true
+files:
+  # JSON translation files
+  - source: /i18n/en/**/*
+    translation: /i18n/%two_letters_code%/**/%original_file_name%
+  # Docs Markdown files
+  - source: /docs/**/*.md
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/**/%original_file_name%
+  # Docs MarkdownX files
+  - source: /docs/**/*.mdx
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/**/%original_file_name%
+  # Studio Docs Markdown files
+  - source: /studio/**/*.md
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs-studio/current/**/%original_file_name%
+  # Studio Docs MarkdownX files
+  - source: /studio/**/*.mdx
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs-studio/current/**/%original_file_name%
+  # Account Docs Markdown files
+  - source: /account/**/*.md
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs-account/current/**/%original_file_name%
+  # Account Docs MarkdownX files
+  - source: /account/**/*.mdx
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs-account/current/**/%original_file_name%
+  # API Docs Markdown files
+  - source: /api/**/*.md
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs-api/current/**/%original_file_name%
+  # API Docs MarkdownX files
+  - source: /api/**/*.mdx
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs-api/current/**/%original_file_name%
+  # Legacy Docs Markdown files
+  - source: /legacy/**/*.md
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs-legacy/current/**/%original_file_name%
+  # Legacy Docs MarkdownX files
+  - source: /legacy/**/*.mdx
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs-legacy/current/**/%original_file_name%
+  # migration Docs Markdown files
+  - source: /migration/*.md
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs-migration/current/%original_file_name%
+  # migration Docs MarkdownX files
+  - source: /migration/*.mdx
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs-migration/current/%original_file_name%
+  # migration Docs Markdown files
+  - source: /migration/**/*.md
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs-migration/current/**/%original_file_name%
+  # migration Docs MarkdownX files
+  - source: /migration/**/*.mdx
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs-migration/current/**/%original_file_name%
+  # Src Markdown files
+  - source: /src/**/*.md
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/**/%original_file_name%
+  # Src MarkdownX files
+  - source: /src/**/*.mdx
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/**/%original_file_name%

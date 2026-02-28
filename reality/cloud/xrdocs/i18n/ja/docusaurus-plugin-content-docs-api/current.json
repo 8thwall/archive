@@ -1,0 +1,78 @@
+{
+  "version.label": {
+    "message": "次のページ",
+    "description": "The label for version current"
+  },
+  "sidebar.apiSidebar.category.Studio API": {
+    "message": "スタジオAPI",
+    "description": "The label for category Studio API in sidebar apiSidebar"
+  },
+  "sidebar.apiSidebar.category.ecs": {
+    "message": "エク",
+    "description": "The label for category ecs in sidebar apiSidebar"
+  },
+  "sidebar.apiSidebar.category.math": {
+    "message": "数学",
+    "description": "The label for category math in sidebar apiSidebar"
+  },
+  "sidebar.apiSidebar.category.geometry": {
+    "message": "ジオメトリー",
+    "description": "The label for category geometry in sidebar apiSidebar"
+  },
+  "sidebar.apiSidebar.category.animation": {
+    "message": "アニメーション",
+    "description": "The label for category animation in sidebar apiSidebar"
+  },
+  "sidebar.apiSidebar.category.world": {
+    "message": "世界",
+    "description": "The label for category world in sidebar apiSidebar"
+  },
+  "sidebar.apiSidebar.category.Events Reference": {
+    "message": "イベントリファレンス",
+    "description": "The label for category Events Reference in sidebar apiSidebar"
+  },
+  "sidebar.apiSidebar.category.XR Events": {
+    "message": "XRイベント",
+    "description": "The label for category XR Events in sidebar apiSidebar"
+  },
+  "sidebar.apiSidebar.category.Engine API": {
+    "message": "エンジンAPI",
+    "description": "The label for category Engine API in sidebar apiSidebar"
+  },
+  "sidebar.apiSidebar.category.XR8": {
+    "message": "エックスアール8",
+    "description": "The label for category XR8 in sidebar apiSidebar"
+  },
+  "sidebar.apiSidebar.category.CameraPipelineModule": {
+    "message": "カメラパイプラインモジュール",
+    "description": "The label for category CameraPipelineModule in sidebar apiSidebar"
+  },
+  "sidebar.apiSidebar.category.CameraPixelArray": {
+    "message": "カメラピクセル配列",
+    "description": "The label for category CameraPixelArray in sidebar apiSidebar"
+  },
+  "sidebar.apiSidebar.category.CanvasScreenshot": {
+    "message": "キャンバスのスクリーンショット",
+    "description": "The label for category CanvasScreenshot in sidebar apiSidebar"
+  },
+  "sidebar.apiSidebar.category.VPS": {
+    "message": "ブイピーエス",
+    "description": "The label for category VPS in sidebar apiSidebar"
+  },
+  "sidebar.apiSidebar.category.XrPermissions": {
+    "message": "Xrパーミッション",
+    "description": "The label for category XrPermissions in sidebar apiSidebar"
+  },
+  "sidebar.apiSidebar.category.XrDevice": {
+    "message": "Xrデバイス",
+    "description": "The label for category XrDevice in sidebar apiSidebar"
+  },
+  "sidebar.apiSidebar.category.material": {
+    "message": "材料",
+    "description": "The label for category material in sidebar apiSidebar"
+  },
+  "sidebar.apiSidebar.category.XrController": {
+    "message": "XrController",
+    "description": "The label for category XrController in sidebar apiSidebar"
+  }
+}

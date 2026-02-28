@@ -1,0 +1,83 @@
+.tutorialCardContainer {
+  overflow: hidden;
+  font-size: 16px;
+  background: #ffffff;
+  box-shadow: 0 0 0.75em rgba(70, 71, 102, 0.15);
+  display: flex;
+  flex-direction: row;
+  border-radius: 8px;
+  margin-bottom: 2em;
+}
+
+.tutorialImage {
+  height: 30em;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.tutorialCardBlock {
+  padding: 3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tutorialCardHeading {
+  font-weight: 900;
+  font-size: 1.5em;
+  color: #2D2E43;
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+}
+
+.tutorialCardIcon {
+  height: 2.5em;
+  width: auto;
+}
+
+.tutorialCardDescription {
+  font-size: 1.25em;
+}
+
+.tutorialCardLink{
+  color: #7611B6;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.tutorialCardLink:hover {
+  color: #408CBA;
+}
+
+@media screen and (max-width: 991px) {
+  .tutorialCardContainer {
+    flex-direction: column;
+  }
+  
+  .tutorialCardBlock {
+    padding: 2em;
+  }
+
+  .tutorialImage {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .tutorialCardBlock {
+    padding: 1.5em;
+  }
+  
+  .tutorialCardHeading {
+    font-size: 1.25em;
+  }
+  
+  .tutorialCardIcon {
+    display: none;
+  }
+
+  .tutorialCardDescription {
+    font-size: 1.125em;
+  }
+}

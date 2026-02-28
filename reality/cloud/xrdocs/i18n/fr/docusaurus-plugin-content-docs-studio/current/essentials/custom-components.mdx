@@ -1,0 +1,62 @@
+---
+id: custom-components
+description: >-
+  Les composants personnalisés sont utilisés pour ajouter une logique de jeu
+  personnalisée à vos entités.
+sidebar_position: 40
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Composants personnalisés
+
+## Introduction
+
+{frontMatter.description}
+
+## Création d'un composant personnalisé
+
+Pour créer un composant personnalisé, procédez comme suit :
+
+1. Dans le navigateur de fichiers, cliquez sur le bouton plus (+).
+2. Cliquez sur "Nouveau fichier" → "Nouveau fichier de composant", et donnez-lui un nom (extension de fichier facultative).
+   1. Un nouveau fichier Component sera généré, TypeScript par défaut, dans votre projet.
+   2. Le nouveau fichier de composant comprendra le code de base nécessaire à l'enregistrement du composant personnalisé.
+
+## Enregistrement d'un composant personnalisé
+
+Le code suivant est un exemple de la façon dont un composant personnalisé nouvellement créé apparaîtra dans l'éditeur de code :
+
+### Exemple
+
+```ts
+// This is a component file. You can use this file to define a custom component for your project.
+// This component will appear as a custom component in the editor.
+
+import * as ecs from '@8thwall/ecs'  // This is how you access the ecs library.
+
+ecs.registerComponent({
+  name: 'Custom Component',
+  // schema: {
+  // },
+  // schemaDefaults: {
+  // },
+  // data: {
+  // },
+  // add: (world, component) => {
+  // },
+  // tick: (world, component) => {
+  // },
+  // remove: (world, component) => {
+  // },
+  // stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+  //   ecs.defineState('default').initial()
+  // },
+})
+```
+
+À partir de cet exemple, vous pouvez ajouter [un schéma] (../schema), [une machine à états] (../state-machines), ou [des rappels de cycle de vie] (../component-lifecycle).
+
+:::warning
+Les noms de composants commençant par "debug-" sont réservés à des fins de débogage interne et **ne s'affichent pas dans l'éditeur**.
+:::

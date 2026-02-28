@@ -1,0 +1,13 @@
+# AFrame-Ereignisbehandlungsroutinen
+
+Dieser Abschnitt beschreibt die Ereignisse, auf die die A-Frame-Komponente "xrweb" wartet
+
+Sie können diese Ereignisse in Ihrer Webanwendung ausgeben, um verschiedene Aktionen durchzuführen:
+
+| Ereignis-Listener                         | Beschreibung                                                                                                                                                                                                                                                                                                |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [hidecamerafeed](hidecamerafeed.md)       | Blendet die Kamerafeed aus. Die Verfolgung hört nicht auf.                                                                                                                                                                                                                                                  |
+| [recenter](recenter.md)                   | Bringt die Kamerafeed zu ihrem Ursprung zurück. Wenn ein neuer Ursprung als Argument angegeben wird, wird der Ursprung der Kamera auf diesen zurückgesetzt und dann neu zentriert.                                                                                                                          |
+| [screenshotrequest](screenshotrequest.md) | Sendet eine Anfrage an die Engine, um einen Screenshot des AFrame-Canvas aufzunehmen. Die Engine gibt ein Ereignis [`screenshotready`](/api/aframeevents/screenshotready) mit dem JPEG-komprimierten Bild oder [`screenshoterror`](/api/aframeevents/screenshoterror) aus, wenn ein Fehler aufgetreten ist. |
+| [showcamerafeed](showcamerafeed.md)       | Zeigt die Kamerafeed an.                                                                                                                                                                                                                                                                                    |
+| [stopxr](stopxr.md)                       | Beendet die aktuelle XR-Sitzung. Wenn die Kamera angehalten ist, wird die Übertragung gestoppt und die Bewegung des Geräts wird nicht verfolgt.                                                                                                                                                             |

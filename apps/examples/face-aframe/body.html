@@ -1,0 +1,45 @@
+<!-- Copyright (c) 2024 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  xrface="allowedDevices: any; cameraDirection: front; mirroredDisplay: true">
+  <!-- 3D models, images, videos -->
+  <a-assets>
+    <a-asset-item id="head-occluder" src="./assets/head-occluder.glb"></a-asset-item>
+  </a-assets>
+
+  <!-- face mesh -->
+  <xrextras-resource id="face-texture" src="./assets/face-alpha.png"></xrextras-resource>
+  <xrextras-resource id="face-alpha" src="./assets/face-alpha.png"> </xrextras-resource>
+  <xrextras-basic-material
+    id="face-mesh"
+    tex="#face-texture"
+    alpha="#face-alpha"
+    opacity="0.9"></xrextras-basic-material>
+
+  <!-- media recorder -->
+  <xrextras-capture-button></xrextras-capture-button>
+  <xrextras-capture-preview></xrextras-capture-preview>
+
+  <a-camera
+    look-controls="enabled: false"
+    wasd-controls="enabled: false"
+    position="0 2 0"></a-camera>
+
+  <!-- content anchored to face -->
+  <xrextras-faceanchor>
+    <a-entity gltf-model="#head-occluder" position="0 0 0.03" xrextras-hider-material></a-entity>
+
+    <xrextras-face-mesh material-resource="#face-mesh"></xrextras-face-mesh>
+
+    <xrextras-face-attachment point="forehead">
+      <a-sphere radius="0.1"></a-sphere>
+    </xrextras-face-attachment>
+  </xrextras-faceanchor>
+
+  <a-light type="directional" target="#face" position="0 1.8 3" intensity="0.8"></a-light>
+  <a-light type="ambient" intensity="0.8"></a-light>
+</a-scene>

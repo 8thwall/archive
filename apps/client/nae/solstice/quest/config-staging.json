@@ -1,0 +1,17 @@
+{
+  "projectUrl": "https://niantic.staging.8thwall.app/intothescaniverse/",
+  "shell": "quest",
+  "android": {
+    "packageName": "com.the8thwall.intothescaniverse",
+    "minSdkVersion": 32,
+    "targetSdkVersion": 32,
+    "resourceDir": "res/",
+    "oculusSplashScreen": "res/mipmap-xxxhdpi/ic_launcher.png"
+  },
+  "niaEnvAccessCode": "moonshot",
+  "appInfo": {
+    "workspace": "niantic",
+    "appName": "intothescaniverse",
+    "refHead": "staging"
+  }
+}

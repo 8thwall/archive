@@ -1,0 +1,177 @@
+@use '../styles/brand-colors';
+@use '../styles/constants';
+
+.section {
+  background-color: brand-colors.$brand-purple;
+  position: relative;
+  overflow: hidden;
+  margin-top: -80px;
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0;
+  z-index: 1;
+  overflow: visible; // Workaround for svg over underneath iframe issue on mobile
+
+  @media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+    height: 85vh;
+  }
+}
+
+.experience {
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  width: inherit;
+  height: inherit;
+}
+
+.container {
+  pointer-events: none;
+  max-width: 33rem;
+  margin: calc(100px + 4.5rem) 8.875rem 0 8.875rem;
+  transition: opacity 1s;
+  z-index: 3;
+
+  @media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+    margin: calc(100px + 3.5rem) 5rem 0 5rem;
+  }
+
+  @media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+    margin: calc(100px + 1rem) 1.5rem 0 1.5rem;
+  }
+}
+
+.title {
+  font-size: 40px;
+  line-height: 1.5;
+  color: brand-colors.$white;
+  text-shadow: 2px 2px 10px rgb(0 0 0 / 30%);
+
+  @media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+    font-size: 24px;
+    max-width: 16rem;
+  }
+}
+
+.copy {
+  max-width: 48rem;
+  text-shadow: 1px 1px 3px rgb(0 0 0 / 50%);
+
+  @media screen and (max-width: constants.$SMALL_MONITOR_WIDTH_BREAKPOINT) {
+    max-width: 30rem;
+  }
+}
+
+.startTrialButton {
+  pointer-events: none;
+  margin: 3rem 8.875rem 0 8.875rem;
+  transition: opacity 1s;
+  z-index: 3;
+
+  button {
+    pointer-events: all;
+    border-radius: 28px;
+    padding: 16px 36px;
+  }
+
+  @media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+    margin: 3rem 5rem 0 5rem;
+  }
+
+  @media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+    position: absolute;
+    bottom: 120px;
+    width: 100%;
+    margin: 0;
+
+    button {
+      width: calc(50% - 32px);
+      margin: 0 8px 0 24px;
+      padding-left: 8px !important;
+      padding-right: 8px !important;
+    }
+  }
+}
+
+
+.hide {
+  opacity: 0;
+
+  & * {
+    pointer-events: none !important;
+  }
+}
+
+.heroDivider {
+  pointer-events: none;
+  position: absolute;
+  bottom: -2px; // Workaround for svg over underneath iframe issue on mobile
+  width: inherit;
+  height: 200px;
+  z-index: 2;
+
+  svg {
+    margin-top: 125px;
+
+    &>path {
+      pointer-events: all;
+    }
+
+    // NOTE(wayne): a workaround of a list of breakpoints to locate the curvy dividers
+    @media screen and (min-width: 375px) {
+      margin-top: 110px;
+    }
+
+    @media screen and (min-width: 768px) {
+      margin-top: 75px;
+    }
+
+    @media screen and (min-width: 992px) {
+      margin-top: 40px;
+      transform: scale(1, 0.7);
+    }
+
+    @media screen and (min-width: 1200px) {
+      margin-top: 0px;
+      transform: scale(1, 0.6);
+    }
+
+    @media screen and (min-width: 1500px) {
+      margin-top: -20px;
+      transform: scale(1, 0.6);
+    }
+
+    @media screen and (min-width: 1920px) {
+      margin-top: -60px;
+      transform: scale(1, 0.5);
+    }
+
+    @media screen and (min-width: 2200px) {
+      margin-top: -80px;
+      transform: scale(1, 0.45);
+    }
+
+    @media screen and (min-width: 2400px) {
+      margin-top: -120px;
+      transform: scale(1, 0.4);
+    }
+
+    @media screen and (min-width: 2700px) {
+      margin-top: -150px;
+      transform: scale(1, 0.35);
+    }
+
+    @media screen and (min-width: 3000px) {
+      margin-top: -190px;
+      transform: scale(1, 0.3);
+    }
+
+    @media screen and (min-width: 3200px) {
+      margin-top: -210px;
+      transform: scale(1, 0.3);
+    }
+  }
+}

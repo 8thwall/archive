@@ -1,0 +1,57 @@
+---
+id: material
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Matériau
+
+## Description
+
+Ce composant crée un matériau sur une entité avec géométrie.
+
+## Propriétés
+
+| Propriété                  | Type                  | Défaut  | Description                                                                                                                                                    |
+| -------------------------- | --------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| r                          | nombre                | 0       | Valeur du canal rouge du matériau [0...255]                                                                                                                    |
+| g                          | nombre                | 0       | Valeur du canal vert du matériau [0...255]                                                                                                                     |
+| b                          | nombre                | 0       | Valeur du canal bleu du matériau [0...255]                                                                                                                     |
+| textureSrc                 | chaîne de caractères  | ""      | La source de la carte des couleurs, modulée par la couleur (si elle est définie)                                                                               |
+| rugosité                   | nombre                | 0       | Le degré de rugosité du matériau [0...1]                                                                                                                       |
+| carte de rugosité          | chaîne de caractères  | ""      | Le canal vert de cette carte de texture ressource la rugosité, multipliée par le nombre de rugosités.                                                          |
+| métallurgie                | nombre                | 0       | Le degré de métallisation du matériau [0...1]                                                                                                                  |
+| metalnessMap               | chaîne de caractères  | ""      | Le canal bleu de cette ressource de texture affecte l'aspect métallique du matériau.                                                                           |
+| normalScale                | nombre                | 0       | Dans quelle mesure la carte des normales (si elle est définie) affecte le matériau [0...1]                                                                     |
+| normalMap                  | chaîne de caractères  | ""      | Source de la carte de normalité de la texture.                                                                                                                 |
+| opacité                    | nombre                | 0       | alpha/transparence globale du matériau [0...1]                                                                                                                 |
+| opacityMap                 | chaîne de caractères  | ""      | Alpha/transparence mappée via une ressource de texture.                                                                                                        |
+| intensité émissive         | nombre                | 0       | Intensité globale de la carte émissive [0...1]                                                                                                                 |
+| emissiveMap                | chaîne de caractères  | ""      | Force émissive cartographiée en tant que ressource de texture. Modulé par la couleur et l'intensité de l'émission.                                             |
+| émissifR                   | nombre                | 0       | Couleur d'émission du canal rouge du matériau [0...255]                                                                                                        |
+| émissifG                   | nombre                | 0       | Couleur d'émission du canal vert du matériau [0...255]                                                                                                         |
+| émissifB                   | nombre                | 0       | Couleur d'émission du canal bleu du matériau [0...255]                                                                                                         |
+| côté                       | chaîne de caractères  | ""      | Quels côtés des faces seront rendus. Choisissez entre le recto, le verso ou le double.                                                                         |
+| mélange                    | chaîne de caractères  | ""      | Mélange à utiliser lors de l'affichage d'objets avec ce matériau. Choisissez parmi les options suivantes : pas de, normal, additif, soustractif et multiplier. |
+| repeatX                    | nombre                | 0       | Nombre de fois qu'une texture est répétée dans un matériau sur l'axe X.                                                                                        |
+| répéterY                   | nombre                | 0       | Nombre de fois qu'une texture est répétée dans un matériau sur l'axe Y.                                                                                        |
+| offsetX                    | nombre                | 0       | Décalage d'une texture par rapport à un matériau sur l'axe X.                                                                                                  |
+| offsetY                    | nombre                | 0       | Décalage d'une texture par rapport à un matériau sur l'axe Y.                                                                                                  |
+| test de profondeur         | booléen               | vrai    | Test de profondeur ou non lors du rendu de ce matériau                                                                                                         |
+| depthWrite                 | booléen               | vrai    | La question de savoir si le rendu de ce matériau a un impact sur le tampon de profondeur                                                                       |
+| fil de fer                 | booléen               | faux    | Rendre la géométrie sous forme d'image filaire.                                                                                                                |
+| forceTransparent           | booléen               | faux    | Indique s'il faut forcer le canal alpha à être rendu transparent.                                                                                              |
+
+## Fonctions
+
+<ComponentFunctions
+    name="Material"
+    properties={{
+        r: 255,
+        g: 0,
+        b: 0,
+    }}
+    mutate={`cursor.roughness = 0.8 ;
+    cursor.wireframe = true ;
+    return false;`}
+/>

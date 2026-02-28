@@ -1,0 +1,202 @@
+---
+id: input
+description: Cette bibliothèque comprend des fonctions qui gèrent les entrées.
+---
+
+# entrée
+
+## Description
+
+{frontMatter.description}
+
+## Fonctions
+
+### disablePointerLockRequest
+
+Désactive la demande de verrouillage du pointeur au moment du clic.
+
+```ts
+world.input.disablePointerLockRequest() // -> void
+```
+
+### enablePointerLockRequest
+
+Demander à l'utilisateur de verrouiller le pointeur lorsqu'il clique sur l'écran.
+
+```ts
+world.input.enablePointerLockRequest() // -> void
+```
+
+### getAction
+
+Renvoie > 0 si l'action a été déclenchée. La valeur est généralement comprise entre 0 et 1. L'exception est la vitesse et le défilement de la souris, qui ne sont pas plafonnés.
+
+```ts
+world.input.getAction(actionName : string) // -> nombre
+```
+
+### getActiveMap
+
+Obtenir la carte des actions actives.
+
+```ts
+world.input.getActiveMap() // -> string (Nom de la carte d'action active)
+```
+
+### setActiveMap
+
+Définit la carte d'action active. Le nom de la carte d'action par défaut est "default".
+
+```ts
+world.input.setActiveMap(mapName : string) // -> void
+```
+
+### getAxis
+
+Renvoie la valeur de l'axe du gamepadIdx.
+
+```ts
+world.input.getAxis(gamepadIdx? : number) // -> number[]
+```
+
+### getButton
+
+Renvoie un message vrai lorsque le bouton virtuel identifié par buttonName est maintenu enfoncé.
+
+```ts
+world.input.getAxis(input : number, gamepadIdx? : number) // -> boolean
+```
+
+### getButtonDown
+
+Renvoie un message vrai pendant l'image où l'utilisateur a appuyé sur le bouton correspondant à l'index.
+
+```ts
+world.input.getAxis(input : number, gamepadIdx? : number) // -> boolean
+```
+
+### getButtonUp
+
+Retourne true la première fois que l'utilisateur relâche le bouton.
+
+```ts
+world.input.getAxis(input : number, gamepadIdx? : number) // -> boolean
+```
+
+### getGamepads
+
+Renvoie toutes les manettes de jeu connectées à l'appareil.
+
+```ts
+world.input.getGamepads() // -> Gamepad[]
+```
+
+### getKey
+
+Renvoie un résultat positif lorsque l'utilisateur maintient la touche identifiée par le nom.
+
+```ts
+world.input.getKey(code : string) // -> booléen
+```
+
+### getKeyDown
+
+Retourne vrai pendant l'image où l'utilisateur commence à appuyer sur la touche identifiée par le nom.
+
+```ts
+world.input.getKeyDown(code : string) // -> booléen
+```
+
+### getKeyUp
+
+Retourne vrai pendant l'image où l'utilisateur relâche la clé identifiée par le nom.
+
+```ts
+world.input.getKeyUp(code : string) // -> booléen
+```
+
+### getMouseButton
+
+Retourne vrai lorsque l'utilisateur maintient enfoncé le bouton de la souris identifié par le numéro de bouton.
+
+| Nombre | Bouton de la souris                        |
+| ------ | ------------------------------------------ |
+| 0      | Clic gauche                                |
+| 1      | Cliquer avec le bouton droit de la souris  |
+| 2      | Clic moyen                                 |
+
+```ts
+world.input.getMouseButton(index : number) // -> boolean
+```
+
+### getMouseDown
+
+Renvoie un message vrai lorsque l'utilisateur commence à appuyer sur le bouton de la souris.
+
+```ts
+world.input.getMouseDown(index : number) // -> booléen
+```
+
+### getMouseUp
+
+Renvoie un message vrai lorsque l'utilisateur relâche le bouton de la souris.
+
+```ts
+world.input.getMouseUp(index : number) // -> booléen
+```
+
+### getMousePosition
+
+Renvoie les coordonnées clientX et clientY de la souris.
+
+```ts
+world.input.getMousePosition() // -> [number, number]
+```
+
+### getMouseVelocity
+
+Renvoie la vitesse x et y de la souris.
+
+```ts
+world.input.getMouseVelocity() // -> [number, number]
+```
+
+### getMouseScroll
+
+Renvoie la vitesse x et y du défilement de la souris.
+
+```ts
+world.input.getMouseScroll() // -> [number, number]
+```
+
+### getTouch
+
+Renvoie un message vrai lorsque l'écran est touché. Si un identifiant est fourni, la réponse est vraie uniquement si le contact en question est actif.
+
+```ts
+world.input.getTouch(identifier? : number) // -> booléen
+```
+
+### getTouchDown
+
+Retourne vrai pendant l'image de début d'un toucher. Si un identificateur est fourni, il ne renvoie un message vrai que lorsque ce contact spécifique commence.
+
+```ts
+world.input.getTouchDown(identifier? : number) // -> booléen
+```
+
+### getTouchUp
+
+Retourne vrai pendant l'image de la fin d'une touche. Si un identifiant est fourni, il ne renvoie un message vrai que lorsque le contact en question se termine.
+
+```ts
+world.input.getTouchUp(identifier? : number) // -> booléen
+```
+
+### getTouchIds
+
+Renvoie un tableau d'identifiants de touches actives. Chaque identifiant représente un point de contact distinct sur l'écran.
+
+```ts
+world.input.getTouchIds() // -> nombre[]
+```

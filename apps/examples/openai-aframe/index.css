@@ -1,0 +1,13 @@
+.recenterButton {
+  position: fixed;
+  bottom: 2.5%;
+  left: 5%;
+  z-index: 1;
+  height: 40px;
+  display: block;
+  cursor: pointer;
+}
+
+.recenterButton:active {
+  filter: brightness(80%);
+}

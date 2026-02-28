@@ -1,0 +1,62 @@
+---
+id: custom-components
+description: >-
+  Los componentes personalizados se utilizan para añadir lógica de juego
+  personalizada a tus entidades.
+sidebar_position: 40
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Componentes personalizados
+
+## Introducción
+
+{frontMatter.description}
+
+## Creación de un componente personalizado
+
+Para crear un Componente personalizado, siga estos pasos:
+
+1. En el explorador de archivos, haga clic en el botón más (+).
+2. Haga clic en "Nuevo archivo" → "Nuevo archivo de componentes" y asígnele un nombre (extensión de archivo opcional).
+   1. Se generará un nuevo archivo Component, TypeScript por defecto, en su proyecto.
+   2. El nuevo archivo de componente incluirá el código requerido para registrar el componente personalizado.
+
+## Registro de un componente personalizado
+
+El siguiente código es un ejemplo de cómo aparecerá un Componente Personalizado recién creado en el Editor de Código:
+
+### Ejemplo
+
+```ts
+// This is a component file. You can use this file to define a custom component for your project.
+// This component will appear as a custom component in the editor.
+
+import * as ecs from '@8thwall/ecs'  // This is how you access the ecs library.
+
+ecs.registerComponent({
+  name: 'Custom Component',
+  // schema: {
+  // },
+  // schemaDefaults: {
+  // },
+  // data: {
+  // },
+  // add: (world, component) => {
+  // },
+  // tick: (world, component) => {
+  // },
+  // remove: (world, component) => {
+  // },
+  // stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+  //   ecs.defineState('default').initial()
+  // },
+})
+```
+
+A partir de este ejemplo, puede añadir [esquema](../schema), [una máquina de estados](../state-machines), o [callbacks del ciclo de vida](../component-lifecycle)
+
+:::warning
+Los nombres de componentes que empiezan por 'debug-' se reservan para fines de depuración interna y **no se mostrarán en el editor.**
+:::

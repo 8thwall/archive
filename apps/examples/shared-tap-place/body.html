@@ -1,0 +1,46 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<a-scene
+  networked-scene="adapter: sharedar; connectOnLoad: false"
+  lobby-handler
+  lobby-pages
+  xrextras-loading
+  xrextras-runtime-error
+  xrextras-gesture-detector>
+  <a-assets>
+    <template id="avatar-template">
+      <a-sphere></a-sphere>
+    </template>
+
+    <template id="box-template">
+      <a-entity>
+        <a-box
+          material="
+        color: #AD50FF; shader: flat; 
+        src: https://cdn.8thwall.com/web/assets/cube-texture.png"></a-box>
+      </a-entity>
+    </template>
+  </a-assets>
+
+  <a-camera
+    id="camera"
+    position="0 2 2"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;">
+  </a-camera>
+
+  <!-- player entities -->
+  <a-entity
+    networked="template: #avatar-template"
+    xrextras-attach="target: camera"
+    spawner="template: #box-template"></a-entity>
+
+  <a-box
+    id="ground"
+    class="cantap"
+    scale="1000 2 1000"
+    position="0 -0.99 0"
+    material="shader: shadow; transparent: true; opacity: 0.4"
+    shadow>
+  </a-box>
+</a-scene>

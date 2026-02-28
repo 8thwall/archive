@@ -1,0 +1,40 @@
+include:
+  - ci-support/util.yml
+
+variables:
+  GITLAB_ENV_SCOPE: crowdin-sync-prod
+
+default:
+  before_script:
+    - !reference [.global, before_script]
+  after_script:
+    - !reference [.global, after_script]
+
+cancel-redundant-jobs:
+  stage: build
+  extends: .cancel-redundant-jobs
+
+ci-support:crowdin-sync-upload:
+  stage: build
+  interruptible: true
+  environment:
+    name: $GITLAB_ENV_SCOPE
+  script:
+    - bazel run //ci-support/crowdin-sync:upload -- $(bazel info workspace)
+  rules:
+    - if: $CI_SUPPORT_TRIGGER == "crowdin-sync"
+  tags:
+    - m1
+
+ci-support:crowdin-sync-download:
+  stage: build
+  interruptible: true
+  environment:
+    name: $GITLAB_ENV_SCOPE
+  script:
+    - bazel build //ci-support/crowdin-sync:download
+    - bazel-bin/ci-support/crowdin-sync/download -- $(bazel info workspace)
+  rules:
+    - if: $CI_SUPPORT_TRIGGER == "crowdin-sync"
+  tags:
+    - m1

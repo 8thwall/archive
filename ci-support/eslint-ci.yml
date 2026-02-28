@@ -1,0 +1,26 @@
+
+include:
+  - ci-support/util.yml
+
+default:
+  before_script:
+    - !reference [.global, before_script]
+  after_script:
+    - !reference [.global, after_script]
+
+cancel-redundant-jobs:
+  stage: build
+  extends: .cancel-redundant-jobs
+
+ci-support:eslint-mr:
+  stage: build
+  interruptible: true
+  script:
+    - bazelisk build //bzl/linter:eslint-mr
+    - echo "{}" > package.json # This makes the import plugin not fail
+    - git fetch origin $CI_MERGE_REQUEST_DIFF_BASE_SHA
+    - NODE_PATH=bazel-bin/bzl/linter/eslint-mr.runfiles/npm-eslint/node_modules bazel-bin/bzl/linter/eslint-mr
+  rules:
+    - if: $CI_SUPPORT_TRIGGER == "eslint_ci_trigger"
+  tags:
+    - linux

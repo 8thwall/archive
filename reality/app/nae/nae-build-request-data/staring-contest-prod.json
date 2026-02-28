@@ -1,0 +1,29 @@
+{
+  "projectUrl": "https://8w.8thwall.app/staring-contest/",
+  "shell": "ios",
+  "apple": {
+    "teamIdentifier": "<REMOVED_BEFORE_OPEN_SOURCING>",
+    "signingType": "development"
+  },
+  "appInfo": {
+    "appDisplayName": "Staring Contest",
+    "bundleIdentifier": "com.the8thwall.staringcontest",
+    "naeBuildMode": "static",
+    "workspace": "8w",
+    "appName": "staring-contest",
+    "refHead": "production",
+    "permissions": {
+      "camera": {
+        "requestStatus": "REQUESTED",
+        "usageDescription": "Test camera placeholder, it is good you are seeing it!"
+      }
+    }
+  },
+  "accountUuid": "5f853779-a91d-4c71-b90b-13d3f114fa85",
+  "appUuid": "f1fd5b94-e392-47b3-bd55-57eedd5fc1b1",
+  "exportType": "ipa",
+  "iconId": "2q22krotk3clhabtn03ymo4dvah458t9mv2i5ox01mxzyymg5hevagj9",
+  "launchScreenIconId": "2q22krotk3clhabtn03ymo4dvah458t9mv2i5ox01mxzyymg5hevagj9",
+  "requestRef": "xiaokaili-default",
+  "repoId": "cc.8.app.9686c26b-77b1-4b51-becf-e5d47868fc12"
+}

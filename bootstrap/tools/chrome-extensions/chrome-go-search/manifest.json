@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "8th Wall Go",
+  "version": "1.3",
+  "description": "Search Engine for 8th Wall's URL shortener",
+  "omnibox": {
+    "keyword": "go"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["tabs"],
+  "icons": {
+    "16": "8thwall.png",
+    "48": "8thwall.png",
+    "128": "8thwall.png"
+  }
+}

@@ -1,0 +1,34 @@
+---
+id: follow-animation
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# FolgenAnimation
+
+## Beschreibung
+
+Diese Komponente erstellt eine Animation für ein Objekt.
+
+## Eigenschaften
+
+| Eigenschaft    | Typ    | Standard    | Beschreibung                                                                                                                                              |
+| -------------- | ------ | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ziel           | eid    | undefiniert | Das Zielobjekt, das animiert werden soll. Wenn nicht angegeben, wird die Animation auf dem Objekt ausgeführt, an das die Komponente angehängt ist.        |
+| minDistance    | Nummer | 0           | Mindestabstand, der beim Folgen einzuhalten ist (in Metern).                                                                                              |
+| maxDistance    | Nummer | 0           | Maximal einzuhaltender Abstand beim Folgen (in Metern).                                                                                                   |
+| Elastizität    | Nummer | 1           | Anteil der zu bewegenden Entfernung (pro Sekunde), wenn sich das Ziel außerhalb der Mindest-/Maximalentfernung befindet (0 bewegt sich nie, 1 ist sofort) |
+
+## Funktionen
+
+<ComponentFunctions
+    name="FollowAnimation"
+    properties={{
+        minDistance: 0,
+        maxDistance: 0,
+        elasticity: 1
+    }}
+    mutate={`cursor.minDistance = 5;
+    cursor.elasticity = 0.5;
+    return false;`}
+/>

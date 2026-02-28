@@ -1,0 +1,342 @@
+---
+id: state-machines
+description: >-
+  Zustandsautomaten wurden entwickelt, um die Zustandsverwaltung zu
+  vereinfachen.
+sidebar_position: 50
+toc_max_heading_level: 3
+---
+
+# Zustandsmaschinen
+
+## Einführung
+
+<p>{frontMatter.description}</p>
+
+Ein Zustandsautomat setzt sich aus drei Hauptkomponenten zusammen:
+
+- Staaten
+- Staatliche Gruppen
+- Auslöser
+
+Ein Zustandsautomat befindet sich immer in genau einem Zustand und wechselt zwischen den Zuständen, wenn bestimmte Bedingungen (definiert durch die Auslöser) erfüllt sind. Zustandsgruppen sind eine bequeme Möglichkeit, die gemeinsame Logik mehrerer Zustände zu bündeln, aber die Gruppen sind selbst keine Zustände.
+
+## Beispiel
+
+```ts
+ecs.registerComponent({
+  name: 'Jump On Touch',
+  stateMachine: ({world, entity, defineState}) => {
+    const idle = defineState('idle').initial().onEnter(() => {
+      console.log('Entering idle state')
+    }).onEvent(ecs.input.SCREEN_TOUCH_START, 'jumping')
+
+    const jumping = defineState('jumping').onEnter(() => {
+      console.log('Springender Zustand')
+      ecs.physics.applyImpulse(world, entity.eid, 0, 5, 0)
+    }).onTick(() => {
+      console.log('Im springenden Zustand')
+    }).wait(2000, 'Leerlauf')
+  },
+})
+```
+
+## Definieren eines Zustandsautomaten
+
+Wenn Sie einen Zustandsautomaten in einer Komponente erstellen, wird Ihre Funktion wie folgt aufgerufen:
+
+### Eigenschaften
+
+| Eigentum              | Typ             | Beschreibung                                                                  |
+| --------------------- | --------------- | ----------------------------------------------------------------------------- |
+| world                 | World           | Hinweis auf die Welt.                                                         |
+| eid                   | eid             | Die Entitäts-ID der aktuellen Komponente                                      |
+| Unternehmen           | Entität         | Die Entitätsinstanz der aktuellen Komponente                                  |
+| defineState           | Funktion        | Eine Funktion zur Definition von Zuständen in der Zustandsmaschine            |
+| defineStateGroup      | Funktion        | Eine Funktion zur Definition von Gruppen im Zustandsautomaten                 |
+| schemaAttribute       | WorldAttribute  | Verweis auf das Schema der aktuellen Komponente im World Scope.               |
+| dataAttribute         | WorldAttribute  | Verweis auf die Daten der aktuellen Komponente im World Scope.                |
+
+Der folgende Code ist ein Beispiel dafür, wie man einen leeren Zustandsautomaten definiert:
+
+```ts
+ecs.registerComponent({
+  ...
+  stateMachine: ({world, entity, defineState}) => {
+    // Hier werden Zustände definiert
+  },
+})
+```
+
+## Staat
+
+Ein Zustand ist die grundlegende atomare Einheit eines Zustandsautomaten. Nachdem Sie die möglichen Zustände Ihres Zustandsautomaten definiert haben, können Sie zwischen den Zuständen wechseln, indem Sie Auslöser definieren.
+
+### Definieren eines Staates
+
+Der folgende Code ist ein Beispiel für die Definition eines neuen Zustands innerhalb eines Zustandsautomaten innerhalb einer Komponente.
+
+```ts
+ecs.registerComponent({
+  ...
+  stateMachine: ({world, entity, defineState}) => {
+    const foo = defineState('foo')
+    ...
+  }
+})
+```
+
+:::tip
+Zustandsfunktionen sind "fließend", d. h. sie geben dieselbe Instanz des Zustands zurück, so dass Sie mehrere Funktionsaufrufe in einer einzigen Anweisung verketten können.
+:::
+
+### .initial()
+
+Kennzeichnen Sie diesen Zustand als den ersten aktiven Zustand, wenn der Zustandsautomat erstellt wird.
+
+```ts
+defineState('myCustomState').initial()
+```
+
+### .onEnter()
+
+Legen Sie einen Callback fest, der beim Eintritt in diesen Zustand ausgeführt wird.
+
+```ts
+defineState('myCustomState').onEnter(() => {
+  // Etwas tun
+})
+```
+
+### .onTick()
+
+Legen Sie einen Callback fest, der bei jedem Frame ausgeführt wird, solange dieser Zustand aktiv ist.
+
+```ts
+defineState('myCustomState').onTick(() => {
+  // Etwas tun
+})
+```
+
+### .onExit()
+
+Legen Sie einen Callback fest, der beim Verlassen dieses Zustands ausgeführt wird.
+
+```ts
+defineState('myCustomState').onExit(() => {
+  // Etwas tun
+})
+```
+
+### .onEvent()
+
+Übergang in einen neuen Zustand, wenn ein bestimmtes Ereignis eintrifft.
+
+| Parameter                   | Typ               | Beschreibung                                                                |
+| --------------------------- | ----------------- | --------------------------------------------------------------------------- |
+| Ereignis (erforderlich)     | String            | Der Name des Ereignisses, nach dem gesucht werden soll                      |
+| nextState (erforderlich)    | String oder Staat | Der Zustand, in den bei Eintreten des Ereignisses übergegangen werden soll  |
+| Optionen (fakultativ)       | Objekt            | Zusätzliche Optionen                                                        |
+
+#### Optionen
+
+| Parameter | Typ                    | Beschreibung                                                                                                   |
+| --------- | ---------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Ziel      | eid                    | Die Entität, die das Ereignis empfangen soll (Standardwert ist die aktuelle Entität)                           |
+| wobei     | (Ereignis) => boolesch | Eine optionale Bedingung, die vor dem Übergang zu prüfen ist; ist sie falsch, findet der Übergang nicht statt. |
+
+```ts
+defineState('myCustomState').onEvent(
+    ecs.input.SCREEN_TOUCH_START,
+    'other',
+    {
+        target: world.events.globalId,
+        where: (event) => event.data.position.y > 0.5
+    }
+)
+```
+
+### .wait()
+
+Übergang in einen neuen Zustand nach einer bestimmten Zeitspanne.
+
+| Parameter | Typ               | Beschreibung                                                    |
+| --------- | ----------------- | --------------------------------------------------------------- |
+| Timeout   | number            | Die Dauer in Millisekunden vor dem Übergang                     |
+| nextState | String oder Staat | Der nächste Zustand, in den übergegangen wird                   |
+
+```ts
+defineState('myCustomState').wait(1000, 'myOtherCustomState')
+```
+
+### .onTrigger()
+
+Übergang in einen neuen Zustand, wenn ein TriggerHandle (definiert mit `ecs.defineTrigger()`) ausgelöst wird.
+
+| Parameter | Typ               | Beschreibung                                                                  |
+| --------- | ----------------- | ----------------------------------------------------------------------------- |
+| handle    | TriggerHandle     | Der Griff, der bei manueller Betätigung einen Übergang auslöst                |
+| nextState | String oder Staat | Der nächste Zustand, in den übergegangen wird                                 |
+
+```ts
+const toOther = ecs.defineTrigger()
+defineState('example').onTrigger(toOther, 'other')
+...
+toOther.trigger()
+```
+
+### .listen()
+
+Registrieren Sie einen Ereignis-Listener, der automatisch hinzugefügt wird, wenn der Zustand betreten wird, und beim Verlassen entfernt wird.
+
+| Parameter | Typ                      | Beschreibung                                                        |
+| --------- | ------------------------ | ------------------------------------------------------------------- |
+| Ziel      | eid oder () => eid       | Die Entität, von der erwartet wird, dass sie ein Ereignis erhält    |
+| Name      | String                   | Das Ereignis, auf das Sie achten sollten                            |
+| Hörer     | (Ereignis) => void       | Die Funktion, die aufgerufen wird, wenn das Ereignis ausgelöst wird |
+
+```ts
+const handleCollision = (event) => { 
+  console.log('Kollidiert mit', event.data.other)
+}
+defineState('example').listen(eid, ecs.physics.COLLISION_START_EVENT, handleCollision)
+```
+
+## Staatliche Gruppen
+
+Eine Zustandsgruppe ist eine Möglichkeit, Verhalten und Auslöser zu definieren, die für eine Liste von Zuständen gelten. Staatliche Gruppen sind keine Staaten und können nicht direkt in diese überführt werden. Wenn ein Zustand in der Gruppe aktiv ist, sind auch das Verhalten und die Auslöser der Gruppe aktiv.
+
+### Definieren einer Statusgruppe
+
+| Parameter              | Typ                         | Beschreibung                                                                                                                                 |
+| ---------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| substates (fakultativ) | Array von String oder State | Die Liste der Staaten, aus denen sich diese Gruppe zusammensetzt; das Ausschließen dieses Parameters entspricht der Auflistung aller Staaten |
+
+```ts
+const fizz = defineState('fizz')
+const buzz = defineState('buzz')
+
+const fizzBuzz = defineStateGroup([fizz, 'buzz'])
+```
+
+:::tip
+Zustandsgruppenfunktionen sind "fließend", d. h. sie geben dieselbe Instanz der Zustandsgruppe zurück, so dass Sie mehrere Funktionsaufrufe in einer einzigen Anweisung verketten können.
+:::
+
+### .onEnter()
+
+Legen Sie einen Callback fest, der beim Betreten dieser Gruppe ausgeführt wird.
+
+```ts
+defineStateGroup(['a', 'b']).onEnter(() => {
+  // Etwas tun
+})
+```
+
+### .onTick()
+
+Legen Sie einen Callback fest, der bei jedem Frame ausgeführt wird, solange diese Gruppe aktiv ist.
+
+```ts
+defineStateGroup(['a', 'b']).onTick(() => {
+  // Etwas tun
+})
+```
+
+### .onExit()
+
+Legen Sie einen Callback fest, der beim Verlassen dieser Gruppe ausgeführt wird.
+
+```ts
+defineStateGroup(['a', 'b']).onTick(() => {
+  // Etwas tun
+})
+```
+
+### .onEvent()
+
+Übergang in einen neuen Zustand, wenn ein bestimmtes Ereignis eintrifft.
+
+| Parameter                   | Typ               | Beschreibung                                                                |
+| --------------------------- | ----------------- | --------------------------------------------------------------------------- |
+| Ereignis (erforderlich)     | String            | Der Name des Ereignisses, nach dem gesucht werden soll                      |
+| nextState (erforderlich)    | String oder Staat | Der Zustand, in den bei Eintreten des Ereignisses übergegangen werden soll  |
+| Optionen (fakultativ)       | Objekt            | Zusätzliche Optionen                                                        |
+
+#### Optionen
+
+| Parameter | Typ                    | Beschreibung                                                                                                   |
+| --------- | ---------------------- | -------------------------------------------------------------------------------------------------------------- |
+| target    | eid                    | Die Entität, die das Ereignis empfangen soll (Standardwert ist die aktuelle Entität)                           |
+| wobei     | (Ereignis) => boolesch | Eine optionale Bedingung, die vor dem Übergang zu prüfen ist; ist sie falsch, findet der Übergang nicht statt. |
+
+```ts
+defineStateGroup(['a', 'b']).onEvent(
+    ecs.input.SCREEN_TOUCH_START,
+    'other',
+    {
+        target: world.events.globalId,
+        where: (event) => event.data.position.y > 0.5
+    }
+)
+```
+
+### .wait()
+
+Übergang in einen neuen Zustand nach einer bestimmten Zeitspanne.
+
+| Parameter | Typ               | Beschreibung                                            |
+| --------- | ----------------- | ------------------------------------------------------- |
+| Timeout   | Nummer            | Die Dauer in Millisekunden vor dem Übergang             |
+| nextState | String oder Staat | Der nächste Zustand, in den übergegangen wird           |
+
+```ts
+defineStateGroup(['a', 'b']).wait(1000, 'c')
+```
+
+### .onTrigger()
+
+Übergang in einen neuen Zustand, wenn ein TriggerHandle (definiert mit `ecs.defineTrigger()`) ausgelöst wird.
+
+| Parameter | Typ               | Beschreibung                                                                  |
+| --------- | ----------------- | ----------------------------------------------------------------------------- |
+| Griff     | TriggerHandle     | Der Griff, der bei manueller Betätigung einen Übergang auslöst                |
+| nextState | String oder Staat | Der nächste Zustand, in den übergegangen wird                                 |
+
+```ts
+const toC = ecs.defineTrigger()
+defineStateGroup(['a', 'b']).onTrigger(toC, 'c')
+...
+toC.trigger()
+```
+
+### .listen()
+
+Registrieren Sie einen Ereignis-Listener, der automatisch hinzugefügt wird, wenn die Zustandsgruppe betreten wird, und der beim Verlassen entfernt wird.
+
+| Parameter | Typ                      | Beschreibung                                                        |
+| --------- | ------------------------ | ------------------------------------------------------------------- |
+| target    | eid oder () => eid       | Die Entität, von der erwartet wird, dass sie ein Ereignis erhält    |
+| name      | String                   | Das Ereignis, auf das Sie achten sollten                            |
+| listener  | (Ereignis) => void       | Die Funktion, die aufgerufen wird, wenn das Ereignis ausgelöst wird |
+
+```ts
+const handleCollision = (event) => { 
+  console.log('collided with', event.data.other)
+}
+defineStateGroup(['a', 'b']).listen(eid, ecs.physics.COLLISION_START_EVENT, handleCollision)
+```
+
+## Benutzerdefinierte Auslöser
+
+Sie können einen benutzerdefinierten Auslöser definieren, der jederzeit aufgerufen werden kann, um einen Übergang zu bewirken.
+
+```ts
+const go = ecs.defineTrigger()
+const stopped = defineState('stopped').onTick(() => {
+  if (world.input.getAction('start-going'))) {
+    go.trigger()
+  }
+}).onTrigger(go, 'going')
+const going = defineState('going')
+```

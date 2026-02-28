@@ -1,0 +1,22 @@
+.hidden {
+  display: none;
+}
+
+.message {
+  position: absolute;
+  width: 75vw;
+  height: auto;
+  bottom: 6vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.5em;
+  line-height: 1.0em;
+  
+  background-color: #AD50FF;
+  border: 0.2em solid white;
+  text-align: center;
+  color: #FFF;
+  border-radius: 10px;
+  z-index: 50;
+}

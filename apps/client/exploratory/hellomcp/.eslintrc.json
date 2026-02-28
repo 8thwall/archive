@@ -1,0 +1,19 @@
+{
+  "rules": {
+    "no-console": "off",
+    "import/extensions": "off",
+    "local-rules/zod-tuple": "error"
+  },
+  "overrides": [
+    {
+      "files": [
+        "src/prompts/**/*.ts",
+        "src/schema/**/*.ts",
+        "src/tools/**/*.ts"
+      ],
+      "rules": {
+        "max-len": "off"
+      }
+    }
+  ]
+}

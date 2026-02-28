@@ -1,0 +1,211 @@
+.embed8-link {
+  display: inline-block;
+  position: relative;
+  font-family: 'Nunito', Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  text-align: center;
+}
+
+.embed8-link, .embed8-link:link, .embed8-link:visited {
+  color: #323232;
+  text-decoration: none;
+}
+
+.embed8-link:hover, .embed8-link:active {
+  color: #32323299;
+  text-decoration: none;
+}
+
+.embed8-link[data-dark-theme], .embed8-link[data-dark-theme]:link, .embed8-link[data-dark-theme]:visited  {
+  color: #fff;
+}
+
+.embed8-link[data-dark-theme]:hover, .embed8-link[data-dark-theme]:active  {
+  color: #fff9;
+}
+
+.embed8-link:hover .embed8-link-icon {
+  opacity: 0.6;
+}
+
+.embed8-link-icon {
+  max-width: 2.2em;
+  vertical-align: -0.8em;
+}
+
+.embed8-link-icon:not(:first-child) {
+  margin-left: 0.5em;
+}
+
+.embed8-link[data-icon-vertical] {
+  line-height: 1;
+}
+
+.embed8-link[data-icon-vertical] .embed8-link-icon {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 0.125em;
+}
+
+.embed8-pop-over {
+  font-family: 'Nunito', Helvetica, Arial, sans-serif;
+  color: #323232;
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translate(calc(-50%), -5px);
+  width: 276px;
+  height: 180px;
+  border-radius: 10px;
+  z-index: 88888;
+  filter: drop-shadow(0 0 10px #0002);
+  cursor: initial;
+}
+
+.embed8-pop-over.embed8-fade {
+  pointer-events: none;
+  transition: 0.2s opacity;
+  opacity: 0;
+}
+
+.embed8-hidden {
+  display: none !important;
+}
+
+.embed8-pop-over::after {
+  position: absolute;
+  content: '';
+  left: 50%;
+  top: 100%;
+  z-index: -1;
+  width: 22px;
+  height: 22px;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.embed8-pop-over, .embed8-pop-over::after {
+  background-color: white;
+}
+
+#embed8-qr, .embed8-qr {
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  background-color: white;
+  width: 91px;
+}
+
+/* Spinner */
+.embed8-pop-over:empty::before, .embed8-pop-over-right::after {
+  content:'';
+  position: absolute;
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  border: 3px solid transparent;
+  border-right-color: #D5D7E4;
+  z-index: -1;
+}
+
+.embed8-pop-over:empty::before {  
+  left: 50%;
+  top: 50%;
+  animation: embed8-spin-center 0.75s linear forwards infinite;
+}
+
+.embed8-pop-over-right::after {
+  right: 50px;
+  bottom: 50px;
+  animation: embed8-spin 0.75s linear forwards infinite;
+}
+
+@keyframes embed8-spin {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
+}
+
+@keyframes embed8-spin-center {
+  0% {transform: translate(-50%, -50%) rotate(0deg);}
+  100% {transform: translate(-50%, -50%) rotate(360deg);}
+}
+
+.embed8-button {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: inherit;
+  box-shadow: none !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.embed8-divider {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+/* Vertical splitter lines */
+.embed8-divider:after, .embed8-divider:before {
+  content: '';
+  position: absolute;
+  background-color: #D5D7E4;
+  width: 1px;
+  height: 55px;
+  left: 50%;
+}
+
+.embed8-divider:before {
+  top: calc(100% + 10px);
+}
+
+.embed8-divider:after {
+  bottom: calc(100% + 10px);
+}
+
+.embed8-pop-over-left {
+  width: 45%;
+  float: left;
+}
+
+.embed8-pop-over-left img {
+  display: block;
+  margin: 0 auto;
+  max-width: 75px;
+  max-height: 50px;
+}
+
+.embed8-pop-over-right {
+  width: 45%;
+  float: right;
+  height: 100%;
+}
+
+.embed8-pop-over-left p, .embed8-pop-over-right ol {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 1em;
+  text-align: left;
+}
+
+.embed8-pop-over-right ol {
+  margin-left: 1.25em;
+  padding-left: 0;
+}
+
+#embed8-address, .embed8-address {
+  cursor: pointer;
+}
+
+#embed8-address:hover, .embed8-address:hover {
+  text-decoration: underline;
+}

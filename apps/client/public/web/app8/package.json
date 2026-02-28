@@ -1,0 +1,26 @@
+{
+  "name": "app8",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build.js",
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "copy": "cp dist/app8.js ~/repo/prod8/cdn/web-stamped/hosting/app8.js && echo 'Now you can send a PR to prod8.'",
+    "build": "webpack",
+    "clean": "rm -rf dist/*",
+    "watch": "echo \"Test page will be available at: https://localhost:9004/test/\" && npx webpack-dev-server"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "babel-loader": "^8.0.6",
+    "ts-essentials": "^9.3.2",
+    "ts-loader": "^9.4.4",
+    "tslib": "^2.8.1",
+    "typescript": "^5.8.3",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.11.2"
+  }
+}

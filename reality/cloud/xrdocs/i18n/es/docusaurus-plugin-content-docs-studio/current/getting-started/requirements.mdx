@@ -1,0 +1,39 @@
+---
+id: requirements
+sidebar_position: 2
+---
+
+# Requisitos
+
+## Navegador web
+
+Los navegadores móviles requieren la siguiente funcionalidad para soportar las experiencias web de 8th Wall:
+
+- WebGL (`canvas.getContext('webgl') || canvas.getContext('webgl2')`)
+- getUserMedia (`navigator.mediaDevices.getUserMedia`)
+- deviceorientation (`window.DeviceOrientationEvent` - _sólo necesario si SLAM está activado_)
+- Web-Assembly / WASM (`window.WebAssembly`)
+
+**NOTA:** Las experiencias web de 8th Wall deben verse a través de **https**. **Esto es requerido por los navegadores para el acceso a la cámara.**
+
+### iOS
+
+- **Safari** (iOS 11+)
+- **Aplicaciones** que utilizan vistas web SFSafariViewController (iOS 13+)
+  - Apple ha añadido soporte `getUserMedia()` a SFSafariViewController en iOS 13. 8th Wall funciona en aplicaciones iOS 13 que utilizan vistas web SFSafariViewController.
+  - Ejemplos: Twitter, Slack, Discord, Gmail, Hangouts, etc.
+- **Aplicaciones/navegadores** que utilizan vistas web WKWebView (iOS 14.3+)
+
+### Android
+
+- **Navegadores** conocidos por soportar de forma nativa las características requeridas para WebAR:
+  - Cromo
+  - Firefox
+  - Samsung Internet
+  - Microsoft Edge
+- **Aplicaciones** que utilizan Web Views conocidas por soportar las características requeridas para WebAR:
+  - Twitter, WhatsApp, Slack, Gmail, Hangouts, Reddit, LinkedIn, etc.
+
+## Motor
+
+- **VPS** requiere motor v27.4.7+

@@ -1,0 +1,21 @@
+import {EventExample} from '@site/src/components/event-example'
+
+# XRイベント
+
+XRイベントは8番目のウォールエンジンから転送される。 これらはカメラ・エンティティ上で発せられ、[world.events.globalId](/api/studio/world/events/#properties)にバブルアップされる。
+
+ワールドエフェクト](world)、[フェイスエフェクト](face)、[イメージターゲット](image-targets)、[VPS](vps)のライフサイクルイベントを参照してください。
+
+## イベント
+
+### REALITY_READY
+
+このイベントは8th Wall Webが初期化され、少なくとも1つのフレームが正常に処理された時に発行される。 これは、あらゆるローディング要素を非表示にすべき推奨時間である。 これは、パーミッション／ローディングUIを非表示にする推奨時間である。
+
+#### プロパティ一覧
+
+いない。
+
+#### 例
+
+<EventExample ns="ecs.events" event="REALITY_READY" target="world.events.globalId" hasPayload={false} callbackBody={`console.log('Reality ready')`} />

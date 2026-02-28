@@ -1,0 +1,30 @@
+{
+	"version": "1.0",
+	"fps": 30,
+	"frameCount": 300,
+	"width": 4096,
+	"height": 256,
+	"maxIndicesCount" : 38070,
+	"gopChunks" : [
+		{ "from":0, "filename" : "gop_tvm_0.tvm" },
+		{ "from":38, "filename" : "gop_tvm_1.tvm" },
+		{ "from":68, "filename" : "gop_tvm_2.tvm" },
+		{ "from":95, "filename" : "gop_tvm_3.tvm" },
+		{ "from":120, "filename" : "gop_tvm_4.tvm" },
+		{ "from":140, "filename" : "gop_tvm_5.tvm" },
+		{ "from":158, "filename" : "gop_tvm_6.tvm" },
+		{ "from":176, "filename" : "gop_tvm_7.tvm" },
+		{ "from":196, "filename" : "gop_tvm_8.tvm" },
+		{ "from":215, "filename" : "gop_tvm_9.tvm" },
+		{ "from":233, "filename" : "gop_tvm_10.tvm" },
+		{ "from":252, "filename" : "gop_tvm_11.tvm" },
+		{ "from":273, "filename" : "gop_tvm_12.tvm" },
+		{ "from":294, "filename" : "gop_tvm_13.tvm" }
+	],
+	"posChunks" : [
+		{ "from":0, "filename" : "position_tvm_0.tvm" },
+		{ "from":84, "filename" : "position_tvm_1.tvm" },
+		{ "from":181, "filename" : "position_tvm_2.tvm" },
+		{ "from":283, "filename" : "position_tvm_3.tvm" }
+	]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "presubmit",
+  "description": "Utilities for verifying commit integrity prior to land.",
+  "private": true,
+  "dependencies": {
+  }
+}

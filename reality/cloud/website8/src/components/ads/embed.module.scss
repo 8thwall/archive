@@ -1,0 +1,222 @@
+@use '../../styles/constants';
+@use '../../styles/brand-colors';
+
+.embedSection {
+  background-color: rgb(235, 235, 241);
+}
+
+.embedSectionVideo {
+  width: 300px;
+  height: auto;
+  border-radius: 6px;
+  filter: drop-shadow(0px 5px 8px brand-colors.$gray4);
+}
+
+@media (min-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+  .embedSectionRow {
+    max-width: 72rem;
+    margin: auto;
+  }
+}
+
+.embedPageText {
+  max-width: 60rem;
+}
+
+.embedPage {
+  background-color: brand-colors.$moonlight;
+  background-image: url(../../../img/embed-bg.png);
+  background-position: 0 340px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.checkmarkSection {
+  display: flex;
+  max-width: 80rem;
+  flex-direction: row;
+}
+
+.checkmarkIcon {
+  max-width: 30px;
+  max-height: 30px;
+  margin-right: 1em;
+}
+
+.checkmarkItem {
+  text-align: center;
+  display: block;
+  p {
+    margin-top: 1em;
+  }
+}
+
+.embedFormButton {
+  margin-top: 2em;
+}
+
+.embedCardButtonSection {
+  max-width: 25rem;
+}
+
+.embedCardButton {
+  background-color: brand-colors.$white;
+  color: brand-colors.$gray4;
+  border: 1px solid brand-colors.$gray2;
+  font-weight: 700;
+  padding: 16px;
+
+  &:active, &:focus, &:global(.active) {
+    color: brand-colors.$brand-purple;
+    border: 1px solid brand-colors.$brand-purple;
+    box-shadow: none;
+    outline: none;
+  }
+}
+
+.embedCardSection {
+  flex-direction: row;
+}
+
+.embedCard {
+  max-width: 20rem;
+  padding: 2em 1.5em;
+  margin: 1.5em 0.5em;
+  background: white;
+  border-radius: 6px;
+}
+
+.embedCardImage {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.embedCardText {
+  color: brand-colors.$gray5;
+}
+
+.embedButton {
+  border: 1px solid brand-colors.$brand-purple;
+  border-radius: 2.5em;
+  padding: 0.5em 3em;
+  transition: color 200ms, background-color 200ms;
+}
+.embedButton:hover {
+  text-decoration: none;
+  color: brand-colors.$white;
+  background-color: brand-colors.$brand-purple;
+}
+
+.highlight {
+  filter: drop-shadow(0 0 8px rgba(brand-colors.$brand-highlight, 0.33));
+}
+
+.socialProofSection {
+  max-width: 45rem;
+}
+
+.socialProofCard {
+  padding: 1.5em 3.5em;
+  border-radius: 6px;
+  display: flex;
+  background-image: linear-gradient(to right, hsl(277, 82.9%, 90%), hsl(292, 57%, 90%));
+  filter: drop-shadow(0 0 10px brand-colors.$gray2);
+}
+
+.socialProofStat {
+  color: white;
+  font-size: 60px;
+  margin-right: 0.4em;
+  filter: drop-shadow(-5px 8px 20px rgba(118, 17, 182, 0.29))
+}
+
+.socialProofText {
+  color: brand-colors.$brand-purple;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.socialProofSource {
+  margin-top: 0.3em;
+  color: brand-colors.$gray5;
+  text-align: center;
+}
+
+@media (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+  .checkmarkSection {
+    max-width: 20rem;
+    flex-direction: column;
+  }
+
+  .checkmarkIcon {
+    max-width: 16px;
+    max-height: 16px;
+    margin-right: 0.5em;
+  }
+
+  .checkmarkItem {
+    padding: 0;
+    display: flex;
+    text-align: left;
+    p {
+      margin: 0.5em 0;
+    }
+  }
+
+  .socialProofCard {
+    padding: 2em;
+    flex-direction: column;
+  }
+
+  .embedFormButton {
+    margin: 0;
+    height: 150px;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 3.5rem;
+  }
+  .embedFormButton:before {
+    content: "";
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    background: linear-gradient(
+      to bottom,
+      hsla(0, 0%, 100%, 0) 0%,
+      hsla(0, 0%, 100%, 0.013) 7.8%,
+      hsla(0, 0%, 100%, 0.049) 14.7%,
+      hsla(0, 0%, 100%, 0.104) 20.8%,
+      hsla(0, 0%, 100%, 0.175) 26.2%,
+      hsla(0, 0%, 100%, 0.259) 31.3%,
+      hsla(0, 0%, 100%, 0.352) 36.1%,
+      hsla(0, 0%, 100%, 0.45) 40.8%,
+      hsla(0, 0%, 100%, 0.55) 45.7%,
+      hsla(0, 0%, 100%, 0.648) 51%,
+      hsla(0, 0%, 100%, 0.741) 56.7%,
+      hsla(0, 0%, 100%, 0.825) 63.2%,
+      hsla(0, 0%, 100%, 0.896) 70.6%,
+      hsla(0, 0%, 100%, 0.951) 79.1%,
+      hsla(0, 0%, 100%, 0.987) 88.8%,
+      hsl(0, 0%, 100%) 100%
+    );
+  }
+
+  .embedCardSection {
+    min-height: 200px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .embedCard {
+    margin: 1.5em 0;
+  }
+}

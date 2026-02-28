@@ -1,0 +1,85 @@
+@use '../styles/constants';
+@use '../styles/brand-colors';
+
+.myArrow {
+  background: none;
+  border: none;
+  font-size: 3rem;
+  line-height: 1;
+  color: brand-colors.$gray4;
+  outline: none !important;
+
+  &:disabled {
+    visibility: hidden,
+  }
+
+  &:hover {
+    color: brand-colors.$gray3;
+  }
+}
+
+.carouselSmall {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+  overflow-x: scroll;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  padding-left: 4em;
+  scrollbar-width: 'none';
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.carouselSmall:after {
+  content: "";
+  padding-right: 2rem;
+}
+
+.partnerCardLink {
+  -webkit-transition: all 0.1s linear; /* Safari and Chrome */
+  -moz-transition: all 0.1s linear; /* Firefox */
+  -ms-transition: all 0.1s linear; /* IE 9 */
+  -o-transition: all 0.1s linear; /* Opera */
+  transition: all 0.1s linear;
+  color: inherit;
+  text-decoration: none;
+  &:hover {
+    -webkit-transform:scale(1.05); /* Safari and Chrome */
+    -moz-transform:scale(1.05); /* Firefox */
+    -ms-transform:scale(1.05); /* IE 9 */
+    -o-transform:scale(1.05); /* Opera */
+    transform:scale(1.05);
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+.partnerCard {
+  min-width: 0;
+  min-height: 0;
+  height: 275px;
+  width: 275px;
+  border-radius: 10px;
+  margin: 0;
+}
+
+@media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+  .carousel {
+    display: none;
+  }
+}
+
+@media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+  .partnerCard {
+    width: 175px;
+    height: 175px;
+  }
+}
+
+@media screen and (min-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+  .carouselSmall {
+    display: none;
+  }
+}

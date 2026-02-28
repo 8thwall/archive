@@ -1,0 +1,8 @@
+@use '../styles/constants';
+
+
+@media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+  .pricingBadge {
+    font-size: 0.7rem;
+  }
+}

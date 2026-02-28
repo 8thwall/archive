@@ -1,0 +1,52 @@
+@use '../../styles/constants';
+@use '../../styles/_brand-colors';
+
+.whyWebARCopy {
+  max-width: 64rem;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3rem;
+
+  @media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+    margin-bottom: 2.5rem;
+  }
+
+  @media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+    margin-bottom: 2rem;
+  }
+}
+
+.reasons {
+  max-width: 100rem;
+  margin: auto;
+  justify-content: space-evenly;
+
+  @media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+    >*:not(:last-child) {
+      margin-bottom: 2.5rem;
+    }
+  }
+
+  @media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+    >*:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.icon {
+  margin-bottom: 1rem;
+
+  @media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+    margin-bottom: 1rem;
+  }
+}
+
+.alignTextLeft {
+  text-align: left;
+}
+
+.title {
+  color: brand-colors.$brand-purple;
+}

@@ -1,0 +1,44 @@
+---
+id: spaces
+description: Diese Bibliothek enthält Funktionen für die Arbeit mit Spaces.
+---
+
+# Räume
+
+## Beschreibung
+
+{frontMatter.description}
+
+## Funktionen
+
+### loadSpace
+
+Lädt einen durch eine ID oder einen Namen angegebenen Space. Der neu geladene Space ersetzt den alten Space als aktiven Space. Die Objekte des alten Spaces (und aller darin enthaltenen Spaces) werden despawned und die neuen Spaces (und alle darin enthaltenen Spaces) werden gespawnt. Gibt einen Fehler aus, wenn es keine Übereinstimmung oder mehrere Übereinstimmungen mit der angegebenen ID oder dem Namen gibt.
+
+```ts
+world.spaces.loadSpace(idOrName: string) // -> void
+```
+
+### listSpaces
+
+Gibt alle SpaceData des Spaces zurück.
+
+```ts
+world.spaces.listSpaces() // -> SpaceData[] | undefiniert
+```
+
+### getActiveSpace
+
+Gibt die SpaceData des aktiven Spaces zurück.
+
+```ts
+world.spaces.getActiveSpace() // -> SpaceData | undefiniert
+```
+
+## RaumfahrtDaten
+
+| Eigentum  | Typ     | Beschreibung                                            |
+| --------- | ------- | ------------------------------------------------------- |
+| Name      | String  | Der Name des Raums. Muss einzigartig sein               |
+| id        | String  | Der Raum id                                             |
+| gelaicht  | boolean | Zeigt an, ob der Raum derzeit gespawnt ist              |

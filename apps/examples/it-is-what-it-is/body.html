@@ -1,0 +1,90 @@
+<!-- Copyright (c) 2020 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<div style="width: 100%">
+  <h2 id="countdown" style="
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  z-index: 10;
+  font-size: 4.5vw;
+  font-family: sans-serif;"></h2>
+</div>
+
+<button id="face"
+    style=
+      "z-index: 10;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      background:none;
+      border: none;
+      outline:none;"
+  ><img style="width: 20vw; max-width: 150px;" src="./assets/Textures/head.png"></button>
+
+<a-scene 
+  xrextras-almost-there
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="maxCanvasWidth: 960; maxCanvasHeight: 960"
+  xrface="mirroredDisplay: true;  meshGeometry: eyes, face, mouth; cameraDirection: front; allowedDevices: any;"
+  flip-button>
+  
+  <a-assets>
+    <img id="eye" src="./assets/Textures/eye.png">
+    <img id="mouth" src="./assets/Textures/mouth.png">
+  </a-assets>
+  
+  <xrextras-capture-button></xrextras-capture-button>
+  <xrextras-capture-preview></xrextras-capture-preview>
+  
+  <a-camera position="0 1 2"></a-camera>
+  
+  <xrextras-faceanchor>
+    
+    <xrextras-face-attachment point="mouth">
+      <a-plane
+        id="mouthObj"
+        src="#mouth"
+        height="0.6" width="0.6" 
+        side="back" 
+        transparent="true"
+        depth-write="false"
+        material="shader: flat"
+      ></a-plane>
+    </xrextras-face-attachment>
+    
+    <xrextras-face-attachment point="leftEye">
+      <a-plane 
+        id="eyeL"
+        src="#eye"
+        height="0.4" 
+        width="0.4" 
+        side="back" 
+        transparent="true"
+        depth-write="false"
+        material="shader: flat"
+      ></a-plane>
+    </xrextras-face-attachment>
+
+    <xrextras-face-attachment point="rightEye">
+      <a-plane
+        id="eyeR"
+        src="#eye"
+        height="0.4" width="0.4" 
+        side="back" 
+        transparent="true"
+        depth-write="false"
+        material="shader: flat"
+      ></a-plane>
+    </xrextras-face-attachment>
+    
+  </xrextras-faceanchor>
+  
+  <a-light type="directional" target="#face" position="0 1.8 3" intensity="0.8"></a-light>
+  <a-light type="ambient" intensity="0.8"></a-light>
+  
+   <a-sky id="void" visible="false" material="shader: flat-disco; random: 0.25;"></a-sky>
+  
+</a-scene>

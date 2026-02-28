@@ -1,0 +1,107 @@
+.carouselCard {
+  margin: 0;
+  padding: 0;
+  
+  text-decoration: none;
+}
+
+.carouselCardContainer:hover {
+  transform: scale(1.05);
+  text-decoration: none;
+}
+
+.carouselCardContainer {
+  margin: 1em;
+  width: 265px;
+  height: 500px;
+  background-color: white;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+  text-align: center;
+  border: 0px;
+  overflow: hidden;
+  border-radius: 10px;
+  transition: all 0.1s linear;
+}
+
+.carouselCardBrands {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 20%;
+}
+
+.carouselCardBrandLogo {
+  max-height: 60%;
+  max-width: 70%;
+  width: auto;
+  height: auto;
+}
+
+.carouselCardImageContainer {
+  width: 100%;
+}
+
+.carouselCardImage {
+  width: 100%;
+}
+
+.carouselCardBody {
+  display: flex;
+  gap: 0.25em;
+  color: #2D2E43;
+  justify-content: center;
+  align-items: flex-end;
+  margin: 0.5em;
+}
+
+.carouselCardQnty {
+  font-family: Noto Sans JP, sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 3rem;
+}
+
+.carouselCardLabel {
+  padding-left: 0.3rem;
+  font-size: 1.25rem;
+  line-height: 1.875rem;
+  font-family: Nunito, sans-serif;
+}
+
+.carouselCardLink {
+  color: #7611B6;
+  text-decoration: underline;
+  font-size: 1.25em;
+}
+
+@media screen and (max-width: 991px) {
+  .carouselCardContainer {
+    margin: 0.5em;
+    height: 415px;
+    width: 215px;
+  }
+  
+  .carouselCardLabel {
+    text-align: left;
+    line-height: 1.125rem;
+    padding-bottom: 0.375em;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .carouselCardContainer {
+    margin: 0.25em;
+    height: 320px;
+    width: 180px;
+  }
+  
+  .carouselCardBody {
+    display: none;
+  }
+  
+  .carouselCardLink {
+    margin: 1em 0;
+    text-decoration: none;
+    font-size: 1em;
+  }
+}

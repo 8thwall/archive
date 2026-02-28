@@ -1,0 +1,29 @@
+---
+id: drei
+description: Diese Bibliothek bietet eine Schnittstelle zur Rendering-Engine.
+---
+
+# drei
+
+## Beschreibung
+
+{frontMatter.description}
+
+## Eigenschaften
+
+| Eigenschaft       | Typ                    | Beschreibung                                  |
+| ----------------- | ---------------------- | --------------------------------------------- |
+| scene             | Drei                   | Einstiegspunkt für die three.js API.          |
+| renderer          | WebGLRenderer          | Der three.js Renderer.                        |
+| activeCamera      | Kamera                 | Handle zur aktiven Kamera.                    |
+| entityToObject    | `Karte<eid, Object3D>` | Abbildung von Entitäten auf three.js-Objekte. |
+
+## Funktionen
+
+### entityToObject
+
+Ruft das entsprechende three.js Object3D für eine bestimmte Entität ab.
+
+```ts
+world.three.entityToObject.get(eid: Eid) // -> Object3D
+```

@@ -1,0 +1,28 @@
+[ {
+  "id" : "dcbd7ec6-6c88-acb9-e2f3-83c1d857402a",
+  "name" : "tags",
+  "display_width" : null,
+  "label" : "Tags List",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "placeholder" : "tag 1, tag 2 (comma-separated)",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text",
+  "default" : ""
+}, {
+  "id" : "322713c8-7216-b3a2-389d-3a057a1b9892",
+  "name" : "align_content",
+  "display_width" : null,
+  "label" : "Align Content",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "flex-start", "Left" ], [ "center", "Center" ], [ "flex-end", "Right" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "default" : "center"
+} ]

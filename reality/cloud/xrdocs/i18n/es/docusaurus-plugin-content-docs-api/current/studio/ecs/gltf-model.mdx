@@ -1,0 +1,47 @@
+---
+id: gltf-model
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# GltfModel
+
+## Descripción
+
+Este componente establece una geometría personalizada en una entidad.
+
+## Propiedades
+
+| Propiedad             | Tipo     | Por defecto | Descripción                                                                                                                                                                            |
+| --------------------- | -------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| url (Obligatorio)     | cadena   | ""          | La url de la fuente.                                                                                                                                                                   |
+| animationClip         | cadena   | ""          | El nombre del animationClip adjunto al modelo a reproducir. También se acepta el comodín `*`, que hará que el modelo reproduzca todas las animaciones.                                 |
+| bucle                 | booleano | falso       | Si el clip de animación se reinicia o no una vez finalizada su reproducción                                                                                                            |
+| en pausa              | booleano | falso       | Si el clip de animación está en pausa                                                                                                                                                  |
+| tiempo                | número   | 0           | Tiempo en segundos de animationClip para saltar a                                                                                                                                      |
+| timeScale             | número   | 1           | Factor de escala para el tiempo. 0 hace que la animación se detenga. Los valores negativos hacen que la animación se reproduzca hacia atrás.                                           |
+| colisionador          | booleano | falso       | Si la animación debe actualizar el colisionador de física.                                                                                                                             |
+| invertir              | booleano | falso       | Si se establece, la animación se reproducirá en reversa cuando termine de reproducirse hacia adelante (juntos cuentan como una iteración de bucle)                                     |
+| repeticiones          | número   | \-1         | Si se establece junto con 'loop', el número de veces que se repetirá el bucle (-1 significa bucle para siempre)                                                                        |
+| crossFadeDuration     | número   | 0           | El tiempo en segundos que se pasará mezclando entre animaciones cuando se inicie una nueva animación (y se esté reproduciendo una animación existente).                                |
+
+## Funciones
+
+<ComponentFunctions
+    name="GltfModel"
+    properties={{
+        url: './assets/doty.glb',
+        animationClip: 'idle',
+        loop: false,
+        paused: false,
+        time: 0,
+        timeScale: 1,
+        collider: false,
+        reverse: false,
+        repetitions: -1,
+        crossFadeDuration: 0
+    }}
+    mutate={`cursor.timeScale = 0.5;
+    cursor.loop = true;
+    return false;`}
+/>

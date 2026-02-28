@@ -1,0 +1,159 @@
+@use '../styles/brand-colors';
+@use '../styles/constants';
+
+.collapseButton {
+  border: 1px solid brand-colors.$gray2;
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.stickyBlock {
+  width: 100%;
+  background-color: brand-colors.$moonlight;
+  height: 2.5rem;
+  top: 4.2em;
+  z-index: 1;
+}
+
+.tableContainer {
+  max-width: 70rem;
+  margin: 0 auto;
+}
+
+.tableHeader {
+  top: 6.5rem;
+  background-color: brand-colors.$white;
+  z-index: 1;
+  color: brand-colors.$gray5;
+  border-radius: 6px 6px 0 0;
+  border-style: solid;
+  border-width: 1px 0;
+  overflow: hidden;
+}
+
+.tableSubHeader {
+  padding: 0.8rem 1.5rem;
+  background-color: rgba(brand-colors.$brand-highlight, 0.05);
+  color: brand-colors.$brand-purple-dark;
+  font-style: italic;
+  border-style: solid;
+  border-color: brand-colors.$gray1 brand-colors.$gray2;
+  border-width: 0 1px 1px 1px;
+}
+
+.tableCell {
+  padding: 0.8rem;
+  flex: 1;
+  color: brand-colors.$gray4;
+  border-style: solid;
+  border-color: brand-colors.$gray1;
+  border-width: 0 1px 0 0;
+  background-color: brand-colors.$white;
+  &:last-child {
+    border: none;
+    min-width: 90px;
+  }
+  @media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+    padding: 0.8em 0.1em;
+  }
+}
+
+.tableHeader > .tableCell {
+  color: brand-colors.$gray5;
+  font-size: 1.25rem;
+  font-weight: 700;
+  @media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+    font-size: 1rem;
+  }
+}
+
+.tableRow {
+  border-style: solid;
+  border-color: brand-colors.$gray1 brand-colors.$gray2;
+  border-width: 0 1px 1px 1px;
+  overflow: hidden;
+  font-size: 0.9rem;
+  &:last-child {
+    border-radius: 0 0 6px 6px;
+    border-bottom-color: brand-colors.$gray2;
+  }
+  &:first-child {
+    border-color: brand-colors.$gray2;
+    border-width: 1px;
+  }
+}
+
+.tableRowHeader {
+  padding: 0.8rem 1.5rem;
+  flex-basis: 40%;
+  border-style: solid;
+  border-color: brand-colors.$gray1;
+  border-width: 0 1px 0 0;
+  background-color: brand-colors.$white;
+
+  @media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+    flex-basis: 100%;
+    border-width: 0 0 1px 0;
+  }
+}
+
+.tableHeader > .tableRowHeader {
+  padding-left: 1.2em;
+  padding-right: 1.2em;
+  border-left-width: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  @media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+    font-size: 1rem;
+  }
+  @media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+    text-align: center;
+  }
+}
+
+.link {
+  text-decoration: underline;
+  &:hover {
+    color: brand-colors.$brand-purple-dark;
+  }
+}
+
+.featuredIcon {
+  height: 15px;
+  width: auto;
+}
+
+.notFeaturedIcon {
+  height: 12px;
+  width: auto;
+}
+
+.toggleContainer {
+  max-width: 1146px;
+  display: flex;
+  justify-content: space-between;
+  margin: 1em auto;
+
+  @media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+    gap: 1em;
+    justify-content: center;
+  }
+}
+
+.planBillingToggleContainer {
+  @media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+    width: 100%;
+  }
+
+}
+
+.unlimitedFont {
+  @media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+    font-size: 12px;
+  }
+}

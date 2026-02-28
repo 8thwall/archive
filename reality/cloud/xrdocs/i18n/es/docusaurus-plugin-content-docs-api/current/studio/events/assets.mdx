@@ -1,0 +1,125 @@
+---
+id: assets
+---
+
+import {EventExample} from '@site/src/components/event-example'
+
+# Eventos
+
+Los eventos de activos se emiten en la entidad del activo y burbujean hasta el [world.events.globalId](/api/studio/world/events/#properties).
+
+## Modelo 3D
+
+### GLTF_MODEL_LOADED
+
+Se emite cuando se carga un modelo
+
+#### Propiedades
+
+| Propiedad | Tipo                                                    | Descripción       |
+| --------- | ------------------------------------------------------- | ----------------- |
+| modelo    | [Grupo](https://threejs.org/docs/#api/en/objects/Group) | El Grupo three.js |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="GLTF_MODEL_LOADED" callbackBody={`console.log('Model loaded: ', event.data.model)`} />
+
+### GLTF_ANIMATION_FINISHED
+
+Se emite cuando todos los bucles de un clip de animación han finalizado.
+
+#### Propiedades
+
+| Propiedad | Tipo   | Descripción               |
+| --------- | ------ | ------------------------- |
+| nombre    | cadena | El nombre de la animación |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="GLTF_ANIMATION_FINISHED" callbackBody={`console.log('Animation finished: ', event.data.name)`} />
+
+### GLTF_ANIMATION_LOOP
+
+Se emite cuando ha finalizado un único bucle del clip de animación.
+
+#### Propiedades
+
+| Propiedad | Tipo   | Descripción               |
+| --------- | ------ | ------------------------- |
+| nombre    | cadena | El nombre de la animación |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="GLTF_ANIMATION_LOOP" callbackBody={`console.log('Animation loop: ', event.data.name)`} />
+
+## Splat gaussiano
+
+### SPLAT_MODEL_LOADED
+
+Se emite cuando se carga un Splat
+
+#### Propiedades
+
+| Propiedad | Tipo                                                       | Descripción             |
+| --------- | ---------------------------------------------------------- | ----------------------- |
+| modelo    | [Object3D](https://threejs.org/docs/#api/en/core/Object3D) | El Objeto3D de three.js |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="SPLAT_MODEL_LOADED" callbackBody={`console.log('Splat loaded: ', event.data.model)`} />
+
+## Audio
+
+### AUDIO_CAN_PLAY_THROUGH
+
+Se emite cuando una entidad tiene la capacidad de reproducir Audio.
+
+#### Propiedades
+
+Ninguno.
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="AUDIO_CAN_PLAY_THROUGH" hasPayload={false} callbackBody={`console.log('Ready to play audio')`} />
+
+### AUDIO_END
+
+Se emite cuando el audio ha terminado de reproducirse en una entidad.
+
+#### Propiedades
+
+Ninguno.
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="AUDIO_END" hasPayload={false} callbackBody={`console.log('Finished playing audio')`} />
+
+## Vídeo
+
+### VIDEO_CAN_PLAY_THROUGH
+
+Se emite cuando una entidad tiene la capacidad de reproducir el vídeo.
+
+#### Propiedades
+
+| Propiedad | Tipo   | Descripción        |
+| --------- | ------ | ------------------ |
+| src       | cadena | La fuente de vídeo |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="VIDEO_CAN_PLAY_THROUGH" callbackBody={`console.log('Ready to play video: ', event.data.src)`} />
+
+### VIDEO_END
+
+Se emite cuando el vídeo ha terminado de reproducirse en una entidad.
+
+#### Propiedades
+
+| Propiedad | Tipo   | Descripción        |
+| --------- | ------ | ------------------ |
+| src       | cadena | La fuente de vídeo |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="VIDEO_END" callbackBody={`console.log('Finished playing video: ', event.data.src)`} />

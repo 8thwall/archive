@@ -1,0 +1,34 @@
+---
+id: escala
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Scale
+
+## Descripción
+
+This component controls how the entity is scaled.
+
+## Propiedades
+
+| Propiedad | Tipo   | Por defecto | Descripción                        |
+| --------- | ------ | ----------- | ---------------------------------- |
+| x         | number | 0           | Scaling factor in the X direction. |
+| y         | number | 0           | Scaling factor in the Y direction. |
+| z         | number | 0           | Scaling factor in the Z direction. |
+
+## Funciones
+
+<ComponentFunctions
+    name="Scale"
+    properties={{
+        x: 0,
+        y: 0,
+        z: 0
+    }}
+    mutate={`cursor.x = 2;
+    cursor.y = 2;
+    cursor.z = 2;
+    return false;`}
+/>

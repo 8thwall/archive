@@ -1,0 +1,87 @@
+.with-ribbon {
+  position: relative !important;
+  overflow: hidden;
+}
+.corner-ribbon{
+  width: 200px;
+  background: #e43;
+  position: absolute;
+  top: 25px;
+  left: -50px;
+  text-align: center;
+  line-height: 50px;
+  letter-spacing: 1px;
+  color: #f0f0f0;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  z-index: 10;
+
+  &.tiny {
+    font-size: 0.6em !important;
+    line-height: 20px;
+
+    &.top-right {
+      top: 10px;
+      right: -80px;
+    }
+  }
+  &.small {
+    font-size: 0.8em;
+    line-height: 32px;
+
+    &.top-right {
+      top: 20px;
+      right: -65px;
+    }
+  }
+  &.medium {
+    // default sizing is built into .corner-ribbon
+  }
+
+  &.sticky {
+    position: absolute;
+  }
+
+  &.top-left{
+    top: 25px;
+    left: -50px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+
+  &.top-right{
+    top: 25px;
+    right: -50px;
+    left: auto;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+
+  &.bottom-left{
+    top: auto;
+    bottom: 25px;
+    left: -50px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+
+  &.bottom-right{
+    top: auto;
+    right: -50px;
+    bottom: 25px;
+    left: auto;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+
+  &.white{background: #f0f0f0; color: #555;}
+  &.black{background: #333;}
+  &.grey{background: #999;}
+  &.blue{background: #39d;}
+  &.green{background: #2c7;}
+  &.turquoise{background: #1b9;}
+  &.purple{background: #7500bf;}
+  &.red{background: #e43;}
+  &.orange{background: #e82;}
+  &.yellow{background: #ec0;}
+}

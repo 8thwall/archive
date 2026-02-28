@@ -1,0 +1,22 @@
+include:
+  - ci-support/util.yml
+
+# This job serves as a template for automatic translation jobs. Pipelines that want to use this should extend this and supply their own rules and variables.
+# Variables that need to be defined are:
+# BASE_DIRECTORY_SOURCE: your source directory of input files
+# BASE_DIRECTORY_OUTPUT: the static portion of the desired output directory. The full output path is determined using this and the LOCALE_DIRECTORY_SPECIFIER
+# CONTENT_TYPE: either "json", for i18n key-value json files, or "md", for markdown docs
+# LOCALE_DIRECTORY_SPECIFIER: the format of locale/language specific portion of the output directory
+# TRANSLATION_ENGINE: the translation engine to use. Either "mock" or "chatgpt"
+# LANGUAGES: The language(s) to translate files into. Multiple languages can be provided in a comma separated string without spaces, e.g., "fr,ja"
+.translate-files:
+  stage: build
+  before_script:
+    - echo "Running common before_script from ci-support/util.yml"
+    - !reference [ .runner_cleanup ]
+    - !reference [ .global, before_script ]
+  script:
+    - ci-support/i18n/translate-ci --base-directory-source=$BASE_DIRECTORY_SOURCE --base-directory-output=$BASE_DIRECTORY_OUTPUT --content-type=$CONTENT_TYPE --locale-directory-specifier=$LOCALE_DIRECTORY_SPECIFIER  --translation-engine=$TRANSLATION_ENGINE --languages=$LANGUAGES
+  tags:
+    - m1
+

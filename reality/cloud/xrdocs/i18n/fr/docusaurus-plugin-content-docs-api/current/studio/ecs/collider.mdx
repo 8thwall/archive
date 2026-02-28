@@ -1,0 +1,59 @@
+---
+id: collider
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import ColliderTable from "../../../gen/tables/Collider.md"
+
+# Collider
+
+## Description
+
+Ce composant établit un collisionneur physique sur une entité.
+
+## ColliderShape
+
+| Type       | Description   |
+| ---------- | ------------- |
+| Boîte      | Boîte         |
+| Sphère     | Sphère        |
+| Avion      | Avion         |
+| Capsule    | Capsule       |
+| Cône       | Cône          |
+| Cylindre   | Cylindre      |
+
+## ColliderType
+
+| Type                    | Description                                                                                                                                                                                                                                                                                             |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Électricité statique    | S'applique à un objet qui ne bouge pas lors de la simulation et qui se comporte comme s'il avait une masse infinie.                                                                                                                                                                                     |
+| Dynamique               | S'applique à un objet réel entièrement simulé, affecté par les forces, la gravité et les collisions.                                                                                                                                                                                                    |
+| Cinématique             | S'applique à un objet dont le mouvement n'est pas affecté par des forces mais est entièrement contrôlé par l'utilisateur au moyen d'un programme. Contrairement aux corps statiques, les corps cinématiques peuvent se déplacer et affecter d'autres corps dynamiques par le biais de collisions.       |
+
+## Propriétés
+
+<ColliderTable />
+
+## Fonctions
+
+<ComponentFunctions
+    name="Collider"
+    properties={{
+        shape: 'ecs.ColliderShape.Sphere',
+        type: 'ecs.ColliderType.Static',
+        radius: 1,
+        mass: 0,
+        eventOnly: false,
+        gravityFactory: 1,
+        lockXAxis: false,
+        lockYAxis: false,
+        lockZAxis: false,
+        friction: 0.5,
+        restitution: 0,
+        linearDamping: 0,
+        angularDamping: 0,
+    }}
+    mutate={`cursor.mass = 5 ;
+    cursor.friction = 0.8 ;
+    return false;`}
+/>

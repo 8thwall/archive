@@ -1,0 +1,29 @@
+<a-scene 
+  xrextras-almost-there
+  xrextras-loading
+  xrextras-runtime-error
+  xrface="mirroredDisplay: true; meshGeometry: face, eyes; cameraDirection: front; allowedDevices: any">
+
+  <a-assets>
+    <video
+      id="vid"
+      loop="true"
+      src="./assets/void.mp4">
+    </video>
+  </a-assets>
+  
+  <a-camera position="0 1 2"></a-camera>
+  
+  <xrextras-faceanchor>
+    <xrextras-face-mesh xrextras-hider-material></xrextras-face-mesh>
+  </xrextras-faceanchor>
+  
+  <a-plane 
+    src="#vid" 
+    material="shader:flat" 
+    position="0 1 0" 
+    height="9" width="16" 
+    scale="0.35 0.35 0.35">
+  </a-plane>
+
+</a-scene>

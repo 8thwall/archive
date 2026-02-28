@@ -1,0 +1,17 @@
+{
+  "page.title": "AWE Portal Hunt",
+  "portal_section.description.introduction": "AWE Portal Hunt war eine experimentelle Marketingkampagne mit begrenzter Zielgruppe, die von 8th Wall für die Augmented World Expo 2019 entwickelt wurde. Wenn die Spieler*innen eines der drei Meter hohen „Portale“ scannten, die überall auf dem Messegelände aufgestellt waren, erschien ein kurzes Spiel aus einer anderen Dimension. Jedes der zehn Portale hatte einen anderen Spielstil, einen anderen Schwierigkeitsgrad und einen anderen Kunststil.",
+  "portal_section.description.logbook_leaderboard": "Das Ganze wurde durch ein Logbuch und eine Bestenliste miteinander verbunden. Das Logbuch diente als Fortschrittsanzeige und App-Launcher, während die Bestenliste das soziale Zentrum des Erlebnisses war und es den Spieler*innen ermöglichte, ihre Freund*innen zu finden und ihre Ergebnisse zu twittern. Durch das Abschließen aller zehn Portale erlangten die Spieler*innen den Status „Certified Explorer“, der sie an die Spitze der Bestenliste katapultierte und durch den sie an der Verlosung des Hauptpreises (in diesem Fall Tickets für die Konferenz im nächsten Jahr und ein holografischer Aufsteller von Looking Glass Factory) teilnehmen durften.",
+  "portal_section.description.stats": "Die Konferenz dauerte nur drei Tage, aber die Zahlen des Portal Hunt waren beeindruckend. Von den über 5000 Konferenzteilnehmer*innen wurden 3779 Portalsitzungen abgehalten, die zusammen 5244 Minuten Portalspielzeit ergaben. Das sind drei aktive Spieler*innen pro Sekunde der Konferenz.",
+  "portal_section.heading.stats": "Statistiken",
+  "portal_section.stats.name.portals_opened": "Geöffnete Portale",
+  "portal_section.stats.name.uniques": "Spieler*innen insgesamt",
+  "portal_section.stats.name.time_spent": "Verbrachte Zeit",
+  "portal_section.stats.value.time_spent": "87,4 Stunden",
+  "portal_section.stats.name.certified_explorers": "Certified Explorers",
+  "portal_section.description.engagement": "Die Beteiligung war deutlich zu erkennen. Die Spieler*innen standen Schlange, machten Fotos von den Portalen, um sie später spielen zu können, taten sich mit Fremden zusammen, um Multiplayer-Herausforderungen zu meistern, suchten stundenlang nach allen Portalen und verpassten sogar Meetings dafür. Es wurde schnell klar, dass die Portalsuche DIE soziale Aktivität der Konferenz war.",
+  "portal_section.description.vindication": "Das Projekt war nicht nur ein Erfolg für 8th Wall und AWE, sondern auch eine Bestätigung dafür, dass die Menschen AR-Technologie und -Spiele nutzen, wenn die Bedienung einfach und für alle verständlich ist.",
+  "brand_section.carousel.item.blurb.gemini": "Zwei Spieler*innen benötigt",
+  "brand_section.carousel.control.previous": "Zurück",
+  "brand_section.carousel.control.next": "Weiter"
+}

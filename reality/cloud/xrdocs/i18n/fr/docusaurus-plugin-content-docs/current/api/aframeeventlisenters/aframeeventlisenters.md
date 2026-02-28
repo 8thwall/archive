@@ -1,0 +1,13 @@
+# Audience d'événements AFrame
+
+Cette section décrit les événements qui sont écoutés par le composant A-Frame "xrweb"
+
+Vous pouvez déclencher ces événements dans votre application web pour effectuer diverses actions :
+
+| Écouteur d'événements                              | Description                                                                                                                                                                                                                                                                                 |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [hidecamerafeed](hidecamerafeed.md)                | Masque le flux de la caméra. Le suivi ne s'arrête pas.                                                                                                                                                                                                                                      |
+| [recentrer](recenter.md)                           | Recentre le flux de la caméra sur son origine. Si un nouveau point d'origine est fourni en argument, le point d'origine de la caméra sera réinitialisé à ce point, puis la caméra se recentrera.                                                                                            |
+| [demande de capture d'écran](screenshotrequest.md) | Émet une requête au moteur pour capturer une capture d'écran de la toile AFrame. Le moteur émettra un événement [`screenshotready`](/api/aframeevents/screenshotready) avec l'image compressée JPEG ou [`screenshoterror`](/api/aframeevents/screenshoterror) si une erreur s'est produite. |
+| [showcamerafeed](showcamerafeed.md)                | Affiche le flux de la caméra.                                                                                                                                                                                                                                                               |
+| [stopxr](stopxr.md)                                | Arrêtez la session XR en cours. Lorsque l'appareil est arrêté, le flux de la caméra est interrompu et les mouvements de l'appareil ne sont pas suivis.                                                                                                                                      |

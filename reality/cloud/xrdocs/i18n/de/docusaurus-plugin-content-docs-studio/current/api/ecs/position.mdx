@@ -1,0 +1,34 @@
+---
+id: position
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Position
+
+## Beschreibung
+
+Diese Komponente steuert die Positionierung des Objekts **im lokalen Raum**.
+
+## Eigenschaften
+
+| Eigenschaft | Typ    | Standard | Beschreibung                                                                                 |
+| ----------- | ------ | -------- | -------------------------------------------------------------------------------------------- |
+| x           | Nummer | 0        | Negative X-Achse erstreckt sich nach links. Die positive X-Achse erstreckt sich nach rechts. |
+| y           | Nummer | 0        | Negative Y-Achse erstreckt sich nach unten. Die positive Y-Achse verläuft nach oben.         |
+| z           | Nummer | 0        | Negative Z-Achse erstreckt sich nach innen. Die positive Z-Achse reicht nach außen.          |
+
+## Funktionen
+
+<ComponentFunctions
+    name="Position"
+    properties={{
+        x: 0,
+        y: 0,
+        z: 0
+    }}
+    mutate={`cursor.x = 2;
+    cursor.y = 2;
+    cursor.z = 2;
+    return false;`}
+/>

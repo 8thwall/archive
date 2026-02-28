@@ -1,0 +1,26 @@
+@use '../styles/brand-colors';
+@use '../styles/constants';
+
+.container {
+  margin-bottom: 4em;
+}
+
+.mainText {
+  color: '000';
+}
+
+.mainText>h2 {
+  font-family: 'Nunito', sans-serif;
+  color: brand-colors.$gray4;
+  font-size: 1.5em;
+  font-weight: 500;
+  line-height: 1.5em;
+}
+
+.mainText>ul {
+  padding-inline-start: 1.85rem;
+}
+
+.mainText>ul>li {
+  margin-bottom: 1em;
+}

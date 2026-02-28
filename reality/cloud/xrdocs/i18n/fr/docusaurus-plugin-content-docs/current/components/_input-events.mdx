@@ -1,0 +1,247 @@
+import {EventExample} from '@site/src/components/event-example'
+
+## Les types
+
+### Position
+
+| Propriété | Type    | Description                                                 |
+| --------- | ------- | ----------------------------------------------------------- |
+| x         | entier  | La coordonnée x sur l'écran, normalisée entre 0 et 1.       |
+| y         | entier  | La coordonnée y sur l'écran, normalisée entre 0 et 1.       |
+
+### Événement UIHover
+
+| Propriété | Type    | Description                                                                          |
+| --------- | ------- | ------------------------------------------------------------------------------------ |
+| 4         | entier  | La coordonnée x sur l'écran, normalisée entre 0 et 1.                                |
+| y         | entier  | La coordonnée y sur l'écran, normalisée entre 0 et 1.                                |
+| cibles    | eid[]   | Le(s) élément(s) de l'interface utilisateur cible                                    |
+
+### TouchEvent
+
+| Propriété         | Type      | Description                                                                                                    |
+| ----------------- | --------- | -------------------------------------------------------------------------------------------------------------- |
+| pointerId         | entier    | identifiant unique du pointeur, fourni par le navigateur.                                                      |
+| position          | Position  | Coordonnées de la position touchée sur l'écran, normalisées entre 0 et 1.                                      |
+| position mondiale | Vecteur3  | Position de l'événement touché dans le monde. _uniquement disponible sur `SCREEN_TOUCH_START`._                |
+| cible             | eid       | eid si l'objet a été touché initialement                                                                       |
+| commencer         | Position  | Coordonnées de la position où l'événement tactile a commencé sur l'écran, normalisées entre 0 et 1.            |
+| changer           | Position  | Les coordonnées de la position du toucher depuis le dernier changement à l'écran, normalisées entre 0 et 1.    |
+
+### GestureEvent
+
+| Propriété              | Type        | Description                                                                                          |
+| ---------------------- | ----------- | ---------------------------------------------------------------------------------------------------- |
+| touchCount             | entier      | Le nombre de points contribuant au geste.                                                            |
+| position               | Position    | Coordonnées de la position touchée sur l'écran, normalisées entre 0 et 1.                            |
+| position de départ     | Position    | Coordonnées de la position où l'événement a commencé, normalisées entre 0 et 1.                      |
+| changement de position | Position    | Coordonnées de la position depuis le dernier changement, normalisées entre 0 et 1.                   |
+| se propager            | flotteur    | La position moyenne entre les pointeurs à partir du point central.                                   |
+| startSpread            | flotteur    | La première pâte à tartiner a été émise en début d'année.                                            |
+| spreadChange           | flotteur    | Valeur de l'écart depuis la dernière modification.                                                   |
+| nextTouchCount         | entier      | Au final, le nombre de pointeurs impliqués dans le geste suivant                                     |
+
+### GamepadEvent
+
+| Propriété             | Type                                                                         | Description          |
+| --------------------- | ---------------------------------------------------------------------------- | -------------------- |
+| manette de jeu        | [Manette de jeu](https://developer.mozilla.org/en-US/docs/Web/API/Gamepad)   | L'objet gamepad      |
+
+## Evénements
+
+### UI_CLICK
+
+Emis lorsque la pression (`UI_PRESSED`) et le relâchement (`UI_RELEASED`) se produisent sur le même élément de l'interface utilisateur. Cet événement représente un clic ou un tapotement complet. Il est envoyé sur l'élément où les deux interactions se sont chevauchées et est généralement utilisé pour confirmer l'intention de l'utilisateur, comme l'activation d'un bouton ou le déclenchement d'une action.
+L'événement sera expédié sur l'ancêtre commun le plus bas du début (pressé) et de la fin (relâché). Le mouvement de la souris n'affecte pas les événements de clic.
+
+La charge utile de l'événement est de type `Position`.
+
+#### Exemple
+
+<EventExample
+  ns="ecs.input"
+  event="UI_CLICK"
+  callbackBody={`console.log('UI click: ', event.data.x, event.data.y)`}
+/>
+
+### UI_PRESSED
+
+Émise lorsque l'utilisateur déclenche une interaction tactile ou un pointeur vers le bas sur un élément de l'interface utilisateur. Elle n'est exécutée que sur l'élément exact qui a été directement pressé et ne s'étend pas aux éléments parents. Cet événement est utile pour déclencher un retour visuel immédiat ou des états d'interaction (tels que la mise en évidence de boutons ou des animations) au début de la saisie de l'utilisateur.
+
+La charge utile de l'événement est de type `TouchEvent`.
+
+#### Exemple
+
+<EventExample
+  ns="ecs.input"
+  event="UI_PRESSED"
+  callbackBody={`console.log('UI pressed: ', event.data.position)`}
+/>
+
+### UI_RELEASED
+
+Emis lorsque le pointeur est levé après une `UI_PRESSED`. Elle est toujours exécutée sur l'élément de l'interface utilisateur qui a été pressé initialement, quel que soit l'endroit où le pointeur est relâché. Cela permet aux développeurs de réagir à la fin d'une interaction avec la presse, même si le pointeur s'est éloigné de la cible initiale.
+
+La charge utile de l'événement est de type `TouchEvent`.
+
+#### Exemple
+
+<EventExample
+  ns="ecs.input"
+  event="UI_RELEASED"
+  callbackBody={`console.log('UI released: ', event.data.position)`}
+/>
+
+### UI_HOVER_START
+
+Émet quand la souris commence à survoler un élément de l'interface utilisateur.
+
+La charge utile de l'événement est de type `HoverEvent`.
+
+#### Exemple
+
+<EventExample
+  ns="ecs.input"
+  event="UI_HOVER_START"
+  callbackBody={`console.log('UI hover start: ', event.data.x, event.data.y)`}
+/>
+
+### UI_HOVER_END
+
+Émet quand la souris arrête de passer au-dessus d'un élément de l'interface utilisateur.
+
+La charge utile de l'événement est de type `HoverEvent`.
+
+#### Exemple
+
+<EventExample
+  ns="ecs.input"
+  event="UI_HOVER_END"
+  callbackBody={`console.log('UI hover end: ', event.data.x, event.data.y)`}
+/>
+
+:::note
+
+- Plusieurs points de contact peuvent être actifs simultanément.
+- Un seul geste tactile (simple ou multiple) sera reconnu comme actif à la fois.
+  :: :
+
+:::info
+Si un événement tactile a une cible, il sera émis sur cette cible et se propagera jusqu'à ses éléments parents et éventuellement jusqu'au niveau global. Cela signifie qu'un récepteur tactile sur un objet parent capturera les événements de tous ses éléments enfants.
+:: :
+
+### SCREEN_TOUCH_START
+
+Émise lorsque l'utilisateur touche ou clique initialement l'écran ou l'objet cible.
+
+La charge utile de l'événement est de type `TouchEvent`.
+
+#### Exemple
+
+<EventExample
+  ns="ecs.input"
+  event="SCREEN_TOUCH_START"
+  callbackBody={`console.log('Screen touch start: ', event.data.position)`}
+/>
+
+### ÉCRAN_TOUCH_MOVE
+
+La charge utile de l'événement est de type `TouchEvent`.
+
+Emet lorsque l'utilisateur clique et glisse ou déplace son doigt sur l'écran.
+
+#### Exemple
+
+<EventExample
+  ns="ecs.input"
+  event="SCREEN_TOUCH_MOVE"
+  callbackBody={`console.log('Screen touch move: ', event.data.position)`}
+/>
+
+### SCREEN_TOUCH_END
+
+Emet lorsque l'utilisateur arrête de cliquer ou lève le doigt de l'écran.
+
+La charge utile de l'événement est de type `TouchEvent`.
+
+#### Exemple
+
+<EventExample
+  ns="ecs.input"
+  event="SCREEN_TOUCH_END"
+  callbackBody={`console.log('Screen touch end: ', event.data.position)`}
+/>
+
+:::info
+Les événements de geste sont émis lorsque l'utilisateur fait un "geste" sur l'écran du téléphone. Un geste est une action qui nécessite plusieurs doigts. Si l'utilisateur commence par une action de "zoom" (2 doigts s'éloignant l'un de l'autre) puis ajoute un autre doigt à l'écran, le geste de "zoom" se terminera et un nouveau geste commencera avec 3 doigts.
+:::
+
+### GESTURE_START
+
+Emet lorsque l'utilisateur arrête de cliquer ou lève le doigt de l'écran.
+
+La charge utile de l'événement est de type `GestureEvent`.
+
+#### Exemple
+
+<EventExample
+  ns="ecs.input"
+  event="GESTURE_START"
+  callbackBody={`console.log('Gesture start: ', event.data.touchCount, event.data.position)`}
+/>
+
+### GESTURE_MOVE
+
+Emet lorsque l'utilisateur déplace son (ses) doigt(s) sur l'écran.
+
+La charge utile de l'événement est de type `GestureEvent`.
+
+#### Exemple
+
+<EventExample
+  ns="ecs.input"
+  event="GESTURE_MOVE"
+  callbackBody={`console.log('Gesture move: ', event.data.touchCount, event.data.position)`}
+/>
+
+### GESTURE_END
+
+Emet lorsque le nombre de doigts change par rapport à la vérification d'un geste précédent.
+
+La charge utile de l'événement est de type `GestureEvent`.
+
+#### Exemple
+
+<EventExample
+  ns="ecs.input"
+  event="GESTURE_END"
+  callbackBody={`console.log('Gesture end: ', event.data.touchCount, event.data.position)`}
+/>
+
+### GAMEPAD_CONNECTED
+
+Emet lorsqu'une manette de jeu est connectée à l'appareil.
+
+La charge utile de l'événement est de type `GamepadEvent`.
+
+#### Exemple
+
+<EventExample
+  ns="ecs.input"
+  event="GAMEPAD_CONNECTED"
+  callbackBody={`console.log('Gamepad connected: ', event.data.gamepad)`}
+/>
+
+### GAMEPAD_DISCONNECTED
+
+Emis lorsqu'une manette de jeu est déconnectée de l'appareil.
+
+La charge utile de l'événement est de type `GamepadEvent`.
+
+#### Exemple
+
+<EventExample
+  ns="ecs.input"
+  event="GAMEPAD_DISCONNECTED"
+  callbackBody={`console.log('Gamepad disconnected: ', event.data.gamepad)`}
+/>

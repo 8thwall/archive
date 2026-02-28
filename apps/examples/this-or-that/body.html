@@ -1,0 +1,73 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene 
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  xrextras-pause-on-hidden
+  renderer="maxCanvasWidth: 960; maxCanvasHeight: 960"
+  xrface="mirroredDisplay: true;  meshGeometry: eyes, face, mouth; cameraDirection: front; allowedDevices: any;">
+  
+  <a-assets>
+    <a-asset-item id="head-occluder" src="./assets/Models/head-occluder.glb"></a-asset-item>
+    <img id="mcdonalds" src="./assets/Images/mcdonalds.png">
+    <img id="cfa" src="./assets/Images/cfa.png">
+    <img id="tesla" src="./assets/Images/tesla.png">
+    <img id="mercedes" src="./assets/Images/mercedes.png">
+    <img id="chanel" src="./assets/Images/chanel.png">
+    <img id="lvmh" src="./assets/Images/lvmh.png">
+  </a-assets>
+  
+  <xrextras-capture-button></xrextras-capture-button>
+  <xrextras-capture-preview></xrextras-capture-preview>
+
+  <a-camera look-controls="enabled: false" wasd-controls="enabled: false" position="0 1.6 0"></a-camera>
+  
+  <xrextras-faceanchor>
+    
+    <a-entity gltf-model="#head-occluder" position="0 0 0.02" xrextras-hider-material></a-entity>
+    
+    <xrextras-face-attachment point="noseBridge" head-rotation-as-input>
+      <a-entity position="0 1.25 0">
+        <a-circle
+          id="left"
+          position="-0.75 0 0"
+          radius="0.5"
+          side="back" 
+          depth-write="false"
+          color="#7611B6"
+          opacity="0.5">
+          <a-plane
+            id="left-img"
+            side="back"
+            depth-write="false"
+            width="0.5" height="0.5"
+            material="src: #mcdonalds; transparent: true">
+          </a-plane>
+        </a-circle>
+        <a-circle 
+          id="right"
+          position="0.75 0 0"
+          radius="0.5"
+          side="back" 
+          depth-write="false"
+          color="#7611B6"
+          opacity="0.5">
+          <a-plane
+            id="right-img"
+            side="back"
+            depth-write="false"
+            width="0.5" height="0.5"
+            material="src: #cfa; transparent: true">
+          </a-plane>
+        </a-circle>
+      </a-entity>
+    </xrextras-face-attachment>
+    
+  </xrextras-faceanchor>
+  
+  <a-light type="directional" target="#face" position="0 1.8 3" intensity="0.8"></a-light>
+  <a-light type="ambient" intensity="0.8"></a-light>
+  
+</a-scene>

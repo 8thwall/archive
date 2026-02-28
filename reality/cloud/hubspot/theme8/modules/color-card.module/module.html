@@ -1,0 +1,82 @@
+<!-- module styles  -->
+
+{# Sets attributes used for the link field #}
+
+{% set href = module.link_url.url.href %}
+{% if module.link_url.url.type == "EMAIL_ADDRESS" %}
+  {% set href = "mailto:" + href %}
+{% endif %}
+{% set rel = [] %}
+{% if module.link_url.no_follow %}
+  {% do rel.append("nofollow") %}
+{% endif %}
+{% if module.link_url.open_in_new_tab %}
+  {% do rel.append("noopener") %}
+{% endif %}
+
+<!-- module html  -->
+
+<style>
+  .colorCardContainer {
+    background: {{ module.background_color.hex }};
+  }
+  
+  .colorCardGradient {
+    background: linear-gradient(270deg, rgba(255,0,0,0) 80%, {{ module.background_color.hex }} 90%);
+  }
+  
+  .colorCardImageBlock {
+    background: url({{ module.image.src }});
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .colorCardImage {
+    background: url({{ module.image.src }});
+  }
+  
+  .colorCardHeading {
+    color: {{ module.color.hex }};
+  }
+  
+  .colorCardDescription {
+    color: {{ module.color.hex }};
+  }
+
+  .colorCardLink {
+    color: {{ module.color.hex }};
+    border: 1px solid {{ module.color.hex }};
+  }
+  .colorCardLink:hover {
+    color: {{ module.color_hover.hex }};
+    border: 1px solid {{ module.color_hover.hex }};
+  }
+  
+  @media screen and (max-width: 991px) {
+    .colorCardGradient {
+      background: linear-gradient(180deg, rgba(255,0,0,0) 80%, {{ module.background_color.hex }} 90%);
+    }
+  }
+</style>
+
+{# colorCard #}
+
+<div class="colorCardContainer">
+  <div class="colorCardBlock">
+    <h2 class="colorCardHeading">
+      {{ module.heading }}
+    </h2>
+    <p class="colorCardDescription">
+      {{ module.description }}
+    </p>
+    <a class="colorCardLink"  href="{{ href }}"
+      {% if module.link_url.open_in_new_tab %}target="_blank"{% endif %}
+      {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}
+    >
+      {{ module.link_text }}
+    </a>
+  </div>
+  <div class="colorCardImageBlock">
+    <div class="colorCardGradient" />
+  </div>
+</div>

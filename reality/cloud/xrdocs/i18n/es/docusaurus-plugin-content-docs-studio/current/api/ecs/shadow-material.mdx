@@ -1,0 +1,40 @@
+---
+id: shadow-material
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# ShadowMaterial
+
+## Descripción
+
+This component creates a material, that only renders shadows, on an entity with geometry.
+
+## Propiedades
+
+| Propiedad   | Tipo    | Por defecto | Descripción                                                                |
+| ----------- | ------- | ----------- | -------------------------------------------------------------------------- |
+| r           | number  | 0           | Red channel value of the material [0...255]                                |
+| g           | number  | 0           | Green channel value of the material [0...255]                              |
+| b           | number  | 0           | Blue channel value of the material [0...255]                               |
+| opacity     | number  | 0           | Overall alpha/transparency of the material [0...1]                         |
+| side        | string  | 'frente'    | Which sides of faces will be rendered. Choose from front, back, or double. |
+| depthTest   | boolean | true        | Whether to test depth when rendering this material                         |
+| depthWrite  | boolean | true        | Whether rendering this material impacts the depth buffer                   |
+
+## Funciones
+
+<ComponentFunctions
+    name="ShadowMaterial"
+    properties={{
+        r: 0,
+        g: 0,
+        b: 0,
+        opacity: 0.5,
+    }}
+    mutate={`cursor.opacity = 0.5;
+    cursor.r = 128;
+    cursor.g = 128;
+    cursor.b = 128;
+    return false;`}
+/>

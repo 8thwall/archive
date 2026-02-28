@@ -1,0 +1,209 @@
+@use 'sass:math';
+
+@import 'settings';
+
+$chart-width: 120px;
+.studio-repo-view {
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  .studio-editor {
+    flex: 0 0 auto;
+  }
+
+}
+
+.studio-repo-view-main {
+  padding: 15px;
+  //flex-grow: 1;
+  background: $gray-5;
+  flex: 1 0 0;
+  color: $brand-white;
+
+  overflow: auto;
+
+  .deployment-repo {
+    display: grid;
+    grid-template-columns: math.div($chart-width, 2) $chart-width auto;
+
+    a {
+      color: $gray-1;
+    }
+
+    .target {
+      grid-column: 1 / 2;
+      justify-self: right;
+      white-space: nowrap;
+      align-self: center;
+
+      .staging-link {
+        color: $mango;
+      }
+
+      .prod-link {
+        color: $green;
+      }
+    }
+    .chart {
+      grid-column: 2 / 3;
+      grid-row: 1 / -1;
+
+      circle.temporary {
+        fill: white !important;
+        stroke-width: 2px;
+        stroke: $dusty-violet;
+        stroke-dasharray: 4;
+      }
+    }
+    .commit {
+      grid-column: 3 / 4;
+      align-self: center;
+      min-width: 24em;
+      z-index: 2;
+
+      &.with-content {
+        border-radius: 5px;
+        padding: 3px 0 3px 0;
+        background-color: $brand-black;
+      }
+      &.temporary {
+        // color: $gray-4;
+        color: white;
+      }
+
+      .commit-box {
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+        .header, .header strong {
+          font-size: 1.1em;
+          display: flex;
+          flex-wrap: nowrap;
+          justify-content: space-between;
+        }
+        .summary {
+          min-width: 6em;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          padding-right: 0.5em;
+        }
+        .commit-hash {
+          white-space: nowrap;
+          font-weight: 700;
+          font-family: $editor-monospace;
+          padding-right: 0.5em;
+        }
+        .commit-summary {
+          white-space: nowrap;
+        }
+
+        .description, .description strong {
+          white-space: nowrap;
+          font-size: 0.95em;
+
+          span {
+            display: inline-block;
+            vertical-align: middle;
+            height: 100%;
+
+            .view-button {
+              vertical-align: middle;
+              background-color: $gray-4;
+              border-radius: 5px;
+              margin: 0;
+              padding: 0.15em 0.6em;
+              font-size: 0.85em;
+              color: white;
+            }
+          }
+        }
+        .description strong {
+          color: $gray-4;
+        }
+      }
+    }
+    .client-branch {
+      grid-column: 3 / 4;
+      align-self: center;
+    }
+
+    // NOTE(christoph): Used by studio-repo-view
+    .row1 {
+      grid-row: 2 / 3;
+    }
+    .row2 {
+      grid-row: 3 / 4;
+    }
+    .row3 {
+      grid-row: 4 / 5;
+    }
+    .row4 {
+      grid-row: 5 / 6;
+    }
+    // END NOTE
+  }
+
+  svg {
+    path {
+      stroke: $dusty-violet;
+      &.line {
+        stroke-width: 2px;
+      }
+      &.pointer {
+        stroke-width: 2px;
+        fill: none;
+
+        // NOTE(christoph): Used by commit-chart
+        &.target-1 {
+          stroke: $dusty-violet;
+        }
+        &.target-2 {
+          stroke: $dusty-violet;
+        }
+        // END NOTE
+
+        &.preview {
+          stroke-dasharray: 7;
+          stroke-dashoffset: 96;
+        }
+      }
+    }
+
+    .marker {
+      stroke: none;
+    }
+
+    circle {
+      fill: $dusty-violet;
+    }
+  }
+
+  .client-branch {
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .branch-split {
+      position: relative;
+      margin-left: 50px;
+
+      .pre-arrow {
+        pointer-events: none;
+        position: absolute;
+      }
+    }
+  }
+
+}
+
+.no-repo-modal {
+  padding: 2em 4em;
+  text-align: center !important;
+
+  .icon {
+    width: 2.2em;
+  }
+}

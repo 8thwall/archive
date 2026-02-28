@@ -1,0 +1,9 @@
+# npm packages
+**/node_modules
+**/package-lock.json
+
+# Allow the responsive-immersive package-lock.json through for use in its npm_package().
+responsive-immersive/package-lock.json
+
+# Mac OS
+**/.DS_Store

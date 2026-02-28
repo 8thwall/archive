@@ -1,0 +1,2081 @@
+{
+  "activeMap": "default",
+  "entrySpaceId": "43f01393-de9d-468f-bda5-65964f7d85ff",
+  "inputs": {
+    "default": [
+      {
+        "name": "backward",
+        "bindings": [
+          {
+            "input": "gamepad:axis:left:down",
+            "modifiers": []
+          },
+          {
+            "input": "gamepad:button:13",
+            "modifiers": []
+          },
+          {
+            "input": "keyboard:KeyS",
+            "modifiers": []
+          },
+          {
+            "input": "keyboard:ArrowDown",
+            "modifiers": []
+          }
+        ]
+      },
+      {
+        "name": "forward",
+        "bindings": [
+          {
+            "input": "gamepad:axis:left:up",
+            "modifiers": []
+          },
+          {
+            "input": "gamepad:button:12",
+            "modifiers": []
+          },
+          {
+            "input": "keyboard:KeyW",
+            "modifiers": []
+          },
+          {
+            "input": "keyboard:ArrowUp",
+            "modifiers": []
+          }
+        ]
+      },
+      {
+        "name": "left",
+        "bindings": [
+          {
+            "input": "gamepad:axis:left:left",
+            "modifiers": []
+          },
+          {
+            "input": "gamepad:button:14",
+            "modifiers": []
+          },
+          {
+            "input": "keyboard:KeyA",
+            "modifiers": []
+          },
+          {
+            "input": "keyboard:ArrowLeft",
+            "modifiers": []
+          }
+        ]
+      },
+      {
+        "name": "right",
+        "bindings": [
+          {
+            "input": "gamepad:axis:left:right",
+            "modifiers": []
+          },
+          {
+            "input": "gamepad:button:15",
+            "modifiers": []
+          },
+          {
+            "input": "keyboard:KeyD",
+            "modifiers": []
+          },
+          {
+            "input": "keyboard:ArrowRight",
+            "modifiers": []
+          }
+        ]
+      }
+    ]
+  },
+  "objects": {
+    "02f3d551-b925-4b96-a8ec-15803498107d": {
+      "collider": {
+        "geometry": {
+          "type": "box",
+          "depth": 3,
+          "height": 3,
+          "width": 3
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/rock3.glb"
+        }
+      },
+      "id": "02f3d551-b925-4b96-a8ec-15803498107d",
+      "name": "rock 8",
+      "order": 2.214271974727011,
+      "parentId": "06642ae7-0f3e-4038-892b-a9d9ad9c023c",
+      "position": [
+        28.066725467166847,
+        0,
+        -8.28281241564015
+      ],
+      "rotation": [
+        0,
+        -0.26723837607825707,
+        0,
+        0.9636304532086228
+      ],
+      "scale": [
+        1.5,
+        1.5,
+        1.5
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "040beb56-a44c-42d8-a071-fb1f6922f350": {
+      "collider": {
+        "geometry": {
+          "type": "box",
+          "depth": 7,
+          "height": 7,
+          "width": 7
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/rock.glb"
+        }
+      },
+      "id": "040beb56-a44c-42d8-a071-fb1f6922f350",
+      "name": "rock4",
+      "order": 0.21427197472701143,
+      "parentId": "06642ae7-0f3e-4038-892b-a9d9ad9c023c",
+      "position": [
+        -9.452130537782605,
+        0,
+        22.061759627960278
+      ],
+      "rotation": [
+        0,
+        -0.8241261886220157,
+        0,
+        0.5664062369248327
+      ],
+      "scale": [
+        1.0000000000000004,
+        1,
+        1.0000000000000004
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "04c4db5a-2f98-451a-81ae-bdb9a1e1e500": {
+      "components": {},
+      "geometry": null,
+      "hidden": false,
+      "id": "04c4db5a-2f98-451a-81ae-bdb9a1e1e500",
+      "material": null,
+      "name": "Environment",
+      "order": 1.644625826599831,
+      "parentId": "43f01393-de9d-468f-bda5-65964f7d85ff",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "06642ae7-0f3e-4038-892b-a9d9ad9c023c": {
+      "components": {},
+      "geometry": null,
+      "id": "06642ae7-0f3e-4038-892b-a9d9ad9c023c",
+      "material": null,
+      "name": "Rocks",
+      "order": 7.1487639106123435,
+      "parentId": "04c4db5a-2f98-451a-81ae-bdb9a1e1e500",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "0746f27f-c465-42da-b6f2-aee71c3f2b67": {
+      "collider": {
+        "geometry": {
+          "type": "box",
+          "depth": 2,
+          "height": 20,
+          "width": 2
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "windturbine_tall_fan.031Action",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/turbine.glb"
+        }
+      },
+      "id": "0746f27f-c465-42da-b6f2-aee71c3f2b67",
+      "name": "Turbine 2",
+      "order": 0.1364810171438487,
+      "parentId": "04c4db5a-2f98-451a-81ae-bdb9a1e1e500",
+      "position": [
+        -20.031552227941575,
+        0.2831847189692615,
+        9.996597807831195
+      ],
+      "rotation": [
+        0,
+        0.15183698222882103,
+        0,
+        0.988405549775822
+      ],
+      "scale": [
+        0.9999999999999994,
+        1,
+        0.9999999999999994
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "09181156-d733-4671-8562-64089cc4354a": {
+      "collider": {
+        "angularDamping": 0.1,
+        "friction": 0.9,
+        "geometry": {
+          "type": "auto"
+        },
+        "linearDamping": 0.4,
+        "mass": 0.8
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/cargo.glb"
+        }
+      },
+      "id": "09181156-d733-4671-8562-64089cc4354a",
+      "name": "Cargo 3",
+      "order": 1.275337803388944,
+      "parentId": "fc73b822-e8ae-4ce2-a5ec-a5497a4b89de",
+      "position": [
+        3.724893855868883,
+        0.38587259041009236,
+        0.44978797150191063
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "0d7e408c-380a-44ee-999a-e33d3fa7439e": {
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/building.glb"
+        }
+      },
+      "id": "0d7e408c-380a-44ee-999a-e33d3fa7439e",
+      "name": "Building",
+      "order": 4.624595680545968,
+      "parentId": "168f6d82-a01e-4e7d-a385-7d155e693426",
+      "position": [
+        7.163440923045442,
+        0,
+        7.422620712408138
+      ],
+      "rotation": [
+        0,
+        0.3826834323650899,
+        0,
+        0.9238795325112867
+      ],
+      "scale": [
+        1.0000000000000007,
+        1,
+        1.0000000000000007
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "168f6d82-a01e-4e7d-a385-7d155e693426": {
+      "components": {},
+      "geometry": null,
+      "id": "168f6d82-a01e-4e7d-a385-7d155e693426",
+      "material": null,
+      "name": "Structure",
+      "order": 6.3303340714421825,
+      "parentId": "04c4db5a-2f98-451a-81ae-bdb9a1e1e500",
+      "position": [
+        16.377515084474883,
+        0,
+        19.025983967162794
+      ],
+      "rotation": [
+        0,
+        1,
+        0,
+        -6.123233995736766e-17
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "19e3da82-335e-446f-a915-9e0a94b66a12": {
+      "collider": {
+        "angularDamping": 0.5,
+        "friction": 1,
+        "geometry": {
+          "type": "auto"
+        },
+        "linearDamping": 0.5,
+        "mass": 0.8
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/trailer.glb"
+        }
+      },
+      "id": "19e3da82-335e-446f-a915-9e0a94b66a12",
+      "name": "Trailer",
+      "order": 9.230472136362186,
+      "parentId": "71081a20-f8ec-46a5-a8dd-4f855a74304e",
+      "position": [
+        0.6828292355880032,
+        0.5193962004326433,
+        1.6798256995268357
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "1b2a571d-1b53-478b-b1b8-35c1b5457bd5": {
+      "collider": {
+        "angularDamping": 0.9,
+        "friction": 1,
+        "geometry": {
+          "type": "auto"
+        },
+        "linearDamping": 0.9,
+        "mass": 2
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/rock4.glb"
+        }
+      },
+      "id": "1b2a571d-1b53-478b-b1b8-35c1b5457bd5",
+      "name": "Dynamic Rock",
+      "order": 9.269700003248339,
+      "parentId": "04c4db5a-2f98-451a-81ae-bdb9a1e1e500",
+      "position": [
+        -8.124016879710725,
+        1.9352282124909381,
+        -2.101283159500049
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "27347e73-573c-4be2-a4ba-925c94d7132e": {
+      "collider": {
+        "angularDamping": 0.9,
+        "friction": 1,
+        "geometry": {
+          "type": "auto"
+        },
+        "linearDamping": 0.9,
+        "mass": 2
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/rock4.glb"
+        }
+      },
+      "id": "27347e73-573c-4be2-a4ba-925c94d7132e",
+      "name": "Dynamic Rock 2",
+      "order": 9.317610356122303,
+      "parentId": "04c4db5a-2f98-451a-81ae-bdb9a1e1e500",
+      "position": [
+        -2.9132049051564834,
+        1.9352282124909381,
+        18.229990593384198
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "30aec8da-6f12-462f-b618-0b882dd84aa4": {
+      "collider": {
+        "geometry": {
+          "type": "box",
+          "depth": 3,
+          "height": 3,
+          "width": 3
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/rock3.glb"
+        }
+      },
+      "id": "30aec8da-6f12-462f-b618-0b882dd84aa4",
+      "name": "rock6",
+      "order": 2.214271974727011,
+      "parentId": "06642ae7-0f3e-4038-892b-a9d9ad9c023c",
+      "position": [
+        2.837768411337514,
+        0,
+        -30.14562138063865
+      ],
+      "rotation": [
+        0,
+        -0.26723837607825707,
+        0,
+        0.9636304532086228
+      ],
+      "scale": [
+        0.9999999999999999,
+        1,
+        0.9999999999999999
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "428c1e6e-ede6-4f12-8db4-3e15ce257505": {
+      "collider": {
+        "geometry": {
+          "type": "box",
+          "depth": 3,
+          "height": 3,
+          "width": 3
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/rock3.glb"
+        }
+      },
+      "id": "428c1e6e-ede6-4f12-8db4-3e15ce257505",
+      "name": "rock3",
+      "order": -0.659093433481229,
+      "parentId": "06642ae7-0f3e-4038-892b-a9d9ad9c023c",
+      "position": [
+        10.728463253566314,
+        0,
+        20.923685081354975
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "52ff23e3-3c9d-48eb-bf30-4c6b29ca8663": {
+      "collider": {
+        "angularDamping": 0.1,
+        "friction": 0.9,
+        "geometry": {
+          "type": "auto"
+        },
+        "linearDamping": 0.4,
+        "mass": 0.8
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/cargo.glb"
+        }
+      },
+      "id": "52ff23e3-3c9d-48eb-bf30-4c6b29ca8663",
+      "name": "Cargo 5",
+      "order": 3.275337803388944,
+      "parentId": "fc73b822-e8ae-4ce2-a5ec-a5497a4b89de",
+      "position": [
+        -0.9059265084852592,
+        2.938773962736182,
+        0.44978797150191063
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "5466d886-5caa-4805-a11d-900d79c526ba": {
+      "collider": {
+        "geometry": {
+          "type": "box",
+          "depth": 2,
+          "height": 20,
+          "width": 2
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "windturbine_tall_fan.031Action",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/turbine.glb"
+        }
+      },
+      "id": "5466d886-5caa-4805-a11d-900d79c526ba",
+      "name": "Turbine",
+      "order": -0.11543791924462488,
+      "parentId": "04c4db5a-2f98-451a-81ae-bdb9a1e1e500",
+      "position": [
+        8.25460480693781,
+        0.2831847189692615,
+        -5.744749668265898
+      ],
+      "rotation": [
+        0,
+        -0.28010719598699235,
+        0,
+        0.9599687280095663
+      ],
+      "scale": [
+        0.9999999999999998,
+        1,
+        0.9999999999999998
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "5d10082b-1b34-4b78-a4bd-eccaa7dc497d": {
+      "components": {},
+      "geometry": null,
+      "id": "5d10082b-1b34-4b78-a4bd-eccaa7dc497d",
+      "material": null,
+      "name": "Cargo Trailer 4",
+      "order": 2.7914979817515633,
+      "parentId": "04c4db5a-2f98-451a-81ae-bdb9a1e1e500",
+      "position": [
+        16.74893310399938,
+        0,
+        -5.023744772186278
+      ],
+      "rotation": [
+        0,
+        -0.3826834323650899,
+        0,
+        0.9238795325112867
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "67607f1e-1b80-4a86-9e1f-3375143f7dbd": {
+      "collider": {
+        "friction": 1,
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "components": {},
+      "geometry": {
+        "depth": 150,
+        "height": 1,
+        "type": "box",
+        "width": 150
+      },
+      "id": "67607f1e-1b80-4a86-9e1f-3375143f7dbd",
+      "material": {
+        "blending": "normal",
+        "color": "#ec864b",
+        "depthTest": true,
+        "depthWrite": true,
+        "emissiveColor": "#ffffff",
+        "emissiveIntensity": 0,
+        "emissiveMap": "",
+        "metalness": 0.5,
+        "metalnessMap": "",
+        "offsetX": 0,
+        "offsetY": 0,
+        "opacity": 1,
+        "opacityMap": "",
+        "repeatX": 1,
+        "repeatY": 1,
+        "roughness": 1,
+        "roughnessMap": "",
+        "side": "front",
+        "textureSrc": "",
+        "type": "basic",
+        "wireframe": false
+      },
+      "name": "Ground",
+      "order": -1.654993756229642,
+      "parentId": "04c4db5a-2f98-451a-81ae-bdb9a1e1e500",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "6bf9f54e-1948-452d-b372-c6508005e29b": {
+      "collider": {
+        "angularDamping": 0.1,
+        "friction": 0.9,
+        "geometry": {
+          "type": "auto"
+        },
+        "linearDamping": 0.4,
+        "mass": 0.8
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/cargo.glb"
+        }
+      },
+      "id": "6bf9f54e-1948-452d-b372-c6508005e29b",
+      "name": "Cargo",
+      "order": -2.496418631713621,
+      "parentId": "fc73b822-e8ae-4ce2-a5ec-a5497a4b89de",
+      "position": [
+        -2.6509342515619663,
+        0.38587259041009236,
+        0.44978797150191063
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "71081a20-f8ec-46a5-a8dd-4f855a74304e": {
+      "components": {},
+      "geometry": null,
+      "id": "71081a20-f8ec-46a5-a8dd-4f855a74304e",
+      "material": null,
+      "name": "Cargo Trailer 3",
+      "order": 2.7914979817515633,
+      "parentId": "04c4db5a-2f98-451a-81ae-bdb9a1e1e500",
+      "position": [
+        13.375517363923805,
+        0,
+        -1.7069586305504032
+      ],
+      "rotation": [
+        0,
+        -0.3826834323650899,
+        0,
+        0.9238795325112867
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "784470c1-7603-4a55-ac9c-506bc338cd54": {
+      "components": {},
+      "geometry": {
+        "height": 1,
+        "type": "plane",
+        "width": 1
+      },
+      "id": "784470c1-7603-4a55-ac9c-506bc338cd54",
+      "material": {
+        "blending": "additive",
+        "color": "#FFFFFF",
+        "depthTest": true,
+        "depthWrite": true,
+        "metalness": 1,
+        "normalMap": null,
+        "opacity": 0.5,
+        "repeatX": 1,
+        "roughness": 1,
+        "textureSrc": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/sign.png"
+        },
+        "type": "basic",
+        "wireframe": false
+      },
+      "name": "Guide",
+      "order": -1.119565360570225,
+      "parentId": "04c4db5a-2f98-451a-81ae-bdb9a1e1e500",
+      "position": [
+        -1.0495343816970797,
+        0.5315731317872694,
+        -4.312710276869025
+      ],
+      "rotation": [
+        -0.7071067999999996,
+        0,
+        0,
+        0.707106762373095
+      ],
+      "scale": [
+        10,
+        10.000000000000002,
+        10.000000000000002
+      ]
+    },
+    "85201604-d26a-4c47-a249-cf027b3006ba": {
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/cargo-stacked.glb"
+        }
+      },
+      "id": "85201604-d26a-4c47-a249-cf027b3006ba",
+      "name": "Cargo Stack",
+      "order": 6.232243221854274,
+      "parentId": "fc73b822-e8ae-4ce2-a5ec-a5497a4b89de",
+      "position": [
+        -9.627648372178845,
+        0.23392545651662067,
+        1.0666299272627615
+      ],
+      "rotation": [
+        0,
+        0.2756373558169995,
+        0,
+        0.9612616959383188
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "8d73f27d-d132-407b-bbdb-34b4520f0428": {
+      "collider": {
+        "angularDamping": 0.5,
+        "friction": 1,
+        "geometry": {
+          "type": "auto"
+        },
+        "linearDamping": 0.5,
+        "mass": 0.8
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/trailer.glb"
+        }
+      },
+      "id": "8d73f27d-d132-407b-bbdb-34b4520f0428",
+      "name": "Trailer",
+      "order": 9.230472136362186,
+      "parentId": "5d10082b-1b34-4b78-a4bd-eccaa7dc497d",
+      "position": [
+        0.6828292355880032,
+        0.5193962004326433,
+        1.6798256995268357
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "936987a8-1476-460e-8d06-79e90cb0bde8": {
+      "collider": {
+        "angularDamping": 0,
+        "eventOnly": false,
+        "friction": 0.9,
+        "geometry": {
+          "type": "auto"
+        },
+        "gravityFactor": 1,
+        "linearDamping": 0.9,
+        "lockXAxis": true,
+        "lockYAxis": true,
+        "lockZAxis": true,
+        "mass": 3,
+        "restitution": 0,
+        "rollingFriction": 0,
+        "spinningFriction": 0
+      },
+      "components": {
+        "4e90f9cb-3a64-4e5c-beea-e237c2adc1d7": {
+          "id": "4e90f9cb-3a64-4e5c-beea-e237c2adc1d7",
+          "name": "vehicleController",
+          "parameters": {
+            "particleSystem": {
+              "type": "entity",
+              "id": "b342d4f8-dffb-43e7-856f-af1b925fdbcb"
+            }
+          }
+        }
+      },
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/rover.glb"
+        }
+      },
+      "id": "936987a8-1476-460e-8d06-79e90cb0bde8",
+      "name": "Player",
+      "order": 3.112758727456584,
+      "parentId": "43f01393-de9d-468f-bda5-65964f7d85ff",
+      "position": [
+        -1,
+        2,
+        2
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "977a2fe6-b7b7-4494-9149-0c86937ea36c": {
+      "components": {},
+      "geometry": null,
+      "id": "977a2fe6-b7b7-4494-9149-0c86937ea36c",
+      "material": null,
+      "name": "Cargo Trailer",
+      "order": 0.791497981751563,
+      "parentId": "04c4db5a-2f98-451a-81ae-bdb9a1e1e500",
+      "position": [
+        -4.547153002772349,
+        0,
+        6.884172537167496
+      ],
+      "rotation": [
+        0,
+        -0.3826834323650899,
+        0,
+        0.9238795325112867
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "98ab8224-6046-4637-b20d-e8952c524858": {
+      "collider": {
+        "angularDamping": 0.9,
+        "friction": 1,
+        "geometry": {
+          "type": "auto"
+        },
+        "linearDamping": 0.9,
+        "mass": 2
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/rock4.glb"
+        }
+      },
+      "id": "98ab8224-6046-4637-b20d-e8952c524858",
+      "name": "Dynamic Rock 2",
+      "order": 10.99768785600327,
+      "parentId": "5d10082b-1b34-4b78-a4bd-eccaa7dc497d",
+      "position": [
+        1.0976435747712916,
+        3.514712297534296,
+        1.6359222281744596
+      ],
+      "rotation": [
+        0.3826834323650906,
+        1.0018028073766051e-15,
+        0.9238795325112864,
+        -3.6602665343110526e-16
+      ],
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "9a6100ec-a736-44d3-aaa8-dc9aca210690": {
+      "collider": {
+        "geometry": {
+          "type": "box",
+          "depth": 3,
+          "height": 3,
+          "width": 3
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/rock3.glb"
+        }
+      },
+      "id": "9a6100ec-a736-44d3-aaa8-dc9aca210690",
+      "name": "rock 9",
+      "order": 2.214271974727011,
+      "parentId": "06642ae7-0f3e-4038-892b-a9d9ad9c023c",
+      "position": [
+        -2.1978588480433547,
+        0,
+        31.225361448826817
+      ],
+      "rotation": [
+        0,
+        -0.26723837607825707,
+        0,
+        0.9636304532086228
+      ],
+      "scale": [
+        0.9999999999999999,
+        1,
+        0.9999999999999999
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "9c311ef2-d1e4-41df-aadd-f0b9a451fe5c": {
+      "components": {},
+      "geometry": null,
+      "id": "9c311ef2-d1e4-41df-aadd-f0b9a451fe5c",
+      "light": {
+        "color": "#ffeddb",
+        "intensity": 0.5,
+        "type": "ambient"
+      },
+      "material": null,
+      "name": "Ambient Light",
+      "order": 1.1127587274565844,
+      "parentId": "43f01393-de9d-468f-bda5-65964f7d85ff",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "a3ae4b1a-6ed8-4e15-8660-c03e6f59b42b": {
+      "collider": {
+        "angularDamping": 0.1,
+        "friction": 0.9,
+        "geometry": {
+          "type": "auto"
+        },
+        "linearDamping": 0.4,
+        "mass": 0.8
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/cargo.glb"
+        }
+      },
+      "id": "a3ae4b1a-6ed8-4e15-8660-c03e6f59b42b",
+      "name": "Cargo 4",
+      "order": 2.275337803388944,
+      "parentId": "fc73b822-e8ae-4ce2-a5ec-a5497a4b89de",
+      "position": [
+        2.1576909430959943,
+        3.012362551561712,
+        0.44978797150191063
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "a3bb9e56-4b41-4b1d-806d-c7494111d27f": {
+      "collider": {
+        "geometry": {
+          "type": "box",
+          "depth": 6,
+          "height": 6,
+          "width": 6
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/lander.glb"
+        }
+      },
+      "id": "a3bb9e56-4b41-4b1d-806d-c7494111d27f",
+      "name": "Lander",
+      "order": 4.50880823372288,
+      "parentId": "168f6d82-a01e-4e7d-a385-7d155e693426",
+      "position": [
+        -1.2100096468893895,
+        0,
+        -1.2499305600524764
+      ],
+      "rotation": [
+        0,
+        0.9238795325112867,
+        0,
+        0.3826834323650899
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "a608ddd9-9379-464d-966f-5d8d8674c83c": {
+      "camera": {
+        "bottom": -1,
+        "left": -1.05,
+        "right": 1.05,
+        "top": 1,
+        "type": "perspective",
+        "xr": {
+          "xrCameraType": "3dOnly",
+          "desktop": "3D",
+          "phone": "3D",
+          "headset": "disabled",
+          "nearClip": 0.001
+        },
+        "zoom": 1.5
+      },
+      "components": {
+        "409567f5-9d34-4904-beb7-9e2711198af9": {
+          "id": "409567f5-9d34-4904-beb7-9e2711198af9",
+          "name": "look-at-animation",
+          "parameters": {
+            "target": {
+              "type": "entity",
+              "id": "936987a8-1476-460e-8d06-79e90cb0bde8"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "material": null,
+      "name": "Camera",
+      "order": 2.112758727456584,
+      "parentId": "56a3d228-e7c1-4b08-b92f-564fb2e5581b",
+      "position": [
+        0,
+        16,
+        16
+      ],
+      "rotation": [
+        -2.3432602026631484e-17,
+        0.9238795325112867,
+        -0.3826834323650897,
+        -5.6571305614385e-17
+      ],
+      "scale": [
+        1.000000359077233,
+        1.0000000215503784,
+        1.0000003375268511
+      ]
+    },
+    "ac1989e3-3b71-49e2-a05f-e682aeb18c36": {
+      "components": {},
+      "geometry": null,
+      "id": "ac1989e3-3b71-49e2-a05f-e682aeb18c36",
+      "light": {
+        "castShadow": true,
+        "color": "#ffffff",
+        "intensity": 0.7,
+        "shadowBias": -0.00005,
+        "shadowNormalBias": 0,
+        "type": "directional"
+      },
+      "material": null,
+      "name": "Directional Light",
+      "order": 0.11275872745658444,
+      "parentId": "43f01393-de9d-468f-bda5-65964f7d85ff",
+      "position": [
+        18.501101565550897,
+        63.17631838125851,
+        -3.666912350374897
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "b1d811ff-af5a-4205-8751-519b0fa7b20e": {
+      "collider": {
+        "angularDamping": 0.5,
+        "friction": 1,
+        "geometry": {
+          "type": "auto"
+        },
+        "linearDamping": 0.5,
+        "mass": 0.8
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/trailer.glb"
+        }
+      },
+      "id": "b1d811ff-af5a-4205-8751-519b0fa7b20e",
+      "name": "Trailer",
+      "order": 9.902786766611433,
+      "parentId": "e3983e26-5adf-4c1a-bdab-a65f96351ac9",
+      "position": [
+        0.6828292355880023,
+        0.5193962004326433,
+        1.679825699526834
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "b342d4f8-dffb-43e7-856f-af1b925fdbcb": {
+      "components": {
+        "9ef67e63-6568-4fca-a780-2d940b02ebaf": {
+          "id": "9ef67e63-6568-4fca-a780-2d940b02ebaf",
+          "name": "particle-emitter",
+          "parameters": {
+            "animateColor": false,
+            "blendingMode": "none",
+            "boundingZoneType": "none",
+            "colorEnd": "",
+            "colorStart": "",
+            "emitDelay": 0.1,
+            "emitterLife": 0,
+            "forceX": 1,
+            "forceY": 3,
+            "forceZ": 6,
+            "gravity": 0,
+            "mass": 1,
+            "maximumLifespan": 0.7,
+            "minimumLifespan": 0.3,
+            "particlesPerShot": 10,
+            "radialVelocity": 5,
+            "randomDrift": false,
+            "resourceType": "sprite",
+            "resourceUrl": "https://static.8thwall.app/assets/particle-oacgo8c3oe.png",
+            "scale": 0.25,
+            "spread": 180,
+            "stopped": false
+          }
+        }
+      },
+      "geometry": null,
+      "hidden": false,
+      "id": "b342d4f8-dffb-43e7-856f-af1b925fdbcb",
+      "material": null,
+      "name": "Particles",
+      "order": 2.7846652114691137,
+      "parentId": "936987a8-1476-460e-8d06-79e90cb0bde8",
+      "position": [
+        -0.01203597461025252,
+        -1.233094023295526,
+        1.0162724464340407
+      ],
+      "rotation": [
+        -5.551115123125783e-17,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        0.9999999403953552,
+        0.9999999403953552
+      ]
+    },
+    "b4025097-6812-4aa5-aab8-b0ad44803c79": {
+      "collider": {
+        "geometry": {
+          "type": "box",
+          "depth": 8,
+          "height": 8,
+          "width": 8
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "drill_moduleAction",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/drill.glb"
+        }
+      },
+      "id": "b4025097-6812-4aa5-aab8-b0ad44803c79",
+      "name": "Drill",
+      "order": 0.308997722585007,
+      "parentId": "04c4db5a-2f98-451a-81ae-bdb9a1e1e500",
+      "position": [
+        -15.24844586944337,
+        0,
+        1.2056780139060077
+      ],
+      "rotation": [
+        0,
+        0.3826834323650899,
+        0,
+        0.9238795325112867
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "b97147f8-1549-4416-a79d-c4fe05c4571b": {
+      "collider": {
+        "angularDamping": 0.5,
+        "friction": 1,
+        "geometry": {
+          "type": "auto"
+        },
+        "linearDamping": 0.5,
+        "mass": 0.8
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/trailer.glb"
+        }
+      },
+      "id": "b97147f8-1549-4416-a79d-c4fe05c4571b",
+      "name": "Trailer",
+      "order": 10.08918820500406,
+      "parentId": "977a2fe6-b7b7-4494-9149-0c86937ea36c",
+      "position": [
+        0.6828292355880028,
+        0.5193962004326433,
+        1.679825699526834
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "bcd7a4de-1403-4160-9a60-6aaa3ba6b52f": {
+      "collider": {
+        "angularDamping": 0.1,
+        "friction": 0.9,
+        "geometry": {
+          "type": "auto"
+        },
+        "linearDamping": 0.4,
+        "mass": 0.8
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/cargo.glb"
+        }
+      },
+      "id": "bcd7a4de-1403-4160-9a60-6aaa3ba6b52f",
+      "name": "Cargo 2",
+      "order": 0.275337803388944,
+      "parentId": "fc73b822-e8ae-4ce2-a5ec-a5497a4b89de",
+      "position": [
+        0.44618102386743885,
+        0.38587259041009236,
+        0.44978797150191063
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "bfb3b5ca-b02a-4bc5-9abe-31e3d1d0bb20": {
+      "collider": {
+        "geometry": {
+          "type": "box",
+          "depth": 6,
+          "height": 6,
+          "width": 5
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/rock2.glb"
+        }
+      },
+      "id": "bfb3b5ca-b02a-4bc5-9abe-31e3d1d0bb20",
+      "name": "rock5",
+      "order": 1.2142719747270114,
+      "parentId": "06642ae7-0f3e-4038-892b-a9d9ad9c023c",
+      "position": [
+        19.689297162155693,
+        0,
+        9.774585868642653
+      ],
+      "rotation": [
+        0,
+        -0.333806859233771,
+        0,
+        0.9426414910921783
+      ],
+      "scale": [
+        1.0000000000000002,
+        1,
+        1.0000000000000002
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "c581ff5c-1633-4184-9bf6-f0b7f102dcbe": {
+      "collider": {
+        "angularDamping": 0.1,
+        "friction": 0.9,
+        "geometry": {
+          "type": "auto"
+        },
+        "linearDamping": 0.4,
+        "mass": 0.8
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/cargo.glb"
+        }
+      },
+      "id": "c581ff5c-1633-4184-9bf6-f0b7f102dcbe",
+      "name": "Cargo",
+      "order": 8.112758727456585,
+      "parentId": "977a2fe6-b7b7-4494-9149-0c86937ea36c",
+      "position": [
+        0.8424354628361641,
+        2.240730590925912,
+        1.6952795427214333
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "cecc1d48-444e-498a-b6a7-665c288f112c": {
+      "collider": {
+        "geometry": {
+          "type": "box",
+          "depth": 6,
+          "height": 6,
+          "width": 5
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/rock2.glb"
+        }
+      },
+      "id": "cecc1d48-444e-498a-b6a7-665c288f112c",
+      "name": "rock2",
+      "order": -0.9687800245599436,
+      "parentId": "06642ae7-0f3e-4038-892b-a9d9ad9c023c",
+      "position": [
+        -9.775235247329435,
+        0,
+        -20.368572380554877
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "d4760236-43ea-4768-bbb2-efe0aa324653": {
+      "collider": {
+        "angularDamping": 0.1,
+        "friction": 0.9,
+        "geometry": {
+          "type": "auto"
+        },
+        "linearDamping": 0.4,
+        "mass": 0.8
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/cargo.glb"
+        }
+      },
+      "id": "d4760236-43ea-4768-bbb2-efe0aa324653",
+      "name": "Cargo 6",
+      "order": 4.275337803388944,
+      "parentId": "fc73b822-e8ae-4ce2-a5ec-a5497a4b89de",
+      "position": [
+        0.8170361050728747,
+        5.712363580966465,
+        0.44978797150191063
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "dbe48e7b-ea3c-4fb0-8041-c54f240ea949": {
+      "collider": {
+        "geometry": {
+          "type": "box",
+          "depth": 7,
+          "height": 7,
+          "width": 7
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/rock.glb"
+        }
+      },
+      "id": "dbe48e7b-ea3c-4fb0-8041-c54f240ea949",
+      "name": "rock",
+      "order": -2.2856215021084756,
+      "parentId": "06642ae7-0f3e-4038-892b-a9d9ad9c023c",
+      "position": [
+        8.824558983071963,
+        0,
+        -12.73251105626318
+      ],
+      "rotation": [
+        0,
+        -0.16504760586067824,
+        0,
+        0.9862856015372314
+      ],
+      "scale": [
+        1.0000000000000002,
+        1,
+        1.0000000000000002
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "e3983e26-5adf-4c1a-bdab-a65f96351ac9": {
+      "components": {},
+      "geometry": null,
+      "id": "e3983e26-5adf-4c1a-bdab-a65f96351ac9",
+      "material": null,
+      "name": "Cargo Trailer 2",
+      "order": 1.791497981751563,
+      "parentId": "04c4db5a-2f98-451a-81ae-bdb9a1e1e500",
+      "position": [
+        -8.020519164264641,
+        0,
+        10.326909774361212
+      ],
+      "rotation": [
+        0,
+        -0.3826834323650899,
+        0,
+        0.9238795325112867
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "e4a9a925-45b8-4f8b-abe7-53a02d48e562": {
+      "collider": {
+        "angularDamping": 0.1,
+        "friction": 0.9,
+        "geometry": {
+          "type": "auto"
+        },
+        "linearDamping": 0.5,
+        "mass": 0.8
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/cargo.glb"
+        }
+      },
+      "id": "e4a9a925-45b8-4f8b-abe7-53a02d48e562",
+      "name": "Cargo",
+      "order": 8.112758727456585,
+      "parentId": "e3983e26-5adf-4c1a-bdab-a65f96351ac9",
+      "position": [
+        0.7693098161499217,
+        2.240730590925912,
+        1.7517684466316723
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "e91c4c86-7107-47e9-a20b-b47c1bd12b8e": {
+      "collider": {
+        "geometry": {
+          "type": "box",
+          "depth": 3,
+          "height": 3,
+          "width": 3
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/rock3.glb"
+        }
+      },
+      "id": "e91c4c86-7107-47e9-a20b-b47c1bd12b8e",
+      "name": "rock 7",
+      "order": 2.214271974727011,
+      "parentId": "06642ae7-0f3e-4038-892b-a9d9ad9c023c",
+      "position": [
+        -24.59013790307851,
+        0,
+        4.465322286424758
+      ],
+      "rotation": [
+        0,
+        -0.26723837607825707,
+        0,
+        0.9636304532086228
+      ],
+      "scale": [
+        1.5,
+        1.5,
+        1.5
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "f24b000c-d605-4184-8c15-26996d9389e1": {
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/tunnel.glb"
+        }
+      },
+      "id": "f24b000c-d605-4184-8c15-26996d9389e1",
+      "name": "Tunnel",
+      "order": 4.384167533765318,
+      "parentId": "168f6d82-a01e-4e7d-a385-7d155e693426",
+      "position": [
+        2.002797379747779,
+        0,
+        2.029550423599943
+      ],
+      "rotation": [
+        0,
+        -0.3826834323650899,
+        0,
+        0.9238795325112867
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "f503dbbb-a170-4a1e-8b6a-fea6f2e90cba": {
+      "collider": {
+        "angularDamping": 0.1,
+        "friction": 0.9,
+        "geometry": {
+          "type": "auto"
+        },
+        "linearDamping": 0.5,
+        "mass": 0.8
+      },
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/LevelDesign/cargo.glb"
+        }
+      },
+      "id": "f503dbbb-a170-4a1e-8b6a-fea6f2e90cba",
+      "name": "Cargo",
+      "order": 8.112758727456585,
+      "parentId": "71081a20-f8ec-46a5-a8dd-4f855a74304e",
+      "position": [
+        0.7693098161499199,
+        2.240730590925912,
+        1.7517684466316723
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "fc73b822-e8ae-4ce2-a5ec-a5497a4b89de": {
+      "components": {},
+      "geometry": null,
+      "id": "fc73b822-e8ae-4ce2-a5ec-a5497a4b89de",
+      "material": null,
+      "name": "Cargo Boxes",
+      "order": 6.666516663681811,
+      "parentId": "04c4db5a-2f98-451a-81ae-bdb9a1e1e500",
+      "position": [
+        -1.762694613015686,
+        0,
+        -10.76619115238811
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "56a3d228-e7c1-4b08-b92f-564fb2e5581b": {
+      "id": "56a3d228-e7c1-4b08-b92f-564fb2e5581b",
+      "position": [
+        -1,
+        2,
+        2
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "43f01393-de9d-468f-bda5-65964f7d85ff",
+      "components": {
+        "19cc7d69-be6e-4532-95eb-3f029f416885": {
+          "id": "19cc7d69-be6e-4532-95eb-3f029f416885",
+          "name": "follow-animation",
+          "parameters": {
+            "target": {
+              "type": "entity",
+              "id": "936987a8-1476-460e-8d06-79e90cb0bde8"
+            },
+            "minDistance": 0,
+            "maxDistance": 0
+          }
+        }
+      },
+      "name": "Camera Rig",
+      "order": 1.8991501028014113
+    }
+  },
+  "spaces": {
+    "43f01393-de9d-468f-bda5-65964f7d85ff": {
+      "id": "43f01393-de9d-468f-bda5-65964f7d85ff",
+      "name": "Default",
+      "activeCamera": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "sky": {
+        "type": "gradient",
+        "colors": [
+          "#e27434",
+          "#ec864b"
+        ]
+      },
+      "reflections": {
+        "type": "url",
+        "url": "https://cdn.8thwall.com/web/assets/envmap/golden_bay_1k-m89fuwlx.hdr"
+      }
+    }
+  },
+  "runtimeVersion": {
+    "type": "version",
+    "level": "major",
+    "major": 2,
+    "minor": 0,
+    "patch": 0
+  },
+  "historyVersion": "mfegbk50"
+}

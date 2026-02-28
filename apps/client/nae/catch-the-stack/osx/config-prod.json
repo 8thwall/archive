@@ -1,0 +1,15 @@
+{
+  "projectUrl": "https://8w.8thwall.app/catch-the-stack",
+  "shell": "osx",
+  "apple": {
+    "teamIdentifier": "<REMOVED_BEFORE_OPEN_SOURCING>"
+  },
+  "appInfo": {
+    "workspace": "8w",
+    "appName": "catch-the-stack",
+    "refHead": "production",
+    "bundleIdentifier": "com.the8thwall.catchthestack",
+    "versionCode": "1",
+    "versionName": "1.0.0"
+  }
+}

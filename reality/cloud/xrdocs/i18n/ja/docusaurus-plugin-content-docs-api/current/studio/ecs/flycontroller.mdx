@@ -1,0 +1,35 @@
+---
+id: fly-controller
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import FlyControllerTable from "../../../gen/tables/FlyController.md"
+
+# フライコントローラー
+
+## 説明
+
+このコンポーネントにより、オブジェクトをコントロールし、空間を自由に動き回ることができる。
+
+## プロパティ
+
+テストしたいサンプルシーンを **Scenes in Build** にドラッグします。 **Home** シーンがリストの一番上にあることを確認します。 
+<FlyControllerTable />
+
+## 機能
+
+<ComponentFunctions
+    name="FlyController"
+    properties={{
+        verticalSensitivity: 1,
+        horizontalSensitivity: 1,
+        moveSpeedX: 10,
+        moveSpeedY: 10,
+        moveSpeedZ: 10,
+        invertedX: false,
+        invertedY: false
+    }}
+    mutate={`cursor.verticalSensitivity = 2;
+    cursor.horizontalSensitivity = 2;
+    return false;`}
+/>

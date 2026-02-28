@@ -1,0 +1,59 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<div id="overlay">
+  <img id="dropButton" src="./assets/trash.svg">
+  <img id="createNoteButton" src="./assets/new-note.png">
+      
+  <form onsubmit="document.getElementById('noteInput').blur(); event.preventDefault(); return false;">
+    <input id="noteInput" type="text">
+  </form>
+</div>
+
+<a-scene
+  antialias="true"
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  note-creator
+  xrweb>
+
+  <a-camera
+    id="camera"
+    position="0 4 0"
+    raycaster="objects: .note"
+    cursor="fuse: false; rayOrigin: mouse;">
+    <a-entity id="holdAnchor" position="0 0 -3"></a-entity>
+  </a-camera>
+  
+  <a-entity
+    light="
+      type: directional;
+      intensity: 0.8;
+      castShadow: true;
+      shadowMapHeight:2048;
+      shadowMapWidth:2048;
+      shadowCameraNear: -5;
+      shadowCameraRight: 25;
+      shadowCameraLeft: -25;
+      shadowCameraTop: 25;
+      shadowCameraBottom: -25;"
+    position="0.5 8 0"
+    shadow>
+  </a-entity>
+  
+  <a-light
+    id="ambientLight"
+    type="ambient"
+    intensity="0.9">
+  </a-light>
+  
+  <a-entity
+    id="ground"
+    geometry="primitive: box"
+    shadow="cast: false"
+    material="shader: shadow"
+    scale="1000 2 1000"
+    position="0 -1 0"
+    static-body>
+  </a-entity>
+</a-scene>

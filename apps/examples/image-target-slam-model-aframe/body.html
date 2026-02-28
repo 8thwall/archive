@@ -1,0 +1,52 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<a-scene
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  xrextras-gesture-detector
+  renderer="colorManagement: true; webgl2: true;"
+  xrweb>
+  
+  <a-assets>
+    <a-asset-item id="sandCastleModel" src="assets/sand-castle.glb"></a-asset-item>
+  </a-assets>
+
+  <a-camera 
+    id="camera"
+    position="0 1.5 0" 
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;"
+  ></a-camera>
+
+  <a-light type="ambient" intensity="0.25"></a-light>
+
+  <xrextras-named-image-target name="image-target" model-spawn></xrextras-named-image-target>
+
+  <a-entity
+    light="
+      type: directional;
+      intensity: 0.8;
+      castShadow: true;
+      shadowMapHeight:2048;
+      shadowMapWidth:2048;
+      shadowCameraTop: 10;
+      target: #camera;
+      shadowRadius: 5"
+    xrextras-attach="target: camera; offset: 0 15 3;"
+    shadow>
+  </a-entity>
+
+  <a-box
+    id="ground"
+    position="0 -0.5 0"
+    rotation="-90 0 0"
+    height="100"
+    width="100"
+    material="color: #000; transparent: true; opacity: 0.5; shader: shadow"
+    shadow>
+  </a-box>
+  
+</a-scene>
+
+

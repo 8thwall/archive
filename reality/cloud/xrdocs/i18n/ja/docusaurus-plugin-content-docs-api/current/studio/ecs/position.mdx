@@ -1,0 +1,31 @@
+---
+id: position
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import PositionTable from "../../../gen/tables/Position.md"
+
+# ポジション
+
+## 説明
+
+このコンポーネントは、**ローカル空間**での、エンティティの位置決めをコントロールする。
+
+## プロパティ
+
+<PositionTable />
+
+## 機能
+
+<ComponentFunctions
+    name="Position"
+    properties={{
+        x: 0,
+        y: 0,
+        z: 0
+    }}
+    mutate={`カーソル.x = 2;
+    カーソル.y = 2;
+    カーソル.z = 2;
+    return false;`}
+/>

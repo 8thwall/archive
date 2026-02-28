@@ -1,0 +1,29 @@
+---
+id: box-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# ボックスジオメトリ
+
+## 商品説明
+
+このコンポーネントは、エンティティのジオメトリを確立する。
+
+## プロパティ一覧
+
+| Property | Type   | 初期値     | 商品説明                        |
+| -------- | ------ | ------- | --------------------------- |
+| width    | 番号     | 1       | X軸の辺の幅。                     |
+| height   | 番号     | 1       | Y軸の辺の高さ。                    |
+| 深さ       | 番号     | 1       | Z軸の辺の深さ。                    |
+
+## 関数一覧
+
+<ComponentFunctions
+    name="BoxGeometry"
+    properties={{width: 1, height: 2, depth: 1}}
+    mutate={`cursor.width += 1;
+    cursor.height *= 2;
+    return false;`}
+/>

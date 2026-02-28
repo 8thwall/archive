@@ -1,0 +1,27 @@
+---
+id: gps-pointer
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import GpsPointerTable from "../../../gen/tables/GpsPointer.md"
+
+# GPSポインタ
+
+## 説明
+
+このコンポーネントは、GPSの入力に応じてエンティティを回転させる方法を制御します。
+
+## 物件 {#properties}
+
+<GpsPointerTable />
+
+## 機能
+
+<ComponentFunctions
+    name="GpsPointer"
+    properties={{
+        faceGpsDirection: true,
+    }}
+    mutate={`cursor.faceGpsDirection = false;
+    return false;`}
+/>

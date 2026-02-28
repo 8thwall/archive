@@ -1,0 +1,51 @@
+@use '../styles/constants';
+@use '../styles/brand-colors';
+
+.questionsSection {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 80%;
+  justify-content: center;
+}
+
+.bigBullets {
+  list-style-image: url('../../img/bullet.png');
+
+  li {
+    padding-left: 1rem;
+  }
+}
+
+.cardHeader {
+  background-color: white;
+  border-bottom: 0;
+  padding-bottom: 1rem;
+}
+
+.filterGray4 {
+  &:hover {
+    // change gray-scale image to gray4
+    filter: brightness(0) invert(27%) sepia(8%) saturate(1873%) hue-rotate(200deg) brightness(96%) contrast(91%);
+    -webkit-filter: brightness(0) invert(27%) sepia(8%) saturate(1873%) hue-rotate(200deg) brightness(96%) contrast(91%);
+  }
+}
+
+.supportRow {
+  display: flex;
+  justify-content: center;
+  gap: 3.5rem;
+}
+
+.communitySection {
+  background-color: brand-colors.$moonlight;
+}
+
+@media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+  .supportRow {
+    gap: 2rem;
+  }
+
+  .questionsSection {
+    grid-template-columns: calc(100% - 3rem);
+  }
+}

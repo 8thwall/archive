@@ -1,0 +1,37 @@
+#
+# These jobs can be used to clean bazel folders on specific runners.
+#
+# To run, start a gitlab pipeline on the web with variables set:
+#  - EVENT: cleanbazel
+#  - RUNNER_TO_CLEAN: <specific runner tag>
+#
+
+ci-support:run-bazel-clean-expunge:
+  stage: .pre
+  when: manual
+  interruptible: true
+  before_script: []
+  script:
+    - echo $RUNNER_TO_CLEAN
+    # remove the entire output base tree (build output and all temp files)
+    - bazel clean --expunge
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "web" && $EVENT == "cleanbazel"
+  tags:
+    - $RUNNER_TO_CLEAN
+
+ci-support:run-remove-bazel-disk_cache:
+  stage: .pre
+  when: manual
+  interruptible: true
+  before_script: []
+  script:
+    - df
+    - echo $RUNNER_TO_CLEAN
+    # clear local cache by deleting the contents in the disk_cache
+    - rm -rf  /tmp/bazel_local_cache_niantic
+    - df
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "web" && $EVENT == "cleanbazel"
+  tags:
+    - $RUNNER_TO_CLEAN

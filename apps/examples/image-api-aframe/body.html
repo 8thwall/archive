@@ -1,0 +1,58 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<div 
+  style="
+    position: absolute;
+    text-align: center;
+    bottom: 12vh;
+    width: 100%;
+    z-index: 10;
+    color: white;
+    font-family: 'Nunito', monospace;
+    font-size: 5vw;
+    text-shadow: 0px 0px 5px black;
+    pointer-events: none;">
+  <h3 id="prompt">Looking for birds that can fly...</h3>
+</div>
+
+<a-scene
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  config-targets=
+    "targets: macaw, owl, peacock, pelican, pigeon, puffin, cardinal, toucan, blue-jay, rooster"
+  xrweb="disableWorldTracking: true">
+  <a-camera
+    position="0 4 10"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;">
+  </a-camera>
+  
+  <a-entity smart-target="name: macaw"><a-text value="macaw"  align="center"></a-text></a-entity>
+  <a-entity smart-target="name: owl"><a-text value="owl" align="center"></a-text></a-entity>
+  <a-entity smart-target="name: peacock"><a-text value="peacock" align="center"></a-text></a-entity>
+  <a-entity smart-target="name: pelican"><a-text value="pelican" align="center"></a-text></a-entity>
+  <a-entity smart-target="name: pigeon"><a-text value="pigeon" align="center"></a-text></a-entity>
+  <a-entity smart-target="name: puffin"><a-text value="puffin" align="center"></a-text></a-entity>
+  <a-entity smart-target="name: cardinal">
+    <a-text value="cardinal" align="center"></a-text>
+  </a-entity>
+  <a-entity smart-target="name: toucan"><a-text value="toucan" align="center"></a-text></a-entity>
+  <a-entity smart-target="name: blue-jay">
+    <a-text value="blue jay" align="center" ></a-text>
+  </a-entity>
+  
+  <!--   last target loads additional targets   -->
+  <a-entity smart-target="name: rooster"><a-text value="rooster" align="center"></a-text></a-entity>
+  
+  <!--   additional targets   -->
+  <a-entity smart-target="name: penguin"><a-text value="penguin" align="center"></a-text></a-entity>
+  <a-entity smart-target="name: ostrich"><a-text value="ostrich" align="center"></a-text></a-entity>
+  <a-entity smart-target="name: roadrunner">
+    <a-text value="roadrunner" align="center"></a-text>
+  </a-entity>
+  
+  <a-light type="directional" intensity="0.5" position="1 1 1"></a-light>
+  <a-light type="ambient" intensity="1"></a-light>
+</a-scene>

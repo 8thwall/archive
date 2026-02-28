@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Embed test</title>
+
+  <script src="dist/embed8.js"></script>
+
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+    p {
+      margin-top: 0;
+      font-size: 1.2rem;
+    }
+    a:link, a:visited {
+      color: blue;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: red;
+    }
+
+    a:active {
+      text-decoration: none;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div style="margin:200px 100px 0;display: block;">
+
+
+    <a href="https://www.google.com">Not an 8 code</a><br>
+
+    <a data-8code="8th"></a><br>
+    <a data-8code="8th">Custom text</a><br>
+    <a data-8code="jinicam" data-hide-icon></a><br>
+    <a data-8code="jinicam" data-icon-color="gray"></a><br>
+    <a data-8code="jinicam" data-icon-vertical></a><br>
+    <a data-8code="jinicam" data-icon-vertical>AR</a><br>
+    <a data-8code="jinicam">AR</a><br>
+
+    <span style="font-size: 25px">
+      <a data-8code="jinicam">Big</a>
+    </span>
+
+    <br>
+
+    <a data-8code="jini" data-hide-icon style="padding: 0.25em; border-radius:0.25em;background-color: #844; color:#ddf">
+      Custom style
+      <img style="width: 1.5em;margin-left: 0.5em;vertical-align: -0.25em" src="https://www.8thwall.com/favicon.ico">
+    </a>
+
+    <br>
+
+    <a data-8code="jini" data-hide-icon style="margin-top: 1em;color: blue; background-color: lightgreen;border-radius: 0;border: 1px solid black; font-size: 20px">
+      <div>
+        This is<br>
+        also an embedded link<br>
+        <img style="width: 5em;" src="https://www.8thwall.com/favicon.ico">
+      </div>
+    </a>
+
+    <br>
+
+    <div style="background-color: black;color: lightgray; padding: 2em;margin: 1em 0;">
+      Dark theme, baby!<br>
+      <a data-8code="8th" data-dark-theme></a><br>
+      <a data-8code="8th" data-dark-theme data-hide-text></a><br>
+      <a data-8code="8th" data-dark-theme data-icon-color="purple"></a><br>
+    </div>
+
+    <p style="line-height: 3.5">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has <a data-8code="8th">survived</a> not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing <a data-8code="8th" data-icon-vertical>software</a> like Aldus PageMaker including versions of Lorem Ipsum.
+    </p>
+
+  </div>
+</body>
+</html>

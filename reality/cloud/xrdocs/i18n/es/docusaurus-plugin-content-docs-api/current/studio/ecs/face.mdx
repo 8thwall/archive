@@ -1,0 +1,29 @@
+---
+id: face
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import FaceTable from "../../../gen/tables/Face.md"
+
+# Cara
+
+## Descripción
+
+Este componente hace que la transformación de la entidad siga una cara rastreada en XR. Mostrará y ocultará la entidad según se encuentre o se pierda la cara.
+
+## Propiedades
+
+<FaceTable />
+
+## Funciones
+
+<ComponentFunctions
+    name="Face"
+    properties={{
+        id: 1,
+        addAttachmentState: false
+    }}
+    mutate={`cursor.id = 1;
+    cursor.addAttachmentState = true;
+    return false;`}
+/>

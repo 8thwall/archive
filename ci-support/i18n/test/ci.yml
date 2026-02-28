@@ -1,0 +1,39 @@
+# Branch to translate. This should be "main" normally, but can be overridden locally for testing.
+variables:
+  MAIN_BRANCH: "main"
+
+# An example pipeline for integrating an automated translate job into a Gitlab pipeline.
+include:
+  - ci-support/i18n/translate.yml
+
+# Define two jobs: one for JSON files and one for markdown.
+# This allows us to:
+# - define separate rules for when the translate job should run
+# - pass different arguments to the scripts in the parent job that do the work
+translate-json:
+  extends: .translate-files
+  rules:
+    - if: ($CI_COMMIT_BRANCH == $MAIN_BRANCH && $CI_PIPELINE_SOURCE == "push")
+      changes:
+        - ci-support/i18n/test/json/en-US/**
+  variables:
+    BASE_DIRECTORY_SOURCE: "ci-support/i18n/test/json/en-US"
+    BASE_DIRECTORY_OUTPUT: "ci-support/i18n/test/json"
+    CONTENT_TYPE: "json"
+    LOCALE_DIRECTORY_SPECIFIER: "{language}-{country}"
+    TRANSLATION_ENGINE: "mock"
+    LANGUAGES: "fr,ja"
+
+translate-markdown:
+  extends: .translate-files
+  rules:
+    - if: ($CI_COMMIT_BRANCH == $MAIN_BRANCH && $CI_PIPELINE_SOURCE == "push")
+      changes:
+        - ci-support/i18n/test/markdown/src/**
+  variables:
+    BASE_DIRECTORY_SOURCE: "ci-support/i18n/test/markdown/src"
+    BASE_DIRECTORY_OUTPUT: "ci-support/i18n/test/markdown/i18n"
+    CONTENT_TYPE: "md"
+    LOCALE_DIRECTORY_SPECIFIER: "{language}/docs"
+    TRANSLATION_ENGINE: "chatgpt"
+    LANGUAGES: "fr,ja"

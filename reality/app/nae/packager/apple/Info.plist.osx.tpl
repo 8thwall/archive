@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>CFBundleExecutable</key>
+  <string>$APP_NAME</string>
+  <key>CFBundleIdentifier</key>
+  <string>$BUNDLE_IDENTIFIER</string>
+  <key>CFBundleInfoDictionaryVersion</key>
+  <string>6.0</string>
+  <key>CFBundleName</key>
+  <string>$APP_NAME</string>
+  <key>CFBundlePackageType</key>
+  <string>APPL</string>
+  <key>CFBundleShortVersionString</key>
+  <string>$VERSION_NAME</string>
+  <key>CFBundleVersion</key>
+  <string>$VERSION_CODE</string>
+  <key>CFBundleDisplayName</key>
+  <string>$APP_DISPLAY_NAME</string>
+  <key>CFBundleSupportedPlatforms</key>
+  <array>
+    <string>MacOSX</string>
+  </array>
+  <key>DTXcode</key>
+  <string>$XCODE_VERSION_NAME</string>
+  <key>DTXcodeBuild</key>
+  <string>$XCODE_BUILD_NUMBER</string>
+  <key>AppUrl</key>
+  <string>$HTML_APP_URL</string>
+  <key>NaeBuildMode</key>
+  <string>$NAE_BUILD_MODE</string>
+  <key>CommitId</key>
+  <string>$COMMIT_ID</string>
+  <key>EncryptedDevCookie</key>
+  <string>$ENCRYPTED_DEV_COOKIE</string>
+  <key>NiaEnvAccessCode</key>
+  <string>$NIA_ENV_ACCESS_CODE</string>
+</dict>
+</plist>

@@ -1,0 +1,152 @@
+---
+id: models
+description: >-
+  Studio vous permet d'intégrer des objets 3D dans vos projets grâce au
+  composant Mesh, ce qui facilite la création d'expériences immersives et
+  interactives. Vous pouvez ajouter des formes de base à l'aide des primitives
+  intégrées ou importer des modèles 3D personnalisés.
+---
+
+# Modèles
+
+![models.png](/images/studio/models.png)
+
+## Introduction
+
+Studio prend en charge plusieurs formats de modèles 3D pour vos entités, chaque entité utilisant un type de modèle à la fois.
+Vous pouvez travailler avec des primitives simples pour les formes de base, ou importer des paquets GLB, FBX et GLTF lorsque vous avez besoin de représentations plus détaillées et haut de gamme. L'éditeur d'actifs intégré vous permet de modifier et d'affiner vos modèles directement dans le moteur, ce qui vous permet d'itérer rapidement sans changer d'outil.
+
+:::note
+Alors que le composant de maillage de Studio UI configure les primitives, les maillages et les splats gaussiens par le biais d'une interface unifiée, chaque type utilise un composant distinct au niveau programmatique.
+:::
+
+## Primitives {#primitives}
+
+Les primitives sont utilisées pour représenter des volumes, des objets simples ou pour servir de supports à de futurs éléments du jeu.
+Studio comprend plusieurs primitives intégrées, telles que des sphères, des boîtes et des plans, qui peuvent être rapidement personnalisées et positionnées dans l'éditeur.
+Les primitives ont des matériaux qui peuvent également être modifiés dynamiquement au moment de l'exécution.
+
+![primitives.png](/images/studio/primitives.png)
+
+Les primitives intégrées suivantes sont disponibles :
+
+| Type               | Attributs                    |
+| ------------------ | ---------------------------- |
+| Sphère             | `{radius}`                   |
+| Boîte              | `{width, height, depth}`     |
+| Avion              | `{width, height}`            |
+| Capsule            | `{radius, height}`           |
+| Cône               | `{radius, height}`           |
+| Cylindre           | `{radius, height}`           |
+| Polyèdre           | `{radius}`                   |
+| Cercle             | `{radius}`                   |
+| Anneau             | `{innerRadius, outerRadius}` |
+| Torus              | `{radius, tubeRadius}`       |
+
+## Ajouter une primitive
+
+Un modèle 3D peut être ajouté à l'entité via l'interface Studio, par l'intermédiaire du composant Mesh, ou dans le code. Leur ajout dans Studio s'effectue via le bouton (+) de la hiérarchie ou en ajoutant la géométrie à un composant personnalisé sur l'entité.
+
+### Exemple
+
+```ts
+ecs.SphereGeometry.set(world, eid, {radius: 5})
+```
+
+## Composante GLTF
+
+### Formats pris en charge
+
+#### GLTF et GLB
+
+Les modèles GLTF et GLB sont pris en charge et sont idéaux pour travailler en 3D sur le web.
+
+#### Ensemble d'actifs
+
+Alors que la plupart des BGL peuvent être glissés et déposés dans le studio, les fichiers GLTF nécessitent parfois plusieurs téléchargements de fichiers.
+Pour gérer ce processus, nous utilisons une liasse d'actifs. Pour télécharger une nouvelle ressource dans votre projet, dans la partie inférieure du panneau de gauche, sélectionnez l'onglet "Fichier" et cliquez sur l'icône "Plus".
+Choisissez l'option "New Asset" et glissez-déposez tous vos fichiers.
+
+![new-asset-bundle-option.png](/images/studio/new-asset-bundle-option.png)
+
+![new-asset-bundle.png](/images/studio/new-asset-bundle.png)
+
+#### FBX
+
+Le téléchargement FBX est pris en charge, mais 8th Wall Studio exige que les modèles soient convertis en GLB après le téléchargement.
+\*\*Assurez-vous que les textures sont intégrées dans le fichier FBX avant de le convertir en GLB.
+
+![fbx-to-glb-converter.png](/images/studio/fbx-to-glb-converter.png)
+
+### Établissement d'un modèle
+
+L'exemple suivant montre comment définir un GLTF ou un GLB sur une entité au moment de l'exécution.
+
+:::info
+Cette méthode exige que vous sélectionniez votre modèle personnalisé dans les propriétés du composant, une fois que le composant est appliqué à votre entité.
+:::
+
+```ts
+import * as ecs from '@8thwall/ecs'
+
+ecs.registerComponent({
+    name : 'loaded-model',
+    schema : {
+        // @asset
+        model : ecs.string,
+    },
+    add : (world, component) => {
+        ecs.GltfModel.set(world, eid, {
+            url: component.schema.model,
+        })
+    }
+})
+```
+
+### Définition des propriétés du modèle
+
+#### Propriétés du modèle
+
+Voir les propriétés [ici](/api/studio/ecs/gltf-model).
+
+#### Exemple
+
+L'exemple suivant montre comment définir un modèle sur une entité au moment de l'exécution.
+
+```ts
+import * as ecs from '@8thwall/ecs'
+
+ecs.registerComponent({
+    name : 'loaded-model',
+    schema : {
+        // @asset
+        model : ecs.string,
+    },
+    add : (world, component) => {
+        ecs.GltfModel.set(world, eid, {
+            url : component.schema.model,
+            animationClip : 'clip1',
+            loop : true,
+            paused : false,
+            time : 0,
+            timeScale : 1,
+        })
+    }
+})
+```
+
+## Modèles et physique
+
+### Primitives
+
+Les collisionneurs représentent des entités physiques dans l'étape de simulation, avec des attributs qui affectent directement leur comportement. La plupart des primitives ont des formes de collision qui correspondent à leur volume exact, ce qui facilite l'apparition d'une primitive comme un cube et l'ajout d'interactions physiques.
+
+### Modèles
+
+Vous pouvez générer un collisionneur personnalisé à partir de votre modèle 3D, qui se rapproche de sa forme et de sa taille. Pour obtenir les meilleurs résultats, utilisez la forme de collisionneur la plus simple qui réponde à vos besoins. La plupart du temps, il est possible d'utiliser une primitive à la place.
+
+:::danger
+La génération de collisionneurs personnalisés peut échouer en raison de variations dans la complexité, la taille et la qualité du modèle. Dans ce cas, utilisez des primitives (une ou plusieurs) pour obtenir approximativement la forme souhaitée, ou exportez un fichier .glb propre à partir d'un outil de modélisation 3D tel que Blender.
+:::
+
+Pour plus d'informations, consultez le guide de physique [ici](/studio/guides/physics/)

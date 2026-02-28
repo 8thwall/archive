@@ -1,0 +1,63 @@
+<!-- Copyright (c) 2021 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<div class="over">
+  <span id="promptText"></span>
+  <img id="pauseBtn" src="./assets/icons/pause.svg" style="display: none;">
+  <img id="muteBtn" src="./assets/icons/sound.svg" style="display: none;">
+  <div id="gradient-box"></div>
+</div>
+
+<a-scene
+  xrextras-gesture-detector
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="antialias: true; colorManagement: false; physicallyCorrectLights: true;"
+  xrweb="disableWorldTracking: true">
+
+  <a-camera
+    id="camera"
+    position="0 10 3"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;">
+  </a-camera>
+  
+  <a-entity
+    light="type: directional;
+           intensity: 0.8;
+           castShadow: true;
+           shadowMapHeight:2048;
+           shadowMapWidth:2048;
+           shadowCameraTop: 10;
+           target: #holo;"
+    xrextras-attach="target: holo; offset: 0 15 0;"
+    shadow>
+  </a-entity>
+
+  <!--
+    For inquiries regarding volumetric capture services, contact 
+    Microsoft Mixed Reality Capture Studios at mrcs@microsoft.com
+    
+    MRCS holograms for this demo are located in the assets folder
+    * FemalePresenter (contains sound) - ./assets/FemalePresenter.hcap
+    * Soccer Player (no sound) - ./assets/Soccer.hcap
+    
+    You can upload your own HCAP files by dropping a .zip of your HCAP assets in the side panel or
+    Assets + -> New asset bundle... -> HCAP file...
+    
+    If you are hosting your own HCAP files, reference the .hcap link in 'src' below
+  -->
+  <xrextras-named-image-target name="floor">
+    <a-entity rotation="90 0 0">
+      <hcap-target-hologram
+        id="holo"
+        class="cantap"
+        src="./assets/FemalePresenter.hcap"
+        size="0.5"
+        xrextras-one-finger-rotate>
+      </hcap-target-hologram>
+    </a-entity>
+  </xrextras-named-image-target>
+
+</a-scene>

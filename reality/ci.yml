@@ -1,0 +1,46 @@
+reality/trigger:
+  stage: build
+  variables:
+    REALITY_TRIGGER: "reality_trigger"
+  trigger:
+    include:
+      - reality/reality-ci.yml
+    strategy: depend
+  needs: []
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - .bazelrc
+        - bzl/**/*
+        - .bazelversion
+        - BUILD
+        - conanfile.txt
+        - c8/dom/**/*
+        - c8/ecs/**/*
+        - platform_mappings
+        - presubmit
+        - PRESUBMIT.json
+        - requirements.txt
+        - third_party/**/*
+        - WORKSPACE
+        - ci-support/generate_ci_bazelrc.sh
+        - ci-support/util.yml
+        - reality/ci.yml
+        - reality/reality-ci.yml
+    - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE == "nightly"
+    - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE == "hourly"
+
+xrhome/trigger:
+  stage: build
+  variables:
+    XRHOME_TRIGGER: "xrhome_trigger"
+  trigger:
+    include:
+      - reality/reality-ci.yml
+    strategy: depend
+  needs: []
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - reality/cloud/xrhome/**/*
+        - reality/reality-ci.yml

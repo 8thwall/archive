@@ -1,0 +1,71 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene
+  xrextras-tap-recenter
+  xrextras-gesture-detector
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="colorManagement: true"
+  xrweb>
+
+  <a-assets>
+    <a-asset-item id="correctGlass" src="./assets/glass_converted.glb"></a-asset-item>
+    <a-asset-item id="incorrectGlass" src="./assets/glass.glb"></a-asset-item>
+  </a-assets>
+
+  <a-camera
+    id="camera"
+    position="0 8 8">
+  </a-camera>
+  
+  <a-entity
+    xr-light
+    light="type: directional;
+       castShadow: true;
+       shadowMapHeight:2048;
+       shadowMapWidth:2048;
+       shadowCameraTop: 10;
+       target: #group;"
+    xrextras-attach="target: group; offset: 0 15 0;" 
+    shadow>
+  </a-entity>
+  
+  <a-light
+    xr-light
+    type="ambient">
+  </a-light>
+
+  <a-entity 
+    id="group"
+    xrextras-two-finger-rotate
+    xrextras-pinch-scale="max: 5">
+
+  <a-entity
+      gltf-model="#correctGlass"
+      reflections="type: static"
+      position="2 0 0"
+      scale="1 1 1"
+      shadow>
+  </a-entity>
+  
+  <a-entity
+      gltf-model="#incorrectGlass"
+      reflections="type: static"
+      position="-2 0 0"
+      scale="1 1 1"
+      shadow>
+  </a-entity>
+    
+  </a-entity>
+  
+  <a-plane
+    id="ground"
+    rotation="-90 0 0"
+    width="200"
+    height="200"
+    material="shader: shadow; transparent: true; opacity: 0.15"
+    shadow
+  ></a-plane>
+</a-scene>

@@ -1,0 +1,110 @@
+/* ============================
+   Zones
+   ============================ */
+
+#jumpZone,
+#joystickZone {
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  z-index: 10;
+}
+
+#jumpZone {
+  left: 0;
+}
+
+#joystickZone {
+  right: 0;
+}
+
+/* ============================
+   Joystick Styles
+   ============================ */
+
+.joystick-parent {
+  position: fixed;
+  bottom: 6%;
+  right: 10%;
+  z-index: 100;
+  pointer-events: none;
+  visibility: visible;
+}
+
+.joystick-origin {
+  pointer-events: auto;
+  width: 100px;
+  height: 100px;
+  background-color: rgba(200, 200, 200, 0.6);
+  border-radius: 50%;
+  position: relative;
+}
+
+.joystick-position {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ============================
+   Circular Button Styles
+   ============================ */
+
+.circularButton {
+  width: 55px;
+  height: 55px;
+  background-color: rgba(200, 200, 200, 0.6);
+  border: 4px solid rgba(128, 128, 128, 0.6);
+  border-radius: 50%;
+  font-family: 'Press Start 2P', cursive;
+  line-height: 50px;
+  text-align: center;
+  position: fixed;
+  bottom: 10%;
+  left: 10%;
+  outline: none;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+  z-index: 101;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.6);
+  background: radial-gradient(circle, rgba(200, 200, 200, 0.6), rgba(160, 160, 160, 0.6));
+}
+
+.circularButton:hover {
+  background-color: rgba(160, 160, 160, 0.6);
+}
+
+.circularButton:active,
+.circularButton.simulate-active {
+  box-shadow: 0 2px rgba(128, 128, 128, 0.6);
+  transform: translateY(3px);
+}
+
+/* ============================
+   For Desktop 3D 
+   ============================ */
+
+#spaceBarInstruction {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 20px; 
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 3px;
+  z-index: 102; 
+  position: absolute;
+  bottom: 60px;
+  width: 100%;
+  text-align: center;
+}

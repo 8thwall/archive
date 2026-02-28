@@ -1,0 +1,186 @@
+@use '../../styles/brand-colors';
+@use '../../styles/constants';
+
+
+.container {
+  padding: 3rem 1.5rem;
+  background-color: brand-colors.$moonlight;
+  color: brand-colors.$brand-black;
+
+  h2, p {
+    text-align: center;
+  }
+
+}
+
+.formContainer {
+  display: flex;
+  gap: 1.5em;
+  z-index: 5;
+  justify-content: center;
+  border-radius: 0.5em;
+
+  p {
+    padding-top: 0.5rem;
+    text-align: left;
+    font-size: 12px;
+  }
+
+  a {
+    color: black;
+    text-decoration: underline;
+  }
+}
+
+.formImg {
+  border-radius: 0.5em;
+  filter: drop-shadow(1em 1.25em 0.75em rgba(0, 0, 0, 0.25));
+
+  @media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+    display: none;
+  }
+
+
+}
+
+.claimForm {
+  min-height: 27.25em;
+}
+
+.claimForm h2 {
+  text-align: center;
+  font-size: 1.25em;
+  line-height: 1.5em;
+  margin-bottom: 1.25em;
+}
+
+.claimForm form {
+  text-align: left;
+
+  input:not([type=submit]):not([type=checkbox]) {
+    color: brand-colors.$brand-black;
+    background-color: transparent;
+    line-height: 2em;
+    border-radius: 1.5em;
+    border: 1px solid brand-colors.$brand-highlight !important;
+    width: 100% !important;
+    padding: 0.2em 0 0.2em 1em;
+
+    &:focus {
+      border: 1px solid brand-colors.$blueberry;
+      outline: 1px solid brand-colors.$blueberry;
+    }
+
+    &::placeholder {
+      color: brand-colors.$gray5;
+    }
+
+    &:focus::placeholder {
+      opacity: 70%;
+    }
+
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 1000px brand-colors.$gray1 inset !important;
+      -webkit-text-fill-color: brand-colors.$brand-black !important;
+    }
+  }
+
+  :global {
+    .hs-form-field {
+      margin-bottom: 1em;
+
+      &:last-child .input {
+        margin-right: 0 !important;
+      }
+    }
+
+    .hs-fieldtype-text label {
+      display: none;
+    }
+
+    .hs-error-msgs {
+      list-style: none;
+      margin-bottom: 0;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .hs-button {
+      margin-top: 0.5em;
+      color: brand-colors.$moonlight;
+      background-color: brand-colors.$brand-purple;
+      padding: 0.5em 2em;
+      border-radius: 1.5em;
+      border: 0;
+      width: 50%;
+      font-weight: 700;
+      font-size: 1.125em;
+      cursor: pointer;
+
+      @media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+        width: 100%;
+      }
+
+    }
+
+    .hs-button:hover {
+      background-color: brand-colors.$brand-purple-dark;
+    }
+
+    .inputs-list {
+      margin: 0;
+      width: 100%;
+      padding-left: 5px;
+      list-style: none;
+    }
+
+    .hs-form-booleancheckbox-display {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      box-sizing: border-box;
+      align-items: center;
+      flex-wrap: wrap;
+      cursor: pointer;
+
+      input[type="checkbox"] {
+        position: absolute;
+        appearance: none;
+        background-color: brand-colors.$moonlight;
+        margin: 0;
+        color: brand-colors.$gray3;
+        width: 16px;
+        height: 16px;
+        border: 0.15em solid brand-colors.$brand-highlight;
+        border-radius: 0.15em;
+        transform: translateY(-0.075em);
+        display: grid;
+        place-content: center;
+      }
+
+      input[type="checkbox"]::before {
+        content: "";
+        width: 0.65em;
+        height: 0.65em;
+        transform: scale(0);
+        box-shadow: inset 1em 1em brand-colors.$brand-black;
+      }
+
+      input[type="checkbox"]:checked::before {
+        transform: scale(1);
+        transform-origin: bottom left;
+        clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+      }
+
+      input[type="checkbox"]:focus {
+        border: 2px solid brand-colors.$blueberry;
+      }
+
+      span {
+        margin-left: 2em;
+        font-size: 14px;
+      }
+    }
+  }
+}

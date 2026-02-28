@@ -1,0 +1,49 @@
+---
+id: physics
+---
+
+import {EventExample} from '@site/src/components/event-example'
+
+# Événements de physique
+
+## Evénements
+
+### ÉVÉNEMENT_DÉBUT_COLLISION
+
+Emis lorsque l'entité a commencé à entrer en collision avec une autre entité.
+
+#### Propriété
+
+| Propriété | Type | Description                              |
+| --------- | ---- | ---------------------------------------- |
+| autres    | eid  | L'eid de l'entité qui entre en collision |
+
+#### Exemple
+
+<EventExample ns="ecs.physics" event="COLLISION_START_EVENT" callbackBody={`console.log('Collided with', event.data.other)`} />
+
+### ÉVÉNEMENT DE FIN DE COLLISION
+
+Emis lorsque l'entité a cessé d'entrer en collision avec une autre entité.
+
+#### Propriétés
+
+| Propriété | Type | Description                              |
+| --------- | ---- | ---------------------------------------- |
+| autres    | eid  | L'eid de l'entité qui entre en collision |
+
+#### Exemple
+
+<EventExample ns="ecs.physics" event="COLLISION_END_EVENT" callbackBody={`console.log('Stopped colliding with', event.data.other)`} />
+
+### UPDATE_EVENT
+
+Emis sur [world.events.globalId](/api/studio/world/events/#properties) immédiatement après la mise à jour de la physique avant le rendu.
+
+#### Propriétés
+
+Aucun.
+
+#### Exemple
+
+<EventExample ns="ecs.physics" event="UPDATE_EVENT" target="world.events.globalId" hasPayload={false} callbackBody={`console.log('Physics update')`} />

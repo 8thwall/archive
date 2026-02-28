@@ -1,0 +1,169 @@
+---
+id: image-targets
+sidebar_position: 2
+---
+
+import {EventExample} from '@site/src/components/event-example'
+
+# Bildziel Ereignisse
+
+## Typen {#types}
+
+### ImagePropertiesObject {#ImagePropertiesObject}
+
+ImagePropertiesObject" ist ein Objekt mit den folgenden Eigenschaften:
+
+| Eigentum       | Typ         | Beschreibung                     |
+| -------------- | ----------- | -------------------------------- |
+| Breite         | `Nummer`    | Breite des Zielbildes.           |
+| Höhe           | Nummer      | Höhe des Zielbildes.             |
+| originalBreite | Nummer      | Breite des hochgeladenen Bildes. |
+| originalHöhe   | `Nummer`    | Höhe des hochgeladenen Bildes.   |
+| isRotated      | `boolesche` | Ob das Bildziel gedreht wurde.   |
+
+### ImageLoadingObject {#ImageLoadingObject}
+
+ImageLoadingObject" ist ein Objekt mit den folgenden Eigenschaften:
+
+| Eigentum  | Typ            | Beschreibung                                |
+| --------- | -------------- | ------------------------------------------- |
+| name      | `Zeichenfolge` | Der Name des Bildes.                        |
+| typ       | `String`       | Eines von `FLAT`, `CYLINDRICAL`, `CONICAL`. |
+| Metadaten | Objekt         | Benutzer-Metadaten.                         |
+
+### ImageScanningObject {#ImageScanningObject}
+
+ImageScanningObject" ist ein Objekt mit den folgenden Eigenschaften:
+
+| Eigentum  | Typ      | Beschreibung                                                                                                                                                                                  |
+| --------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name      | `String` | Der Name des Bildes.                                                                                                                                                                          |
+| Typ       | `String` | Eines von `FLAT`, `CYLINDRICAL`, `CONICAL`.                                                                                                                                                   |
+| Metadaten | Objekt   | Benutzer-Metadaten.                                                                                                                                                                           |
+| Geometrie | Objekt   | Objekt mit Geometriedaten. Wenn type=FLAT:`{scaledWidth, scaledHeight}`, sonst bei type=CYLINDRICAL oder type=CONICAL: `{height, radiusTop, radiusBottom, arcStartRadians, arcLengthRadians}` |
+
+## Veranstaltungen
+
+### REALITÄTS_BILD_GEFUNDEN
+
+Dieses Ereignis wird ausgelöst, wenn ein Bildziel zum ersten Mal gefunden wird.
+
+#### Eigenschaft
+
+| Eigenschaft      | Typ                                             | Beschreibung                                                                                                 |
+| ---------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Name             | `String`                                        | Der Name des Bildes.                                                                                         |
+| Typ              | `Zeichenfolge`                                  | Eines von `FLAT`, `CYLINDRICAL`, `CONICAL`.                                                                  |
+| Position         | `{x, y, z}`                                     | Die 3d-Position des georteten Bildes.                                                                        |
+| Rotation         | `{w, x, y, z}`                                  | Die lokale 3D-Ausrichtung des georteten Bildes.                                                              |
+| Skala            | Nummer                                          | Ein Skalierungsfaktor, der auf das an dieses Bild angehängte Objekt angewendet werden soll.                  |
+| Eigenschaften    | [ImagePropertiesObject](#ImagePropertiesObject) | Zusätzliche Bildzieleigenschaften.                                                                           |
+| scaledWidth      | `Nummer`                                        | **Nur anwendbar auf `FLAT`**. Die Breite des Bildes in der Szene, multipliziert mit dem Maßstab.             |
+| scaledHeight     | Nummer                                          | **Nur anwendbar auf `FLAT`**. Die Höhe des Bildes in der Szene, wenn sie mit dem Maßstab multipliziert wird. |
+| Höhe             | Nummer                                          | **Nur anwendbar auf `CYLINDRICAL` oder `CONICAL`**. Höhe der gekrümmten Zielscheibe.                         |
+| radiusTop        | Nummer                                          | **Nur anwendbar auf `CYLINDRICAL` oder `CONICAL`**. Radius der gekrümmten Zielscheibe am oberen Rand.        |
+| radiusBottom     | Nummer                                          | **Nur anwendbar auf `CYLINDRICAL` oder `CONICAL`**. Radius der gekrümmten Zielscheibe am unteren Rand.       |
+| arcStartRadian   | Nummer                                          | **Nur anwendbar auf `CYLINDRICAL` oder `CONICAL`**. Startwinkel in Radiant.                                  |
+| arcLengthRadians | Nummer                                          | **Nur anwendbar auf `CYLINDRICAL` oder `CONICAL`**. Zentralwinkel in Radiant.                                |
+
+#### Beispiel
+
+<EventExample ns="ecs.events" event="REALITY_IMAGE_FOUND" target="world.events.globalId" callbackBody={`console.log('Image found: ', event.data.name)`} />
+
+### REALITÄT_BILD_LADEN
+
+Dieses Ereignis wird ausgelöst, wenn das Laden des Erkennungsbildes beginnt.
+
+#### Eigenschaften
+
+| Eigenschaft  | Typ                         | Beschreibung             |
+| ------------ | --------------------------- | ------------------------ |
+| imageTargets | `Array<ImageLoadingObject>` | Die Liste der Bildziele. |
+
+#### Beispiel
+
+<EventExample
+  ns="ecs.events"
+  event="REALITY_IMAGE_LOADING"
+  target="world.events.globalId"
+  callbackBody={[
+   `event.data.imageTargets.forEach(({name, type, metadata, geometry}) => {`,
+   `  console.log('Loading: ', name)`,
+   `})`,
+  ]}
+/>
+
+### REALITY_IMAGE_LOST
+
+Dieses Ereignis wird ausgelöst, wenn ein Bildziel nicht mehr verfolgt wird.
+
+#### Eigenschaften
+
+| Eigentum         | Typ                                             | Beschreibung                                                                                                 |
+| ---------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| name             | `String`                                        | Der Name des Bildes.                                                                                         |
+| Typ              | `String`                                        | Eines von `FLAT`, `CYLINDRICAL`, `CONICAL`.                                                                  |
+| Position         | `{x, y, z}`                                     | Die 3d-Position des georteten Bildes.                                                                        |
+| Rotation         | `{w, x, y, z}`                                  | Die lokale 3D-Ausrichtung des georteten Bildes.                                                              |
+| Skala            | Nummer                                          | Ein Skalierungsfaktor, der auf das an dieses Bild angehängte Objekt angewendet werden soll.                  |
+| eigenschaften    | [ImagePropertiesObject](#ImagePropertiesObject) | Zusätzliche Bildzieleigenschaften.                                                                           |
+| scaledWidth      | Nummer                                          | **Nur anwendbar auf `FLAT`**. Die Breite des Bildes in der Szene, multipliziert mit dem Maßstab.             |
+| scaledHeight     | Nummer                                          | **Nur anwendbar auf `FLAT`**. Die Höhe des Bildes in der Szene, wenn sie mit dem Maßstab multipliziert wird. |
+| Höhe             | Nummer                                          | **Nur anwendbar auf `CYLINDRICAL` oder `CONICAL`**. Höhe der gekrümmten Zielscheibe.                         |
+| radiusTop        | Nummer                                          | **Nur anwendbar auf `CYLINDRICAL` oder `CONICAL`**. Radius der gekrümmten Zielscheibe am oberen Rand.        |
+| radiusBottom     | Nummer                                          | **Nur anwendbar auf `CYLINDRICAL` oder `CONICAL`**. Radius der gekrümmten Zielscheibe am unteren Rand.       |
+| arcStartRadian   | Nummer                                          | **Nur anwendbar auf `CYLINDRICAL` oder `CONICAL`**. Startwinkel in Radiant.                                  |
+| arcLengthRadians | `Nummer`                                        | **Nur anwendbar auf `CYLINDRICAL` oder `CONICAL`**. Zentralwinkel in Radiant.                                |
+
+#### Beispiel
+
+<EventExample ns="ecs.events" event="REALITY_IMAGE_LOST" target="world.events.globalId" callbackBody={`console.log('Image lost: ', event.data.name)`} />
+
+### REALITÄTS_BILD_ABTASTUNG
+
+Dieses Ereignis wird ausgelöst, wenn alle Erkennungsbilder geladen wurden und der Scanvorgang begonnen hat.
+
+#### Eigenschaften
+
+| Eigentum     | Typ                          | Beschreibung             |
+| ------------ | ---------------------------- | ------------------------ |
+| imageTargets | `Array<ImageScanningObject>` | Die Liste der Bildziele. |
+
+#### Beispiel
+
+<EventExample
+  ns="ecs.events"
+  event="REALITY_IMAGE_SCANNING"
+  target="world.events.globalId"
+  callbackBody={[
+   `event.data.imageTargets.forEach(({name, type, metadata, geometry}) => {`,
+   `  console.log('Scanning: ', name)`,
+   `})`,
+  ]}
+/>
+
+### REALITÄTS_BILD_AKTUALISIERT
+
+Dieses Ereignis wird ausgelöst, wenn ein Bildziel seine Position, Drehung oder Skalierung ändert.
+
+#### Eigenschaften
+
+| Eigentum         | Typ                                             | Beschreibung                                                                                                 |
+| ---------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Name             | `Zeichenfolge`                                  | Der Name des Bildes.                                                                                         |
+| Typ              | `String`                                        | Eines von `FLAT`, `CYLINDRICAL`, `CONICAL`.                                                                  |
+| Position         | `{x, y, z}`                                     | Die 3d-Position des georteten Bildes.                                                                        |
+| Rotation         | `{w, x, y, z}`                                  | Die lokale 3D-Ausrichtung des georteten Bildes.                                                              |
+| Skala            | Nummer                                          | Ein Skalierungsfaktor, der auf das an dieses Bild angehängte Objekt angewendet werden soll.                  |
+| Eigenschaften    | [ImagePropertiesObject](#ImagePropertiesObject) | Zusätzliche Bildzieleigenschaften.                                                                           |
+| scaledWidth      | Nummer                                          | **Nur anwendbar auf `FLAT`**. Die Breite des Bildes in der Szene, multipliziert mit dem Maßstab.             |
+| scaledHeight     | Nummer                                          | **Nur anwendbar auf `FLAT`**. Die Höhe des Bildes in der Szene, wenn sie mit dem Maßstab multipliziert wird. |
+| Höhe             | Nummer                                          | **Nur anwendbar auf `CYLINDRICAL` oder `CONICAL`**. Höhe der gekrümmten Zielscheibe.                         |
+| radiusTop        | Nummer                                          | **Nur anwendbar auf `CYLINDRICAL` oder `CONICAL`**. Radius der gekrümmten Zielscheibe am oberen Rand.        |
+| radiusBottom     | Nummer                                          | **Nur anwendbar auf `CYLINDRICAL` oder `CONICAL`**. Radius der gekrümmten Zielscheibe am unteren Rand.       |
+| arcStartRadian   | `Nummer`                                        | **Nur anwendbar auf `CYLINDRICAL` oder `CONICAL`**. Startwinkel in Radiant.                                  |
+| arcLengthRadians | Nummer                                          | **Nur anwendbar auf `CYLINDRICAL` oder `CONICAL`**. Zentralwinkel in Radiant.                                |
+
+#### Beispiel
+
+<EventExample ns="ecs.events" event="REALITY_IMAGE_UPDATED" target="world.events.globalId" callbackBody={`console.log('Image updated: ', event.data.position, event.data.rotation)`} />

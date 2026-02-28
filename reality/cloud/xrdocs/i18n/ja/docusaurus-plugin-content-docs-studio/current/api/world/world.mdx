@@ -1,0 +1,106 @@
+---
+id: world
+description: このライブラリには、ワールドに関連するプロパティと関数が含まれています。
+---
+
+# 世界
+
+## 商品説明
+
+{frontMatter.description}
+
+## プロパティ一覧
+
+| Property    | Type | 商品説明                |
+| ----------- | ---- | ------------------- |
+| すべてのエンティティ  | セット  | すべてのシーンエンティティのセット。  |
+
+## 関数一覧
+
+### createEntity
+
+新しいエンティティを作成する。
+
+```ts
+world.createEntity() // -> eid
+```
+
+### 削除エンティティ
+
+既存のエンティティを削除する。
+
+```ts
+world.deleteEntity(eid) // -> void
+```
+
+### ゲットチャイルドレン
+
+エンティティの子を取得します。
+
+```ts
+world.getChildren(eid) // -> ジェネレーター<Eid>
+```
+
+### ゲットペアレント
+
+エンティティの親を取得する。
+
+```ts
+world.getParent(eid) // -> eid
+```
+
+### セットペアレント
+
+エンティティの親を設定する。
+
+```ts
+world.setParent(eid, parent: eid) // -> void
+```
+
+### ゲットワールドトランスフォーム
+
+エンティティのワールドトランスフォームを取得する。 \*\*ターゲットのworldTransformを第2パラメータにコピーする。
+
+```ts
+world.getWorldTransform(eid, transform: Mat4) // -> void
+```
+
+### setTransform
+
+エンティティのトランスフォームを設定する。
+
+```ts
+world.setPosition(eid, transform: Mat4) // -> void
+```
+
+### セットポジション
+
+エンティティの位置を設定する。
+
+```ts
+world.setPosition(eid, x: number, y: number, z: number) // -> void
+```
+
+### セットクォータニオン
+
+エンティティの回転を設定する。
+
+```ts
+world.setQuaternion(eid, x: 数, y: 数, z: 数, w: 数) // -> void
+```
+
+### セットスケール
+
+エンティティのスケールを設定する。
+
+```ts
+world.setScale(eid, x: number, y: number, z: number) // -> void
+```
+
+### 正規化クォータニオン
+
+エンティティのクォータニオンを正規化する。
+
+```ts
+world.normalizeQuaternion(eid) // -> void
+```

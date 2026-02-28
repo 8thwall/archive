@@ -1,0 +1,191 @@
+---
+id: schema
+description: コンポーネント・スキーマは、コンポーネントが含むデータを定義します。
+toc_max_heading_level: 3
+sidebar_position: 42
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import EcsTypes from '/src/components/_ecs-types.mdx'
+
+# スキーマ
+
+{frontMatter.description} スキーマを定義するとき、キーと値のペアを含むオブジェクトを提供します。キーはプロパティの名前で、値はそのプロパティが保持するデータの種類を指定する[ECSタイプ](/api/studio/ecs/#types)です。
+
+<EcsTypes />
+
+## 例
+
+次の例は、カスタム・コンポーネントのスキーマを示しています。
+
+```ts
+schema: {
+  target: ecs.eid,             // Unique entity reference for the NPC (Entity ID)
+  speed: ecs.f32,              // Movement speed of the NPC (32-bit float)
+  strength: ecs.f64,           // Strength level for the NPC (64-bit float)
+  level: ecs.i32,              // Character level of the NPC (32-bit integer)
+  armor: ecs.ui8,              // Armor rating of the NPC (0-255, 8-bit unsigned integer)
+  experience: ecs.ui32,        // Experience points of the NPC (32-bit unsigned integer)
+  guildName: ecs.string,       // Name of the Guild NPC belongs to. (String)
+  isHostile: ecs.boolean       // Boolean indicating if the NPC is hostile to the player (Boolean)
+}
+```
+
+デフォルトを指定することもできるが、必須ではない。 デフォルトが指定されていない場合、数値のデフォルトは `0`、論理値のデフォルトは `false`、文字列のデフォルトは `''`、実体参照のデフォルトは unset となります。 コンポーネント・レベルでエンティティ参照のデフォルトを設定する方法はありません。
+
+```ts
+schemaDefaults: {
+  speed: 3.14,
+  strength: 5.8,
+  level: 10,
+  armor: 255,
+  experience: 12,
+  guildName: 'Niantic Crew'
+  isHostile: false
+}
+```
+
+## カスタムエディターフィールド {#custom-editor-fields}
+
+エンティティエディタでのコンポーネントの表示と機能は、さまざまな方法でカスタマイズできます。 これはすべてスキーマ内のコメントを使って行われ、フィールドには`//@`というマークが付けられる。
+
+### ラベル
+
+エディター上のラベルは、コード上の名前よりも説明的でなければならないことがある。
+
+```ts
+schema: {
+   // @label Foo
+   bar: ecs.eid,
+},
+```
+
+### 資産の参照
+
+プロジェクト内のアセットを参照する必要がある場合。
+
+```ts
+schema: {
+   // @asset
+   yetiModel: ecs.string,
+}
+```
+
+### 最小＆最大
+
+インターフェイスで値を変更したときに、その値が一定量を超えないようにクランプする必要がある場合。
+\*実行時の変数の変更には影響しない。
+
+```ts
+schema: {
+   // @min 0
+   // @max 128
+   goldCoins: ecs.i32,
+}
+```
+
+### 条件
+
+プロパティは、他のプロパティの値によってのみ表示されるように設定することができます。
+
+```ts
+schema: {
+   // 'from' will only show if autoFrom set false:
+   autoFrom: ecs.boolean,
+   // @condition autoFrom=false
+   from: ecs.f32,
+
+   // 'easingFunction' will show if either easeIn or easeOut set:
+   easeIn: ecs.boolean,
+   easeOut: ecs.boolean,
+   // @condition easeIn=true|easeOut=true
+   easingFunction: ecs.string,
+
+   // 'targetX' only shows if no target set:
+   target: ecs.eid,
+   // @condition target=null
+   targetX: ecs.f32,
+}
+```
+
+### 列挙
+
+文字列プロパティは、セットリストに制限することができます：
+
+```ts
+schema: {
+   // @enum Quadratic, Cubic, Quartic, Quintic, Sinusoidal, Exponential
+   easingFunction: ecs.string,
+}
+```
+
+### グループ
+
+特定のプロパティのグループをエディタで特別に扱うように指示することができる。 グループは以下のように設定される：
+
+* グループの開始と終了は // @group start …でマークされる。 および // @group end
+* 条件は // @group 条件でグループ全体に適用できる。
+* 現在サポートされているグループは2種類：vector3とcolor
+
+#### ラベル
+
+カスタムラベルは、個々のフィールドに使用することができます：
+
+```ts
+schema: {
+   // @group start orient:vector3
+   // @label Pitch
+   orientPitch: ecs.f32,
+   // @label Yaw
+   orientYaw: ecs.f32,
+   // @label Roll
+   orientRoll: ecs.f32,
+   // @group end
+}
+```
+
+#### Vector3
+
+3次元ベクトルを表すプロパティのグループは、以下のように示すことができる：
+
+```ts
+schema: {
+ autoFrom: ecs.boolean,
+ // @group start from:vector3
+ // @group condition autoFrom=false
+ fromX: ecs.f32,
+ fromY: ecs.f32,
+ fromZ: ecs.f32,
+ // @group end
+}
+```
+
+#### カラー
+
+色は次の例のように示すことができる：
+
+```ts
+schema: {
+ // @group start background:color
+ bgRed: ecs.f32,
+ bgGreen: ecs.f32,
+ bgBlue: ecs.f32,
+ // @group end
+}
+```
+
+## データ
+
+データはスキーマと似ているが、顕著な違いが2つある。
+
+1. データは、それが定義されているコンポーネントの外部で読み書きすることは\*\*できない。
+2. データには\*\*デフォルト値はありませんが、同様の機能を持つライフサイクルメソッド'add'で設定することができます。
+
+## カーソルは、非同期（例えば、setTimeout内部や遅延コールバックなど）で使用されると、古くなる可能性がある。
+
+カーソルは、エンティティにアタッチされた別のコンポーネントのスキーマへの参照です。 これは、プロパティの読み書きを可能にするポインタやハンドルのようなものだと考えることができる。
+
+しかし、心に留めておいてほしい：
+
+* カーソルは、非同期（例えば、setTimeoutや遅延コールバックの内部）で使用されると、古くなる可能性がある。 このような場合は、代わりにschemaAttributeとdataAttributeを使用してください。
+* カーソルは、エンティティ上のデータへのライブアクセスを提供します。

@@ -1,0 +1,32 @@
+---
+id: map
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import MapTable from "../../../gen/tables/Map.md"
+
+# Mapa
+
+## Descripción
+
+Este componente representa la configuración general del mapa.
+
+## Propiedades
+
+<MapTable />
+
+## Funciones
+
+<ComponentFunctions
+    name="Mapa"
+    properties={{
+        latitude: 37.7955281,
+        longitude: -122.3934225,
+        radius: 500,
+        spawnLocations: false,
+        useGPS: true,
+    }}
+    mutate={`cursor.latitud = 37,4419;
+    cursor.longitud = -122,1430;
+    return false;`}
+/>

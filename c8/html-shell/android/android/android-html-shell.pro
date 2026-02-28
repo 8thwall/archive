@@ -1,0 +1,1 @@
+-keep class com.the8thwall.htmlshell.android.VibrationHelper { *; }

@@ -1,0 +1,22 @@
+{
+  "projectUrl": "https://parismorgan1.8thwall.app/studio-face-effects-1/",
+  "shell": "android",
+  "android": {
+    "packageName": "com.parismorgan1.studio_face_effects_1",
+    "versionName": "1.0.1",
+    "versionCode": 14
+  },
+  "appInfo": {
+    "bundleIdentifier": "com.parismorgan1.studio_face_effects_1",
+    "appDisplayName": "Test App 1",
+    "refHead": "production",
+    "workspace": "parismorgan1",
+    "appName": "studio-face-effects-1",
+    "naeBuildMode": "hot-reload"
+  },
+  "appUuid": "ecdc1c15-08ab-4596-a78a-689b9a63db12",
+  "exportType": "apk",
+  "requestRef": "paris-default",
+  "iconId": "defaulticon1",
+  "repoId": "cc.9.app.08034e63-5c52-472f-9e00-33f122a6aba7"
+}

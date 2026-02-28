@@ -1,0 +1,43 @@
+const PROJECT_PATH = '/project'
+const PROJECT_INIT_PATH = `${PROJECT_PATH}/init-local`
+const PROJECT_WATCH_PATH = `${PROJECT_PATH}/watch-local`
+const PROJECT_STATUS_PATH = `${PROJECT_PATH}/project-status`
+const PROJECT_LIST_PATH = `${PROJECT_PATH}/list`
+const PROJECT_REVEAL_IN_FINDER_PATH = `${PROJECT_PATH}/reveal-in-finder`
+const PROJECT_OPEN_PATH = `${PROJECT_PATH}/open`
+const PROJECT_DELETE_PATH = `${PROJECT_PATH}/delete`
+const PROJECT_PICK_NEW_LOCATION_PATH = `${PROJECT_PATH}/pick-new-location`
+const PROJECT_MOVE_PATH = `${PROJECT_PATH}/move`
+
+const FILE_PATH = '/file'
+const FILE_STATE_SNAPSHOT_PATH = `${FILE_PATH}/snapshot`
+const FILE_DIRECTORY_PATH = `${FILE_PATH}/directory`
+const FILE_METADATA_PATH = `${FILE_PATH}/metadata`
+const FILE_OPEN_PATH = `${FILE_PATH}/open`
+const FILE_SHOW_PATH = `${FILE_PATH}/show`
+const FILE_HASH_SHA256_PATH = `${FILE_PATH}/hash/sha256`
+
+const isProjectPath = (pathname: string) => pathname.startsWith(PROJECT_PATH)
+const isFilePath = (pathname: string) => pathname.startsWith(FILE_PATH)
+
+export {
+  PROJECT_PATH,
+  PROJECT_INIT_PATH,
+  PROJECT_WATCH_PATH,
+  PROJECT_STATUS_PATH,
+  PROJECT_LIST_PATH,
+  PROJECT_REVEAL_IN_FINDER_PATH,
+  PROJECT_OPEN_PATH,
+  PROJECT_DELETE_PATH,
+  PROJECT_PICK_NEW_LOCATION_PATH,
+  PROJECT_MOVE_PATH,
+  FILE_PATH,
+  FILE_STATE_SNAPSHOT_PATH,
+  FILE_DIRECTORY_PATH,
+  FILE_METADATA_PATH,
+  FILE_HASH_SHA256_PATH,
+  FILE_OPEN_PATH,
+  FILE_SHOW_PATH,
+  isProjectPath,
+  isFilePath,
+}

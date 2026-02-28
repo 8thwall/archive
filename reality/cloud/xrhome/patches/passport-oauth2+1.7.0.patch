@@ -1,0 +1,21 @@
+diff --git a/node_modules/passport-oauth2/lib/strategy.js b/node_modules/passport-oauth2/lib/strategy.js
+index 8575b72..5efaab4 100644
+--- a/node_modules/passport-oauth2/lib/strategy.js
++++ b/node_modules/passport-oauth2/lib/strategy.js
+@@ -97,6 +97,7 @@ function OAuth2Strategy(options, verify) {
+                             '', options.authorizationURL, options.tokenURL, options.customHeaders);
+ 
+   this._callbackURL = options.callbackURL;
++  this._generateCallbackUrl = options.generateCallbackUrl;
+   this._scope = options.scope;
+   this._scopeSeparator = options.scopeSeparator || ' ';
+   this._pkceMethod = (options.pkce === true) ? 'S256' : options.pkce;
+@@ -139,7 +140,7 @@ OAuth2Strategy.prototype.authenticate = function(req, options) {
+     }
+   }
+ 
+-  var callbackURL = options.callbackURL || this._callbackURL;
++  var callbackURL = options.callbackURL || (this._generateCallbackUrl && this._generateCallbackUrl(req)) || this._callbackURL;
+   if (callbackURL) {
+     var parsed = url.parse(callbackURL);
+     if (!parsed.protocol) {

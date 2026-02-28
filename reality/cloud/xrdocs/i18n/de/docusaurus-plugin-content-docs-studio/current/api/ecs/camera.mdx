@@ -1,0 +1,52 @@
+---
+id: camera
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Kamera
+
+## Beschreibung
+
+Diese Komponente ermöglicht es dem Benutzer, die Welt durch die Entität zu betrachten.
+
+## Eigenschaften
+
+### Weltweite Auswirkungen
+
+| Eigenschaft | Typ    | Standard      | Beschreibung                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ----------- | ------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| scale       | String | 'responsive'  | Entweder 'responsiv' oder 'absolut'. responsive gibt Werte zurück, so dass sich die Kamera auf Bild 1 am Ursprung befindet, der über [XR8.XrController.updateCameraProjectionMatrix()](https://www.8thwall.com/docs/api/xrcontroller/updatecameraprojectionmatrix/) definiert wurde. absolute gibt die Kamera, die Bildziele usw. in Metern zurück. Bei der Verwendung von absolut werden die x-Position, die z-Position und die Drehung der Ausgangspose die in [XR8.XrController.updateCameraProjectionMatrix()](https://www.8thwall.com/docs/api/xrcontroller/updatecameraprojectionmatrix/) festgelegten Parameter berücksichtigen, sobald der Maßstab geschätzt wurde. Die y-Position hängt von der physischen Höhe der Kamera über dem Boden ab. |
+
+### Gesichtseffekte
+
+| Eigenschaft      | Typ     | Standard | Beschreibung                                                                                                                                                         |
+| ---------------- | ------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| nearClip         | Nummer  | 0.1      | Die Entfernung der nahen Clipebene von der Kamera, d.h. die kürzeste Entfernung zur Kamera, in der Szenenobjekte sichtbar sind.                                      |
+| farClip          | Nummer  | 1000     | Die Entfernung der fernen Clipebene von der Kamera, d.h. die weiteste Entfernung zur Kamera, in der Szenenobjekte sichtbar sind.                                     |
+| Gesicht          | boolean | true     | Ob die Geometrie des Gesichtsnetzes angezeigt werden soll.                                                                                                           |
+| Augen            | boolean | false    | Ob die Geometrie des Augennetzes angezeigt werden soll.                                                                                                              |
+| Iris             | boolean | false    | Ob die Geometrie des Blendennetzes angezeigt werden soll.                                                                                                            |
+| Mund             | boolean | false    | Ob die Geometrie des Mundnetzes angezeigt werden soll.                                                                                                               |
+| maxDetections    | Nummer  | 1        | Die maximale Anzahl der zu erkennenden Gesichter. Sie haben die Wahl zwischen 1, 2 und 3.                                                                            |
+| enableEars       | boolean | false    | Wenn "true", wird die Ohrenerkennung gleichzeitig mit den Gesichtseffekten ausgeführt und die Ohranlegepunkte werden zurückgegeben.                                  |
+
+## Funktionen
+
+<ComponentFunctions
+    name="Kamera"
+    properties={{
+        scale: "responsive",
+        nearClip: 0.1,
+        farClip: 1000,
+        Face: true,
+        Eyes: false,
+        Iris: false,
+        Mouth: false,
+        maxDetections: 1,
+        enableEars: false
+    }}
+    mutate={`cursor.scale = 'absolute';
+    cursor.nearClip = 0.5;
+    return false;`}
+/>

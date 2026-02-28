@@ -1,0 +1,20 @@
+{
+    "name": "8th Wall",
+    "short_name": "8th Wall",
+    "icons": [
+        {
+            "src": "/static/public/android-chrome-192x192-mbn7t3bo.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/static/public/android-chrome-256x256-mbn7tv4e.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#7611b7",
+    "background_color": "#7611b7",
+    "display": "browser",
+    "start_url": "/"
+}

@@ -1,0 +1,21 @@
+@use '../styles/constants';
+
+.plansTable {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1em;
+}
+
+@media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+  .plansTable {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+  .plansTable {
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
+}

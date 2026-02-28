@@ -1,0 +1,184 @@
+---
+id: ecs
+---
+
+import EcsTypes from '/src/components/_ecs-types.mdx'
+
+# ecs
+
+## Propiedades
+
+### Tipos {#types}
+
+<EcsTypes/>
+
+## Funciones
+
+### registrarComponente
+
+Registra un componente en el ECS.
+
+```ts
+ecs.registerComponent({
+    nombre: cadena,
+    esquema: Schema,
+    data: Esquema,
+    schemaDefaults: Object,
+    add: function
+    remove: function,
+    tick: function
+}) // -> Componente Handle
+```
+
+#### Estado
+
+| Parámetro                  | Tipo                          | Descripción                                                                                                         |
+| -------------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| disparadores (Obligatorio) | `Registro<String, Trigger[]>` | Nombre de los siguientes estados a los que este estado y la transición y los factores desencadenantes para hacerlo. |
+| onEntrar                   | función                       | Función llamada antes de entrar en el estado.                                                                       |
+| onExit                     | función                       | Función llamada antes de entrar en el estado.                                                                       |
+
+#### Disparador
+
+##### Activador de eventos
+
+| Parámetro            | Tipo                 | Descripción                                                                                                                                      |
+| -------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| tipo (Obligatorio)   | constante: 'evento'  | Una constante para indicar el tipo de disparador                                                                                                 |
+| evento (Obligatorio) | cadena               | El tipo de evento que desencadena este                                                                                                           |
+| objetivo             | eid                  | La entidad para la que desea que este disparador cambie de estado                                                                                |
+| beforeTransition     | (evento) => booleano | Una función que se ejecuta antes de la transición, si el resultado es verdadero entonces la transición terminará y el estado no cambiará.        |
+
+##### TimeoutTrigger
+
+| Parámetro                      | Tipo                 | Descripción                                        |
+| ------------------------------ | -------------------- | -------------------------------------------------- |
+| tipo (Obligatorio)             | constante: 'timeout' | Una constante para indicar el tipo de disparador   |
+| tiempo de espera (obligatorio) | número               | El número de milisegundos antes de la transición   |
+
+### createStateMachine
+
+Crear una máquina de estados.
+
+```ts
+ecs.createStateMachine(world, owner, {initialState: string, states: Record<string, State>}) // -> ID de la máquina de estados
+```
+
+### deleteStateMachine
+
+Borrar una máquina de estado.
+
+```ts
+ecs.deleteStateMachine(world, machineId) // -> void
+```
+
+### definirEstado
+
+Define un estado.
+
+```ts
+ecs.defineState(name: string) // -> Estado
+```
+
+#### inicial
+
+Marca este estado como el estado inicial de la máquina de estados
+
+```ts
+ecs.defineEstado(nombre).inicial() // -> void
+```
+
+#### onEntrar
+
+Establece una llamada de retorno que se ejecutará al entrar en este estado.
+
+```ts
+ecs.defineState(name).onEnter(callback) // -> void
+```
+
+#### onEvento
+
+##### Evento
+
+| Parámetro          | Tipo                 | Descripción                                                                                                                                   |
+| ------------------ | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| objetivo           | eid                  | la entidad para la que desea que este activador cambie de estado                                                                              |
+| beforeTransition   | (evento) => booleano | Función que se ejecuta antes de la transición, si el resultado es verdadero entonces la transición terminará y el estado no cambiará.         |
+
+Activar una transición al siguiente estado cuando se recibe un evento.
+
+```ts
+ecs.defineState(name).onEvent(event: string, nextState: string | State, args: EventObject) // -> void
+```
+
+#### onExit
+
+Establece una llamada de retorno que se ejecutará al salir de este estado.
+
+```ts
+ecs.defineState(name).onExit(callback) // -> void
+```
+
+#### espere
+
+Espera antes de cambiar de estado.
+
+```ts
+ecs.defineState(name).wait(waitTime: number, nextState: string | State) // -> void
+```
+
+### definirSistema
+
+Definir un sistema.
+
+```ts
+ecs.defineSistema([términos]: cadena[], comportamiento: función) // -> Sistema
+```
+
+### defineQuery
+
+Definir una consulta.
+
+```ts
+ecs.defineQuery([términos: cadena]) // -> callback
+```
+
+### getAttribute
+
+Los componentes incorporados también se exponen como una propiedad de ecs.
+
+```ts
+ecs.getAttribute(attributeName: string) // -> el atributo que se ha registrado con ese nombre.
+```
+
+### listAttributes
+
+Devuelve una lista de atributos.
+
+```ts
+ecs.listAttributes() // -> cadena[]
+```
+
+### getBehaviors
+
+Devuelve una lista de comportamientos registrados.
+
+```ts
+ecs.getBehaviors() // -> function[]
+```
+
+### registerBehavior
+
+Registra una función que se ejecute en el mundo cada tick.
+
+```ts
+ecs.registerBehavior(behavior: function) // -> void
+```
+
+### unregisterBehavior
+
+Desactivar un comportamiento.
+
+```ts
+ecs.unregisterBehavior(behavior: function) // -> void
+```

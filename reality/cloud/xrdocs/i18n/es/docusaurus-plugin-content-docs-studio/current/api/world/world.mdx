@@ -1,0 +1,106 @@
+---
+id: world
+description: This library includes properties and functions related to the World.
+---
+
+# world
+
+## Descripción
+
+{frontMatter.description}
+
+## Propiedades
+
+| Propiedad    | Tipo | Descripción                |
+| ------------ | ---- | -------------------------- |
+| allEntities  | Set  | Set of all scene entities. |
+
+## Funciones
+
+### createEntity
+
+Create a new entity.
+
+```ts
+world.createEntity() // -> eid
+```
+
+### deleteEntity
+
+Delete an existing entity.
+
+```ts
+world.deleteEntity(eid) // -> void
+```
+
+### getChildren
+
+Get children of an entity.
+
+```ts
+world.getChildren(eid) // -> Generator<Eid>
+```
+
+### getParent
+
+Get the parent of an entity.
+
+```ts
+world.getParent(eid) // -> eid
+```
+
+### setParent
+
+Set the parent of an entity.
+
+```ts
+world.setParent(eid, parent: eid) // -> void
+```
+
+### getWorldTransform
+
+Get the world transform of an entity. **Copies the worldTransform of the target into the second parameter.**
+
+```ts
+world.getWorldTransform(eid, transform: Mat4) // -> void
+```
+
+### setTransform
+
+Set transform of an entity.
+
+```ts
+world.setPosition(eid, transform: Mat4) // -> void
+```
+
+### setPosition
+
+Set position of an entity.
+
+```ts
+world.setPosition(eid, x: number, y: number, z: number) // -> void
+```
+
+### setQuaternion
+
+Set rotation of an entity.
+
+```ts
+world.setQuaternion(eid, x: number, y: number, z: number, w: number) // -> void
+```
+
+### setScale
+
+Set scale of an entity.
+
+```ts
+world.setScale(eid, x: number, y: number, z: number) // -> void
+```
+
+### normalizeQuaternion
+
+Normalizes an entity's quaternion.
+
+```ts
+world.normalizeQuaternion(eid) // -> void
+```

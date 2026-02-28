@@ -1,0 +1,107 @@
+[ {
+  "id" : "1c0a30be-aa3b-5564-dcce-b877b6b7266d",
+  "name" : "image",
+  "display_width" : null,
+  "label" : "Image",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "default" : {
+    "size_type" : "auto",
+    "src" : "https://7255816.fs1.hubspotusercontent-na1.net/hubfs/7255816/MVP-Interactive-Tenneseee-Titans-2020-AR-Mural-jpg.jpeg",
+    "alt" : "MVP-Interactive-Tenneseee-Titans-2020-AR-Mural-jpg",
+    "loading" : "lazy",
+    "width" : 1132,
+    "height" : 569,
+    "max_width" : 1132,
+    "max_height" : 569
+  }
+}, {
+  "id" : "4c3414b7-3e9e-8c3d-3828-5f4f0129a4a6",
+  "name" : "image_position",
+  "display_width" : null,
+  "label" : "Image Position",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "default" : false
+}, {
+  "id" : "8c638084-42ff-a4d2-da59-dfb3480666e1",
+  "name" : "heading",
+  "display_width" : null,
+  "label" : "Lesson Title",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text",
+  "default" : "Example Lesson"
+}, {
+  "id" : "f7d33940-db3d-af9d-c918-a3a381067520",
+  "name" : "description",
+  "display_width" : null,
+  "label" : "Description",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text",
+  "default" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+}, {
+  "id" : "b8757c42-c7a6-826b-8617-1d760f6b5726",
+  "name" : "bullets",
+  "display_width" : null,
+  "label" : "Bullet Points",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "default" : "<ul>\n<li>Example Point 1</li>\n<li>Example Point 2</li>\n<li>Example Point 3</li>\n</ul>"
+}, {
+  "id" : "36e4d0bf-ee4e-a483-a9f2-f4a05e7899a4",
+  "name" : "time",
+  "display_width" : null,
+  "label" : "Time Range",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "20 - 30 minutes", "20 - 30 minutes" ], [ "30 - 45 minutes", "30 - 45 minutes" ], [ "1 hour", "1 hour" ], [ "1 - 1.5 hours", "1 - 1.5 hours" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "default" : "20 - 30 minutes"
+}, {
+  "id" : "6d39c502-5ae8-46e4-5c4e-535f55015579",
+  "name" : "link",
+  "display_width" : null,
+  "label" : "Link",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION", "PHONE_NUMBER", "WHATSAPP_NUMBER", "PAYMENT" ],
+  "show_advanced_rel_options" : false,
+  "type" : "link",
+  "default" : {
+    "url" : {
+      "content_id" : null,
+      "href" : "https://8thwall.com",
+      "type" : "EXTERNAL"
+    },
+    "open_in_new_tab" : false,
+    "no_follow" : false
+  }
+}, {
+  "id" : "5664d5fe-7d27-6673-5f77-7582af0c6371",
+  "name" : "link_text",
+  "display_width" : null,
+  "label" : "Bullet List",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "default" : "<ul>\n<li>Bullet List Item 1</li>\n<li>Bullet List Item 2</li>\n<li>Bullet List Item 3</li>\n</ul>"
+} ]

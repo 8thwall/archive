@@ -1,0 +1,25 @@
+---
+id: plane-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import PlaneGeometryTable from "../../../../gen/tables/PlaneGeometry.md"
+
+# 平面幾何学
+
+## 説明
+
+このコンポーネントは、エンティティのジオメトリを確立する。
+
+## プロパティ
+
+<PlaneGeometryTable />
+
+## 機能
+
+<ComponentFunctions
+    name="PlaneGeometry"
+    properties={{ width: 1, height: 1 }}
+    mutate={`カーソル.width += 1;
+    カーソル.height *= 2;
+    return false;`}/>

@@ -1,0 +1,87 @@
+---
+id: prefabs
+description: >-
+  Prefabs sind wiederverwendbare Sammlungen von Elementen, von denen Sie mehrere
+  Kopien erstellen können.
+---
+
+# Fertighäuser
+
+## Einführung
+
+{frontMatter.description} Sie werden in der Ausdehnungsdatei gespeichert, können aber nach Belieben an die Oberfläche gebracht werden. Außerdem gibt es eine praktische API für die Arbeit mit Prefabs im ECS. Prefabs in Studio haben die folgenden Eigenschaften:
+
+1. Vorgefertigte Komponenten können über Instanzen hinweg gemeinsam genutzt werden
+2. Vererbte Komponenten können auf Instanzbasis überschrieben werden
+3. Eine vorgefertigte Instanz kann Instanzen anderer vorgefertigter Objekte enthalten
+4. Prefabs sind zur Laufzeit zugänglich und veränderbar
+
+## Verwendung von Prefabs
+
+In Studio können Sie Prefabs schnell einrichten und anpassen, indem Sie mit der rechten Maustaste auf ein Element klicken oder es in die Registerkarte "Prefab" im Dateiverzeichnis unten links ziehen. Auf der Registerkarte "Voreinstellungen" können Sie Ihre Voreinstellung und ihre Komponenten einfach bearbeiten, ihre Hierarchie aktualisieren und Duplikate erstellen - so wie Sie auch mit Objekten in der Raumhierarchie arbeiten würden.
+
+Vorgefertigte Hierarchien werden auf die gleiche Weise erstellt wie Entitätshierarchien. Wenn Sie die Details Ihres Prefab in einer isolierten Ansicht visuell überprüfen und bearbeiten möchten, doppelklicken Sie einfach darauf oder klicken Sie mit der rechten Maustaste, um den Prefab-Editor zu öffnen, mit dem Sie Design-Bearbeitungen direkt an der Quelle vornehmen können. Aktualisierungen, die an der Quelle vorgenommen werden, sind automatisch in allen Instanzen des Prefab in der Szene in der Vorschau sichtbar.
+
+Bist du bereit, mit deinem neuen Prefab in deiner Szene zu arbeiten? Ziehen Sie das Prefab einfach per Drag & Drop in Ihr Szenenfenster oder in die Raumhierarchie, um eine Prefab-Instanz zu erstellen. Bei der Arbeit mit Prefab und ihren Instanzen gibt es zwei wichtige Konzepte zu beachten: **Vererbung** und **Überschreibungen**.
+
+### Vererbung
+
+Entitäten können Komponenten von vorgefertigten Elementen erben. Nachdem Sie eine Prefab-Instanz in Ihrem Raum hinzugefügt haben, werden alle Konfigurationen, die Sie später an der Prefab-Quelle vornehmen, automatisch an die Instanz "vererbt". Änderungen an der Voreinstellung zur Laufzeit werden auch auf die Voreinstellungsinstanzen angewendet. Vererbte Komponenten werden nur an einem Ort gespeichert und von allen Instanzen gemeinsam genutzt. Dies kann für statische Daten nützlich sein, die von mehreren Instanzen gemeinsam genutzt werden, wie z.B. Materialdaten, Texturen oder Meshes.
+
+:::info
+Die Physics Collider-Komponente ist zur Laufzeit nicht vererbbar.
+:::
+
+### Vererbung
+
+Wenn eine Instanz eine Komponente von einem Prefab erbt, kann sie mit für die Instanz spezifischen Komponentenwerten überschrieben werden. Um eine Komponente (z. B. Material, Animation, benutzerdefiniertes Komponentenskript usw.) außer Kraft zu setzen, fügen Sie sie einfach der Instanz hinzu oder ändern Sie sie. Wenn eine Komponente in einer Prefab-Instanz überschrieben wird, bleibt sie auch in Zukunft überschrieben.  Das bedeutet, dass künftige Änderungen, die Sie an derselben Komponente in ihrem Prefab-Quellcode vornehmen, nicht vererbt werden.
+
+#### Zurücksetzen von Überschreibungen
+
+Wenn Sie eine überschriebene Komponente wieder auf den geerbten Wert der Voreinstellung zurücksetzen möchten, können Sie mit der rechten Maustaste auf die Komponente im Inspektor klicken und "Voreinstellung zurücksetzen" wählen. Dadurch wird die Überschreibung entfernt und die Komponente wieder auf den ursprünglichen Wert der Voreinstellung zurückgesetzt.
+
+## Laufzeit-Instanzen
+
+Mit der Spiel-Engine von Studio können Sie Prefabs zur Laufzeit mit minimalem Code steuern. Sie können programmatisch neue Instanzen in Echtzeit auf der Grundlage vorhandener Prefabs erzeugen und Änderungen und Bearbeitungen von Prefab-Instanzen zur Laufzeit vornehmen. Sie können auch alle Unterinstanzen von Prefab-Instanzen zur Laufzeit abfragen, falls Sie Änderungen an verschiedenen Instanzen vornehmen müssen, die dynamisch erzeugt wurden.
+
+### Vorgefertigte Objekte instanziieren
+
+Erstellen Sie eine neue Instanz der Voreinstellung unter Verwendung eines Voreinstellungsnamens oder einer EID. Vorgefertigte Instanzen können wie jedes andere Entity verwendet werden. Bei einer Prefab-Instanz wird die Position bei der Instanzierung auf Null gesetzt.
+
+#### Verwendung von Prefab Name
+
+![Prefab Name](/images/studio/guides/prefabs/prefab-name.png)
+
+```ts
+ecs.registerComponent({
+  name: 'Spawn Prefab by Name',
+  stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+    ecs.defineState('default')
+      .initial()
+      .listen(eid, ecs.input.SCREEN_TOUCH_START, (e) => {
+        const newInstance = world.createEntity("Human")
+      })
+  },
+})
+```
+
+#### Vorgefertigte EID verwenden
+
+```ts
+ecs.registerComponent({
+  name: 'Spawn Prefab by EID',
+  schema: {
+    prefabToSpawn: ecs.eid,
+  },
+  stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+    ecs.defineState('default')
+      .initial()
+      .listen(eid, ecs.input.SCREEN_TOUCH_START, (e) => {
+        const {prefabToSpawn} = schemaAttribute.get(eid)
+
+        if (prefabToSpawn) {
+          const newInstance = world.createEntity(prefabToSpawn)
+      })
+  },
+})
+```

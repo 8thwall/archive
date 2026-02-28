@@ -1,0 +1,20 @@
+[ {
+  "picker" : "video",
+  "id" : "894b7a76-f579-27f1-8ff5-5fa8806a8d35",
+  "name" : "video",
+  "display_width" : null,
+  "label" : "Video",
+  "required" : false,
+  "locked" : false,
+  "type" : "file",
+  "default" : "https://7255816.fs1.hubspotusercontent-na1.net/hubfs/7255816/jumanji-vid.mp4"
+}, {
+  "id" : "67cec446-1788-fb64-ad34-3439b9405caa",
+  "name" : "text",
+  "display_width" : null,
+  "label" : "Experience Text",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "default" : "<span>Fans are immersed into the world of Jumanji with one of the first voice-activated AR experiences on the web. Saying “show me Jumanji” activates the virtual map, where users can visit surreal locations from the movie and watch as jungle animals run wild in detailed 3D scenes. The WebAR experience unlocks exclusive content, such as never-before-seen videos featuring the cast including Dwayne Johnson, Karen Gillan, Nick Jonas, and Jack Black. Fans are seamlessly directed to the ticket purchasing flow upon saying \"buy tickets.\"</span>"
+} ]

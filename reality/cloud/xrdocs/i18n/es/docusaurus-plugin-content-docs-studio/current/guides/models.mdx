@@ -1,0 +1,152 @@
+---
+id: models
+description: >-
+  Studio te permite integrar objetos 3D en tus proyectos a través del componente
+  Mesh, lo que facilita la creación de experiencias inmersivas e interactivas.
+  Puede añadir formas básicas utilizando las primitivas incorporadas o importar
+  modelos 3D personalizados.
+---
+
+# Modelos
+
+![models.png](/images/studio/models.png)
+
+## Introducción
+
+Studio admite varios formatos de modelos 3D para sus entidades, y cada entidad utiliza un tipo de modelo a la vez.
+Puede trabajar con primitivas sencillas para formas básicas, o importar paquetes GLB, FBX y GLTF cuando necesite representaciones más detalladas y de gama alta. El editor de activos integrado le permite modificar y ajustar sus modelos directamente en el motor, para que pueda iterar rápidamente sin cambiar de herramienta.
+
+:::note
+Aunque el componente de malla de Studio UI configura primitivas, mallas y splats gaussianos a través de una interfaz unificada, cada tipo utiliza un componente distinto mediante programación.
+:::
+
+## Primitivos {#primitives}
+
+Las primitivas se utilizan para representar volúmenes, objetos sencillos o como marcadores de posición para futuros activos del juego.
+Studio incluye varias primitivas integradas, como esferas, cajas y planos, que pueden personalizarse y colocarse rápidamente en el editor.
+Las primitivas tienen materiales que también pueden modificarse dinámicamente en tiempo de ejecución.
+
+![primitives.png](/images/studio/primitives.png)
+
+Están disponibles las siguientes primitivas incorporadas:
+
+| Tipo               | Atributos                    |
+| ------------------ | ---------------------------- |
+| Esfera             | `{radius}`                   |
+| Caja               | `{width, height, depth}`     |
+| Plano              | `{width, height}`            |
+| Cápsula            | `{radius, height}`           |
+| Cono               | `{radius, height}`           |
+| Cilindro           | `{radius, height}`           |
+| Poliedro           | `{radius}`                   |
+| Círculo            | `{radius}`                   |
+| Anillo             | `{innerRadius, outerRadius}` |
+| Torus              | `{radius, tubeRadius}`       |
+
+## Añadir una primitiva
+
+Se puede añadir un Modelo 3D a la entidad a través de la interfaz de Studio mediante el componente Malla, o en código. Añadirlos en Studio se hace a través del botón (+) en la Jerarquía o añadiendo geometría a un Componente Personalizado en la entidad.
+
+### Ejemplo
+
+```ts
+ecs.SphereGeometry.set(world, eid, {radius: 5})
+```
+
+## Componente GLTF
+
+### Formatos admitidos
+
+#### GLTF y GLB
+
+Los modelos GLTF y GLB son compatibles y resultan ideales cuando se trabaja con 3D en la web.
+
+#### Paquete de activos
+
+Aunque la mayoría de los GLB pueden arrastrarse y soltarse en el estudio, a veces los archivos GLTF requieren varias cargas.
+Para gestionar este proceso utilizamos un paquete de activos. Para cargar un nuevo activo en su proyecto, en la parte inferior del panel izquierdo seleccione la pestaña de archivo y haga clic en el icono más.
+Elige la opción de nuevo activo y, a continuación, arrastra y suelta todos tus archivos.
+
+![new-asset-bundle-option.png](/images/studio/new-asset-bundle-option.png)
+
+![new-asset-bundle.png](/images/studio/new-asset-bundle.png)
+
+#### FBX
+
+Sin embargo, 8th Wall Studio requiere que los modelos se conviertan a GLB después de cargarlos.
+**Asegúrate de que las texturas están incrustadas en el archivo FBX antes de convertirlo a GLB.**
+
+![fbx-to-glb-converter.png](/images/studio/fbx-to-glb-converter.png)
+
+### Establecer un modelo
+
+El siguiente ejemplo muestra cómo establecer un GLTF o GLB en una entidad en tiempo de ejecución.
+
+:::info
+Este método requiere que seleccione su modelo personalizado de las propiedades del componente, una vez que el componente se aplica a su entidad
+:::
+
+```ts
+import * as ecs from '@8thwall/ecs'
+
+ecs.registerComponent({
+    name: 'loaded-model',
+    schema: {
+        // @asset
+        model: ecs.string,
+    },
+    add: (world, component) => {
+        ecs.GltfModel.set(world, eid, {
+            url: component.schema.model,
+        })
+    }
+})
+```
+
+### Configuración de las propiedades del modelo
+
+#### Propiedades del modelo
+
+Ver propiedades [aquí](/api/studio/ecs/gltf-model).
+
+#### Ejemplo
+
+El siguiente ejemplo muestra cómo establecer un Modelo en una entidad en tiempo de ejecución.
+
+```ts
+import * as ecs from '@8thwall/ecs'
+
+ecs.registerComponent({
+    name: 'loaded-model',
+    schema: {
+        // @asset
+        model: ecs.string,
+    },
+    add: (world, component) => {
+        ecs.GltfModel.set(world, eid, {
+            url: component.schema.model,
+            animationClip: 'clip1',
+            loop: true,
+            paused: false,
+            time: 0,
+            timeScale: 1,
+        })
+    }
+})
+```
+
+## Modelos y física
+
+### Primitivos
+
+Los colisionadores representan entidades físicas en el paso de simulación, con atributos que afectan directamente a su comportamiento. La mayoría de las primitivas tienen formas de colisionador que coinciden con su volumen exacto, por lo que es sencillo crear una primitiva como un cubo y añadir interacciones físicas.
+
+### Modelos
+
+Puede generar un colisionador personalizado a partir de su modelo 3D que se aproxime a su forma y tamaño. Para obtener los mejores resultados, utilice la forma de colisionador más sencilla que se adapte a sus necesidades. La mayoría de las veces esto se puede hacer utilizando una primitiva en su lugar.
+
+:::danger
+La generación de colisionadores personalizados puede fallar debido a variaciones en la complejidad, el tamaño y la calidad del modelo. Si esto ocurre, utilice primitivas (una o varias) para aproximarse a la forma deseada, o exporte un archivo .glb limpio desde una herramienta de modelado 3D como Blender.
+:::
+
+Para más información, visite la guía de física [aquí](/studio/guides/physics/)

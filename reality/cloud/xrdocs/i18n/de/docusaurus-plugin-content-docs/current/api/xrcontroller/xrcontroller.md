@@ -1,0 +1,15 @@
+# XR8.XrController
+
+## Beschreibung {#description}
+
+`XrController` bietet 6DoF-Kamera-Tracking und Schnittstellen zur Konfiguration des Trackings.
+
+## Funktionen {#functions}
+
+| Funktion                                                        | Beschreibung                                                                                                                                                                                                                                                                                                                                                |
+| --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [configure](configure.md)                                       | Legt fest, welche Verarbeitung `XrController` durchführt (kann Auswirkungen auf die Leistung haben).                                                                                                                                                                                                                                                        |
+| [hitTest](hittest.md)                                           | Schätzen Sie die 3D-Position eines Punktes auf dem Kamerabild.                                                                                                                                                                                                                                                                                              |
+| [pipelineModule](pipelinemodule.md)                             | Erstellt ein Kamera-Pipelinemodul, das nach der Installierung Rückrufe empfängt, wenn die Kamera gestartet wurde, Ereignisse der Kameraprozessierung und andere Statusänderungen. Diese werden verwendet, um die Position der Kamera zu berechnen.                                                                                                          |
+| [recenter](recenter.md)                                         | Positioniert die Kamera auf den Ursprung / die Richtung, die durch updateCameraProjectionMatrix angegeben wurde, und startet die Verfolgung neu.                                                                                                                                                                                                            |
+| [updateCameraProjectionMatrix](updatecameraprojectionmatrix.md) | Setzen Sie die Anzeigegeometrie der Szene und die Startposition der Kamera in der Szene zurück. Die Anzeigegeometrie wird benötigt, um die Position von Objekten in der virtuellen Szene korrekt über ihre entsprechende Position im Kamerabild zu legen. Die Startposition gibt an, wo die Kamera zu Beginn einer Sitzung platziert und ausgerichtet wird. |

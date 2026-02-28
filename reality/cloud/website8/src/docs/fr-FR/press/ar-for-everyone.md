@@ -1,0 +1,9 @@
+---
+title: La réalité augmentée s’adresse à tous
+---
+
+Basée à Palo Alto, en Californie, l’entreprise 8th Wall a pour mission de rendre la réalité augmentée accessible à tous. 8th Wall est la plateforme de développement de réalité augmentée primée de Niantic Inc. et la pile technologique de vision par ordinateur qui permet de créer des sites de réalité augmentée interactifs sur le Web (WebAR) qui peuvent être consultés sur n’importe quel smartphone. Ne nécessite aucune application. Les expériences WebAR de 8th Wall peuvent être accessibles et utilisées par plus de 5 milliards de smartphones iOS et Android, ainsi que par des ordinateurs et des casques AR/VR/MR. Pour la première fois, les marques et les développeurs peuvent proposer aux utilisateurs des expériences de réalité augmentée telles que World Effects, Lightship VPS, Face Effects et Image Targets sur le site avec la même facilité que l’accès à une page Web dans le navigateur.
+
+Depuis sa première année complète en 2019, la plateforme 8th Wall a propulsé plus de 2 000 expériences commerciales pour des marques de premier plan dans des secteurs verticaux tels que le sport et le divertissement, les biens de grande consommation, la vente au détail, la mode et la beauté, l’automobile et plus encore. Les activations WebAR pilotées par 8th Wall ont démontré une réelle valeur commerciale, qu’il s’agisse de remporter des prix et de faire la une des journaux, d’engager des millions d’utilisateurs ou d’obtenir un retour sur investissement à chaque étape de l’entonnoir marketing, du temps d’attente à l’augmentation de l’achat.
+
+L’ensemble complet d’outils de 8th Wall, y compris le moteur RA et l’éditeur basé sur le cloud, fournit aux développeurs tout ce dont ils ont besoin pour réussir avec leur contenu WebAR, depuis le développement et les tests jusqu’à la distribution et la familiarisation.

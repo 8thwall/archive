@@ -1,0 +1,22 @@
+{
+  "version.label": {
+    "message": "Siguiente",
+    "description": "The label for version current"
+  },
+  "sidebar.accountSidebar.category.Getting Started": {
+    "message": "Primeros pasos",
+    "description": "The label for category Getting Started in sidebar accountSidebar"
+  },
+  "sidebar.accountSidebar.category.Account Settings": {
+    "message": "Configuración de la cuenta",
+    "description": "The label for category Account Settings in sidebar accountSidebar"
+  },
+  "sidebar.accountSidebar.category.Projects": {
+    "message": "Proyectos",
+    "description": "The label for category Projects in sidebar accountSidebar"
+  },
+  "sidebar.accountSidebar.category.Featured Projects": {
+    "message": "Proyectos destacados",
+    "description": "The label for category Featured Projects in sidebar accountSidebar"
+  }
+}

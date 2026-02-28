@@ -1,0 +1,57 @@
+---
+id: material
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Material
+
+## Beschreibung
+
+Diese Komponente erzeugt ein Material auf einem Objekt mit Geometrie.
+
+## Eigenschaften
+
+| Eigentum                | Typ     | Standard | Beschreibung                                                                                                                                                     |
+| ----------------------- | ------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| r                       | Nummer  | 0        | Wert des roten Kanals des Materials [0...255]                                                                                                                    |
+| g                       | Nummer  | 0        | Grüner Kanalwert des Materials [0...255]                                                                                                                         |
+| b                       | Nummer  | 0        | Wert des blauen Kanals des Materials [0...255]                                                                                                                   |
+| textureSrc              | String  | ""       | Die Quelle der Farbkarte, moduliert nach Farbe (falls eingestellt)                                                                                               |
+| Unebenheiten            | Nummer  | 0        | Wie rau das Material erscheint [0...1]                                                                                                                           |
+| roughnessMap            | String  | ""       | Grüner Kanal dieser Texturkarte Ressource die Rauheit, multipliziert mit der Rauheitszahl.                                                                       |
+| Metallizität            | Nummer  | 0        | Wie metallisch das Material erscheint [0...1]                                                                                                                    |
+| metalnessMap            | String  | ""       | Der blaue Kanal dieser Texturressource beeinflusst, wie metallisch das Material erscheint.                                                                       |
+| normalScale             | Nummer  | 0        | Wie stark die Normal Map (falls eingestellt) das Material beeinflusst [0...1]                                                                                    |
+| normalMap               | String  | ""       | Quelle der Normal Map der Textur.                                                                                                                                |
+| Opazität                | Nummer  | 0        | Gesamt-Alpha/Transparenz des Materials [0...1]                                                                                                                   |
+| opacityMap              | String  | ""       | Alpha/Transparenz, die über eine Texturressource abgebildet wird.                                                                                                |
+| emissiveIntensität      | Nummer  | 0        | Gesamtintensität der emittierenden Karte [0...1]                                                                                                                 |
+| emissiveMap             | String  | ""       | Die Emissionsstärke wird als Texturressource abgebildet. Moduliert durch Farbe und Intensität der Emission.                                                      |
+| emittierendR            | Nummer  | 0        | Rotkanal-Emissionsfarbe des Materials [0...255]                                                                                                                  |
+| emittierendG            | Nummer  | 0        | Emissionsfarbe des grünen Kanals des Materials [0...255]                                                                                                         |
+| emittierendB            | Nummer  | 0        | Blaukanal-Emissionsfarbe des Materials [0...255]                                                                                                                 |
+| Seite                   | String  | ""       | Welche Seiten von Flächen gerendert werden. Wählen Sie zwischen Vorderseite, Rückseite oder doppelt.                                                             |
+| Mischen                 | String  | ""       | Überblendung, die bei der Anzeige von Objekten mit diesem Material verwendet werden soll. Wählen Sie aus: keine, normal, additiv, subtraktiv und multiplizieren. |
+| WiederholungX           | Nummer  | 0        | Wie oft eine Textur auf der X-Achse in einem Material wiederholt wird.                                                                                           |
+| WiederholungY           | Nummer  | 0        | Wie oft eine Textur auf der Y-Achse in einem Material wiederholt wird.                                                                                           |
+| offsetX                 | Nummer  | 0        | Wie stark eine Textur über ein Material auf der X-Achse versetzt ist.                                                                                            |
+| offsetY                 | Nummer  | 0        | Wie stark eine Textur über ein Material auf der Y-Achse versetzt ist.                                                                                            |
+| depthTest               | boolean | wahr     | ob beim Rendern dieses Materials die Tiefe getestet werden soll                                                                                                  |
+| depthWrite              | boolean | wahr     | ob sich das Rendern dieses Materials auf den Tiefenpuffer auswirkt                                                                                               |
+| Drahtgitter             | boolean | falsch   | Geometrie als Drahtmodell rendern.                                                                                                                               |
+| forceTransparent        | boolean | falsch   | Ob der Alphakanal als transparent gerendert werden soll.                                                                                                         |
+
+## Funktionen
+
+<ComponentFunctions
+    name="Material"
+    properties={{
+        r: 255,
+        g: 0,
+        b: 0,
+    }}
+    mutate={`cursor.roughness = 0.8;
+    cursor.wireframe = true;
+    return false;`}
+/>

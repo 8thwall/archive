@@ -1,0 +1,329 @@
+---
+id: custom-components
+description: >-
+  Les composants personnalisés peuvent définir l'apparence visuelle, les
+  propriétés physiques, la gestion des entrées ou la logique de jeu
+  personnalisée.
+toc_max_heading_level: 5
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import EcsTypes from '/src/components/_ecs-types.mdx'
+
+# Composants personnalisés
+
+## Introduction
+
+{frontMatter.description}
+
+## Création d'un composant personnalisé
+
+Pour créer un composant personnalisé, procédez comme suit :
+
+1. Dans le navigateur de fichiers, cliquez sur le bouton plus (+).
+2. Cliquez sur "Nouveau fichier" → "Nouveau fichier de composant", et donnez-lui un nom (extension de fichier facultative).
+   1. Un nouveau fichier Component sera généré, TypeScript par défaut, dans votre projet.
+   2. Le nouveau fichier de composant comprendra le code de base nécessaire à l'enregistrement du composant personnalisé.
+
+## Enregistrement d'un composant personnalisé
+
+Le code suivant est un exemple de la façon dont un composant personnalisé nouvellement créé apparaîtra dans l'éditeur de code :
+
+### Exemple
+
+:::danger
+Évitez d'utiliser "debug-" comme préfixe pour les noms de composants. Les noms de composants commençant par "debug-" sont réservés à des fins de débogage interne et **ne fonctionneront pas correctement s'ils sont utilisés dans votre code**.
+:::
+
+```ts
+// Il s'agit d'un fichier de composant. Vous pouvez utiliser ce fichier pour définir un composant personnalisé pour votre projet.
+// Ce composant apparaîtra comme un composant personnalisé dans l'éditeur.
+
+import * as ecs from '@8thwall/ecs' // C'est ainsi que vous accédez à la bibliothèque ecs.
+
+ecs.registerComponent({
+  name : 'Custom Component',
+  // schema : {
+  // },
+  // schemaDefaults : {
+  // },
+  // data : {
+  // },
+  // add : (world, component) => {
+  // },
+  // tick : (world, component) => {
+  // },
+  // remove : (world, component) => {
+  // },
+  // stateMachine : ({world, eid, schemaAttribute, dataAttribute}) => {
+  // ecs.defineState('default').initial()
+  // },
+})
+```
+
+## Ajout de composants personnalisés à une entité
+
+L'exemple suivant montre comment ajouter un composant personnalisé à une entité existante.
+
+### Exemple
+
+:::tip
+Veillez à exporter le composant **avant** d'essayer de l'importer ou de l'utiliser où que ce soit.
+:::
+
+```tsx title="/custom-component.ts"
+import * as ecs from '@8thwall/ecs'
+
+const CustomComponent = ecs.registerComponent({
+  name : 'Custom Component',
+  schema : {
+    displayName: ecs.string
+  },
+  schemaDefaults : {
+    displayName: 'Unnamed'
+  },
+})
+
+export {CustomComponent}
+```
+
+```tsx title="/another-component.ts"
+import * as ecs from '@8thwall/ecs'
+import {CustomComponent} from './custom-component'
+
+ecs.registerComponent({
+  name : 'Another Custom Component',
+  stateMachine : ({world, eid, schemaAttribute, dataAttribute}) => {
+    ecs.defineState('default')
+      .initial()
+      .onEnter(() => {
+        const entity = world.createEntity()
+
+        CustomComponent.set(world, entity, {
+          displayName: 'Jini'
+        })
+      })
+  },
+})
+```
+
+## Fonctions
+
+Les fonctions des composants permettent d'effectuer différentes actions sur un composant et ses données en relation avec une entité.
+
+<ComponentFunctions
+    name="CylinderGeometry"
+    properties={{ radius: 1, height: 1 }}
+    mutate={`cursor.radius += 1 ;
+    cursor.height *= 2 ;
+    return false;`}
+/>
+
+## Schéma
+
+Un schéma est une liste de paires clé-valeur qui définit la structure d'un composant. La clé est le nom de la propriété et la valeur est un [type ECS](/api/studio/ecs/#types) qui spécifie le type de données que la propriété contiendra.
+
+<EcsTypes/>
+
+### Exemple
+
+L'exemple suivant montre le schéma d'un composant personnalisé.
+
+```ts
+schema : {
+  target : ecs.eid, // Référence unique de l'entité pour le PNJ (Entity ID)
+  speed : ecs.f32, // Vitesse de déplacement du PNJ (32-bit float)
+  strength : ecs.f64, // Niveau de force du PNJ (64-bit float)
+  level : ecs.i32, // Niveau de personnage du PNJ (entier 32 bits)
+  armor : ecs.ui8, // Indice d'armure du PNJ (0-255, entier 8 bits non signé)
+  experience : ecs.ui32, // Points d'expérience du PNJ (entier 32 bits non signé)
+  guildName : ecs.string, // Nom de la guilde à laquelle appartient le PNJ (chaîne de caractères). (Chaîne)
+  isHostile : ecs.boolean // Booléen indiquant si le PNJ est hostile au joueur (Booléen)
+}
+```
+
+```ts
+schemaDefaults : {
+  vitesse : 3.14,
+  force : 5.8,
+  niveau : 10,
+  armure : 255,
+  expérience : 12,
+  guildName : 'Niantic Crew'
+  isHostile : false
+}
+```
+
+### Champs personnalisés de l'éditeur
+
+L'affichage et la fonctionnalité de vos composants dans l'éditeur d'entités peuvent être personnalisés de différentes manières. Tout cela se fait à l'aide de commentaires dans le schéma où les champs sont marqués `// @`.
+
+#### Étiquettes
+
+Parfois, les étiquettes dans l'éditeur doivent être plus descriptives que leurs noms dans le code.
+
+```ts
+schema : {
+   // @label Foo
+   bar : ecs.eid,
+},
+```
+
+#### Références des actifs
+
+Si vous devez référencer un actif dans le projet.
+
+```ts
+schema : {
+   // @asset
+   yetiModel : ecs.string,
+}
+```
+
+#### Min & Max
+
+Si vous devez empêcher les valeurs de dépasser un certain montant lorsqu'elles sont modifiées dans l'interface.
+\*N'affecte pas les changements apportés à la variable au moment de l'exécution.
+
+```ts
+schema : {
+   // @min 0
+   // @max 128
+   goldCoins : ecs.i32,
+}
+```
+
+#### Conditions
+
+Les propriétés peuvent être paramétrées pour ne s'afficher qu'en fonction des valeurs d'autres propriétés.
+
+```ts
+schema : {
+   // 'from' ne s'affichera que si autoFrom est réglé sur false :
+   autoFrom : ecs.boolean,
+   // @condition autoFrom=false
+   from : ecs.f32,
+
+   // 'easingFunction' s'affichera si easeIn ou easeOut sont réglés :
+   easeIn : ecs.boolean,
+   easeOut : ecs.boolean,
+   // @condition easeIn=true|easeOut=true
+   easingFunction : ecs.string,
+
+   // 'targetX' ne s'affiche que si aucune cible n'est définie :
+   target : ecs.eid,
+   // @condition target=null
+   targetX : ecs.f32,
+}
+```
+
+#### Les énumérations
+
+Les propriétés des chaînes de caractères peuvent être limitées à une liste définie :
+
+```ts
+schema : {
+   // @enum Quadratique, Cubique, Quartique, Quintique, Sinusoïdale, Exponentielle
+   easingFunction : ecs.string,
+}
+```
+
+#### Groupes
+
+Il est possible de demander à certains groupes de biens de faire l'objet d'un traitement particulier dans l'éditeur. Les groupes sont configurés comme suit :
+
+- Le début et la fin du groupe sont marqués par // @group start … et // @group end
+- Les conditions peuvent être appliquées à l'ensemble du groupe avec // @group condition
+- Deux types de groupes sont actuellement pris en charge : vector3 et color
+
+##### Étiquettes
+
+Les étiquettes personnalisées peuvent toujours être utilisées pour des champs individuels :
+
+```ts
+schema : {
+   // @group start orient:vector3
+   // @label Pitch
+   orientPitch : ecs.f32,
+   // @label Yaw
+   orientYaw : ecs.f32,
+   // @label Roll
+   orientRoll : ecs.f32,
+   // @group end
+}
+```
+
+##### Vecteur3
+
+Les groupes de propriétés qui représentent des vecteurs 3D peuvent être indiqués comme suit :
+
+```ts
+schema : {
+ autoFrom : ecs.boolean,
+ // @group start from:vector3
+ // @group condition autoFrom=false
+ fromX : ecs.f32,
+ fromY : ecs.f32,
+ fromZ : ecs.f32,
+ // @group end
+}
+```
+
+##### Couleur
+
+Les couleurs peuvent être indiquées comme dans l'exemple suivant :
+
+```ts
+schema : {
+ // @group start background:color
+ bgRed : ecs.f32,
+ bgGreen : ecs.f32,
+ bgBlue : ecs.f32,
+ // @group end
+}
+```
+
+## Données
+
+Data est similaire à Schema, mais il y a deux différences notables.
+
+1. Les données ne peuvent **pas** être lues ou écrites en dehors du composant dans lequel elles sont définies.
+2. Les données n'ont **pas** de valeurs par défaut, mais elles peuvent être définies dans la méthode de cycle de vie "add" pour une fonctionnalité similaire.
+
+## Curseurs
+
+Un curseur est une référence au schéma d'un autre composant attaché à une entité. Vous pouvez l'assimiler à un pointeur ou à une poignée qui vous permet de lire ou d'écrire des propriétés.
+
+Cependant, il faut garder à l'esprit que
+
+- Les curseurs peuvent devenir périmés s'ils sont utilisés de manière asynchrone (par exemple, à l'intérieur d'un setTimeout ou de rappels différés). Utilisez plutôt schemaAttribute et dataAttribute dans ces cas.
+- Les curseurs permettent d'accéder en direct aux données d'une entité, ce qui signifie que la modification d'un curseur change directement la valeur dans le monde.
+
+## Méthodes de cycle de vie
+
+| Méthode    | Description                                                                                                                                                                             |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ajouter    | Appelé une fois lors de l'initialisation du composant. Utilisé pour mettre en place l'état initial et instancier les variables                                                          |
+| supprimer  | Appelé lorsque le composant est retiré de l'entité ou lorsque l'entité est détachée de la scène. Permet d'annuler toutes les modifications précédentes apportées à l'entité.            |
+| tique      | Appelé à chaque boucle de rendu ou à chaque tic de la scène. Utilisé pour les changements ou les contrôles continus.                                                                    |
+
+### Paramètres
+
+| Propriété  | Type                                  | Description                         |
+| ---------- | ------------------------------------- | ----------------------------------- |
+| monde      | [Monde](/api/studio/world)            | Référence au monde.                 |
+| composante | [ComponentObject](#componentobject)   | Référence au composant actuel.      |
+
+### ComponentObject
+
+:::warning
+Utilisez schemaAttribute ou dataAttribute au lieu des propriétés eid, schema ou data dans des contextes asynchrones tels que les temporisateurs ou les gestionnaires d'événements.
+:::
+
+| Propriété          | Type             | Description                                                         |
+| ------------------ | ---------------- | ------------------------------------------------------------------- |
+| eid                | eid              | L'ID de l'entité du composant actuel                                |
+| schéma             | Curseur          | Référence au schéma de l'entité actuelle                            |
+| schemaAttribute    | ComponentObject  | Référence au schéma du composant actuel dans World Scope.           |
+| données            | Curseur          | Référence aux données de l'entité actuelle                          |
+| dataAttribute      | ComponentObject  | Référence aux données de la composante actuelle dans World Scope.   |

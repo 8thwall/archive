@@ -1,0 +1,61 @@
+
+  @use '../styles/brand-colors';
+  @use '../styles/constants';
+  
+  .pricingToggleBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5em;
+    margin: 1em 0 2em;
+  }
+
+  .pricingToggleContainer {
+    position: relative;
+    display: flex;
+    color: brand-colors.$gray4;
+    border: 1px solid brand-colors.$gray2;
+    background-color: brand-colors.$white;
+    cursor: pointer;
+    border-radius: 2em;
+    margin: 0;
+    width: 20em;
+    @media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+      width: 100%;
+      max-width: 20em;
+    }
+  }
+
+  .pricingToggleInput {
+    display: none;
+    &:checked + .pricingToggle {
+      transform: translateX(100%)
+    }
+  }
+
+  .pricingToggle {
+    position: absolute;
+    border: 1px solid brand-colors.$brand-purple;
+    border-radius: 2em;
+    height: 100%;
+    width: 50%;
+    transition: transform .3s;
+  }
+
+  .options {
+    padding: 0.8em;
+    width: 50%;
+    text-align: center;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  .optionSelected {
+    color: brand-colors.$brand-purple;
+  }
+
+  .savePercentText {
+    b {
+      color: brand-colors.$brand-purple;
+    }
+  }

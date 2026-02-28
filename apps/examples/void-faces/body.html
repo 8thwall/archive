@@ -1,0 +1,246 @@
+<!-- Copyright (c) 2020 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene 
+  xrextras-almost-there
+  xrextras-loading
+  xrextras-runtime-error
+  xrface="mirroredDisplay: true; meshGeometry: face; cameraDirection: front; allowedDevices: any">
+  
+  <a-camera position="0 1 2"></a-camera>
+
+  <!-- OBJECT 1 -->
+  
+  <a-entity
+    id="object-1"
+    void-face-translate="offset: 0; startOrder: first"
+    position="0 -5 0"
+    animation="
+    startEvents: first;
+    property: position;
+    from: 0 -4 0;
+    to: 0 3 0; 
+    loop: false;
+    easing: linear;
+    dur: 20000">
+    
+    <a-entity 
+    id="face-parent"
+    position="0 1.5 -1"
+    animation="
+    property: rotation;
+    to: 0 360 0; 
+    loop: true;
+    dir: reverse;
+    easing: linear;
+    dur: 10000">
+        
+      <xrextras-face-mesh 
+        position="0 0 0.25"
+        rotation="0 180 0"
+        material="
+          shader: flat-disco;
+          random: -0.3;
+          side: double"
+      ></xrextras-face-mesh>
+      
+      <xrextras-face-mesh 
+        position="0 0 -0.25"
+        material="
+          shader: flat-disco;
+          random: 0.3;
+          side: double"
+      ></xrextras-face-mesh>
+    
+    </a-entity>
+    
+    <a-dodecahedron 
+      position="0 1.25 -1" 
+      scale="0.35 0.35 0.35"
+      animation="
+        property: rotation;
+        to: 0 360 0; 
+        loop: true;
+        easing: linear;
+        dur: 10000"
+    ></a-dodecahedron>
+    
+  </a-entity>
+  
+  <!-- OBJECT 2 -->
+  
+  <a-entity 
+    id="object-2"
+    void-face-translate="offset: 5000; startOrder: second"
+    position="0 -5 0"
+    animation="
+    startEvents: second;
+    property: position;
+    from: 0 -4 0;
+    to: 0 3 0; 
+    loop: false;
+    easing: linear;
+    dur: 20000">
+    
+    <a-entity 
+    id="face-parent"
+    position="0 1.5 -1"
+    animation="
+    property: rotation;
+    to: 0 360 0; 
+    loop: true;
+    easing: linear;
+    dur: 10000">
+        
+      <xrextras-face-mesh 
+        position="0 0 0.25"
+        rotation="0 180 0"
+        material="
+          shader: flat-disco;
+          random: -0.2;
+          side: double"
+      ></xrextras-face-mesh>
+      
+      <xrextras-face-mesh 
+        position="0 0 -0.25"
+        material="
+          shader: flat-disco;
+          random: 0.2;
+          side: double"
+      ></xrextras-face-mesh>
+    
+    </a-entity>
+    
+    <a-octahedron 
+      position="0 1.25 -1" 
+      scale="0.35 0.35 0.35"
+      animation="
+        property: rotation;
+        to: 0 360 0; 
+        loop: true;
+        easing: linear;
+        dir: reverse;
+        dur: 10000"
+    ></a-octahedron>
+    
+  </a-entity>
+  
+ <!-- OBJECT 3 -->
+  
+  <a-entity 
+    id="object-3"
+    void-face-translate="offset: 10000; startOrder: third"
+    position="0 -5 0"
+    animation="
+    startEvents: third;
+    property: position;
+    from: 0 -4 0;
+    to: 0 3 0; 
+    loop: false;
+    easing: linear;
+    dur: 20000">
+    
+    <a-entity 
+    id="face-parent"
+    position="0 1.5 -1"
+    animation="
+    property: rotation;
+    to: 0 360 0; 
+    loop: true;
+    dir: reverse;
+    easing: linear;
+    dur: 10000">
+        
+      <xrextras-face-mesh 
+        position="0 0 0.25"
+        rotation="0 180 0"
+        material="
+          shader: flat-disco;
+          random: -0.2;
+          side: double"
+      ></xrextras-face-mesh>
+      
+      <xrextras-face-mesh 
+        position="0 0 -0.25"
+        material="
+          shader: flat-disco;
+          random: 0.2;
+          side: double"
+      ></xrextras-face-mesh>
+    
+    </a-entity>
+    
+    <a-icosahedron
+      position="0 1.25 -1" 
+      scale="0.35 0.35 0.35"
+      animation="
+        property: rotation;
+        to: 0 360 0; 
+        loop: true;
+        easing: linear;
+        dur: 10000"
+    ></a-icosahedron>
+    
+  </a-entity>
+  
+ <!-- OBJECT 4 -->
+  
+  <a-entity 
+    id="object-4"
+    void-face-translate="offset: 15000; startOrder: third"
+    position="0 -5 0"
+    animation="
+    startEvents: third;
+    property: position;
+    from: 0 -4 0;
+    to: 0 3 0; 
+    loop: false;
+    easing: linear;
+    dur: 20000">
+    
+    <a-entity 
+    id="face-parent"
+    position="0 1.5 -1"
+    animation="
+    property: rotation;
+    to: 0 360 0; 
+    loop: true;
+    easing: linear;
+    dur: 10000">
+        
+      <xrextras-face-mesh 
+        position="0 0 0.25"
+        rotation="0 180 0"
+        material="
+          shader: flat-disco;
+          random: -0.2;
+          side: double"
+      ></xrextras-face-mesh>
+      
+      <xrextras-face-mesh 
+        position="0 0 -0.25"
+        material="
+          shader: flat-disco;
+          random: 0.2;
+          side: double"
+      ></xrextras-face-mesh>
+    
+    </a-entity>
+    
+    <a-box 
+      position="0 1.25 -1" 
+      scale="0.5 0.5 0.5"
+      animation="
+        property: rotation;
+        dir: reverse;
+        to: 0 360 0; 
+        loop: true;
+        easing: linear;
+        dur: 10000"
+    ></a-box>
+    
+  </a-entity>
+ 
+ 
+  <a-sky material="shader: flat-disco; random: 1;"></a-sky>
+</a-scene>

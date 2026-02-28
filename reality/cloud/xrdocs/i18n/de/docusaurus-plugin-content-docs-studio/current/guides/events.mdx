@@ -1,0 +1,174 @@
+---
+id: events
+description: >-
+  Ereignisse sind die Art und Weise, wie Entitäten über ein flexibles Zuhörer-
+  und Versandsystem miteinander kommunizieren können.
+---
+
+# Veranstaltungen
+
+## Einführung
+
+{frontMatter.description}
+
+## Ereignis-Listener
+
+##### Hörer {#listener}
+
+| Eigentum       | Typ     | Beschreibung                                    |
+| -------------- | ------- | ----------------------------------------------- |
+| Ziel           | eid     | Entität, bei der das Ereignis ausgelöst wurde.  |
+| currentTarget  | eid     | Entität, bei der das Ereignis abgehört wurde.   |
+| Name           | String  | Name der Veranstaltung.                         |
+| Daten          | jede    | Ereignisbezogene Daten                          |
+
+### Ereignis-Listener erstellen
+
+#### addListener
+
+```ts
+world.events.addListener(target, name, listener)
+```
+
+##### Parameter
+
+:::tip
+Es ist möglich, globale Ereignis-Listener zu erstellen, indem man `world.events.globalId` als Ziel verwendet.
+:::
+
+| Eigentum | Typ                   | Beschreibung                                                            |
+| -------- | --------------------- | ----------------------------------------------------------------------- |
+| Ziel     | eid                   | Verweis auf die Zielentität.                                            |
+| Name     | String                | Name des Ereignisses, nach dem gesucht werden soll.                     |
+| Hörer    | [Listener](#listener) | Die Rückruf-Funktion, wenn ein Ereignis ausgelöst wird                  |
+
+### Ereignisbehandler erstellen
+
+Beim Hinzufügen von Ereignis-Listenern zu Entitäten ist es wichtig, die Handler korrekt einzurichten, um sicherzustellen, dass sie wie vorgesehen funktionieren, insbesondere wenn Komponenten zu mehreren Entitäten hinzugefügt werden. Die unsachgemäße Erstellung von Handlern kann zu veralteten Referenzen und unerwartetem Verhalten führen.
+
+Angenommen, Sie erstellen einen Handler für eine NPC-Entität, der auf ein beschädigtes Ereignis wartet. Der Handler sollte einige Schema- und Datenwerte aktualisieren, wenn das Ereignis eintritt.
+
+#### Falsches Beispiel
+
+<div class="code-invalid">
+
+```ts
+import * as ecs from '@8thwall/ecs'
+import { addCleanup, doCleanup } from './cleanup'
+
+ecs.registerComponent({
+  name: 'npc',
+  schema: {
+    isInjured: ecs.boolean,
+  },
+  data: {
+    bpm: ecs.f32,
+  },
+  add: (world, component) => {
+    // Falsche Handler-Erstellung
+    const damagedHandler = (e) => {
+      component.schema.isInjured = true
+      component.data.bpm += 30
+    }
+    world.events.addListener(component.eid, 'damaged', damagedHandler)
+
+    const cleanup = () => {
+      world.events.removeListener(component.eid, 'damaged', damagedHandler)
+    }
+    addCleanup(component, cleanup)
+  },
+  remove: (world, component) => {
+    doCleanup(component)
+  },
+})
+```
+
+</div>
+
+In diesem Beispiel:
+
+- Der Handler damagedHandler verweist direkt auf `component.schema` und `component.data`.
+- Wenn die Komponente zu mehreren Entitäten hinzugefügt wird, wird der Komponentenverweis innerhalb des Handlers veraltet.
+- Dies kann dazu führen, dass der Handler mit falschen Daten arbeitet, was zu Fehlern führt.
+
+#### Richtiges Beispiel
+
+Um sicherzustellen, dass der Handler mit den korrekten Entitätsdaten arbeitet, übergeben Sie das `dataAttribute` und das `schemaAttribute` der Komponente an den Handler und verwenden Sie diese, um die Cursor innerhalb des Handlers zu holen.
+
+<div class="code-valid">
+
+```ts
+import * as ecs from '@8thwall/ecs'
+import { addCleanup, doCleanup } from './cleanup'
+
+// Funktion zum Erstellen des beschädigten Handlers
+const createDamagedHandler = (dataAttribute, schemaAttribute) => (e) => {
+  const dataCursor = dataAttribute.cursor(e.target)
+  const schemaCursor = schemaAttribute.cursor(e.target)
+  schemaCursor.isInjured = true
+  dataCursor.bpm += 30
+}
+
+ecs.registerComponent({
+  name: 'npc',
+  schema: {
+    isInjured: ecs.boolean,
+  },
+  data: {
+    bpm: ecs.f32,
+  },
+  add: (world, component) => {
+    // Korrekte Erstellung des Handlers
+    const damagedHandler = createDamagedHandler(component.dataAttribute, component.schemaAttribute)
+    world.events.addListener(component.eid, 'damaged', damagedHandler)
+
+    const cleanup = () => {
+      world.events.removeListener(component.eid, 'damaged', damagedHandler)
+    }
+    addCleanup(component, cleanup)
+  },
+  remove: (world, component) => {
+    doCleanup(component)
+  },
+})
+```
+
+</div>
+
+### Entfernen von Ereignis-Listenern
+
+#### removeListener
+
+```ts
+world.events.removeListener(target, name, listener)
+```
+
+##### Parameter
+
+| Eigentum | Typ                   | Beschreibung                                                            |
+| -------- | --------------------- | ----------------------------------------------------------------------- |
+| Ziel     | eid                   | Verweis auf die Zielentität.                                            |
+| Name     | String                | Name des Ereignisses, nach dem gesucht werden soll.                     |
+| Hörer    | [Listener](#listener) | Die Rückruf-Funktion, wenn ein Ereignis ausgelöst wird                  |
+
+## Ereignis-Disponenten
+
+### Versenden von benutzerdefinierten Ereignissen
+
+#### Versenden
+
+:::info
+Wenn ein Ereignis auf einer Entität eintritt, werden zuerst die Handler auf dieser Entität, dann auf der übergeordneten Entität und schließlich auf allen anderen Vorfahren ausgeführt.
+:::
+
+```ts
+world.events.dispatch(eidOfEnemy, "attack", {damage: 10})
+```
+
+## Hörer aufräumen
+
+:::danger
+Stellen Sie immer sicher, dass Listener ordnungsgemäß entfernt werden, um Speicherlecks zu vermeiden.
+:::
+
+Wenn eine Komponente gelöscht wird, werden ihre Ereignis-Listener nicht automatisch bereinigt, so dass Sie sie manuell entfernen müssen.

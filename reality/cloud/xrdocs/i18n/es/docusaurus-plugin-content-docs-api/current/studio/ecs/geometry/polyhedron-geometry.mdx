@@ -1,0 +1,25 @@
+---
+id: polyhedron-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import PolyhedronGeometryTable from "../../../../gen/tables/PolyhedronGeometry.md"
+
+# PoliedroGeometría
+
+## Descripción
+
+Este componente establece la geometría de una entidad.
+
+## Propiedades
+
+<PolyhedronGeometryTable />
+
+## Funciones
+
+<ComponentFunctions
+    name="PoliedroGeometría"
+    properties={{ radius: 1 }}
+    mutate={`cursor.radio += 1;
+    return false;`}
+/>

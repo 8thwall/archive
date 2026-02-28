@@ -1,0 +1,24 @@
+{
+  "projectUrl": "https://www.intothescaniverse.com/",
+  "shell": "quest",
+  "android": {
+    "packageName": "com.the8thwall.intothescaniverse",
+    "minSdkVersion": 32,
+    "targetSdkVersion": 32,
+    "resourceDir": "res/",
+    "oculusSplashScreen": "res/mipmap-xxxhdpi/ic_launcher.png"
+  },
+  "appInfo": {
+    "bundleIdentifier": "com.the8thwall.intothescaniverse",
+    "appDisplayName": "Into the Scaniverse",
+    "naeBuildMode": "static",
+    "workspace": "niantic",
+    "appName": "intothescaniverse",
+    "refHead": "production"
+  },
+  "appUuid": "880ee632-3a77-41b3-a67b-d812ab56a4b0",
+  "exportType": "apk",
+  "iconId": "intothescaniverse",
+  "requestRef": "lucas-default",
+  "repoId": "cc.7.app.880ee632-3a77-41b3-a67b-d812ab56a4b0"
+}

@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "module": "esnext",
+    "target": "es2020",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@nia/*": [
+        "../../../*"
+      ],
+    }
+  },
+  "types": [
+    "node",
+  ],
+  "include": [
+    "./",
+  ],
+  "exclude": [
+    "./local",
+  ]
+}

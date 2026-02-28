@@ -1,0 +1,108 @@
+---
+id: image-targets
+description: >-
+  Les cibles d'image vous permettent de définir une forme plate, cylindrique ou
+  conique comme déclencheur ou marqueur pour superposer un contenu AR.
+---
+
+# Cibles d'image
+
+## Introduction
+
+{frontMatter.description}
+
+<br></br>
+<br></br>
+
+![](/images/studio/image-target-intro.gif)
+
+---
+
+## Activation des cibles d'image
+
+Pour activer les cibles d'image dans votre projet, vous devez utiliser une caméra World.
+
+1. Sélectionnez la **Caméra** dans votre scène  
+2. Fixer le **Type** à `Monde`
+
+```mdx-code-block
+<img src={require('/images/studio/image-target-enable.png').default} width="400px"/>
+```
+
+---
+
+## Ajout de cibles d'images
+
+### Télécharger l'image cible
+
+Localisez le panneau **Image Targets** en bas à gauche de l'interface Studio. Cliquez sur le **( + )** pour ajouter une cible d'image plate, cylindrique ou conique.
+
+```mdx-code-block
+<img src={require('/images/studio/image-target-upload.png').default} width="400px"/>
+```
+
+### Configuration de la cible d'image
+
+Personnaliser la région de suivi et les métadonnées de la cible de l'image.
+
+```mdx-code-block
+<img src={require('/images/studio/image-target-config.png').default} width="400px"/>
+```
+
+### Test de la cible d'image
+
+Scannez le code QR pour tester la qualité et le suivi de l'image cible téléchargée.
+
+```mdx-code-block
+<img src={require('/images/studio/image-target-test.png').default} width="400px"/>
+```
+
+### Ajout de l'entité Image Target
+
+Vous pouvez ajouter une cible d'image à votre scène en créant une entité **Cible d'image**.\
+Pour ce faire, cliquez sur **( + )** dans la hiérarchie de la scène et sélectionnez **Image Target**.\
+Pour ce faire, cliquez sur **( + )** dans la hiérarchie de la scène et sélectionnez **Image Target**.
+
+```mdx-code-block
+<img src={require('/images/studio/image-target-add.png').default} width="400px"/>
+```
+
+### Lien vers la cible de l'image
+
+Lier l'entité image cible à une image cible téléchargée.
+
+```mdx-code-block
+<img src={require('/images/studio/image-target-link.png').default} width="400px"/>
+```
+
+---
+
+## Utilisation des cibles d'image
+
+Lorsque vous ajoutez une cible d'image à votre projet, un maillage de cible d'image apparaît afin que vous puissiez aligner et positionner d'autres contenus 3D par rapport à la cible d'image.
+
+---
+
+## Simulation de cibles d'images
+
+Le **Simulateur** de Studio vous permet de tester votre expérience en matière de cible d'image à distance en simulant des mouvements à l'aide des commandes **WASD**.
+
+### Utilisation du simulateur avec des cibles d'image
+
+Pour simuler le mouvement et le placement du contenu autour d'une cible d'image ajoutée à votre scène :
+
+1. Assurez-vous que les **Paramètres de l'appareil photo** sont réglés sur **Monde**.
+2. Appuyez sur **Jouer** pour ouvrir le simulateur.
+3. Utilisez les **options de l'environnement du simulateur** (sélecteur en bas à gauche) pour trouver la cible d'image souhaitée.
+4. Utilisez les **raccourcis clavier WASD** pour simuler les mouvements. \*(Vous devez d'abord cliquer sur le panneau du simulateur avant d'utiliser le clavier)
+
+**Touches de mouvement:**
+
+- `W` = Avant  
+- `A` = Gauche  
+- `S` = Retour  
+- `D` = Droite  
+- `Q` = Haut  
+- `E` = En bas
+
+Le fait de se déplacer autour de la cible avec la touche WASD déclenche l'événement **Image trouvée** pour simuler un suivi réussi de la cible.

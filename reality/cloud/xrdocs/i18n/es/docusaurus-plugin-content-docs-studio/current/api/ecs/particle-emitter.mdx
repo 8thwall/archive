@@ -1,0 +1,73 @@
+---
+id: particle-emitter
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# ParticleEmitter
+
+## Descripción
+
+This component makes an entity emit particles.
+
+## Propiedades
+
+| Propiedad           | Tipo         | Por defecto   | Descripción                                                             |
+| ------------------- | ------------ | ------------- | ----------------------------------------------------------------------- |
+| stopped             | boolean      | false         | Playback state of the emitter                                           |
+| emitterLife         | number       | 0             | The lifetime of the emitter in seconds                                  |
+| particlesPerShot    | integer      | 20            | Particles per emission                                                  |
+| emitDelay           | number       | 0,1           | The time between particle emissions                                     |
+| minimumLifespan     | number       | 1             | Minimum lifetime range for each particle                                |
+| maximumLifespan     | number       | 1             | Maximum lifetime range for each particle                                |
+| mass                | number       | 1             | Mass of each particle                                                   |
+| gravity             | number       | 0.2           | Gravity factor of each particle                                         |
+| escala              | number       | 0.2           | Uniform scale of each particle                                          |
+| forceX              | number       | 5             | Force applied to each particle in the X direction                       |
+| forceY              | number       | 12            | Force applied to each particle in the Y direction                       |
+| forceZ              | number       | 5             | Force applied to each particle in the Z direction                       |
+| spread              | number       | 360           | Area and direction that each particles spawns relative to its origin    |
+| radialVelocity      | number       | 5             | Amount of radial velocity applied to each particle                      |
+| spawnAreaType       | string       | 'point'       | Supported types are: 'point', 'box' and 'sphere'                        |
+| spawnAreaWidth      | number       | 0             | Width of the spawn area box (Box only)                                  |
+| spawnAreaHeight     | number       | 0             | Height of the spawn area box (Box only)                                 |
+| spawnAreaDepth      | number       | 0             | Depth of the spawn area box (Box only)                                  |
+| spawnAreaRadius     | number       | 0             | Radius of the spawn area sphere (Sphere only)                           |
+| boundingZoneType    | string       | 'none'        | Supported types are: 'none', 'box', 'sphere'                            |
+| boundingZoneWidth   | number       | 0             | Width of the bounding zone (Box only)                                   |
+| boundingZoneHeight  | number       | 0             | Height of the bounding zone (Box only)                                  |
+| boundingZoneDepth   | number       | 0             | Depth of the bounding zone (Box only)                                   |
+| boundingZoneRadius  | number       | 0             | Radius of the bounding zone (Sphere only)                               |
+| resourceType        | string       | 'sprite'      | Supported types are: 'sprite', and 'model'                              |
+| resourceUrl         | string (URL) | ''            | URL of the resource                                                     |
+| blendingMode        | string       | 'none'        | Supported types are: 'none', 'normal', 'add', 'multiply' and 'subtract' |
+| animateColor        | boolean      | false         | Determines if color should be animated                                  |
+| colorStart          | string (Hex) | undefined     | The starting color of each particle                                     |
+| colorEnd            | string (Hex) | undefined     | The ending color of each particle                                       |
+| randomDrift         | boolean      | false         | Enable randomized drifting for each particle                            |
+| randomDriftRange    | number       | undefined     | Determines the randomized drift range and speed of each particle        |
+| collisions          | boolean      | false         | Determines if particles should respond to physics collisions            |
+
+## Funciones
+
+<ComponentFunctions
+    name="ParticleEmitter"
+    properties={{
+        stopped: false,
+        emitterLife: 0,
+        particlesPerShot: 20,
+        emitDelay: 0.1,
+        minimumLifespan: 1,
+        maximumLifespan: 1,
+        mass: 1,
+        gravity: 0.2,
+        scale: 0.2,
+        forceX: 5,
+        forceY: 12,
+        forceZ: 5,
+        spread: 360,
+    }}
+    mutate={`cursor.emitDelay = 0.05;
+    cursor.particlesPerShot = 50;
+    return false;`}
+/>

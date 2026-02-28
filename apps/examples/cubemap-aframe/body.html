@@ -1,0 +1,74 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene
+  xrextras-gesture-detector
+  xrextras-tap-recenter
+  responsive-immersive
+  landing-page="mediaSrc: https://www.youtube.com/watch?v=H-f40M2Ap_g"
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="colorManagement: true"
+  xrweb="allowedDevices: any">
+
+  <a-assets>
+    <a-asset-item id="ballModel" src="./assets/jini-ball.glb"></a-asset-item>
+  </a-assets>
+
+  <a-camera
+    id="camera"
+    position="0 8 8">
+  </a-camera>
+  
+  <a-entity
+    xr-light
+    light="type: directional;
+       castShadow: true;
+       shadowMapHeight:2048;
+       shadowMapWidth:2048;
+       shadowCameraTop: 10;
+       target: #group;
+       shadowRadius: 10"
+    xrextras-attach="target: group; offset: 0 15 0;"
+    shadow>
+  </a-entity>
+  
+  <a-light
+    xr-light
+    type="ambient">
+  </a-light>
+
+  <a-entity 
+    id="group"
+    xrextras-one-finger-rotate
+    xrextras-pinch-scale="max: 1.3">
+      
+    <a-entity
+      id="static-ball"
+      gltf-model="#ballModel"
+      position="-2 0 0"
+      scale="10 10 10"
+      reflections="type: static"
+      shadow>
+    </a-entity>
+  
+    <a-entity
+      id="realtime-ball"
+      gltf-model="#ballModel"
+      position="2 0 0"
+      scale="10 10 10"
+      shadow
+      reflections="type: static">
+      <!-- We update reflections to "type: realtime" depending on the OS. This is done to prevent rendering issues seen on the meta quest pro-->
+    </a-entity>
+  </a-entity>
+  
+  <a-plane
+    id="ground"
+    rotation="-90 0 0"
+    width="100"
+    height="100"
+    material="shader: shadow"
+    shadow
+  ></a-plane>
+</a-scene>

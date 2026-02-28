@@ -1,0 +1,37 @@
+---
+id: video-controls
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import VideoControlsTable from "../../../gen/tables/VideoControls.md"
+
+# ビデオコントロール
+
+## 説明
+
+このコンポーネントにより、エンティティはマテリアルに適用されたテクスチャのビデオ再生を制御できる。 これは、Studioコンフィギュレーターでビデオが設定されると自動的に追加されます。 プログラムでビデオを追加する場合、再生コントロールを有効にするには、このコンポーネントを手動で追加する必要がある。
+
+## プロパティ
+
+<VideoControlsTable />
+
+## 機能
+
+<ComponentFunctions
+    name="VideoControls"
+    properties={{
+        url: "./assets/video.mp4",
+        volume: 1,
+        loop: false,
+        paused: false,
+        speed: 1,
+        positional: false,
+        refDistance: 1,
+        distanceModel: "inverse",
+        rolloffFactor: 1,
+        maxDistance: 10000
+    }}
+    mutate={`cursor.volume = 0.5;
+    cursor.loop = true;
+    return false;`}
+/>

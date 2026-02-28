@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "build": "npx 8w-build",
+    "serve": "npx 8w-build --serve",
+    "local:build": "./bootstrap.sh && npm run build",
+    "local:serve": "./bootstrap.sh && npm run serve"
+  },
+  "dependencies": {
+    "@8thwall/build": "file:../ecs-build/8thwall-build-0.1.0.tgz"
+  }
+}

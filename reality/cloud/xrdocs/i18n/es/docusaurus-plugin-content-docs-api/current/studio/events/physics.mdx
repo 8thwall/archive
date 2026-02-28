@@ -1,0 +1,49 @@
+---
+id: physics
+---
+
+import {EventExample} from '@site/src/components/event-example'
+
+# Eventos de Física
+
+## Eventos
+
+### EVENTO_INICIO_COLISIÓN
+
+Se emite cuando la entidad ha empezado a colisionar con otra entidad.
+
+#### Propiedades
+
+| Propiedad | Tipo | Descripción                        |
+| --------- | ---- | ---------------------------------- |
+| otro      | eid  | El eid de la entidad que colisiona |
+
+#### Ejemplo
+
+<EventExample ns="ecs.physics" event="COLLISION_START_EVENT" callbackBody={`console.log('Collided with', event.data.other)`} />
+
+### EVENTO_FINAL_COLISIÓN
+
+Se emite cuando la entidad ha dejado de colisionar con otra entidad.
+
+#### Propiedades
+
+| Propiedad | Tipo | Descripción                        |
+| --------- | ---- | ---------------------------------- |
+| otro      | eid  | El eid de la entidad que colisiona |
+
+#### Ejemplo
+
+<EventExample ns="ecs.physics" event="COLLISION_END_EVENT" callbackBody={`console.log('Stopped colliding with', event.data.other)`} />
+
+### UPDATE_EVENT
+
+Emitido en el [world.events.globalId](/api/studio/world/events/#properties) inmediatamente después de la actualización de la física antes de la renderización.
+
+#### Propiedades
+
+Ninguno.
+
+#### Ejemplo
+
+<EventExample ns="ecs.physics" event="UPDATE_EVENT" target="world.events.globalId" hasPayload={false} callbackBody={`console.log('Physics update')`} />

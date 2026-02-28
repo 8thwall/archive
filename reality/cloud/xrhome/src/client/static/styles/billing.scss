@@ -1,0 +1,207 @@
+@import 'settings';
+
+.auto-renew-status {
+  margin-top: 1em;
+  color: $text-color;
+  display: inline-block;
+  font-family: 'Nunito', sans-serif !important;
+
+  i.icon {
+    color: $brand-purple;
+  }
+
+  a {
+    color: $brand-black !important;
+    font-weight: normal !important;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+.remove-license-text {
+  min-width: 20em;
+
+  a {
+    font-weight: bold !important;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+// Manage Plans
+%plan-container {
+  padding: 2em !important;
+  border-radius: 9px;
+  min-width: 400px;
+
+  @media screen and (max-width: $mobile-width-breakpoint) {
+    padding: 1em !important;
+    min-width: unset;
+  }
+
+  &.ui.grid {
+    margin: 0;
+  }
+
+  .ui.form .field>label {
+    font-family: 'Nunito', sans-serif !important;
+    font-weight: 200;
+    color: $light-text !important;
+  }
+
+  .ui.form input {
+    background: #F7F7F7 !important;
+    border: 0px solid !important;
+  }
+
+  p {
+    font-size: 1.23em;
+  }
+
+  h2 {
+    font-family: 'Nunito', sans-serif !important;
+    color: $dark-background-5;
+    margin-top: 0.25em !important;
+    font-size: 1.8em;
+    font-weight: 450;
+  }
+
+  h3 {
+    font-family: 'Nunito', sans-serif !important;
+    color: $brand-purple;
+    font-size: 1.5em;
+    font-weight: 450;
+    margin-top: 10px !important;
+  }
+
+  p.views-sub {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 0.9em;
+  }
+
+  .contact-owner-notice {
+    font-size: 0.9em;
+  }
+
+  .StripeElement {
+    box-shadow: none;
+    background: #f6f6f6;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 17px;
+    max-width: 100%;
+  }
+}
+
+%web-plan-container {
+  padding: 2em !important;
+  border-radius: 9px;
+  min-width: 400px;
+
+  @media screen and (max-width: $mobile-width-breakpoint) {
+    padding: 1em !important;
+    min-width: unset;
+  }
+
+  &+.hovering-plan-container {
+    margin-top: 1em !important;
+  }
+
+  &.ui.grid {
+    margin: 0;
+  }
+
+  .ui.form .field>label {
+    font-family: 'Nunito', sans-serif !important;
+  }
+
+  p {
+    font-size: 1em;
+  }
+
+  h2 {
+    font-family: 'Nunito', sans-serif !important;
+    color: $gray-4;
+    letter-spacing: 0.15px;
+    margin-top: 0 !important;
+    margin-bottom: 0.5em !important;
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+
+  h3 {
+    font-family: 'Nunito', sans-serif !important;
+    text-transform: uppercase;
+    color: $dark-background-5;
+    font-size: 1em;
+    font-weight: 450;
+    letter-spacing: 1.17px;
+    margin: 0.25em 0 !important;
+  }
+
+  h4 {
+    font-family: 'Nunito', sans-serif !important;
+    color: $dark-background-5;
+    font-size: 1.2em;
+    letter-spacing: 0.34px;
+    margin: 0 !important;
+
+    .cost {
+      font-size: 1.9em;
+      font-weight: bold;
+    }
+  }
+
+  p.plan-description {
+    font-family: 'Nunito', sans-serif !important;
+    font-weight: bold;
+    color: $dark-background-5;
+    margin-bottom: 0 !important;
+  }
+
+  a {
+    color: $brand-purple;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  p.included-views {
+    font-family: 'Nunito', sans-serif !important;
+    margin-top: 1em !important;
+    color: $brand-purple;
+  }
+
+  .contact-owner-notice {
+    margin-top: 1em;
+  }
+
+  .StripeElement {
+    box-shadow: none;
+    border: 1px solid rgba(34, 36, 38, 0.15);
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 17px;
+    max-width: 100%;
+  }
+}
+
+.hovering-plan-container {
+  @extend %web-plan-container;
+  background: #FFFFFF;
+  box-shadow: 2px 2px 18px 8px rgba(70, 71, 102, 0.15);
+  margin-top: 1em !important;
+  margin-bottom: 1em !important;
+}
+
+.expiring-description {
+  display: inline-flex;
+  align-items: center;
+  color: $cherry;
+  white-space: nowrap;
+  margin-bottom: 0.5em !important;
+
+  .expiring-img {
+    width: 1em;
+  }
+}

@@ -1,0 +1,8 @@
+@import 'settings';
+
+.account-tier-label {
+  &.basic {
+    color: $brand-black !important;
+    border-color: $brand-black !important;
+  }
+}

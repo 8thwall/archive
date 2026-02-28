@@ -1,0 +1,67 @@
+---
+id: maps
+description: >-
+  Kartenobjekte bieten interaktive, reale 3D-Karten zur Integration von Geodaten
+  in AR- und 3D-Erlebnisse.
+---
+
+# Karten
+
+## Einführung
+
+{frontMatter.description} Sie ermöglichen es Ihnen, Inhalte an bestimmten realen Orten zu verankern.
+
+Die Funktion umfasst integriertes Terrain, Stadtlandschaften und reale Strukturen, die eine genaue Platzierung virtueller Objekte in einer kartierten Umgebung ermöglichen. Diese Funktionalität unterstützt standortbezogene Anwendungen, einschließlich Visual Positioning System (VPS) und AR-Interaktionen in der realen Welt.
+
+![](/images/studio/maps-intro.gif)
+
+## Hinzufügen einer Karte
+
+Sie können eine Karte zu Ihrer Szene hinzufügen, indem Sie eine Kartenentität erstellen. Klicken Sie dazu in der Szenenhierarchie auf ( + ) und wählen Sie Zuordnen.
+
+![](/images/studio/maps-add.png)
+
+## Karten-Konfigurationen
+
+### Zentrum und Radius
+
+Das Kartenzentrum ist standardmäßig auf den GPS-Standort des Geräts eingestellt. Bei Bedarf können Sie den Breitengrad, Längengrad und Radius manuell konfigurieren, um einen benutzerdefinierten Standort festzulegen.
+
+Sie können das Kontrollkästchen "GPS verwenden" aktivieren, um das GPS des Geräts zur Laufzeit zu verwenden.
+
+### Themen der Karte
+
+Sie können das Aussehen der Karte anpassen, indem Sie aus 20 voreingestellten Themen auswählen. Alternativ können Sie auch einzelne Eigenschaften anpassen, um ein benutzerdefiniertes Design zu erstellen.
+
+### Eigenschaften
+
+Die Karte besteht aus den folgenden Ebenen:
+
+- Land: Die Basis der Karte, Gebiete, in denen es keine anderen Merkmale gibt.
+- Gebäude: Gebäude auf der Karte. Diese können sich über die Karte erheben.
+- Park: Grünflächen (natürliche und künstliche).
+- Parken: Parkplätze.
+- Transit: Bahnlinien und andere Transitplattformen (z. B. Zug oder Fähre).
+- Straße: Straßen in verschiedenen Größen.
+- Sand: Strände und Wüsten.
+- Wasser: Gewässer und Wasserstraßen.
+
+Diese können mit Hilfe des Karteninspektors umgeschaltet und angepasst werden. Die vollständige Liste der konfigurierbaren Eigenschaften finden Sie in der [`MapTheme` API-Referenz](/api/studio/ecs/map-theme).
+
+## Karte Punkte
+
+Kartenpunkte sind Objekte, die an einem bestimmten Breiten- und Längengrad verankert sind. Indem Sie ein Asset als untergeordnetes Element eines Kartenpunkts hinzufügen, können Sie es an den Längen- und Breitengrad des Kartenpunkts binden, so dass es sich bewegt und skaliert, wenn sich die Koordinaten und der Radius der Karte ändern.
+
+Sie können einen einzelnen Kartenpunkt erstellen, indem Sie im Inspektionsbereich auf "Neuer Kartenpunkt" klicken und den Breiten- und Längengrad angeben. Sie können auch einen VPS-Standort als Koordinatenquelle auswählen.
+
+Wenn Sie das Kontrollkästchen "Spawn Locations" aktivieren, wird Studio prozedural einen Kartenpunkt an jedem VPS-Standort in der Welt erzeugen. Im [Map Explorer-Beispielprojekt] (https://www.8thwall.com/8thwall/map-explorer) finden Sie ein Beispiel dafür, wie Sie benutzerdefinierte Objekte auf jedem sichtbaren POI erzeugen können.
+
+![](/images/studio/map-points.gif)
+
+## Simulator
+
+Sie können Ihre Kartenerfahrung mit dem Simulator testen. In der zweiten Dropdown-Liste oben im Fenster können Sie den simulierten Breiten- und Längengrad ändern, so dass Sie Ihre Erfahrungen an verschiedenen Orten testen können. Sie können auch zu jedem Ort oder Kartenpunkt in Ihrem Projekt navigieren.
+
+Die Auswahl von "Keine" in der Dropdown-Liste simuliert das Fehlen von Standortdaten.
+
+![](/images/studio/maps-simulator.png)

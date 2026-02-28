@@ -1,0 +1,30 @@
+---
+id: unlit-material
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import UnlitMaterialTable from "../../../../gen/tables/UnlitMaterial.md"
+
+# アンライトマテリアル
+
+## 説明
+
+このコンポーネントは、ジオメトリを持つエンティティ上に、ライティングやシャドウの影響を受けないマテリアルを作成します。
+
+## 物件 {#properties}
+
+<UnlitMaterialTable />
+
+## 機能
+
+<ComponentFunctions
+    name="UnlitMaterial"
+    properties={{
+        color: '#FFFFFF',
+        opacity: 1,
+        side: 'double'
+    }}
+    mutate={`cursor.opacity = 0.5;
+    cursor.color = '#808080';
+    return false;`}
+/>

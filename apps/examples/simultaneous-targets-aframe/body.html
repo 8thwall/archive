@@ -1,0 +1,32 @@
+<!-- Copyright (c) 2021 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<div id="message" class="message"></div>
+
+<a-scene
+  simultaneous-targets="targetQuantity: 2"
+  xrextras-gesture-detector
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="colorManagement: true"
+  xrweb="disableWorldTracking: true">
+
+  <a-assets>
+    <a-asset-item id="frame-model" src="assets/frame.glb"></a-asset-item>
+    <a-asset-item id="present-model" src="assets/present.glb"></a-asset-item>
+  </a-assets>
+
+  <a-camera 
+    id="camera" 
+    position="0 4 10"
+    raycaster="objects: .cantap"
+    cursor="fuse:false; rayOrigin:mouse;">
+    <a-entity id="gift" position="0 0 -3" scale="0.1 0.1 0.1" visible="false" xrextras-one-finger-rotate>
+      <a-entity rotation="20 0 0" gltf-model="#present-model"></a-entity>
+    </a-entity>
+  </a-camera>
+  
+  <a-light type="ambient" intensity="1.3"></a-light>
+  <a-light type="directional" intensity="3" position="1.5 2.5 0.6"></a-light>
+
+</a-scene>

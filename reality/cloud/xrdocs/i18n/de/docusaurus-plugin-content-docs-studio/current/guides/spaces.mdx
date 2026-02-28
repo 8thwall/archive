@@ -1,0 +1,71 @@
+---
+id: spaces
+description: >-
+  Ein Space ist eine Möglichkeit, Entities zu organisieren und eine globale
+  Konfiguration vorzunehmen.
+---
+
+# Räume
+
+## Einführung
+
+{frontMatter.description} Die Entwicklung von immersiven WebXR-Spielen und -Erlebnissen erfordert oft mehrere Umgebungen, Übergänge und strukturierte Räume für verschiedene Teile der User Journey. Mit Spaces haben Sie jetzt die Möglichkeit, mehrere unterschiedliche Bereiche innerhalb eines einzigen Projekts zu erstellen und zu verwalten. Sie können sich Spaces wie Szenen oder Umgebungen in anderen Spiel-Engines oder Design-Tools vorstellen. Einfach ausgedrückt, sind Spaces 3D-Rahmen, in denen Sie Elemente, Beleuchtung, Kameras und Spielinteraktionen platzieren können.
+
+![](/images/studio/spaces-intro.gif)
+
+## Hinzufügen eines Leerzeichens
+
+Wenn Sie ein neues Projekt in 8th Wall Studio starten, sehen Sie einen Standardraum mit einer Kamera und einem Licht. Das Hinzufügen eines neuen Bereichs ist ganz einfach: Wählen Sie einfach das Dropdown-Menü oben im Hierarchiebereich, benennen Sie Ihren Bereich und beginnen Sie mit der Gestaltung.
+
+Hinweis: Die Leerzeichen wurden in unserer Version 2025-Februar-13 eingeführt. Projekte, die vor dieser Version erstellt wurden, sind ohne Spaces, aber Sie können Spaces einrichten, indem Sie das Dropdown-Menü Space oben in der Hierarchie verwenden. Alle Entitäten im Projekt werden nun dem erstellten Space zugeordnet.
+
+![](/images/studio/spaces-add.png)
+
+## Eingeschlossene Räume
+
+Sie können einen Bereich angeben, um andere Bereiche einzuschließen. Das Einbeziehen eines Spaces bedeutet, dass alle seine Objekte geladen werden, wenn der Space, der ihn einschließt, geladen wird. Sie können Ihrem aktiven Raum mit Hilfe des Raumkonfigurators auf der Registerkarte Einstellungen des Inspektors weitere Räume hinzufügen.
+
+![](/images/studio/spaces-settings.png)
+
+Anmerkungen:
+
+* Das Einbeziehen eines zusätzlichen Raums bedeutet, dass alle Objekte dieses Raums und jedes Raums, den er einschließt (und so weiter).
+* Wenn man zwischen zwei Räumen wechselt, werden die Objekte auf den Räumen, die sich die beiden Räume teilen, nicht despawned und respawned.
+
+## Laden eines Raums
+
+Ein neu geladener Space ersetzt den alten Space als aktiven Space. world.spaces.loadSpace lädt einen durch eine ID oder einen Namen angegebenen Space. Die Objekte des alten Spaces (und aller darin enthaltenen Spaces) werden despawned und die neuen Spaces (und alle darin enthaltenen Spaces) werden gespawnt.
+
+Durch das Laden eines Spaces wird das Objekt in seinen Anfangszustand versetzt. Wenn Sie einen zuvor geladenen Space erneut laden, werden alle vorherigen Laufzeitaktualisierungen gelöscht.
+
+Ephemere Objekte bleiben auch beim Wechsel zwischen den Spaces geladen. Um ephemere Objekte bei Raumänderungen zu entladen, ordnen Sie die ephemeren Objekte einem Diagrammobjekt zu.
+
+![](/images/studio/spaces-loading.gif)
+
+## Persistente Objekte
+
+Sie können ganz einfach Objekte einrichten, die zwischen den Spaces erhalten bleiben sollen. Sie haben zum Beispiel ein Hauptfigurenobjekt, das sich zwischen den Ebenen bewegen soll. Verwenden Sie den Schalter Persistenz im Inspektor des Objekts oder die Komponente Persistent oder verwenden Sie ecs.Persistent, um festzulegen, dass dieses Objekt geladen bleibt, wenn ein neuer Space geladen wird.
+
+![](/images/studio/spaces-persistent.png)
+
+Hinweis: Die Persistenz sollte nur für Objekte der Stammebene festgelegt werden. Das Reparieren von persistenten Objekten auf andere Objekte zur Laufzeit kann zu unerwartetem Verhalten in Live Sync führen.
+
+## Raumeinstellungen
+
+Auf der Registerkarte Einstellungen des Inspektors können Sie die aktive Kamera und die Skybox eines bestimmten Raums konfigurieren, und im Abschnitt Projekteinstellungen können Sie den Einstiegsraum (oder den Standardstartraum) konfigurieren.
+
+Aktive Kamera: Die aktive Kamera eines Raums kann ein beliebiges Kameraobjekt in diesem Raum oder in einem anderen Raum sein, den er einschließt.
+
+Skybox: Gestalte die Skybox deines Raums. Skyboxes sind ein Wrapper um deinen gesamten Space, der zeigt, wie die Welt jenseits deiner Geometrie aussieht. Wenn Ihr Projekt für die Verwendung von AR auf einem AR-kompatiblen Gerät konfiguriert ist, wird die Skybox nicht gerendert.
+
+Einstiegsbereich: Im Bereich Projekteinstellungen (rechtes Feld) können Sie schnell einen Einstiegsbereich (oder Standardstartbereich) einrichten.
+
+## Simulation des aktiven Raums im Live-Sync-Modus
+
+Der Live-Synchronisationsmodus (im rechten Bereich der Einstellungen) ermöglicht einen einfachen modularen Test des aktiven Raums. Wenn die Live-Synchronisation aktiviert ist, lädt der Inline-Simulator den Raum, der gerade in der Hierarchie aktiv ist.
+
+Anmerkungen:
+
+* Wenn Sie eine Simulatorinstanz in einem neuen Fenster öffnen (über den Link Neue Registerkarte) oder den Pop-Out-Modus des Simulators verwenden, wird der Eintragsbereich unabhängig von der aktivierten Live-Synchronisierung geladen.
+* Das Umschalten von Spaces im Dropdown-Menü Hierarchie ändert, welcher Space im Simulator im Live-Sync-Modus geladen ist.
+* Wenn die Option Bearbeitungen speichern aktiviert ist, bleiben alle Bearbeitungen im Ansichtsfenster zwischen den Änderungen des Leerzeichens erhalten. Wenn die Option "Bearbeitungen speichern" ausgeschaltet ist, werden die Bearbeitungen durch den Wechsel zu Spaces zurückgesetzt.

@@ -1,0 +1,174 @@
+---
+id: events
+description: >-
+  Los eventos son la forma en que las entidades pueden comunicarse entre sí a
+  través de un sistema flexible de escucha y envío.
+---
+
+# Eventos
+
+## Introducción
+
+{frontMatter.description}
+
+## Receptores de eventos
+
+##### Oyente {#listener}
+
+| Propiedad       | Tipo         | Descripción                                       |
+| --------------- | ------------ | ------------------------------------------------- |
+| objetivo        | eid          | Entidad sobre la que se ha enviado el evento.     |
+| currentTarget   | eid          | Entidad en la que se escuchó el evento.           |
+| nombre          | cadena       | Nombre del acontecimiento.                        |
+| datos           | cualquier    | Datos personalizados del evento                   |
+
+### Creación de receptores de eventos
+
+#### addListener
+
+```ts
+world.events.addListener(target, name, listener)
+```
+
+##### Parámetros
+
+:::tip
+Es posible crear escuchadores de eventos globales utilizando `world.events.globalId` como objetivo.
+:::
+
+| Propiedad  | Tipo                  | Descripción                                                         |
+| ---------- | --------------------- | ------------------------------------------------------------------- |
+| objetivo   | eid                   | Referencia a la entidad de destino.                                 |
+| nombre     | cadena                | Nombre del evento a escuchar.                                       |
+| oyente     | [Listener](#listener) | La función de devolución de llamada para cuando se activa un evento |
+
+### Creación de controladores de eventos
+
+Cuando se añaden escuchadores de eventos a las entidades, es crucial configurar correctamente los manejadores para asegurarse de que funcionan según lo previsto, especialmente cuando los componentes se añaden a múltiples entidades. La creación incorrecta de manejadores puede provocar referencias obsoletas y comportamientos inesperados.
+
+Supongamos que estás creando un manejador para una entidad NPC que escucha un evento de daño. El manejador debe actualizar algunos valores de esquema y datos cuando se produce el evento.
+
+#### Ejemplo incorrecto
+
+<div class="code-invalid">
+
+```ts
+import * as ecs from '@8thwall/ecs'
+import { addCleanup, doCleanup } from './cleanup'
+
+ecs.registerComponent({
+  name: 'npc',
+  schema: {
+    isInjured: ecs.boolean,
+  },
+  data: {
+    bpm: ecs.f32,
+  },
+  add: (world, component) => {
+    // Creación incorrecta del manejador
+    const damagedHandler = (e) => {
+      component.schema.isInjured = true
+      component.data.bpm += 30
+    }
+    world.events.addListener(component.eid, 'damaged', damagedHandler)
+
+    const cleanup = () => {
+      world.events.removeListener(component.eid, 'damaged', damagedHandler)
+    }
+    addCleanup(component, cleanup)
+  },
+  remove: (world, component) => {
+    doCleanup(component)
+  },
+})
+```
+
+</div>
+
+En este ejemplo:
+
+- El manejador damagedHandler hace referencia directa a `component.schema` y `component.data`.
+- Si el componente se añade a varias entidades, la referencia del componente dentro del manejador se vuelve obsoleta.
+- Esto puede hacer que el manejador opere con datos incorrectos, provocando errores.
+
+#### Ejemplo correcto
+
+Para asegurarse de que el manejador opera sobre los datos correctos de la entidad, pase el `dataAttribute` y el `schemaAttribute` del componente al manejador y utilícelos para obtener cursores dentro del manejador.
+
+<div class="code-valid">
+
+```ts
+import * as ecs from '@8thwall/ecs'
+import { addCleanup, doCleanup } from './cleanup'
+
+// Función para crear el manejador dañado
+const createDamagedHandler = (dataAttribute, schemaAttribute) => (e) => {
+  const dataCursor = dataAttribute.cursor(e.target)
+  const schemaCursor = schemaAttribute.cursor(e.target)
+  schemaCursor.isInjured = true
+  dataCursor.bpm += 30
+}
+
+ecs.registerComponent({
+  name: 'npc',
+  schema: {
+    isInjured: ecs.boolean,
+  },
+  data: {
+    bpm: ecs.f32,
+  },
+  add: (world, component) => {
+    // Creación correcta del manejador
+    const damagedHandler = createDamagedHandler(component.dataAttribute, component.schemaAttribute)
+    world.events.addListener(component.eid, 'damaged', damagedHandler)
+
+    const cleanup = () => {
+      world.events.removeListener(component.eid, 'damaged', damagedHandler)
+    }
+    addCleanup(component, cleanup)
+  },
+  remove: (world, component) => {
+    doCleanup(component)
+  },
+})
+```
+
+</div>
+
+### Eliminación de receptores de eventos
+
+#### removeListener
+
+```ts
+world.events.removeListener(target, name, listener)
+```
+
+##### Parámetros
+
+| Propiedad  | Tipo                  | Descripción                                                         |
+| ---------- | --------------------- | ------------------------------------------------------------------- |
+| objetivo   | eid                   | Referencia a la entidad de destino.                                 |
+| nombre     | cadena                | Nombre del evento a escuchar.                                       |
+| oyente     | [Listener](#listener) | La función de devolución de llamada para cuando se activa un evento |
+
+## Organizadores de eventos
+
+### Envío de eventos personalizados
+
+#### Despacho
+
+:::info
+Cuando se produce un evento en una entidad, primero se ejecutan los manejadores en ella, luego en su padre, y por último en otros ancestros.
+:::
+
+```ts
+world.events.dispatch(eidOfEnemy, "attack", {damage: 10})
+```
+
+## Limpieza de oyentes
+
+:::danger
+Asegúrese siempre de que las escuchas se eliminan correctamente para evitar fugas de memoria.
+:::
+
+Cuando se elimina un componente, sus escuchadores de eventos no se limpian automáticamente, por lo que debe eliminarlos manualmente.

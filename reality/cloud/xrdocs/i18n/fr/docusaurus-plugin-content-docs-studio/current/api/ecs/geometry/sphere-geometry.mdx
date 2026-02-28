@@ -1,0 +1,26 @@
+---
+id: sphere-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# SphereGeometry
+
+## Description
+
+Ce composant établit la géométrie d'une entité.
+
+## Propriétés
+
+| Propriété | Type   | Défaut  | Description           |
+| --------- | ------ | ------- | --------------------- |
+| rayon     | nombre | 1       | Rayon de la sphère.   |
+
+## Fonctions
+
+<ComponentFunctions
+    name="SphereGeometry"
+    properties={{ radius: 1 }}
+    mutate={`cursor.radius += 1;
+    return false;`}
+/>

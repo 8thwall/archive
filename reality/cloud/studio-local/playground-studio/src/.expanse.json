@@ -1,0 +1,178 @@
+{
+  "objects": {
+    "7e98572b-0ccc-4f7d-911d-5782b9e8c988": {
+      "id": "7e98572b-0ccc-4f7d-911d-5782b9e8c988",
+      "position": [
+        0,
+        0.5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": {
+        "type": "box",
+        "depth": 1,
+        "height": 1,
+        "width": 1
+      },
+      "material": {
+        "type": "basic",
+        "color": "#7611b6"
+      },
+      "components": {
+        "a0673861-e76e-48dc-abb1-ad8619b3bf78": {
+          "id": "a0673861-e76e-48dc-abb1-ad8619b3bf78",
+          "name": "position-animation",
+          "parameters": {
+            "toY": 5,
+            "reverse": true,
+            "duration": 2000
+          }
+        }
+      },
+      "name": "Box",
+      "parentId": "0c5424f7-a0af-4e70-8b0f-2c7e544d2c95"
+    },
+    "ac1989e3-3b71-49e2-a05f-e682aeb18c36": {
+      "id": "ac1989e3-3b71-49e2-a05f-e682aeb18c36",
+      "position": [
+        20,
+        20,
+        10
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {},
+      "name": "Directional Light",
+      "light": {
+        "type": "directional",
+        "intensity": 1
+      },
+      "parentId": "0c5424f7-a0af-4e70-8b0f-2c7e544d2c95"
+    },
+    "9c311ef2-d1e4-41df-aadd-f0b9a451fe5c": {
+      "id": "9c311ef2-d1e4-41df-aadd-f0b9a451fe5c",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {},
+      "name": "Ambient Light",
+      "light": {
+        "type": "ambient"
+      },
+      "parentId": "0c5424f7-a0af-4e70-8b0f-2c7e544d2c95"
+    },
+    "03050eca-cc54-412b-9fcd-bda60ec9305b": {
+      "id": "03050eca-cc54-412b-9fcd-bda60ec9305b",
+      "position": [
+        0,
+        0.01431037934877466,
+        -4.393865769946368
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1.0000000532124818,
+        1.0000000532124818
+      ],
+      "geometry": {
+        "type": "plane",
+        "width": 9,
+        "height": 6
+      },
+      "material": {
+        "type": "basic",
+        "color": "#ffffff",
+        "textureSrc": {
+          "type": "asset",
+          "asset": "assets/images/orange_logo.png"
+        },
+        "opacity": 1
+      },
+      "parentId": "0c5424f7-a0af-4e70-8b0f-2c7e544d2c95",
+      "components": {},
+      "name": "Plane"
+    },
+    "824fa445-30d6-4a51-b22b-bf215031cab8": {
+      "id": "824fa445-30d6-4a51-b22b-bf215031cab8",
+      "position": [
+        0.0023884120684116716,
+        0,
+        3.930916469889995
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "0c5424f7-a0af-4e70-8b0f-2c7e544d2c95",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/glbs/doty_1.glb"
+        },
+        "animationClip": "walk",
+        "loop": true
+      },
+      "name": "doty_1.glb"
+    }
+  },
+  "spaces": {
+    "0c5424f7-a0af-4e70-8b0f-2c7e544d2c95": {
+      "id": "0c5424f7-a0af-4e70-8b0f-2c7e544d2c95",
+      "name": "s1"
+    }
+  },
+  "entrySpaceId": "0c5424f7-a0af-4e70-8b0f-2c7e544d2c95",
+  "history": "adweqewahdlewajo",
+  "historyVersion": "snflhkhf"
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="module">
+        import {createWavBlob, generateSamplePCM} from './test-utils.js'
+
+        const sampleRate = 44100 // Samples per second
+        const duration = 2 // Duration in seconds
+        // we are using sounds of the same frequency, such that they will overlap and surpass the 
+        // maximum amplitude, causing clipping
+        const frequency = 440 // Frequency in Hz (A4 note)
+        const audioData = generateSamplePCM(sampleRate, duration, frequency, 1.5)
+
+        const wavBlob = createWavBlob(audioData, sampleRate)
+        const audioURL = URL.createObjectURL(wavBlob)
+        const audioElement = new Audio(audioURL)
+        const audioElement2 = new Audio(audioURL)
+
+        audioElement.addEventListener('canplaythrough', () => {
+            audioElement.play()
+        })
+
+        audioElement2.addEventListener('canplaythrough', () => {
+            audioElement2.play()
+        })
+
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                audioElement.stop()
+                audioElement2.stop()
+                resolve()
+            }, 3000)
+        })
+
+    </script>
+</head>
+<body></body>
+</html>

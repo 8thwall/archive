@@ -1,0 +1,65 @@
+---
+id: time
+description: >-
+  Cette section fournit tout ce dont vous avez besoin pour gérer le temps dans
+  le monde, depuis le suivi de la durée d'exécution écoulée et des intervalles
+  entre les images jusqu'à la mise en place d'actions uniques ou répétées.
+---
+
+# L'heure
+
+## Introduction
+
+{frontMatter.description} Apprenez à utiliser les fonctions de synchronisation intégrées pour créer des interactions réactives et bien synchronisées dans votre expérience.
+
+## temps.mondial.écoulé
+
+Le nombre de millisecondes pendant lesquelles le monde a fonctionné, à l'exclusion du temps passé pendant que le monde était en pause.
+
+## temps.mondial.delta
+
+Le nombre de millisecondes écoulées depuis l'image précédente, à l'exclusion des sauts de temps dus à la mise en pause.
+
+## temps.mondial.absolu
+
+Le nombre de millisecondes qui se sont écoulées depuis la création du monde.
+
+## world.time.absoluteDelta
+
+Le nombre de millisecondes depuis la dernière image, y compris les grands sauts de temps si le monde reprend après avoir été mis en pause.
+
+## Minuteries
+
+Exécute une fonction une fois après un délai spécifié.
+
+### Démarrage d'une minuterie
+
+```ts
+const timeout = world.time.setTimeout(() => {
+    console.log('1000 ms have passed!')
+}, 1000)
+```
+
+### Effacer une minuterie
+
+```ts
+world.time.clearTimeout(timeout)
+```
+
+## Intervalles
+
+Exécute de manière répétée une fonction à des intervalles de temps spécifiés.
+
+### Définition d'un intervalle
+
+```ts
+const interval = world.time.setInterval(() => {
+    console.log('Another 1000 ms have passed!')
+}, 1000)
+```
+
+### Effacer un intervalle
+
+```ts
+world.time.clearTimeout(intervalle)
+```

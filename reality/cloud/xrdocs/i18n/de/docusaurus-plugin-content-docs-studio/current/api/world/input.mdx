@@ -1,0 +1,170 @@
+---
+id: input
+description: Diese Bibliothek enthält Funktionen für die Verwaltung von Eingaben.
+---
+
+# Eingabe
+
+## Beschreibung
+
+{frontMatter.description}
+
+## Funktionen
+
+### disablePointerLockRequest
+
+Deaktiviert die Anforderung der Zeigersperre beim Klicken.
+
+```ts
+world.input.disablePointerLockRequest() // -> void
+```
+
+### enablePointerLockRequest
+
+Anforderung einer Zeigersperre vom Benutzer, wenn der Bildschirm angeklickt wird.
+
+```ts
+world.input.enablePointerLockRequest() // -> void
+```
+
+### getAction
+
+Gibt > 0 zurück, wenn die Aktion ausgelöst wurde. Der Wert liegt normalerweise zwischen 0 und 1. Die Ausnahme ist die Mausgeschwindigkeit und der Bildlauf, der nicht begrenzt ist.
+
+```ts
+world.input.getAction(actionName: string) // -> Zahl
+```
+
+### getActiveMap
+
+Holen Sie sich die aktive Aktionskarte.
+
+```ts
+world.input.getActiveMap() // -> string (Name der aktiven Aktionskarte)
+```
+
+### setActiveMap
+
+Legt die aktive Aktionskarte fest. Der Name der Standard-Aktionskarte lautet "Standard".
+
+```ts
+world.input.setActiveMap(mapName: string) // -> void
+```
+
+### getAxis
+
+Gibt den Wert der Achse des gamepadIdx zurück.
+
+```ts
+world.input.getAxis(gamepadIdx?: Zahl) // -> Zahl[]
+```
+
+### getButton
+
+Gibt true zurück, wenn die durch buttonName identifizierte virtuelle Schaltfläche gedrückt gehalten wird.
+
+```ts
+world.input.getAxis(input: Zahl, gamepadIdx?: Zahl) // -> boolesch
+```
+
+### getButtonDown
+
+Gibt true zurück, wenn der Benutzer während des Frames die dem Index zugeordnete Taste gedrückt hat.
+
+```ts
+world.input.getAxis(input: Zahl, gamepadIdx?: Zahl) // -> boolesch
+```
+
+### getButtonUp
+
+Gibt true zurück, wenn der Benutzer die Schaltfläche zum ersten Mal loslässt.
+
+```ts
+world.input.getAxis(input: Zahl, gamepadIdx?: Zahl) // -> boolesch
+```
+
+### getGamepads
+
+Gibt alle mit dem Gerät verbundenen Gamepads zurück.
+
+```ts
+world.input.getGamepads() // -> Gamepad[]
+```
+
+### getKey
+
+Gibt true zurück, wenn der Benutzer die durch den Namen bezeichnete Taste gedrückt hält.
+
+```ts
+world.input.getKey(code: string) // -> boolesch
+```
+
+### getKeyDown
+
+Gibt true zurück, wenn der Benutzer beginnt, die mit dem Namen bezeichnete Taste zu drücken.
+
+```ts
+world.input.getKeyDown(code: string) // -> boolesch
+```
+
+### getKeyUp
+
+Gibt true zurück, wenn der Benutzer die Taste mit dem Namen loslässt.
+
+```ts
+world.input.getKeyUp(code: string) // -> boolesch
+```
+
+### getMouseButton
+
+Gibt true zurück, wenn der Benutzer die durch die Tastennummer bezeichnete Maustaste gedrückt hält.
+
+| Nummer | Maustaste       |
+| ------ | --------------- |
+| 0      | Links klicken   |
+| 1      | Rechtsklick     |
+| 2      | Mittlerer Klick |
+
+```ts
+world.input.getMouseButton(index: Zahl) // -> boolesch
+```
+
+### getMouseDown
+
+Gibt true zurück, wenn der Benutzer beginnt, die Maustaste zu drücken.
+
+```ts
+world.input.getMouseDown(index: Zahl) // -> boolesch
+```
+
+### getMouseUp
+
+Gibt während des Frames, in dem der Benutzer die Maustaste loslässt, true zurück.
+
+```ts
+world.input.getMouseUp(index: Zahl) // -> boolesch
+```
+
+### getMousePosition
+
+Gibt die x- und y-Position der Maus auf dem Bildschirm zurück.
+
+```ts
+world.input.getMousePosition() // -> [Zahl, Zahl]
+```
+
+### getMouseVelocity
+
+Gibt die x- und y-Geschwindigkeit der Maus zurück.
+
+```ts
+world.input.getMouseVelocity() // -> [Zahl, Zahl]
+```
+
+### getMouseScroll
+
+Gibt die x- und y-Geschwindigkeit des Mauslaufs zurück.
+
+```ts
+world.input.getMouseScroll() // -> [Zahl, Zahl]
+```

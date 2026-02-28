@@ -1,0 +1,25 @@
+---
+id: sphere-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import SphereGeometryTable from "../../../../gen/tables/SphereGeometry.md"
+
+# EsferaGeometría
+
+## Descripción
+
+Este componente establece la geometría de una entidad.
+
+## Propiedades
+
+<SphereGeometryTable />
+
+## Funciones
+
+<ComponentFunctions
+    name="EsferaGeometría"
+    properties={{ radius: 1 }}
+    mutate={`cursor.radio += 1;
+    return false;`}
+/>

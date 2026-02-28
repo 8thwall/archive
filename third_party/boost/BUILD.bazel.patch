@@ -1,0 +1,29 @@
+diff --color -ruN BUILD.boost BUILD.boost
+--- BUILD.boost	2022-06-13 08:31:43
++++ BUILD.boost	2024-07-09 15:08:17
+@@ -624,6 +624,7 @@
+ 
+ boost_library(
+     name = "container_hash",
++    defines = ["BOOST_NO_CXX98_FUNCTION_BASE"],
+     deps = [
+         ":assert",
+         ":config",
+diff --color -ruN BUILD.lzma BUILD.lzma
+--- BUILD.lzma	2022-06-13 08:31:43
++++ BUILD.lzma	2024-07-09 15:09:08
+@@ -40,10 +40,10 @@
+ alias(
+     name = "apple_config",
+     actual = select({
+-        ":aarch64": "config.lzma-ios-arm64.h",
+-        ":arm": "config.lzma-ios-armv7.h",
+-        ":x86_64": "config.lzma-osx-x86_64.h", # Configuration same as macOS
+-        ":x86_32": "config.lzma-ios-i386.h",
++        ":aarch64": "@com_github_nelhage_rules_boost//:config.lzma-ios-arm64.h",
++        ":arm": "@com_github_nelhage_rules_boost//:config.lzma-ios-armv7.h",
++        ":x86_64": "@com_github_nelhage_rules_boost//:config.lzma-osx-x86_64.h", # Configuration same as macOS
++        ":x86_32": "@com_github_nelhage_rules_boost//:config.lzma-ios-i386.h",
+     }),
+ )
+ 

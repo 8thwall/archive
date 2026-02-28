@@ -1,0 +1,36 @@
+---
+id: xr
+description: このライブラリには、Studio プロジェクト内の画像やビデオをキャプチャする機能が含まれています。
+---
+
+# xr
+
+## 説明
+
+{frontMatter.description} [Media Recorder Events](/api/studio/events/media-recorder/)も参照してください。
+
+## 機能
+
+### startMediaRecorder
+
+録音を開始する。
+
+```ts
+world.xr.startMediaRecorder: () => void
+```
+
+### stopMediaRecorder
+
+録音を停止する。
+
+```ts
+world.xr.stopMediaRecorder: () => void
+```
+
+### takeScreenshot
+
+スクリーンショットを撮ります。 解決されると、JPEG圧縮画像を含むバッファを提供するPromiseを返します。 拒否された場合は、エラーメッセージが表示される。 拒否されるとエラーメッセージが表示されます。
+
+```ts
+world.xr.takeScreenshot：() => Promise<Blob>
+```

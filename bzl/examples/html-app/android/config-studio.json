@@ -1,0 +1,13 @@
+{
+  "projectUrl": "https://alvin.8thwall.app/simple-studio",
+  "shell": "android",
+  "android": {
+    "packageName": "com.nianticlabs.bzl.htmlapp.example",
+    "resourceDir": "res/"
+  },
+  "appInfo": {
+    "workspace": "alvin",
+    "appName": "simple-studio",
+    "refHead": "production"
+  }
+}

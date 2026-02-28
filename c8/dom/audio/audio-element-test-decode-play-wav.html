@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="module">
+        const audioElement = new Audio('test_files/BAK.wav');
+
+        audioElement.addEventListener('canplaythrough', () => {
+            audioElement.play()
+        })
+
+        //play for 3s
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                audioElement.stop()
+                resolve()
+            }, 3000)
+        })
+
+    </script>
+</head>
+<body></body>
+</html>

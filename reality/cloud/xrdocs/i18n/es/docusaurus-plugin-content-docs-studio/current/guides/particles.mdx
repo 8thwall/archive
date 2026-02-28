@@ -1,0 +1,128 @@
+---
+id: particles
+description: >-
+  Las partículas son una potente herramienta para añadir efectos dinámicos y
+  llamativos a cualquier escena. Aportan vida y movimiento, creando desde
+  elementos ambientales realistas como humo, fuego y lluvia hasta efectos
+  estilizados como magia, chispas o explosiones.
+---
+
+# Partículas
+
+## Introducción
+
+{frontMatter.description} Utilizadas de forma sutil o dramática, las partículas realzan la atmósfera y la interactividad de una escena, haciendo que las experiencias sean más cautivadoras y visualmente más ricas.
+
+## Añadir partículas
+
+Las partículas pueden añadirse a la entidad a través de la interfaz de Studio o en código. Para añadirlos en Studio, pulse el botón "Nuevo componente".
+
+![particle-new-component.jpg](/images/studio/particle-new-component.jpg)
+![particle-component.png](/images/studio/particle-component.png)
+
+### Ejemplo
+
+El siguiente ejemplo muestra cómo añadir un ParticleEmitter a una entidad en tiempo de ejecución.
+
+```ts
+ecs.ParticleEmitter.set(world, component.eid, {
+    stopped: false,
+    emitterLife: 10,
+    particlesPerShot: 5,
+    emitDelay: 1,
+    minimumLifespan: 1,
+    maximumLifespan: 3,
+    mass: 1,
+    gravity: 1,
+    scale: 1,
+    forceX: 0,
+    forceY: 60,
+    forceZ: 0,
+    spread: 120,
+    radialVelocity: 0,
+    spawnAreaType: 'point',
+    resourceType: 'model',
+    resourceUrl: 'https://static.8thwall.app/assets/Moon-lowpoly-v3-yg6nmdc1uj.glb',
+})
+```
+
+## Emisión
+
+Los atributos de emisión definen la forma en que las partículas se colocan en el mundo y algunos de los atributos globales que afectan a todas las partículas por igual.
+
+- **Detenido:** Si está marcada, el emisor no emitirá.
+- **Vida útil del emisor:** Define la vida útil del emisor.
+- **Partículas por disparo:** Cuántas partículas se colocan cada vez que se dispara el emisor.
+- **Retardo entre emisiones:** Retardo entre emisiones en segundos.
+- **Duración:** Establece un rango que representa el tiempo que las partículas permanecen en la escena antes de desaparecer.
+- **Masa:** La masa de cada partícula, sólo relevante cuando se simula física.
+- **Gravedad:** Añade una fuerza hacia abajo que hace caer las partículas.
+- **Fuerzas:** Fuerzas simples en los ejes relativos X, Y y Z que se aplican a cada partícula.
+- **Dispersión:** Es el ángulo que se mueven las partículas en relación al emisor.
+- **Velocidad radial:** Si se establece por encima de 0, el tipo de velocidad del emisor cambiará a radial. La velocidad radial se calcula con respecto al observador y las fuerzas vectoriales se ven influidas por la fuerza radial.
+
+### Tipo de zona de desove
+
+Las zonas de generación cambian la coordenada inicial de las partículas.
+
+- **Punto:** Spawn se establece en las coordenadas del emisor.
+- **Caja:** Define una caja utilizando anchura, altura y profundidad.
+- **Esfera:** Define un área de spawn de una esfera con un radio definido.
+
+:::note
+Estas áreas de spawn no funcionarán correctamente si las dimensiones se establecen en 0.
+:::
+
+### Tipo de zona límite
+
+Las cajas delimitadoras dictan los límites espaciales dentro de los cuales se generan las partículas.
+
+- **Caja:** Define una caja utilizando anchura, altura y profundidad.
+- **Esfera:** Define un área de spawn de una esfera con un radio definido.
+
+:::note
+Estas zonas delimitadoras no funcionarán correctamente si las dimensiones son 0 o negativas. Si se utiliza el Área de generación, la zona delimitada debe ocupar un volumen mayor que el Área de generación.
+:::
+
+### Tipo de recurso
+
+Este sistema es capaz de renderizar activos glb y sprites sencillos. Elige un modelo para 3D o un sprite para sprites 2D. Utilice una URL de acceso público para cargar el activo en el emisor.
+
+- **Sprites:** Tienen opciones de fusión que funcionan de forma similar a los efectos de capa básicos de Photoshop. Son muy útiles para crear efectos visuales como fuego, estrellas o humo.
+- **Modelo:** Modelos 3D con comportamiento de partículas. Útil para crear efectos volumétricos.
+
+### Simulación
+
+Estos parámetros afectarán a la forma en que las partículas se comportan por sí mismas después de ser colocadas en el mundo.
+
+- **Color:** Si los sprites se establecen como un tipo de recurso, entonces los sprites pueden cambiar de color. Introduzca un valor hexadecimal del color inicial y final para que se desplacen gradualmente.
+- **Deriva aleatoria:** Las partículas derivarán aleatoriamente de acuerdo con el parámetro de rango de deriva aleatoria.
+- **Colisión:** Si las partículas se acercan entre sí, se aplicará una fuerza opuesta entre ellas.
+
+## Ejemplos
+
+### Partículas iniciales
+
+```ts
+ecs.ParticleEmitter.mutate(world, component.eid, (cursor) => {
+    cursor.stopped = false
+})
+```
+
+### Detención de partículas
+
+```ts
+ecs.ParticleEmitter.mutate(world, component.eid, (cursor) => {
+    cursor.stopped = true
+})
+```
+
+### Modelos emisores
+
+```ts
+ecs.ParticleEmitter.set(world, component.eid, {
+    stopped: false,
+    resourceType: 'model',
+    resourceUrl: 'assets/robot.glb',
+})
+```

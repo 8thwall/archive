@@ -1,0 +1,82 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="colorManagement:true"
+  xrconfig="allowedDevices: any; cameraDirection: front; mirroredDisplay: true"
+  xrface="enableEars:true; meshGeometry: face, eyes, iris, mouth">
+  <!-- 3D models, images, videos -->
+  <a-assets>
+    <a-asset-item
+      id="head-occluder-no-ears"
+      src="./assets/models/noEarsHeadOccluder.glb"></a-asset-item>
+  </a-assets>
+
+  <a-camera position="0 2 0"></a-camera>
+
+  <!-- content anchored to face -->
+  <xrextras-faceanchor>
+    <!-- head occluder -->
+    <a-entity
+      gltf-model="#head-occluder-no-ears"
+      position="0 0.08 0.13"
+      scale="1 1.1 1.2"
+      xrextras-hider-material></a-entity>
+      
+    <xrextras-face-mesh xrextras-hider-material></xrextras-face-mesh>
+
+    <!-- left ear attachment points -->
+    <xrextras-face-attachment point="leftHelix"> </xrextras-face-attachment>
+
+    <xrextras-face-attachment point="leftCanal">
+      <a-sphere
+        id="leftEarOccluder"
+        position="0 0.01 .1"
+        rotation="0 -50 -17"
+        color="red"
+        scale="0.12 .23 0.03"
+        xrextras-hider-material></a-sphere>
+
+      <a-sphere
+        scale=".05 .1 .04"
+        id="leftTragusOccluder"
+        color="red"
+        xrextras-hider-material
+        position="-.04 0.02 0"></a-sphere>
+    </xrextras-face-attachment>
+
+    <xrextras-face-attachment point="leftLobe">
+      <a-sphere position="0 0 0" scale="0.05 0.05 0.05" color="purple"> </a-sphere>
+    </xrextras-face-attachment>
+
+    <!-- right ear attachment points -->
+    <xrextras-face-attachment point="rightHelix"> </xrextras-face-attachment>
+
+    <xrextras-face-attachment point="rightCanal">
+      <a-sphere
+        id="rightEarOccluder"
+        position="0 0.02 0.13"
+        rotation="0 40 17"
+        color="red"
+        scale="0.12 .23 0.03"
+        xrextras-hider-material></a-sphere>
+
+      <a-sphere
+        scale=".05 .1 .02"
+        id="rightTragusOccluder"
+        rotation="20 0 0"
+        color="red"
+        xrextras-hider-material
+        position=".05 0.02 -.03"></a-sphere>
+    </xrextras-face-attachment>
+
+    <xrextras-face-attachment point="rightLobe">
+      <a-sphere position="0 0 0" scale="0.05 0.05 0.05" color="purple"> </a-sphere>
+    </xrextras-face-attachment>
+  </xrextras-faceanchor>
+
+  <a-light type="directional" target="#face" position="0 1.8 3" intensity="0.8"></a-light>
+  <a-light type="ambient" intensity="0.8"></a-light>
+</a-scene>

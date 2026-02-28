@@ -1,0 +1,101 @@
+@use '../../styles/brand-colors';
+@use '../../styles/constants';
+
+
+
+.industrySectionContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255),
+    rgba(255,255,255,.50)),
+    url('../../../img/industry-section-logos/industry-section-background.jpg'
+    );
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 0;
+
+    h2 {
+      color: brand-colors.$brand-purple;
+    }
+
+    p {
+      width: 40%;
+      margin: auto;
+    }
+}
+
+.row {
+  margin: auto;
+  width: 100%;
+
+  > * {
+    margin: 1.25rem 1.5rem;
+
+    @media screen and (max-width: constants.$SMALL_MONITOR_WIDTH_BREAKPOINT) {
+      margin: 1.25rem 1rem;
+    }
+  }
+}
+
+.logos {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  grid-template-rows: 1fr 1fr;
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 3rem 4rem;
+  margin-top: 2rem;
+}
+
+.logo {
+  object-fit: contain;
+  max-width: 8rem;
+
+  img {
+    max-height: 6rem;
+  }
+}
+
+@media screen and (max-width: constants.$SMALL_MONITOR_WIDTH_BREAKPOINT) {
+  .industrySectionContainer {
+    background-position: 60% 0;
+    p {
+      width: 65%;
+    }
+  }
+}
+
+
+@media screen and (max-width: constants.$TABLET_WIDTH_BREAKPOINT) {
+  .logos {
+    justify-content: center;
+    vertical-align: middle;
+    gap: 2rem 4rem;
+    padding-bottom: 2rem;
+  }
+
+  .logo {
+    max-width: 8em;
+  }
+}
+
+@media screen and (max-width: constants.$MOBILE_WIDTH_BREAKPOINT) {
+  .logos {
+    grid-template-columns: 115px repeat(2, auto);
+    gap: 1;
+  }
+
+  .hideSmall {
+    display: none;
+  }
+
+  .button {
+    width: 100%;
+    margin: 1rem;
+  }
+}

@@ -1,0 +1,28 @@
+---
+id: plane-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# 平面幾何学
+
+## 商品説明
+
+このコンポーネントは、エンティティのジオメトリを確立する。
+
+## プロパティ一覧
+
+| Property | Type   | 初期値     | 商品説明             |
+| -------- | ------ | ------- | ---------------- |
+| width    | 番号     | 1       | X軸に沿った幅。         |
+| height   | 番号     | 1       | Y軸に沿った幅。         |
+
+## 関数一覧
+
+<ComponentFunctions
+    name="PlaneGeometry"
+    properties={{ width: 1, height: 1 }}
+    mutate={`カーソル.width += 1;
+    カーソル.height *= 2;
+    return false;`}
+/>

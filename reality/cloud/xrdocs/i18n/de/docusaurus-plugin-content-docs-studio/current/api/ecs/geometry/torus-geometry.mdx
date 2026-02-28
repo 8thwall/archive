@@ -1,0 +1,27 @@
+---
+id: torus-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# TorusGeometry
+
+## Beschreibung
+
+Diese Komponente legt die Geometrie einer Entität fest.
+
+## Eigenschaften
+
+| Eigenschaft   | Typ    | Standard | Beschreibung          |
+| ------------- | ------ | -------- | --------------------- |
+| radius        | Nummer | 1        | Radius des Torus.     |
+| tubeRadius    | Nummer | 1        | Radius des Rohrs.     |
+
+## Funktionen
+
+<ComponentFunctions
+    name="TorusGeometry"
+    properties={{ radius: 1 }}
+    mutate={`cursor.radius += 1;
+    return false;`}
+/>

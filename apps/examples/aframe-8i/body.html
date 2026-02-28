@@ -1,0 +1,78 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<!-- UI -->
+<div class="over">
+  <span id="promptText"></span>
+  <div id="progressBar">
+    <div id="playProgress"></div>
+    <div id="loadProgress"></div>
+  </div>
+  <img id="pauseBtn" class="media-btn" src="./assets/icons/pause.svg" style="display: none;">
+  <img id="muteBtn" class="media-btn" src="./assets/icons/sound.svg" style="display: none;">
+  <div id="gradient-box"></div>
+</div>
+
+<a-scene 
+landing-page="mediaSrc: https://media.giphy.com/media/qJaWbUCugZJhK0bHGA/giphy.mp4; logoSrc: #logo"
+xrextras-loading
+xrextras-runtime-error
+xrextras-gesture-detector
+renderer="webgl2: true;"
+xrweb>
+
+  <xrextras-resource id="logo" src="./assets/icons/8i.png"></xrextras-resource>
+
+  <a-camera
+    id="camera"
+    position="0 2 3"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;">
+  </a-camera>
+
+  <a-entity
+    light="
+      type: directional;
+      intensity: 0.8;
+      castShadow: true;
+      shadowMapHeight:2048;
+      shadowMapWidth:2048;
+      shadowCameraTop: 20;
+      shadowCameraBottom: -10;
+      shadowCameraRight: 10;
+      shadowCameraLeft: -10;
+      target: #camera"
+    xrextras-attach="target: camera; offset: 5 15 4"
+    position="1 4.3 2.5"
+    shadow>
+  </a-entity>
+
+  <!--
+       CEO: https://assets.8i.com/8IPROMOEXPERIENCE20210204_S02_T01_20210222_130718/manifest.mpd
+       Army man: https://assets.8i.com/army/ARMY20201110_S04A_T01_2.4.1/manifest.mpd
+       Army pair: https://assets.8i.com/army/ARMY20201109_S01E_T05_1.5.6-1.5.8/manifest.mpd
+       Red dress (no audio): https://assets.8i.com/Odyssey_S32B_T02_20210322_162110/manifest.mpd
+  -->
+  
+  <a-entity
+    id="hologram"
+    hologram="src: https://assets.8i.com/8IPROMOEXPERIENCE20210204_S02_T01_20210205_141236/manifest.mpd; muted: false; autoplay: false; loop: false;"
+    class="cantap"
+    visible="false"
+    xrextras-hold-drag="riseHeight: 0.3"
+    xrextras-two-finger-rotate
+    xrextras-pinch-scale
+    eighti-controls>
+  </a-entity>
+  
+  <a-entity
+    id="ground"
+    class="cantap"
+    visible="false"
+    geometry="primitive: box; width: 1000; height: 1; depth: 1000;"
+    material="shader: shadow; transparent: true; opacity: 0.4"
+    position="0 -0.5 0"
+    shadow="cast: false">
+  </a-entity>
+</a-scene>
+

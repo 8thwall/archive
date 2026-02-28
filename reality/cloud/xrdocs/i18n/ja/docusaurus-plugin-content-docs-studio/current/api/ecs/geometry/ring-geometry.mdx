@@ -1,0 +1,28 @@
+---
+id: ring-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# リング幾何学
+
+## 商品説明
+
+このコンポーネントは、エンティティのジオメトリを確立する。
+
+## プロパティ一覧
+
+| Property    | Type   | 初期値     | 商品説明                           |
+| ----------- | ------ | ------- | ------------------------------ |
+| 内側半径        | 番号     | 1       | リングの内孔の半径。                     |
+| 外半径         | 番号     | 1       | リング外周の半径。                      |
+
+## 関数一覧
+
+<ComponentFunctions
+    name="RingGeometry"
+    properties={{ innerRadius: 1, outerRadius: 1 }}
+    mutate={`cursor.innerRadius += 0.5;
+    cursor.outerRadius += 1;
+    return false;`}
+/>

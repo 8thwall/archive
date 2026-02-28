@@ -1,0 +1,70 @@
+---
+id: collider
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Collider
+
+## Descripción
+
+This component establishes a physics collider on an entity.
+
+## ColliderShape
+
+| Tipo     | Descripción |
+| -------- | ----------- |
+| Box      | Box         |
+| Sphere   | Sphere      |
+| Plane    | Plane       |
+| Capsule  | Capsule     |
+| Cone     | Cone        |
+| Cylinder | Cylinder    |
+
+## Propiedades
+
+| Name             | Tipo              | Por defecto               | Descripción                                                                  |
+| ---------------- | ----------------- | ------------------------- | ---------------------------------------------------------------------------- |
+| shape (Required) | ecs.ColliderShape | ecs.ColliderShape.Box     | Supported types are available in ecs.ColliderShape                           |
+| width            | number            | 0                         | Width of Box or Plane shapes.                                                |
+| height           | number            | 0                         | Height of Box, Plane, Capsule, Cone, or Cylinder shapes.                     |
+| depth            | number            | 0                         | Depth of Box shape.                                                          |
+| radio            | number            | 0                         | Radius of Sphere, Capsule, Cone, or Cylinder shapes.                         |
+| mass             | number            | 0                         | Mass of the entity. **Leave 0 to make static**                               |
+| eventOnly        | boolean           | false                     | Should the object only dispatch collision events, and not physically respond |
+| gravityFactory   | number            | 1                         | Factor of which to scale World gravity                                       |
+| lockXAxis        | boolean           | false                     | Disables rotation on the X Axis                                              |
+| lockYAxis        | boolean           | false                     | Disables rotation on the Y Axis                                              |
+| lockZAxis        | boolean           | false                     | Disables rotation on the Z Axis                                              |
+| friction         | number            | 0.5                       | The amount of contact friction on the entity                                 |
+| restitution      | number            | 0                         | The bounciness of the entity                                                 |
+| linearDamping    | number            | 0                         | The amount of air resistance while moving                                    |
+| angularDamping   | number            | 0                         | The amount of air resistance while rotating                                  |
+| spinningFriction | number            | 0                         | The amount of friction on the entity while spinning                          |
+
+## Funciones
+
+<ComponentFunctions
+    name="Collider"
+    properties={{
+        shape: "ecs.ColliderShape.Box",
+        width: 0,
+        height: 0,
+        depth: 0,
+        radius: 0,
+        mass: 0,
+        eventOnly: false,
+        gravityFactory: 1,
+        lockXAxis: false,
+        lockYAxis: false,
+        lockZAxis: false,
+        friction: 0.5,
+        restitution: 0,
+        linearDamping: 0,
+        angularDamping: 0,
+        spinningFriction: 0
+    }}
+    mutate={`cursor.mass = 5;
+    cursor.friction = 0.8;
+    return false;`}
+/>

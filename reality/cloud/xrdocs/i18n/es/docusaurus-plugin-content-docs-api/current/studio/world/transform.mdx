@@ -1,0 +1,156 @@
+---
+id: transform
+description: Esta biblioteca incluye funciones para trabajar con Transformaciones.
+---
+
+# transformar
+
+## Descripción
+
+{frontMatter.description}
+
+## Funciones
+
+### getLocalPosition
+
+Devuelve la posición local de la entidad dada.
+
+```ts
+world.transform.getLocalPosition(eid: Eid, out?: Vec3): Vec3
+```
+
+### getLocalTransform
+
+Devuelve la matriz de transformación local de la entidad dada.
+
+```ts
+world.transform.getLocalTransform(eid: Eid, out?: Mat4): Mat4
+```
+
+### getWorldPosition
+
+Devuelve la posición mundial de la entidad dada.
+
+```ts
+world.transform.getWorldPosition(eid: Eid, out?: Vec3): Vec3
+```
+
+### getWorldTransform
+
+Devuelve la matriz de transformación del mundo de la entidad dada.
+
+```ts
+world.transform.getWorldTransform(eid: Eid, out?: Mat4): Mat4
+```
+
+### setLocalPosition
+
+Establece la posición local de la entidad dada.
+
+```ts
+world.transform.setLocalPosition(eid: Eid, position: Vec3Source): void
+```
+
+### setLocalTransform
+
+Establece la matriz de transformación local de la entidad dada.
+
+```ts
+world.transform.setLocalTransform(eid: Eid, mat4: Mat4): void
+```
+
+### setWorldPosition
+
+Establece la posición mundial de la entidad dada.
+
+```ts
+world.transform.setWorldPosition(eid: Eid, position: Vec3Source): void
+```
+
+### setWorldTransform
+
+Establece la matriz de transformación global de la entidad dada.
+
+```ts
+world.transform.setWorldTransform(eid: Eid, mat4: Mat4): void
+```
+
+### getWorldQuaternion
+
+Devuelve el cuaternión del mundo de la entidad dada.
+
+```ts
+world.transform.getWorldQuaternion(eid: Eid, out?: Quat): Quat
+```
+
+### setWorldQuaternion
+
+Establece el cuaternión del mundo de la entidad dada.
+
+```ts
+world.transform.setWorldQuaternion(eid: Eid, rotation: QuatSource): void
+```
+
+### translateSelf
+
+Traduce la entidad en su propio espacio local utilizando la entrada parcial Vec3Source.
+
+```ts
+world.transform.translateSelf(eid: Eid, translation: Parcial<Vec3Source>): void
+```
+
+### translateLocal
+
+Traduce la entidad en el espacio local de su padre utilizando la entrada parcial Vec3Source.
+
+```ts
+world.transform.translateLocal(eid: Eid, translation: Parcial<Vec3Source>): void
+```
+
+### translateWorld
+
+Traduce la entidad en el espacio del mundo utilizando la entrada parcial Vec3Source.
+
+```ts
+world.transform.translateWorld(eid: Eid, translation: Parcial<Vec3Source>): void
+```
+
+### rotateSelf
+
+Rota la entidad alrededor de sus propios ejes utilizando un cuaternión.
+
+```ts
+world.transform.rotateSelf(eid: Eid, rotation: QuatSource): void
+```
+
+### rotarLocal
+
+Rota la entidad respecto a su espacio local utilizando un cuaternión.
+
+```ts
+world.transform.rotateLocal(eid: Eid, rotation: QuatSource): void
+```
+
+### ver
+
+Orienta la entidad hacia otra entidad.
+
+```ts
+world.transform.lookAt(eid: Eid, other: Eid): void
+```
+
+### lookAtLocal
+
+Orienta la entidad hacia una posición en el espacio local.
+
+```ts
+world.transform.lookAtLocal(eid: Eid, position: Vec3Source): void
+```
+
+### lookAtWorld
+
+Orienta la entidad hacia una posición en el espacio del mundo.
+
+```ts
+world.transform.lookAtWorld(eid: Eid, position: Vec3Source): void
+```

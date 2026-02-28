@@ -1,0 +1,54 @@
+---
+id: time
+description: Cette bibliothèque comprend des propriétés et des fonctions qui permettent de gérer le temps.
+---
+
+# temps
+
+## Description
+
+{frontMatter.description}
+
+## Propriétés
+
+### temps.mondial.écoulé
+
+Le nombre de millisecondes pendant lesquelles le monde a fonctionné, à l'exclusion du temps passé pendant que le monde était en pause.
+
+### temps.mondial.delta
+
+Nombre de millisecondes écoulées depuis l'image précédente, à l'exclusion des sauts de temps dus à la mise en pause.
+
+### temps.mondial.absolu
+
+Le nombre de millisecondes qui se sont écoulées depuis la création du monde.
+
+### world.time.absoluteDelta
+
+Le nombre de millisecondes depuis la dernière image, y compris les grands sauts de temps si le monde reprend après avoir été mis en pause.
+
+## Fonctions
+
+### setTimeout
+
+Exécute une fonction une fois après un délai spécifié.
+
+```ts
+world.time.setTimeout(callback : function, delay : number) // -> Timeout
+```
+
+### clearTimeout
+
+Arrête un délai ou un intervalle préalablement défini, empêchant l'exécution de la fonction spécifiée si le délai n'est pas encore écoulé.
+
+```ts
+world.time.clearTimeout(timeout : Timeout) // -> void
+```
+
+### setInterval
+
+Exécute une fonction de manière répétée à des intervalles de temps spécifiés.
+
+```ts
+world.time.setInterval(callback : function, interval : number) // -> Intervalle
+```

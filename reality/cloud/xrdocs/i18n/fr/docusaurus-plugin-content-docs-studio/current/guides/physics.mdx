@@ -1,0 +1,110 @@
+---
+id: physics
+description: >-
+  Studio dispose d'un système physique intégré destiné à gérer des interactions
+  robustes et dynamiques dans votre scène.
+---
+
+# Physique
+
+## Introduction
+
+{frontMatter.description}
+
+## Ajout de collisionneurs
+
+:::note
+
+- Les collisionneurs peuvent être imbriqués dans certaines configurations, mais pas dans d'autres. Par exemple, un collisionneur statique à l'intérieur d'un collisionneur dynamique, ou deux collisionneurs dynamiques imbriqués, pourraient mal se comporter.
+- À moins que vous ne disposiez d'un composant géométrique qui soit également une forme de collision valide, vous devrez spécifier une forme manuellement. Par exemple, il n'existe pas de collisionneur compatible avec la primitive tétraèdre.
+- La génération de collisionneurs de modèles GLTF pour les modèles complexes peut affecter les performances.
+  :: :
+
+### Exemple
+
+L'exemple qui suit montre comment ajouter un collisionneur à une entité au moment de l'exécution.
+
+```ts
+ecs.Collider.set(world, component.eid, {
+    shape : ecs.ColliderShape.Sphere,
+    type : ecs.ColliderType.Dynamic,
+    radius : 1,
+    mass : 1,
+    eventOnly : false,
+    lockXAxis : false,
+    lockYAxis : false,
+    lockZAxis : false,
+    friction : 0.5,
+    restitution : 0.5,
+    linearDamping : 0,
+    angularDamping : 0,
+})
+```
+
+## Types de collisionneurs statiques, dynamiques et cinématiques
+
+Dans les simulations physiques, les collisionneurs définissent la forme physique d'un objet pour la détection des collisions. Ils peuvent être statiques, dynamiques ou cinématiques, selon la manière dont ils interagissent avec les forces et l'environnement.
+
+- **Statique:** Un collisionneur qui ne réagit pas aux forces externes ou aux simulations de la physique. Il reste en place, ce qui le rend idéal pour les objets inamovibles tels que les murs, les sols ou les terrains.
+- \*\*Dynamique : un collisionneur qui réagit aux forces externes telles que la gravité, les collisions ou les impulsions. Il convient aux objets mobiles tels que les joueurs, les ennemis ou les débris.
+- **Kinematic:** Un collisionneur dont le mouvement n'est pas affecté par des forces, mais est entièrement contrôlé par l'utilisateur de manière programmatique. Contrairement aux corps statiques, les corps cinématiques peuvent se déplacer et affecter d'autres corps dynamiques par le biais de collisions.
+
+### Événement seulement
+
+Le paramètre `eventOnly` convertit un collider en une zone de déclenchement - il ne bloque plus ou ne réagit plus aux objets physiques mais émet des événements d'entrée et de sortie lorsque d'autres corps physiques interagissent avec lui.
+
+## Fonctions
+
+Vous pouvez appliquer directement des forces (linéaires et angulaires) à n'importe quelle entité dotée d'un collisionneur physique. Ces forces sont appliquées lors de la prochaine mise à jour de la simulation physique, qui a lieu à intervalles réguliers. La fonction accepte un vecteur 3D pour définir la direction et l'ampleur de la force.
+
+### Vélocité
+
+#### Linéaire
+
+```ts
+ecs.physics.setLinearVelocity(world, component.eid, forceX, forceY, forceZ)
+```
+
+#### Angulaire
+
+```ts
+ecs.physics.setAngularVelocity(world, component.eid, forceX, forceY, forceZ)
+```
+
+### Force et couple
+
+#### La force
+
+```ts
+ecs.physics.applyForce(world, component.eid, forceX, forceY, forceZ)
+```
+
+#### Couple
+
+```ts
+ecs.physics.applyTorque(world, component.eid, torqueX, torqueY, torqueZ)
+```
+
+### Impulsion
+
+:::tip
+:::tip
+Cette fonction est utilisée pour appliquer une force d'impulsion unique à un collisionneur physique, en modifiant sa vitesse sur la base du vecteur d'impulsion donné.
+Cette méthode est utile pour les événements qui nécessitent une réaction rapide et unique, comme un saut, un coup de poing ou une poussée soudaine.
+:::
+
+```ts
+ecs.physics.applyImpulse(world, component.eid, impulseX, impulseY, impulseZ)
+```
+
+### Gravité
+
+#### Facteur de gravité
+
+Dans chaque scène, la gravité agit comme une force constante connue sous le nom de "gravité mondiale". Cette force affecte tous les collisionneurs de la scène qui sont définis comme dynamiques. Pour personnaliser l'impact de la gravité mondiale sur un collisionneur donné, nous fournissons un attribut appelé "facteur de gravité".
+
+#### Définir la gravité du monde
+
+```ts
+ecs.physics.setWorldGravity(world, gravity)
+```

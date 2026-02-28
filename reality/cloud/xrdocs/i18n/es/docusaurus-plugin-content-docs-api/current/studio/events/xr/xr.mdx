@@ -1,0 +1,21 @@
+import {EventExample} from '@site/src/components/event-example'
+
+# Eventos XR
+
+Los eventos XR se reenvían desde el motor de la 8ª Pared. Se emiten en la entidad de la cámara y burbujean hasta el [world.events.globalId](/api/studio/world/events/#properties).
+
+Consulte los eventos del ciclo de vida de [Efectos del mundo](world), [Efectos de la cara](face), [Objetivos de imagen](image-targets) y [VPS](vps).
+
+## Eventos
+
+### REALITY_READY
+
+Este evento se emite cuando 8th Wall Web se ha inicializado y se ha procesado correctamente al menos un fotograma. Este es el momento recomendado en el que se debe ocultar cualquier permiso/carga de la interfaz de usuario.
+
+#### Propiedades
+
+Ninguna.
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="REALITY_READY" target="world.events.globalId" hasPayload={false} callbackBody={`console.log('Reality ready')`} />

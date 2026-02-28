@@ -1,0 +1,27 @@
+---
+id: torus-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# トーラス・ジオメトリー
+
+## 商品説明
+
+このコンポーネントは、エンティティのジオメトリを確立する。
+
+## プロパティ一覧
+
+| Property   | Type   | 初期値     | 商品説明          |
+| ---------- | ------ | ------- | ------------- |
+| radius     | 番号     | 1       | トーラスの半径。      |
+| チューブ半径     | 番号     | 1       | チューブの半径。      |
+
+## 関数一覧
+
+<ComponentFunctions
+    name="TorusGeometry"
+    properties={{ radius: 1 }}
+    mutate={`cursor.radius += 1;
+    return false;`}
+/>

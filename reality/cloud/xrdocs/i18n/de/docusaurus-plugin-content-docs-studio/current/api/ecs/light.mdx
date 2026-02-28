@@ -1,0 +1,71 @@
+---
+id: light
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Licht
+
+## Beschreibung
+
+Diese Komponente lässt eine Entität Licht ausstrahlen.
+
+## Eigenschaften
+
+| Eigenschaft             | Typ            | Standard         | Beschreibung                                                                                                                         |
+| ----------------------- | -------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| type (erforderlich)     | String         | Richtungsweisend | Unterstützte Typen sind: "gerichtet", "Punkt" und "Umgebung".                                                                        |
+| castShadow              | boolean        | true             | Wenn die Lichtquelle Schatten werfen soll.                                                                                           |
+| Intensität              | Nummer         | 0.5              | Die Emissionsstärke.                                                                                                                 |
+| r                       | Nummer (0-255) | 255              | Die Menge an Rot, die das Licht ausstrahlt.                                                                                          |
+| g                       | Nummer (0-255) | 255              | Die Menge an Grün, die das Licht ausstrahlt.                                                                                         |
+| b                       | Nummer (0-255) | 255              | Die Menge an blauem Licht, die das Licht ausstrahlt.                                                                                 |
+| shadowBias              | Nummer         | \-0.005          | Wie viel von der normalisierten Tiefe addiert oder subtrahiert werden soll, wenn entschieden wird, ob eine Fläche im Schatten liegt. |
+| shadowNormalBias        | Nummer         | 0                | Wie stark die Position, die zur Abfrage der Schattenkarte verwendet wird, entlang der Objektnormalen versetzt ist.                   |
+| shadowRadius            | Nummer         | 1                | Der Radius des Schattens                                                                                                             |
+| shadowAutoUpdate        | boolean        | true             | Soll der Schatten automatisch berechnet und aktualisiert werden?                                                                     |
+| shadowBlurSamples       | Nummer         | 8                | Die Anzahl der Samples, die für die Berechnung der virtuellen Schattenkarte verwendet werden sollen.                                 |
+| shadowMapSizeHeight     | Nummer         | 1024             | Die Höhe der Schattenkarte. (Werte **müssen** Potenzen von 2 sein)                                                                   |
+| shadowMapSizeWidth      | Nummer         | 1024             | Die Breite der Schattenkarte. (Werte **müssen** Potenzen von 2 sein)                                                                 |
+| shadowCameraNear        | Nummer         | 0.5              | Kamerastumpf in der Nähe des Fensters für die Schattenberechnung                                                                     |
+| shadowCameraFar         | Nummer         | 200              | Kamerastumpf-Fernausschnitt für die Berechnung von Schatten                                                                          |
+| shadowCameraLeft        | Nummer         | \-50             | Linker Bereich des Kamerastumpfes für die Schattenberechnung                                                                         |
+| shadowCameraRight       | Nummer         | 50               | Rechter Kamerastumpf für die Schattenberechnung                                                                                      |
+| shadowCameraBottom      | Nummer         | \-50             | Unterer Bereich des Kamerastumpfes für die Berechnung von Schatten                                                                   |
+| shadowCameraTop         | Nummer         | 50               | Oberer Bereich des Kamerastumpfes für die Schattenberechnung                                                                         |
+| ZielX                   | Nummer         | 0                | Die Ziel-X-Koordinate des Lichts (nur Richtungslicht)                                                                                |
+| ZielY                   | Nummer         | 0                | Die Y-Zielkoordinate des Lichts (nur Richtungslicht)                                                                                 |
+| ZielZ                   | Nummer         | 0                | Die Ziel-Z-Koordinate des Lichts (nur Richtungslicht)                                                                                |
+
+## Funktionen
+
+<ComponentFunctions
+    name="Licht"
+    properties={{
+        type: "directional",
+        castShadow: true,
+        intensity: 0.5,
+        r: 255,
+        g: 255,
+        b: 255,
+        shadowBias: -0.005,
+        shadowNormalBias: 0,
+        shadowRadius: 1,
+        shadowAutoUpdate: true,
+        shadowBlurSamples: 8,
+        shadowMapSizeHeight: 1024,
+        shadowMapSizeWidth: 1024,
+        shadowCameraNear: 0.5,
+        shadowCameraFar: 200,
+        shadowCameraLeft: -50,
+        shadowCameraRight: 50,
+        shadowCameraBottom: -50,
+        shadowCameraTop: 50,
+        targetX: 0,
+        targetY: 0,
+        targetZ: 0
+    }}
+    mutate={`cursor.intensity = 1.0;
+    cursor.castShadow = false;
+    return false;`}
+/>

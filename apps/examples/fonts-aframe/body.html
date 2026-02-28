@@ -1,0 +1,132 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<div class="over">
+  <h3>A-Frame: Custom Fonts</h3>
+</div>
+
+<a-scene
+  xrextras-gesture-detector
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  xrweb="allowedDevices: any">
+
+  <!-- We can define assets here to be loaded when A-Frame initializes -->
+  <a-assets>
+    <!-- Credit to Poly by Google for the model: https://poly.google.com/view/5ZMAz7_ucTn -->
+    <a-asset-item id="bookModel" src="assets/books.glb"></a-asset-item>
+    
+    <!--Font file from https://rawgit.com/mrdoob/three.js/dev/examples/fonts/optimer_bold.typeface.json" -->
+    <!--Asset bundles can't have a .json extension, so rename to ".jsonasset" with optimer_bold.typeface.json as the "main file"-->
+    <a-asset-item id="optimerBoldFont" src="./assets/fonts/optimer_bold.jsonasset"></a-asset-item>
+  </a-assets>
+
+  <a-camera
+    id="camera"
+    position="0 8 8"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;">
+  </a-camera>
+
+  <a-entity
+    light="
+      type: directional;
+      intensity: 0.8;
+      castShadow: true;
+      shadowMapHeight:2048;
+      shadowMapWidth:2048;
+      shadowCameraBottom: -7;
+      shadowCameraLeft: -7;
+      target: #model;"
+    xrextras-attach="target: model; offset: 1 15 3;"
+    shadow>
+  </a-entity>
+
+  <a-light type="ambient" intensity="0.75"></a-light>
+  
+  <a-entity 
+    id="model" 
+    gltf-model="#bookModel"
+    position="0 0 -7"
+    rotation="0 -55 0"
+    shadow="receive: false"
+    xrextras-hold-drag 
+    scale="11 11 11">
+  </a-entity>
+
+  <a-entity scale="3 3 3" xrextras-attach="target: model; offset: 0 -0.75 6" shadow="receive: false">
+
+    <a-entity 
+      scale="5 5 5"
+      position="0 2.55 0"
+      msdf-font>
+    </a-entity>
+
+    <!-- text-geometry component, default font -->
+    <!-- See https://github.com/supermedium/superframe/tree/master/components/text-geometry/ -->
+    <a-entity 
+      position="-1.65 2.2 0"
+      scale="0.4 0.4 0.4"
+      material="color: #56cfe1"
+      text-geometry="value: text-geometry, default font; height: 0.3">
+    </a-entity>   
+
+    <!-- text-geometry component, custom font using local json font asset. -->
+    <!-- See https://github.com/supermedium/superframe/tree/master/components/text-geometry/ -->
+    <a-entity
+      position="-1.65 1.95 0"
+      scale = "0.4 0.4 0.4"
+      material="color: #16db93"
+      text-geometry="font: #optimerBoldFont; value: text-geometry, custom font;">
+    </a-entity>
+
+    <!-- AFrame text component using one of A-Frame’s built-in fonts. Pulled in from AFrame CDN -->
+    <!-- See https://aframe.io/docs/1.0.0/components/text.html#stock-fonts-->
+    <a-entity
+      position="0 1.85 0"
+      scale="5 5 5"
+      text="font: dejavu; align: center; letterSpacing: 0.2; color: #83e377; value: text component, custom font">
+    </a-entity>
+
+    <!-- AFrame built-in text component using custom font / fontImage served locally -->
+    <!-- See https://aframe.io/docs/1.0.0/components/text.html#custom-fonts -->
+    <a-entity
+      position="0 1.635 0"
+      scale="3 3 3"
+      text-font="color: #b9e769">
+    </a-entity>
+
+    <!-- a-text primitive, default font. Wraps the "text" component above -->
+    <a-text
+      position="0 1.4 0"
+      color="#efea5a"
+      align="center"
+      width="4.5"
+      value="<a-text> primitive, default font">
+    </a-text>
+    
+    <!-- See https://github.com/lojjic/aframe-troika-text -->
+    <a-entity
+      position="0 1.2 0"
+      troika-text="value: troika text, default font; align: center; color: #f1c453"
+      troika-text-material="shader: standard; metalness: 0.1;">
+    </a-entity>
+    
+    <!-- Also using https://github.com/lojjic/aframe-troika-text but with a custom font asset (.otf) served locally-->
+    <a-entity
+      position="0 0.975 0"
+      troika-text-custom="color: #f29e4c">
+    </a-entity>
+    
+  </a-entity>
+
+  <a-plane
+    id="ground" 
+    rotation="-90 0 0" 
+    width="1000" 
+    height="1000" 
+    material="shader: shadow" 
+    shadow>
+  </a-plane>
+</a-scene>

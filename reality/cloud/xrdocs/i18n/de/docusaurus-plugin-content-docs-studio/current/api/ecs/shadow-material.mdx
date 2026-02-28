@@ -1,0 +1,40 @@
+---
+id: shadow-material
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# SchattenMaterial
+
+## Beschreibung
+
+Diese Komponente erstellt ein Material, das nur Schatten auf ein Objekt mit Geometrie rendert.
+
+## Eigenschaften
+
+| Eigenschaft   | Typ     | Standard      | Beschreibung                                                                                         |
+| ------------- | ------- | ------------- | ---------------------------------------------------------------------------------------------------- |
+| r             | Nummer  | 0             | Wert des roten Kanals des Materials [0...255]                                                        |
+| g             | Nummer  | 0             | Grüner Kanalwert des Materials [0...255]                                                             |
+| b             | Nummer  | 0             | Wert des blauen Kanals des Materials [0...255]                                                       |
+| Opazität      | Nummer  | 0             | Gesamt-Alpha/Transparenz des Materials [0...1]                                                       |
+| Seite         | String  | 'Vorderseite' | Welche Seiten von Flächen gerendert werden. Wählen Sie zwischen Vorderseite, Rückseite oder doppelt. |
+| depthTest     | boolean | true          | ob beim Rendern dieses Materials die Tiefe getestet werden soll                                      |
+| depthWrite    | boolean | true          | ob sich das Rendern dieses Materials auf den Tiefenpuffer auswirkt                                   |
+
+## Funktionen
+
+<ComponentFunctions
+    name="ShadowMaterial"
+    properties={{
+        r: 0,
+        g: 0,
+        b: 0,
+        opacity: 0.5,
+    }}
+    mutate={`cursor.opacity = 0.5;
+    cursor.r = 128;
+    cursor.g = 128;
+    cursor.b = 128;
+    return false;`}
+/>

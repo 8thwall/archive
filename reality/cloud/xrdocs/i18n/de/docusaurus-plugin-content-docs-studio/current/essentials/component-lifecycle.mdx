@@ -1,0 +1,61 @@
+---
+id: component-lifecycle
+description: >-
+  Lifecyle-Ereignisse können verwendet werden, um das Verhalten einer Komponente
+  beim Hinzufügen, Ticken oder Entfernen auszulösen.
+sidebar_position: 55
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Lebenszyklus einer Komponente
+
+## Einführung
+
+{frontMatter.description}
+
+## Beispiel
+
+```ts
+const MyComponent = ecs.registerComponent({
+  name: 'My Component',
+  add: (world, component) => {
+    console.log('My component was added to', component.eid) 
+  },
+  tick: (world, component) => {
+    console.log('My tick function is running on', component.eid) 
+  },
+  remove: (world, component) => {
+    console.log('My component was removed from', component.eid) 
+  },
+})
+```
+
+## Methoden
+
+| Methode | Beschreibung                                                                                                                                                                                               |
+| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| add     | Wird einmal aufgerufen, wenn die Komponente initialisiert wird. Zum Einrichten des Anfangszustands und zum Instanziieren von Variablen                                                                     |
+| remove  | Wird aufgerufen, wenn die Komponente von der Entität entfernt wird oder wenn die Entität von der Szene abgetrennt wird. Wird verwendet, um alle vorherigen Änderungen an der Entität rückgängig zu machen. |
+| tick    | Wird bei jeder Renderschleife oder jedem Tick der Szene aufgerufen. Wird für kontinuierliche Änderungen oder Kontrollen verwendet.                                                                         |
+
+### Parameter
+
+| Eigentum  | Typ                                 | Beschreibung                         |
+| --------- | ----------------------------------- | ------------------------------------ |
+| world     | [World](/api/studio/world)          | Hinweis auf die Welt.                |
+| component | [ComponentObject](#componentobject) | Verweis auf die aktuelle Komponente. |
+
+### ComponentObject
+
+:::warning
+Verwenden Sie schemaAttribute oder dataAttribute anstelle von eid-, schema- oder data-Eigenschaften in asynchronen Kontexten wie Timern oder Event-Handlern.
+:::
+
+| Eigentum        | Typ             | Beschreibung                                                    |
+| --------------- | --------------- | --------------------------------------------------------------- |
+| eid             | eid             | Die Entitäts-ID der aktuellen Komponente                        |
+| Schema          | Cursor          | Verweis auf das Schema der aktuellen Entität                    |
+| schemaAttribute | ComponentObject | Verweis auf das Schema der aktuellen Komponente im World Scope. |
+| data            | Cursor          | Verweis auf die Daten der aktuellen Entität                     |
+| dataAttribute   | ComponentObject | Verweis auf die Daten der aktuellen Komponente im World Scope.  |

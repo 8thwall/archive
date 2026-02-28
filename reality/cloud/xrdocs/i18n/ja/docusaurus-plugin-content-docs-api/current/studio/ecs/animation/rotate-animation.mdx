@@ -1,0 +1,40 @@
+---
+id: rotate-animation
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import RotateAnimationTable from "../../../../gen/tables/RotateAnimation.md"
+
+# 回転アニメーション
+
+## 説明
+
+このコンポーネントは、エンティティにアニメーションを作成します。
+
+## プロパティ
+
+<RotateAnimationTable />
+
+## 機能
+
+<ComponentFunctions
+    name="RotateAnimation"
+    properties={{
+        fromX: 0,
+        fromY: 0,
+        fromZ: 0,
+        toX: 0,
+        toY: 0,
+        toZ: 0,
+        autoFrom: false,
+        duration: 1000,
+        loop: true,
+        reverse: false,
+        easeIn: false,
+        easeOut: false,
+        easingFunction: "Quadratic"
+    }}
+    mutate={`カーソル.toZ = 90;
+    cursor.duration = 1500;
+    return false;`}
+/>

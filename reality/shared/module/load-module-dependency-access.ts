@@ -1,0 +1,1 @@
+../../cloud/aws/edge-lambda/serve-modules/src/shared/module/load-module-dependency-access.ts

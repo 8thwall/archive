@@ -1,0 +1,141 @@
+<a-scene 
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  xrextras-pause-on-hidden
+  xrface="mirroredDisplay: true; meshGeometry: eyes, face, mouth; cameraDirection: front; allowedDevices: any;">
+  
+  <a-assets>
+    <img id="smoke-tex" src="../assets/Custom/lava/smoke.png">
+    <img id="lava-tex" src="../assets/Custom/lava/lava.jpg">
+    <img id="vortex-tex" src="../assets/Custom/texture-vortex/stripes-green.png">
+    <video id="beach-v" muted autoplay crossorigin="anonymous" loop="true"
+      src="../assets/Custom/videos/beach.mp4">
+    </video>
+    <video id="blue-v" muted autoplay crossorigin="anonymous" loop="true"
+      src="../assets/Custom/videos/silky-blue.mp4">
+    </video>
+    <video id="dodeca-v" muted autoplay crossorigin="anonymous" loop="true"
+      src="../assets/Custom/videos/tunnel-dodeca.mp4">
+    </video>
+    <video id="tri-v" muted autoplay crossorigin="anonymous" loop="true"
+      src="../assets/Custom/videos/tunnel-tri.mp4">
+    </video>
+  </a-assets>
+  
+  <!-- Material resources will be loaded incrementally and will not block loading of the scene. -->
+  <xrextras-resource id="metal" src="../assets/PBR/Metallic.png"></xrextras-resource>
+  
+  <xrextras-resource id="alpha-soft-eyes" src="../assets/Alpha/soft-eyes-mouth.png"></xrextras-resource>
+  <xrextras-resource id="alpha-softer" src="../assets/Alpha/softer.png"></xrextras-resource>
+  <xrextras-resource id="alpha-soft-mouth" src="../assets/Alpha/soft-mouth.png"></xrextras-resource>
+  <xrextras-resource id="alpha-mouth-fill" src="../assets/Alpha/mouth-filled.png"></xrextras-resource>
+  <xrextras-resource id="alpha-hero-eyes" src="../assets/Alpha/hero-mask-eyes.png"></xrextras-resource>
+  <xrextras-resource id="alpha-hero-mask" src="../assets/Alpha/hero-mask.png"></xrextras-resource>
+  <xrextras-resource id="alpha-half-mask" src="../assets/Alpha/half-mask.png"></xrextras-resource>
+  <xrextras-resource id="alpha-lips" src="../assets/Alpha/lips-soft-mouth.png"></xrextras-resource>
+  <xrextras-resource id="alpha-band" src="../assets/Alpha/eye-band.png"></xrextras-resource>
+  <xrextras-resource id="alpha-trees" src="../assets/Alpha/palm-tree.png"></xrextras-resource>
+  
+  <xrextras-resource id="cracked-t" src="../assets/PBR/cracked/BaseColor.png"></xrextras-resource>
+  <xrextras-resource id="cracked-r" src="../assets/PBR/cracked/Roughness.png"></xrextras-resource>
+  <xrextras-resource id="cracked-n" src="../assets/PBR/cracked/Normal.png"></xrextras-resource>
+  <xrextras-resource id="gray-t" src="../assets/PBR/gross-gray/BaseColor.png"></xrextras-resource>
+  <xrextras-resource id="gray-r" src="../assets/PBR/gross-gray/Roughness.png"></xrextras-resource>
+  <xrextras-resource id="gray-n" src="../assets/PBR/gross-gray/Normal.png"></xrextras-resource>
+  <xrextras-resource id="koi-t" src="../assets/PBR/porcelain-koi/BaseColor.png"></xrextras-resource>
+  <xrextras-resource id="koi-r" src="../assets/PBR/porcelain-koi/Roughness.png"></xrextras-resource>
+  <xrextras-resource id="koi-n" src="../assets/PBR/porcelain-koi/Normal.png"></xrextras-resource>
+  <xrextras-resource id="sakura-t" src="../assets/PBR/porcelain-sakura/BaseColor.png"></xrextras-resource>
+  <xrextras-resource id="sakura-r" src="../assets/PBR/porcelain-sakura/Roughness.png"></xrextras-resource>
+  <xrextras-resource id="sakura-n" src="../assets/PBR/porcelain-sakura/Normal.png"></xrextras-resource>
+  <xrextras-resource id="waves-t" src="../assets/PBR/porcelain-waves/BaseColor.png"></xrextras-resource>
+  <xrextras-resource id="waves-r" src="../assets/PBR/porcelain-waves/Roughness.png"></xrextras-resource>
+  <xrextras-resource id="waves-n" src="../assets/PBR/porcelain-waves/Normal.png"></xrextras-resource>
+  <xrextras-resource id="lips-t" src="../assets/PBR/lip-gloss/BaseColor.png"></xrextras-resource>
+  <xrextras-resource id="lips-m" src="../assets/PBR/lip-gloss/Metallic.png"></xrextras-resource>
+  <xrextras-resource id="lips-r" src="../assets/PBR/lip-gloss/Roughness.png"></xrextras-resource>
+  <xrextras-resource id="lips-n" src="../assets/PBR/lip-gloss/Normal.png"></xrextras-resource>
+  <xrextras-resource id="ice-t" src="../assets/PBR/rock-ice/BaseColor.png"></xrextras-resource>
+  <xrextras-resource id="ice-r" src="../assets/PBR/rock-ice/Roughness.png"></xrextras-resource>
+  <xrextras-resource id="ice-n" src="../assets/PBR/rock-ice/Normal.png"></xrextras-resource>
+  <xrextras-resource id="bright-t" src="../assets/Tattoos/uv-bright.png"></xrextras-resource>
+  <xrextras-resource id="black-t" src="../assets/Tattoos/uv-black.png"></xrextras-resource>
+  <xrextras-resource id="tattoo-t" src="../assets/Tattoos/8-tat.png"></xrextras-resource>
+  
+  <xrextras-pbr-material id="cracked"
+    tex="#cracked-t" roughness="#cracked-r" normals="#cracked-n"
+    metalness="#metal" alpha="#alpha-soft-eyes"  opacity=".99">
+  </xrextras-pbr-material>
+  
+  <xrextras-pbr-material id="gray"
+    tex="#gray-t" roughness="#gray-r" normals="#gray-n"
+    metalness="#metal" alpha="#alpha-soft-eyes"  opacity=".99">
+  </xrextras-pbr-material>
+  
+  <xrextras-pbr-material id="koi"
+    tex="#koi-t" roughness="#koi-r" normals="#koi-n"
+    metalness="#metal" alpha="#alpha-half-mask"  opacity=".99">
+  </xrextras-pbr-material>
+  
+  <xrextras-pbr-material id="sakura"
+    tex="#sakura-t" roughness="#sakura-r" normals="#sakura-n"
+    metalness="#metal" alpha="#alpha-soft-eyes"  opacity=".99">
+  </xrextras-pbr-material>
+  
+  <xrextras-pbr-material id="waves"
+    tex="#waves-t" roughness="#waves-r" normals="#waves-n"
+    metalness="#metal" alpha="#alpha-soft-eyes"  opacity=".99">
+  </xrextras-pbr-material>
+  
+  <xrextras-pbr-material id="ice"
+    tex="#ice-t" roughness="#ice-r" normals="#ice-n"
+    metalness="#metal" alpha="#alpha-trees"  opacity=".9">
+  </xrextras-pbr-material>  
+  
+  <xrextras-pbr-material id="lips"
+    tex="#lips-t" roughness="#lips-r" normals="#lips-n"
+    metalness="#lips-m" alpha="#alpha-lips"  opacity=".3">
+  </xrextras-pbr-material>  
+  
+  <xrextras-basic-material id="black"  tex="#black-t" alpha="#alpha-soft-eyes" opacity="0.9">
+  </xrextras-basic-material>
+  <xrextras-basic-material id="bright"  tex="#bright-t" alpha="#alpha-soft-eyes" opacity="0.9">
+  </xrextras-basic-material>
+  <xrextras-basic-material id="tattoo"  tex="#tattoo-t" alpha="#alpha-soft-eyes" opacity="0.9">
+  </xrextras-basic-material>
+  
+  <xrextras-video-material 
+    id="beach" video="#beach-v" alpha="#alpha-soft-eyes" autoplay="true" opacity="0.8">
+  </xrextras-video-material>
+  <xrextras-video-material 
+    id="blue" video="#blue-v" alpha="#alpha-soft-eyes" autoplay="true" opacity="0.8">
+  </xrextras-video-material>
+  <xrextras-video-material 
+    id="dodeca" video="#dodeca-v" alpha="#alpha-hero-mask" autoplay="true" opacity="0.8">
+  </xrextras-video-material>
+  <xrextras-video-material 
+    id="tri" video="#tri-v" alpha="#alpha-band" autoplay="true" opacity="0.99">
+  </xrextras-video-material>
+  
+  <xrextras-capture-button></xrextras-capture-button>
+
+  <xrextras-capture-config
+    watermark-image-url="./../assets/Logos/8logo.png"
+    watermark-max-width="100"
+    watermark-max-height="10"
+  ></xrextras-capture-config>
+  
+  <xrextras-capture-preview></xrextras-capture-preview>
+  
+  <a-camera look-controls="enabled: false" wasd-controls="enabled: false" position="0 1.6 0"></a-camera>
+  
+  <xrextras-faceanchor id="face">
+    <xrextras-face-mesh 
+      material="shader: cosmic-waves; alphaTexture: #alpha-hero-eyes; transparent: true;">
+    </xrextras-face-mesh>
+  </xrextras-faceanchor>
+  
+  <a-light type="directional" target="#face" position="0 1.8 3" intensity="0.8"></a-light>
+  <a-light type="ambient" intensity="0.5"></a-light>
+</a-scene>

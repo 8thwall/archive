@@ -1,0 +1,141 @@
+---
+id: world
+description: >-
+  Diese Bibliothek enthält Eigenschaften und Funktionen im Zusammenhang mit der
+  Welt.
+---
+
+# Welt
+
+## Beschreibung
+
+{frontMatter.description}
+
+## Eigenschaften
+
+| Eigentum    | Typ          | Beschreibung                |
+| ----------- | ------------ | --------------------------- |
+| allEntities | Einstellung  | Menge aller Szenenobjekte.  |
+
+## Funktionen
+
+### createEntity
+
+Erstellen Sie eine neue Entität. Geben Sie optional eine Prefab-Entität oder einen Prefab-Namen an, um eine Instanz dieses Prefab zu erzeugen.
+
+```ts
+world.createEntity(prefabOrPrefabName?: Eid | string) // -> eid
+```
+
+### deleteEntity
+
+Eine bestehende Entität löschen.
+
+```ts
+world.deleteEntity(eid) // -> void
+```
+
+### getChildren
+
+Kinder einer Entität abrufen.
+
+```ts
+world.getChildren(eid) // -> Generator<Eid>
+```
+
+### getParent
+
+Ermittelt die Muttergesellschaft einer Entität.
+
+```ts
+world.getParent(eid) // -> eid
+```
+
+### setParent
+
+Legen Sie das Elternteil einer Entität fest.
+
+```ts
+world.setParent(eid, parent: eid) // -> void
+```
+
+### getWorldTransform
+
+Ermittelt die Welttransformation einer Entität. **Kopiert die WeltTransformation des Ziels in den zweiten Parameter**.
+
+```ts
+world.getWorldTransform(eid, transform: Mat4) // -> void
+```
+
+### setTransform
+
+Setzen der Transformation einer Entität.
+
+```ts
+world.setTransform(eid, transform: Mat4) // -> void
+```
+
+### setPosition
+
+Position eines Objekts festlegen.
+
+```ts
+world.setPosition(eid, x: Zahl, y: Zahl, z: Zahl) // -> void
+```
+
+### setQuaternion
+
+Festlegen der Rotation eines Objekts.
+
+```ts
+world.setQuaternion(eid, x: Zahl, y: Zahl, z: Zahl, w: Zahl) // -> void
+```
+
+### setScale
+
+Maßstab eines Objekts festlegen.
+
+```ts
+world.setScale(eid, x: Zahl, y: Zahl, z: Zahl) // -> void
+```
+
+### normalizeQuaternion
+
+Normalisiert die Quaternion einer Entität.
+
+```ts
+world.normalizeQuaternion(eid) // -> void
+```
+
+### getInstanceEntity
+
+Ermittelt die entsprechende Instanz-Entität aus einer Voreinstellungs-Instanzhierarchie unter Angabe der Wurzelinstanz und einer Quell-Voreinstellung oder einer Voreinstellungs-Unterentität.
+
+```ts
+world.getInstanceEntity(prefabInstance: Eid, prefabSourceEntity: Eid) // -> Eid
+```
+
+### Strahlenübertragung
+
+Führen Sie einen Raycast von einer bestimmten Position und Richtung aus.
+
+```ts
+world.raycast(origin: Vec3, direction: Vec3, near: number = 0, far: number = Infinity) // -> IntersectionResult[]
+```
+
+### raycastFrom
+
+Führen Sie einen Raycast von der Position und Vorwärtsrichtung eines Objekts aus.
+
+```ts
+world.raycastFrom(eid: Eid, near: number = 0, far: number = Infinity) // -> IntersectionResult[]
+```
+
+## IntersectionResult
+
+| Eigentum    | Typ          | Beschreibung                                                          |
+| ----------- | ------------ | --------------------------------------------------------------------- |
+| eid?        | Eid          | Die eid des getroffenen Objekts.                                      |
+| Punkt       | Vec3         | Der Ort im Weltraum, an dem die Überschneidung stattgefunden hat.     |
+| Entfernung  | Nummer       | Die Entfernung zwischen der Startposition und der Trefferposition.    |
+| dreiDaten   | Kreuzung     | Die three.js-Kreuzungsdaten.                                          |

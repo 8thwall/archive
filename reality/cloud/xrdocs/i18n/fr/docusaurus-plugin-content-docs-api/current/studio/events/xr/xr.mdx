@@ -1,0 +1,21 @@
+import {EventExample} from '@site/src/components/event-example'
+
+# Événements XR
+
+Les événements XR sont transférés depuis le moteur 8th Wall. Ils sont émis sur l'entité caméra et remontent jusqu'au [world.events.globalId](/api/studio/world/events/#properties).
+
+Voir les événements du cycle de vie pour [World Effects](world), [Face Effects](face), [Image Targets](image-targets), et [VPS](vps).
+
+## Evénements
+
+### REALITY_READY
+
+Cet événement est émis lorsque 8th Wall Web a été initialisé et qu'au moins une image a été traitée avec succès. Il s'agit du délai recommandé pour masquer l'interface utilisateur relative aux autorisations et au chargement.
+
+#### Propriétés
+
+Aucun.
+
+#### Exemple
+
+<EventExample ns="ecs.events" event="REALITY_READY" target="world.events.globalId" hasPayload={false} callbackBody={`console.log('Reality ready')`} />

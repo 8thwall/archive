@@ -1,0 +1,34 @@
+---
+id: look-at-animation
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# アニメーション
+
+## 商品説明
+
+このコンポーネントは、エンティティにアニメーションを作成します。
+
+## プロパティ一覧
+
+| Property   | Type   | 初期値       | 商品説明                                        |
+| ---------- | ------ | --------- | ------------------------------------------- |
+| ターゲット      | イード    | 未定義       | 追跡対象のオブジェクト。                                |
+| ターゲットエックス  | 番号     | 0         | ターゲットの x 位置（ターゲットが指定されていない場合）。              |
+| ターゲットY     | 番号     | 0         | ターゲットの y 位置（ターゲットが指定されていない場合）。              |
+| ターゲットZ     | 番号     | 0         | ターゲットの z 位置（ターゲットが指定されていない場合）。              |
+
+## 関数一覧
+
+<ComponentFunctions
+    name="LookAtAnimation"
+    properties={{
+        targetX: 0,
+        targetY: 0,
+        targetZ: 0
+    }}
+    mutate={`cursor.targetX = 10;
+    cursor.targetY = 5;
+    return false;`}
+/>

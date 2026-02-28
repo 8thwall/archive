@@ -1,0 +1,128 @@
+---
+id: particles
+description: >-
+  Partikel sind ein leistungsstarkes Werkzeug, um jeder Szene dynamische,
+  auffällige Effekte hinzuzufügen. Sie sorgen für Leben und Bewegung und
+  erzeugen alles, von realistischen Umgebungselementen wie Rauch, Feuer und
+  Regen bis hin zu stilisierten Effekten wie Magie, Funken oder Explosionen.
+---
+
+# Partikel
+
+## Einführung
+
+{frontMatter.description} Ob subtil oder dramatisch eingesetzt, Partikel verstärken die Atmosphäre und Interaktivität einer Szene und machen das Erlebnis fesselnder und visuell reicher.
+
+## Hinzufügen von Partikeln
+
+Partikel können dem Objekt über die Studio-Schnittstelle oder im Code hinzugefügt werden. Das Hinzufügen von Komponenten in Studio erfolgt über die Schaltfläche "Neue Komponente".
+
+![particle-new-component.jpg](/images/studio/particle-new-component.jpg)
+![particle-component.png](/images/studio/particle-component.png)
+
+### Beispiel
+
+Das folgende Beispiel zeigt, wie man zur Laufzeit einen ParticleEmitter zu einer Entität hinzufügt.
+
+```ts
+ecs.ParticleEmitter.set(world, component.eid, {
+    stopped: false,
+    emitterLife: 10,
+    particlesPerShot: 5,
+    emitDelay: 1,
+    minimumLifespan: 1,
+    maximumLifespan: 3,
+    mass: 1,
+    gravity: 1,
+    scale: 1,
+    forceX: 0,
+    forceY: 60,
+    forceZ: 0,
+    spread: 120,
+    radialVelocity: 0,
+    spawnAreaType: 'point',
+    resourceType: 'model',
+    resourceUrl: 'https://static.8thwall.app/assets/Moon-lowpoly-v3-yg6nmdc1uj.glb',
+})
+```
+
+## Emission
+
+Emissionsattribute definieren die Art und Weise, wie Partikel in der Welt platziert werden und einige der globalen Attribute, die alle Partikel gleichermaßen betreffen.
+
+- **Stopp:** Wenn diese Option aktiviert ist, wird der Sender nicht emittieren.
+- **Lebensdauer des Strahlers:** Definiert die Lebensdauer des Strahlers.
+- **Partikel pro Schuss:** Wie viele Partikel jedes Mal platziert werden, wenn der Emitter feuert.
+- **Emissionsverzögerung:** Verzögerung zwischen den Emissionen in Sekunden.
+- **Lebensdauer:** Legt einen Bereich fest, der die Zeit angibt, die Partikel in der Szene verbleiben, bevor sie despawnen.
+- **Masse:** Die Masse der einzelnen Teilchen, nur relevant für die Simulation von Physik.
+- **Schwerkraft:** Fügt eine nach unten gerichtete Kraft hinzu, die Teilchen fallen lässt.
+- **Kräfte:** Einfache Kräfte in den relativen Achsen X, Y und Z, die auf jedes Teilchen einwirken.
+- **Spread:** Ist der Winkel, in dem sich die Partikel im Verhältnis zum Emitter bewegen.
+- **Radiale Geschwindigkeit:** Wenn der Wert größer als 0 ist, ändert sich der Typ der Emitter-Geschwindigkeit in radial. Die Radialgeschwindigkeit wird relativ zum Beobachter berechnet und die vektoriellen Kräfte werden durch die Radialkraft beeinflusst.
+
+### Laichgebietstyp
+
+Spawnbereiche ändern die Startkoordinate der Partikel.
+
+- **Punkt:** Spawn wird auf die Koordinaten des Emitters gesetzt.
+- **Box:** Definiert einen Rahmen mit Breite, Höhe und Tiefe.
+- **Sphere:** Definiert einen Spawn-Bereich einer Kugel mit einem bestimmten Radius.
+
+:::note
+Diese Spawnbereiche funktionieren nicht richtig, wenn die Abmessungen auf 0 gesetzt sind.
+:::
+
+### Typ der Begrenzungszone
+
+Bounding Boxes geben die räumlichen Grenzen vor, innerhalb derer die Partikel erzeugt werden.
+
+- **Box:** Definiert einen Rahmen mit Breite, Höhe und Tiefe.
+- **Sphere:** Definiert einen Spawn-Bereich einer Kugel mit einem bestimmten Radius.
+
+:::note
+Diese Begrenzungszonen funktionieren nicht richtig, wenn die Abmessungen auf 0 oder negativ eingestellt sind. Bei der Verwendung von Spawn Area muss die Bounding Zone ein größeres Volumen als die Spawn Area einnehmen.
+:::
+
+### Ressourcentyp
+
+Dieses System ist in der Lage, Glb-Assets und einfache Sprites zu rendern. Wählen Sie ein Modell für 3D oder ein Sprite für 2D-Sprites. Verwenden Sie eine öffentlich zugängliche URL, um das Asset in den Emitter zu laden.
+
+- **Sprites:** Sie haben Überblendungsoptionen, die ähnlich wie die grundlegenden Photoshop-Ebeneneffekte funktionieren. Diese sind sehr praktisch, um visuelle Effekte wie Feuer, Sterne oder Rauch zu erzeugen.
+- **Modell:** 3D-Modelle mit Partikelverhalten. Nützlich für die Erstellung volumetrischer Effekte.
+
+### Simulation
+
+Diese Parameter wirken sich darauf aus, wie sich die Partikel nach ihrer Platzierung in der Welt selbständig verhalten.
+
+- **Farbe:** Wenn Sprites als Ressourcentyp festgelegt sind, können Sprites ihre Farbe ändern. Geben Sie einen Hexadezimalwert für die Anfangs- und Endfarbe ein, damit sie sich allmählich verschieben.
+- **Zufallsdrift:** Die Partikel driften nach dem Zufallsprinzip entsprechend dem Parameter für den Zufallsdriftbereich.
+- **Kollision:** Wenn sich Teilchen einander nähern, wird eine entgegengesetzte Kraft zwischen ihnen ausgeübt.
+
+## Beispiele
+
+### Startpartikel
+
+```ts
+ecs.ParticleEmitter.mutate(world, component.eid, (cursor) => {
+    cursor.stopped = false
+})
+```
+
+### Partikel aufhalten
+
+```ts
+ecs.ParticleEmitter.mutate(world, component.eid, (cursor) => {
+    cursor.stopped = true
+})
+```
+
+### Emittierende Modelle
+
+```ts
+ecs.ParticleEmitter.set(world, component.eid, {
+    stopped: false,
+    resourceType: 'model',
+    resourceUrl: 'assets/robot.glb',
+})
+```

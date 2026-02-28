@@ -1,0 +1,169 @@
+---
+id: image-targets
+sidebar_position: 2
+---
+
+import {EventExample} from '@site/src/components/event-example'
+
+# Eventos Image Target
+
+## Tipos {#types}
+
+### ImagePropertiesObject {#ImagePropertiesObject}
+
+ImagePropertiesObject" es un objeto con las siguientes propiedades:
+
+| Propiedad      | Tipo      | Descripción                              |
+| -------------- | --------- | ---------------------------------------- |
+| anchura        | "Número   | Anchura del objetivo de la imagen.       |
+| altura         | "Número   | Altura del objetivo de la imagen.        |
+| anchooriginal  | "Número   | Anchura de la imagen cargada.            |
+| originalHeight | "Número   | Altura de la imagen cargada.             |
+| isRotated      | `boolean` | Si se ha girado el destino de la imagen. |
+
+### ImageLoadingObject {#ImageLoadingObject}
+
+ImageLoadingObject" es un objeto con las siguientes propiedades:
+
+| Propiedad | Tipo     | Descripción                              |
+| --------- | -------- | ---------------------------------------- |
+| nombre    | Cadena   | El nombre de la imagen.                  |
+| tipo      | Cadena   | Una de `FLAT`, `CYLINDRICAL`, `CONICAL`. |
+| metadatos | `Objeto` | Metadatos del usuario.                   |
+
+### ImageScanningObject {#ImageScanningObject}
+
+ImageScanningObject" es un objeto con las siguientes propiedades:
+
+| Propiedad | Tipo     | Descripción                                                                                                                                                                                             |
+| --------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| nombre    | Cadena   | El nombre de la imagen.                                                                                                                                                                                 |
+| tipo      | Cadena   | Una de `FLAT`, `CYLINDRICAL`, `CONICAL`.                                                                                                                                                                |
+| metadatos | `Objeto` | Metadatos del usuario.                                                                                                                                                                                  |
+| geometría | `Objeto` | Objeto que contiene datos de geometría. Si type=FLAT: `{scaledWidth, scaledHeight}`, si no, si type=CYLINDRICAL o type=CONICAL: `{height, radiusTop, radiusBottom, arcStartRadians, arcLengthRadians}`. |
+
+## Eventos
+
+### IMAGEN_REALIDAD_ENCONTRADA
+
+Este evento se emite cuando se encuentra por primera vez un objetivo de imagen.
+
+#### Propiedades
+
+| Propiedad        | Tipo                                              | Descripción                                                                                    |
+| ---------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| nombre           | Cadena                                            | El nombre de la imagen.                                                                        |
+| tipo             | Cadena                                            | Una de `FLAT`, `CYLINDRICAL`, `CONICAL`.                                                       |
+| posición         | `{x, y, z}`                                       | La posición 3d de la imagen localizada.                                                        |
+| rotación         | `{w, x, y, z}`                                    | La orientación local 3d de la imagen localizada.                                               |
+| escala           | "Número                                           | Factor de escala que debe aplicarse a los objetos adjuntos a esta imagen.                      |
+| propiedades      | [`ImagePropertiesObject`](#ImagePropertiesObject) | Propiedades adicionales del destino de la imagen.                                              |
+| scaledWidth      | "Número                                           | **Sólo aplicable a `FLAT`**. La anchura de la imagen en la escena, multiplicada por la escala. |
+| scaledHeight     | "Número                                           | **Sólo aplicable a `FLAT`**. La altura de la imagen en la escena, multiplicada por la escala.  |
+| altura           | "Número                                           | **Sólo aplicable a `CYLINDRICAL` o `CONICAL`**. Altura del blanco curvo.                       |
+| radiusTop        | "Número                                           | **Sólo aplicable a `CYLINDRICAL` o `CONICAL`**. Radio de la diana curva en la parte superior.  |
+| radiusBottom     | "Número                                           | **Sólo aplicable a `CYLINDRICAL` o `CONICAL`**. Radio de la diana curva en la parte inferior.  |
+| arcStartRadians  | "Número                                           | **Sólo aplicable a `CYLINDRICAL` o `CONICAL`**. Ángulo inicial en radianes.                    |
+| arcLengthRadians | "Número                                           | **Sólo aplicable a `CYLINDRICAL` o `CONICAL`**. Ángulo central en radianes.                    |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="REALITY_IMAGE_FOUND" target="world.events.globalId" callbackBody={`console.log('Image found: ', event.data.name)`} />
+
+### CARGA_IMAGEN_REALIDAD
+
+Este evento se emite cuando comienza la carga de la imagen de detección.
+
+#### Propiedades
+
+| Propiedad    | Tipo                        | Descripción                      |
+| ------------ | --------------------------- | -------------------------------- |
+| imageTargets | `Array<ImageLoadingObject>` | La lista de objetivos de imagen. |
+
+#### Ejemplo
+
+<EventExample
+  ns="ecs.events"
+  event="REALITY_IMAGE_LOADING"
+  target="world.events.globalId"
+  callbackBody={[
+   `event.data.imageTargets.forEach(({name, type, metadata, geometry}) => {`,
+   `  console.log('Loading: ', name)`,
+   `})`,
+  ]}
+/>
+
+### IMAGEN_REALIDAD_PERDIDA
+
+Este evento se emite cuando un objetivo de imagen deja de ser rastreado.
+
+#### Propiedades
+
+| Propiedad        | Tipo                                              | Descripción                                                                                    |
+| ---------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| nombre           | Cadena                                            | El nombre de la imagen.                                                                        |
+| tipo             | Cadena                                            | Una de `FLAT`, `CYLINDRICAL`, `CONICAL`.                                                       |
+| posición         | `{x, y, z}`                                       | La posición 3d de la imagen localizada.                                                        |
+| rotación         | `{w, x, y, z}`                                    | La orientación local 3d de la imagen localizada.                                               |
+| escala           | "Número                                           | Factor de escala que debe aplicarse a los objetos adjuntos a esta imagen.                      |
+| propiedades      | [`ImagePropertiesObject`](#ImagePropertiesObject) | Propiedades adicionales del destino de la imagen.                                              |
+| scaledWidth      | "Número                                           | **Sólo aplicable a `FLAT`**. La anchura de la imagen en la escena, multiplicada por la escala. |
+| scaledHeight     | "Número                                           | \*\*Sólo aplicable a "FLAT". La altura de la imagen en la escena, multiplicada por la escala.  |
+| altura           | "Número                                           | **Sólo aplicable a `CYLINDRICAL` o `CONICAL`**. Altura del blanco curvo.                       |
+| radiusTop        | "Número                                           | **Sólo aplicable a `CYLINDRICAL` o `CONICAL`**. Radio de la diana curva en la parte superior.  |
+| radiusBottom     | "Número                                           | **Sólo aplicable a `CYLINDRICAL` o `CONICAL`**. Radio de la diana curva en la parte inferior.  |
+| arcStartRadians  | "Número                                           | **Sólo aplicable a `CYLINDRICAL` o `CONICAL`**. Ángulo inicial en radianes.                    |
+| arcLengthRadians | "Número                                           | **Sólo aplicable a `CYLINDRICAL` o `CONICAL`**. Ángulo central en radianes.                    |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="REALITY_IMAGE_LOST" target="world.events.globalId" callbackBody={`console.log('Image lost: ', event.data.name)`} />
+
+### EXPLORACIÓN_DE_IMÁGENES_REALES
+
+Este evento se emite cuando se han cargado todas las imágenes de detección y se ha iniciado la exploración.
+
+#### Propiedades
+
+| Propiedad    | Tipo                         | Descripción                      |
+| ------------ | ---------------------------- | -------------------------------- |
+| imageTargets | `Array<ImageScanningObject>` | La lista de objetivos de imagen. |
+
+#### Ejemplo
+
+<EventExample
+  ns="ecs.events"
+  event="REALITY_IMAGE_SCANNING"
+  target="world.events.globalId"
+  callbackBody={[
+   `event.data.imageTargets.forEach(({name, type, metadata, geometry}) => {`,
+   `  console.log('Scanning: ', name)`,
+   `})`,
+  ]}
+/>
+
+### IMAGEN_REALIDAD_ACTUALIZADA
+
+Este evento se emite cuando un objetivo de imagen cambia de posición, rotación o escala.
+
+#### Propiedades
+
+| Propiedad        | Tipo                                              | Descripción                                                                                    |
+| ---------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| nombre           | Cadena                                            | El nombre de la imagen.                                                                        |
+| tipo             | Cadena                                            | Una de `FLAT`, `CYLINDRICAL`, `CONICAL`.                                                       |
+| posición         | `{x, y, z}`                                       | La posición 3d de la imagen localizada.                                                        |
+| rotación         | `{w, x, y, z}`                                    | La orientación local 3d de la imagen localizada.                                               |
+| escala           | "Número                                           | Factor de escala que debe aplicarse a los objetos adjuntos a esta imagen.                      |
+| propiedades      | [`ImagePropertiesObject`](#ImagePropertiesObject) | Propiedades adicionales del destino de la imagen.                                              |
+| scaledWidth      | "Número                                           | \*\*Sólo aplicable a "FLAT". La anchura de la imagen en la escena, multiplicada por la escala. |
+| scaledHeight     | "Número                                           | \*\*Sólo aplicable a "FLAT". La altura de la imagen en la escena, multiplicada por la escala.  |
+| altura           | "Número                                           | **Sólo aplicable a `CYLINDRICAL` o `CONICAL`**. Altura del blanco curvo.                       |
+| radiusTop        | "Número                                           | **Sólo aplicable a `CYLINDRICAL` o `CONICAL`**. Radio de la diana curva en la parte superior.  |
+| radiusBottom     | "Número                                           | **Sólo aplicable a `CYLINDRICAL` o `CONICAL`**. Radio de la diana curva en la parte inferior.  |
+| arcStartRadians  | "Número                                           | **Sólo aplicable a `CYLINDRICAL` o `CONICAL`**. Ángulo inicial en radianes.                    |
+| arcLengthRadians | "Número                                           | **Sólo aplicable a `CYLINDRICAL` o `CONICAL`**. Ángulo central en radianes.                    |
+
+#### Ejemplo
+
+<EventExample ns="ecs.events" event="REALITY_IMAGE_UPDATED" target="world.events.globalId" callbackBody={`console.log('Image updated: ', event.data.position, event.data.rotation)`} />

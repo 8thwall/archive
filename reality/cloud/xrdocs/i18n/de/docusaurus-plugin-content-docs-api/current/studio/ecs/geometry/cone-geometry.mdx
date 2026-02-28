@@ -1,0 +1,26 @@
+---
+id: cone-geometry
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import ConeGeometryTable from "../../../../gen/tables/ConeGeometry.md"
+
+# ConeGeometry
+
+## Beschreibung
+
+Diese Komponente legt die Geometrie einer Entität fest.
+
+## Eigenschaften
+
+<ConeGeometryTable />
+
+## Funktionen
+
+<ComponentFunctions
+    name="ConeGeometry"
+    properties={{ radius: 1, height: 1 }}
+    mutate={`cursor.radius += 1;
+    cursor.height *= 2;
+    return false;`}
+/>

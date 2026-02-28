@@ -1,0 +1,274 @@
+<!--
+    templateType: page
+    isAvailableForNewContent: true
+-->
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+{% dnd_area "dnd_area"
+  label="Main section",
+  class="body-container body-container--about"
+%}
+  {% dnd_section
+    background_color={{ context.background_color or "#7611B6" }},
+    vertical_alignment="MIDDLE"
+  %}
+    {% dnd_module
+      path="../modules/hero-heading",
+      offset=0,
+      width=12
+    %}
+    {% end_dnd_module %}
+  {% end_dnd_section %}
+
+  {% dnd_section
+    vertical_alignment="TOP"
+  %}
+    {% dnd_column %}
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/centered-heading",
+          subheading="This is the subheading"
+          %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/product-content-block"
+          image={
+            src: "{{ get_asset_url('/theme8/images/team-image.jpg') }}",
+            alt: "Example Picture"
+          },
+          heading="Value Prop"
+          show_link="true"
+          link_text="Learn more about feature"
+        %}
+          {% module_attribute "productBlockBody" %}
+            <p>
+              Everything you need to learn how to create interactive WebAR experiences using 8th Wall
+            </p>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/product-content-block"
+          image={
+            src: "{{ get_asset_url('/theme8/images/team-image.jpg') }}",
+            alt: "Example Picture"
+          },
+          heading="Value Prop"
+          link_text="Learn more about feature"
+          image_position="true"
+        %}
+          {% module_attribute "productBlockBody" %}
+            <ul>
+              <li>Bullet Point 1</li>
+              <li>Bullet Point 2</li>
+              <li>Bullet Point 3</li>
+            </ul>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/product-content-block"
+          image={
+            src: "{{ get_asset_url('/theme8/images/team-image.jpg') }}",
+            alt: "Example Picture"
+          },
+          heading="Value Prop"
+          link_text="Learn more about feature"
+        %}
+          {% module_attribute "productBlockBody" %}
+            <ul>
+              <li>Bullet Point 1</li>
+              <li>Bullet Point 2</li>
+              <li>Bullet Point 3</li>
+            </ul>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+    {% end_dnd_column %}
+  {% end_dnd_section %}
+
+  {% dnd_section
+    background_color={{ context.background_color or "#F2F1F3" }},
+    vertical_alignment="TOP"
+  %}
+    {% dnd_column %}
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/product-content-block"
+          image={
+            src: "{{ get_asset_url('/theme8/images/team-image.jpg') }}",
+            alt: "Example Picture"
+          },
+          heading="Value Prop"
+          show_link="true"
+          link_text="Learn more about feature"
+        %}
+          {% module_attribute "productBlockBody" %}
+            <p>
+              Everything you need to learn how to create interactive WebAR experiences using 8th Wall
+            </p>
+            <ul>
+              <li>Bullet Point 1</li>
+              <li>Bullet Point 2</li>
+              <li>Bullet Point 3</li>
+            </ul>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+    {% end_dnd_column %}
+  {% end_dnd_section %}
+
+  {% dnd_section
+    vertical_alignment="TOP"
+  %}
+    {% dnd_column %}
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/centered-heading",
+          subheading="Everything you need to learn how to create interactive WebAR experiences using 8th Wall"
+          %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/product-content-block"
+          image={
+            src: "{{ get_asset_url('/theme8/images/team-image.jpg') }}",
+            alt: "Example Picture"
+          },
+          heading="Value Prop"
+          show_link="true"
+          link_text="Learn more about feature"
+        %}
+          {% module_attribute "productBlockBody" %}
+            <p>
+              Everything you need to learn how to create interactive WebAR experiences using 8th Wall
+            </p>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/product-content-block"
+          image={
+            src: "{{ get_asset_url('/theme8/images/team-image.jpg') }}",
+            alt: "Example Picture"
+          },
+          heading="Value Prop"
+          link_text="Learn more about feature"
+          image_position="true"
+          show_link="true"
+        %}
+          {% module_attribute "productBlockBody" %}
+            <ul>
+              <li>Bullet Point 1</li>
+              <li>Bullet Point 2</li>
+              <li>Bullet Point 3</li>
+            </ul>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/product-content-block"
+          image={
+            src: "{{ get_asset_url('/theme8/images/team-image.jpg') }}",
+            alt: "Example Picture"
+          },
+          heading="Value Prop"
+          link_text="Learn more about feature"
+        %}
+          {% module_attribute "productBlockBody" %}
+            <ul>
+              <li>Bullet Point 1</li>
+              <li>Bullet Point 2</li>
+              <li>Bullet Point 3</li>
+            </ul>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+    {% end_dnd_column %}
+  {% end_dnd_section %}
+
+  {% include_dnd_partial
+    path="../sections/free-trial-section.html"
+  %}
+
+  {% include_dnd_partial
+    path="../sections/news-block-section.html"
+  %}
+
+  {% dnd_section
+    vertical_alignment="TOP"
+    background_color={{ context.background_color or "#F2F1F3" }},
+  %}
+    {% dnd_column %}
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/centered-heading",
+          subheading=""
+          %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/collapse-section"
+          question="What is WebAR?"
+        %}
+          {% module_attribute "answer" %}
+            <p>
+              WebAR, or web-based augmented reality, refers to the technology which enables augmented reality to work within a browser. WebAR requires no app to download. Users access WebAR by clicking a link or scanning a QR code to open an AR-enabled web page in their browser.
+            </p>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/collapse-section"
+          question="What is Augmented Reality?"
+        %}
+          {% module_attribute "answer" %}
+            <p>
+              Augmented Reality (AR) is a technology which enables users to experience the real world together with digital information or objects at the same time. It requires a user to view the real world through a display, such as a mobile or wearable device, and makes use of computer vision technology to augment a user's experience of the world with computer graphics.
+            </p>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/collapse-section"
+          question="What is Virtual Reality?"
+        %}
+          {% module_attribute "answer" %}
+            <p>
+              Virtual Reality, or VR, is a technology that allows users to to experience a completely simulated or virtual world. It typically requires the user to wear a head-mounted display which completely obscures the user's view of the real world, although some VR experiences can be experienced on 2D screens as 3D experiences.
+            </p>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/collapse-section"
+          question="Can you develop WebVR with 8th Wall?"
+        %}
+          {% module_attribute "answer" %}
+            <p>
+              Yes, the 8th Wall Cloud Editor supports the development of WebAR and WebVR content.
+            </p>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+    {% end_dnd_column %}
+  {% end_dnd_section %}
+
+{% end_dnd_area %}
+{% endblock body %}

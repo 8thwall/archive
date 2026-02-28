@@ -1,0 +1,31 @@
+---
+id: position
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+import PositionTable from "../../../gen/tables/Position.md"
+
+# Position
+
+## Description
+
+Ce composant contrôle la façon dont l'entité est positionnée, **dans l'espace local**.
+
+## Propriétés
+
+<PositionTable />
+
+## Fonctions
+
+<ComponentFunctions
+    name="Position"
+    properties={{
+        x: 0,
+        y: 0,
+        z: 0
+    }}
+    mutate={`cursor.x = 2 ;
+    cursor.y = 2 ;
+    cursor.z = 2 ;
+    return false;`}
+/>

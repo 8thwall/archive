@@ -1,0 +1,30 @@
+# Extend this in pipeline steps that require WIF
+.wif:
+  id_tokens:
+    GITLAB_TOKEN:
+      aud: https://gitlab.<REMOVED_BEFORE_OPEN_SOURCING>.com
+
+# Reference this in before_script sections.
+#
+# Example:
+# 
+# ```yaml
+# include:
+#   - ci-support/wif.yml
+# 
+# test: 
+#   stage: test
+#   extends: .wif
+#   variables:
+#      # Optionally set Application default credentials
+#     GOOGLE_APPLICATION_CREDENTIALS: "${CI_PROJECT_DIR}/.gcp_temp_cred.json"
+#   before_script:
+#      - !reference [".wif_before_script", "before_script"]
+# ```
+.wif_before_script:
+  before_script:
+    - echo ${GITLAB_TOKEN} > ${CI_PROJECT_DIR}/.ci_job_jwt_file
+    - gcloud iam workload-identity-pools create-cred-config ${GCP_WORKLOAD_IDENTITY_PROVIDER}
+      --service-account="${GCP_WORKLOAD_IDENTITY_FEDERATION_SA}" --output-file=${CI_PROJECT_DIR}/.gcp_temp_cred.json
+      --credential-source-file=${CI_PROJECT_DIR}/.ci_job_jwt_file
+    - gcloud auth login --cred-file=${CI_PROJECT_DIR}/.gcp_temp_cred.json

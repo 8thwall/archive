@@ -1,0 +1,161 @@
+# What is the goal of this pipeline?
+# - This pipeline is used to run builds that will populate the remote cache.
+#
+# Can I add things to this job?
+# - Yes, feel free to add any builds here which you want to be run across combinations of host,
+#   target, and config.
+#
+# When does this pipeline run?
+# - This pipeline is triggered by the `nightly` schedule which sets the SCHEDULE=nightly variable.
+#   See: https://gitlab.<REMOVED_BEFORE_OPEN_SOURCING>.com/repo/<REMOVED_BEFORE_OPEN_SOURCING>/-/pipeline_schedules
+
+include:
+  - ci-support/util.yml
+
+default:
+  before_script:
+    - !reference [.global, before_script]
+  after_script:
+    - !reference [.global, after_script]
+
+cancel-redundant-jobs:
+  stage: build
+  extends: .cancel-redundant-jobs
+
+####################################################################################################
+# What to build ####################################################################################
+####################################################################################################
+.populate-cache:common:
+  stage: build
+  interruptible: true
+  timeout: 480m
+  rules:
+    - if: $CI_SUPPORT_TRIGGER == "populate_remote_cache_trigger"
+
+.populate-cache:scripts:
+  common:
+    - ci-support/generate_ci_disk_cache_config.sh
+    - ci-support/generate_ci_bazelrc_downloader_config.sh
+    - cat ci-support/ci_gen.bazel-disk-cache.bazelrc
+    - cat ci-support/ci_gen.bazel-downloader.bazelrc
+    - export CONFIG_SETTINGS="--keep_going --platforms=${PLATFORM} ${CONFIG}" && echo ${CONFIG_SETTINGS}
+    - bazel build ${CONFIG_SETTINGS} -- //third_party/... -//third_party/zxing/zxing/...
+    # TODO(paris): Fix failing builds (mostly on config=debug or platform=ios_arm64) and re-enable.
+    - bazel build ${CONFIG_SETTINGS} -- //bzl/... -//bzl/examples/unity/... -//bzl/examples/windows/... -//bzl/examples/ios/xcode:hello-world -//bzl/unity/... -//bzl/windows/... -//bzl/httpfileserver/... -//bzl/presubmit/... -//bzl/examples:hello-wasm-test -//bzl/crosstool/... -//bzl/stamp:release-build-id-stamped -//bzl/examples/unity:hello-world ${INCOMPATIBLE_TARGETS}
+  extra-fastbuild:
+    - ci-support/generate_ci_disk_cache_config.sh
+    - ci-support/generate_ci_bazelrc_downloader_config.sh
+    - cat ci-support/ci_gen.bazel-disk-cache.bazelrc
+    - cat ci-support/ci_gen.bazel-downloader.bazelrc
+    - bazel build ${CONFIG_SETTINGS} -- //c8/...
+    - bazel build ${CONFIG_SETTINGS} -- //reality/... -//reality/app/...
+    - bazel build ${CONFIG_SETTINGS} //apps/client/internalqa/omniscope/imgui:omniscope
+  debug:
+    - ci-support/generate_ci_disk_cache_config.sh
+    - ci-support/generate_ci_bazelrc_downloader_config.sh
+    - cat ci-support/ci_gen.bazel-disk-cache.bazelrc
+    - cat ci-support/ci_gen.bazel-downloader.bazelrc
+    # Many targets don't build with --config=debug so limit to just the things that we know we want.
+    - export CONFIG_SETTINGS="--keep_going --platforms=${PLATFORM} ${CONFIG}" && echo ${CONFIG_SETTINGS}
+
+####################################################################################################
+# Builds ###########################################################################################
+####################################################################################################
+
+####################################################################################################
+#### PLATFORM: osx_arm64
+# CONFIG: none (defaults to fastbuild)
+populate-cache:macos_m1:fastbuild:macos_m1:
+  extends: .populate-cache:common
+  script:
+    - !reference [.populate-cache:scripts, common]
+    - !reference [.populate-cache:scripts, extra-fastbuild]
+  variables:
+    PLATFORM: "//bzl:osx_arm64"
+  tags:
+    - m1
+
+# CONFIG: debug
+populate-cache:macos_m1:debug:macos_m1:
+  extends: .populate-cache:common
+  script:
+    - !reference [.populate-cache:scripts, debug]
+  variables:
+    PLATFORM: "//bzl:osx_arm64"
+    CONFIG: "--config=debug"
+  tags:
+    - m1
+
+# CONFIG: release
+populate-cache:macos_m1:release:macos_m1:
+  extends: .populate-cache:common
+  script:
+    - !reference [.populate-cache:scripts, common]
+  variables:
+    PLATFORM: "//bzl:osx_arm64"
+    CONFIG: "--config=release"
+  tags:
+    - m1
+
+####################################################################################################
+#### PLATFORM: macos_x86
+# CONFIG: none (defaults to fastbuild)
+populate-cache:macos_x86:fastbuild:macos_x86:
+  extends: .populate-cache:common
+  script:
+    - !reference [.populate-cache:scripts, common]
+    - !reference [.populate-cache:scripts, extra-fastbuild]
+  variables:
+    PLATFORM: "//bzl:osx_x86_64"
+  tags:
+    - intel
+
+# CONFIG: debug
+populate-cache:macos_x86:debug:macos_x86:
+  extends: .populate-cache:common
+  script:
+    - !reference [.populate-cache:scripts, debug]
+  variables:
+    PLATFORM: "//bzl:osx_x86_64"
+    CONFIG: "--config=debug"
+  tags:
+    - intel
+
+# CONFIG: release
+populate-cache:macos_x86:release:macos_x86:
+  extends: .populate-cache:common
+  script:
+    - !reference [.populate-cache:scripts, common]
+  variables:
+    PLATFORM: "//bzl:osx_x86_64"
+    CONFIG: "--config=release"
+  tags:
+    - intel
+
+####################################################################################################
+#### PLATFORM: android_arm64
+# CONFIG: none (defaults to fastbuild)
+populate-cache:macos_m1:fastbuild:android_arm64:
+  extends: .populate-cache:common
+  script:
+    - !reference [.populate-cache:scripts, common]
+  variables:
+    PLATFORM: "//bzl:android_arm64"
+    INCOMPATIBLE_TARGETS: "-//bzl/examples/pybind11/..."
+  tags:
+    - m1
+# NOTE(paris): We could add other configs here if we wanted.
+
+####################################################################################################
+#### PLATFORM: ios_arm64
+# CONFIG: none (defaults to fastbuild)
+populate-cache:macos_m1:fastbuild:ios_arm64:
+  extends: .populate-cache:common
+  script:
+    - !reference [.populate-cache:scripts, common]
+  variables:
+    PLATFORM: "//bzl:ios_arm64"
+    INCOMPATIBLE_TARGETS: "-//bzl/examples/pybind11/..."
+  tags:
+    - m1
+# NOTE(paris): We could add other configs here if we wanted.

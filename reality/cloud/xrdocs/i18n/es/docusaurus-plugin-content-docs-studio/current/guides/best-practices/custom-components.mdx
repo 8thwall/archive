@@ -1,0 +1,166 @@
+---
+id: custom-components
+description: >-
+  Problemas comunes y mejores prácticas a seguir al crear componentes
+  personalizados.
+sidebar_position: 1
+---
+
+# Componentes personalizados
+
+## Introducción
+
+{frontMatter.description}
+
+## Referencias obsoletas
+
+Cuando a tu componente se le pasa `(world, component)` para añadir, marcar o eliminar callbacks, no siempre es seguro hacer referencia a `component` en una función anidada y usarla después de que el callback haya retornado.
+
+<div class="code-invalid">
+
+### Ejemplo incorrecto
+
+```ts
+ecs.registerComponent({
+    name: 'contador-edad',
+    data: {
+    edad: ecs.i32,
+    intervalo: ecs.i32,
+},
+    add: (world, component) => {
+    const interval = world.time.setInterval(() => {
+    // Esto no es seguro porque estamos accediendo a los datos después de que haya pasado una cierta cantidad de tiempo
+    // no se garantiza que sigan siendo válidos.
+    component.data.age += 1
+}, 1000)
+
+    // Esto es seguro porque estamos asignando a los datos dentro de la función add
+    component.data.interval = interval
+},
+    tick: (world, component) => {
+    console.log('I am', component.data.age, 'seconds old')
+},
+    remove: (world, component) => {
+    world.time.clearTimeout(component.data.interval)
+}
+})
+```
+
+</div>
+
+<div class="code-valid">
+
+### Ejemplo correcto
+
+```ts
+ecs.registerComponent({
+  name: 'contador-edad',
+  data: {
+    age: ecs.i32,
+    interval: ecs.i32,
+  },
+  add: (world, component) => {
+    const {eid, dataAttribute} = component
+    const interval = world.time.setInterval(() => {
+	  // Esto es seguro porque estamos readquiriendo un cursor en el momento en que lo necesitamos,
+      // en lugar de usar un cursor obsoleto de antes.
+	  const data = dataAttribute.cursor(eid)
+      data.age += 1
+    }, 1000)
+
+    component.data.interval = interval
+},
+tick: (world, component) => {
+console.log('Tengo', component.data.age, 'segundos')
+},
+remove: (world, component) => {
+// world.time.clearTimeout(component.data.interval)
+}
+})
+```
+
+</div>
+
+En el ejemplo anterior, dataAttribute se utiliza como método estable para acceder a los datos del componente dentro de una función anidada. Esto garantiza que los datos permanezcan válidos y actualizados incluso cuando la función se llama de forma asíncrona.
+
+Además, la variable eid se desestructura en lugar de acceder directamente a component.eid porque component.eid puede cambiar dependiendo de qué entidad esté recibiendo la devolución de llamada. El uso de una variable desestructurada evita posibles referencias obsoletas.
+
+De los argumentos pasados a las llamadas de retorno de los componentes, he aquí la validez de cada uno:
+
+:::warning
+Desestructure siempre eid antes de utilizarlo en lugar de acceder a component.eid, ya que acceder directamente a component.eid puede dar lugar a referencias obsoletas.
+:::
+
+| contexto                          | ¿Cambios tras la salida de la devolución de llamada? | ¿Puede utilizarse en una función anidada? | De por vida                  |
+| --------------------------------- | ---------------------------------------------------- | ----------------------------------------- | ---------------------------- |
+| mundo                             | ❌ No                                                 | ✅ Sí                                      | Experiencia de vida          |
+| eid                               | ✅ Sí                                                 | ✅ Sí                                      | Duración de la entidad       |
+| esquema y datos                   | ✅ Sí                                                 | ❌ No                                      | Nivel superior de Callback   |
+| schemaAttribute & dataAttribute   | ❌ No                                                 | ✅ Sí                                      | Duración de la entidad       |
+
+## Cursores invalidados
+
+Los objetos Cursor actúan como interfaces para leer y escribir datos en el estado ECS. Cada vez que se solicita un cursor para un componente, se reutiliza la misma instancia de cursor, pero apunta a una ubicación diferente en la memoria. Como resultado, la referencia de un cursor puede dejar de ser válida, es decir, puede que ya no apunte a los datos esperados.
+
+### Ejemplo incorrecto
+
+<div class="code-invalid">
+
+```ts
+const cursor1 = MyComponent.get(world, entity1)
+console.log(cursor1.name) // 'entity1'
+
+const cursor2 = MyComponent.get(world, entity2)
+console.log(cursor2.name) // 'entidad2'
+
+// Pueden producirse errores inesperados si se utiliza cursor1 después de otro acceso al componente
+console.log(cursor1.name) // 'entidad2'
+console.log(cursor1 === cursor2) // 'true' - es el mismo objeto, sólo que inicializado de forma diferente cada vez
+```
+
+</div>
+
+## Oyentes colgantes
+
+Evite asumir que cualquier objeto o componente persistirá indefinidamente. A medida que el proyecto evoluciona o se introducen nuevas funciones, es importante asegurarse de que la lógica del componente es robusta, incluida la limpieza adecuada de los escuchadores de eventos.
+
+Las Máquinas de Estado son una gran manera de gestionar y limpiar los Receptores de Eventos.
+
+### Ejemplo correcto
+
+<div class="code-valid">
+
+```ts
+ecs.registerComponent({
+  name: 'Game Manager',
+  schema: {
+    // Añade datos que se pueden configurar en el componente.
+    scoreDisplay: ecs.eid, // cuántas monedas has recogido
+  },
+  schemaDefaults: {
+    // Añade valores por defecto para los campos del esquema.
+  },
+  data: {
+    // Añade datos que no se pueden configurar fuera del componente.
+    score: ecs.i32, // El valor entero de la puntuación
+  },
+  stateMachine: ({world, eid, schemaAttribute, dataAttribute}) => {
+    // Añade evento de puntuación
+    const coinCollect = () => {
+      const data = dataAttribute.cursor(eid)
+      data.score += 1
+      ecs.Ui.set(world, schemaAttribute.get(eid).scoreDisplay, {
+        text: data.score.toString(),
+      })
+    }
+
+    ecs.defineState('default').initial().onEnter(() => {
+      world.events.addListener(world.events.globalId, 'coinCollect', coinCollect)
+    }).onExit(() => {
+      world.events.removeListener(world.events.globalId, 'coinCollect', coinCollect)
+    })
+  },
+})
+```
+
+</div>

@@ -1,0 +1,61 @@
+---
+id: component-lifecycle
+description: >-
+  Les événements du cycle de vie peuvent être utilisés pour déclencher le
+  comportement du composant lors de l'ajout, du cochage ou de la suppression.
+sidebar_position: 55
+---
+
+import ComponentFunctions from "@site/src/components/component-functions";
+
+# Cycle de vie des composants
+
+## Introduction
+
+{frontMatter.description}
+
+## Exemple
+
+```ts
+const MyComponent = ecs.registerComponent({
+  name: 'My Component',
+  add: (world, component) => {
+    console.log('My component was added to', component.eid) 
+  },
+  tick: (world, component) => {
+    console.log('My tick function is running on', component.eid) 
+  },
+  remove: (world, component) => {
+    console.log('My component was removed from', component.eid) 
+  },
+})
+```
+
+## Méthodes
+
+| Méthode   | Description                                                                                                                                                                  |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ajouter   | Appelé une fois lors de l'initialisation du composant. Utilisé pour mettre en place l'état initial et instancier les variables                                               |
+| supprimer | Appelé lorsque le composant est retiré de l'entité ou lorsque l'entité est détachée de la scène. Permet d'annuler toutes les modifications précédentes apportées à l'entité. |
+| tique     | Appelé à chaque boucle de rendu ou à chaque tic de la scène. Utilisé pour les changements ou les contrôles continus.                                                         |
+
+### Paramètres
+
+| Propriété  | Type                                | Description                    |
+| ---------- | ----------------------------------- | ------------------------------ |
+| monde      | [Monde](/api/studio/world)          | Référence au monde.            |
+| composante | [ComponentObject](#componentobject) | Référence au composant actuel. |
+
+### ComponentObject
+
+:::warning
+Utilisez schemaAttribute ou dataAttribute au lieu des propriétés eid, schema ou data dans des contextes asynchrones tels que les temporisateurs ou les gestionnaires d'événements.
+:::
+
+| Propriété       | Type            | Description                                                       |
+| --------------- | --------------- | ----------------------------------------------------------------- |
+| eid             | eid             | L'ID de l'entité du composant actuel                              |
+| schéma          | Curseur         | Référence au schéma de l'entité actuelle                          |
+| schemaAttribute | ComponentObject | Référence au schéma du composant actuel dans World Scope.         |
+| données         | Curseur         | Référence aux données de l'entité actuelle                        |
+| dataAttribute   | ComponentObject | Référence aux données de la composante actuelle dans World Scope. |

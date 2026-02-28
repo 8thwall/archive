@@ -1,0 +1,1 @@
+../../cloud/aws/edge-lambda/serve-modules/src/shared/module/update-version-target.ts
