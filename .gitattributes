@@ -122,17 +122,8 @@ tools/bazel filter=lfs diff=lfs merge=lfs -text
 # git rm --cached *.bin
 # git add *.bin
 # git commit -m "Convert last commit to LFS"
-bzl/hellobuild/nativewindow/res/drawable-hdpi/ic_launcher.png -filter -diff -merge
-bzl/hellobuild/nativewindow/res/drawable-mdpi/ic_launcher.png -filter -diff -merge
-bzl/hellobuild/nativewindow/res/drawable-xhdpi/ic_launcher.png -filter -diff -merge
-bzl/hellobuild/nativewindow/res/drawable-xxhdpi/ic_launcher.png -filter -diff -merge
-bzl/hellobuild/nativewindowlite/res/drawable-hdpi/ic_launcher.png -filter -diff -merge
-bzl/hellobuild/nativewindowlite/res/drawable-mdpi/ic_launcher.png -filter -diff -merge
-bzl/hellobuild/nativewindowlite/res/drawable-xhdpi/ic_launcher.png -filter -diff -merge
-bzl/hellobuild/nativewindowlite/res/drawable-xxhdpi/ic_launcher.png -filter -diff -merge
 third_party/opencvcontrib/sfm/doc/pics/desktop_trajectory.png -filter -diff -merge
 third_party/opencvcontrib/sfm/doc/pics/import_sagrada_familia.png -filter -diff -merge
-bzl/hellobuild/nativewindow/assets/clips/testfile.mp4 -filter -diff -merge
 reality/quality/visualization/jupyter/chesspose-estimator.ipynb -filter -diff -merge
 third_party/opencvcontrib/sfm/doc/pics/sagrada_familia_input.jpg -filter -diff -merge
 third_party/opencvcontrib/sfm/doc/pics/sagrada_familia_reconstruction.jpg -filter -diff -merge
@@ -144,17 +135,8 @@ third_party/opencvcontrib/sfm/samples/data/images/resized_IMG_2889.jpg -filter -
 third_party/opencvcontrib/sfm/samples/data/images/resized_IMG_2890.jpg -filter -diff -merge
 third_party/opencvcontrib/sfm/samples/data/images/resized_IMG_2891.jpg -filter -diff -merge
 third_party/opencvcontrib/sfm/samples/data/images/resized_IMG_2892.jpg -filter -diff -merge
-platform/mapperops/mapper_ops_backend/bunny.drc -filter -diff -merge
-platform/mapperops/mapper_ops_frontend/lidar_mesh_0.drc -filter -diff -merge
-platform/mapperops/mapper_ops_frontend/public/bunny.drc -filter -diff -merge
-platform/mapperops/mapper_ops_frontend/public/lidar_mesh_0.drc -filter -diff -merge
-platform/mapperops/mapper_ops_frontend/src/assets/lidar_mesh_0.drc -filter -diff -merge
 # Files whitelisted for LFS without a full glob rule
 ammo.js filter=lfs diff=lfs merge=lfs -text
-reality/cloud/aws/lambda/github-webhook-handler/yaml2json filter=lfs diff=lfs merge=lfs -text
-reality/cloud/aws/lambda/github-webhook-handler/unzip filter=lfs diff=lfs merge=lfs -text
-reality/cloud/aws/lambda/github-webhook-handler/zip filter=lfs diff=lfs merge=lfs -text
-reality/cloud/xrhome/tools/stripe/tax-scripts/**/*.json filter=lfs diff=lfs merge=lfs -text
 *.mdb filter=lfs diff=lfs merge=lfs -text
 *.aar filter=lfs diff=lfs merge=lfs -text
 *.ppm filter=lfs diff=lfs merge=lfs -text
@@ -163,9 +145,7 @@ reality/cloud/xrhome/tools/stripe/tax-scripts/**/*.json filter=lfs diff=lfs merg
 uploadDSYM filter=lfs diff=lfs merge=lfs -text
 *.solverstate filter=lfs diff=lfs merge=lfs -text
 *.wasm filter=lfs diff=lfs merge=lfs -text
- filter=lfs diff=lfs merge=lfs -text
 *.spz filter=lfs diff=lfs merge=lfs -text
 *.pdb filter=lfs diff=lfs merge=lfs -text
 *.objlist filter=lfs diff=lfs merge=lfs -text
-genai/third-party/inworld-protocol/google/tools/*/grpc_csharp_plugin
-genai/third-party/inworld-protocol/google/tools/*/protoc
+apps/examples/*/assets/** filter=lfs diff=lfs merge=lfs -text
