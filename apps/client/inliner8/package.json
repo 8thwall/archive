@@ -1,0 +1,50 @@
+{
+    "name": "inliner8",
+    "displayName": "inliner8",
+    "description": "Run inliner",
+    "version": "1.0.0",
+    "publisher": "8thwall",
+    "engines": {
+        "vscode": "^1.44.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:extension.runInliner"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.runInliner",
+                "title": "Inliner"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "extension.runInliner",
+                "key": "ctrl+shift+i",
+                "mac": "cmd+shift+i",
+                "when": "editorTextFocus"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "package": "vsce package",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "@types/mocha": "^2.2.42",
+        "@types/node": "^7.10.10",
+        "@types/vscode": "^1.44.0",
+        "tslint": "^5.20.1",
+        "typescript": "^2.9.2",
+        "vsce": "^1.75.0"
+    },
+    "dependencies": {}
+}
