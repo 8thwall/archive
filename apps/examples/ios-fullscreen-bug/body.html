@@ -1,0 +1,49 @@
+<!-- Copyright (c) 2019 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+  <button id="fullscreen-btn" style="position: absolute; width: 10em; height: 5em; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%); z-index: 99;">
+        FULLSCREEN
+  </button>
+
+<!-- Add the tap-place component to the scene so it has an effect -->
+<a-scene
+  tap-place
+  xrextras-almost-therea
+  xrextras-loadinga
+  xrextras-runtime-errora
+  fullscreen-button
+  xrweb>
+
+  <!-- We can define assets here to be loaded when A-Frame initializes -->
+  <a-assets>
+    <!-- Credit to Poly by Google for the model: https://poly.google.com/view/6pwiq7hSrHr -->
+    <a-asset-item id="treeModel" src="assets/tree.glb"></a-asset-item>
+  </a-assets>
+
+  <!-- The raycaster will emit mouse events on scene objects specified with the cantap class -->
+  <a-camera
+    position="0 8 0"
+    raycaster="objects: .cantap"
+    cursor="
+      fuse: false;
+      rayOrigin: mouse;">
+  </a-camera>
+
+  <a-entity
+    light="type: directional;
+           intensity: 0.8;"
+    position="1 4.3 2.5">
+  </a-entity>
+
+  <a-light type="ambient" intensity="1"></a-light>
+
+  <!-- Adding the cantap class allows the ground to be clicked -->
+  <a-entity
+    id="ground"
+    class="cantap"
+    geometry="primitive: box"
+    material="color: #ffffff; transparent: true; opacity: 0.0"
+    scale="1000 2 1000"
+    position="0 -1 0">
+  </a-entity>
+</a-scene>

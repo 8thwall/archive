@@ -1,0 +1,84 @@
+.lil-gui.autoPlace {
+  border-radius: 0px 0px 0px 10px;
+  right: 0px !important;
+}
+
+.lil-gui {
+  border-radius: 0px 0px 0px 10px;
+  --background-color: #464766;
+  --text-color: #D5D7E4;
+  --title-text-color: #FFFFFF;
+  --title-background-color: unset;
+  --widget-color: #8083A2;
+  --hover-color: #686b8d;
+  --focus-color: #464766;
+  --number-color: #FFF;
+  --string-color: #FFF;
+}
+
+#overlay {
+  z-index: 10;
+  pointer-events: none;
+  position:absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.custom-upload {
+  position: absolute;
+  bottom: 5vmax;
+  left: 50vw;
+  width: 35vw;
+  max-width: 450px;
+  transform: translate(-50%, 0);
+  display: block;
+  background-color: #FFFFFF;
+  border-radius: 0.5em;
+  padding: 0.5rem 0;
+  pointer-events: auto;
+  box-shadow: 0px 0px 6px #888;
+  font-family: 'Nunito', monospace;
+  color: #2D2E43;
+  text-decoration: none !important;
+  text-align: center;
+  font-size: 5vmin;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.custom-upload img {
+  vertical-align: middle;
+  margin-left: 0.5em;
+  margin-bottom: 0.1em;
+  width: 5vw;
+}
+
+#file {
+  display: none !important;
+}
+
+#loadImage {
+  position: absolute;
+  margin-top: -2.5em;
+  margin-left: -2.5em;
+  top: 50%;
+  left: 50%;
+  height: 5em;
+  width: 5em;
+  transform: translate(-50%, -50%);
+}
+
+.spin {
+  animation: spin 1.1s cubic-bezier(0.785, 0.135, 0.150, 0.860) infinite both;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

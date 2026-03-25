@@ -1,0 +1,35 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<div id="overlay" style="z-index: 2">
+  <img id="nextBtn" src="assets/arrow-right.svg" />
+  <img id="prevBtn" src="assets/arrow-left.svg" />
+</div>
+
+<a-scene
+  xr-mode-ui="enabled: false"
+  vr-mode-ui="enabled: false"
+  device-orientation-permission-ui="enabled: false"
+  background="color: #000000"
+  splat-switcher>
+  <a-assets>
+    <a-asset-item id="doty_model" src="assets/doty.glb"></a-asset-item>
+  </a-assets>
+  <a-camera 
+    fov="55" 
+    near="0.1" 
+    far="400" 
+    look-controls-enabled="false"
+    wasd-controls-enabled="false" 
+    position="0 0 0" 
+    orbit-controls="target: 0 0 -3; rotateSpeed: 1;  minPolarAngle: 60; maxPolarAngle: 110; minDistance: 1; maxDistance: 10; initialPosition: 0 0 0">
+  <a-entity
+    id="character"
+    character-move
+    character-recenter
+    gltf-model="#doty_model"
+    animation-mixer="clip: idle; loop: repeat; crossFadeDuration: 0.4"
+    scale="4.5 4.5 4.5"
+    position="0 0 -2"
+    shadow></a-entity>
+</a-scene>

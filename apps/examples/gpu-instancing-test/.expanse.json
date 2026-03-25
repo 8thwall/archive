@@ -1,0 +1,157 @@
+{
+  "objects": {
+    "ac1989e3-3b71-49e2-a05f-e682aeb18c36": {
+      "id": "ac1989e3-3b71-49e2-a05f-e682aeb18c36",
+      "position": [
+        -152.73661073698935,
+        105.4228900222176,
+        -32.711445011121256
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {},
+      "name": "Directional Light",
+      "light": {
+        "type": "directional",
+        "intensity": 1
+      }
+    },
+    "9c311ef2-d1e4-41df-aadd-f0b9a451fe5c": {
+      "id": "9c311ef2-d1e4-41df-aadd-f0b9a451fe5c",
+      "position": [
+        4.888398857651675,
+        0,
+        7.7241142821082
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {},
+      "name": "Ambient Light",
+      "light": {
+        "type": "ambient"
+      }
+    },
+    "343b22f8-482c-4766-be82-cd8b667f10e3": {
+      "id": "343b22f8-482c-4766-be82-cd8b667f10e3",
+      "position": [
+        47.70389020480607,
+        71.3149828030079,
+        155.47884437830038
+      ],
+      "rotation": [
+        -0.014729780787219916,
+        0.9756897521387466,
+        -0.20738925897128813,
+        -0.06929817019757216
+      ],
+      "scale": [
+        0.9999999999999994,
+        0.9999999999999993,
+        0.999999999999999
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {},
+      "name": "Camera",
+      "camera": {
+        "type": "perspective",
+        "xr": {
+          "xrCameraType": "3dOnly",
+          "phone": "3D",
+          "desktop": "3D",
+          "headset": "disabled"
+        }
+      }
+    },
+    "527da749-4892-4251-9a5e-aa2407cee58a": {
+      "id": "527da749-4892-4251-9a5e-aa2407cee58a",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "material": {
+        "type": "basic",
+        "color": "#FFFFFF"
+      },
+      "components": {
+        "d15f653c-b284-4f46-9986-d729b59f6b7b": {
+          "id": "d15f653c-b284-4f46-9986-d729b59f6b7b",
+          "name": "spawner",
+          "parameters": {
+            "baseModel": "assets/Animated_Platformer_Character.glb"
+          }
+        }
+      },
+      "name": "Spawner"
+    },
+    "7187a19e-ab6d-414c-9778-5c6e00b21080": {
+      "id": "7187a19e-ab6d-414c-9778-5c6e00b21080",
+      "position": [
+        -55.81568122936035,
+        0,
+        149.10412609526145
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        20,
+        20,
+        20
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": null,
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/Animated_Platformer_Character.glb"
+        },
+        "animationClip": "CharacterArmature|Walk",
+        "loop": true
+      },
+      "name": "character1",
+      "hidden": false
+    }
+  },
+  "activeCamera": "343b22f8-482c-4766-be82-cd8b667f10e3",
+  "historyVersion": "mbskes3m"
+}

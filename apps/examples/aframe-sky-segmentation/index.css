@@ -1,0 +1,63 @@
+.bottomBar{
+  width:100%;
+  height:15%;
+  display:grid;
+  position:absolute;
+  bottom:0;
+  grid-template-columns: .5fr 1fr 1fr 1fr .5fr;
+  grid-template-rows: 1fr .3fr;
+  z-index: 60;
+  column-gap: 1vh;
+}
+
+.bottomBar{
+  width:100%;
+  height:15%;
+  display:grid;
+  position:absolute;
+  bottom:0;
+  grid-template-columns: .5fr 1fr .25fr 1fr .5fr;
+  grid-template-rows: 1fr .2fr;
+  z-index: 60;
+  column-gap: 1vh;
+}
+
+.leftButton{
+  grid-row: 1;
+  grid-column: 2;
+  width: 100%;
+  height:100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url('./assets/UI/leftArrow.png');
+}
+
+.rightButton{
+  grid-row: 1;
+  grid-column: 4;
+  width: 100%;
+  height:100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url('./assets/UI/rightArrow.png');
+}
+
+#mediaButton{
+  position:absolute;
+  width: 20%;
+  height: 20%;
+  z-index: 100;
+  bottom:0;
+  left:0;
+}
+
+#arrowMedia{
+  position:absolute;
+  width: 20%;
+  height: 20%;
+  z-index: 100;
+  bottom:0;
+  right:0;
+}

@@ -1,0 +1,1049 @@
+{
+  "entrySpaceId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+  "inputs": {
+    "default": []
+  },
+  "objects": {
+    "0c213d82-9b34-461a-a3a8-e6df8f91128d": {
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/cc5ce191-08d0-46b9-8096-156aa72b86bd.glb"
+        }
+      },
+      "id": "0c213d82-9b34-461a-a3a8-e6df8f91128d",
+      "material": null,
+      "name": "yellow_balloon",
+      "order": 5.835238934013125,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "prefab": true,
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ]
+    },
+    "0d17690d-cbbb-4fc4-935a-638e3b0a1746": {
+      "components": {},
+      "geometry": {
+        "height": 1,
+        "radius": 0.02,
+        "type": "cylinder"
+      },
+      "id": "0d17690d-cbbb-4fc4-935a-638e3b0a1746",
+      "material": {
+        "color": "#FFFFFF",
+        "type": "basic"
+      },
+      "name": "string",
+      "order": 1.919829890604834,
+      "parentId": "1c521e89-2110-4de8-86b9-7a21c3203c4f",
+      "position": [
+        -0.06668249995790919,
+        -0.8800784950630529,
+        -0.05870069112679843
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1.428571428571429,
+        1.428571428571429,
+        1.428571428571429
+      ]
+    },
+    "1c521e89-2110-4de8-86b9-7a21c3203c4f": {
+      "id": "1c521e89-2110-4de8-86b9-7a21c3203c4f",
+      "name": "yellow_balloon",
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/balloon-yellow.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "material": null,
+      "order": -0.4012107745429925,
+      "position": [
+        0,
+        1.8742434221109567,
+        0.024981884678350497
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "parentId": "12d8c449-3928-4f6e-8348-90cf4c3f3d1f",
+      "shadow": {
+        "castShadow": true
+      }
+    },
+    "32ff3930-8d1f-425d-afcd-ce410c10b669": {
+      "components": {},
+      "geometry": null,
+      "id": "32ff3930-8d1f-425d-afcd-ce410c10b669",
+      "light": {
+        "intensity": 1,
+        "shadowBias": 0,
+        "shadowCamera": [
+          -5,
+          5,
+          5,
+          -5,
+          0.5,
+          200
+        ],
+        "shadowMapSize": [
+          2048,
+          2048
+        ],
+        "type": "directional"
+      },
+      "material": null,
+      "name": "Directional Light",
+      "order": 11.442741156280537,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "37fb92c7-aed2-408a-a2e9-b59d86d29e23": {
+      "components": {},
+      "id": "37fb92c7-aed2-408a-a2e9-b59d86d29e23",
+      "name": "Prize",
+      "order": 3.4618156969855343,
+      "parentId": "12d8c449-3928-4f6e-8348-90cf4c3f3d1f",
+      "position": [
+        -0.04667774997053641,
+        0.1885133202061844,
+        -0.01610859911040885
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.6354158604275228,
+        0.6354158604275228,
+        0.6354158604275228
+      ],
+      "collider": {
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.7000000000000002,
+          "width": 1
+        },
+        "mass": 1,
+        "type": "dynamic",
+        "gravityFactor": 0
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/8-jewel.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      }
+    },
+    "38de5b26-9863-40c1-96d8-184f3e627ad5": {
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/table.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "id": "38de5b26-9863-40c1-96d8-184f3e627ad5",
+      "name": "booth.glb",
+      "order": 1.7206902200653,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "position": [
+        0,
+        -3.0713065650941593,
+        -0.867964845351846
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        6.399999999999994,
+        6.399999999999994,
+        1
+      ]
+    },
+    "39716bef-b488-450e-8e56-9334a30201f4": {
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/2103febd-443d-41b4-9863-b0799080cf35.glb"
+        }
+      },
+      "id": "39716bef-b488-450e-8e56-9334a30201f4",
+      "material": null,
+      "name": "blue_balloon",
+      "order": 8.277742736036114,
+      "position": [
+        1,
+        0,
+        0
+      ],
+      "prefab": true,
+      "rotation": [
+        0,
+        1,
+        0,
+        -6.123233995736766e-17
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "4a14502b-9d97-4452-8d1d-dadefd4a0777": {
+      "components": {},
+      "geometry": null,
+      "id": "4a14502b-9d97-4452-8d1d-dadefd4a0777",
+      "light": {
+        "type": "ambient"
+      },
+      "material": null,
+      "name": "Ambient Light",
+      "order": 13.180200983340097,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "4a21af1e-59cf-42cd-866f-e8e6e52c7790": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "auto"
+        },
+        "mass": 0,
+        "type": "static"
+      },
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "hidden": true,
+      "id": "4a21af1e-59cf-42cd-866f-e8e6e52c7790",
+      "material": {
+        "color": "#ff0000",
+        "opacity": 0.5,
+        "type": "unlit"
+      },
+      "name": "Sphere",
+      "order": 1.9698404616193759,
+      "parentId": "0c213d82-9b34-461a-a3a8-e6df8f91128d",
+      "position": [
+        0,
+        0.24162133730630903,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1.3,
+        1.5,
+        1.3
+      ]
+    },
+    "6bc563f9-fa67-45af-bfcd-f9e35bc84f99": {
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/aa152b35-f641-4016-91c2-808740862727.glb"
+        }
+      },
+      "id": "6bc563f9-fa67-45af-bfcd-f9e35bc84f99",
+      "material": null,
+      "name": "red_balloon",
+      "order": 6.904695293742451,
+      "position": [
+        -1,
+        0,
+        0
+      ],
+      "prefab": true,
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "6c55f8c9-104f-44e9-8622-2c9a9981df8d": {
+      "collider": {
+        "geometry": {
+          "type": "box",
+          "depth": 0.1,
+          "height": 0.1,
+          "width": 0.10000000000000003
+        },
+        "gravityFactor": 0,
+        "mass": 1,
+        "offsetY": 0,
+        "type": "dynamic",
+        "offsetZ": -0.12
+      },
+      "components": {},
+      "id": "6c55f8c9-104f-44e9-8622-2c9a9981df8d",
+      "name": "Dart",
+      "order": 9.776084296722987,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "position": [
+        0,
+        1.8,
+        1.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/dart-fix.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      }
+    },
+    "909ad99a-ed22-457b-a352-7caa5a5e2f26": {
+      "components": {
+        "29189e0e-9404-4253-b2dd-364a46d5f49d": {
+          "id": "29189e0e-9404-4253-b2dd-364a46d5f49d",
+          "name": "position-animation",
+          "parameters": {
+            "autoFrom": false,
+            "fromX": -15,
+            "toX": 15,
+            "duration": 10000,
+            "fromY": 3.176,
+            "toY": 3.176,
+            "fromZ": -100,
+            "toZ": -100,
+            "reverse": true,
+            "easeIn": true,
+            "easeOut": true
+          }
+        }
+      },
+      "geometry": {
+        "height": 9,
+        "type": "plane",
+        "width": 16
+      },
+      "id": "909ad99a-ed22-457b-a352-7caa5a5e2f26",
+      "material": {
+        "color": "#FFFFFF",
+        "textureSrc": {
+          "type": "asset",
+          "asset": "assets/backdrop.png"
+        },
+        "type": "basic"
+      },
+      "name": "Backdrop",
+      "order": 1.3284244359357842,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "position": [
+        0,
+        3.176234427355186,
+        -100
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        14,
+        14,
+        14
+      ]
+    },
+    "a608ddd9-9379-464d-966f-5d8d8674c83c": {
+      "camera": {
+        "fov": 60,
+        "type": "perspective",
+        "xr": {
+          "desktop": "3D",
+          "xrCameraType": "3dOnly",
+          "headset": "disabled"
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "id": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "material": null,
+      "name": "Camera",
+      "order": 1.0308214152219775,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "position": [
+        0,
+        2.289514916478793,
+        2.9244118961455907
+      ],
+      "rotation": [
+        0,
+        1,
+        0,
+        -6.123233995736766e-17
+      ],
+      "scale": [
+        0.9999998646558023,
+        0.9999999931513284,
+        0.9999998715044741
+      ]
+    },
+    "c6322ae0-4c30-4460-a666-6ee7a0941649": {
+      "components": {
+        "e45876b5-cff5-4cd2-8a7d-1759bfd0cfa4": {
+          "id": "e45876b5-cff5-4cd2-8a7d-1759bfd0cfa4",
+          "name": "Dart Thrower",
+          "parameters": {
+            "autoResetDelay": 3000,
+            "dartEntity": {
+              "type": "entity",
+              "id": "6c55f8c9-104f-44e9-8622-2c9a9981df8d"
+            },
+            "forceMultiplier": 6,
+            "resetHeight": -1
+          }
+        }
+      },
+      "geometry": null,
+      "id": "c6322ae0-4c30-4460-a666-6ee7a0941649",
+      "material": null,
+      "name": "Dart Controller",
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "d6535416-932f-41b1-b347-097e7f9e69da": {
+      "id": "d6535416-932f-41b1-b347-097e7f9e69da",
+      "parentId": "12d8c449-3928-4f6e-8348-90cf4c3f3d1f",
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1,
+          "width": 1
+        },
+        "mass": 0,
+        "type": "static"
+      },
+      "components": {
+        "59e737b7-a57c-49cd-9373-2cef65b3a03b": {
+          "id": "59e737b7-a57c-49cd-9373-2cef65b3a03b",
+          "name": "Balloon Popper",
+          "parameters": {
+            "prizeEntity": {
+              "type": "entity",
+              "id": "37fb92c7-aed2-408a-a2e9-b59d86d29e23"
+            },
+            "balloonObj": {
+              "type": "entity",
+              "id": "1c521e89-2110-4de8-86b9-7a21c3203c4f"
+            }
+          }
+        }
+      },
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "hidden": true,
+      "material": {
+        "color": "#ff0000",
+        "opacity": 0.5,
+        "type": "unlit"
+      },
+      "name": "Balloon Collider",
+      "order": -2.2047356952675363,
+      "position": [
+        0,
+        2.043378358225373,
+        0.024981884678350497
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.9099999999999999,
+        1.0499999999999998,
+        0.9099999999999999
+      ]
+    },
+    "12d8c449-3928-4f6e-8348-90cf4c3f3d1f": {
+      "id": "12d8c449-3928-4f6e-8348-90cf4c3f3d1f",
+      "position": [
+        0,
+        1.6712641719837256,
+        -4.01611832558913
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "d1462ad1-a479-4312-8535-088156771dfc": {
+          "id": "d1462ad1-a479-4312-8535-088156771dfc",
+          "name": "Balloon Floater",
+          "parameters": {}
+        }
+      },
+      "name": "BalloonTarget",
+      "order": 3.9637884856861514
+    },
+    "768a390d-ce11-43d2-bb19-023336bf65e2": {
+      "id": "768a390d-ce11-43d2-bb19-023336bf65e2",
+      "position": [
+        -2.3328964407679234,
+        2.9781641693876213,
+        -4.01611832558913
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "3d10bf1b-2601-47d5-9e64-f00157d8c9d4": {
+          "id": "3d10bf1b-2601-47d5-9e64-f00157d8c9d4",
+          "name": "Balloon Floater",
+          "parameters": {
+            "floatAmplitude": 0.6,
+            "driftSpeed": 0.4,
+            "driftAmplitude": 0.2,
+            "phaseOffset": 0.5,
+            "rotationAmount": 15,
+            "floatSpeed": 0.6
+          }
+        }
+      },
+      "name": "BalloonTarget (1)",
+      "order": 6.612694681141866
+    },
+    "14cb428c-0a21-4864-865c-85459ed0492d": {
+      "id": "14cb428c-0a21-4864-865c-85459ed0492d",
+      "name": "yellow_balloon (1)",
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/balloon-yellow.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "material": null,
+      "order": -0.4012107745429925,
+      "position": [
+        0,
+        1.8742434221109567,
+        0.024981884678350497
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "parentId": "768a390d-ce11-43d2-bb19-023336bf65e2",
+      "shadow": {
+        "castShadow": true
+      }
+    },
+    "e4ebfcdf-0ec8-430c-a51a-fa2eaf05e5e8": {
+      "components": {},
+      "geometry": {
+        "height": 1,
+        "radius": 0.02,
+        "type": "cylinder"
+      },
+      "id": "e4ebfcdf-0ec8-430c-a51a-fa2eaf05e5e8",
+      "material": {
+        "color": "#FFFFFF",
+        "type": "basic"
+      },
+      "name": "string (1)",
+      "order": 1.919829890604834,
+      "parentId": "14cb428c-0a21-4864-865c-85459ed0492d",
+      "position": [
+        -0.06668249995790919,
+        -0.8800784950630529,
+        -0.05870069112679843
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1.428571428571429,
+        1.428571428571429,
+        1.428571428571429
+      ]
+    },
+    "1ee5cbfb-6249-412a-8cca-cc08b55d5c79": {
+      "components": {},
+      "id": "1ee5cbfb-6249-412a-8cca-cc08b55d5c79",
+      "name": "Prize (1)",
+      "order": 3.4618156969855343,
+      "parentId": "768a390d-ce11-43d2-bb19-023336bf65e2",
+      "position": [
+        -0.04667774997053641,
+        0.1885133202061844,
+        -0.01610859911040885
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.6354158604275228,
+        0.6354158604275228,
+        0.6354158604275228
+      ],
+      "collider": {
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.7000000000000002,
+          "width": 1
+        },
+        "mass": 1,
+        "type": "dynamic",
+        "gravityFactor": 0
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/8-jewel.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      }
+    },
+    "8e060b4b-565c-4acd-a83b-beb15da6f546": {
+      "id": "8e060b4b-565c-4acd-a83b-beb15da6f546",
+      "parentId": "768a390d-ce11-43d2-bb19-023336bf65e2",
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "auto"
+        },
+        "mass": 0,
+        "type": "static"
+      },
+      "components": {
+        "59e737b7-a57c-49cd-9373-2cef65b3a03b": {
+          "id": "59e737b7-a57c-49cd-9373-2cef65b3a03b",
+          "name": "Balloon Popper",
+          "parameters": {
+            "prizeEntity": {
+              "type": "entity",
+              "id": "1ee5cbfb-6249-412a-8cca-cc08b55d5c79"
+            },
+            "balloonObj": {
+              "type": "entity",
+              "id": "14cb428c-0a21-4864-865c-85459ed0492d"
+            }
+          }
+        }
+      },
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "hidden": true,
+      "material": {
+        "color": "#ff0000",
+        "opacity": 0.5,
+        "type": "unlit"
+      },
+      "name": "Balloon Collider (1)",
+      "order": -2.2047356952675363,
+      "position": [
+        0,
+        2.043378358225373,
+        0.024981884678350497
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.9099999999999999,
+        1.0499999999999998,
+        0.9099999999999999
+      ]
+    },
+    "9cce9e3a-9015-443f-9ade-d396c49970c0": {
+      "id": "9cce9e3a-9015-443f-9ade-d396c49970c0",
+      "position": [
+        3.102889001276102,
+        3.292123061480457,
+        -4.01611832558913
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "e904ebe2-3a3b-4211-8453-826e6fc175f0": {
+          "id": "e904ebe2-3a3b-4211-8453-826e6fc175f0",
+          "name": "Balloon Floater",
+          "parameters": {
+            "floatAmplitude": 0.6,
+            "driftSpeed": 0.4,
+            "driftAmplitude": 0.2,
+            "phaseOffset": 1,
+            "rotationAmount": 15,
+            "floatSpeed": 0.6
+          }
+        }
+      },
+      "name": "BalloonTarget (2)",
+      "order": 8.803546397943968
+    },
+    "2d66a325-c27e-4c5f-9303-2671195c0fb3": {
+      "id": "2d66a325-c27e-4c5f-9303-2671195c0fb3",
+      "name": "yellow_balloon (2)",
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/balloon-yellow.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "material": null,
+      "order": -0.4012107745429925,
+      "position": [
+        0,
+        1.8742434221109567,
+        0.024981884678350497
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "parentId": "9cce9e3a-9015-443f-9ade-d396c49970c0",
+      "shadow": {
+        "castShadow": true
+      }
+    },
+    "f1418f78-9e65-4596-a1d7-d6fe42d4e2b1": {
+      "components": {},
+      "geometry": {
+        "height": 1,
+        "radius": 0.02,
+        "type": "cylinder"
+      },
+      "id": "f1418f78-9e65-4596-a1d7-d6fe42d4e2b1",
+      "material": {
+        "color": "#FFFFFF",
+        "type": "basic"
+      },
+      "name": "string (2)",
+      "order": 1.919829890604834,
+      "parentId": "2d66a325-c27e-4c5f-9303-2671195c0fb3",
+      "position": [
+        -0.06668249995790919,
+        -0.8800784950630529,
+        -0.05870069112679843
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1.428571428571429,
+        1.428571428571429,
+        1.428571428571429
+      ]
+    },
+    "7ef61b37-ddf1-46f3-8486-397bc67b3f95": {
+      "components": {},
+      "id": "7ef61b37-ddf1-46f3-8486-397bc67b3f95",
+      "name": "Prize (2)",
+      "order": 3.4618156969855343,
+      "parentId": "9cce9e3a-9015-443f-9ade-d396c49970c0",
+      "position": [
+        -0.04667774997053641,
+        0.1885133202061844,
+        -0.01610859911040885
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.6354158604275228,
+        0.6354158604275228,
+        0.6354158604275228
+      ],
+      "collider": {
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.7,
+          "width": 1
+        },
+        "mass": 1,
+        "type": "dynamic",
+        "gravityFactor": 0
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/8-jewel.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      }
+    },
+    "c37abd78-0fcd-4e78-bb88-bbc51184c42a": {
+      "id": "c37abd78-0fcd-4e78-bb88-bbc51184c42a",
+      "parentId": "9cce9e3a-9015-443f-9ade-d396c49970c0",
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "auto"
+        },
+        "mass": 0,
+        "type": "static"
+      },
+      "components": {
+        "59e737b7-a57c-49cd-9373-2cef65b3a03b": {
+          "id": "59e737b7-a57c-49cd-9373-2cef65b3a03b",
+          "name": "Balloon Popper",
+          "parameters": {
+            "prizeEntity": {
+              "type": "entity",
+              "id": "7ef61b37-ddf1-46f3-8486-397bc67b3f95"
+            },
+            "balloonObj": {
+              "type": "entity",
+              "id": "2d66a325-c27e-4c5f-9303-2671195c0fb3"
+            }
+          }
+        }
+      },
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "hidden": true,
+      "material": {
+        "color": "#ff0000",
+        "opacity": 0.5,
+        "type": "unlit"
+      },
+      "name": "Balloon Collider (2)",
+      "order": -2.2047356952675363,
+      "position": [
+        0,
+        2.043378358225373,
+        0.024981884678350497
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.9099999999999999,
+        1.0499999999999998,
+        0.9099999999999999
+      ]
+    }
+  },
+  "runtimeVersion": {
+    "type": "version",
+    "level": "major",
+    "major": 2,
+    "minor": 0,
+    "patch": 0
+  },
+  "spaces": {
+    "88453035-dc0f-486d-868a-8ff7c2fda864": {
+      "activeCamera": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "id": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "name": "Default",
+      "reflections": {
+        "type": "url",
+        "url": "https://cdn.8thwall.com/web/assets/envmap/basic_env_map-m9hqpneh.jpg"
+      }
+    }
+  },
+  "historyVersion": "mg5xvrfh"
+}

@@ -1,0 +1,81 @@
+<!-- Copyright (c) 2021 8th Wall, Inc. -->
+<!-- head.html is optional; elements will be added to your html head before app.js is loaded. -->
+
+<meta name="8thwall:multithread" content="true" />
+<!-- aframe -->
+<meta name="8thwall:renderer" content="aframe:1.5.0" />
+
+<!-- Preloading chunks -->
+<!-- <meta name="8thwall:preloadChunks" content="" /> -->
+
+<!-- xrextras -->
+<!-- <meta name="8thwall:package" content="@8thwall.xrextras" /> -->
+<meta name="8thwall:package" content="@8thwall.xrextras:beta" />
+
+<!-- coaching overlay -->
+<!-- <meta name="8thwall:package" content="@8thwall.coaching-overlay"> -->
+<meta name="8thwall:package" content="@8thwall.coaching-overlay" />
+
+<!-- landing page -->
+<meta name="8thwall:package" content="@8thwall.landing-page" />
+
+<!-- react -->
+<meta name="8thwall:package" content="@react.react:17.0.0" />
+<meta name="8thwall:package" content="@react.react-dom:17.0.0" />
+<meta name="8thwall:package" content="@react.react-router-dom" />
+
+<!-- Other external scripts and meta tags can also be added. -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+<script src="//cdn.8thwall.com/web/aframe/stats.16.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/tween.js/16.3.5/Tween.min.js"></script>
+
+<!-- babylon.js-->
+<!-- Code copied from: https://www.8thwall.com/8thwall/placeground-babylonjs/files/head.html-->
+<!-- NOTE(paris): There is a bug in Chrome pre 4.2.1 with shadows: https://forum.babylonjs.com/t/unable-to-compile-effects-error/26548/4 -->
+<script
+  src="//cdn.jsdelivr.net/npm/babylonjs@5.4.0/babylon.min.js"
+  crossorigin="anonymous"></script>
+<script
+  src="//cdn.jsdelivr.net/npm/babylonjs-loaders@5.4.0/babylonjs.loaders.min.js"
+  crossorigin="anonymous"></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/babylonjs-materials@5.4.0/babylonjs.materials.min.js"
+  crossorigin="anonymous"></script>
+<!--<script src="//preview.babylonjs.com/babylon.js"></script>-->
+<!--<script src="//preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>-->
+<!--<script src="//preview.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>-->
+
+<!--Used for AFrame curvy-->
+<script src="https://unpkg.com/aframe-state-component@7.1.1/dist/aframe-state-component.js"></script>
+
+<!-- Used for AFrame Sky -->
+<script
+  crossorigin="anonymous"
+  src="//cdn.8thwall.com/web/aframe/aframe-extras-7.2.0.min.js"></script>
+
+<!--Used by curvy-targets-scene-->
+<script src="https://cdn.jsdelivr.net/gh/supermedium/three.js@super-r123/examples/js/controls/OrbitControls.js"></script>
+
+<!-- Used by cube-webgl-->
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"
+  integrity="sha512-zhHQR0/H5SEBL3Wn6yYSaTTZej12z0hVZKOv3TwCUXT1z5qeqGcXJLLrbERYRScEDDpYIJhPC1fk31gqR783iQ=="
+  crossorigin="anonymous"></script>
+
+<!-- Used by outer-iframe -->
+<!--<script src="//cdn.8thwall.com/web/test/iframe-12/iframe.js"></script>-->
+<!--<link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,700,700i&display=swap" rel="stylesheet">-->
+<!--<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap" rel="stylesheet">-->
+
+<!--WebGL debugging-->
+<!--<script type="text/javascript" src="https://spectorcdn.babylonjs.com/spector.bundle.js"></script>-->
+<!--<meta name="theme-color" content="black">-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">-->
+<!--<meta name=“apple-mobile-web-app-capable” content=“yes”>-->
+<!--<meta name=“apple-mobile-web-app-status-bar-style” content=“yellow”>-->
+
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/UAParser.js/2.0.0-alpha.2/ua-parser.min.js"
+  integrity="sha512-kHEj6vZYgiWSjmNdiztJ0XX0/DVx/dA2ER5Y0lvDBx/ZxUIYCOTq3NnVgl15sSfLTGvk6S+9oYWU3oY8S7ulqQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"></script>

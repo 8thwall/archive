@@ -1,0 +1,84 @@
+$moonlight: #f9f9fa;
+$eggshell: #f2f1f3;
+$gray-1: #ebebf1;
+$gray-2: #d5d7e4;
+$gray-3: #b5b8d0;
+$gray-4: #8083a2;
+$gray-5: #464766;
+$gray-6: #3a3b55;
+$black: #2d2e43;
+
+h1 {
+  color: $black;
+}
+h2 {
+  color: $gray-6;
+}
+h3 {
+  color: $gray-5;
+}
+
+.main-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  background-size: cover;
+  background-position: center;
+  background-color: $moonlight;
+
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+}
+
+.home {
+  padding: 0 0.5em;
+}
+
+.home-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  background-image: url('https://static.8thwall.app/assets/pipeline-tester2-yck6nma064.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 20vw;
+
+  h1 {
+    text-align: right;
+    color: white !important;
+    margin: 2em 0.5em 0 0;
+  }
+}
+
+.button-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-gap: 0.5em;
+
+  & > a:visited,
+  & > a:link {
+    color: #2d2e43;
+  }
+}
+
+.button-container > * {
+  display: block;
+  border: 2px solid #57bfff;
+  padding: 0.5em;
+  text-decoration: none;
+  border-radius: 0.5em;
+}
+
+h3 {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+h4 {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}

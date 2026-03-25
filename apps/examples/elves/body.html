@@ -1,0 +1,71 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene
+  landing-page
+  xrextras-loading
+  renderer="colorManagement:true"
+  xrextras-runtime-error
+  xrface="allowedDevices: any; uvType: standard; maxDetections:1; cameraDirection: front; meshGeometry: eyes, face, mouth; mirroredDisplay: true; enableEars:true">
+  <!-- 3D models, images, videos -->
+  <a-assets>
+    <a-asset-item id="head-occluder" src="./assets/noEarHeadOccluder.glb"></a-asset-item>
+    <a-asset-item id="elfEar" src="./assets/models/elfEar.glb"></a-asset-item>
+    <a-asset-item id="elfEarLeft" src="./assets/models/elfEarLeft.glb"></a-asset-item>
+    <a-asset-item id="elfHat" src="./assets/models/elfHat.glb"></a-asset-item>
+    <img id="elfMakeup" src="./assets/elfMakeup.png" />
+  </a-assets>
+
+  <a-camera
+    look-controls="enabled: false"
+    wasd-controls="enabled: false"
+    position="0 2 0"></a-camera>
+
+  <!-- content anchored to face -->
+  <xrextras-faceanchor>
+    <xrextras-face-mesh
+      id="makeup"
+      material="shader:standard; visible: true; src:#elfMakeup; transparent:true; opacity:0.6">
+    </xrextras-face-mesh>
+
+    <a-entity
+      gltf-model="#head-occluder"
+      position="0.01 0.35 0.17"
+      scale="1.2 0.7 0.9"
+      xrextras-hider-material></a-entity>
+
+    <xrextras-face-mesh position="0 0 0.09" xrextras-hider-material></xrextras-face-mesh>
+
+    <xrextras-face-attachment point="forehead">
+      <a-entity
+        zhide-ears
+        id="elfHatEntity"
+        position="-.04 0.16 0.8"
+        rotation="7 0 0"
+        gltf-model="#elfHat"
+        scale="1.8 1.37 1.8"></a-entity>
+    </xrextras-face-attachment>
+
+    <xrextras-face-attachment point="leftCanal">
+      <a-entity
+        change-color
+        id="leftElfEar"
+        position="0.02 -.04 0"
+        rotation="0 180 0"
+        gltf-model="#elfEarLeft"
+        scale="9 10 10"></a-entity>
+    </xrextras-face-attachment>
+
+    <xrextras-face-attachment point="rightCanal">
+      <a-entity
+        id="rightElfEar"
+        position="0 -.03 0"
+        rotation="0 180 0"
+        gltf-model="#elfEar"
+        scale="9 10 10"></a-entity>
+    </xrextras-face-attachment>
+  </xrextras-faceanchor>
+
+  <a-light type="directional" target="#face" position="0 1.8 3" intensity="0.8"></a-light>
+  <a-light type="ambient" intensity="0.5"></a-light>
+</a-scene>

@@ -1,0 +1,14 @@
+.deviceTable {
+  width: max-content;
+  tr td {
+    background-color: #ececec;
+  }
+  tr th {
+    background-color: #aaa;
+    font-weight: bold;
+    color: #333;
+  }
+  tr + tr {
+    margin-top: 0.5em;
+  }
+}

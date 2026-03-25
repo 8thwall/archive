@@ -1,0 +1,299 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<a-scene
+  renderer="colorManagement: false; physicallyCorrectLights: false"
+  xrextras-loading
+  xrextras-runtime-error
+  ui-manager
+  gltf-model="dracoDecoderPath: https://cdn.8thwall.com/web/aframe/draco-decoder/"
+  hand-coaching-overlay="promptText:Point the phone towards your hand;"
+  xrhand="allowedDevices:any; cameraDirection:back; "
+>
+  <!-- 3D models, images, videos -->
+  <a-assets>
+    <a-asset-item
+      id="luxWatch"
+      src="./assets/models/luxWatchFinal.glb"
+    ></a-asset-item>
+        <a-asset-item
+      id="tree"
+      src="./assets/models/treeTest.glb"
+    ></a-asset-item>
+    <a-asset-item
+      id="slenderWatch"
+      src="./assets/models/slenderWatchFinal.glb"
+    ></a-asset-item>
+
+    <a-asset-item id="cuff" src="./assets/models/cuffFinal.glb"></a-asset-item>
+    <a-asset-item
+      id="maleBangle"
+      src="./assets/models/maleBangleFinal2.glb"
+    ></a-asset-item>
+    <a-asset-item
+      id="femaleBangle"
+      src="./assets/models/femaleBangleFinal.glb"
+    ></a-asset-item>
+
+    <a-asset-item
+      id="diamond"
+      src="./assets/models/diamondFinal.glb"
+    ></a-asset-item>
+    <a-asset-item id="band" src="./assets/models/bandFinal.glb"></a-asset-item>
+    <a-asset-item
+      id="emerald"
+      src="./assets/models/emeraldFinal.glb"
+    ></a-asset-item>
+    <a-asset-item
+      id="marquise"
+      src="./assets/models/marquiseFinal.glb"
+    ></a-asset-item>
+    <a-asset-item id="signet" src="./assets/models/signetRotated.glb"></a-asset-item>
+  </a-assets>
+
+  <a-camera position="0 2 0"> </a-camera>
+  <xrextras-hand-anchor id="hand">
+    <!-- Hand occluder made using hider-material and hand-mesh -->
+    <xrextras-hand-occluder
+      show="false"
+      adjustment="0.0025"
+    ></xrextras-hand-occluder>
+
+    <!-- <xrextras-hand-attachment id="palm" point="palm" pointType="inner">
+      <a-entity gltf-model="#tree" rotation="0 0 30" position="0 0 .1" scale="0.5 0.5 0.5"></a-entity>
+    </xrextras-hand-attachment> -->
+
+    <!-- Watch attachment point -->
+    <xrextras-hand-attachment point="wrist">
+      <a-cylinder
+        id="wristOccluder"
+        color="#FAFAFA"
+        scale="1 1 1"
+        position=".002 -0.055 .003"
+        height=".1"
+        radius="1"
+        wrist-occluder
+        xrextras-hider-material
+      ></a-cylinder>
+
+      <a-entity
+        id="model"
+        clock-animation
+        position="0 -0.013 0"
+        rotation="0 90 0"
+        scale="1 1 1"
+        reflections="type:static"
+        shadow="receive: false"
+      ></a-entity>
+    </xrextras-hand-attachment>
+    <!-- Ring attachment point -->
+    <xrextras-hand-attachment point="thumbUpper">
+      <a-entity
+        id="thumbModel"
+        position="0 0.006 0"
+        rotation="90 180 0"
+        scale="1 1 1 "
+        reflections="type:static"
+        shadow="receive: false"
+      ></a-entity>
+    </xrextras-hand-attachment>
+    <xrextras-hand-attachment point="indexLower">
+      <a-entity
+        id="indexModel"
+        position="0 -.004 0"
+        rotation="90 180 0"
+        scale="1 1 1"
+        reflections="type:static"
+        shadow="receive: false"
+      ></a-entity>
+    </xrextras-hand-attachment>
+    <xrextras-hand-attachment point="middleLower">
+      <a-entity
+        id="middleModel"
+        position="0 -.005 0"
+        rotation="90 180 0"
+        scale="1 1 1"
+        reflections="type:static"
+        shadow="receive: false"
+      ></a-entity>
+    </xrextras-hand-attachment>
+    <xrextras-hand-attachment point="ringLower">
+      <a-entity
+        id="ringModel"
+        position="0 -.002 0"
+        scale="1 1 1"
+        rotation="90 180 0"
+        reflections="type:static"
+        shadow="receive: false"
+      ></a-entity>
+    </xrextras-hand-attachment>
+    <xrextras-hand-attachment point="pinkyLower">
+      <a-entity
+        id="pinkyModel"
+        position="0 -.002 0"
+        rotation="90 180 0"
+        scale="1 1 1"
+        reflections="type:static"
+        shadow="receive: false"
+      ></a-entity>
+    </xrextras-hand-attachment>
+  </xrextras-hand-anchor>
+
+  <!-- <a-entity
+      id="model"
+      clock-animation
+      position="-.4 0.2 -2"
+      rotation="-90 0 -90"
+      scale="20 20 20"
+      reflections="type:static"
+      shadow="receive: false"
+    ></a-entity> -->
+  <!-- <a-entity
+    id="ringModel"
+    position="0.4 0.2 -2"
+    rotation="0 -90 -90"
+    scale="5 5 5"
+    reflections="type:static"
+    shadow="receive: false"
+  ></a-entity> -->
+  <!-- <a-entity
+    id="middleModel"
+    position="0.4 0.2 -3"
+    rotation="0 -90 -90"
+    scale="5 5 5"
+    reflections="type:static"
+    shadow="receive: false"
+  ></a-entity> -->
+  <!-- <a-entity
+    id="indexModel"
+    position="0.4 0.2 -4"
+    rotation="0 -90 -90"
+    scale="5 5 5"
+    reflections="type:static"
+    shadow="receive: false"
+  ></a-entity> -->
+  <!-- <a-entity
+    id="pinkyModel"
+    position="0.4 0.2 -5"
+    rotation="0 -90 -90"
+    scale="5 5 5"
+    reflections="type:static"
+    shadow="receive: false"
+  ></a-entity> -->
+  <!-- <a-entity
+    id="thumbModel"
+    position="0.4 0.2 -6"
+    rotation="0 -90 -90"
+    scale="5 5 5"
+    reflections="type:static"
+    shadow="receive: false"
+  ></a-entity> -->
+
+  <a-entity
+    light="
+      type: directional;
+      intensity: 1;
+      castShadow: true;
+      shadowMapHeight:2048;
+      shadowMapWidth:2048;
+      shadowCameraTop: 10;
+      target: #model;
+      shadowRadius: 12"
+    xrextras-attach="target: model; offset: 1 15 8;"
+    shadow
+  >
+  </a-entity>
+
+    <a-entity
+    light="
+      type: directional;
+      intensity: 0.5;
+      castShadow: true;
+      shadowMapHeight:2048;
+      shadowMapWidth:2048;
+      shadowCameraTop: 10;
+      target: #middleModel;
+      shadowRadius: 12"
+    xrextras-attach="target: middleModel; offset: 1 15 8;"
+    shadow
+  >
+  </a-entity>
+
+  <a-light type="ambient" intensity="1.5"></a-light>
+</a-scene>
+
+<div id="cartUI"></div>
+
+<div id="selectionParent" class="noselect">
+  <div id="backParent" class="back">
+    <div id="backButton" class="back">Back</div>
+  </div>
+
+  <div id="variationParent" class="noselect">
+    <div id="variationUI" class="variation">
+      <div id="primaryVariation" class="variation variationOption"></div>
+      <div id="variationOptions" class="variation">
+        <div id="variation1" class="variation variationOption"></div>
+        <div id="variation2" class="variation variationOption"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="fingerParent" class="noselect">
+    <div id="fingerUI" class="finger">
+      <div id="primaryFinger" class="finger fingerOption"></div>
+      <div id="fingerOptions" class="finger">
+        <div id="finger1" class="finger fingerOption"></div>
+        <div id="finger2" class="finger fingerOption"></div>
+        <div id="finger3" class="finger fingerOption"></div>
+        <div id="finger4" class="finger fingerOption"></div>
+      </div>
+    </div>
+  </div>
+  <div id="mainSelection" class="selectionRow">
+    <div id="watchOption" class="accessoryOption"></div>
+    <div id="ringOption" class="accessoryOption"></div>
+    <div id="braceletOption" class="accessoryOption"></div>
+  </div>
+  <div id="watchSelection" class="selectionRow">
+    <div id="noneWatch" class="accessoryOption noneOption optionSelected"></div>
+    <div id="luxuryWatchOption" name="luxWatch" class="accessoryOption"></div>
+    <div
+      id="slenderWatchOption"
+      name="slenderWatch"
+      class="accessoryOption"
+    ></div>
+  </div>
+  <div id="ringSelection" class="selectionRow">
+    <div id="noneRing" class="accessoryOption noneOption optionSelected"></div>
+    <div id="bandOption" name="band" class="ring accessoryOption"></div>
+    <div
+      id="diamondRingOption"
+      name="diamond"
+      class="ring accessoryOption"
+    ></div>
+    <div
+      id="emeraldCutOption"
+      name="emerald"
+      class="ring accessoryOption"
+    ></div>
+    <div
+      id="marquiseCutOption"
+      name="marquise"
+      class="ring accessoryOption"
+    ></div>
+    <div id="signetRingOption" name="signet" class="ring accessoryOption"></div>
+  </div>
+  <div id="braceletSelection" class="selectionRow">
+    <div
+      id="noneBracelet"
+      class="accessoryOption noneOption optionSelected"
+    ></div>
+    <div id="cuffOption" name="cuff" class="accessoryOption"></div>
+    <div
+      id="femaleBangleOption"
+      name="femaleBangle"
+      class="accessoryOption"
+    ></div>
+    <div id="maleBangleOption" name="maleBangle" class="accessoryOption"></div>
+  </div>
+</div>

@@ -1,0 +1,381 @@
+{
+  "activeCamera": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+  "objects": {
+    "47699d9e-18a5-4f88-a4f9-b8be92e8f74a": {
+      "components": {},
+      "geometry": null,
+      "id": "47699d9e-18a5-4f88-a4f9-b8be92e8f74a",
+      "light": {
+        "type": "ambient"
+      },
+      "material": null,
+      "name": "Ambient Light",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "729478ae-d067-4e0c-a753-66c2e9efb625": {
+      "components": {},
+      "geometry": {
+        "depth": 1,
+        "height": 1,
+        "type": "box",
+        "width": 1
+      },
+      "id": "729478ae-d067-4e0c-a753-66c2e9efb625",
+      "material": {
+        "color": "#5577ff",
+        "type": "basic"
+      },
+      "name": "Box",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0.3897781759669001,
+        0,
+        0.9209087759055814
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "e2001735-b938-4dff-ba09-7ba32217dd2a"
+    },
+    "a608ddd9-9379-464d-966f-5d8d8674c83c": {
+      "camera": {
+        "type": "perspective",
+        "xr": {
+          "desktop": "AR",
+          "xrCameraType": "face",
+          "headset": "disabled",
+          "phone": "AR",
+          "direction": "front"
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "id": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "material": null,
+      "name": "Camera",
+      "position": [
+        0,
+        5.202330467552535,
+        6.820029855918676
+      ],
+      "rotation": [
+        -1.8412919444518387e-17,
+        0.9537169517857893,
+        -0.30070579621354565,
+        -5.839832572618051e-17
+      ],
+      "scale": [
+        0.9999998646558023,
+        0.9999999931513284,
+        0.9999998715044741
+      ]
+    },
+    "ac1989e3-3b71-49e2-a05f-e682aeb18c36": {
+      "components": {},
+      "geometry": null,
+      "id": "ac1989e3-3b71-49e2-a05f-e682aeb18c36",
+      "light": {
+        "intensity": 1,
+        "type": "directional"
+      },
+      "material": null,
+      "name": "Directional Light",
+      "position": [
+        20,
+        20,
+        10
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "b618e0cc-4c15-44bd-b7ec-97dd87d0ee91": {
+      "id": "b618e0cc-4c15-44bd-b7ec-97dd87d0ee91",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {
+        "42b05350-03ae-4df8-ac39-762c50c608ed": {
+          "id": "42b05350-03ae-4df8-ac39-762c50c608ed",
+          "name": "cycle-button",
+          "parameters": {
+            "worldContent": {
+              "type": "entity",
+              "id": "e2001735-b938-4dff-ba09-7ba32217dd2a"
+            },
+            "faceContent": {
+              "type": "entity",
+              "id": "e953ac6c-1414-4be9-a2bb-ad42cf4afe13"
+            },
+            "swapButton": {
+              "type": "entity",
+              "id": "0b9db9b5-c707-453f-9586-f964a87aaa49"
+            }
+          }
+        }
+      },
+      "name": "Swap Screen",
+      "ui": {
+        "position": "absolute",
+        "top": "0",
+        "left": "0",
+        "width": "100%",
+        "height": "100%",
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "alignItems": "flex-end",
+        "padding": "8",
+        "type": "overlay"
+      }
+    },
+    "b1f90107-b3ef-4ad4-af8e-6640af6fb173": {
+      "id": "b1f90107-b3ef-4ad4-af8e-6640af6fb173",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "b618e0cc-4c15-44bd-b7ec-97dd87d0ee91",
+      "components": {},
+      "name": "Container",
+      "ui": {
+        "flexDirection": "column",
+        "alignItems": "center"
+      }
+    },
+    "0b9db9b5-c707-453f-9586-f964a87aaa49": {
+      "id": "0b9db9b5-c707-453f-9586-f964a87aaa49",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "b1f90107-b3ef-4ad4-af8e-6640af6fb173",
+      "components": {},
+      "name": "Cycle Button",
+      "ui": {
+        "image": {
+          "type": "asset",
+          "asset": "assets/Swap-Screen/Cycle.svg"
+        },
+        "width": "64",
+        "height": "64"
+      },
+      "order": 2.242745893095974
+    },
+    "e953ac6c-1414-4be9-a2bb-ad42cf4afe13": {
+      "id": "e953ac6c-1414-4be9-a2bb-ad42cf4afe13",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {},
+      "name": "Face Content"
+    },
+    "e2001735-b938-4dff-ba09-7ba32217dd2a": {
+      "id": "e2001735-b938-4dff-ba09-7ba32217dd2a",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {},
+      "name": "World Content"
+    },
+    "e394c229-769e-49ea-a5f6-ce48b05347e7": {
+      "id": "e394c229-769e-49ea-a5f6-ce48b05347e7",
+      "position": [
+        0,
+        2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "e953ac6c-1414-4be9-a2bb-ad42cf4afe13",
+      "components": {
+        "2924e055-e2ca-43ae-8b18-d042dfb89769": {
+          "id": "2924e055-e2ca-43ae-8b18-d042dfb89769",
+          "name": "face-anchor",
+          "parameters": {}
+        }
+      },
+      "face": {
+        "id": 1,
+        "addAttachmentState": false
+      },
+      "name": "Face"
+    },
+    "e19ac11e-6fd4-4f1a-948d-8bc9449ef96a": {
+      "id": "e19ac11e-6fd4-4f1a-948d-8bc9449ef96a",
+      "position": [
+        0.00021499999274965376,
+        -0.2652910053730011,
+        0.7601410150527954
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "e394c229-769e-49ea-a5f6-ce48b05347e7",
+      "components": {
+        "e526df0b-2640-4e29-b10c-50fcd4e01d31": {
+          "id": "e526df0b-2640-4e29-b10c-50fcd4e01d31",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "noseTip"
+          }
+        }
+      },
+      "name": "noseTip"
+    },
+    "4a7f32da-2b8b-446d-a2e1-666bf8e589f3": {
+      "id": "4a7f32da-2b8b-446d-a2e1-666bf8e589f3",
+      "position": [
+        0,
+        0,
+        -0.11233351872018615
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ],
+      "geometry": {
+        "type": "sphere",
+        "radius": 0.5
+      },
+      "material": {
+        "type": "basic",
+        "color": "#ff0000"
+      },
+      "parentId": "e19ac11e-6fd4-4f1a-948d-8bc9449ef96a",
+      "components": {},
+      "name": "Sphere"
+    }
+  },
+  "historyVersion": "m69u8u2i"
+}

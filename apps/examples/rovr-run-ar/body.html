@@ -1,0 +1,44 @@
+<!-- Copyright (c) 2021 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<div id="overlay" class="absolute-fill share-tech" style="z-index: 10; pointer-events: none;">
+</div> 
+
+<a-scene
+  xrweb
+  renderer="sortObjects: true; antialias: true"
+  xrextras-gesture-detector
+  xrextras-almost-there
+  xrextras-loading
+  xrextras-runtime-error
+  rover
+  >
+
+  <a-assets>
+    <a-asset-item id="craterModel" src="https://cdn.glitch.com/d9bf0c8d-e6ca-4896-a941-8333aa8be05c%2Fcrater.glb"></a-asset-item>
+    <a-asset-item id="hill1Model" src="https://cdn.glitch.com/d9bf0c8d-e6ca-4896-a941-8333aa8be05c%2Fhill1.glb"></a-asset-item>
+    <a-asset-item id="hill2Model" src="https://cdn.glitch.com/d9bf0c8d-e6ca-4896-a941-8333aa8be05c%2Fhill2.glb"></a-asset-item>
+    <a-asset-item id="hill3Model" src="https://cdn.glitch.com/d9bf0c8d-e6ca-4896-a941-8333aa8be05c%2Fhill3.glb"></a-asset-item>
+    <a-asset-item id="flagModel" src="https://cdn.glitch.com/d9bf0c8d-e6ca-4896-a941-8333aa8be05c%2Fflag.glb"></a-asset-item>
+    <a-asset-item id="roverBodyModel" src="https://cdn.glitch.com/d9bf0c8d-e6ca-4896-a941-8333aa8be05c%2Fbody.glb"></a-asset-item>
+    <a-asset-item id="roverHeadModel" src="https://cdn.glitch.com/d9bf0c8d-e6ca-4896-a941-8333aa8be05c%2Fhead.glb"></a-asset-item>
+    <a-asset-item id="roverWheelModel" src="https://cdn.glitch.com/d9bf0c8d-e6ca-4896-a941-8333aa8be05c%2Fwheel.glb"></a-asset-item>
+    <a-asset-item id="water" src="https://cdn.glitch.com/d9bf0c8d-e6ca-4896-a941-8333aa8be05c%2Fwater.glb"></a-asset-item>
+    <a-asset-item id="relicModel" src="https://cdn.glitch.com/d9bf0c8d-e6ca-4896-a941-8333aa8be05c%2Fcuriosity.glb"></a-asset-item>
+  </a-assets>
+
+  <a-camera id="camera" position="0 4 -3"></a-camera>
+
+  <a-light id="ambientLight" type="ambient" intensity="0.8"></a-light>
+  <a-entity
+    id="directionalLight"
+    light="type: directional;
+           intensity: 1;
+           castShadow: true;
+           shadowMapHeight: 1024;
+           shadowMapWidth: 1024;
+           color: #e5810d;"
+    position="1 4.3 2.5"
+    shadow>
+  </a-entity>
+</a-scene>

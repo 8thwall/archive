@@ -1,0 +1,72 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<a-scene
+  xrextras-loading
+  xrextras-runtime-error
+  hand-coaching-overlay
+  tap
+  renderer="colorManagement: true"
+  gltf-model="dracoDecoderPath: https://cdn.8thwall.com/web/aframe/draco-decoder/"
+  xrhand="allowedDevices:any">
+  <a-camera position="0 2 0"> </a-camera>
+  <a-light type="ambient" intensity="1.5"></a-light>
+
+  <xrextras-hand-anchor id="hand">
+    <xrextras-hand-occluder show="false" adjustment="0.0025"></xrextras-hand-occluder>
+    <a-asset-item id="nail" src="./assets/nail.glb"></a-asset-item>
+
+    <xrextras-hand-attachment point="indexNail" pointType="outer">
+      <a-entity
+        id="nailEntity1"
+        gltf-model="#nail"
+        scale="1.2 1.2 1.2"
+        rotation="90 0 -180"
+        position="0 0.005 -0.005"
+        reflections="type:static">
+      </a-entity>
+    </xrextras-hand-attachment>
+
+    <xrextras-hand-attachment point="thumbNail" pointType="outer">
+      <a-entity
+        id="nailEntity2"
+        gltf-model="#nail"
+        scale="1.2 1.2 1.2"
+        rotation="90 0 -180"
+        position="0 0.015 -0.005"
+        reflections="type:static">
+      </a-entity>
+    </xrextras-hand-attachment>
+
+    <xrextras-hand-attachment point="middleNail" pointType="outer">
+      <a-entity
+        id="nailEntity3"
+        gltf-model="#nail"
+        scale="1.2 1.2 1.2"
+        rotation="90 0 -180"
+        position="0 0.005 -0.005"
+        reflections="type:static">
+      </a-entity>
+    </xrextras-hand-attachment>
+
+    <xrextras-hand-attachment point="ringNail" pointType="outer">
+      <a-entity
+        id="nailEntity4"
+        gltf-model="#nail"
+        scale="1.2 1.2 1.2"
+        rotation="90 0 -180"
+        position="0 0 -0.005"
+        reflections="type:static">
+      </a-entity>
+    </xrextras-hand-attachment>
+    <xrextras-hand-attachment point="pinkyNail" pointType="outer">
+      <a-entity
+        id="nailEntity5"
+        gltf-model="#nail"
+        scale="1.2 1.2 1.2"
+        rotation="90 0 -180"
+        position="0 0.005 -0.005"
+        reflections="type:static">
+      </a-entity>
+    </xrextras-hand-attachment>
+  </xrextras-hand-anchor>
+</a-scene>

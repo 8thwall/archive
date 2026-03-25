@@ -1,0 +1,91 @@
+body {
+  color: white;
+/*   background-color: black; */
+  font-size: 4vmin;
+}
+
+.futura {
+  font-family: 'futura-pt-bold', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.caps {
+  text-transform: uppercase;
+}
+
+h1.futura {
+  letter-spacing: 0.08em;
+}
+
+.share-tech {
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.absolute-fill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.absolute-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.shadowed {
+  filter: drop-shadow(0 0 3px #0008);
+}
+
+
+.joystick-container {
+  pointer-events: none;
+  opacity: 0;
+  transition: 0.2s opacity;
+}
+
+.joystick-container.visible {
+  opacity: 1;
+}
+
+.joystick {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border-radius: 10000px;
+}
+
+.joystick.position {
+  width: 15vmin;
+  height: 15vmin;
+  background-color: white;
+  z-index: 10;
+}
+
+.joystick.origin {
+  width: 40vmin;
+  height: 40vmin;
+  border: 2vmin solid white;
+}
+
+.reset {
+  position: absolute;
+  width: 20vmin;
+  height: 20vmin;
+  bottom: 2vmax;
+  border-radius: 7.5vmin;
+  left: 88%;
+  transform: translateX(-50%);
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  pointer-events: auto;
+  background-image: url('https://cdn.glitch.com/d9bf0c8d-e6ca-4896-a941-8333aa8be05c%2Freset.svg');
+}

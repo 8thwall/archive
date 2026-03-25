@@ -1,0 +1,35 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<a-scene
+  xrextras-loading
+  xrextras-runtime-error
+  hand-coaching-overlay="promptText: Point the phone towards your hand;"
+  renderer="colorManagement: true"
+  landing-page
+  xrhand
+>
+  <xrextras-resource id="black" src="./assets/black.jpg"></xrextras-resource>
+  <xrextras-basic-material
+    id="handMaterial"
+    tex="#black"
+  ></xrextras-basic-material>
+
+  <a-camera position="0 2 0"> </a-camera>
+  <a-light type="ambient" intensity="1.5"></a-light>
+
+  <xrextras-hand-anchor id="hand">
+    <!-- <xrextras-hand-occluder
+      show="false"
+      adjustment="0.0025"
+    ></xrextras-hand-occluder> -->
+    <xrextras-hand-mesh material-resource="#handMaterial"></xrextras-hand-mesh>
+  </xrextras-hand-anchor>
+
+  <a-plane
+    id="background"
+    position="0 3 -5"
+    width="5"
+    height="10"
+    color="white"
+  ></a-plane>
+</a-scene>

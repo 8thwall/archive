@@ -1,0 +1,30 @@
+h3 {
+  text-align: center;
+  color: white;
+  font-family: 'Nunito', monospace;
+  text-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+  
+  z-index: 10;
+  position: absolute;
+  bottom: 0vh;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+#bullseye {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2em;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 1s;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 20px;
+  font-family: 'Press Start 2P', cursive;  /* Use the Press Start 2P font */
+}

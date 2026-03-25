@@ -1,0 +1,832 @@
+{
+  "activeCamera": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+  "objects": {
+    "47699d9e-18a5-4f88-a4f9-b8be92e8f74a": {
+      "components": {},
+      "geometry": null,
+      "id": "47699d9e-18a5-4f88-a4f9-b8be92e8f74a",
+      "light": {
+        "type": "ambient"
+      },
+      "material": null,
+      "name": "Ambient Light",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "order": 0.883606434628259
+    },
+    "729478ae-d067-4e0c-a753-66c2e9efb625": {
+      "components": {},
+      "geometry": {
+        "depth": 1,
+        "height": 1,
+        "type": "box",
+        "width": 1
+      },
+      "id": "729478ae-d067-4e0c-a753-66c2e9efb625",
+      "material": {
+        "color": "#5577ff",
+        "type": "basic"
+      },
+      "name": "Box",
+      "position": [
+        0.19412306827904668,
+        -3.0273732239155953,
+        -22.852391272164308
+      ],
+      "rotation": [
+        0,
+        0.38977817596690006,
+        0,
+        0.9209087759055814
+      ],
+      "scale": [
+        5.890676969204802,
+        5.890676969204802,
+        5.890676969204802
+      ],
+      "parentId": "fff0c3ce-9c27-4f2d-8f42-97613cafb313"
+    },
+    "a608ddd9-9379-464d-966f-5d8d8674c83c": {
+      "camera": {
+        "type": "perspective",
+        "xr": {
+          "desktop": "3D",
+          "xrCameraType": "3dOnly",
+          "headset": "disabled"
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "id": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "material": null,
+      "name": "Camera",
+      "position": [
+        4.9097123653418974e-23,
+        5.000000000000007,
+        20.435149929434896
+      ],
+      "rotation": [
+        0,
+        -1,
+        0,
+        6.123233995736766e-17
+      ],
+      "scale": [
+        0.999999864655804,
+        0.9999999931513226,
+        0.9999998715044689
+      ],
+      "order": 1.883606434628259,
+      "parentId": "78cb99a3-5473-4707-a2ba-a5ae10a3eb9a"
+    },
+    "ac1989e3-3b71-49e2-a05f-e682aeb18c36": {
+      "components": {},
+      "geometry": null,
+      "id": "ac1989e3-3b71-49e2-a05f-e682aeb18c36",
+      "light": {
+        "intensity": 1,
+        "type": "directional",
+        "color": "#0000ff"
+      },
+      "material": null,
+      "name": "Directional Light",
+      "position": [
+        -20,
+        20,
+        10
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "order": 2.883606434628259
+    },
+    "8dce4b25-c206-4898-9ff0-f3de734c3cbe": {
+      "id": "8dce4b25-c206-4898-9ff0-f3de734c3cbe",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {},
+      "name": "Managers",
+      "order": 3.883606434628259
+    },
+    "825413a2-6e90-4fa8-9e4c-bbfe7d126d7a": {
+      "id": "825413a2-6e90-4fa8-9e4c-bbfe7d126d7a",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "8dce4b25-c206-4898-9ff0-f3de734c3cbe",
+      "components": {
+        "0e065a2c-34b0-47dd-9120-2952ed6ace35": {
+          "id": "0e065a2c-34b0-47dd-9120-2952ed6ace35",
+          "name": "XRManager",
+          "parameters": {}
+        }
+      },
+      "name": "XRManager"
+    },
+    "fff0c3ce-9c27-4f2d-8f42-97613cafb313": {
+      "id": "fff0c3ce-9c27-4f2d-8f42-97613cafb313",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {},
+      "name": "Static Objects",
+      "order": 4.883606434628259
+    },
+    "aa079663-6ae8-4d72-a2fe-51ecdd36af1e": {
+      "components": {},
+      "geometry": {
+        "depth": 1,
+        "height": 1,
+        "type": "box",
+        "width": 1
+      },
+      "id": "aa079663-6ae8-4d72-a2fe-51ecdd36af1e",
+      "material": {
+        "color": "#ffa857",
+        "type": "basic"
+      },
+      "name": "Box (1)",
+      "position": [
+        -37.17270571630129,
+        9.925874155166191,
+        -14.095924206037742
+      ],
+      "rotation": [
+        0,
+        0.38977817596690006,
+        0,
+        0.9209087759055814
+      ],
+      "scale": [
+        5.890676969204802,
+        5.890676969204802,
+        5.890676969204802
+      ],
+      "parentId": "fff0c3ce-9c27-4f2d-8f42-97613cafb313"
+    },
+    "d11ccf26-c403-45f1-9612-6edb20183f1b": {
+      "components": {},
+      "geometry": {
+        "depth": 1,
+        "height": 1,
+        "type": "box",
+        "width": 1
+      },
+      "id": "d11ccf26-c403-45f1-9612-6edb20183f1b",
+      "material": {
+        "color": "#ff57e0",
+        "type": "basic"
+      },
+      "name": "Box (2)",
+      "position": [
+        -20.255990359389273,
+        7.186445426497614,
+        43.828882754609324
+      ],
+      "rotation": [
+        0.2689742849932825,
+        -0.03404962327163501,
+        0.2988583862619569,
+        0.9149738368545359
+      ],
+      "scale": [
+        5.890676969204801,
+        5.890676969204799,
+        5.890676969204802
+      ],
+      "parentId": "fff0c3ce-9c27-4f2d-8f42-97613cafb313"
+    },
+    "e31ad33c-1d1d-4202-906f-543aaba953f0": {
+      "components": {},
+      "geometry": {
+        "depth": 1,
+        "height": 1,
+        "type": "box",
+        "width": 1
+      },
+      "id": "e31ad33c-1d1d-4202-906f-543aaba953f0",
+      "material": {
+        "color": "#5577ff",
+        "type": "basic"
+      },
+      "name": "Box (3)",
+      "position": [
+        9.82575214244342,
+        -3.0273732239155953,
+        50.723207576603755
+      ],
+      "rotation": [
+        0,
+        0.38977817596690006,
+        0,
+        0.9209087759055814
+      ],
+      "scale": [
+        5.890676969204802,
+        5.890676969204802,
+        5.890676969204802
+      ],
+      "parentId": "fff0c3ce-9c27-4f2d-8f42-97613cafb313"
+    },
+    "608fb7f4-127c-4647-89a0-6deb1f274179": {
+      "components": {},
+      "geometry": {
+        "depth": 1,
+        "height": 1,
+        "type": "box",
+        "width": 1
+      },
+      "id": "608fb7f4-127c-4647-89a0-6deb1f274179",
+      "material": {
+        "color": "#5577ff",
+        "type": "basic"
+      },
+      "name": "Box (4)",
+      "position": [
+        18.445049549165745,
+        -31.81000208272905,
+        8.77720891287466
+      ],
+      "rotation": [
+        0,
+        0.38977817596690006,
+        0,
+        0.9209087759055814
+      ],
+      "scale": [
+        5.890676969204802,
+        5.890676969204802,
+        5.890676969204802
+      ],
+      "parentId": "fff0c3ce-9c27-4f2d-8f42-97613cafb313"
+    },
+    "4f853d9e-a163-4b14-b7f5-ebc442e37772": {
+      "components": {
+        "d63b6fd8-6f28-42a4-891c-70eb2c1fac1f": {
+          "id": "d63b6fd8-6f28-42a4-891c-70eb2c1fac1f",
+          "name": "rotate-animation",
+          "parameters": {
+            "autoFrom": true,
+            "toY": 360,
+            "duration": 5000,
+            "shortestPath": false
+          }
+        }
+      },
+      "geometry": {
+        "depth": 1,
+        "height": 1,
+        "type": "box",
+        "width": 1
+      },
+      "id": "4f853d9e-a163-4b14-b7f5-ebc442e37772",
+      "material": {
+        "color": "#ebff57",
+        "type": "basic"
+      },
+      "name": "Box (5)",
+      "position": [
+        21.55761146881207,
+        6.490257801036157,
+        -22.852391272164308
+      ],
+      "rotation": [
+        0,
+        0.38977817596690006,
+        0,
+        0.9209087759055814
+      ],
+      "scale": [
+        5.890676969204802,
+        5.890676969204802,
+        5.890676969204802
+      ],
+      "parentId": "fff0c3ce-9c27-4f2d-8f42-97613cafb313"
+    },
+    "4a6603b9-4188-43ce-ac2f-d97ec4b4446c": {
+      "id": "4a6603b9-4188-43ce-ac2f-d97ec4b4446c",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {},
+      "name": "Environment",
+      "order": 5.883606434628259
+    },
+    "8c7bab34-9302-4cb0-97bb-57022d2e492c": {
+      "id": "8c7bab34-9302-4cb0-97bb-57022d2e492c",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": {
+        "type": "sphere",
+        "radius": 100
+      },
+      "material": {
+        "type": "unlit",
+        "color": "#FFFFFF",
+        "side": "back",
+        "textureSrc": {
+          "type": "asset",
+          "asset": "assets/textures/starmap_2020_4k_gal.jpg"
+        }
+      },
+      "parentId": "4a6603b9-4188-43ce-ac2f-d97ec4b4446c",
+      "components": {},
+      "name": "Sphere"
+    },
+    "f9b6c044-6fed-417b-a1f4-81673acc6fb5": {
+      "components": {
+        "d63b6fd8-6f28-42a4-891c-70eb2c1fac1f": {
+          "id": "d63b6fd8-6f28-42a4-891c-70eb2c1fac1f",
+          "name": "rotate-animation",
+          "parameters": {
+            "autoFrom": true,
+            "toY": 360,
+            "duration": 5000,
+            "shortestPath": false
+          }
+        }
+      },
+      "geometry": {
+        "depth": 1,
+        "height": 1,
+        "type": "box",
+        "width": 1
+      },
+      "id": "f9b6c044-6fed-417b-a1f4-81673acc6fb5",
+      "material": {
+        "color": "#ebff57",
+        "type": "basic"
+      },
+      "name": "Box (6)",
+      "position": [
+        -16.769389141364197,
+        10.159467074880947,
+        -22.852391272164308
+      ],
+      "rotation": [
+        0,
+        0.38977817596690006,
+        0,
+        0.9209087759055814
+      ],
+      "scale": [
+        5.890676969204802,
+        5.890676969204802,
+        5.890676969204802
+      ],
+      "parentId": "fff0c3ce-9c27-4f2d-8f42-97613cafb313"
+    },
+    "ebd92b4b-185d-49aa-ae28-3a71420619d6": {
+      "components": {
+        "d63b6fd8-6f28-42a4-891c-70eb2c1fac1f": {
+          "id": "d63b6fd8-6f28-42a4-891c-70eb2c1fac1f",
+          "name": "rotate-animation",
+          "parameters": {
+            "autoFrom": true,
+            "toY": 360,
+            "duration": 5000,
+            "shortestPath": false
+          }
+        }
+      },
+      "geometry": {
+        "depth": 1,
+        "height": 1,
+        "type": "box",
+        "width": 1
+      },
+      "id": "ebd92b4b-185d-49aa-ae28-3a71420619d6",
+      "material": {
+        "color": "#ebff57",
+        "type": "basic"
+      },
+      "name": "Box (7)",
+      "position": [
+        2.1982200040277764,
+        -6.843539736573039,
+        -22.852391272164308
+      ],
+      "rotation": [
+        0,
+        0.38977817596690006,
+        0,
+        0.9209087759055814
+      ],
+      "scale": [
+        5.890676969204802,
+        5.890676969204802,
+        5.890676969204802
+      ],
+      "parentId": "fff0c3ce-9c27-4f2d-8f42-97613cafb313"
+    },
+    "e1a9f136-d221-44a7-92ac-a76d74aa0c93": {
+      "components": {
+        "d63b6fd8-6f28-42a4-891c-70eb2c1fac1f": {
+          "id": "d63b6fd8-6f28-42a4-891c-70eb2c1fac1f",
+          "name": "rotate-animation",
+          "parameters": {
+            "autoFrom": true,
+            "toY": 360,
+            "duration": 5000,
+            "shortestPath": false
+          }
+        }
+      },
+      "geometry": {
+        "depth": 1,
+        "height": 1,
+        "type": "box",
+        "width": 1
+      },
+      "id": "e1a9f136-d221-44a7-92ac-a76d74aa0c93",
+      "material": {
+        "color": "#ebff57",
+        "type": "basic"
+      },
+      "name": "Box (8)",
+      "position": [
+        -16.10173429385583,
+        10.159467074880947,
+        23.339183080654674
+      ],
+      "rotation": [
+        0,
+        0.38977817596690006,
+        0,
+        0.9209087759055814
+      ],
+      "scale": [
+        5.890676969204802,
+        5.890676969204802,
+        5.890676969204802
+      ],
+      "parentId": "fff0c3ce-9c27-4f2d-8f42-97613cafb313"
+    },
+    "f7da5966-dd23-499f-9cd7-f456122a29f6": {
+      "components": {
+        "d63b6fd8-6f28-42a4-891c-70eb2c1fac1f": {
+          "id": "d63b6fd8-6f28-42a4-891c-70eb2c1fac1f",
+          "name": "rotate-animation",
+          "parameters": {
+            "autoFrom": true,
+            "toY": 360,
+            "duration": 5000,
+            "shortestPath": false
+          }
+        }
+      },
+      "geometry": {
+        "depth": 1,
+        "height": 1,
+        "type": "box",
+        "width": 1
+      },
+      "id": "f7da5966-dd23-499f-9cd7-f456122a29f6",
+      "material": {
+        "color": "#ebff57",
+        "type": "basic"
+      },
+      "name": "Box (9)",
+      "position": [
+        2.8658748515361467,
+        -6.843539736573039,
+        23.339183080654674
+      ],
+      "rotation": [
+        0,
+        0.38977817596690006,
+        0,
+        0.9209087759055814
+      ],
+      "scale": [
+        5.890676969204802,
+        5.890676969204802,
+        5.890676969204802
+      ],
+      "parentId": "fff0c3ce-9c27-4f2d-8f42-97613cafb313"
+    },
+    "83fc46bf-acda-40e2-bbbc-bcbcffd1e125": {
+      "components": {
+        "d63b6fd8-6f28-42a4-891c-70eb2c1fac1f": {
+          "id": "d63b6fd8-6f28-42a4-891c-70eb2c1fac1f",
+          "name": "rotate-animation",
+          "parameters": {
+            "autoFrom": true,
+            "toY": 360,
+            "duration": 5000,
+            "shortestPath": false
+          }
+        }
+      },
+      "geometry": {
+        "depth": 1,
+        "height": 1,
+        "type": "box",
+        "width": 1
+      },
+      "id": "83fc46bf-acda-40e2-bbbc-bcbcffd1e125",
+      "material": {
+        "color": "#ebff57",
+        "type": "basic"
+      },
+      "name": "Box (10)",
+      "position": [
+        22.22526631632044,
+        6.490257801036157,
+        23.339183080654674
+      ],
+      "rotation": [
+        0,
+        0.38977817596690006,
+        0,
+        0.9209087759055814
+      ],
+      "scale": [
+        5.890676969204802,
+        5.890676969204802,
+        5.890676969204802
+      ],
+      "parentId": "fff0c3ce-9c27-4f2d-8f42-97613cafb313"
+    },
+    "8a398fd1-fda8-47d8-a523-5e9cb724196f": {
+      "components": {
+        "d63b6fd8-6f28-42a4-891c-70eb2c1fac1f": {
+          "id": "d63b6fd8-6f28-42a4-891c-70eb2c1fac1f",
+          "name": "rotate-animation",
+          "parameters": {
+            "autoFrom": true,
+            "toY": 360,
+            "duration": 5000,
+            "shortestPath": false
+          }
+        }
+      },
+      "geometry": {
+        "depth": 1,
+        "height": 1,
+        "type": "box",
+        "width": 1
+      },
+      "id": "8a398fd1-fda8-47d8-a523-5e9cb724196f",
+      "material": {
+        "color": "#ebff57",
+        "type": "basic"
+      },
+      "name": "Box (11)",
+      "position": [
+        -14.954127426924742,
+        10.159467074880947,
+        -0.8081154695677526
+      ],
+      "rotation": [
+        0,
+        0.38977817596690006,
+        0,
+        0.9209087759055814
+      ],
+      "scale": [
+        5.890676969204802,
+        5.890676969204802,
+        5.890676969204802
+      ],
+      "parentId": "fff0c3ce-9c27-4f2d-8f42-97613cafb313"
+    },
+    "b82ed135-7dd7-43ab-a877-22956914acdf": {
+      "components": {
+        "d63b6fd8-6f28-42a4-891c-70eb2c1fac1f": {
+          "id": "d63b6fd8-6f28-42a4-891c-70eb2c1fac1f",
+          "name": "rotate-animation",
+          "parameters": {
+            "autoFrom": true,
+            "toY": 360,
+            "duration": 5000,
+            "shortestPath": false
+          }
+        }
+      },
+      "geometry": {
+        "depth": 1,
+        "height": 1,
+        "type": "box",
+        "width": 1
+      },
+      "id": "b82ed135-7dd7-43ab-a877-22956914acdf",
+      "material": {
+        "color": "#ebff57",
+        "type": "basic"
+      },
+      "name": "Box (12)",
+      "position": [
+        4.013481718467235,
+        -6.843539736573039,
+        -0.8081154695677526
+      ],
+      "rotation": [
+        0,
+        0.38977817596690006,
+        0,
+        0.9209087759055814
+      ],
+      "scale": [
+        5.890676969204802,
+        5.890676969204802,
+        5.890676969204802
+      ],
+      "parentId": "fff0c3ce-9c27-4f2d-8f42-97613cafb313"
+    },
+    "5468bb8a-7d4b-49c3-b567-fbf156a2e36a": {
+      "components": {
+        "d63b6fd8-6f28-42a4-891c-70eb2c1fac1f": {
+          "id": "d63b6fd8-6f28-42a4-891c-70eb2c1fac1f",
+          "name": "rotate-animation",
+          "parameters": {
+            "autoFrom": true,
+            "toY": 360,
+            "duration": 5000,
+            "shortestPath": false
+          }
+        }
+      },
+      "geometry": {
+        "depth": 1,
+        "height": 1,
+        "type": "box",
+        "width": 1
+      },
+      "id": "5468bb8a-7d4b-49c3-b567-fbf156a2e36a",
+      "material": {
+        "color": "#ebff57",
+        "type": "basic"
+      },
+      "name": "Box (13)",
+      "position": [
+        23.372873183251528,
+        6.490257801036157,
+        -0.8081154695677526
+      ],
+      "rotation": [
+        0,
+        0.38977817596690006,
+        0,
+        0.9209087759055814
+      ],
+      "scale": [
+        5.890676969204802,
+        5.890676969204802,
+        5.890676969204802
+      ],
+      "parentId": "fff0c3ce-9c27-4f2d-8f42-97613cafb313"
+    },
+    "78cb99a3-5473-4707-a2ba-a5ae10a3eb9a": {
+      "id": "78cb99a3-5473-4707-a2ba-a5ae10a3eb9a",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        9.298118062846261e-16,
+        -5.517343029590242e-25,
+        2.654757764348932e-24,
+        0.9999999999999996
+      ],
+      "scale": [
+        0.9999999999999982,
+        1.0000000000000062,
+        1.0000000000000047
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {},
+      "name": "CameraRig",
+      "order": 1.5754096519423886
+    },
+    "de05a2d8-2dc7-4ec5-ae13-7f3d5f5f3dfa": {
+      "components": {},
+      "geometry": null,
+      "id": "de05a2d8-2dc7-4ec5-ae13-7f3d5f5f3dfa",
+      "light": {
+        "intensity": 1,
+        "type": "directional",
+        "color": "#ff0000"
+      },
+      "material": null,
+      "name": "Directional Light (1)",
+      "position": [
+        20,
+        20,
+        10
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "order": 2.883606434628259
+    }
+  },
+  "historyVersion": "mcgv2n3n"
+}

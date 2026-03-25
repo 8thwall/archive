@@ -1,0 +1,88 @@
+<div id="overlay">
+  <h1 id="message"></h1>
+  <button id="shareBtn">Share</button>
+
+  <form action="#" onsubmit="document.getElementById('nameInput').blur(); event.preventDefault(); return false;">
+      <input id="nameInput" type="text">
+  </form>
+</div>
+
+<a-scene
+  responsive-immersive
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="colorManagement:true"
+  xrweb="
+    allowedDevices: any;
+    defaultEnvironmentFogIntensity: 0.85; 
+    defaultEnvironmentFloorTexture: #groundTex; 
+    defaultEnvironmentFloorColor: #FFF;
+    defaultEnvironmentSkyBottomColor: #ACD1E3; 
+    defaultEnvironmentSkyTopColor: #5ac8fa;
+    defaultEnvironmentSkyGradientStrength: 0.3;">
+
+  <!-- We can define assets here to be loaded when A-Frame initializes -->
+  <a-assets>
+    <img id="groundTex" src="./assets/grass.jpg">
+    <a-asset-item id="turkeyModel" src="assets/turkey.glb"></a-asset-item>
+    <a-asset-item id="tableModel" src="assets/table.glb"></a-asset-item>
+  </a-assets>
+
+  <!-- The raycaster will emit mouse events on scene objects specified with the cantap class -->
+  <a-camera
+    id="camera"
+    position="0 4 4"
+    raycaster="objects: .cantap"
+    cursor="
+      fuse: false;
+      rayOrigin: mouse;">
+  </a-camera>
+
+  <a-entity
+    light="
+      type: directional;
+      intensity: 0.8;
+      castShadow: true;
+      shadowMapHeight:2048;
+      shadowMapWidth:2048;
+      shadowCameraTop: 20;
+      shadowCameraBottom: -20;
+      shadowCameraRight: 20;
+      shadowCameraLeft: -20;
+      target: #camera"
+    xrextras-attach="target: camera; offset: 8 15 4"
+    position="1 4.3 2.5"
+    shadow>
+  </a-entity>
+
+  <a-light type="ambient" intensity="0.5"></a-light>
+
+  <a-entity
+    id="link"
+    class="cantap"
+    click-tap
+    look-at-slerp="tilt: false"
+    look-controller
+    gltf-model="#turkeyModel"
+    animation-mixer="clip: idle; loop: repeat;"
+    scale="5 5 5"
+    move-controller="moveY: false"
+    click-move="speed:2"
+    shadow
+  ></a-entity>
+
+  <xrextras-opaque-background>
+    <a-entity gltf-model="#tableModel" position="-4 0 -4" rotation="0 45 0" scale="2 2 2" shadow="receive: false"></a-entity>
+  </xrextras-opaque-background>
+
+  <!-- Adding the cantap class allows the ground to be clicked -->
+  <a-box
+    id="ground"
+    class="cantap"
+    scale="1000 2 1000"
+    position="0 -0.99 0"
+    material="shader: shadow; transparent: true; opacity: 0.4"
+    shadow>
+  </a-box>
+</a-scene>

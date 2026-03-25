@@ -1,0 +1,88 @@
+<!-- Copyright (c) 2020 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<div id="overlay">
+  <label for="file" class="custom-upload">Add .glb<img src="./assets/upload.svg"/></label>
+  <input id="file" type="file" name="filename" accept="">
+  <img id="loadImage" src="//cdn.8thwall.com/web/img/loading/v2/load-grad.png" class="spin" style="display: none"/>
+</div>
+
+<a-scene
+  object-import
+  landing-page
+  xrextras-gesture-detector
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="colorManagement: true"
+  gltf-model="dracoDecoderPath: https://cdn.8thwall.com/web/aframe/draco-decoder/"
+  xrweb="allowedDevices: any">
+
+  <a-assets>
+    <img id="basic-px" src="./assets/basic-scape/px.png">
+    <img id="basic-py" src="./assets/basic-scape/py.png">
+    <img id="basic-pz" src="./assets/basic-scape/pz.png">
+    <img id="basic-nx" src="./assets/basic-scape/nx.png">
+    <img id="basic-ny" src="./assets/basic-scape/ny.png">
+    <img id="basic-nz" src="./assets/basic-scape/nz.png">        
+    
+    <img id="room-px" src="./assets/room-scape/px.png">
+    <img id="room-py" src="./assets/room-scape/py.png">
+    <img id="room-pz" src="./assets/room-scape/pz.png">
+    <img id="room-nx" src="./assets/room-scape/nx.png">
+    <img id="room-ny" src="./assets/room-scape/ny.png">
+    <img id="room-nz" src="./assets/room-scape/nz.png">    
+    
+    <img id="mountain-px" src="./assets/mountain-scape/px.png">
+    <img id="mountain-py" src="./assets/mountain-scape/py.png">
+    <img id="mountain-pz" src="./assets/mountain-scape/pz.png">
+    <img id="mountain-nx" src="./assets/mountain-scape/nx.png">
+    <img id="mountain-ny" src="./assets/mountain-scape/ny.png">
+    <img id="mountain-nz" src="./assets/mountain-scape/nz.png">    
+    
+    <img id="ocean-px" src="./assets/ocean-scape/px.png">
+    <img id="ocean-py" src="./assets/ocean-scape/py.png">
+    <img id="ocean-pz" src="./assets/ocean-scape/pz.png">
+    <img id="ocean-nx" src="./assets/ocean-scape/nx.png">
+    <img id="ocean-ny" src="./assets/ocean-scape/ny.png">
+    <img id="ocean-nz" src="./assets/ocean-scape/nz.png">
+  </a-assets>
+
+  <a-camera
+    id="camera"
+    position="0 8 8"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;">
+  </a-camera>
+
+  <a-entity
+    id="directionalLight"
+    light="
+      type: directional;
+      intensity: 0.8;
+      castShadow: true;
+      shadowMapHeight:2048;
+      shadowMapWidth:2048;
+      shadowCameraTop: 40;
+      shadowCameraBottom: -40;
+      shadowCameraRight: 40;
+      shadowCameraLeft: -40;
+      target: #camera"
+    xrextras-attach="target: camera; offset: 8 15 4"
+    position="1 4.3 2.5"
+    shadow>
+  </a-entity>
+  <a-light id="ambientLight" type="ambient" intensity="0.5"></a-light>
+  
+  <a-entity id="model" reflections="type: realtime"></a-entity>
+
+  <a-plane
+    id="ground" 
+    rotation="-90 0 0" 
+    position="0 0.01 0"
+    width="1000" 
+    height="1000" 
+    material="shader: shadow" 
+    shadow="cast: false">
+  </a-plane>
+  
+</a-scene>

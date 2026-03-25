@@ -1,0 +1,142 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene
+  physics="driver: ammo; debug:false;"
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="colorManagement:false"
+  xrface="allowedDevices: any; cameraDirection: front; meshGeometry: face, eyes, iris, mouth; enableEars:true; mirroredDisplay: true">
+  <!-- 3D models, images, videos -->
+  <a-assets>
+    <a-asset-item id="morphTargets" src="./assets/models/facePivot.glb"></a-asset-item>
+    <a-asset-item id="earringTop" src="./assets/models/faceEarringTop.glb"></a-asset-item>
+    <a-asset-item id="topHat" src="./assets/models/topHat.glb"></a-asset-item>
+    <a-asset-item id="suit" src="./assets/models/suit.glb"></a-asset-item>
+  </a-assets>
+
+  <a-camera
+    look-controls="enabled: false"
+    wasd-controls="enabled: false"
+    position="0 2 0"></a-camera>
+
+  <xrextras-faceanchor id="face">
+    <a-entity position="0 0 0.25" scale="1.05 1.1 1.35" rotation="-6 0 0">
+      <a-entity
+        position="0 0 -0.1"
+        ammo-body="type: static"
+        ammo-shape="type: capsule; fit: manual; halfExtents: .036 .02 .036 ">
+      </a-entity>
+    </a-entity>
+    <xrextras-face-mesh xrextras-hider-material></xrextras-face-mesh>
+
+    <xrextras-face-attachment point="leftLobe">
+      <a-entity
+        id="leftEarringTop"
+        earring-chain
+        position="0 0 0"
+        reflections="type:static"
+        rotation="0 -45 0"
+        gltf-model="#earringTop"
+        scale=".1 .1 .1"></a-entity>
+    </xrextras-face-attachment>
+
+    <xrextras-face-attachment point="rightLobe">
+      <a-entity
+        id="rightEarringTop"
+        position="0 0 0"
+        reflections="type:static"
+        rotation="0 45 0"
+        gltf-model="#earringTop"
+        scale=".1 .1 .1"></a-entity>
+    </xrextras-face-attachment>
+  </xrextras-faceanchor>
+
+  <!-- <a-entity
+    id="midFaceLeft"
+    scale="0.04 .04 .04"
+    test-anchor
+    gltf-model="#morphTargets"
+    rotation="0 0 0">
+    <a-cylinder color="Indigo" position="0 -.07 0" scale=".43 1.2 .45"> </a-cylinder>
+    <a-entity
+      id="midFaceLeft2"
+      scale="1 1 1"
+      test-anchor
+      gltf-model="#morphTargets"
+      rotation="0 0 0">
+    </a-entity>
+  </a-entity> -->
+
+  <a-entity id="hatLeft" scale="0.06 .06 .06" test-anchor gltf-model="#topHat" rotation="0 0 0"
+    ><a-entity
+      id="midFaceLeft"
+      scale=".35 .35 .35"
+      rotation="0 180 0"
+      position="0 -.55 -.03"
+      gltf-model="#morphTargets"
+      rotation="0 0 0"></a-entity>
+    <a-entity
+      id="midFaceLeft2"
+      scale=".35 .35 .35"
+      xtest-anchor
+      rotation="0 0 0"
+      gltf-model="#morphTargets"
+      position="0 -.55 .03">
+    </a-entity>
+    <a-entity
+      id="suitLeft"
+      scale=".35 .35 .35"
+      rotation="0 90 0"
+      gltf-model="#suit"
+      position="0 -0.8 0">
+    </a-entity>
+  </a-entity>
+
+  <a-entity id="hatRight" scale="0.06 .06 .06" test-anchor gltf-model="#topHat" rotation="0 0 0"
+    ><a-entity
+      id="midFaceRight"
+      animate-face
+      scale=".35 .35 .35"
+      rotation="0 180 0"
+      position="0 -.55 -.03"
+      gltf-model="#morphTargets"
+      rotation="0 0 0"></a-entity>
+    <a-entity
+      id="midFaceRight2"
+      scale=".35 .35 .35"
+      xtest-anchor
+      rotation="0 0 0"
+      gltf-model="#morphTargets"
+      position="0 -.55 .03">
+    </a-entity>
+        <a-entity
+      id="suitRight"
+      scale=".35 .35 .35"
+      rotation="0 90 0"
+      gltf-model="#suit"
+      position="0 -0.8 0">
+    </a-entity>
+  </a-entity>
+
+  <!-- <a-entity
+    id="midFaceRight"
+    animate-face
+    test-anchor
+    scale="0.04 .04 .04"
+    gltf-model="#morphTargets"
+    rotation="0 0 0"
+    ><a-cylinder color="Indigo" position="0 -.07 0" scale=".43 1.2 .45"></a-cylinder>
+    <a-entity
+      id="midFaceRight2"
+      scale="1 1 1"
+      test-anchor
+      gltf-model="#morphTargets"
+      rotation="0 0 0">
+    </a-entity
+  ></a-entity> -->
+
+  <a-light type="directional" target="#face" position="0 1.8 3" intensity="0.8"></a-light>
+  <a-light type="ambient" intensity="1.5"></a-light>
+</a-scene>

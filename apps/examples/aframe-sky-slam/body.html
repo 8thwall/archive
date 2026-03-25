@@ -1,0 +1,94 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene 
+  xrextras-loading
+  xrextras-runtime-error
+  landing-page
+  sky-coaching-overlay
+  recenter
+  renderer="colorManagement: false"
+  xrlayers
+  xrconfig
+  xrweb
+  gltf-model="dracoDecoderPath: https://cdn.8thwall.com/web/aframe/draco-decoder/">
+  
+  <a-assets>
+    <a-asset-item id="ufo" src='./assets/models/ufo.glb'></a-asset-item>
+    <a-asset-item id="risingAnimation" src='./assets/models/rising.glb'></a-asset-item>
+    <a-asset-item id="fallingAnimation" src='./assets/models/falling.glb'></a-asset-item>
+    <video
+      id="beamVideo"
+      autoplay
+      muted
+      crossorigin="anonymous"
+      loop="true"
+      src="assets/textures/beam.mp4">
+    </video>
+     <!-- for remote authoring -->
+    <img id="groundTex" src='./assets/textures/ground.svg'>
+    <img id="foreground" src='./assets/textures/foreground.svg'>
+  </a-assets>
+
+  <a-camera id="camera" wasd-controls-enabled="false" position="0 3 0"></a-camera>
+
+  <a-entity light="type: ambient; intensity: 1.5;"></a-entity>
+
+  <a-entity
+      id="light"
+      light="
+        type: directional;
+        intensity: 0;
+        castShadow: true;
+        shadowMapHeight:2048;
+        shadowMapWidth:2048;
+        shadowCameraTop: 10;
+        shadowCameraBottom: -10;
+        shadowCameraRight: 10;
+        shadowCameraLeft: -10;
+        target: #camera;
+        shadowRadius: 7;"
+      xrextras-attach="target: camera; offset: 8 15 4"
+      position="1 4.3 2.5"
+      shadow>
+  </a-entity>
+
+  <a-box
+    id="ground"
+    scale="2000 2 2000"
+    position="0 -1 0"
+    material="shader: shadow; transparent: true; opacity: 0.4"
+    shadow>
+  </a-box> 
+
+  <a-entity id="skyScene" xrlayerscene="name:sky; invertLayerMask:false; edgeSmoothness:0.6" hide-overlay>
+    <a-entity
+      gltf-model="#ufo"
+      reflections="type: static"
+      animate-ufo
+      position= "0 0 -10"
+      rotation= "0 0 0"
+      scale=".7 .7 .7">
+      <a-cone 
+        id="beam"
+        position="0 -8 0"
+        rotation="0 90 0"
+        scale="1 1 1"
+        material="shader:hologram; src:#beamVideo; repeat:20 1; transparent:true; alpha:0"
+        radius-top="1.02"
+        radius-bottom="6"
+        open-ended="true"
+        height="15">
+      </a-cone>
+      <a-entity
+        id="risingModel"
+        gltf-model="#risingAnimation"
+        position= "0 -15 0"
+        rotation= "0 0 0"
+        scale=".001 .001 .001">
+      </a-entity>
+    </a-entity>
+    <a-entity light="type: ambient; intensity: 1.5;"></a-entity>
+  </a-entity>
+  
+</a-scene>

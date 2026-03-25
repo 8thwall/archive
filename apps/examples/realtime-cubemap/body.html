@@ -1,0 +1,80 @@
+<!-- Copyright (c) 2020 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<button id="recenterBtn"
+  style="   
+  right: 3vw;
+  bottom: 3vw;
+  position: absolute;
+  border: none;
+  border-radius: 10px;
+  z-index: 10;">
+<img src="./assets/reset.svg" style="width: 50px;">
+</button>
+
+<a-scene
+  tap-recenter
+  xrextras-gesture-detector
+  xrextras-almost-there
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="colorManagement: true"
+  xrweb>
+
+  <a-assets>
+    <a-asset-item id="ballModel" src="./assets/scifi-hat.glb"></a-asset-item>
+  </a-assets>
+
+  <!--<xrextras-capture-button></xrextras-capture-button>-->
+  <!--<xrextras-capture-config request-mic="manual"></xrextras-capture-config>-->
+  <!--<xrextras-capture-preview></xrextras-capture-preview>-->
+
+  <a-camera
+    id="camera"
+    position="0 8 8"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;">
+  </a-camera>
+  
+  <a-entity
+    xr-light
+    light="type: directional;
+       intensity: 0.8;
+       castShadow: true;
+       shadowMapHeight:2048;
+       shadowMapWidth:2048;
+       shadowCameraTop: 10;
+       target: #ball;"
+    position="1 4.3 2.5"
+    xrextras-attach="target: ball; offset: 0 15 0;"
+    shadow>
+  </a-entity>
+  
+  <a-light
+    xr-light
+    type="ambient"
+    intensity="0.5"
+  ></a-light>
+  
+  <a-entity
+    id="ball"
+    gltf-model="#ballModel"
+    class="cantap"
+    cubemap-realtime
+    xrextras-hold-drag
+    xrextras-two-finger-rotate
+    xrextras-pinch-scale
+    scale="3 3 3"
+    shadow
+  ></a-entity>
+  
+  <a-plane
+    id="ground"
+    position="0 0 0"
+    rotation="-90 0 0"
+    width="100"
+    height="100"
+    material="shader: shadow"
+    shadow
+  ></a-plane>
+</a-scene>

@@ -1,0 +1,41 @@
+<!-- Copyright (c) 2020 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<a-scene
+  xrextras-gesture-detector
+  xrextras-almost-there
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="colorManagement: true; physicallyBasedRendering: true;"
+  xrweb="disableWorldTracking: true">
+  
+  <a-assets>
+    <a-asset-item id="bean-glb" src="./assets/Models/beans.glb"></a-asset-item>
+    <a-asset-item id="blades-glb" src="./assets/Models/blades.glb"></a-asset-item>
+    <a-asset-item id="words-glb" src="./assets/Models/purrfect-brew.glb"></a-asset-item>
+    <img id="logo" src="./assets/Media/sleeve-logo.png">
+    <video
+      id="halloween-video"
+      crossorigin="anonymous"
+      loop="true"
+      src="./assets/halloween.mp4">
+    </video>
+  </a-assets>
+
+  <a-camera
+    position="0 1 1"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;">
+  </a-camera>
+
+  <a-light type="directional" intensity="1.5" position="0 1 0"></a-light>
+
+  <a-light type="ambient" intensity="0.25"></a-light>
+  
+  <!-- WINE LABEL (Cylindrical): video fades in on label -->
+  
+  <a-entity curved-target-video-fade="name: trick; video: #halloween-video; height: 1.5"
+  material="shader: chromakey; src: #halloween-video; color: 0.1 0.9 0.2; opacity: 0;"
+  position="0 -0.25 0">
+  </a-entity>
+
+</a-scene>

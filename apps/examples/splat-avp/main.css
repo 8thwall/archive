@@ -1,0 +1,41 @@
+#nextBtn {
+  position: absolute;
+  z-index: 5;
+  right: 1vh;
+  top: 1vh;
+  max-width: 12vw;
+  background-color: #ad50ff;
+  border-radius: 25%;
+  visibility: hidden;
+}
+
+#prevBtn {
+  position: absolute;
+  z-index: 5;
+  left: 1vh;
+  top: 1vh;
+  max-width: 12vw;
+  background-color: #ad50ff;
+  border-radius: 25%;
+  visibility: hidden;
+}
+
+.pulse-once {
+  animation: pulse-once 0.2s cubic-bezier(0.785, 0.135, 0.15, 0.86) both;
+}
+@keyframes pulse-once {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.a-enter-vr-button {
+  min-width: 33vw;
+  min-height: 33vh;
+}

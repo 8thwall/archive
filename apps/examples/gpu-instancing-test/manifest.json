@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "config": {
+    "runtimeUrl": "https://localhost:8004/runtime.js",
+    "dev8Url": "https://localhost:9000/dev8.js"
+  }
+}
