@@ -1,0 +1,1393 @@
+{
+  "objects": {
+    "ac1989e3-3b71-49e2-a05f-e682aeb18c36": {
+      "id": "ac1989e3-3b71-49e2-a05f-e682aeb18c36",
+      "position": [
+        20,
+        20,
+        10
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {},
+      "name": "Directional Light",
+      "light": {
+        "type": "directional",
+        "intensity": 1
+      },
+      "disabled": false
+    },
+    "9c311ef2-d1e4-41df-aadd-f0b9a451fe5c": {
+      "id": "9c311ef2-d1e4-41df-aadd-f0b9a451fe5c",
+      "position": [
+        0,
+        5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {},
+      "name": "Ambient Light",
+      "light": {
+        "type": "ambient"
+      },
+      "disabled": false
+    },
+    "82306892-ee9b-4f91-a706-b52d77abe877": {
+      "id": "82306892-ee9b-4f91-a706-b52d77abe877",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ],
+      "components": {
+        "8b9d3d41-6a99-4554-a826-0cf31a9d31bc": {
+          "id": "8b9d3d41-6a99-4554-a826-0cf31a9d31bc",
+          "name": "character",
+          "parameters": {
+            "board": {
+              "type": "entity",
+              "id": "6bbd1db2-9744-40da-9490-dc15d8d7e95e"
+            },
+            "actionInterval": 3000,
+            "turningAnim": "Jump_Full_Short",
+            "movingForwardAnim": "Jump_Full_Short",
+            "movingBackwardAnim": "Jump_Full_Short",
+            "bumpAnim": "Jump_Full_Short",
+            "attackAnim": "1H_Melee_Attack_Chop",
+            "idleAnim": "Idle",
+            "preJumpPeriod": 150,
+            "movementPeriod": 200,
+            "preTurnPeriod": 150,
+            "postJumpPeriod": 350,
+            "turnPeriod": 150,
+            "postTurnPeriod": 400,
+            "preAttackPeriod": 300,
+            "attackPeriod": 350,
+            "projectilePrefab": {
+              "type": "entity",
+              "id": "28eabdff-3987-45eb-89b8-0fb98b45597c"
+            },
+            "player": true,
+            "dyingAnim": "Death_A",
+            "deadAnim": "Death_A_Pose",
+            "maxJumpHeight": 0.03
+          }
+        },
+        "d9689e32-223f-4e0f-9bfc-170fb8d28eb7": {
+          "id": "d9689e32-223f-4e0f-9bfc-170fb8d28eb7",
+          "name": "character-control",
+          "parameters": {
+            "character": {
+              "type": "entity",
+              "id": "82306892-ee9b-4f91-a706-b52d77abe877"
+            },
+            "keyTurnCCW": "KeyD",
+            "keyTurnCW": "KeyA",
+            "keyMoveForward": "KeyW",
+            "keyMoveBackward": "KeyS",
+            "keyAttack": "KeyE",
+            "eventIDTurnCCW": "turnCCW",
+            "eventIDTurnCW": "turnCW",
+            "eventIDMoveForward": "moveForward",
+            "eventIDMoveBackward": "moveBackward",
+            "eventIDAttack": "attack",
+            "keyDie": "KeyT",
+            "eventIDDie": "die"
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/Characters/Barbarian.glb"
+        },
+        "animationClip": "Idle",
+        "loop": true,
+        "paused": false,
+        "timeScale": 1.5
+      },
+      "name": "Player",
+      "disabled": false,
+      "shadow": {
+        "castShadow": true
+      }
+    },
+    "6bbd1db2-9744-40da-9490-dc15d8d7e95e": {
+      "id": "6bbd1db2-9744-40da-9490-dc15d8d7e95e",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {
+        "effc8733-69e8-4d88-9d12-7af20ede68c8": {
+          "id": "effc8733-69e8-4d88-9d12-7af20ede68c8",
+          "name": "gameBoard",
+          "parameters": {
+            "pillarPrefab": {
+              "type": "entity",
+              "id": "43fd1c1a-f400-4b6b-8b84-daa22d73c0ea"
+            },
+            "coinPrefab": {
+              "type": "entity",
+              "id": "17ae4609-409c-4b71-8fbf-c0f13a5af326"
+            },
+            "ghostPrefab": {
+              "type": "entity",
+              "id": "61e5b161-f9bd-4dff-96a5-cc15a82889f7"
+            }
+          }
+        }
+      },
+      "name": "GameBoard"
+    },
+    "91f6602d-cf83-43cd-a972-f7b5bf388a72": {
+      "id": "91f6602d-cf83-43cd-a972-f7b5bf388a72",
+      "position": [
+        0,
+        -0.25,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ],
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/arena.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "arena.glb",
+      "disabled": false,
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "parentId": "04cb9c5e-21d4-4d6f-87af-d1fb91b1b76a",
+      "order": 0.17784643274976775
+    },
+    "35649f8c-9501-47b7-b665-3a822472394a": {
+      "id": "35649f8c-9501-47b7-b665-3a822472394a",
+      "position": [
+        0,
+        0.6357890570661213,
+        -0.8146851578674679
+      ],
+      "rotation": [
+        0.2993429075625764,
+        0,
+        0,
+        0.9541455987908674
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {
+        "a5aa89b3-e9d1-49e5-bb4b-ce83993281e9": {
+          "id": "a5aa89b3-e9d1-49e5-bb4b-ce83993281e9",
+          "name": "cameraControl",
+          "parameters": {
+            "offsetY": 0.636,
+            "offsetZ": -0.8,
+            "character": {
+              "type": "entity",
+              "id": "82306892-ee9b-4f91-a706-b52d77abe877"
+            },
+            "offsetX": 0
+          }
+        }
+      },
+      "name": "Camera",
+      "camera": {
+        "type": "perspective",
+        "fov": 30,
+        "zoom": 1,
+        "xr": {
+          "xrCameraType": "world",
+          "phone": "AR",
+          "desktop": "3D",
+          "headset": "AR",
+          "farClip": 10
+        }
+      }
+    },
+    "43fd1c1a-f400-4b6b-8b84-daa22d73c0ea": {
+      "id": "43fd1c1a-f400-4b6b-8b84-daa22d73c0ea",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.05,
+        0.2,
+        0.05
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {
+        "329dfa61-85c6-4306-98ab-f726e815c54d": {
+          "id": "329dfa61-85c6-4306-98ab-f726e815c54d",
+          "name": "pillar",
+          "parameters": {
+            "moveSpeed": 0.0002
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/pillar.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "PillarPrefab",
+      "collider": {
+        "geometry": {
+          "type": "box",
+          "depth": 0.05,
+          "height": 0.2,
+          "width": 0.05
+        }
+      },
+      "shadow": {
+        "receiveShadow": true
+      },
+      "order": 3.7462818082848104,
+      "parentId": "43a03891-4adc-4555-a5f1-ca8047dae81c"
+    },
+    "66441d62-d019-49f3-a7b8-14c50af86c52": {
+      "id": "66441d62-d019-49f3-a7b8-14c50af86c52",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {
+        "e320e077-6ad3-4c32-9f56-87e00021d1c7": {
+          "id": "e320e077-6ad3-4c32-9f56-87e00021d1c7",
+          "name": "game",
+          "parameters": {
+            "playerCharacter": {
+              "type": "entity",
+              "id": "82306892-ee9b-4f91-a706-b52d77abe877"
+            },
+            "coinPrefab": {
+              "type": "entity",
+              "id": "17ae4609-409c-4b71-8fbf-c0f13a5af326"
+            },
+            "ghostPrefab": {
+              "type": "entity",
+              "id": "61e5b161-f9bd-4dff-96a5-cc15a82889f7"
+            },
+            "ghostCount": 3,
+            "playerStartRow": 0,
+            "coinCount": 10,
+            "board": {
+              "type": "entity",
+              "id": "6bbd1db2-9744-40da-9490-dc15d8d7e95e"
+            },
+            "coinCollectEffectPrefab1": {
+              "type": "entity",
+              "id": "25006011-122f-4534-b8ce-da17bba5d957"
+            },
+            "coinCollectEffectPrefab2": {
+              "type": "entity",
+              "id": "51f98830-b43b-4e4b-98ce-2e6f82ba20ac"
+            },
+            "coinPointValue": 5,
+            "ghostPointValue": 20,
+            "hitEffectPrefab": {
+              "type": "entity",
+              "id": "378b2b74-8cdc-427b-bffc-e75a205a6d32"
+            },
+            "startGame": false,
+            "playerStartColumn": 3
+          }
+        }
+      },
+      "name": "Game"
+    },
+    "28eabdff-3987-45eb-89b8-0fb98b45597c": {
+      "id": "28eabdff-3987-45eb-89b8-0fb98b45597c",
+      "position": [
+        -0.0776900321850138,
+        0.05383677780628204,
+        0
+      ],
+      "rotation": [
+        0.9271838625872145,
+        0,
+        0,
+        0.3746065735646575
+      ],
+      "scale": [
+        0.02500000037252903,
+        0.025000000876972645,
+        0.025000000876972645
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {
+        "bb3b2630-ac99-44dd-94d1-ed3e410d1661": {
+          "id": "bb3b2630-ac99-44dd-94d1-ed3e410d1661",
+          "name": "projectile",
+          "parameters": {
+            "facing": "North",
+            "movementSpeed": 0.025,
+            "prefab": true
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/axe.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "ProjectilePrefab",
+      "order": 2.3149400950402432,
+      "parentId": "43a03891-4adc-4555-a5f1-ca8047dae81c"
+    },
+    "ce473d6b-7cb0-41c1-b3cf-a4d3285dd9a1": {
+      "id": "ce473d6b-7cb0-41c1-b3cf-a4d3285dd9a1",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1.8,
+        1.8,
+        1.8
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "ffc4bc95-6c78-4a37-b424-a4950f6b1c7e",
+      "components": {
+        "619d1ad8-31ba-4cb5-a794-6ad45b85a22f": {
+          "id": "619d1ad8-31ba-4cb5-a794-6ad45b85a22f",
+          "name": "SimpleButton",
+          "parameters": {
+            "imageUrl": "https://static.8thwall.app/assets/CCWIcon-u5tku468vh.png",
+            "bottom": "80px",
+            "top": "-1px",
+            "left": "10px",
+            "right": "-1px",
+            "eventId": "turnCW",
+            "elementId": "button_turn_ccw"
+          }
+        }
+      },
+      "name": "ButtonTurnCCW",
+      "order": 0.315789016768822
+    },
+    "ffc4bc95-6c78-4a37-b424-a4950f6b1c7e": {
+      "id": "ffc4bc95-6c78-4a37-b424-a4950f6b1c7e",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {},
+      "name": "GameUI"
+    },
+    "c6e3bc19-65eb-439d-9cc9-d5bc4d78402b": {
+      "id": "c6e3bc19-65eb-439d-9cc9-d5bc4d78402b",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1.8,
+        1.8,
+        1.8
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "ffc4bc95-6c78-4a37-b424-a4950f6b1c7e",
+      "components": {
+        "619d1ad8-31ba-4cb5-a794-6ad45b85a22f": {
+          "id": "619d1ad8-31ba-4cb5-a794-6ad45b85a22f",
+          "name": "SimpleButton",
+          "parameters": {
+            "imageUrl": "https://static.8thwall.app/assets/CWIcon-tnsk5j68kg.png",
+            "top": "-1px",
+            "bottom": "80px",
+            "right": "-1px",
+            "left": "90px",
+            "eventId": "turnCCW",
+            "elementId": "button_turn_cw"
+          }
+        }
+      },
+      "name": "ButtonTurnCW",
+      "order": 1.315789016768822
+    },
+    "9db0dac5-0e6a-49cd-8f31-d3a96d5c43db": {
+      "id": "9db0dac5-0e6a-49cd-8f31-d3a96d5c43db",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1.8,
+        1.8,
+        1.8
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "ffc4bc95-6c78-4a37-b424-a4950f6b1c7e",
+      "components": {
+        "619d1ad8-31ba-4cb5-a794-6ad45b85a22f": {
+          "id": "619d1ad8-31ba-4cb5-a794-6ad45b85a22f",
+          "name": "SimpleButton",
+          "parameters": {
+            "imageUrl": "https://static.8thwall.app/assets/ForwardIcon-3hh23e6571.png",
+            "top": "-1px",
+            "bottom": "120px",
+            "left": "50px",
+            "right": "-1px",
+            "eventId": "moveForward",
+            "elementId": "button_move_forward"
+          }
+        }
+      },
+      "name": "ButtonMoveForward",
+      "order": 2.315789016768822
+    },
+    "5a75a95a-d050-4665-8ff7-41f1d3a84dd6": {
+      "id": "5a75a95a-d050-4665-8ff7-41f1d3a84dd6",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1.8,
+        1.8,
+        1.8
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "ffc4bc95-6c78-4a37-b424-a4950f6b1c7e",
+      "components": {
+        "619d1ad8-31ba-4cb5-a794-6ad45b85a22f": {
+          "id": "619d1ad8-31ba-4cb5-a794-6ad45b85a22f",
+          "name": "SimpleButton",
+          "parameters": {
+            "imageUrl": "https://static.8thwall.app/assets/BackwardIcon-bs27nncm6f.png",
+            "top": "-1px",
+            "bottom": "80px",
+            "left": "50px",
+            "right": "-1px",
+            "eventId": "moveBackward",
+            "elementId": "button_move_backward"
+          }
+        }
+      },
+      "name": "ButtonMoveBackward",
+      "order": 3.315789016768822
+    },
+    "2d176771-3b9f-40eb-a616-268503b72d9e": {
+      "id": "2d176771-3b9f-40eb-a616-268503b72d9e",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1.8,
+        1.8,
+        1.8
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "ffc4bc95-6c78-4a37-b424-a4950f6b1c7e",
+      "components": {
+        "619d1ad8-31ba-4cb5-a794-6ad45b85a22f": {
+          "id": "619d1ad8-31ba-4cb5-a794-6ad45b85a22f",
+          "name": "SimpleButton",
+          "parameters": {
+            "imageUrl": "https://static.8thwall.app/assets/AttackIcon-skwjggo9sg.png",
+            "top": "-1px",
+            "bottom": "120px",
+            "right": "-1px",
+            "eventId": "attack",
+            "left": "90px",
+            "elementId": "button_attack"
+          }
+        }
+      },
+      "name": "ButtonAttack",
+      "order": 4.3157890167688215
+    },
+    "17ae4609-409c-4b71-8fbf-c0f13a5af326": {
+      "id": "17ae4609-409c-4b71-8fbf-c0f13a5af326",
+      "position": [
+        0.07586726137770583,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.03,
+        0.03,
+        0.03
+      ],
+      "parentId": "43a03891-4adc-4555-a5f1-ca8047dae81c",
+      "components": {
+        "008007f9-03f6-4a8c-8967-ad0cc4fd2094": {
+          "id": "008007f9-03f6-4a8c-8967-ad0cc4fd2094",
+          "name": "coin",
+          "parameters": {
+            "spinSpeedY": 180,
+            "spinSpeedX": 0,
+            "spinSpeedZ": 0,
+            "rotationZ": 45,
+            "rotationX": 45,
+            "prefab": true
+          }
+        }
+      },
+      "name": "CoinPrefab",
+      "order": 0.6574700475201216,
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/coin.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      }
+    },
+    "43a03891-4adc-4555-a5f1-ca8047dae81c": {
+      "id": "43a03891-4adc-4555-a5f1-ca8047dae81c",
+      "position": [
+        -1.3478652625043508,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {},
+      "name": "Prefabs"
+    },
+    "61e5b161-f9bd-4dff-96a5-cc15a82889f7": {
+      "id": "61e5b161-f9bd-4dff-96a5-cc15a82889f7",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.05,
+        0.05,
+        0.05
+      ],
+      "components": {
+        "047dd8a5-04c1-4c16-b620-6002998c8059": {
+          "id": "047dd8a5-04c1-4c16-b620-6002998c8059",
+          "name": "character",
+          "parameters": {
+            "board": {
+              "type": "entity",
+              "id": "6bbd1db2-9744-40da-9490-dc15d8d7e95e"
+            }
+          }
+        },
+        "7fc81b21-7e9d-4edb-8b88-1f59c1bb07da": {
+          "id": "7fc81b21-7e9d-4edb-8b88-1f59c1bb07da",
+          "name": "character-ai",
+          "parameters": {
+            "turnCCWChance": 0.3,
+            "turnCWChance": 0.3,
+            "moveForwardChance": 0.3,
+            "attackChance": 0
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/ghost_idle.glb"
+        },
+        "animationClip": "Armature|Take 001|BaseLayer",
+        "loop": true
+      },
+      "name": "GhostPrefab",
+      "parentId": "43a03891-4adc-4555-a5f1-ca8047dae81c",
+      "order": 5.519945469077587
+    },
+    "04cb9c5e-21d4-4d6f-87af-d1fb91b1b76a": {
+      "id": "04cb9c5e-21d4-4d6f-87af-d1fb91b1b76a",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {},
+      "name": "Arena"
+    },
+    "91567cf5-19e7-4721-8905-de5fd4ffb6bf": {
+      "id": "91567cf5-19e7-4721-8905-de5fd4ffb6bf",
+      "position": [
+        0,
+        -0.171,
+        0.281
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.5581585723483133,
+        0.3249351592053628,
+        0.05
+      ],
+      "geometry": {
+        "type": "box",
+        "depth": 1,
+        "height": 1,
+        "width": 1
+      },
+      "material": {
+        "type": "basic",
+        "color": "#FFFFFF"
+      },
+      "parentId": "04cb9c5e-21d4-4d6f-87af-d1fb91b1b76a",
+      "components": {
+        "0d1bedfd-2c35-4813-a286-124e6444bcc7": {
+          "id": "0d1bedfd-2c35-4813-a286-124e6444bcc7",
+          "name": "occluder-mesh",
+          "parameters": {}
+        }
+      },
+      "name": "occluder",
+      "order": 2.565163956574426
+    },
+    "69dcb077-e626-463a-b3ce-be5637c6f7fe": {
+      "id": "69dcb077-e626-463a-b3ce-be5637c6f7fe",
+      "position": [
+        0.281,
+        -0.17053276010173612,
+        0
+      ],
+      "rotation": [
+        0,
+        0.7071067811865475,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        0.5581585723483133,
+        0.3249351592053628,
+        0.05
+      ],
+      "geometry": {
+        "type": "box",
+        "depth": 1,
+        "height": 1,
+        "width": 1
+      },
+      "material": {
+        "type": "basic",
+        "color": "#FFFFFF"
+      },
+      "parentId": "04cb9c5e-21d4-4d6f-87af-d1fb91b1b76a",
+      "components": {
+        "0d1bedfd-2c35-4813-a286-124e6444bcc7": {
+          "id": "0d1bedfd-2c35-4813-a286-124e6444bcc7",
+          "name": "occluder-mesh",
+          "parameters": {}
+        }
+      },
+      "name": "occluder (1)",
+      "order": 2.565163956574426
+    },
+    "b57032e9-5e6d-4b11-ae22-2eb737c4ed6f": {
+      "id": "b57032e9-5e6d-4b11-ae22-2eb737c4ed6f",
+      "position": [
+        0,
+        -0.17053276010173612,
+        -0.280915657244994
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.5581585723483133,
+        0.3249351592053628,
+        0.05
+      ],
+      "geometry": {
+        "type": "box",
+        "depth": 1,
+        "height": 1,
+        "width": 1
+      },
+      "material": {
+        "type": "basic",
+        "color": "#FFFFFF"
+      },
+      "parentId": "04cb9c5e-21d4-4d6f-87af-d1fb91b1b76a",
+      "components": {
+        "0d1bedfd-2c35-4813-a286-124e6444bcc7": {
+          "id": "0d1bedfd-2c35-4813-a286-124e6444bcc7",
+          "name": "occluder-mesh",
+          "parameters": {}
+        }
+      },
+      "name": "occluder (2)",
+      "order": 2.565163956574426
+    },
+    "c0257e11-14f3-4bf9-b314-d970491132fc": {
+      "id": "c0257e11-14f3-4bf9-b314-d970491132fc",
+      "position": [
+        -0.281,
+        -0.17053276010173612,
+        0
+      ],
+      "rotation": [
+        0,
+        0.7071067811865475,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        0.5581585723483133,
+        0.3249351592053628,
+        0.05
+      ],
+      "geometry": {
+        "type": "box",
+        "depth": 1,
+        "height": 1,
+        "width": 1
+      },
+      "material": {
+        "type": "basic",
+        "color": "#FFFFFF"
+      },
+      "parentId": "04cb9c5e-21d4-4d6f-87af-d1fb91b1b76a",
+      "components": {
+        "0d1bedfd-2c35-4813-a286-124e6444bcc7": {
+          "id": "0d1bedfd-2c35-4813-a286-124e6444bcc7",
+          "name": "occluder-mesh",
+          "parameters": {}
+        }
+      },
+      "name": "occluder (3)",
+      "order": 2.565163956574426
+    },
+    "71be0678-1d50-41c8-a42d-e6e1175f46fd": {
+      "id": "71be0678-1d50-41c8-a42d-e6e1175f46fd",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1.8,
+        1.8,
+        1.8
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "ffc4bc95-6c78-4a37-b424-a4950f6b1c7e",
+      "components": {
+        "2cb85500-1287-4a8e-bd1e-0bab5e3d6dda": {
+          "id": "2cb85500-1287-4a8e-bd1e-0bab5e3d6dda",
+          "name": "score-text",
+          "parameters": {
+            "left": "10px",
+            "text": "0",
+            "top": "50px",
+            "width": "200px"
+          }
+        }
+      },
+      "name": "ScoreValue",
+      "order": 5.3157890167688215
+    },
+    "ffdc51b1-57a0-4f33-8382-af172f9a04fb": {
+      "id": "ffdc51b1-57a0-4f33-8382-af172f9a04fb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1.8,
+        1.8,
+        1.8
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "ffc4bc95-6c78-4a37-b424-a4950f6b1c7e",
+      "components": {
+        "36a19db7-ab58-4007-8204-e3c96db3a1bf": {
+          "id": "36a19db7-ab58-4007-8204-e3c96db3a1bf",
+          "name": "simple-text",
+          "parameters": {
+            "text": "<b>Score</b>",
+            "left": "10px",
+            "right": "-1px",
+            "width": "200px",
+            "top": "30px",
+            "color": "#FFAAAA"
+          }
+        }
+      },
+      "name": "ScoreLabel",
+      "order": 6.3157890167688215
+    },
+    "25006011-122f-4534-b8ce-da17bba5d957": {
+      "id": "25006011-122f-4534-b8ce-da17bba5d957",
+      "position": [
+        1.3478652625043508,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "43a03891-4adc-4555-a5f1-ca8047dae81c",
+      "components": {
+        "70d1773e-7045-4eac-b7b3-c104721b23bb": {
+          "id": "70d1773e-7045-4eac-b7b3-c104721b23bb",
+          "name": "particle-emitter",
+          "parameters": {
+            "emitterLife": 0.15,
+            "particlesPerShot": 50,
+            "minimumLifespan": 0.75,
+            "maximumLifespan": 1,
+            "scale": 0.05,
+            "forceY": 0.15,
+            "spread": 60,
+            "resourceType": "sprite",
+            "resourceUrl": "https://static.8thwall.app/assets/Particle-z2dob1o3zk.png",
+            "blendingMode": "add",
+            "colorStart": "#FFFC8E",
+            "colorEnd": "#000000",
+            "animateColor": true,
+            "boundingZoneType": "none",
+            "emitDelay": 0.1
+          }
+        }
+      },
+      "name": "CoinCollectEffectPrefab1",
+      "order": 7.11047673236584
+    },
+    "51f98830-b43b-4e4b-98ce-2e6f82ba20ac": {
+      "id": "51f98830-b43b-4e4b-98ce-2e6f82ba20ac",
+      "position": [
+        1.3478652625043508,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "43a03891-4adc-4555-a5f1-ca8047dae81c",
+      "components": {
+        "70d1773e-7045-4eac-b7b3-c104721b23bb": {
+          "id": "70d1773e-7045-4eac-b7b3-c104721b23bb",
+          "name": "particle-emitter",
+          "parameters": {
+            "emitterLife": 0.15,
+            "particlesPerShot": 50,
+            "minimumLifespan": 0.75,
+            "maximumLifespan": 1,
+            "scale": 0.025,
+            "forceY": 0.15,
+            "spread": 60,
+            "resourceType": "model",
+            "resourceUrl": "assets/coin.glb",
+            "blendingMode": "add",
+            "colorStart": "#FFFC8E",
+            "colorEnd": "#000000",
+            "animateColor": true,
+            "boundingZoneType": "none",
+            "emitDelay": 0.1
+          }
+        }
+      },
+      "name": "CoinCollectEffectPrefab2",
+      "order": 8.330554068729272
+    },
+    "378b2b74-8cdc-427b-bffc-e75a205a6d32": {
+      "id": "378b2b74-8cdc-427b-bffc-e75a205a6d32",
+      "position": [
+        1.3478652625043508,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "43a03891-4adc-4555-a5f1-ca8047dae81c",
+      "components": {
+        "70d1773e-7045-4eac-b7b3-c104721b23bb": {
+          "id": "70d1773e-7045-4eac-b7b3-c104721b23bb",
+          "name": "particle-emitter",
+          "parameters": {
+            "emitterLife": 0.15,
+            "particlesPerShot": 50,
+            "minimumLifespan": 0.75,
+            "maximumLifespan": 1,
+            "scale": 0.05,
+            "forceY": 0.15,
+            "spread": 60,
+            "resourceType": "sprite",
+            "resourceUrl": "https://static.8thwall.app/assets/Particle-z2dob1o3zk.png",
+            "blendingMode": "add",
+            "colorStart": "#8AFFED",
+            "colorEnd": "#000000",
+            "animateColor": true,
+            "boundingZoneType": "none",
+            "emitDelay": 0.1
+          }
+        }
+      },
+      "name": "HitEffectPrefab",
+      "order": 8.592565967271277
+    },
+    "737eb21c-550c-4be7-83d6-06b5e9c4952a": {
+      "id": "737eb21c-550c-4be7-83d6-06b5e9c4952a",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "ffc4bc95-6c78-4a37-b424-a4950f6b1c7e",
+      "components": {
+        "b61e4c57-dd21-4e22-ab40-7fbb41c3436d": {
+          "id": "b61e4c57-dd21-4e22-ab40-7fbb41c3436d",
+          "name": "FeedbackText",
+          "parameters": {
+            "victoryImageURL": "https://static.8thwall.app/assets/victory-text-a536y46x5u.png",
+            "startImageURL": "https://static.8thwall.app/assets/start-text-xanmx8c71j.png",
+            "gameOverImageURL": "https://static.8thwall.app/assets/game-over-text-6o846k02g3.png",
+            "top": "200px",
+            "height": "150px",
+            "displayPeriod": 2000,
+            "elementId": "feedback"
+          }
+        }
+      },
+      "name": "FeedbackText",
+      "order": 7.631578033537643
+    },
+    "b2f668e3-2bef-4ff6-9dbc-18dad5066594": {
+      "id": "b2f668e3-2bef-4ff6-9dbc-18dad5066594",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {
+        "e6a9a468-cb95-485d-81cd-975e3878646c": {
+          "id": "e6a9a468-cb95-485d-81cd-975e3878646c",
+          "name": "game-ui",
+          "parameters": {
+            "logo": {
+              "type": "entity",
+              "id": "675476a4-fa6a-4f36-a889-9ac5bd7ba27d"
+            },
+            "startButton": {
+              "type": "entity",
+              "id": "cd60dde4-9222-4b88-ad09-1ba1c8953e23"
+            },
+            "turnCCWButton": {
+              "type": "entity",
+              "id": "ce473d6b-7cb0-41c1-b3cf-a4d3285dd9a1"
+            },
+            "turnCWButton": {
+              "type": "entity",
+              "id": "c6e3bc19-65eb-439d-9cc9-d5bc4d78402b"
+            },
+            "moveForwardButton": {
+              "type": "entity",
+              "id": "9db0dac5-0e6a-49cd-8f31-d3a96d5c43db"
+            },
+            "moveBackwardButton": {
+              "type": "entity",
+              "id": "5a75a95a-d050-4665-8ff7-41f1d3a84dd6"
+            },
+            "attackButton": {
+              "type": "entity",
+              "id": "2d176771-3b9f-40eb-a616-268503b72d9e"
+            },
+            "restartButton": {
+              "type": "entity",
+              "id": "b4198547-621b-4d8b-b295-1bb50199b3e9"
+            }
+          }
+        }
+      },
+      "name": "MenuUI"
+    },
+    "cd60dde4-9222-4b88-ad09-1ba1c8953e23": {
+      "id": "cd60dde4-9222-4b88-ad09-1ba1c8953e23",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "b2f668e3-2bef-4ff6-9dbc-18dad5066594",
+      "components": {
+        "73903678-eae0-4d95-8be8-5acc3d5e6d43": {
+          "id": "73903678-eae0-4d95-8be8-5acc3d5e6d43",
+          "name": "SimpleButton",
+          "parameters": {
+            "imageUrl": "https://static.8thwall.app/assets/start-button-text-owegoqo4ae.png",
+            "bottom": "150px",
+            "right": "50px",
+            "top": "-1px",
+            "width": "-1px",
+            "eventId": "start_game",
+            "left": "50px",
+            "elementId": "start_button",
+            "height": "75px"
+          }
+        }
+      },
+      "name": "StartButton",
+      "order": 1.5147538463210322
+    },
+    "675476a4-fa6a-4f36-a889-9ac5bd7ba27d": {
+      "id": "675476a4-fa6a-4f36-a889-9ac5bd7ba27d",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "b2f668e3-2bef-4ff6-9dbc-18dad5066594",
+      "components": {},
+      "name": "Logo",
+      "order": 0.2573769231605161,
+      "ui": {
+        "image": {
+          "type": "asset",
+          "asset": "assets/UI/Title.png"
+        },
+        "width": 300,
+        "height": 200,
+        "position": "absolute",
+        "borderWidth": 0,
+        "top": "100",
+        "right": "50",
+        "left": "50",
+        "opacity": 1
+      }
+    },
+    "b4198547-621b-4d8b-b295-1bb50199b3e9": {
+      "id": "b4198547-621b-4d8b-b295-1bb50199b3e9",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "b2f668e3-2bef-4ff6-9dbc-18dad5066594",
+      "components": {
+        "73903678-eae0-4d95-8be8-5acc3d5e6d43": {
+          "id": "73903678-eae0-4d95-8be8-5acc3d5e6d43",
+          "name": "SimpleButton",
+          "parameters": {
+            "imageUrl": "https://static.8thwall.app/assets/restart-button-text-11ypuaelib.png",
+            "bottom": "225px",
+            "right": "50px",
+            "top": "-1px",
+            "width": "-1px",
+            "eventId": "start_game",
+            "left": "50px",
+            "elementId": "restart_button",
+            "height": "75px"
+          }
+        }
+      },
+      "name": "RestartButton",
+      "order": 1.5147538463210322
+    }
+  },
+  "activeCamera": "35649f8c-9501-47b7-b665-3a822472394a",
+  "history": "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"
+}
