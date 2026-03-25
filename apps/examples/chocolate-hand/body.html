@@ -1,0 +1,76 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene
+  physics="driver: ammo; debug: false"
+  ball-generator="count: 30"
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  xrextras-pause-on-hidden
+  zhand-coaching-overlay
+  gltf-model="dracoDecoderPath: https://cdn.8thwall.com/web/aframe/draco-decoder/"
+  xrhand="cameraDirection:back; mirroredDisplay: false;">
+  <a-assets>
+    <a-asset-item id="blue" src="./assets/blue.glb"></a-asset-item>
+    <a-asset-item id="brown" src="./assets/brown.glb"></a-asset-item>
+    <a-asset-item id="green" src="./assets/green.glb"></a-asset-item>
+    <a-asset-item id="orange" src="./assets/orange.glb"></a-asset-item>
+    <a-asset-item id="red" src="./assets/red.glb"></a-asset-item>
+    <a-asset-item id="yellow" src="./assets/yellow.glb"></a-asset-item>
+  </a-assets>
+
+  <a-camera
+    look-controls="enabled: false"
+    wasd-controls="enabled: false"
+    position="0 1.6 0"></a-camera>
+
+  <!-- Hand anchor primitive to nest hand tracking objects -->
+  <xrextras-hand-anchor id="hand">
+    <!-- Hand occluder made using hider-material and hand-mesh -->
+    <xrextras-hand-occluder show="false" adjustment="0.001"></xrextras-hand-occluder>
+
+    <!-- Hand mesh with indices -->
+    <xrextras-hand-mesh></xrextras-hand-mesh>
+    <xrextras-hand-attachment debug-ball lock-wrist="false" point="wrist">
+      <a-sphere
+        position="0 0.08 0"
+        ammo-body="type: kinematic"
+        ammo-shape="type: sphere"
+        radius="0.07"
+        color="#EF2D5E"
+        visible="false"></a-sphere>
+    </xrextras-hand-attachment>
+  </xrextras-hand-anchor>
+
+  <a-entity
+    light="
+      type: directional;
+      shadowBias: -0.0001
+      intensity: 0.8;
+      castShadow: true;
+      shadowMapHeight:4096;
+      shadowMapWidth:4096;
+      shadowCameraTop: 1.5;
+      shadowCameraBottom: -1.5;
+      shadowCameraRight: 1.5;
+      shadowCameraLeft: -1.5;
+      target: #red-sphere;"
+    xrextras-attach="target: red-sphere; offset: 8 15 4"
+    position="1 4.3 2.5">
+  </a-entity>
+
+  <a-light type="ambient" intensity="0.8"></a-light>
+
+  <a-sphere
+    id="red-sphere"
+    position="0 1.75 -.42"
+    zammo-body="type: kinematic"
+    zammo-shape="type: sphere"
+    radius="0.05"
+    color="#EF2D5E"
+    visible="false"></a-sphere>
+</a-scene>
+
+<!-- UI -->
+<div id="nextButton">Next</div>

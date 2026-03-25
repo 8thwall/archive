@@ -1,0 +1,3483 @@
+{
+  "entrySpaceId": "0118a0d9-55ce-4c8b-a39b-b0dbba0df257",
+  "objects": {
+    "00e4f618-68f6-414e-93cf-8b03f8088ef2": {
+      "components": {
+        "271944bd-83e9-4293-b9cf-34836e88995e": {
+          "id": "271944bd-83e9-4293-b9cf-34836e88995e",
+          "name": "face-mesh-anchor",
+          "parameters": {}
+        }
+      },
+      "geometry": {
+        "id": 1,
+        "type": "face"
+      },
+      "id": "00e4f618-68f6-414e-93cf-8b03f8088ef2",
+      "material": {
+        "color": "#ffb3e3",
+        "opacity": 0.8,
+        "type": "basic"
+      },
+      "name": "Face Mesh",
+      "parentId": "418c6942-190b-4613-865b-8aecffa14fe5",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "013d5e8f-94fc-4f09-9024-1aa04e7129c0": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "013d5e8f-94fc-4f09-9024-1aa04e7129c0",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (27)",
+      "parentId": "4cc47b5d-5f0c-4aa7-893f-b0d77519abb3",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "04dca04a-c1b5-4a92-8605-51d7b5cec240": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "04dca04a-c1b5-4a92-8605-51d7b5cec240",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (22)",
+      "parentId": "7106c764-02b0-4509-b022-06800c3c7551",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "06028545-8a7e-4b27-ac2f-fd278b72a78b": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "06028545-8a7e-4b27-ac2f-fd278b72a78b",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (33)",
+      "parentId": "618b49dc-681d-4548-b733-38b2c8602486",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "0c1e0ffb-6257-4661-ade4-6b69c7526650": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "0c1e0ffb-6257-4661-ade4-6b69c7526650",
+      "material": {
+        "color": "#0062ff",
+        "type": "basic"
+      },
+      "name": "Sphere (32)",
+      "parentId": "49d1dbcf-6298-4ec2-93d8-c8fa8c9799ef",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "1995147d-aaec-45a7-b933-4425ad78af70": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "1995147d-aaec-45a7-b933-4425ad78af70",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (19)",
+      "parentId": "93be7a1f-9126-41bd-b03c-d693cba237d3",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "207d94fc-62e8-4b61-99a0-e090b9f6db09": {
+      "components": {
+        "61bdf08c-6c84-4f60-ae80-ba5b433955f6": {
+          "id": "61bdf08c-6c84-4f60-ae80-ba5b433955f6",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "forehead"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "207d94fc-62e8-4b61-99a0-e090b9f6db09",
+      "material": null,
+      "name": "forehead",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        -0.00020399999630171806,
+        0.2865149974822998,
+        0.60726398229599
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "21050905-af96-4c61-978c-2d763eaa361f": {
+      "components": {},
+      "geometry": null,
+      "id": "21050905-af96-4c61-978c-2d763eaa361f",
+      "light": {
+        "type": "ambient"
+      },
+      "material": null,
+      "name": "Ambient Light",
+      "order": 1.0824818429185872,
+      "parentId": "948d8bba-bc0c-45e4-9c94-d7dedcc31f4b",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "225c7964-dd9c-4efe-8bc0-fe984e8ad24e": {
+      "components": {
+        "cdd1f1d7-4004-4844-84fe-7c508d774113": {
+          "id": "cdd1f1d7-4004-4844-84fe-7c508d774113",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "upperLip"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "225c7964-dd9c-4efe-8bc0-fe984e8ad24e",
+      "material": null,
+      "name": "upperLip",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        -0.001693999976851046,
+        -0.5155979990959167,
+        0.5950930118560791
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "23437d05-30d4-4c4d-b753-74cec842ada9": {
+      "components": {
+        "bac41453-7b1a-4d1e-8f31-58115f854b90": {
+          "id": "bac41453-7b1a-4d1e-8f31-58115f854b90",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "mouthLeftCorner"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "23437d05-30d4-4c4d-b753-74cec842ada9",
+      "material": null,
+      "name": "mouthLeftCorner",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        0.1721380054950714,
+        -0.5306640267372131,
+        0.48681798577308655
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "24f1d0f0-34d6-49b6-8f22-e983b36f35c4": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "24f1d0f0-34d6-49b6-8f22-e983b36f35c4",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (18)",
+      "parentId": "7d2c5619-2c78-4c97-a3f6-a667e45025b1",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "24fac2e2-335d-44d3-b4b6-745fdbc0f231": {
+      "components": {
+        "2cae1a06-c3f2-43a3-a142-a67c93b0fabf": {
+          "id": "2cae1a06-c3f2-43a3-a142-a67c93b0fabf",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "rightEyebrowOuter"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "24fac2e2-335d-44d3-b4b6-745fdbc0f231",
+      "material": null,
+      "name": "rightEyebrowOuter",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        -0.42764899134635925,
+        0.04938200116157532,
+        0.42567700147628784
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "2dc24e3f-672f-404f-8cdb-a2075edd019a": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "2dc24e3f-672f-404f-8cdb-a2075edd019a",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere",
+      "parentId": "207d94fc-62e8-4b61-99a0-e090b9f6db09",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "2f1c28be-f2fa-4cb4-b042-be47a05d6fe5": {
+      "components": {
+        "aecb671b-eae6-426a-95b5-b99d54698131": {
+          "id": "aecb671b-eae6-426a-95b5-b99d54698131",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "chin"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "2f1c28be-f2fa-4cb4-b042-be47a05d6fe5",
+      "material": null,
+      "name": "chin",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        0.0004090000002179295,
+        -0.8453059792518616,
+        0.4980260133743286
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "30dc85a1-d4e1-4800-9739-1f96b619a715": {
+      "components": {
+        "a01ddc57-3774-4580-858a-c10760d8fda9": {
+          "id": "a01ddc57-3774-4580-858a-c10760d8fda9",
+          "name": "face-anchor",
+          "parameters": {}
+        }
+      },
+      "face": {
+        "addAttachmentState": false,
+        "id": 2
+      },
+      "geometry": null,
+      "id": "30dc85a1-d4e1-4800-9739-1f96b619a715",
+      "material": null,
+      "name": "Face (1)",
+      "parentId": "948d8bba-bc0c-45e4-9c94-d7dedcc31f4b",
+      "position": [
+        -1.9610231999380896,
+        2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "363dbfd2-9e1c-4574-9155-8a9227e9c8d3": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "363dbfd2-9e1c-4574-9155-8a9227e9c8d3",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (25)",
+      "parentId": "ba6f014e-3f9b-4864-9bbc-07fe4aa91a74",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "3dc377de-3501-4ef7-aa4d-ce6606efb85f": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "3dc377de-3501-4ef7-aa4d-ce6606efb85f",
+      "material": {
+        "color": "#00ff04",
+        "type": "basic"
+      },
+      "name": "Sphere (2)",
+      "parentId": "fb2d5ce5-a6de-4db0-9a72-0bdd911932c3",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "418c6942-190b-4613-865b-8aecffa14fe5": {
+      "components": {
+        "9e81ff87-c149-46ff-b89c-e2b52bc3a988": {
+          "id": "9e81ff87-c149-46ff-b89c-e2b52bc3a988",
+          "name": "face-anchor",
+          "parameters": {}
+        }
+      },
+      "face": {
+        "addAttachmentState": false,
+        "id": 3
+      },
+      "geometry": null,
+      "id": "418c6942-190b-4613-865b-8aecffa14fe5",
+      "material": null,
+      "name": "Face (2)",
+      "parentId": "948d8bba-bc0c-45e4-9c94-d7dedcc31f4b",
+      "position": [
+        0,
+        2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "47699d9e-18a5-4f88-a4f9-b8be92e8f74a": {
+      "components": {},
+      "geometry": null,
+      "id": "47699d9e-18a5-4f88-a4f9-b8be92e8f74a",
+      "light": {
+        "type": "ambient"
+      },
+      "material": null,
+      "name": "Ambient Light",
+      "order": 1.178245333774687,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "49d1dbcf-6298-4ec2-93d8-c8fa8c9799ef": {
+      "components": {
+        "2482332c-078a-4b42-8262-c67d05cae943": {
+          "id": "2482332c-078a-4b42-8262-c67d05cae943",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "leftLobe"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "49d1dbcf-6298-4ec2-93d8-c8fa8c9799ef",
+      "material": null,
+      "name": "leftLobe",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        0.6882219910621643,
+        -0.31519630551338196,
+        -0.1308031678199768
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "4c8b25af-4c8d-4e25-a4b8-facce830b035": {
+      "camera": {
+        "type": "perspective",
+        "xr": {
+          "xrCameraType": "face",
+          "phone": "AR",
+          "desktop": "AR",
+          "headset": "disabled",
+          "face": {
+            "enableEars": true,
+            "mirroredDisplay": true
+          }
+        }
+      },
+      "components": {
+        "f71d3bb3-9c20-4b47-8f8a-c6163d1bc69d": {
+          "id": "f71d3bb3-9c20-4b47-8f8a-c6163d1bc69d",
+          "name": "face-effect-debug",
+          "parameters": {
+            "showFaceDebug": false
+          }
+        }
+      },
+      "geometry": null,
+      "id": "4c8b25af-4c8d-4e25-a4b8-facce830b035",
+      "material": null,
+      "name": "Camera",
+      "order": 1.6320078176551265,
+      "parentId": "411fc3d7-d52b-4bc2-9510-e02871d78eb9",
+      "position": [
+        0,
+        2,
+        -2.61127518991209
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "4cab8b9f-1e68-4948-9179-ec05b8d32567": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "4cab8b9f-1e68-4948-9179-ec05b8d32567",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (8)",
+      "parentId": "4fd0a048-9c76-49f5-b7b6-f8ad8762f0b7",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "4cc47b5d-5f0c-4aa7-893f-b0d77519abb3": {
+      "components": {
+        "6415a3e1-767f-430e-a752-1b4ab12dd554": {
+          "id": "6415a3e1-767f-430e-a752-1b4ab12dd554",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "leftEyebrowMiddle"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "4cc47b5d-5f0c-4aa7-893f-b0d77519abb3",
+      "material": null,
+      "name": "leftEyebrowMiddle",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        0.29465600848197937,
+        0.1482049971818924,
+        0.5481359958648682
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "4fd0a048-9c76-49f5-b7b6-f8ad8762f0b7": {
+      "components": {
+        "fd38c9f0-e4d2-41c7-b91f-34be0480ad3c": {
+          "id": "fd38c9f0-e4d2-41c7-b91f-34be0480ad3c",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "rightEye"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "4fd0a048-9c76-49f5-b7b6-f8ad8762f0b7",
+      "material": null,
+      "name": "rightEye",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        -0.24723400175571442,
+        0.002947000088170171,
+        0.4965899884700775
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "51173f00-d41e-4a3d-93c5-9a2af5ad2585": {
+      "components": {
+        "8c58b7fc-b19c-482b-a24b-d3fa4b87945c": {
+          "id": "8c58b7fc-b19c-482b-a24b-d3fa4b87945c",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "leftEyeLower"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "51173f00-d41e-4a3d-93c5-9a2af5ad2585",
+      "material": null,
+      "name": "leftEyeLower",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        0.24287599325180054,
+        -0.033066000789403915,
+        0.4853389859199524
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "53b1ea98-3da4-4681-8c3b-43feef5ea172": {
+      "components": {},
+      "geometry": null,
+      "id": "53b1ea98-3da4-4681-8c3b-43feef5ea172",
+      "light": {
+        "type": "directional"
+      },
+      "material": null,
+      "name": "Directional Light",
+      "order": 0.6320078176551265,
+      "parentId": "411fc3d7-d52b-4bc2-9510-e02871d78eb9",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "5620b018-0d22-48ee-8b2b-0317caff058c": {
+      "components": {},
+      "geometry": null,
+      "id": "5620b018-0d22-48ee-8b2b-0317caff058c",
+      "light": {
+        "type": "ambient"
+      },
+      "material": null,
+      "name": "Ambient Light",
+      "order": -1.3593977421941505,
+      "parentId": "411fc3d7-d52b-4bc2-9510-e02871d78eb9",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "580230a5-e6e6-4ad3-919c-62e2aeaa9e8b": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "580230a5-e6e6-4ad3-919c-62e2aeaa9e8b",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (9)",
+      "parentId": "f2ac4e8d-4263-4ef6-b9f3-5bcce3a05bcb",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "5a7c611d-f33c-4f94-acba-f382ebfd4b75": {
+      "components": {
+        "cfac9504-2769-4fdc-a556-51a127e10ecf": {
+          "id": "cfac9504-2769-4fdc-a556-51a127e10ecf",
+          "name": "face-mesh-anchor",
+          "parameters": {}
+        }
+      },
+      "geometry": {
+        "id": 1,
+        "type": "face"
+      },
+      "id": "5a7c611d-f33c-4f94-acba-f382ebfd4b75",
+      "material": {
+        "color": "#FFFFFF",
+        "opacity": 0.5,
+        "type": "basic"
+      },
+      "name": "Face Mesh",
+      "order": 0.36844308583111707,
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "5fbaf9c0-8d42-4e47-abaa-a33526fe554b": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "5fbaf9c0-8d42-4e47-abaa-a33526fe554b",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (13)",
+      "parentId": "225c7964-dd9c-4efe-8bc0-fe984e8ad24e",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "618b49dc-681d-4548-b733-38b2c8602486": {
+      "components": {
+        "0dcebd4d-5621-4a9c-91e3-eb364bb096c4": {
+          "id": "0dcebd4d-5621-4a9c-91e3-eb364bb096c4",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "lowerLip"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "618b49dc-681d-4548-b733-38b2c8602486",
+      "material": null,
+      "name": "lowerLip",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        -0.0014410000294446945,
+        -0.5521460175514221,
+        0.5762069821357727
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "6e9b0775-19cd-4f3c-8793-286c84a90cbf": {
+      "components": {
+        "fdacbd55-4343-43c5-a87c-bb23b000176b": {
+          "id": "fdacbd55-4343-43c5-a87c-bb23b000176b",
+          "name": "Return to Main",
+          "parameters": {}
+        }
+      },
+      "geometry": null,
+      "id": "6e9b0775-19cd-4f3c-8793-286c84a90cbf",
+      "material": null,
+      "name": "Button",
+      "parentId": "320d4074-fabd-40a4-9609-689bf2762e22",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "alignItems": "flex-end",
+        "background": "#ad50ff",
+        "backgroundOpacity": 1,
+        "borderRadius": 18,
+        "flexDirection": "row",
+        "gap": "6",
+        "height": 36,
+        "justifyContent": "flex-start",
+        "padding": "10",
+        "type": "overlay",
+        "width": 100
+      }
+    },
+    "6ef0a77b-7099-418b-bf38-0a397461363a": {
+      "components": {},
+      "geometry": null,
+      "id": "6ef0a77b-7099-418b-bf38-0a397461363a",
+      "material": null,
+      "name": "Text",
+      "order": 1.313680651904812,
+      "parentId": "6e9b0775-19cd-4f3c-8793-286c84a90cbf",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "color": "#ffffff",
+        "fontSize": 16,
+        "height": 14,
+        "text": "Back",
+        "width": 50
+      }
+    },
+    "7011202a-a4cb-4520-8e9b-33d2aac4c53b": {
+      "components": {
+        "467bf632-54ba-416e-a2c6-6bde10896111": {
+          "id": "467bf632-54ba-416e-a2c6-6bde10896111",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "rightEyebrowInner"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "7011202a-a4cb-4520-8e9b-33d2aac4c53b",
+      "material": null,
+      "name": "rightEyebrowInner",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        -0.09589900076389313,
+        0.09236600250005722,
+        0.5916619896888733
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "7106c764-02b0-4509-b022-06800c3c7551": {
+      "components": {
+        "358f3479-89a7-42a7-b947-8783173c26cc": {
+          "id": "358f3479-89a7-42a7-b947-8783173c26cc",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "leftIris"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "7106c764-02b0-4509-b022-06800c3c7551",
+      "material": null,
+      "name": "leftIris",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        0.2419780045747757,
+        0.008744999766349792,
+        0.4767119884490967
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "72759142-58f5-4c73-b03e-ef9c071ef359": {
+      "components": {
+        "126eb113-fc16-41dd-9d84-616a34602f58": {
+          "id": "126eb113-fc16-41dd-9d84-616a34602f58",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "leftEyeUpper"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "72759142-58f5-4c73-b03e-ef9c071ef359",
+      "material": null,
+      "name": "leftEyeUpper",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        0.25374600291252136,
+        0.04122199863195419,
+        0.4962339997291565
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "730a3324-05bc-4b2f-9e52-23c7f42d2ac3": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "730a3324-05bc-4b2f-9e52-23c7f42d2ac3",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (6)",
+      "parentId": "b0246d09-7f86-40b5-8ca7-7ac842b444b2",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "78d864cf-7ab3-4286-8bf7-d8daedc932e3": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "78d864cf-7ab3-4286-8bf7-d8daedc932e3",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (24)",
+      "parentId": "9569dec2-ad49-495c-b974-60c09198a1a6",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "790b2234-e250-40d6-b358-ad77dd6a51cf": {
+      "components": {
+        "0114a825-d44e-47cc-8cae-e26307372483": {
+          "id": "0114a825-d44e-47cc-8cae-e26307372483",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "leftEye"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "790b2234-e250-40d6-b358-ad77dd6a51cf",
+      "material": null,
+      "name": "leftEye",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        0.24831099808216095,
+        0.0040779998525977135,
+        0.49078598618507385
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "7928bb23-1167-4d3b-8fe8-806980a24ec4": {
+      "components": {
+        "c853788a-3bd0-4ddc-86bc-85dca84b223c": {
+          "id": "c853788a-3bd0-4ddc-86bc-85dca84b223c",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "leftHelix"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "7928bb23-1167-4d3b-8fe8-806980a24ec4",
+      "material": null,
+      "name": "leftHelix",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        0.6804929971694946,
+        0.03194158896803856,
+        -0.33333414793014526
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "7d2c5619-2c78-4c97-a3f6-a667e45025b1": {
+      "components": {
+        "af193b81-b182-4bb9-a550-574ffef0e705": {
+          "id": "af193b81-b182-4bb9-a550-574ffef0e705",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "noseBridge"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "7d2c5619-2c78-4c97-a3f6-a667e45025b1",
+      "material": null,
+      "name": "noseBridge",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        0.00021600000036414713,
+        -0.036883000284433365,
+        0.62990802526474
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "7e3c93ed-5cfc-4f56-b856-037836edb142": {
+      "camera": {
+        "type": "perspective",
+        "xr": {
+          "xrCameraType": "face",
+          "phone": "AR",
+          "desktop": "AR",
+          "headset": "disabled",
+          "face": {
+            "maxDetections": 3,
+            "mirroredDisplay": true
+          }
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "id": "7e3c93ed-5cfc-4f56-b856-037836edb142",
+      "material": null,
+      "name": "Camera",
+      "order": 1.5549878952790581,
+      "parentId": "948d8bba-bc0c-45e4-9c94-d7dedcc31f4b",
+      "position": [
+        0,
+        2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "7f8cc45d-9586-4381-86fa-aab9c57995a4": {
+      "components": {
+        "e0c365a4-77c6-48f3-857c-eee7685879f2": {
+          "id": "e0c365a4-77c6-48f3-857c-eee7685879f2",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "leftCheek"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "7f8cc45d-9586-4381-86fa-aab9c57995a4",
+      "material": null,
+      "name": "leftCheek",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        0.3623940050601959,
+        -0.25988999009132385,
+        0.46482399106025696
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "83b19c2f-862b-4409-ac7d-b1b133d25afa": {
+      "components": {
+        "a18fdf7d-6457-4cdd-8360-730f1cd8b27c": {
+          "id": "a18fdf7d-6457-4cdd-8360-730f1cd8b27c",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "rightEyeUpper"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "83b19c2f-862b-4409-ac7d-b1b133d25afa",
+      "material": null,
+      "name": "rightEyeUpper",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        -0.2521679997444153,
+        0.0401809997856617,
+        0.5020080208778381
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "83fa651a-67cd-4fd2-9e8a-67dc4f7cc1e7": {
+      "components": {
+        "4dff95fe-7d11-45cb-9427-c34ecc9872d1": {
+          "id": "4dff95fe-7d11-45cb-9427-c34ecc9872d1",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "rightEyebrowMiddle"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "83fa651a-67cd-4fd2-9e8a-67dc4f7cc1e7",
+      "material": null,
+      "name": "rightEyebrowMiddle",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        -0.29657700657844543,
+        0.14402399957180023,
+        0.5557940006256104
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "8ba30c26-7061-4ecf-ade2-d8de55bda96f": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "8ba30c26-7061-4ecf-ade2-d8de55bda96f",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (28)",
+      "parentId": "c3ead016-c7b3-4475-8102-8dfd4e0b011f",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "8c89d6e6-b396-438c-96b5-4d9bd3e5f1a8": {
+      "components": {
+        "9341485b-116d-439f-b958-4aaad759c13f": {
+          "id": "9341485b-116d-439f-b958-4aaad759c13f",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "leftEyebrowOuter"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "8c89d6e6-b396-438c-96b5-4d9bd3e5f1a8",
+      "material": null,
+      "name": "leftEyebrowOuter",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        0.42706501483917236,
+        0.054382000118494034,
+        0.41510000824928284
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "8e3f81b5-c9d3-4df2-9c06-5f104060506a": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "8e3f81b5-c9d3-4df2-9c06-5f104060506a",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (16)",
+      "parentId": "7011202a-a4cb-4520-8e9b-33d2aac4c53b",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "8ecde627-7d3b-489a-853c-6924b08d903c": {
+      "components": {
+        "0dbcafb2-03ce-414a-8e2f-c2a2ec1e0b10": {
+          "id": "0dbcafb2-03ce-414a-8e2f-c2a2ec1e0b10",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "mouth"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "8ecde627-7d3b-489a-853c-6924b08d903c",
+      "material": null,
+      "name": "mouth",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        -0.0015670000575482845,
+        -0.5338720083236694,
+        0.5856500267982483
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "8f757fbb-b140-4cb0-95d5-501b029895e6": {
+      "components": {
+        "9e258dac-c5a8-4d65-8ce7-51c6702f5c66": {
+          "id": "9e258dac-c5a8-4d65-8ce7-51c6702f5c66",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "leftEyebrowInner"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "8f757fbb-b140-4cb0-95d5-501b029895e6",
+      "material": null,
+      "name": "leftEyebrowInner",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        0.09562399983406067,
+        0.0935320034623146,
+        0.5894100069999695
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "902fb956-c201-4ace-acb0-c048f4cc9cf0": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "902fb956-c201-4ace-acb0-c048f4cc9cf0",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (21)",
+      "parentId": "790b2234-e250-40d6-b358-ad77dd6a51cf",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "93be7a1f-9126-41bd-b03c-d693cba237d3": {
+      "components": {
+        "ec83a580-ab27-41d1-a854-344deca7bc53": {
+          "id": "ec83a580-ab27-41d1-a854-344deca7bc53",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "noseTip"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "93be7a1f-9126-41bd-b03c-d693cba237d3",
+      "material": null,
+      "name": "noseTip",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        0.00021499999274965376,
+        -0.2652910053730011,
+        0.7601410150527954
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "9569dec2-ad49-495c-b974-60c09198a1a6": {
+      "components": {
+        "8a70d95a-ca0c-4126-9818-5df270a6e996": {
+          "id": "8a70d95a-ca0c-4126-9818-5df270a6e996",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "leftUpperEyelid"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "9569dec2-ad49-495c-b974-60c09198a1a6",
+      "material": null,
+      "name": "leftUpperEyelid",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        0.25374600291252136,
+        0.04122199863195419,
+        0.4962339997291565
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "9d4731e7-f736-4039-87c5-41cb82958ec7": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "9d4731e7-f736-4039-87c5-41cb82958ec7",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (11)",
+      "parentId": "ed1ca34d-d41c-467f-aa9a-9e890e721e3e",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "a1c71d92-f295-481b-94e8-523e6bb3f6b9": {
+      "components": {
+        "4ecae423-d22f-4dca-8eec-401ac80fe0ef": {
+          "id": "4ecae423-d22f-4dca-8eec-401ac80fe0ef",
+          "name": "face-mesh-anchor",
+          "parameters": {}
+        }
+      },
+      "geometry": {
+        "id": 1,
+        "type": "face"
+      },
+      "id": "a1c71d92-f295-481b-94e8-523e6bb3f6b9",
+      "material": {
+        "color": "#a8c2ff",
+        "opacity": 0.8,
+        "type": "basic"
+      },
+      "name": "Face Mesh (1)",
+      "parentId": "30dc85a1-d4e1-4800-9739-1f96b619a715",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "a608ddd9-9379-464d-966f-5d8d8674c83c": {
+      "camera": {
+        "type": "perspective",
+        "xr": {
+          "desktop": "3D",
+          "xrCameraType": "3dOnly",
+          "headset": "disabled"
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "id": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "material": null,
+      "name": "Camera",
+      "order": 3.178245333774687,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "position": [
+        0,
+        0,
+        6.940722938036766
+      ],
+      "rotation": [
+        0,
+        -1,
+        0,
+        6.123233995736766e-17
+      ],
+      "scale": [
+        0.9999998646558023,
+        0.9999999931513284,
+        0.9999998715044741
+      ]
+    },
+    "a9000f91-64e0-43ff-b0f2-316910f26fcc": {
+      "components": {
+        "806e8de3-0dce-4be8-bbde-a2931110d0c0": {
+          "id": "806e8de3-0dce-4be8-bbde-a2931110d0c0",
+          "name": "face-anchor",
+          "parameters": {}
+        }
+      },
+      "face": {
+        "addAttachmentState": false,
+        "id": 1
+      },
+      "geometry": null,
+      "id": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "material": null,
+      "name": "Face",
+      "order": 2.6320078176551265,
+      "parentId": "411fc3d7-d52b-4bc2-9510-e02871d78eb9",
+      "position": [
+        0,
+        2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "ac1989e3-3b71-49e2-a05f-e682aeb18c36": {
+      "components": {},
+      "geometry": null,
+      "id": "ac1989e3-3b71-49e2-a05f-e682aeb18c36",
+      "light": {
+        "intensity": 1,
+        "type": "directional"
+      },
+      "material": null,
+      "name": "Directional Light",
+      "order": 2.178245333774687,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "position": [
+        20,
+        20,
+        10
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "acdb5f24-7012-4ef6-bd9c-e592c9ca83b0": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "acdb5f24-7012-4ef6-bd9c-e592c9ca83b0",
+      "material": {
+        "color": "#00ff04",
+        "type": "basic"
+      },
+      "name": "Sphere (4)",
+      "parentId": "c75702d5-9a59-43ce-bc6f-a3373acab9a5",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "ade290ed-e0d3-47fc-8874-e488abacfc2b": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "ade290ed-e0d3-47fc-8874-e488abacfc2b",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (20)",
+      "parentId": "51173f00-d41e-4a3d-93c5-9a2af5ad2585",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "b0246d09-7f86-40b5-8ca7-7ac842b444b2": {
+      "components": {
+        "5dfb8bd1-c60a-4be8-92f3-57d60d3a9362": {
+          "id": "5dfb8bd1-c60a-4be8-92f3-57d60d3a9362",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "rightEyeOuterCorner"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "b0246d09-7f86-40b5-8ca7-7ac842b444b2",
+      "material": null,
+      "name": "rightEyeOuterCorner",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        -0.34439000487327576,
+        0.0064860000275075436,
+        0.439642995595932
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "b3b66ea3-893e-43c5-a8a4-4963ccbbe2e3": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "b3b66ea3-893e-43c5-a8a4-4963ccbbe2e3",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (15)",
+      "parentId": "23437d05-30d4-4c4d-b753-74cec842ada9",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "b9492d9a-9f41-4419-8681-2c4f11f1765c": {
+      "components": {
+        "c43e0d09-57a4-4452-91ba-44e71e310ab4": {
+          "id": "c43e0d09-57a4-4452-91ba-44e71e310ab4",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "rightCheek"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "b9492d9a-9f41-4419-8681-2c4f11f1765c",
+      "material": null,
+      "name": "rightCheek",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        -0.36182600259780884,
+        -0.26144498586654663,
+        0.47355198860168457
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "ba6f014e-3f9b-4864-9bbc-07fe4aa91a74": {
+      "components": {
+        "7b588b77-f8a1-461c-b955-eca0f47a72cb": {
+          "id": "7b588b77-f8a1-461c-b955-eca0f47a72cb",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "leftEyeOuterCorner"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "ba6f014e-3f9b-4864-9bbc-07fe4aa91a74",
+      "material": null,
+      "name": "leftEyeOuterCorner",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        0.3463740050792694,
+        0.009332000277936459,
+        0.4309700131416321
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "bc0f6dfd-dd51-43c0-8754-be84bcf7c0fa": {
+      "components": {
+        "944f6b0b-e209-4ead-95c6-146c347accc5": {
+          "id": "944f6b0b-e209-4ead-95c6-146c347accc5",
+          "name": "navigation",
+          "parameters": {}
+        },
+        "ec651d20-1267-40cb-9361-fcccdd47a5cb": {
+          "id": "ec651d20-1267-40cb-9361-fcccdd47a5cb",
+          "name": "Menu",
+          "parameters": {}
+        }
+      },
+      "geometry": null,
+      "id": "bc0f6dfd-dd51-43c0-8754-be84bcf7c0fa",
+      "material": null,
+      "name": "Empty Object",
+      "order": 0.5173680006620305,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "bcaa3157-67f2-46b7-ac0d-3bd1a8f6302b": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "bcaa3157-67f2-46b7-ac0d-3bd1a8f6302b",
+      "material": {
+        "color": "#0062ff",
+        "type": "basic"
+      },
+      "name": "Sphere (30)",
+      "parentId": "c355a189-9885-4b78-9011-6f2fd2fec2a2",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "bf4d08bd-abad-4c3e-bf6b-9d6b2c7036c3": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "bf4d08bd-abad-4c3e-bf6b-9d6b2c7036c3",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (29)",
+      "parentId": "8c89d6e6-b396-438c-96b5-4d9bd3e5f1a8",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "c2bc0cb1-6ea7-4017-b719-63d1969609f5": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "c2bc0cb1-6ea7-4017-b719-63d1969609f5",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (1)",
+      "parentId": "83fa651a-67cd-4fd2-9e8a-67dc4f7cc1e7",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "c355a189-9885-4b78-9011-6f2fd2fec2a2": {
+      "components": {
+        "939fb0b1-5f73-4cfa-b59d-cf5e9b555895": {
+          "id": "939fb0b1-5f73-4cfa-b59d-cf5e9b555895",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "leftCanal"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "c355a189-9885-4b78-9011-6f2fd2fec2a2",
+      "material": null,
+      "name": "leftCanal",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        0.6118280291557312,
+        -0.16078467667102814,
+        -0.1305091232061386
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "c3ead016-c7b3-4475-8102-8dfd4e0b011f": {
+      "components": {
+        "dd7558de-27c6-46b9-bc4b-ed7b487df480": {
+          "id": "dd7558de-27c6-46b9-bc4b-ed7b487df480",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "leftEyeOuterCorner"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "c3ead016-c7b3-4475-8102-8dfd4e0b011f",
+      "material": null,
+      "name": "leftEyeOuterCorner (1)",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        0.3463740050792694,
+        0.009332000277936459,
+        0.4309700131416321
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "c75702d5-9a59-43ce-bc6f-a3373acab9a5": {
+      "components": {
+        "c8a3c2bc-b1ea-48b3-be6a-651911b5b8a2": {
+          "id": "c8a3c2bc-b1ea-48b3-be6a-651911b5b8a2",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "rightLobe"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "c75702d5-9a59-43ce-bc6f-a3373acab9a5",
+      "material": null,
+      "name": "rightLobe",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        -0.6882219910621643,
+        -0.31519630551338196,
+        -0.1308031678199768
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "c9d6da56-900d-46af-acd7-6cddf6b8a99b": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "c9d6da56-900d-46af-acd7-6cddf6b8a99b",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (17)",
+      "parentId": "8f757fbb-b140-4cb0-95d5-501b029895e6",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "ce901875-b40d-47d4-b5c6-08f25119b780": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "ce901875-b40d-47d4-b5c6-08f25119b780",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (7)",
+      "parentId": "83b19c2f-862b-4409-ac7d-b1b133d25afa",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "d136b389-60e8-4115-84c1-dd2b4c7d11c8": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "d136b389-60e8-4115-84c1-dd2b4c7d11c8",
+      "material": {
+        "color": "#0062ff",
+        "type": "basic"
+      },
+      "name": "Sphere (31)",
+      "parentId": "7928bb23-1167-4d3b-8fe8-806980a24ec4",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "d181a48b-64d9-4a79-aced-0042efb7e4c0": {
+      "components": {},
+      "geometry": null,
+      "id": "d181a48b-64d9-4a79-aced-0042efb7e4c0",
+      "light": {
+        "type": "directional"
+      },
+      "material": null,
+      "name": "Directional Light",
+      "order": 0.554987895279058,
+      "parentId": "948d8bba-bc0c-45e4-9c94-d7dedcc31f4b",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "d92fb3b6-32cd-461a-98ab-7542ceeea5b2": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "d92fb3b6-32cd-461a-98ab-7542ceeea5b2",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (12)",
+      "parentId": "8ecde627-7d3b-489a-853c-6924b08d903c",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "dc50498a-315e-49a6-a923-29c9c46f5380": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "dc50498a-315e-49a6-a923-29c9c46f5380",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (14)",
+      "parentId": "2f1c28be-f2fa-4cb4-b042-be47a05d6fe5",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "de57b685-1e51-4995-a34e-69072f2846cc": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "de57b685-1e51-4995-a34e-69072f2846cc",
+      "material": {
+        "color": "#00ff04",
+        "type": "basic"
+      },
+      "name": "Sphere (3)",
+      "parentId": "eae86b31-e7b8-4b4a-86c6-1aa415aec987",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "defdbe2b-4472-4a75-8d08-0698afd37099": {
+      "components": {
+        "9cf8c535-07c8-4b23-9055-e429b310402c": {
+          "id": "9cf8c535-07c8-4b23-9055-e429b310402c",
+          "name": "face-mesh-anchor",
+          "parameters": {}
+        }
+      },
+      "geometry": {
+        "id": 1,
+        "type": "face"
+      },
+      "id": "defdbe2b-4472-4a75-8d08-0698afd37099",
+      "material": {
+        "color": "#a9ffa3",
+        "opacity": 0.8,
+        "type": "basic",
+        "wireframe": false
+      },
+      "name": "Face Mesh (2)",
+      "parentId": "f731eb7e-cf93-4798-a85d-d87ef511216b",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "receiveShadow": true
+      }
+    },
+    "e34d0330-8874-4e2a-81ff-143ba6c06608": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "e34d0330-8874-4e2a-81ff-143ba6c06608",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (26)",
+      "parentId": "7f8cc45d-9586-4381-86fa-aab9c57995a4",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "e8a5e374-8122-406a-b9b5-2cae1a26f9f5": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "e8a5e374-8122-406a-b9b5-2cae1a26f9f5",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (10)",
+      "parentId": "b9492d9a-9f41-4419-8681-2c4f11f1765c",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "eae86b31-e7b8-4b4a-86c6-1aa415aec987": {
+      "components": {
+        "b953fe24-16a8-4c61-bbe7-70c128acb340": {
+          "id": "b953fe24-16a8-4c61-bbe7-70c128acb340",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "rightCanal"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "eae86b31-e7b8-4b4a-86c6-1aa415aec987",
+      "material": null,
+      "name": "rightCanal",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        -0.6118280291557312,
+        -0.16078467667102814,
+        -0.1305091232061386
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "ed1ca34d-d41c-467f-aa9a-9e890e721e3e": {
+      "components": {
+        "ac0d26ac-2ce0-4b93-b4a4-34f76b736abd": {
+          "id": "ac0d26ac-2ce0-4b93-b4a4-34f76b736abd",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "mouthRightCorner"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "ed1ca34d-d41c-467f-aa9a-9e890e721e3e",
+      "material": null,
+      "name": "mouthRightCorner",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        -0.1747319996356964,
+        -0.5310199856758118,
+        0.4912340044975281
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "f0d26d24-12fc-4356-929f-48fef6947efe": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "f0d26d24-12fc-4356-929f-48fef6947efe",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (5)",
+      "parentId": "24fac2e2-335d-44d3-b4b6-745fdbc0f231",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "f2ac4e8d-4263-4ef6-b9f3-5bcce3a05bcb": {
+      "components": {
+        "18d341f8-fb20-4a5c-b5b3-21d9ecea96ae": {
+          "id": "18d341f8-fb20-4a5c-b5b3-21d9ecea96ae",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "rightEyeLower"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "f2ac4e8d-4263-4ef6-b9f3-5bcce3a05bcb",
+      "material": null,
+      "name": "rightEyeLower",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        -0.24230000376701355,
+        -0.034286998212337494,
+        0.49117299914360046
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "f36eb8ac-16c5-4844-a724-fbc712872ad7": {
+      "components": {},
+      "geometry": {
+        "radius": 0.5,
+        "type": "sphere"
+      },
+      "id": "f36eb8ac-16c5-4844-a724-fbc712872ad7",
+      "material": {
+        "color": "#ff0000",
+        "type": "basic"
+      },
+      "name": "Sphere (23)",
+      "parentId": "72759142-58f5-4c73-b03e-ef9c071ef359",
+      "position": [
+        0.00020399999630171806,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ]
+    },
+    "f731eb7e-cf93-4798-a85d-d87ef511216b": {
+      "components": {
+        "ff7efa4b-369e-491f-90b5-c7c851f61784": {
+          "id": "ff7efa4b-369e-491f-90b5-c7c851f61784",
+          "name": "face-anchor",
+          "parameters": {}
+        }
+      },
+      "face": {
+        "addAttachmentState": false,
+        "id": 1
+      },
+      "geometry": null,
+      "id": "f731eb7e-cf93-4798-a85d-d87ef511216b",
+      "material": null,
+      "name": "Face",
+      "parentId": "948d8bba-bc0c-45e4-9c94-d7dedcc31f4b",
+      "position": [
+        2.0304387504099384,
+        2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "fb2d5ce5-a6de-4db0-9a72-0bdd911932c3": {
+      "components": {
+        "c2377bb6-e2bb-4601-abbf-e94438dbd806": {
+          "id": "c2377bb6-e2bb-4601-abbf-e94438dbd806",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "rightHelix"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "fb2d5ce5-a6de-4db0-9a72-0bdd911932c3",
+      "material": null,
+      "name": "rightHelix",
+      "parentId": "a9000f91-64e0-43ff-b0f2-316910f26fcc",
+      "position": [
+        -0.6804929971694946,
+        0.03194158896803856,
+        -0.33333414793014526
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "d9c8be18-67ed-48b4-aa6b-9980b0c30807": {
+      "id": "d9c8be18-67ed-48b4-aa6b-9980b0c30807",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "ad8d3ae4-af5e-4bd9-b35d-28ba396416bc",
+      "components": {},
+      "light": {
+        "type": "directional"
+      },
+      "name": "Directional Light"
+    },
+    "6013e3bb-cbe6-48d1-af14-265ea54b0e7c": {
+      "id": "6013e3bb-cbe6-48d1-af14-265ea54b0e7c",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "ad8d3ae4-af5e-4bd9-b35d-28ba396416bc",
+      "components": {},
+      "light": {
+        "type": "ambient"
+      },
+      "name": "Ambient Light"
+    },
+    "d28ab667-5239-45e9-8741-8d2c9d76f11f": {
+      "id": "d28ab667-5239-45e9-8741-8d2c9d76f11f",
+      "position": [
+        0,
+        2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "ad8d3ae4-af5e-4bd9-b35d-28ba396416bc",
+      "components": {},
+      "name": "Camera",
+      "camera": {
+        "type": "perspective",
+        "xr": {
+          "xrCameraType": "world",
+          "phone": "AR",
+          "desktop": "3D",
+          "headset": "AR"
+        }
+      }
+    },
+    "b0cddd2f-c4c6-4e27-8daf-23293854ca25": {
+      "id": "b0cddd2f-c4c6-4e27-8daf-23293854ca25",
+      "position": [
+        0,
+        0,
+        6.337824942382142
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": {
+        "type": "box",
+        "depth": 1,
+        "height": 1,
+        "width": 1
+      },
+      "material": {
+        "type": "basic",
+        "color": "#9061ff"
+      },
+      "parentId": "ad8d3ae4-af5e-4bd9-b35d-28ba396416bc",
+      "components": {},
+      "name": "Box"
+    },
+    "c7b87d4e-7358-4c50-ae84-81febf07f565": {
+      "id": "c7b87d4e-7358-4c50-ae84-81febf07f565",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "0118a0d9-55ce-4c8b-a39b-b0dbba0df257",
+      "components": {},
+      "light": {
+        "type": "directional"
+      },
+      "name": "Directional Light"
+    },
+    "10b094bb-2149-4043-9028-b521ef206138": {
+      "id": "10b094bb-2149-4043-9028-b521ef206138",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "0118a0d9-55ce-4c8b-a39b-b0dbba0df257",
+      "components": {},
+      "light": {
+        "type": "ambient"
+      },
+      "name": "Ambient Light"
+    },
+    "41ab932e-6c50-4bc6-aa43-182ce9c871f1": {
+      "id": "41ab932e-6c50-4bc6-aa43-182ce9c871f1",
+      "position": [
+        1.6485368777954548,
+        2,
+        4.351057430386925
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "0118a0d9-55ce-4c8b-a39b-b0dbba0df257",
+      "components": {},
+      "name": "Camera",
+      "camera": {
+        "type": "perspective",
+        "xr": {
+          "xrCameraType": "world",
+          "phone": "AR",
+          "desktop": "3D",
+          "headset": "AR"
+        }
+      }
+    },
+    "2b6af8ad-1682-46b6-b0ab-4ef85ec33ebc": {
+      "id": "2b6af8ad-1682-46b6-b0ab-4ef85ec33ebc",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "03d03e30-2651-4f16-a027-69ae743a2220",
+      "components": {},
+      "light": {
+        "type": "directional"
+      },
+      "name": "Directional Light"
+    },
+    "ecabe63d-4ed1-42ae-990a-7e7911793a47": {
+      "id": "ecabe63d-4ed1-42ae-990a-7e7911793a47",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "03d03e30-2651-4f16-a027-69ae743a2220",
+      "components": {},
+      "light": {
+        "type": "ambient"
+      },
+      "name": "Ambient Light"
+    },
+    "74645c6c-658b-425c-b043-2aba7079a53d": {
+      "id": "74645c6c-658b-425c-b043-2aba7079a53d",
+      "position": [
+        0,
+        2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "03d03e30-2651-4f16-a027-69ae743a2220",
+      "components": {},
+      "name": "Camera",
+      "camera": {
+        "type": "perspective"
+      }
+    },
+    "8d307f0a-cb3e-4019-8946-eb826fc1a131": {
+      "id": "8d307f0a-cb3e-4019-8946-eb826fc1a131",
+      "position": [
+        0,
+        1.931076492668438,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "0118a0d9-55ce-4c8b-a39b-b0dbba0df257",
+      "components": {},
+      "name": "gallery-monet",
+      "imageTarget": {
+        "name": "gallery-monet"
+      }
+    },
+    "ee1521e6-2a24-4e08-94ea-972fd32eb422": {
+      "id": "ee1521e6-2a24-4e08-94ea-972fd32eb422",
+      "position": [
+        0.8801569777728799,
+        1.931076492668438,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "0118a0d9-55ce-4c8b-a39b-b0dbba0df257",
+      "components": {},
+      "name": "gallery-vangogh",
+      "imageTarget": {
+        "name": "gallery-vangogh"
+      }
+    },
+    "d9234319-8eac-4b1e-8727-9958bb61d138": {
+      "id": "d9234319-8eac-4b1e-8727-9958bb61d138",
+      "position": [
+        1.7196867737271897,
+        1.931076492668438,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "0118a0d9-55ce-4c8b-a39b-b0dbba0df257",
+      "components": {},
+      "name": "gallery-davinci",
+      "imageTarget": {
+        "name": "gallery-davinci"
+      }
+    },
+    "41090c97-9c1a-402c-9e4c-9a02bd186564": {
+      "id": "41090c97-9c1a-402c-9e4c-9a02bd186564",
+      "position": [
+        2.6281783385849913,
+        1.931076492668438,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "0118a0d9-55ce-4c8b-a39b-b0dbba0df257",
+      "components": {},
+      "name": "gallery-renoir",
+      "imageTarget": {
+        "name": "gallery-renoir"
+      }
+    },
+    "e0b60c1a-2e11-4ae7-915f-a1c1b901e4c2": {
+      "id": "e0b60c1a-2e11-4ae7-915f-a1c1b901e4c2",
+      "position": [
+        3.531661794161681,
+        1.931076492668438,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "0118a0d9-55ce-4c8b-a39b-b0dbba0df257",
+      "components": {},
+      "name": "gallery-seurat",
+      "imageTarget": {
+        "name": "gallery-seurat"
+      }
+    },
+    "e524cadd-de79-4ff3-941e-fe7d86349b32": {
+      "id": "e524cadd-de79-4ff3-941e-fe7d86349b32",
+      "position": [
+        0,
+        0,
+        0.003458786943451697
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": {
+        "type": "plane",
+        "width": 0.75,
+        "height": 1
+      },
+      "material": {
+        "type": "basic",
+        "color": "#ff0000",
+        "opacity": 0.5
+      },
+      "parentId": "8d307f0a-cb3e-4019-8946-eb826fc1a131",
+      "components": {},
+      "name": "Plane"
+    },
+    "bbbd8923-91a9-4c2d-8673-ab81eb5333dc": {
+      "id": "bbbd8923-91a9-4c2d-8673-ab81eb5333dc",
+      "position": [
+        0,
+        0,
+        0.003
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": {
+        "type": "plane",
+        "width": 0.75,
+        "height": 1
+      },
+      "material": {
+        "type": "basic",
+        "color": "#fb00ff",
+        "opacity": 0.5
+      },
+      "parentId": "ee1521e6-2a24-4e08-94ea-972fd32eb422",
+      "components": {},
+      "name": "Plane (1)"
+    },
+    "f0ced256-832d-4ff8-a11b-c3c0651defd7": {
+      "id": "f0ced256-832d-4ff8-a11b-c3c0651defd7",
+      "position": [
+        0,
+        0,
+        0.003
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": {
+        "type": "plane",
+        "width": 0.75,
+        "height": 1
+      },
+      "material": {
+        "type": "basic",
+        "color": "#0400ff",
+        "opacity": 0.5
+      },
+      "parentId": "d9234319-8eac-4b1e-8727-9958bb61d138",
+      "components": {},
+      "name": "Plane (2)"
+    },
+    "ca32d8f3-b769-4c0b-84cc-89acc6626d2e": {
+      "id": "ca32d8f3-b769-4c0b-84cc-89acc6626d2e",
+      "position": [
+        0,
+        0,
+        0.003
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": {
+        "type": "plane",
+        "width": 0.75,
+        "height": 1
+      },
+      "material": {
+        "type": "basic",
+        "color": "#04ff00",
+        "opacity": 0.5
+      },
+      "parentId": "41090c97-9c1a-402c-9e4c-9a02bd186564",
+      "components": {},
+      "name": "Plane (3)"
+    },
+    "8cf02d51-2ef2-4678-981f-3fe1cad6b41e": {
+      "id": "8cf02d51-2ef2-4678-981f-3fe1cad6b41e",
+      "position": [
+        0,
+        0,
+        0.003
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": {
+        "type": "plane",
+        "width": 0.75,
+        "height": 1
+      },
+      "material": {
+        "type": "basic",
+        "color": "#ffbb00",
+        "opacity": 0.5
+      },
+      "parentId": "e0b60c1a-2e11-4ae7-915f-a1c1b901e4c2",
+      "components": {},
+      "name": "Plane (4)"
+    },
+    "5041400e-75bb-4af0-8f02-4f1594fc98bf": {
+      "id": "5041400e-75bb-4af0-8f02-4f1594fc98bf",
+      "position": [
+        -4.136683723020081,
+        0.3302656383039998,
+        -0.45172863214767744
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "0118a0d9-55ce-4c8b-a39b-b0dbba0df257",
+      "components": {},
+      "name": "conical-cat",
+      "imageTarget": {
+        "name": "conical-cat"
+      },
+      "order": 7.27702683223953
+    },
+    "d9f5dc31-7f9e-4e7f-855b-425795605905": {
+      "id": "d9f5dc31-7f9e-4e7f-855b-425795605905",
+      "position": [
+        -5.906604702345537,
+        0,
+        -1.1508648202092449
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "0118a0d9-55ce-4c8b-a39b-b0dbba0df257",
+      "components": {},
+      "name": "cylindrical-amity",
+      "imageTarget": {
+        "name": "cylindrical-amity"
+      },
+      "order": 5.754294308571043
+    }
+  },
+  "spaces": {
+    "320d4074-fabd-40a4-9609-689bf2762e22": {
+      "activeCamera": "5a51e4b7-17bf-4f60-bec0-3375fed6d918",
+      "id": "320d4074-fabd-40a4-9609-689bf2762e22",
+      "name": "return-to-main"
+    },
+    "411fc3d7-d52b-4bc2-9510-e02871d78eb9": {
+      "activeCamera": "4c8b25af-4c8d-4e25-a4b8-facce830b035",
+      "id": "411fc3d7-d52b-4bc2-9510-e02871d78eb9",
+      "includedSpaces": [
+        "320d4074-fabd-40a4-9609-689bf2762e22"
+      ],
+      "name": "face-effects"
+    },
+    "88453035-dc0f-486d-868a-8ff7c2fda864": {
+      "activeCamera": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "id": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "includedSpaces": [],
+      "name": "Default"
+    },
+    "948d8bba-bc0c-45e4-9c94-d7dedcc31f4b": {
+      "activeCamera": "7e3c93ed-5cfc-4f56-b856-037836edb142",
+      "id": "948d8bba-bc0c-45e4-9c94-d7dedcc31f4b",
+      "includedSpaces": [
+        "320d4074-fabd-40a4-9609-689bf2762e22"
+      ],
+      "name": "multi-face"
+    },
+    "ad8d3ae4-af5e-4bd9-b35d-28ba396416bc": {
+      "id": "ad8d3ae4-af5e-4bd9-b35d-28ba396416bc",
+      "name": "world-tracking",
+      "activeCamera": "d28ab667-5239-45e9-8741-8d2c9d76f11f"
+    },
+    "0118a0d9-55ce-4c8b-a39b-b0dbba0df257": {
+      "id": "0118a0d9-55ce-4c8b-a39b-b0dbba0df257",
+      "name": "image-targets",
+      "activeCamera": "41ab932e-6c50-4bc6-aa43-182ce9c871f1"
+    },
+    "03d03e30-2651-4f16-a027-69ae743a2220": {
+      "id": "03d03e30-2651-4f16-a027-69ae743a2220",
+      "name": "vps-tracking",
+      "activeCamera": "74645c6c-658b-425c-b043-2aba7079a53d"
+    }
+  },
+  "historyVersion": "mehsn0mz"
+}

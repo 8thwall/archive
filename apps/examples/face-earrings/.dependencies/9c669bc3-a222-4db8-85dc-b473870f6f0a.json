@@ -1,0 +1,39 @@
+{
+  "type": "module",
+  "dependencyId": "79391975-8416-4466-a649-bcbb3138a846",
+  "moduleId": "b6dd7aae-c75b-41f2-b3fa-2dd7204a3cbe",
+  "alias": "reflections",
+  "target": {
+    "type": "version",
+    "level": "major",
+    "major": 1,
+    "minor": 0,
+    "patch": 8
+  },
+  "config": {
+    "static-negx": {
+      "type": "asset",
+      "asset": "assets/nx.png"
+    },
+    "static-negy": {
+      "type": "asset",
+      "asset": "assets/ny.png"
+    },
+    "static-negz": {
+      "type": "asset",
+      "asset": "assets/nz.png"
+    },
+    "static-posx": {
+      "type": "asset",
+      "asset": "assets/px.png"
+    },
+    "static-posy": {
+      "type": "asset",
+      "asset": "assets/py.png"
+    },
+    "static-posz": {
+      "type": "asset",
+      "asset": "assets/pz.png"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+<a-scene 
+  xrweb="verbose: true; allowedDevices: any;"	
+  xrextras-almost-there
+  landing-page8
+  xrextras-loading
+  recenter-on-select 
+  xrextras-pause-on-hidden
+  renderer="colorManagement: true;">
+  <a-assets>
+    <img id="cube-texture" src="./assets/cube-texture.png">
+    <img id="sky-texture" src="./assets/skyuni-4mb.png">
+  </a-assets>
+
+  <a-entity
+    light="type: hemisphere; color: #ffffff; groundColor: #bbbbff; intensity: 1;"
+    position="0.5 1 0.25"></a-entity>
+  <a-entity 
+    light="type: directional; castShadow: true; color: white; intensity: 0.5" 
+    position="5 10 7">
+  </a-entity>
+  
+  <a-camera position="1.4 2 1.4" rotation="-45 45 0"></a-camera>
+  
+  <a-box 
+    position="0 0.5 0" 
+    material="color: #7611B6; shader: flat; src: #cube-texture"
+    shadow>
+  </a-box>
+
+  <!-- xrweb-background>
+    <a-plane 
+      height="10" 
+      width="10"
+      position="0 -0.01 0"
+      rotation="-90 0 0" 
+      material="shader: flat; opacity: 0.33; color: #57BFFF" 
+      shadow>
+    </a-plane>
+    <grid-helper size="10" divisions="100"></grid-helper>
+    <a-sky src="#sky-texture"></a-sky>
+  </xrweb-background -->
+</a-scene>

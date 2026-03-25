@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "config": {
+    "xruntimeUrl": "https://cdn-dev.8thwall.com/pr/920/fkk2nvw5/web/ecs/release/runtime.js",
+    "xdev8Url": "https://cdn-dev.8thwall.com/pr/920/fkk2nvw5/web/ecs/release/dev8/dev8.js"
+  }
+}

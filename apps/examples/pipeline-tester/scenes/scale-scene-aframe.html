@@ -1,0 +1,82 @@
+<a-scene
+  id='ascene'
+  xrextras-almost-there
+  xrextras-loading
+  xrextras-runtime-error
+  xrextras-gesture-detector
+  xrweb="allowedDevices:any; verbose: true;"
+  coaching-overlay
+  gltf-model="dracoDecoderPath: https://cdn.8thwall.com/web/aframe/draco-decoder/"
+>
+
+  <a-assets>
+    <a-asset-item id="chairModel" src="../assets/truescale/chair.glb"></a-asset-item>
+  </a-assets>
+  
+  <a-entity raycaster="objects: .cantap" cursor="fuse: false; rayOrigin: mouse;" light="type:directional; castShadow:true; color:white; intensity:0.5" position="5 10 7"></a-entity>
+  <a-camera id="camera" position="0 2 0" rotation="0 0 0"></a-camera>
+  <a-plane id="ground" height="2000" width="2000" rotation="-90 0 0" material="shader: shadow; opacity: 0.67" shadow></a-plane>
+  <a-entity
+    light="type: ambient;
+         intensity: 0.2;">
+  </a-entity>
+  <a-entity
+    light="type: directional;
+         intensity: 0.5;
+         castShadow: true; 
+         shadowMapHeight:2048;
+         shadowMapWidth:2048;
+         shadowCameraTop: 10;
+         shadowRadius: 5;"
+    position="1 4.3 2.5"
+    shadow>
+  </a-entity>
+
+  <!--Hack to make xrextras-hold-drag work with an offset-->
+  <a-box opacity=0.0 position="0 0 0" xrextras-hold-drag="riseHeight: 0.0;" xrextras-two-finger-rotate>
+    <a-box position="0 0.5 -2" material="color: #AD50FF;" shadow></a-box>
+    <a-box position="0 0.5 4" material="color: blue;" shadow></a-box>
+    <a-box position="3 0.5 1" material="color: red;" shadow></a-box>
+    <a-box position="-3 0.5 1" material="color: white;" shadow></a-box>
+  </a-box>
+  <a-plane id="ground" height="2000" width="2000" rotation="-90 0 0" position="0 0.5 0" material="shader: shadow; opacity: 0.67" shadow></a-plane> 
+
+  <!--Comment back in if you want to use chairs instead of boxes-->
+  <!--<a-entity -->
+  <!--  id="modelFront" -->
+  <!--  gltf-model="#chairModel"-->
+  <!--  xrextras-hold-drag="riseHeight: 0"-->
+  <!--  xrextras-two-finger-rotate -->
+  <!--  position="0 0 -2"-->
+  <!--  rotation="0 0 0"-->
+  <!--  shadow="cast: true; receive: false">-->
+  <!--</a-entity>-->
+  <!--<a-entity -->
+  <!--  id="modelBack" -->
+  <!--  gltf-model="#chairModel"-->
+  <!--  xrextras-hold-drag="riseHeight: 0"-->
+  <!--  xrextras-two-finger-rotate -->
+  <!--  position="0 0 4"-->
+  <!--  rotation="0 0 0"-->
+  <!--  shadow="cast: true; receive: false">-->
+  <!--</a-entity>-->
+  <!--<a-entity -->
+  <!--  id="modelRight" -->
+  <!--  gltf-model="#chairModel"-->
+  <!--  xrextras-hold-drag="riseHeight: 0"-->
+  <!--  xrextras-two-finger-rotate -->
+  <!--  position="3 0 1"-->
+  <!--  rotation="0 0 0"-->
+  <!--  shadow="cast: true; receive: false">-->
+  <!--</a-entity>-->
+  <!--<a-entity -->
+  <!--  id="modelLeft" -->
+  <!--  gltf-model="#chairModel"-->
+  <!--  xrextras-hold-drag="riseHeight: 0"-->
+  <!--  xrextras-two-finger-rotate -->
+  <!--  position="-3 0 1"-->
+  <!--  rotation="0 0 0"-->
+  <!--  shadow="cast: true; receive: false">-->
+  <!--</a-entity>-->
+    
+</a-scene>

@@ -2,7 +2,7 @@
   "type": "module",
   "dependencyId": "20d4df8e-fd1d-4a38-a59b-10b9941f57c7",
   "moduleId": "d1b1a397-16bf-4265-8235-1350ea721ac5",
-  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkZXAiLCJpYXQiOjE2NTI5ODEzMzkuNDg2LCJ2ZXJzaW9uIjoxLCJhY2Nlc3NMZXZlbCI6Im93bmVkIiwibW9kdWxlSWQiOiJkMWIxYTM5Ny0xNmJmLTQyNjUtODIzNS0xMzUwZWE3MjFhYzUiLCJhcHBVdWlkIjoiM2ZkNWNhM2QtZTZlNy00MzVmLWIyN2EtMGM0NTJlMDkzOGY1IiwiYWNjb3VudFV1aWQiOiI1Zjg1Mzc3OS1hOTFkLTRjNzEtYjkwYi0xM2QzZjExNGZhODUifQ.M6Yzizg-a1jAv3WE4bbxWaN1I-5sZ3VkJ3mPpzwcwB0",
+  "accessToken": "<REMOVED>",
   "alias": "payments",
   "config": {
     "testMode": true,

@@ -1,0 +1,75 @@
+body {
+  font-family: 'Pacifico', sans-serif;
+  box-sizing: border-box;
+}
+
+#overlay {
+  z-index: 10;
+  pointer-events: none;
+  position:absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+#shareBtn {
+  position: absolute;
+  right: 2vmax;
+  bottom: 2vmax;
+  display: none; /* hidden by default */
+  border: none !important;
+  background-color: #5F2705;
+  color: #FFC95E;
+  border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+  pointer-events: auto;
+  text-decoration: none !important;
+
+  font-size: 5vmin;
+  font-weight: 400; 
+  font-style: normal;
+}
+
+#message {
+  position: absolute;
+  top: 2vmax;
+  left: 50vw;
+  width: 85vw;
+  transform: translate(-50%, 0);
+  display: block;
+  color: #FFC95E;
+  text-shadow: 0 0 10px #00000080;
+  padding: 0.6rem 0.8rem;
+  pointer-events: auto;
+  text-decoration: none !important;
+  text-align: center;
+
+  font-size: 6vmin;
+  font-weight: 400; 
+  font-style: normal;
+}
+
+#nameInput {
+  opacity: 0.01;
+  position: absolute;
+  right:0;
+  max-height: 50vh;
+  overflow: hidden;
+  left: 20px;
+  top: 15vh;
+  background: none; 
+  outline: none; 
+  border: none;
+  color: #FFAC6C;
+  text-shadow: 0 0 10px #00000080;
+  font-size: 12vmin;
+  z-index: 5;
+}
+
+.pulse-once { animation: pulse-once 0.5s cubic-bezier(0.785, 0.135, 0.150, 0.860) both; }
+@keyframes pulse-once {
+  0% {transform: scale(1);}
+  50% {transform: scale(0.8);}
+  100% {transform: scale(1);}
+}

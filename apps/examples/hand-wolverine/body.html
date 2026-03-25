@@ -1,0 +1,33 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<a-scene
+  xrextras-loading
+  xrextras-runtime-error
+  hand-coaching-overlay
+  renderer="colorManagement: true"
+  gltf-model="dracoDecoderPath: https://cdn.8thwall.com/web/aframe/draco-decoder/"
+  landing-page
+  tap
+  xrhand="allowedDevices:any">
+  <a-assets>
+    <a-asset-item id="claws" src="./assets/claws.glb"></a-asset-item>
+  </a-assets>
+  <a-camera position="0 2 0"> </a-camera>
+  <a-light type="ambient" intensity="1.5"></a-light>
+
+  <xrextras-hand-anchor id="hand">
+    <xrextras-hand-occluder show="false" adjustment="0.0025"></xrextras-hand-occluder>
+
+    <xrextras-hand-attachment point="palm" pointType="outer">
+      <a-box id="box" xrextras-hider-material color="red" position="0 .08 0" scale=".15 .2 .1"></a-box>
+      <a-entity
+        id="clawsEntity"
+        gltf-model="#claws"
+        scale=".15 .15 .15"
+        rotation="50 0 110"
+        position=".0001 .02 .01"
+        reflections="type:static">
+      </a-entity>
+    </xrextras-hand-attachment>
+  </xrextras-hand-anchor>
+</a-scene>

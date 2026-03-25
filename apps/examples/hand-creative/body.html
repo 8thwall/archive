@@ -1,0 +1,94 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  xrextras-pause-on-hidden
+  tap
+  renderer="colorManagement:true"
+  gltf-model="dracoDecoderPath: https://cdn.8thwall.com/web/aframe/draco-decoder/"
+  hand-coaching-overlay
+  xrhand="allowedDevices:any; cameraDirection:back;">
+  <a-assets>
+    <img id="cosmic-alpha" src="./assets/black-alpha.png" />
+    <a-asset-item id="cube" src="./assets/rubiks.glb"></a-asset-item>
+    <a-asset-item id="lighter" src="./assets/lighter.glb"></a-asset-item>
+
+    <video
+      id="fire"
+      muted
+      autoplay
+      playsinline
+      loop="true"
+      crossorigin="anonymous"
+      src="./assets/fire.mp4"></video>
+  </a-assets>
+
+  <a-camera
+    id="camera"
+    look-controls="enabled: false"
+    wasd-controls="enabled: false"
+    position="0 1.6 0"></a-camera>
+
+  <!-- Hand anchor primitive to nest hand tracking objects -->
+  <xrextras-hand-anchor id="hand">
+    <!-- Hand occluder made using hider-material and hand-mesh -->
+    <!-- <xrextras-hand-occluder
+      show="false"
+      adjustment="0.002"
+    ></xrextras-hand-occluder> -->
+
+    <xrextras-hand-attachment point="palm" pointType="center">
+      <!-- <a-entity
+        position="0.01 -0.02 -0.04"
+        gltf-model="#cube"
+        zvideo-texture="video:#dodeca"
+        scale=".03 .03 .03"
+      ></a-entity> -->
+    </xrextras-hand-attachment>
+
+    <xrextras-hand-attachment point="thumbTip">
+      <a-entity
+        id="fireEntity"
+        visible="false"
+        auto-play-video="video: #fire"
+        material="shader: chromakey; blending:additive; src: #fire; color: 0 0 0; side:double;"
+        geometry="primitive: plane; height: 1; width: .4;"
+        position="0 0.05 0"
+        rotation="0 90 0"
+        scale=".1 .1 .1">
+      </a-entity>
+    </xrextras-hand-attachment>
+
+    <xrextras-hand-attachment point="palm" pointType="inner">
+      <a-entity
+        id="lighterEntity"
+        gltf-model="#lighter"
+        scale=".085 .085 .085"
+        rotation="15 0 90"
+        position=".06 .03 0"
+        reflections="type:realtime">
+      </a-entity>
+    </xrextras-hand-attachment>
+
+    <!-- Hand mesh with indices -->
+    <!-- <xrextras-hand-mesh
+      wireframe="false"
+      zmaterial="color:blue"
+      zanimation="property: components.material.material.color;
+                      type: color;
+                      to: yellow;
+                      dur: 1000;
+                      dir: alternate;
+                      loop: true"
+      scale="2 2 2"
+      material="shader: disco; random: -0.1; alphaTexture: #cosmic-alpha; transparent: true;"
+      zvideo-texture="video:#dodeca"
+    ></xrextras-hand-mesh> -->
+  </xrextras-hand-anchor>
+
+  <a-light type="directional" target="#hand" position="0 1.8 3" intensity="0.8"></a-light>
+  <a-light type="ambient" intensity="0.8"></a-light>
+</a-scene>

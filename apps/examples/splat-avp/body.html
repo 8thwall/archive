@@ -1,0 +1,26 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<div id="overlay" style="z-index: 2">
+  <img id="nextBtn" src="assets/arrow-right.svg" />
+  <img id="prevBtn" src="assets/arrow-left.svg" />
+</div>
+
+<a-scene xr-mode-ui="enabled: true" background="color: #000000" splat-switcher>
+  <a-assets>
+    <a-asset-item id="doty_model" src="assets/doty.glb"></a-asset-item>
+  </a-assets>
+  <a-camera
+    position="0 1.75 0"
+    fov="75"
+    look-controls="magic-window-tracking-enabled: false"></a-camera>
+  <a-entity
+    id="character"
+    character-move
+    character-recenter
+    gltf-model="#doty_model"
+    animation-mixer="clip: idle; loop: repeat; crossFadeDuration: 0.4"
+    scale="4.5 4.5 4.5"
+    position="0 0 -2"
+    shadow></a-entity>
+</a-scene>

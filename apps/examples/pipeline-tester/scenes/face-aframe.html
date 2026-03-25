@@ -1,0 +1,83 @@
+<!-- Copyright (c) 2020 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene
+  xrextras-almost-there
+  xrextras-loading
+  xrextras-runtime-error
+  xrextras-pause-on-hidden
+  renderer="antialias: true; colorManagement: true; physicallyCorrectLights: true;"
+  xrface="mirroredDisplay: true; cameraDirection: front; allowedDevices: any; uvStyle: flat; verbose: true; enableEars: true;">
+  <a-assets>
+    <a-asset-item id="head-occluder" src="../assets/face/occluder.glb"></a-asset-item>
+    <a-asset-item id="pirate-hat" src="../assets/face/pirate-hat.glb"></a-asset-item>
+    <a-asset-item id="jellyfish" src="../assets/flyer/jellyfish-model.glb"></a-asset-item>
+    <a-asset-item id="uv-debugger" src="../assets/face/uv-debugger.png"></a-asset-item>
+  </a-assets>
+
+  <!-- <xrextras-resource id="waves-tex" src="../assets/face/checkerboard.png"></xrextras-resource> -->
+  <xrextras-resource id="waves-tex" src="../assets/face/uv-bright.png"></xrextras-resource>
+  <xrextras-resource id="waves-metalness" src="../assets/face/Metallic.png"></xrextras-resource>
+  <xrextras-resource id="waves-roughness" src="../assets/face/Roughness.png"></xrextras-resource>
+  <xrextras-resource id="waves-normals" src="../assets/face/Normal.png"></xrextras-resource>
+  <xrextras-resource id="alpha-soft" src="../assets/face/soft.png"></xrextras-resource>
+
+  <xrextras-pbr-material
+    id="waves-material"
+    tex="#waves-tex"
+    metalness="#waves-metalness"
+    roughness="#waves-roughness"
+    normals="#waves-normals"
+    opacity="1.0">
+  </xrextras-pbr-material>
+
+  <a-camera position="0 1 2" rotation="0 0 0"></a-camera>
+  <xrextras-faceanchor id="face">
+    <a-entity id="hat">
+      <a-entity
+        xrextras-hider-material
+        gltf-model="#head-occluder"
+        position="0 0 0.35"
+        rotation="10 180 0"></a-entity>
+      <!-- a-box xrextras-hider-material scale=".75 .75 .75"></a-box -->
+      <a-entity
+        gltf-model="#pirate-hat"
+        scale="1.35 1.35 1.35"
+        rotation="-10 0 0"
+        position="0 0.5 0"></a-entity>
+    </a-entity>
+    <xrextras-face-mesh material-resource="#waves-material"></xrextras-face-mesh>
+    <xrextras-face-attachment point="chin">
+      <a-entity
+        gltf-model="#jellyfish"
+        scale="1 .5 .2"
+        position="0 -0.1 -0.1"
+        rotation="-15 0 0"></a-entity>
+    </xrextras-face-attachment>
+
+    <!-- Ear stuff -->
+    <xrextras-face-attachment point="leftHelix">
+      <a-sphere color="yellow" radius="0.01"></a-sphere>
+    </xrextras-face-attachment>
+    <xrextras-face-attachment point="leftCanal">
+      <a-box color="teal" depth="0.1" height="0.05" width="0.15"></a-box>
+    </xrextras-face-attachment>
+    <xrextras-face-attachment point="leftLobe">
+      <a-box color="tomato" position="0 -0.1 0" depth="0.05" height="0.2" width="0.05"></a-box>
+    </xrextras-face-attachment>
+    <xrextras-face-attachment point="rightHelix">
+      <a-sphere color="yellow" radius="0.01"></a-sphere>
+    </xrextras-face-attachment>
+    <xrextras-face-attachment point="rightCanal">
+      <a-box color="teal" depth="0.1" height="0.05" width="0.15"></a-box>
+    </xrextras-face-attachment>
+    <xrextras-face-attachment point="rightLobe">
+      <a-box color="tomato" position="0 -0.1 0" depth="0.05" height="0.2" width="0.05"></a-box>
+    </xrextras-face-attachment>
+  </xrextras-faceanchor>
+  <a-light type="directional" target="#face" position="0 1.8 3" intensity="1"></a-light>
+  <a-light type="ambient" intensity="1"></a-light>
+
+  <!-- <xrextras-capture-button></xrextras-capture-button>
+  <xrextras-capture-preview></xrextras-capture-preview> -->
+</a-scene>

@@ -1,0 +1,142 @@
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<!-- Fade In/Out -->
+<div id="fadeElem" class="absolute-fill" style="z-index: 413; opacity: 1"></div>
+
+<div id="display-overlay">
+  <img id="display-image">
+  <video autoplay muted playsinline loop></video>
+</div>
+
+<!-- UI Buttons used to change colors -->
+<div id="container"></div>
+
+<div id="ar-button-section" class="bottom-center">
+  <button id="ar-btn">See in your Space</button>
+  <p>Requires Camera Access</p>
+</div>
+
+<div id="config-button-section" class="mid-center-right" style="display: none">
+  <button id="config-btn">Configure Now</button>
+</div>
+
+<span id="cta-button-section" class="top-right" style="display: block">
+  <a id="cta-text" target="_blank" href="https://bit.ly/33ScHYI">Shop Now<img id="cta-img" src="./assets/icons/link-out.svg"></a>
+</span>
+
+<div id="question-mark-section" class="bottom-left">
+  <button id="question-btn"><img src="./assets/icons/question-mark-icon.svg"></button>
+</div>
+
+<div id="debug-section" class="bottom-right" style="display: none">
+  <button id="debug-btn"><img src="./assets/icons/bug.svg"></button>
+</div>
+
+<div id="logo-section" class="top-left">
+  <a target="_blank" href="https://bit.ly/33ScHYI"><img src="./assets/icons/aloe-logo.svg"></a>
+</div>
+
+<div id="gradient-box"></div>
+
+<div id="video-preview-section" class="center-right" style="display: none">
+  <video muted autoplay loop src="https://i.giphy.com/media/CUabusF8htXx7lbW2c/giphy.mp4"></video>
+  <p>PREVIEW</p>
+</div>
+
+<div id="qr-code-section" class="center-left" style="display: none">
+  <img src="./assets/icons/aloe-code.png">
+  <p>Scan or visit<br><b>8th.io/aloe</b><br>to view in AR</p>
+</div>
+
+<div id="desktop-overlay" style="display: none"></div>
+
+<div id="question-close-button-section" class="top-right" style="display: none">
+  <button id="question-close-btn"><img src="./assets/icons/close-button.svg"></button>
+</div>
+
+<div id="preview-close-button-section" class="top-right" style="display: none">
+  <button id="preview-close-btn"><img src="./assets/icons/close-button.svg"></button>
+</div>
+
+<div id="gesture-section" style="display: none"></div>
+
+<a-scene
+  ad-flow
+  xrextras-gesture-detector
+  landing-page="mediaSrc: none;"
+  renderer="colorManagement:true; antialias: true;"
+  fog="type: exponential; color: #FFF; density: 0.05"
+  gltf-model="dracoDecoderPath: https://cdn.8thwall.com/web/aframe/draco-decoder/">
+
+  <!-- We can define assets here to be loaded when A-Frame initializes -->
+  <a-assets>
+    <a-asset-item id="chairModel" src="assets/chair.glb"></a-asset-item>
+    <img id="posx" src="./assets/cubemap-static/posx.png">
+    <img id="posy" src="./assets/cubemap-static/posy.png">
+    <img id="posz" src="./assets/cubemap-static/posz.png">
+    <img id="negx" src="./assets/cubemap-static/negx.png">
+    <img id="negy" src="./assets/cubemap-static/negy.png">
+    <img id="negz" src="./assets/cubemap-static/negz.png">
+  </a-assets>
+
+  <xrextras-resource><img id="woodTex" src="./assets/textures/wood-floor.jpg"></xrextras-resource>
+
+  <!-- The raycaster will emit mouse events on scene objects specified with the cantap class -->
+  <a-camera
+    id="camera"
+    raycaster="objects: .cantap"
+    fov="40"
+    position="0 1 2"
+    look-controls="enabled: false"
+    orbit-controls="target: #pivot; enablePan: false; autoRotate: true; autoRotateSpeed: 0.3; minDistance: 1; maxDistance: 4;"
+    cursor="fuse: false; rayOrigin: mouse;">
+  </a-camera>
+
+  <a-entity
+    xr-light="max: 0.5"
+    light="
+      type: directional;
+      intensity: 0.5;
+      castShadow: true;
+      shadowMapHeight:2048;
+      shadowMapWidth:2048;
+      shadowCameraTop: 10;
+      shadowRadius: 1.5;
+      target: #model;"
+    xrextras-attach="target: model; offset: 3 15 3;"
+    shadow>
+  </a-entity>
+
+  <a-light xr-light="max: 0.5" type="ambient" intensity="0.5"></a-light>
+
+  <a-entity 
+    id="model" 
+    gltf-model="#chairModel"
+    cubemap-static
+    class="cantap"
+    rotation="0 45 0"
+    change-color
+    shadow="receive: false">
+      <a-entity id="pivot" position="0 0.5 0"></a-entity>
+  </a-entity>
+
+  <a-plane
+    id="ground" 
+    rotation="-90 0 0"
+    position="0 0 0"
+    width="1000" 
+    height="1000" 
+    material="shader: standard; repeat: 800 800; src: #woodTex"
+    shadow="cast: false">
+  </a-plane>
+
+  <a-sky id="sky" 
+  material="
+      shader: gradient; 
+      topColor: 164 223 250; 
+      bottomColor: 255 255 255;
+      offset: -10;
+      exponent: 1.2
+  "></a-sky>
+
+</a-scene>

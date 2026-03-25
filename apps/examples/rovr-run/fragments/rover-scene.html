@@ -1,0 +1,176 @@
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<REMOVED_BEFORE_OPEN_SOURCING>"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<a-scene
+  on-scene-start
+  browser-detect
+  renderer="sortObjects: false; 
+            antialias: true;
+            alpha: true;
+            highRefreshRate: true;"
+  vr-mode-ui="enabled: false"
+  rover
+  >
+
+  <a-assets>
+    <a-asset-item id="craterModel" src="../assets/models/crater-solid.glb"></a-asset-item>
+    <a-asset-item id="flagModel" src="../assets/models/flag.glb"></a-asset-item>
+    <a-asset-item id="roverBodyModel" src="../assets/models/body.glb"></a-asset-item>
+    <!--<a-asset-item id="cyberTruckModel" src="../assets/models/cybertruck.glb"></a-asset-item>-->
+    <a-asset-item id="roverHeadModel" src="../assets/models/head.glb"></a-asset-item>
+    <a-asset-item id="roverWheelModel" src="../assets/models/wheel.glb"></a-asset-item>
+    <a-asset-item id="poweredbyModel" src="../assets/models/poweredby.glb"></a-asset-item>
+    <a-asset-item id="btnModel" src="../assets/models/btn.glb"></a-asset-item>
+    <a-asset-item id="titleModel" src="../assets/models/mesh-title-blend.glb"></a-asset-item>
+    <a-asset-item id="uiBoxModel" src="../assets/models/ui-box.glb"></a-asset-item>
+    
+    <!--SEASONAL ITEMS-->
+    <a-asset-item id="santaHatModel" src="../assets/models/holiday/santa-hat.glb"></a-asset-item>
+    <a-asset-item id="giftModel" src="../assets/models/holiday/8gift.glb"></a-asset-item>
+    <a-asset-item id="snowmanModel" src="../assets/models/holiday/snowman.glb"></a-asset-item>    
+    <a-asset-item id="snowTreeModel" src="../assets/models/holiday/snowy-tree.glb"></a-asset-item>
+    <a-asset-item id="candyCaneModel" src="../assets/models/holiday/candycane.glb"></a-asset-item>
+    
+    <a-asset-item id="leftControllerModel" src="../assets/models/oculus-touch-controller-gen2-left-light.glb"></a-asset-item>
+    <a-asset-item id="rightControllerModel" src="../assets/models/oculus-touch-controller-gen2-right-light.glb"></a-asset-item>
+
+    <audio id="musicSnd" src="../assets/audio/jingle-electro.mp3" preload="auto"></audio> <!-- XMAS MUSIC -->
+     <!--<audio id="musicSnd" src="../assets/audio/synth-music-128-fr.mp3" preload="auto"></audio>-->
+    <audio id="buttonSnd" src="../assets/audio/chime-3.mp3" preload="auto"></audio>
+    <audio id="pickupSnd" src="../assets/audio/pickup-1.mp3" preload="auto"></audio>
+    <audio id="endGameSnd" src="../assets/audio/death.mp3" preload="auto"></audio>
+    
+    <!-- Rocks -->
+    <a-asset-item id="hill1Model" src="../assets/models/hill1.glb"></a-asset-item>
+    <a-asset-item id="hill2Model" src="../assets/models/hill2.glb"></a-asset-item>
+    <a-asset-item id="hill3Model" src="../assets/models/hill3.glb"></a-asset-item>
+    <a-asset-item id="rock1Model" src="../assets/models/rock-1.glb"></a-asset-item>
+    <a-asset-item id="rock2Model" src="../assets/models/rock-2.glb"></a-asset-item>
+    <a-asset-item id="rock3Model" src="../assets/models/rock-3.glb"></a-asset-item>
+
+    <img id="startImg" src="../assets/images/start-game-text-1.png">
+    <img id="playAgainImg" src="../assets/images/play-again-text-1.png">
+    <img id="oxygenImg" src="../assets/images/o2.png">
+    <img id="sky" src="../assets/images/skyuni-4mb.png">
+    <img id="tooltip" src="../assets/images/tooltip.png">
+
+    <a-asset-item id="oxygenModel" src="../assets/models/oxygen-2.glb"></a-asset-item>
+  </a-assets>
+  
+  <!-- Skybox -->
+  <a-sky src="#sky" rotation="0 -75 35"></a-sky>
+  
+  <!-- Elements tied to the user. -->
+  <a-entity id="rig" position="0 1.5 0">
+    <a-camera id="camera" 
+      wasd-controls="enabled: false"
+      debug-controlsa
+      position="0 1.6 0"           
+      sound="src: #musicSnd; autoplay: false; loop: true; volume: 0.1">
+    </a-camera>
+    
+    <a-entity 
+      id="oxygenUiParent" 
+      attach-to-head="target: camera"
+      position="0 -0.43 -1"
+      rotation="70 0 0">
+        <a-entity id="oxygenUi" 
+            oxygen-monitor 
+            oxygen-countdown 
+            sound="src: #endGameSnd; volume: 0.7"
+            rotation="-90 0 0"
+            geometry="primitive: ring; thetaStart: 180" 
+            material="color: green"
+            scale="-0.072 0.072 0.072"
+            position="-0.17 0.055 0.15">
+        </a-entity>
+        <a-text 
+            id="countText" 
+            font="monoid"
+            value="0" 
+            color="black" 
+            position="0.23 0.055 0.15" 
+            rotation="-90 0 0" 
+            width="1.3"
+            align="center">
+        </a-text>
+        <a-plane src="#oxygenImg" position="-0.17 0.05 0.15" rotation="-90 0 0" scale="0.09 0.09 0.09" material="transparent: true"></a-plane>
+        <a-entity id="oxygenRef" rotation="-90 0 0" position="0.12 0.05 0.23" scale="2.5 2.5 2.5">
+          <a-entity gltf-model="#oxygenModel" spin></a-entity>
+        </a-entity>
+        <a-entity gltf-model="#uiBoxModel" position="-0.17 0.035 0.15" rotation="90 0 0" scale="4.5 6 6" ></a-entity>
+        <a-entity gltf-model="#uiBoxModel" position="0.17 0.035 0.15" rotation="90 0 0" scale="6 6 6" ></a-entity>
+    </a-entity>  
+    
+    <a-entity 
+    id="leftController" 
+    tracked-controls="hand: left;">
+    </a-entity>
+    
+    <a-entity 
+    id="rightController"
+    tracked-controls="hand: right;"
+    input-listener>
+    </a-entity>
+    
+    <a-entity id="titleObj" visible="false" gltf-model="#titleModel" scale="30 30 30" position="0 2 -2.5"></a-entity>
+    <a-entity id="poweredbyObj" visible="false" gltf-model="#poweredbyModel" position="1.53 0.75 -2.5" scale="10 10 10"></a-entity>
+    <a-text id="text" visible="false" font="monoid" value="Collect as many Oxygen Tanks as you can before time runs out!" 
+    side="double" position="0 1.5 -2.5" width="2" wrap-count="31" align="center"></a-text>
+    
+    <a-entity
+    id="startBtn" 
+    class="button" 
+    play-again
+    gltf-model="#btnModel"
+    sound="src: #buttonSnd;"
+    scale="10 10 10"
+    position="0 1 -2.25"
+    visible="false">      
+      <a-plane
+        src="#startImg" 
+        width="5.58" 
+        height="1"
+        scale="0.013 0.013 0.013" 
+        position="0 0 0.008" 
+        side="double"
+        font="monoid"
+        flat-shading="true"
+        material="transparent: true; alphaTest: 0.3; emissive: #000;">
+      </a-plane>
+    </a-entity>
+    
+  </a-entity>
+
+  <a-light id="ambientLight" type="ambient" intensity="0.8"></a-light>
+  
+  <!--SEASONAL MODELS-->
+  <a-entity position="0 25 0" particle-system="preset: snow; maxAge: 10; maxParticleCount: 500000.000; positionSpread: 40 10 40; size: 0.4; velocityValue: 0 5 0"></a-entity>
+  <a-entity gltf-model="#snowmanModel" position="3.5 0 -24" rotation="0 -22 0" scale="12 12 12" shadow></a-entity>
+  <a-entity gltf-model="#snowTreeModel" position="-1.5 0 -25" scale="35 35 35" shadow></a-entity>
+  <a-entity gltf-model="#snowTreeModel" position="17.5 0 -9.5" scale="27 27 27" shadow></a-entity>
+  <a-entity gltf-model="#candyCaneModel" position="-22 5 -18" rotation="0 180 32" scale="20 20 20" shadow></a-entity>
+  <a-entity gltf-model="#candyCaneModel" position="22 1.8 -2" rotation="0 -50 22" scale="14 14 14" shadow></a-entity>
+  
+  <a-entity
+      id="directionalLight"
+      light="type: directional;
+             intensity: 1;
+             color: #f0dfff;
+             castShadow: true;
+             shadowCameraBottom: -19;
+             shadowCameraTop: 5;
+             shadowCameraRight: 18;
+             shadowCameraLeft: -29;
+             shadowMapHeight: 1536;
+             shadowMapWidth: 1536;
+             shadowRadius: 0.85"
+      position="-23 32 -35"
+      shadow>
+  </a-entity>
+  
+  <!--<a-entity id="lander" gltf-model="#landerModel" position="10.5 3.2 0.5" scale="2 2 2" -->
+  <!--rotation="0 -170 0" shadow></a-entity>-->
+</a-scene>

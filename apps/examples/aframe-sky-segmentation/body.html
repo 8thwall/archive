@@ -1,0 +1,70 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene 
+  xrextras-loading
+  xrextras-runtime-error
+  landing-page
+  xrlayers="cameraDirection: back;"
+  gltf-model="dracoDecoderPath: https://cdn.8thwall.com/web/aframe/draco-decoder/"
+  sky-coaching-overlay
+  sky-recenter
+  renderer="colorManagement: true"
+>
+  <a-assets>
+    <a-asset-item id="doty" src='./assets/models/doty.glb'></a-asset-item>
+    <a-asset-item id="airship" src='./assets/models/airship.glb'></a-asset-item>
+  </a-assets>
+
+  <div id="bottomBar" class="bottomBar" style="display:none">
+    <div id="leftButton" class="leftButton"></div>
+    <div id="rightButton" class="rightButton"></div>
+  </div>
+    
+  <sky-scene id="skyScene" invert-layer-mask="false" skybox="transparent:true" sky-debug>
+
+   <a-entity
+    gltf-model="#doty"
+    id="dotyModel"
+    sky-position="x:0; y: -10; z:-25; resetRotation:true;"
+    rotation="0 0 0" 
+    scale="100 100 100"
+    animation-mixer="clip:idle; loop:repeat;"
+    sky-arrows>
+    </a-entity>
+
+   <a-entity
+    gltf-model="#airship"
+    sky-position="x:-20; y:20; z:-55;"
+    rotation="0 0 -5" 
+    animation-mixer="clip:idle; loop:repeat;"
+    scale="10 10 10"
+   ></a-entity>
+
+    <a-entity 
+      light="
+        type: directional; 
+        castShadow: true; 
+        color: white; 
+        intensity: 0.5" 
+      position="5 10 7"
+      rotation="45 0 45">
+    </a-entity>
+
+    <a-entity
+      name='sky-ambient-light'
+      light="type: ambient;
+         intensity: 1;">
+    </a-entity>
+
+  </sky-scene>
+
+  <a-entity
+    name='scene-ambient-light'
+    light="type: ambient;
+    intensity: .8;">
+  </a-entity>
+  
+  <a-camera position="0 3 0"></a-camera>
+  
+</a-scene>

@@ -1,0 +1,10 @@
+<a-scene xrweb xrextras-tap-recenter xrextras-almost-there xrextras-loading xrextras-runtime-error>
+  <a-asset>
+    <a-asset-item id="palm" src="./assets/coco.glb"></a-asset-item>
+  </a-asset>
+
+  <a-camera position="0 3 3"></a-camera>
+  <!--<a-box position="0 0.5 -1" material="color: blue;" shadow></a-box>-->
+  <a-entity position="0 0 -4" gltf-model="#palm"></a-entity>
+  <a-box scale="100 2 100" position="0 -1 0" material="shader: shadow" shadow></a-box>
+</a-scene>

@@ -1,0 +1,146 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  gltf-model="dracoDecoderPath: https://cdn.8thwall.com/web/aframe/draco-decoder/"
+  renderer="colorManagement: true; webgl2: true"
+  xrweb="disableWorldTracking: true">
+  <a-assets>
+    <a-asset-item id="hider-model" src="assets/hider.glb"></a-asset-item>
+    <a-asset-item id="billboard-model" src="assets/test.glb"></a-asset-item>
+    <a-asset-item id="background-model" src="assets/background2.glb"></a-asset-item>
+    <video
+      id="portal-video"
+      muted
+      autoplay
+      playsinline
+      crossorigin="anonymous"
+      loop="true"
+      src="./assets/portal-video.mp4"></video>
+  </a-assets>
+
+  <a-camera></a-camera>
+
+  <a-light type="ambient" intensity="0.8"></a-light>
+
+  <a-entity image-target-portal="name: billboard">
+    <a-entity
+      light="
+      type: directional;
+      shadowBias: -0.0001
+      intensity: 0.65;
+      castShadow: true;
+      shadowMapHeight:4096;
+      shadowMapWidth:4096;
+      shadowCameraTop: 10;
+      shadowCameraBottom: -10;
+      shadowCameraRight: 10;
+      shadowCameraLeft: -10;
+      target: #model"
+      xrextras-attach="target: model; offset: 8 15 4"
+      position="1 4.3 2.5"
+      shadow>
+    </a-entity>
+
+    <a-entity
+      position="0 0 0"
+      gltf-model="#hider-model"
+      my-hider-material
+      scale="0.395 0.395 0.395">
+    </a-entity>
+
+    <a-entity
+      position="0 0 0"
+      gltf-model="#background-model"
+      scale="0.395 0.395 0.395">
+    </a-entity>
+
+    <a-entity
+      id="model"
+      position="0 0 0"
+      gltf-model="#billboard-model"
+      reflections="type: realtime"
+      scale="0.395 0.395 0.395"
+      no-cull
+      shadow>
+    </a-entity>
+
+    <!--PORTAL VIDEO-->
+
+    <!-- <a-entity
+      id="portalVideo"
+      auto-play-video="video: #portal-video"
+      material="shader: flat; src: #portal-video; blending: additive; side: front"
+      geometry="primitive: plane; height: 1; width: 1;"
+      position="0 0.03 -16"
+      scale="2.6 1.3 1.3">
+    </a-entity>
+
+    <a-entity
+      id="portalVideo"
+      auto-play-video="video: #portal-video"
+      material="shader: flat; src: #portal-video; blending: additive; side: front"
+      geometry="primitive: plane; height: 1; width: 1;"
+      position="0 0.03 -8"
+      scale="2.6 1.3 1.3">
+    </a-entity>
+
+    <a-entity
+      id="portalVideo"
+      auto-play-video="video: #portal-video"
+      material="shader: flat; src: #portal-video; blending: additive; side: front"
+      geometry="primitive: plane; height: 1; width: 1;"
+      position="0 0.03 -4"
+      scale="2.6 1.3 1.3">
+    </a-entity>
+
+    <a-entity
+      id="portalVideo"
+      auto-play-video="video: #portal-video"
+      material="shader: flat; src: #portal-video; blending: additive; side: front"
+      geometry="primitive: plane; height: 1; width: 1;"
+      position="0 0.03 -2"
+      scale="2.6 1.3 1.3">
+    </a-entity>
+
+    <a-entity
+      id="portalVideo"
+      auto-play-video="video: #portal-video"
+      material="shader: flat; src: #portal-video; blending: additive; side: front"
+      geometry="primitive: plane; height: 1; width: 1;"
+      position="0 0.03 -1"
+      scale="2.6 1.3 1.3">
+    </a-entity>
+
+    <a-entity
+      id="portalVideo"
+      auto-play-video="video: #portal-video"
+      material="shader: flat; src: #portal-video; blending: additive; side: front"
+      geometry="primitive: plane; height: 1; width: 1;"
+      position="0 0.03 -.5"
+      scale="2.6 1.3 1.3">
+    </a-entity>
+
+    <a-entity
+      id="portalVideo"
+      auto-play-video="video: #portal-video"
+      material="shader: flat; src: #portal-video; blending: additive; side: front"
+      geometry="primitive: plane; height: 1; width: 1;"
+      position="0 0.03 -.25"
+      scale="2.6 1.3 1.3">
+    </a-entity> -->
+
+    <a-entity
+      id="portalVideo"
+      auto-play-video="video: #portal-video"
+      material="shader: flat; src: #portal-video; blending: additive; side: front"
+      geometry="primitive: plane; height: 1; width: 1;"
+      position="0 0.03 -.1"
+      scale="2.6 1.3 1.3">
+    </a-entity>
+
+  </a-entity>
+</a-scene>

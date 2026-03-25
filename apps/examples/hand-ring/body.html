@@ -1,0 +1,179 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene
+  landing-page
+  xrextras-loading
+  gltf-model="dracoDecoderPath: https://cdn.8thwall.com/web/aframe/draco-decoder/"
+  xrextras-runtime-error
+  hand-coaching-overlay
+  xrhand="allowedDevices:any; cameraDirection:back;"
+>
+  <!-- 3D models, images, videos -->
+  <a-assets>
+    <a-asset-item
+      id="diamondModel"
+      src="./assets/diamondRotated.glb"
+    ></a-asset-item>
+    <a-asset-item id="bandModel" src="./assets/bandRotated.glb"></a-asset-item>
+    <a-asset-item
+      id="simpleBandModel"
+      src="./assets/simpleBand.glb"
+    ></a-asset-item>
+    <a-asset-item
+      id="engagementModel"
+      src="./assets/engagementRotated.glb"
+    ></a-asset-item>
+    <a-asset-item
+      id="signetModel"
+      src="./assets/signetQuart.glb"
+    ></a-asset-item>
+    <a-asset-item id="luxWatchModel" src="./assets/luxWatch.glb"></a-asset-item>
+    <a-asset-item
+      id="slenderWatchModel"
+      src="./assets/slenderWatch.glb"
+    ></a-asset-item>
+  </a-assets>
+
+  <a-camera
+    look-controls="enabled: false"
+    wasd-controls="enabled: false"
+    position="0 2 0"
+  ></a-camera>
+
+  <!-- content anchored to face -->
+  <xrextras-hand-anchor id="hand">
+    <!-- <xrextras-hand-mesh wireframe="true"></xrextras-hand-mesh> -->
+
+    <xrextras-hand-occluder
+      show="false"
+      adjustment="0.003"
+    ></xrextras-hand-occluder>
+
+    <xrextras-hand-attachment point="ringLower">
+      <a-entity
+        gltf-model="#diamondModel"
+        position="0 -0.008 0"
+        rotation="-8 0 -15"
+        reflections="type:static"
+        change-map="color:gold;"
+        scale="1 1 1"
+        scale-to-hand="size:16; adjustment:0.81"
+      ></a-entity>
+      <!-- GOOD but have to make occluder smaller -->
+      <!-- <a-entity
+        gltf-model="#diamondModel"
+        position="0 -0.008 0"
+        rotation="-3 0 -10"
+        reflections="type:static"
+        change-map="color:gold;"
+        scale="1 1 1"
+        scale-to-hand="size:16; adjustment:0.8"
+      ></a-entity> -->
+      <!-- <a-entity
+        gltf-model="#simpleBandModel"
+        position="0 -0.008 0"
+        rotation="-3 0 -10"
+        reflections="type:static"
+        change-map="color:gold;"
+        scale="1 1 1"
+        scale-to-hand="size:16; adjustment:0.8"
+      ></a-entity> -->
+      <a-entity
+        gltf-model="#engagementModel"
+        position="0 -0.01 0"
+        rotation="-8 0 -15"
+        reflections="type:static"
+        scale="1 1 1"
+        scale-to-hand="size:16; adjustment:0.76"
+      ></a-entity>
+    </xrextras-hand-attachment>
+
+    <xrextras-hand-attachment point="middleLower">
+      <!-- GOOD -->
+      <!-- <a-entity
+        gltf-model="#bandModel"
+        position="0 -0.008 0"
+        rotation="110 180 0"
+        reflections="type:static"
+        change-map="color:gold;"
+        scale="1 1 1"
+        scale-to-hand="size:16; adjustment:0.78"
+      ></a-entity> -->
+    </xrextras-hand-attachment>
+
+    <xrextras-hand-attachment point="indexLower">
+      <!-- GOOD ehh-->
+      <!-- <a-entity
+        gltf-model="#bandModel"
+        position="0 -0.007 0"
+        rotation="-10 0 -10"
+        reflections="type:static"
+        change-map="color:gold;"
+        scale="1 1 1"
+        scale-to-hand="size:16; adjustment:0.78"
+      ></a-entity> -->
+    </xrextras-hand-attachment>
+
+    <xrextras-hand-attachment point="pinkyLower">
+      <!-- GOOD -->
+      <!-- <a-entity
+        gltf-model="#signetModel"
+        position="0 -0.008 0"
+        rotation="40 -20 -20"
+        reflections="type:static"
+        change-map="color:signetGold;"
+        scale="1 1 1"
+        scale-to-hand="size:16; adjustment:0.9"
+      ></a-entity> -->
+    </xrextras-hand-attachment>
+    <xrextras-hand-attachment point="wrist">
+      <!-- GOOD -->
+      <a-cylinder
+        id="wristOccluder"
+        color="#FAFAFA"
+        scale="1 1 1"
+        position=".00005 -0.055 .003"
+        height=".1"
+        radius="1"
+        wrist-occluder
+        xrextras-hider-material
+      ></a-cylinder>
+      <!-- <a-entity
+        gltf-model="#slenderWatchModel"
+        position="0 -0.013 0"
+        change-map="color:slenderBlack"
+        rotation="0 90 0"
+        reflections="type:static"
+        scale="1 1 1"
+        scale-to-hand="size:6; adjustment:0.96"
+      ></a-entity> -->
+      <!-- <a-entity
+        gltf-model="#luxWatchModel"
+        clock-animation
+        position="0 -0.013 0"
+        rotation="0 90 0"
+        reflections="type:static"
+        scale="1 1 1"
+        scale-to-hand="size:6; adjustment:0.96"
+      ></a-entity> -->
+      <!-- <a-entity
+        gltf-model="#slenderWatchModel"
+        position="0 -0.013 0"
+        change-map="color:slenderBlack"
+        rotation="0 90 0"
+        reflections="type:static"
+        scale="1 1 1"
+        scale-to-hand="size:6; adjustment:0.96"
+      ></a-entity> -->
+    </xrextras-hand-attachment>
+  </xrextras-hand-anchor>
+
+  <a-light
+    type="directional"
+    target="#hand"
+    position="0 1.8 3"
+    intensity="0.8"
+  ></a-light>
+  <a-light type="ambient" intensity="0.8"></a-light>
+</a-scene>

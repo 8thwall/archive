@@ -1,0 +1,303 @@
+const vec4 BEHIND_CAM = vec4(0.0, 0.0, 2.0, 1.0);
+
+// THREEJS built-in uniforms
+// = object.matrixWorld
+uniform mediump mat4 modelMatrix;
+// = camera.matrixWorldInverse * object.matrixWorld
+
+//uniform mediump mat4 modelViewMatrix;
+uniform mediump mat4 modelViewMatrices[2];
+#define modelViewMatrix modelViewMatrices[gl_ViewID_OVR]
+
+// = camera.projectionMatrix
+//uniform mediump mat4 projectionMatrix;
+uniform mediump mat4 projectionMatrices[2];
+#define projectionMatrix projectionMatrices[gl_ViewID_OVR]
+
+// = camera.matrixWorldInverse
+//uniform mediump mat4 viewMatrix;
+uniform mediump mat4 viewMatrices[2];
+#define viewMatrix viewMatrices[gl_ViewID_OVR]
+
+// = inverse transpose of modelViewMatrix
+//uniform mediump mat3 normalMatrix;
+uniform mediump mat3 normalMatrices[2];
+#define normalMatrix normalMatrices[gl_ViewID_OVR]'
+
+// = camera position in world space
+uniform mediump vec3 cameraPosition;
+
+
+// Vertex shader for rendering splats with data provided as an RGBA32UI texture.
+void projectSplat(
+  // Inputs
+  in mediump mat4 mv,                // Model-view matrix for the splat.
+  in mediump mat4 p,                 // Projection matrix for the camera
+  in mediump float raysToPix,        // Mapping from rays to pixels.
+  in mediump vec4 vertexPosition,    // Quad corner of this vertex.
+  in mediump vec4 instancePosition,  // Position of the splat.
+  in mediump vec4 instanceColor,     // Color of the splats.
+  in mediump float[6] rssrCoeffs,    // RSS'R' coefficients for the splat.
+  in mediump vec3[3] sh1,            // SH1 coefficients for the splat.
+  in mediump vec3[5] sh2,            // SH2 coefficients for the splat.
+  in mediump vec3[7] sh3,            // SH3 coefficients for the splat.
+  // Outputs
+  out mediump vec4 outVertexPosition,  // Output vertex position for the input quad corner.
+  out mediump vec4 splatColor,         // Color of the splat.
+  out mediump vec2 splatEccentricity,  // Gaussian eccentricity of the splat.
+  out mediump float maxSqEccentricity  // Maximum squared eccentricity for this splat to add color.
+) {
+  // minAlpha controls how the maxSigma and the size of the fragments that need to be drawn, so it
+  // is an important performance / quality knob. The equation is maxSigma = sqrt(-2 * ln(10/255))
+  //
+  // minAlpha | maxSigma | fragment area
+  //    1/255 |   3.33   | 100%
+  //    5/255 |   2.80   |  70%
+  //   10/255 |   2.55   |  58%
+  //   16/255 |   2.35   |  50%
+  //   25/255 |   2.15   |  41%
+  //   35/255 |   1.99   |  35%
+  mediump float minAlpha = 10.0 / 255.0;
+  splatColor = instanceColor / 255.0;
+
+  if (instanceColor.a < minAlpha) {
+    outVertexPosition = BEHIND_CAM;
+    return;
+  }
+
+  mediump vec4 splat3d = mv * instancePosition;
+  splat3d /= splat3d.w;
+  mediump vec4 splat2d = p * splat3d;
+  splat2d /= splat2d.w;
+
+  // cull behind camera
+  if (splat2d.z < -1.0 || splat2d.z > 1.0) {
+    outVertexPosition = BEHIND_CAM;
+    return;
+  }
+
+  mediump float c0 = rssrCoeffs[0];
+  mediump float c1 = rssrCoeffs[1];
+  mediump float c2 = rssrCoeffs[2];
+  mediump float c3 = rssrCoeffs[3];
+  mediump float c4 = rssrCoeffs[4];
+  mediump float c5 = rssrCoeffs[5];
+  mediump mat3 rssr = mat3(
+    vec3(c0, c1, c2),  // col 0
+    vec3(c1, c3, c4),  // col 1
+    vec3(c2, c4, c5)   // col 2
+  );
+
+  // This needs to match the space of the projection matrix (e.g. RDF or RUB or RUF).
+  // Currently this is RUB.
+  mediump mat3 J = mat3(
+    vec3(1.0, 0., -splat3d.x / splat3d.z),  // col 0
+    vec3(0., 1.0, -splat3d.y / splat3d.z),  // col 1
+    vec3(0., 0., 0.)                        // col 2
+  );
+
+  mat3 T = transpose(mat3(mv)) * J;
+  mat3 cov2d = transpose(T) * rssr * T;
+
+  // Low-pass filter the covariance matrix to prevent pixel-level gaps in the splats.
+  // We increase the standard deviation of the splats by approximately 1 pixel per 3
+  // standard deviations.
+  mediump float lowPassPaddingStd = splat3d.z / (1.7320508 * raysToPix);
+  mediump float lowPassPaddingVar = lowPassPaddingStd * lowPassPaddingStd;
+  mediump float diagonal1 = cov2d[0][0] + lowPassPaddingVar;
+  mediump float offDiagonal = cov2d[0][1];
+  mediump float diagonal2 = cov2d[1][1] + lowPassPaddingVar;
+
+  mediump float mid = 0.5 * (diagonal1 + diagonal2);
+  mediump float radius = length(vec2((diagonal1 - diagonal2) / 2.0, offDiagonal));
+  mediump float lambda1 = mid + radius;
+  mediump float lambda2 = mid - radius;
+
+  if (lambda2 <= 0.0) {
+    outVertexPosition = BEHIND_CAM;
+    return;
+  }
+
+  mediump vec2 diagonalVector = vec2(offDiagonal, lambda1 - diagonal1);
+
+  mediump float dn = length(diagonalVector);
+  if (dn < 1e-6f) {
+    diagonalVector = vec2(1.0f, 0.0f);
+  } else {
+    diagonalVector /= dn;
+  }
+
+  mediump float std1 = sqrt(lambda1);
+  mediump float std2 = sqrt(lambda2);
+
+  // cull splats that are too close to the near clip plane and also too large.
+  mediump float projectedStd1 = std1 / -splat3d.z;
+  if (projectedStd1 > 1.0 / min(p[0][0], p[1][1])) {
+    outVertexPosition = BEHIND_CAM;
+    return;
+  }
+
+  // We want:
+  //   exp(-0.5 * sqEccentricity) * alpha > minAlpha
+  //                -0.5 * sqEccentricity > log(minALpha / alpha)
+  //                       sqEccentricity < -2.0 * log(minAlpha / alpha)
+  maxSqEccentricity = -2.0 * log(minAlpha / splatColor.a);
+
+  mediump float maxSigma = sqrt(maxSqEccentricity);
+  mediump vec2 majorAxis = maxSigma * std1 * diagonalVector;
+  mediump vec2 minorAxis = maxSigma * std2 * vec2(diagonalVector.y, -diagonalVector.x);
+
+  mediump mat4 transform = mat4(
+    vec4(majorAxis, 0.0, 0.0),
+    vec4(minorAxis, 0.0, 0.0),
+    vec4(0.0, 0.0, 1.0, 0.0),
+    vec4(splat3d.xyz, 1.0));
+
+  outVertexPosition = p * transform * vertexPosition;
+  splatEccentricity = maxSigma * vertexPosition.xy;
+
+  mediump vec3 camPos = inverse(mv)[3].xyz;
+  mediump vec3 toCam = instancePosition.xyz - camPos;
+  mediump float dist = length(toCam);
+  if (dist < 1e-6f) {
+    toCam = vec3(0.0, 0.0, 0.0);
+  } else {
+    toCam /= dist;
+  }
+
+  mediump float x = toCam.x, y = toCam.y, z = toCam.z;
+  mediump float x2 = x * x, y2 = y * y, z2 = z * z;
+  mediump float xy = x * y, xz = x * z, yz = y * z;
+
+  splatColor.rgb += sh1[0] * (-0.488603 * y)
+    + sh1[1] * (0.488603 * z)
+    + sh1[2] * (-0.488603 * x)
+    + sh2[0] * (1.092548 * xy)
+    + sh2[1] * (-1.092548 * yz)
+    + sh2[2] * (0.946175 * z2 - 0.315392)
+    + sh2[3] * (-1.092548 * xz)
+    + sh2[4] * (0.546274 * (x2 - y2))
+    + sh3[0] * (-0.590044 * y * (3.0 * x2 - y2))
+    + sh3[1] * (2.890611 * xy * z)
+    + sh3[2] * (0.457046 * y * (1.0 - 5.0 * z2))
+    + sh3[3] * (0.373176 * z * (5.0 * z2 - 3.0))
+    + sh3[4] * (0.457046 * x * (1.0 - 5.0 * z2))
+    + sh3[5] * (1.445306 * z * (x2 - y2))
+    + sh3[6] * (-0.590044 * x * (x2 - 3.0 * y2));
+}
+
+uniform highp usampler2D splatDataTexture;
+uniform mediump float raysToPix;
+uniform mediump float sortTexture; // 0.0 means no sorting.
+uniform mediump float maxInstanceIdForFragment; // 0.0 means no culling. TODO(dat): Remove in production.
+
+in uint instanceId;
+in mediump uvec4 positionColor;
+in mediump uvec4 scaleRotation;
+in mediump uvec4 shR;
+in mediump uvec4 shG;
+in mediump uvec4 shB;
+
+// default vertex attributes provided by BufferGeometry
+in mediump vec3 position;
+in mediump vec3 normal;
+in mediump vec2 uv;
+
+out mediump vec4 splatColor;
+out mediump vec2 splatEccentricity;
+out mediump float maxSqEccentricity;
+
+mediump float[6] rssrCoeffs(mediump uvec4 c) {
+  mediump vec2 c1 = unpackHalf2x16(c.x);
+  mediump vec2 c2 = unpackHalf2x16(c.y);
+  mediump vec2 c3 = unpackHalf2x16(c.z);
+
+  return float[6](0.25 * c1.x, 0.25 * c1.y, 0.25 * c2.x, 0.25 * c2.y, 0.25 * c3.x, 0.25 * c3.y);
+}
+
+mediump vec3 b2f(mediump vec3 b) {
+  return b / 127.5 - 1.0;
+}
+
+void main(void) {
+  // Fetch the splat data from the texture.
+  int pixelsPerSplat = 5;
+  int splatsPerRow = textureSize(splatDataTexture, 0).x / pixelsPerSplat;
+  int col = (int(instanceId) % splatsPerRow) * pixelsPerSplat;
+  int row = int(instanceId) / splatsPerRow;
+
+  mediump uvec4 pix0 = positionColor;
+  mediump uvec4 pix1 = scaleRotation;
+  mediump uvec4 pix2 = shR;
+  mediump uvec4 pix3 = shG;
+  mediump uvec4 pix4 = shB;
+
+  if (sortTexture == 0.0) {
+    pix0 = texelFetch(splatDataTexture, ivec2(col, row), 0);
+    pix1 = texelFetch(splatDataTexture, ivec2(col + 1, row), 0);
+    // Not texelFetch these SH coordinates. (set to zero SH, then do no SH computation at all)
+    // improve fps of Kate Sessions from 24 to 30fps.
+    pix2 = texelFetch(splatDataTexture, ivec2(col + 2, row), 0);
+    pix3 = texelFetch(splatDataTexture, ivec2(col + 3, row), 0);
+    pix4 = texelFetch(splatDataTexture, ivec2(col + 4, row), 0);
+  }
+
+  mediump vec4 instancePosition = vec4(uintBitsToFloat(pix0.xyz), 1);
+  mediump uint packedColor = pix0.w;
+  mediump vec4 instanceColor = vec4(
+    (packedColor)&0xffu,
+    (packedColor >> 8) & 0xffu,
+    (packedColor >> 16) & 0xffu,
+    (packedColor >> 24) & 0xffu);
+
+  mediump float coeffs[6] = rssrCoeffs(pix1);
+
+  // The order of the indexes here is accounting for endianness of encoding uint32 pixels.
+  mediump vec3 sh1[3] = vec3[3](
+    b2f(vec3((pix2.x >> 24) & 0xffu, (pix3.x >> 24) & 0xffu, (pix4.xy >> 24) & 0xffu)),
+    b2f(vec3((pix2.x >> 16) & 0xffu, (pix3.x >> 16) & 0xffu, (pix4.xy >> 16) & 0xffu)),
+    b2f(vec3((pix2.x >> 8) & 0xffu, (pix3.x >> 8) & 0xffu, (pix4.xy >> 8) & 0xffu)));
+
+  // The order of the indexes here is accounting for endianness of encoding uint32 pixels.
+  mediump vec3 sh2[5] = vec3[5](
+    b2f(vec3((pix2.x >> 0) & 0xffu, (pix3.x >> 0) & 0xffu, (pix4.x >> 0) & 0xffu)),
+    b2f(vec3((pix2.y >> 24) & 0xffu, (pix3.y >> 24) & 0xffu, (pix4.y >> 24) & 0xffu)),
+    b2f(vec3((pix2.y >> 16) & 0xffu, (pix3.y >> 16) & 0xffu, (pix4.y >> 16) & 0xffu)),
+    b2f(vec3((pix2.y >> 8) & 0xffu, (pix3.y >> 8) & 0xffu, (pix4.y >> 8) & 0xffu)),
+    b2f(vec3((pix2.y >> 0) & 0xffu, (pix3.y >> 0) & 0xffu, (pix4.y >> 0) & 0xffu))
+  );
+
+  mediump vec3 sh3[7] = vec3[7](
+    b2f(vec3((pix2.z >> 24) & 0xffu, (pix3.z >> 24) & 0xffu, (pix4.z >> 24) & 0xffu)),
+    b2f(vec3((pix2.z >> 16) & 0xffu, (pix3.z >> 16) & 0xffu, (pix4.z >> 16) & 0xffu)),
+    b2f(vec3((pix2.z >> 8) & 0xffu, (pix3.z >> 8) & 0xffu, (pix4.z >> 8) & 0xffu)),
+    b2f(vec3((pix2.z >> 0) & 0xffu, (pix3.z >> 0) & 0xffu, (pix4.z >> 0) & 0xffu)),
+    b2f(vec3((pix2.w >> 24) & 0xffu, (pix3.w >> 24) & 0xffu, (pix4.w >> 24) & 0xffu)),
+    b2f(vec3((pix2.w >> 16) & 0xffu, (pix3.w >> 16) & 0xffu, (pix4.w >> 16) & 0xffu)),
+    b2f(vec3((pix2.w >> 8) & 0xffu, (pix3.w >> 8) & 0xffu, (pix4.w >> 8) & 0xffu)));
+
+  projectSplat(
+    // Inputs
+    modelViewMatrix,
+    projectionMatrix,
+    raysToPix,
+    vec4(position, 1),
+    instancePosition,
+    instanceColor,
+    coeffs,
+    sh1,
+    sh2,
+    sh3,
+    // Outputs
+    gl_Position,
+    splatColor,
+    splatEccentricity,
+    maxSqEccentricity);
+
+  // Put vertex outside of clip space if it's above our max instance id.
+  // To be used to debug fragment shader performance.
+  // For Kate Sessions, only processing 10% gets us 30fps while 100% gets us 24fps.
+  if (maxInstanceIdForFragment > 0.0 && float(gl_InstanceID) > maxInstanceIdForFragment) {
+    gl_Position = BEHIND_CAM;
+  }
+}

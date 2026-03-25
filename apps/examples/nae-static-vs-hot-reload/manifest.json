@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "config": {
+    "runtimeUrl": "https://cdn-dev.8thwall.com/web/ecs/sourcemap-m2ozhexg/runtime.js",
+    "app8Url": "https://cdn-dev.8thwall.com/web/hosting/rc/app8-lucasdev2.js"
+  }
+}

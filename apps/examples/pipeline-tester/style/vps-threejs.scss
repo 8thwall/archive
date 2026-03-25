@@ -1,0 +1,41 @@
+.wayspot-list {
+  max-height: 5em;
+  overflow-y: auto;
+  & div {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    border-left: 2px solid white;
+    margin-left: 1px;
+    margin-bottom: 2px;
+    padding: 2px;
+    white-space: nowrap;
+  }
+}
+
+.segment h4 {
+  margin: 0;
+  font-weight: bold;
+}
+
+.status-list {
+  display: grid;
+  grid-template-columns: 1fr fit-content(6ch);
+  column-gap: 5px;
+  justify-content: space-between;
+  align-items: center;
+  .reference {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .reference {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .status {
+    background-color: #aeaeae;
+    border-radius: 0.25em;
+    padding: 0 0.25em;
+  }
+}

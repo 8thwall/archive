@@ -72,7 +72,7 @@
   "backendSlotValues": {
     "39b575a7-05e4-4d9c-955f-f02168a9a5eb": {
       "type": "secret",
-      "secretId": "3831518a-414e-4f70-a084-2e44adb2ec44",
+      "secretId": "<REMOVED_BEFORE_OPEN_SOURCING>",
       "length": 164,
       "lastCouple": "ydsA",
       "allowedOrigin": "https://api.openai.com"

@@ -1,0 +1,79 @@
+<!-- Copyright (c) 2021 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<!--Landing Page-->
+<div id="landing" class="noselect" style="display: flex"> 
+
+  <div id="landingWelcome" class="landingView" style="display: flex">
+    <img id="landingHeroGraphic" class="heroGraphic" src="./assets/Logo.png" />
+    <div id="StartSection">
+      <div id="StartButtonLabel" class="StartLabel"><span class="confidential"> Do not distribute. Proprietary and confidential. </span> </br> Immediately after pressing "Start TrueScale Experience". Point your phone to the ground and wave in a circle before tapping to place your measuring stick.</div>
+      <div id="StartButtonSection">
+        <div id="StartExperience" class="CTAButton startButton"><span>Start TrueScale Experience</span></div>
+     </div>
+     </div> 
+   </div>
+   
+  
+
+</div>
+
+
+<!-- Add the tap-place component to the scene so it has an effect -->
+<a-scene
+  start-btn
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="colorManagement: true"
+  xrweb="scale: metric">
+
+  <!-- We can define assets here to be loaded when A-Frame initializes -->
+  <a-assets>
+    <a-asset-item id="ruler" src="assets/ruler-v1.glb"></a-asset-item>
+  </a-assets>
+
+  <!-- The raycaster will emit mouse events on scene objects specified with the cantap class -->
+  <!-- The 1.7 height is the average height in meters of a human.  This makes the
+  experience look good in responsive mode.  Metric mode will overwrite the height and put it all in
+  true scale.-->
+  <a-camera
+    id="camera"
+    position="0 1.7 0">
+  </a-camera>
+  
+  <a-ring
+    tap-place-cursor
+    rotation="-90 0 0"
+    material="shader: flat; color: #7611B6"
+    radius-inner="0.5" radius-outer="0.8">
+  </a-ring>
+  
+  <a-entity
+    light="
+      type: directional;
+      intensity: 0.8;
+      castShadow: true;
+      shadowMapHeight:2048;
+      shadowMapWidth:2048;
+      shadowCameraTop: 20;
+      shadowCameraBottom: -20;
+      shadowCameraRight: 20;
+      shadowCameraLeft: -20;
+      target: #camera"
+    xrextras-attach="target: camera; offset: 8 15 4"
+    position="1 4.3 2.5"
+    shadow>
+  </a-entity>
+
+  <a-light type="ambient" intensity="0.5"></a-light>
+
+  <!-- Adding the cantap class allows the ground to be clicked -->
+  <a-box
+    id="ground"
+    scale="1000 2 1000"
+    position="0 -1 0"
+    material="shader: shadow; transparent: true; opacity: 0.4"
+    shadow>
+  </a-box>
+</a-scene>

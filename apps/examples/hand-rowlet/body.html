@@ -1,0 +1,36 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<a-scene
+  xrextras-loading
+  xrextras-runtime-error
+  hand-coaching-overlay
+  renderer="colorManagement: true"
+  zlanding-page
+  xrhand="allowedDevices: any"
+>
+  <a-assets>
+    <a-asset-item id="rowlet" src="./assets/rowlet.glb"></a-asset-item>
+  </a-assets>
+
+  <a-camera position="0 2 0"> </a-camera>
+  <a-light type="ambient" intensity="1.25"></a-light>
+
+  <xrextras-hand-anchor id="hand">
+    <xrextras-hand-occluder
+      show="false"
+      adjustment="0.0025"
+    ></xrextras-hand-occluder>
+
+    <xrextras-hand-attachment point="palm" pointType="inner">
+      <!-- see readme for explanation on the hand coordinate system -->
+      <a-entity rotation="90 0 0" position="0 0 0.075">
+        <a-entity
+          rotation="0 90 0"
+          scale="0.1 0.1 0.1"
+          gltf-model="#rowlet"
+          animation-mixer="clip: *"
+        ></a-entity>
+      </a-entity>
+    </xrextras-hand-attachment>
+  </xrextras-hand-anchor>
+</a-scene>

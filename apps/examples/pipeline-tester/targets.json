@@ -1,0 +1,94 @@
+[
+    {
+      "name": "1_cylinder_landscape",
+      "type": "CYLINDRICAL",
+      "metadata": null,
+      "properties": null,
+      "geometry": {
+          "height": 1.591531753540039,
+          "radiusTop": 0.5420800447463989,
+          "radiusBottom": 0.5420800447463989,
+          "arcLengthRadians": 2.508671283721924,
+          "arcStartRadians": 1.8872569799423218
+      },
+      "originalImagePath": "https://cdn.8thwall.com/image-target/8w/cc0eeedf-fda2-4484-85fe-6f6913bee9d1",
+      "isRotated": true
+    },
+    {
+      "name": "2_cylinder_portrait",
+      "type": "CYLINDRICAL",
+      "metadata": null,
+      "properties": null,
+      "geometry": {
+          "height": 1.0998278856277466,
+          "radiusTop": 0.37460434436798096,
+          "radiusBottom": 0.37460434436798096,
+          "arcLengthRadians": 2.508671283721924,
+          "arcStartRadians": 1.8872569799423218
+      },
+      "originalImagePath": "https://cdn.8thwall.com/image-target/8w/3f479c72-fe22-4733-9557-0720fe3cfccf",
+      "isRotated": false
+    },
+    {
+      "name": "3_cup_landscape",
+      "type": "CONICAL",
+      "metadata": null,
+      "properties": null,
+      "geometry": {
+          "height": 1.094195008277893,
+          "radiusTop": 0.43782493472099304,
+          "radiusBottom": 0.3322785198688507,
+          "arcLengthRadians": 6.2831854820251465,
+          "arcStartRadians": 0
+      },
+      "originalImagePath": "https://cdn.8thwall.com/image-target/8w/dbbceb84-9ff4-4427-8f84-5bb3eb18ffb6",
+      "isRotated": true
+    },
+    {
+      "name": "4_cup_portrait",
+      "type": "CONICAL",
+      "metadata": null,
+      "properties": null,
+      "geometry": {
+          "height": 1.046073317527771,
+          "radiusTop": 0.41856980323791504,
+          "radiusBottom": 0.3176652193069458,
+          "arcLengthRadians": 6.2831854820251465,
+          "arcStartRadians": 0
+      },
+      "originalImagePath": "https://cdn.8thwall.com/image-target/8w/f7e77de3-10c6-49e4-81cf-dedca950cecd",
+       "isRotated": false
+    },
+    {
+      "name": "5_fez_landscape",
+      "type": "CONICAL",
+      "metadata": null,
+      "properties": null,
+      "geometry": {
+          "height": 1.0597538948059082,
+          "radiusTop": 0.3068808317184448,
+          "radiusBottom": 0.4138241708278656,
+          "arcLengthRadians": 6.2831854820251465,
+          "arcStartRadians": 0
+      },
+      "originalImagePath": "https://cdn.8thwall.com/image-target/8w/030dbe6d-faa0-43f4-8b64-c561d4f6a6ba",
+      "isRotated": true
+    },
+    {
+      "name": "6_fez_portrait",
+      "type": "CONICAL",
+      "metadata": null,
+      "properties": null,
+      "geometry": {
+          "height": 1.0396552085876465,
+          "radiusTop": 0.30106064677238464,
+          "radiusBottom": 0.40597572922706604,
+          "arcLengthRadians": 6.2831854820251465,
+          "arcStartRadians": 0
+      },
+      "originalImagePath": "https://cdn.8thwall.com/image-target/8w/6d76a43f-8ca1-46f4-8f7e-6e55801d62c9",
+      "isRotated": false
+    }
+]
+
+

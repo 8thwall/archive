@@ -1,0 +1,32 @@
+<a-scene
+  id='ascene'
+  xrextras-almost-there
+  xrextras-loading
+  xrextras-runtime-error
+  xrextras-gesture-detector
+  coaching-overlay="promptColor: pink; animationColor: blue; promptText: testing123;"
+  xrweb="allowedDevices: any; scale: relative; verbose: true;"
+  {WEBGL_SELECT}
+>
+  <a-entity raycaster="objects: .cantap" cursor="fuse: false; rayOrigin: mouse;" light="type:directional; castShadow:true; color:white; intensity:0.5" position="5 10 7"></a-entity>
+  <!--coaching-overlay="promptText: throw phone far; promptColor: gray; animationColor: white; disablePrompt: false;"-->
+  <a-camera id="camera" position="0 2 2" rotation="0 0 0"></a-camera>
+
+  <!--Hack to make xrextras-hold-drag work with an offset-->
+  <a-box opacity=0.0 position="0 0 0" xrextras-hold-drag="riseHeight: 0.0;" xrextras-two-finger-rotate shadow>
+    <a-box visible=true position="0 0.5 0" material="color: #AD50FF;"></a-box>
+
+    <!--It's important to test both MSDF and SDF fonts, which have been broken in the past-->
+    <a-entity
+      id="top-text"
+      text="font: roboto; value: Stay classy, San Diego (msdf).; width: 2; align: center;"
+      position="0 1.1 0"
+    ></a-entity>
+    <a-entity
+      id="bottom-text"
+      text="value: Here's looking at you, kid (sdf).; width: 2; align: center;"
+      position="0 0.5 0.6"
+    ></a-entity>
+  </a-box>
+  <a-plane id="ground" height="2000" width="2000" rotation="-90 0 0" position="0 0.5 0" material="shader: shadow; opacity: 0.67" shadow></a-plane>  
+</a-scene>

@@ -1,0 +1,4452 @@
+{
+  "objects": {
+    "47699d9e-18a5-4f88-a4f9-b8be92e8f74a": {
+      "components": {},
+      "geometry": null,
+      "id": "47699d9e-18a5-4f88-a4f9-b8be92e8f74a",
+      "light": {
+        "type": "ambient"
+      },
+      "material": null,
+      "name": "Light_Ambient",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "order": 2.095242466813636
+    },
+    "a608ddd9-9379-464d-966f-5d8d8674c83c": {
+      "camera": {
+        "type": "perspective",
+        "xr": {
+          "desktop": "3D",
+          "xrCameraType": "3dOnly",
+          "headset": "disabled"
+        },
+        "farClip": 5000,
+        "fov": 80
+      },
+      "components": {
+        "2fb46496-2cf6-4720-b0f3-86787ac13b7f": {
+          "id": "2fb46496-2cf6-4720-b0f3-86787ac13b7f",
+          "name": "custom-orbit-cam",
+          "parameters": {
+            "invertedY": true,
+            "startYaw": 0,
+            "startPitch": 30,
+            "focusEntity": {
+              "type": "entity",
+              "id": "3a9d00c3-41d2-4177-acc2-9e53c2bea9a7"
+            },
+            "startDistance": 10,
+            "orientWithEntity": true,
+            "recenterTimeout": 1000,
+            "invertedX": true,
+            "recenterFactor": 1,
+            "laziness": 0.75,
+            "maxTiltAngle": 45,
+            "tiltSpeed": 1,
+            "specialIndicatorEntity": {
+              "type": "entity",
+              "id": "3ad0c346-4d62-4885-a3d3-0ce618d3ea56"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "material": null,
+      "name": "Camera_Main",
+      "position": [
+        0,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.9999998646558022,
+        0.9999999931513284,
+        0.999999871504474
+      ],
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "order": 0.3928637002204539
+    },
+    "ac1989e3-3b71-49e2-a05f-e682aeb18c36": {
+      "components": {},
+      "geometry": null,
+      "id": "ac1989e3-3b71-49e2-a05f-e682aeb18c36",
+      "light": {
+        "intensity": 1,
+        "type": "directional",
+        "shadowBias": 0
+      },
+      "material": null,
+      "name": "Light_Directional",
+      "position": [
+        20,
+        20,
+        10
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "order": 3.095242466813636
+    },
+    "5858b3a7-812b-4bcb-8d91-a16cb3d5b6ee": {
+      "id": "5858b3a7-812b-4bcb-8d91-a16cb3d5b6ee",
+      "position": [
+        0,
+        -0.8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "3a9d00c3-41d2-4177-acc2-9e53c2bea9a7",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/jetski-body.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Player_JetskiBody",
+      "order": 0.6825374408040522
+    },
+    "18925941-51fb-43cb-98b5-96bf94da88d2": {
+      "id": "18925941-51fb-43cb-98b5-96bf94da88d2",
+      "position": [
+        0,
+        -0.6,
+        -0.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "3a9d00c3-41d2-4177-acc2-9e53c2bea9a7",
+      "components": {
+        "cc786a85-b7be-4a4c-b3c9-af0b149d852b": {
+          "id": "cc786a85-b7be-4a4c-b3c9-af0b149d852b",
+          "name": "particle-emitter",
+          "parameters": {
+            "emitterLife": 0,
+            "particlesPerShot": 4,
+            "emitDelay": 0,
+            "minimumLifespan": 0.2,
+            "maximumLifespan": 0.8,
+            "mass": 1,
+            "gravity": -0.1,
+            "scale": 2,
+            "forceX": 1,
+            "forceY": 5,
+            "forceZ": 1,
+            "spread": 120,
+            "radialVelocity": 10,
+            "spawnAreaType": "point",
+            "boundingZoneType": "sphere",
+            "resourceType": "model",
+            "resourceUrl": "assets/particle-mesh.glb",
+            "stopped": false,
+            "blendingMode": "add",
+            "randomDrift": true,
+            "randomDriftRange": 4,
+            "collisions": false,
+            "animateColor": true,
+            "colorStart": "#FFE500",
+            "colorEnd": "#FFE500"
+          }
+        }
+      },
+      "name": "Player_Particles",
+      "order": 1.8566349604958543
+    },
+    "3a9d00c3-41d2-4177-acc2-9e53c2bea9a7": {
+      "id": "3a9d00c3-41d2-4177-acc2-9e53c2bea9a7",
+      "position": [
+        154.45101388252084,
+        2,
+        -127.87517354544939
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "81cee6af-ea56-4992-977f-da5b15d1a4bc": {
+          "id": "81cee6af-ea56-4992-977f-da5b15d1a4bc",
+          "name": "Jetski Controller",
+          "parameters": {
+            "particleSystem": {
+              "type": "entity",
+              "id": "18925941-51fb-43cb-98b5-96bf94da88d2"
+            },
+            "jetski": {
+              "type": "entity",
+              "id": "5858b3a7-812b-4bcb-8d91-a16cb3d5b6ee"
+            },
+            "speed": 50,
+            "jumpImpulse": 2,
+            "rotationSpeed": 3,
+            "jumpGravityFactor": 1,
+            "jumpForce": 50,
+            "jumpHeight": 4,
+            "jumpDuration": 0.3,
+            "jumpPower": 8,
+            "drift": 0.4,
+            "ocean": {
+              "type": "entity",
+              "id": "29182b6b-f2f7-4ea1-9ad9-f54a8ed250ad"
+            },
+            "enableWaveFollowing": true,
+            "verticalOffset": 1.2,
+            "waveInfluence": 0.15,
+            "waveTiltInfluence": 0.75,
+            "jetskiHandles": {
+              "type": "entity",
+              "id": "c9873ee5-f826-4b56-9fa8-4ea7d20ac2b2"
+            },
+            "rearKickIntensity": 10,
+            "skipThreshold": 2,
+            "skipIntensity": 23.8,
+            "camera": {
+              "type": "entity",
+              "id": "a608ddd9-9379-464d-966f-5d8d8674c83c"
+            },
+            "steeringTiltInfluence": 0.5,
+            "cameraRightStickSensitivity": 0.01,
+            "boostMeterBar": {
+              "type": "entity",
+              "id": "b56cc80b-2f05-463e-bc59-11e9a1da7bef"
+            }
+          }
+        },
+        "4502fb3d-0f86-4893-a874-2eaeb82dacf8": {
+          "id": "4502fb3d-0f86-4893-a874-2eaeb82dacf8",
+          "name": "boundary-enforcer",
+          "parameters": {
+            "boundaryRadius": 245
+          }
+        }
+      },
+      "name": "Player_Jetski",
+      "order": 0.0952424668136359,
+      "hidden": false,
+      "audio": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/audio/engine-driving-extended.mp3"
+        },
+        "pitch": 0.5,
+        "loop": true,
+        "volume": 0.5
+      }
+    },
+    "29182b6b-f2f7-4ea1-9ad9-f54a8ed250ad": {
+      "id": "29182b6b-f2f7-4ea1-9ad9-f54a8ed250ad",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        10,
+        1,
+        10
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "6145ab84-b6cb-491f-9607-689dbec900d6": {
+          "id": "6145ab84-b6cb-491f-9607-689dbec900d6",
+          "name": "toon-ocean",
+          "parameters": {
+            "rippleFreq": 0.15,
+            "rippleHeight": 1,
+            "colorFoam": "#90bbfc",
+            "colorShallow": "#9ad5fc",
+            "colorDeep": "#7eacf2",
+            "rippleSpeed": 0.001,
+            "rippleMod": 8,
+            "causticSpeed": 0.001,
+            "causticStrength": 2,
+            "depthOpacity": 0.1,
+            "bandSharpness": 0.5,
+            "useBands": true,
+            "causticTint": "#0077b6",
+            "causticScale": 40,
+            "deepAlpha": 0.10000000000000142,
+            "meshScale": 0.1,
+            "deepOpacity": 0.95
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/ocean-stable.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Env_Ocean",
+      "order": 1.5394469165067521,
+      "hidden": false
+    },
+    "a4d20fae-9b9f-4d84-81db-ccd621a1046d": {
+      "id": "a4d20fae-9b9f-4d84-81db-ccd621a1046d",
+      "position": [
+        75,
+        0,
+        100
+      ],
+      "rotation": [
+        0,
+        -0.7071067811865475,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "1d8bba47-36e7-4072-a159-746f27b4052b": {
+          "id": "1d8bba47-36e7-4072-a159-746f27b4052b",
+          "name": "wave-height-sync",
+          "parameters": {
+            "ocean": {
+              "type": "entity",
+              "id": "29182b6b-f2f7-4ea1-9ad9-f54a8ed250ad"
+            },
+            "verticalOffset": -0.75,
+            "orientWithWave": true,
+            "yRotationOffset": 20,
+            "rollSensitivity": 0.5,
+            "pitchSensitivity": 0.5,
+            "maxPitchAngle": 100,
+            "maxRollAngle": 20,
+            "orientationDamping": 0.5,
+            "normalSmoothingEpsilon": 0.05,
+            "waveInfluence": 0.3,
+            "smoothing": 0.8
+          }
+        },
+        "3891f6a2-18a3-406b-9c5d-03c785cdd39c": {
+          "id": "3891f6a2-18a3-406b-9c5d-03c785cdd39c",
+          "name": "CurveAnimator",
+          "parameters": {
+            "curveDataKey": "cruiseShip",
+            "trainMode": true,
+            "maintainSpacing": false,
+            "trackTightness": 0.7,
+            "lookAheadDistance": 0.2,
+            "duration": 150,
+            "debugVisualization": false,
+            "useCustomStartPosition": true,
+            "orientToDirection": true,
+            "loop": true
+          }
+        },
+        "e5721be1-61a6-4837-992e-5c73c34582af": {
+          "id": "e5721be1-61a6-4837-992e-5c73c34582af",
+          "name": "box-collider",
+          "parameters": {
+            "debugVisualization": false,
+            "rotationAware": true,
+            "extraHeight": 5,
+            "autoSize": false,
+            "boxWidth": 15,
+            "boxHeight": 30,
+            "boxDepth": 40
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/ship-ocean-liner.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "NPC_ShipLarge",
+      "order": 5.095242466813636
+    },
+    "76b4e765-1c67-4df0-8ea6-cced089eea06": {
+      "id": "76b4e765-1c67-4df0-8ea6-cced089eea06",
+      "position": [
+        200,
+        0,
+        -15
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1.5,
+        1.5,
+        1.5
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "fd74c05d-c194-440d-af76-b059a7a96e8f": {
+          "id": "fd74c05d-c194-440d-af76-b059a7a96e8f",
+          "name": "wave-height-sync",
+          "parameters": {
+            "ocean": {
+              "type": "entity",
+              "id": "29182b6b-f2f7-4ea1-9ad9-f54a8ed250ad"
+            },
+            "verticalOffset": -0.75,
+            "orientWithWave": true,
+            "yRotationOffset": 20,
+            "rollSensitivity": 0.5,
+            "pitchSensitivity": 0.5,
+            "maxPitchAngle": 100,
+            "maxRollAngle": 70,
+            "orientationDamping": 0.5,
+            "normalSmoothingEpsilon": 0.05
+          }
+        },
+        "3891f6a2-18a3-406b-9c5d-03c785cdd39c": {
+          "id": "3891f6a2-18a3-406b-9c5d-03c785cdd39c",
+          "name": "CurveAnimator",
+          "parameters": {
+            "curveDataKey": "smallShip",
+            "trainMode": true,
+            "maintainSpacing": false,
+            "trackTightness": 0.7,
+            "lookAheadDistance": 0.2,
+            "duration": 150,
+            "useCustomStartPosition": false,
+            "loopAtCustomPosition": false
+          }
+        },
+        "7b8dc907-9ef7-4730-a372-3c7c5857062e": {
+          "id": "7b8dc907-9ef7-4730-a372-3c7c5857062e",
+          "name": "box-collider",
+          "parameters": {
+            "debugVisualization": false,
+            "autoSize": false,
+            "boxWidth": 5,
+            "boxHeight": 20,
+            "boxDepth": 20,
+            "offsetX": 0,
+            "offsetZ": 5,
+            "offsetY": 0,
+            "rotationAware": true
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/ship-ocean-liner-small.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "NPC_ShipSmall",
+      "order": 6.095242466813636,
+      "hidden": false
+    },
+    "759e648a-2621-41f7-8411-ff9b09e39bea": {
+      "id": "759e648a-2621-41f7-8411-ff9b09e39bea",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": {
+        "type": "sphere",
+        "radius": 1000
+      },
+      "material": {
+        "type": "unlit",
+        "color": "#FFFFFF",
+        "side": "back",
+        "textureSrc": {
+          "type": "asset",
+          "asset": "assets/cloud-grad-2.png"
+        },
+        "roughness": 1,
+        "metalness": 0,
+        "offsetY": 0
+      },
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "name": "Env_Sky",
+      "order": 17.569586183801214
+    },
+    "43eea5a2-cc44-4309-b099-d3748d7f6998": {
+      "id": "43eea5a2-cc44-4309-b099-d3748d7f6998",
+      "position": [
+        -32.74424568130687,
+        0,
+        -230.32930744913213
+      ],
+      "rotation": [
+        0,
+        -0.7071067811865475,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "67e27e3b-364b-42fe-869e-43b28e2735b8": {
+          "id": "67e27e3b-364b-42fe-869e-43b28e2735b8",
+          "name": "wave-height-sync",
+          "parameters": {
+            "ocean": {
+              "type": "entity",
+              "id": "29182b6b-f2f7-4ea1-9ad9-f54a8ed250ad"
+            },
+            "yRotationOffset": 90
+          }
+        },
+        "3891f6a2-18a3-406b-9c5d-03c785cdd39c": {
+          "id": "3891f6a2-18a3-406b-9c5d-03c785cdd39c",
+          "name": "CurveAnimator",
+          "parameters": {
+            "curveDataKey": "bargeShip",
+            "trainMode": true,
+            "maintainSpacing": false,
+            "trackTightness": 0.7,
+            "lookAheadDistance": 0.2,
+            "duration": 150,
+            "useCustomStartPosition": true
+          }
+        },
+        "352805ca-1f90-4a6e-a924-00ff4c708b25": {
+          "id": "352805ca-1f90-4a6e-a924-00ff4c708b25",
+          "name": "box-collider",
+          "parameters": {
+            "debugVisualization": false,
+            "autoSize": false,
+            "boxWidth": 10,
+            "boxHeight": 20,
+            "boxDepth": 18
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/ship-cargo-a.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "NPC_ShipCargo",
+      "order": 10.095242466813636
+    },
+    "48537476-c110-44bf-817d-c56171f48114": {
+      "id": "48537476-c110-44bf-817d-c56171f48114",
+      "position": [
+        40.349652981980896,
+        0,
+        -118.96331807020852
+      ],
+      "rotation": [
+        0,
+        0.45278726312135964,
+        0,
+        0.8916185812078327
+      ],
+      "scale": [
+        4.000000000000001,
+        4,
+        4.000000000000001
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "67e27e3b-364b-42fe-869e-43b28e2735b8": {
+          "id": "67e27e3b-364b-42fe-869e-43b28e2735b8",
+          "name": "wave-height-sync",
+          "parameters": {
+            "ocean": {
+              "type": "entity",
+              "id": "29182b6b-f2f7-4ea1-9ad9-f54a8ed250ad"
+            },
+            "yRotationOffset": -60,
+            "verticalOffset": -1
+          }
+        },
+        "3f2a39d9-eaad-4c91-a397-687e8f267230": {
+          "id": "3f2a39d9-eaad-4c91-a397-687e8f267230",
+          "name": "box-collider",
+          "parameters": {
+            "debugVisualization": false,
+            "autoSize": false,
+            "boxWidth": 12,
+            "boxHeight": 8,
+            "boxDepth": 14,
+            "rotationAware": true
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/boat-speed-j.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "NPC_BoatSpeed",
+      "order": 11.095242466813636
+    },
+    "a0ec21e9-2ac1-4f44-9d36-20bdf632fcf4": {
+      "id": "a0ec21e9-2ac1-4f44-9d36-20bdf632fcf4",
+      "position": [
+        215,
+        0,
+        -35
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        3,
+        3,
+        3
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "67e27e3b-364b-42fe-869e-43b28e2735b8": {
+          "id": "67e27e3b-364b-42fe-869e-43b28e2735b8",
+          "name": "wave-height-sync",
+          "parameters": {
+            "ocean": {
+              "type": "entity",
+              "id": "29182b6b-f2f7-4ea1-9ad9-f54a8ed250ad"
+            },
+            "yRotationOffset": 80
+          }
+        },
+        "de334bfa-e6e5-4672-8394-1a552c342b91": {
+          "id": "de334bfa-e6e5-4672-8394-1a552c342b91",
+          "name": "box-collider",
+          "parameters": {
+            "rotationAware": true,
+            "debugVisualization": false,
+            "autoSize": false,
+            "boxWidth": 10,
+            "boxHeight": 20,
+            "boxDepth": 12
+          }
+        },
+        "3891f6a2-18a3-406b-9c5d-03c785cdd39c": {
+          "id": "3891f6a2-18a3-406b-9c5d-03c785cdd39c",
+          "name": "CurveAnimator",
+          "parameters": {
+            "curveDataKey": "sailShip",
+            "trainMode": true,
+            "maintainSpacing": false,
+            "trackTightness": 0.7,
+            "lookAheadDistance": 0.2,
+            "duration": 150,
+            "debugVisualization": false,
+            "useCustomStartPosition": true,
+            "orientToDirection": true,
+            "loop": true
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/boat-sail-b.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "NPC_BoatSail",
+      "order": 12.095242466813636
+    },
+    "76851e25-92d1-4fc5-a1ec-5840e34bb8a6": {
+      "id": "76851e25-92d1-4fc5-a1ec-5840e34bb8a6",
+      "position": [
+        -57.48251519576604,
+        0,
+        49.64372432560549
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        4,
+        4,
+        4
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "67e27e3b-364b-42fe-869e-43b28e2735b8": {
+          "id": "67e27e3b-364b-42fe-869e-43b28e2735b8",
+          "name": "wave-height-sync",
+          "parameters": {
+            "ocean": {
+              "type": "entity",
+              "id": "29182b6b-f2f7-4ea1-9ad9-f54a8ed250ad"
+            },
+            "yRotationOffset": 40,
+            "verticalOffset": -1
+          }
+        },
+        "8715f0e1-3c31-4692-905d-9def05aa4205": {
+          "id": "8715f0e1-3c31-4692-905d-9def05aa4205",
+          "name": "box-collider",
+          "parameters": {
+            "debugVisualization": false,
+            "extraHeight": 5
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/boat-fishing-small.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "NPC_BoatFishing",
+      "order": 13.095242466813636
+    },
+    "435d57ea-f78a-40ed-85dc-f687699b978b": {
+      "id": "435d57ea-f78a-40ed-85dc-f687699b978b",
+      "position": [
+        155.9772006867331,
+        0,
+        -65.72738413177707
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "name": "Checkpoint_01",
+      "order": 23.469499194795286
+    },
+    "c9873ee5-f826-4b56-9fa8-4ea7d20ac2b2": {
+      "id": "c9873ee5-f826-4b56-9fa8-4ea7d20ac2b2",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        0.9999999999999999,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "387d4eb5-9b67-4544-aaf3-e1066b4c189d",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/jetski-handles.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Player_JetskiHandles",
+      "order": 3.4352668094233185
+    },
+    "387d4eb5-9b67-4544-aaf3-e1066b4c189d": {
+      "id": "387d4eb5-9b67-4544-aaf3-e1066b4c189d",
+      "position": [
+        -0.014710187771136817,
+        -0.06555127369476028,
+        0.26805845962515207
+      ],
+      "rotation": [
+        -0.2756373558169995,
+        0,
+        0,
+        0.9612616959383188
+      ],
+      "scale": [
+        0.9999999999999999,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "3a9d00c3-41d2-4177-acc2-9e53c2bea9a7",
+      "components": {},
+      "name": "Player_JetskiHandlesParent",
+      "order": 5.13314774799609
+    },
+    "f893f005-88bc-408c-ab61-c292521896e8": {
+      "id": "f893f005-88bc-408c-ab61-c292521896e8",
+      "position": [
+        137.95779530117818,
+        -80,
+        -167.77984584498864
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        500,
+        100,
+        500
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/optimized_42.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Env_Mountain1",
+      "order": 20.43387301487285
+    },
+    "732a4186-4dda-48b0-8d05-a5d96125432d": {
+      "id": "732a4186-4dda-48b0-8d05-a5d96125432d",
+      "position": [
+        0,
+        -76.54193664696047,
+        0
+      ],
+      "rotation": [
+        -0.7071067811865475,
+        0,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        1,
+        1.0000000532124818,
+        1.0000000532124818
+      ],
+      "geometry": {
+        "type": "circle",
+        "radius": 1000
+      },
+      "material": {
+        "type": "unlit",
+        "color": "#366b77"
+      },
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "name": "Env_OceanFloor",
+      "order": 22.271528855050367
+    },
+    "a39d6549-85b1-4f2e-b7d1-b74986573de3": {
+      "id": "a39d6549-85b1-4f2e-b7d1-b74986573de3",
+      "position": [
+        -226.2316578232402,
+        -80,
+        -50.840392133479966
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        500,
+        100,
+        500
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/optimized_42.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Env_Mountain2",
+      "order": 21.120559536488607
+    },
+    "95dde8ad-077a-4168-b036-d837df62a707": {
+      "id": "95dde8ad-077a-4168-b036-d837df62a707",
+      "position": [
+        43.549592177843124,
+        -80,
+        166.9525777041431
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        500,
+        100,
+        500
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/optimized_42.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Env_Mountain3",
+      "order": 21.524543969167212
+    },
+    "bea0b840-7c9d-403a-96fe-4a5f891cc0bb": {
+      "id": "bea0b840-7c9d-403a-96fe-4a5f891cc0bb",
+      "position": [
+        0,
+        1.5387775665093857,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": {
+        "type": "box",
+        "depth": 1,
+        "height": 10,
+        "width": 10.799999999999994
+      },
+      "material": {
+        "type": "unlit",
+        "color": "#ff0000",
+        "opacity": 0.5
+      },
+      "parentId": "435d57ea-f78a-40ed-85dc-f687699b978b",
+      "components": {},
+      "name": "Checkpoint_01_Collider",
+      "order": 1.3726382766808476,
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        },
+        "eventOnly": true,
+        "mass": 0,
+        "type": "static"
+      },
+      "hidden": true
+    },
+    "bdaab80a-d0ed-41cf-813f-7fce3b4e1766": {
+      "id": "bdaab80a-d0ed-41cf-813f-7fce3b4e1766",
+      "position": [
+        156.61908719893322,
+        3.5998209543043975,
+        -64.54083901141111
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "geometry": {
+        "type": "polyhedron",
+        "radius": 1,
+        "faces": 12
+      },
+      "material": {
+        "type": "basic",
+        "color": "#ff006f"
+      },
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "9673be30-7286-4a2b-8303-11fe8f29c18a": {
+          "id": "9673be30-7286-4a2b-8303-11fe8f29c18a",
+          "name": "rotate-animation",
+          "parameters": {
+            "autoFrom": true,
+            "toY": 360,
+            "shortestPath": false,
+            "duration": 3000
+          }
+        }
+      },
+      "name": "Checkpoint_ActiveIndicator",
+      "order": 31.08766747643432,
+      "audio": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/audio/phaserUp4.mp3"
+        },
+        "paused": true,
+        "volume": 0.8
+      }
+    },
+    "389b17ac-c041-428c-a7cd-d48334e48412": {
+      "id": "389b17ac-c041-428c-a7cd-d48334e48412",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "30f1fd20-fa7a-461f-b0e9-b3a35bcd003c": {
+          "id": "30f1fd20-fa7a-461f-b0e9-b3a35bcd003c",
+          "name": "Checkpoint Manager",
+          "parameters": {
+            "playerEntity": {
+              "type": "entity",
+              "id": "4a38ed68-7ae1-460a-b515-05f08706a988"
+            },
+            "activeCheckpointIndicator": {
+              "type": "entity",
+              "id": "bdaab80a-d0ed-41cf-813f-7fce3b4e1766"
+            },
+            "checkpoint0": {
+              "type": "entity",
+              "id": "bea0b840-7c9d-403a-96fe-4a5f891cc0bb"
+            },
+            "checkpoint1": {
+              "type": "entity",
+              "id": "435d57ea-f78a-40ed-85dc-f687699b978b"
+            },
+            "checkpoint2": {
+              "type": "entity",
+              "id": "4a9a0ca8-b94a-454a-806b-31bfd99951bd"
+            },
+            "checkpoint3": {
+              "type": "entity",
+              "id": "b87dbb42-9925-4b28-a14f-9fadea82469c"
+            },
+            "checkpoint4": {
+              "type": "entity",
+              "id": "32bcc4ed-81ab-4be6-96b7-bf2eb8cd2a3b"
+            },
+            "checkpoint5": {
+              "type": "entity",
+              "id": "25752cbf-d8a5-4c27-bcb4-d6d6a3dbb09f"
+            },
+            "ocean": {
+              "type": "entity",
+              "id": "29182b6b-f2f7-4ea1-9ad9-f54a8ed250ad"
+            },
+            "checkpoint6": {
+              "type": "entity",
+              "id": "7ca3cb77-5b39-4868-a706-383c3d932216"
+            },
+            "checkpoint7": {
+              "type": "entity",
+              "id": "84653bb8-67eb-46a6-8647-ba7b0b7edcb5"
+            },
+            "checkpoint8": {
+              "type": "entity",
+              "id": "7b482bb4-9310-4999-a8d8-5036dd41be6c"
+            },
+            "checkpointCollider1": {
+              "type": "entity",
+              "id": "bea0b840-7c9d-403a-96fe-4a5f891cc0bb"
+            },
+            "checkpointCollider2": {
+              "type": "entity",
+              "id": "0f19afa4-3d76-4207-a79a-1a6e65b9f789"
+            },
+            "checkpointCollider3": {
+              "type": "entity",
+              "id": "fa95f433-b224-4e62-bb0e-24971dac9a98"
+            },
+            "checkpointCollider4": {
+              "type": "entity",
+              "id": "d15a4ed8-080d-4084-aef3-9a69201d5533"
+            },
+            "checkpointCollider5": {
+              "type": "entity",
+              "id": "4f537e00-f72d-40ae-9270-347ea8619580"
+            },
+            "checkpointCollider6": {
+              "type": "entity",
+              "id": "19b90565-59b7-4e0d-88eb-556a5edf0c44"
+            },
+            "checkpointCollider7": {
+              "type": "entity",
+              "id": "929fb89d-713f-4a54-be3f-bea44fef49c9"
+            },
+            "checkpointCollider8": {
+              "type": "entity",
+              "id": "d74d267f-8a2f-463c-8510-d171c76f7f5a"
+            },
+            "arrowPointer": {
+              "type": "entity",
+              "id": "5c4e2df6-a0d4-4a8e-bd72-1433fb1e96be"
+            },
+            "pointerSmoothing": 0.1,
+            "gemCounterText": {
+              "type": "entity",
+              "id": "4f19cfd5-4caa-4c5d-aeda-303f9ac5070d"
+            },
+            "specialIndicator": {
+              "type": "entity",
+              "id": "3ad0c346-4d62-4885-a3d3-0ce618d3ea56"
+            },
+            "frog": {
+              "type": "entity",
+              "id": "09b65ead-000c-4502-b69c-f864a060ab75"
+            }
+          }
+        },
+        "1e5361c7-8ab6-4e8d-af5d-d80a4782a7d3": {
+          "id": "1e5361c7-8ab6-4e8d-af5d-d80a4782a7d3",
+          "name": "Countdown Timer",
+          "parameters": {
+            "timerTextEntity": {
+              "type": "entity",
+              "id": "756a6a69-9da6-4913-9bf9-5b4d923576a8"
+            },
+            "checkpointBonus": 2,
+            "startTime": 10,
+            "gameOverTextEntity": {
+              "type": "entity",
+              "id": "5ce630a9-2bae-42ae-bb46-577c47e06275"
+            },
+            "playAgainButton": {
+              "type": "entity",
+              "id": "ae8faef2-8480-4e6e-9625-395de29f7e18"
+            },
+            "centerTextEntity": {
+              "type": "entity",
+              "id": "5ce630a9-2bae-42ae-bb46-577c47e06275"
+            },
+            "logoEntity": {
+              "type": "entity",
+              "id": "97fdaa6a-be4b-4da7-a388-b35b873348f8"
+            },
+            "playAgainButtonText": {
+              "type": "entity",
+              "id": "5e49beb4-11e4-469b-b3d0-2d8622746c51"
+            }
+          }
+        }
+      },
+      "name": "System_GameManager",
+      "order": -1.4801891899867239,
+      "audio": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/audio/splash-zone-full.mp3"
+        },
+        "loop": true,
+        "volume": 0.3,
+        "pitch": 1,
+        "paused": true
+      }
+    },
+    "4a38ed68-7ae1-460a-b515-05f08706a988": {
+      "id": "4a38ed68-7ae1-460a-b515-05f08706a988",
+      "position": [
+        0,
+        -0.30000000000000004,
+        -0.08042433177795516
+      ],
+      "rotation": [
+        0.7071067811865475,
+        0,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        1,
+        1.0000000000000002,
+        1.0000000000000002
+      ],
+      "geometry": {
+        "type": "box",
+        "depth": 1,
+        "height": 1,
+        "width": 1
+      },
+      "material": {
+        "type": "unlit",
+        "color": "#ff0000",
+        "opacity": 0.5
+      },
+      "parentId": "3a9d00c3-41d2-4177-acc2-9e53c2bea9a7",
+      "components": {},
+      "name": "Player_Collider",
+      "order": 6.951939345496176,
+      "hidden": true,
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        },
+        "mass": 1,
+        "type": "dynamic",
+        "eventOnly": true,
+        "gravityFactor": 0,
+        "offsetY": 0,
+        "lockXPosition": true,
+        "lockYPosition": true,
+        "lockZPosition": true,
+        "lockZAxis": true,
+        "lockYAxis": true,
+        "lockXAxis": true,
+        "highPrecision": true
+      }
+    },
+    "14956a66-d03c-413a-93ee-4d1f4a231666": {
+      "id": "14956a66-d03c-413a-93ee-4d1f4a231666",
+      "position": [
+        -5.5,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "435d57ea-f78a-40ed-85dc-f687699b978b",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/buoy-flag.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Checkpoint_01_Buoy1",
+      "order": 2.930441927090222
+    },
+    "6c15f979-9abc-4464-b008-045f60a49332": {
+      "id": "6c15f979-9abc-4464-b008-045f60a49332",
+      "position": [
+        5.5,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "435d57ea-f78a-40ed-85dc-f687699b978b",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/buoy-flag.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Checkpoint_01_Buoy2",
+      "order": 2.0030024482111486
+    },
+    "cb7b85d4-a3c8-4494-b29a-7e216f5ef1e6": {
+      "id": "cb7b85d4-a3c8-4494-b29a-7e216f5ef1e6",
+      "position": [
+        0,
+        -43.956290059461566,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "011cc56e-98e1-4fcd-b50b-3ae1a9c8a383": {
+          "id": "011cc56e-98e1-4fcd-b50b-3ae1a9c8a383",
+          "name": "Vignette Effect",
+          "parameters": {}
+        }
+      },
+      "ui": {
+        "width": "100%",
+        "height": "100%",
+        "type": "overlay",
+        "background": "#000000",
+        "backgroundOpacity": 0,
+        "position": "absolute",
+        "top": "",
+        "left": "",
+        "bottom": "",
+        "right": "",
+        "image": {
+          "type": "asset",
+          "asset": "assets/vignette.png"
+        },
+        "backgroundSize": "stretch"
+      },
+      "name": "UI_Vignette",
+      "order": 36.09521726505584
+    },
+    "4a9a0ca8-b94a-454a-806b-31bfd99951bd": {
+      "id": "4a9a0ca8-b94a-454a-806b-31bfd99951bd",
+      "position": [
+        -12.92999184782559,
+        0,
+        -67.7563965361181
+      ],
+      "rotation": [
+        0,
+        -0.3826834323650899,
+        0,
+        0.9238795325112867
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "name": "Checkpoint_02",
+      "order": 28.711353510699514
+    },
+    "0f19afa4-3d76-4207-a79a-1a6e65b9f789": {
+      "id": "0f19afa4-3d76-4207-a79a-1a6e65b9f789",
+      "position": [
+        0,
+        1.5387775665093857,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": {
+        "type": "box",
+        "depth": 1,
+        "height": 10,
+        "width": 10.799999999999994
+      },
+      "material": {
+        "type": "unlit",
+        "color": "#ff0000",
+        "opacity": 0.5
+      },
+      "parentId": "4a9a0ca8-b94a-454a-806b-31bfd99951bd",
+      "components": {},
+      "name": "Checkpoint_02_Collider",
+      "order": 1.3726382766808476,
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        },
+        "eventOnly": true
+      },
+      "hidden": true
+    },
+    "5ee629aa-5a03-4114-9115-c2c51a123a27": {
+      "id": "5ee629aa-5a03-4114-9115-c2c51a123a27",
+      "position": [
+        -5.5,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "4a9a0ca8-b94a-454a-806b-31bfd99951bd",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/buoy-flag.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Checkpoint_02_Buoy1",
+      "order": 2.930441927090222
+    },
+    "67a5bd48-f355-4a08-aee8-0e379bf16f5d": {
+      "id": "67a5bd48-f355-4a08-aee8-0e379bf16f5d",
+      "position": [
+        5.5,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "4a9a0ca8-b94a-454a-806b-31bfd99951bd",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/buoy-flag.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Checkpoint_02_Buoy2",
+      "order": 2.0030024482111486
+    },
+    "b87dbb42-9925-4b28-a14f-9fadea82469c": {
+      "id": "b87dbb42-9925-4b28-a14f-9fadea82469c",
+      "position": [
+        117.2580820234358,
+        0,
+        126.03883632412294
+      ],
+      "rotation": [
+        0,
+        -0.4690428013250452,
+        0,
+        0.8831754358705602
+      ],
+      "scale": [
+        1.9999999999999998,
+        2,
+        1.9999999999999998
+      ],
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "name": "Checkpoint_03",
+      "order": 30.025188079476038
+    },
+    "fa95f433-b224-4e62-bb0e-24971dac9a98": {
+      "id": "fa95f433-b224-4e62-bb0e-24971dac9a98",
+      "position": [
+        0,
+        1.5387775665093857,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": {
+        "type": "box",
+        "depth": 1,
+        "height": 10,
+        "width": 10.799999999999994
+      },
+      "material": {
+        "type": "unlit",
+        "color": "#ff0000",
+        "opacity": 0.5
+      },
+      "parentId": "b87dbb42-9925-4b28-a14f-9fadea82469c",
+      "components": {},
+      "name": "Checkpoint_03_Collider",
+      "order": 1.3726382766808476,
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        },
+        "eventOnly": true
+      },
+      "hidden": true
+    },
+    "c380fc5f-e016-4793-b94b-3b340072e1dd": {
+      "id": "c380fc5f-e016-4793-b94b-3b340072e1dd",
+      "position": [
+        -5.5,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "b87dbb42-9925-4b28-a14f-9fadea82469c",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/buoy-flag.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Checkpoint_03_Buoy1",
+      "order": 2.930441927090222
+    },
+    "d0b3a354-e262-4568-86cb-626b0e326d37": {
+      "id": "d0b3a354-e262-4568-86cb-626b0e326d37",
+      "position": [
+        5.5,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "b87dbb42-9925-4b28-a14f-9fadea82469c",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/buoy-flag.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Checkpoint_03_Buoy2",
+      "order": 2.0030024482111486
+    },
+    "32bcc4ed-81ab-4be6-96b7-bf2eb8cd2a3b": {
+      "id": "32bcc4ed-81ab-4be6-96b7-bf2eb8cd2a3b",
+      "position": [
+        -69.09114331346709,
+        0,
+        111.55632775071938
+      ],
+      "rotation": [
+        0,
+        0.8210119569824096,
+        0,
+        0.5709109969968298
+      ],
+      "scale": [
+        2.0000000000000004,
+        2,
+        2.0000000000000004
+      ],
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "name": "Checkpoint_04",
+      "order": 30.470291125179646
+    },
+    "d15a4ed8-080d-4084-aef3-9a69201d5533": {
+      "id": "d15a4ed8-080d-4084-aef3-9a69201d5533",
+      "position": [
+        0,
+        1.5387775665093857,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": {
+        "type": "box",
+        "depth": 1,
+        "height": 10,
+        "width": 10.799999999999994
+      },
+      "material": {
+        "type": "unlit",
+        "color": "#ff0000",
+        "opacity": 0.5
+      },
+      "parentId": "32bcc4ed-81ab-4be6-96b7-bf2eb8cd2a3b",
+      "components": {},
+      "name": "Checkpoint_04_Collider",
+      "order": 1.3726382766808476,
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        },
+        "eventOnly": true
+      },
+      "hidden": true
+    },
+    "d1a93d7e-2fc3-41d0-ab18-7ac4cea50b4a": {
+      "id": "d1a93d7e-2fc3-41d0-ab18-7ac4cea50b4a",
+      "position": [
+        -5.5,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "32bcc4ed-81ab-4be6-96b7-bf2eb8cd2a3b",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/buoy-flag.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Checkpoint_04_Buoy1",
+      "order": 2.930441927090222
+    },
+    "392b76fc-cc06-4818-b9cd-fc0b25eaddc8": {
+      "id": "392b76fc-cc06-4818-b9cd-fc0b25eaddc8",
+      "position": [
+        5.5,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "32bcc4ed-81ab-4be6-96b7-bf2eb8cd2a3b",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/buoy-flag.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Checkpoint_04_Buoy2",
+      "order": 2.0030024482111486
+    },
+    "7ca3cb77-5b39-4868-a706-383c3d932216": {
+      "id": "7ca3cb77-5b39-4868-a706-383c3d932216",
+      "position": [
+        18.04051621583676,
+        0,
+        42.208183123800616
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2.000000000000001,
+        2,
+        2.000000000000001
+      ],
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "name": "Checkpoint_06",
+      "order": 30.84973981941682
+    },
+    "19b90565-59b7-4e0d-88eb-556a5edf0c44": {
+      "id": "19b90565-59b7-4e0d-88eb-556a5edf0c44",
+      "position": [
+        0,
+        1.5387775665093857,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": {
+        "type": "box",
+        "depth": 1,
+        "height": 10,
+        "width": 10.799999999999994
+      },
+      "material": {
+        "type": "unlit",
+        "color": "#ff0000",
+        "opacity": 0.5
+      },
+      "parentId": "7ca3cb77-5b39-4868-a706-383c3d932216",
+      "components": {},
+      "name": "Checkpoint_06_Collider",
+      "order": 1.3726382766808476,
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        },
+        "eventOnly": true
+      },
+      "hidden": true
+    },
+    "bd452ca9-eb3d-4129-a8aa-f728bf20f45f": {
+      "id": "bd452ca9-eb3d-4129-a8aa-f728bf20f45f",
+      "position": [
+        -5.5,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "7ca3cb77-5b39-4868-a706-383c3d932216",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/buoy-flag.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Checkpoint_06_Buoy1",
+      "order": 2.930441927090222
+    },
+    "c0995d1e-c51d-40ea-aa27-62c65f869f9d": {
+      "id": "c0995d1e-c51d-40ea-aa27-62c65f869f9d",
+      "position": [
+        5.5,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "7ca3cb77-5b39-4868-a706-383c3d932216",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/buoy-flag.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Checkpoint_06_Buoy2",
+      "order": 2.0030024482111486
+    },
+    "84653bb8-67eb-46a6-8647-ba7b0b7edcb5": {
+      "id": "84653bb8-67eb-46a6-8647-ba7b0b7edcb5",
+      "position": [
+        -132.91858114267075,
+        0,
+        -84.32495035452457
+      ],
+      "rotation": [
+        0,
+        0.29023448717230543,
+        0,
+        0.9569555592898914
+      ],
+      "scale": [
+        2.0000000000000013,
+        2,
+        2.0000000000000013
+      ],
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "name": "Checkpoint_07",
+      "order": 30.88596736624783
+    },
+    "929fb89d-713f-4a54-be3f-bea44fef49c9": {
+      "id": "929fb89d-713f-4a54-be3f-bea44fef49c9",
+      "position": [
+        0,
+        1.5387775665093857,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": {
+        "type": "box",
+        "depth": 1,
+        "height": 10,
+        "width": 10.799999999999994
+      },
+      "material": {
+        "type": "unlit",
+        "color": "#ff0000",
+        "opacity": 0.5
+      },
+      "parentId": "84653bb8-67eb-46a6-8647-ba7b0b7edcb5",
+      "components": {},
+      "name": "Checkpoint_07_Collider",
+      "order": 1.3726382766808476,
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        },
+        "eventOnly": true
+      },
+      "hidden": true
+    },
+    "6d0ee8c8-49bb-4941-a8b7-574b02abebcb": {
+      "id": "6d0ee8c8-49bb-4941-a8b7-574b02abebcb",
+      "position": [
+        -5.5,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "84653bb8-67eb-46a6-8647-ba7b0b7edcb5",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/buoy-flag.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Checkpoint_07_Buoy1",
+      "order": 2.930441927090222
+    },
+    "4a95767a-5a4c-41f6-bc50-de1e65a8d5af": {
+      "id": "4a95767a-5a4c-41f6-bc50-de1e65a8d5af",
+      "position": [
+        5.5,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "84653bb8-67eb-46a6-8647-ba7b0b7edcb5",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/buoy-flag.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Checkpoint_07_Buoy2",
+      "order": 2.0030024482111486
+    },
+    "25752cbf-d8a5-4c27-bcb4-d6d6a3dbb09f": {
+      "id": "25752cbf-d8a5-4c27-bcb4-d6d6a3dbb09f",
+      "position": [
+        -155.70119010687796,
+        0,
+        65.01182817528706
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2.000000000000001,
+        2,
+        2.000000000000001
+      ],
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "name": "Checkpoint_05",
+      "order": 30.830769244176707,
+      "hidden": false
+    },
+    "4f537e00-f72d-40ae-9270-347ea8619580": {
+      "id": "4f537e00-f72d-40ae-9270-347ea8619580",
+      "position": [
+        0,
+        1.5387775665093857,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": {
+        "type": "box",
+        "depth": 1,
+        "height": 10,
+        "width": 10.799999999999994
+      },
+      "material": {
+        "type": "unlit",
+        "color": "#ff0000",
+        "opacity": 0.5
+      },
+      "parentId": "25752cbf-d8a5-4c27-bcb4-d6d6a3dbb09f",
+      "components": {},
+      "name": "Checkpoint_05_Collider",
+      "order": 1.3726382766808476,
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        },
+        "eventOnly": true
+      },
+      "hidden": true
+    },
+    "8c0c3cea-daf3-4934-a29a-0546a261958b": {
+      "id": "8c0c3cea-daf3-4934-a29a-0546a261958b",
+      "position": [
+        -5.5,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "25752cbf-d8a5-4c27-bcb4-d6d6a3dbb09f",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/buoy-flag.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Checkpoint_05_Buoy1",
+      "order": 2.930441927090222
+    },
+    "80acc5b2-a4d2-4ea6-9cfd-fee889e68f2f": {
+      "id": "80acc5b2-a4d2-4ea6-9cfd-fee889e68f2f",
+      "position": [
+        5.5,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "25752cbf-d8a5-4c27-bcb4-d6d6a3dbb09f",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/buoy-flag.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Checkpoint_05_Buoy2",
+      "order": 2.0030024482111486
+    },
+    "7b482bb4-9310-4999-a8d8-5036dd41be6c": {
+      "id": "7b482bb4-9310-4999-a8d8-5036dd41be6c",
+      "position": [
+        76.59912637573987,
+        0,
+        -171.73286822012116
+      ],
+      "rotation": [
+        0,
+        0.9480736058835666,
+        0,
+        -0.3180509987831064
+      ],
+      "scale": [
+        2.000000000000002,
+        2,
+        2.000000000000002
+      ],
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "name": "Checkpoint_08",
+      "order": 31.024440105770474
+    },
+    "d74d267f-8a2f-463c-8510-d171c76f7f5a": {
+      "id": "d74d267f-8a2f-463c-8510-d171c76f7f5a",
+      "position": [
+        0,
+        1.5387775665093857,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": {
+        "type": "box",
+        "depth": 1,
+        "height": 10,
+        "width": 10.799999999999994
+      },
+      "material": {
+        "type": "unlit",
+        "color": "#ff0000",
+        "opacity": 0.5
+      },
+      "parentId": "7b482bb4-9310-4999-a8d8-5036dd41be6c",
+      "components": {},
+      "name": "Checkpoint_08_Collider",
+      "order": 1.3726382766808476,
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        },
+        "eventOnly": true
+      },
+      "hidden": true
+    },
+    "cf43b62f-e32d-44d5-9185-39de8680ce0a": {
+      "id": "cf43b62f-e32d-44d5-9185-39de8680ce0a",
+      "position": [
+        -5.5,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "7b482bb4-9310-4999-a8d8-5036dd41be6c",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/buoy-flag.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Checkpoint_08_Buoy1",
+      "order": 2.930441927090222
+    },
+    "5eeb2801-7d8d-416c-b557-34de240d003d": {
+      "id": "5eeb2801-7d8d-416c-b557-34de240d003d",
+      "position": [
+        5.5,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "7b482bb4-9310-4999-a8d8-5036dd41be6c",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/buoy-flag.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Checkpoint_08_Buoy2",
+      "order": 2.0030024482111486
+    },
+    "a881a2fb-e15e-4b58-948e-78b964f7fe07": {
+      "id": "a881a2fb-e15e-4b58-948e-78b964f7fe07",
+      "position": [
+        0,
+        -0.6999999999999993,
+        -1
+      ],
+      "rotation": [
+        -1,
+        6.123233995736766e-17,
+        -6.123233995736766e-17,
+        3.749399456654644e-33
+      ],
+      "scale": [
+        2.000000000000001,
+        2.0000000000000044,
+        2
+      ],
+      "parentId": "3a9d00c3-41d2-4177-acc2-9e53c2bea9a7",
+      "components": {
+        "cc94eb39-5d37-49bc-ac2e-47ea7baf5e8e": {
+          "id": "cc94eb39-5d37-49bc-ac2e-47ea7baf5e8e",
+          "name": "Random Scale Animator",
+          "parameters": {
+            "maxScale": 3,
+            "minScale": 1,
+            "animationSpeed": 8,
+            "smoothness": 0.1,
+            "jetskiEntity": {
+              "type": "entity",
+              "id": "3a9d00c3-41d2-4177-acc2-9e53c2bea9a7"
+            }
+          }
+        },
+        "82d6b219-e5cd-461c-9be8-db871105f0c3": {
+          "id": "82d6b219-e5cd-461c-9be8-db871105f0c3",
+          "name": "Render First",
+          "parameters": {}
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/water-jaggy-morph.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Player_WaterSplash",
+      "order": 8.689069442894551
+    },
+    "bfe98f44-af0e-4049-847a-9fab5f078a0a": {
+      "id": "bfe98f44-af0e-4049-847a-9fab5f078a0a",
+      "position": [
+        0,
+        -10,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "ui": {
+        "flexDirection": "column",
+        "width": "100%",
+        "height": "100%",
+        "type": "overlay",
+        "alignItems": "center",
+        "justifyContent": "space-between",
+        "paddingTop": 45,
+        "paddingBottom": 45
+      },
+      "name": "UI_Overlay",
+      "order": 37.50335085700478
+    },
+    "756a6a69-9da6-4913-9bf9-5b4d923576a8": {
+      "id": "756a6a69-9da6-4913-9bf9-5b4d923576a8",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "bfe98f44-af0e-4049-847a-9fab5f078a0a",
+      "components": {},
+      "ui": {
+        "background": "#ffffff",
+        "backgroundOpacity": 0.5,
+        "width": 130,
+        "height": 60,
+        "text": "00",
+        "color": "#000000",
+        "fontSize": 50,
+        "type": "3d",
+        "font": {
+          "type": "font",
+          "font": "Press Start 2p"
+        },
+        "verticalTextAlign": "end",
+        "borderRadius": 20,
+        "textAlign": "center"
+      },
+      "name": "UI_Timer",
+      "order": -2.2533136262232265
+    },
+    "5ce630a9-2bae-42ae-bb46-577c47e06275": {
+      "id": "5ce630a9-2bae-42ae-bb46-577c47e06275",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "bfe98f44-af0e-4049-847a-9fab5f078a0a",
+      "components": {},
+      "ui": {
+        "width": "50%",
+        "height": 180,
+        "text": "123",
+        "color": "#ffffff",
+        "fontSize": 70,
+        "type": "3d",
+        "font": {
+          "type": "font",
+          "font": "Press Start 2p"
+        },
+        "verticalTextAlign": "center",
+        "position": "absolute",
+        "top": 150,
+        "left": "",
+        "bottom": "",
+        "right": ""
+      },
+      "name": "UI_CenterText",
+      "order": 3.69395302117608
+    },
+    "ae8faef2-8480-4e6e-9625-395de29f7e18": {
+      "id": "ae8faef2-8480-4e6e-9625-395de29f7e18",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "bfe98f44-af0e-4049-847a-9fab5f078a0a",
+      "components": {},
+      "ui": {
+        "type": "3d",
+        "width": 380,
+        "height": 65,
+        "background": "#ff6842",
+        "borderRadius": 30,
+        "flexDirection": "row",
+        "backgroundOpacity": 1,
+        "padding": "10",
+        "gap": "",
+        "alignItems": "center",
+        "justifyContent": "center",
+        "position": "absolute",
+        "top": "",
+        "left": "",
+        "bottom": 30,
+        "right": ""
+      },
+      "name": "UI_PlayAgainButton",
+      "order": 5.28697336413465,
+      "hidden": false
+    },
+    "5e49beb4-11e4-469b-b3d0-2d8622746c51": {
+      "id": "5e49beb4-11e4-469b-b3d0-2d8622746c51",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "ae8faef2-8480-4e6e-9625-395de29f7e18",
+      "components": {},
+      "name": "UI_PlayAgainText",
+      "ui": {
+        "width": 400,
+        "height": 25,
+        "text": "Play Again",
+        "color": "#ffffff",
+        "fontSize": 30,
+        "font": {
+          "type": "font",
+          "font": "Press Start 2p"
+        },
+        "verticalTextAlign": "start",
+        "textAlign": "center"
+      },
+      "order": 1.3841223869771873
+    },
+    "b964511d-5a47-4827-8da3-9f13a756aa78": {
+      "id": "b964511d-5a47-4827-8da3-9f13a756aa78",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "bfe98f44-af0e-4049-847a-9fab5f078a0a",
+      "components": {},
+      "ui": {
+        "flexDirection": "column",
+        "width": 400,
+        "height": 75,
+        "type": "3d",
+        "position": "absolute",
+        "top": "",
+        "left": "",
+        "bottom": 30,
+        "right": 30,
+        "alignItems": "flex-end",
+        "justifyContent": "center",
+        "gap": 0
+      },
+      "name": "UI_BoostMeter",
+      "order": 4.54625243943161
+    },
+    "b56cc80b-2f05-463e-bc59-11e9a1da7bef": {
+      "id": "b56cc80b-2f05-463e-bc59-11e9a1da7bef",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "b964511d-5a47-4827-8da3-9f13a756aa78",
+      "components": {},
+      "ui": {
+        "width": 10,
+        "height": 30,
+        "type": "3d",
+        "background": "#ff0000",
+        "backgroundOpacity": 0.5
+      },
+      "name": "UI_BoostMeterBar",
+      "order": 1.7436628301789079
+    },
+    "f4f64ce9-b4a2-4854-bfac-c3bf378e6402": {
+      "id": "f4f64ce9-b4a2-4854-bfac-c3bf378e6402",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "b964511d-5a47-4827-8da3-9f13a756aa78",
+      "components": {},
+      "ui": {
+        "width": 205,
+        "height": 35,
+        "text": "BOOST",
+        "color": "#ffffff",
+        "fontSize": 30,
+        "type": "3d",
+        "font": {
+          "type": "font",
+          "font": "Press Start 2p"
+        },
+        "verticalTextAlign": "start",
+        "textAlign": "right"
+      },
+      "name": "UI_BoostText",
+      "order": -0.8996647536153843
+    },
+    "917404ee-787e-4808-88a2-9f10f5e83bcf": {
+      "id": "917404ee-787e-4808-88a2-9f10f5e83bcf",
+      "position": [
+        0,
+        -1,
+        -495
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        10,
+        1,
+        10
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "6145ab84-b6cb-491f-9607-689dbec900d6": {
+          "id": "6145ab84-b6cb-491f-9607-689dbec900d6",
+          "name": "toon-ocean",
+          "parameters": {
+            "rippleFreq": 0.15,
+            "rippleHeight": 1,
+            "colorFoam": "#90bbfc",
+            "colorShallow": "#9ad5fc",
+            "colorDeep": "#7eacf2",
+            "rippleSpeed": 0.001,
+            "rippleMod": 8,
+            "causticSpeed": 0.001,
+            "causticStrength": 2,
+            "depthOpacity": 0.1,
+            "bandSharpness": 0.5,
+            "useBands": true,
+            "causticTint": "#0077b6",
+            "causticScale": 40,
+            "deepAlpha": 0.10000000000000142,
+            "meshScale": 0.1,
+            "deepOpacity": 0.95
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/ocean-stable.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Env_Ocean",
+      "order": 1.7903656196187858,
+      "hidden": false
+    },
+    "70273042-637e-4198-8ca4-0bf1fb49874d": {
+      "id": "70273042-637e-4198-8ca4-0bf1fb49874d",
+      "position": [
+        495,
+        -1,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        10,
+        1,
+        10
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "6145ab84-b6cb-491f-9607-689dbec900d6": {
+          "id": "6145ab84-b6cb-491f-9607-689dbec900d6",
+          "name": "toon-ocean",
+          "parameters": {
+            "rippleFreq": 0.15,
+            "rippleHeight": 1,
+            "colorFoam": "#90bbfc",
+            "colorShallow": "#9ad5fc",
+            "colorDeep": "#7eacf2",
+            "rippleSpeed": 0.001,
+            "rippleMod": 8,
+            "causticSpeed": 0.001,
+            "causticStrength": 2,
+            "depthOpacity": 0.1,
+            "bandSharpness": 0.5,
+            "useBands": true,
+            "causticTint": "#0077b6",
+            "causticScale": 40,
+            "deepAlpha": 0.10000000000000142,
+            "meshScale": 0.1,
+            "deepOpacity": 0.95
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/ocean-stable.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Env_Ocean",
+      "order": 1.8967284349155586,
+      "hidden": false
+    },
+    "31db0290-4bb4-466a-bcdf-5f92c1672a93": {
+      "id": "31db0290-4bb4-466a-bcdf-5f92c1672a93",
+      "position": [
+        0,
+        -1,
+        495
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        10,
+        1,
+        10
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "6145ab84-b6cb-491f-9607-689dbec900d6": {
+          "id": "6145ab84-b6cb-491f-9607-689dbec900d6",
+          "name": "toon-ocean",
+          "parameters": {
+            "rippleFreq": 0.15,
+            "rippleHeight": 1,
+            "colorFoam": "#90bbfc",
+            "colorShallow": "#9ad5fc",
+            "colorDeep": "#7eacf2",
+            "rippleSpeed": 0.001,
+            "rippleMod": 8,
+            "causticSpeed": 0.001,
+            "causticStrength": 2,
+            "depthOpacity": 0.1,
+            "bandSharpness": 0.5,
+            "useBands": true,
+            "causticTint": "#0077b6",
+            "causticScale": 40,
+            "deepAlpha": 0.10000000000000142,
+            "meshScale": 0.1,
+            "deepOpacity": 0.95
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/ocean-stable.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Env_Ocean",
+      "order": 2.0207604779605344,
+      "hidden": false
+    },
+    "7e3a2c56-de01-4842-b333-8587c2a90c84": {
+      "id": "7e3a2c56-de01-4842-b333-8587c2a90c84",
+      "position": [
+        -495,
+        -1,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        10,
+        1,
+        10
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "6145ab84-b6cb-491f-9607-689dbec900d6": {
+          "id": "6145ab84-b6cb-491f-9607-689dbec900d6",
+          "name": "toon-ocean",
+          "parameters": {
+            "rippleFreq": 0.15,
+            "rippleHeight": 1,
+            "colorFoam": "#90bbfc",
+            "colorShallow": "#9ad5fc",
+            "colorDeep": "#7eacf2",
+            "rippleSpeed": 0.001,
+            "rippleMod": 8,
+            "causticSpeed": 0.001,
+            "causticStrength": 2,
+            "depthOpacity": 0.1,
+            "bandSharpness": 0.5,
+            "useBands": true,
+            "causticTint": "#0077b6",
+            "causticScale": 40,
+            "deepAlpha": 0.10000000000000142,
+            "meshScale": 0.1,
+            "deepOpacity": 0.95
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/ocean-stable.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Env_Ocean",
+      "order": 2.076486193466521,
+      "hidden": false
+    },
+    "f1a19eba-6cb7-4b64-be4a-5b05d25afe5e": {
+      "id": "f1a19eba-6cb7-4b64-be4a-5b05d25afe5e",
+      "position": [
+        -495,
+        -1,
+        495
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        10,
+        1,
+        10
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "6145ab84-b6cb-491f-9607-689dbec900d6": {
+          "id": "6145ab84-b6cb-491f-9607-689dbec900d6",
+          "name": "toon-ocean",
+          "parameters": {
+            "rippleFreq": 0.15,
+            "rippleHeight": 1,
+            "colorFoam": "#90bbfc",
+            "colorShallow": "#9ad5fc",
+            "colorDeep": "#7eacf2",
+            "rippleSpeed": 0.001,
+            "rippleMod": 8,
+            "causticSpeed": 0.001,
+            "causticStrength": 2,
+            "depthOpacity": 0.1,
+            "bandSharpness": 0.5,
+            "useBands": true,
+            "causticTint": "#0077b6",
+            "causticScale": 40,
+            "deepAlpha": 0.10000000000000142,
+            "meshScale": 0.1,
+            "deepOpacity": 0.95
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/ocean-stable.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Env_Ocean",
+      "order": 2.087056851002059,
+      "hidden": false
+    },
+    "dd9c724a-c6e2-4068-acb5-2be4e5b57e56": {
+      "id": "dd9c724a-c6e2-4068-acb5-2be4e5b57e56",
+      "position": [
+        -495,
+        -1,
+        -495
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        10,
+        1,
+        10
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "6145ab84-b6cb-491f-9607-689dbec900d6": {
+          "id": "6145ab84-b6cb-491f-9607-689dbec900d6",
+          "name": "toon-ocean",
+          "parameters": {
+            "rippleFreq": 0.15,
+            "rippleHeight": 1,
+            "colorFoam": "#90bbfc",
+            "colorShallow": "#9ad5fc",
+            "colorDeep": "#7eacf2",
+            "rippleSpeed": 0.001,
+            "rippleMod": 8,
+            "causticSpeed": 0.001,
+            "causticStrength": 2,
+            "depthOpacity": 0.1,
+            "bandSharpness": 0.5,
+            "useBands": true,
+            "causticTint": "#0077b6",
+            "causticScale": 40,
+            "deepAlpha": 0.10000000000000142,
+            "meshScale": 0.1,
+            "deepOpacity": 0.95
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/ocean-stable.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Env_Ocean",
+      "order": 2.092440107022464,
+      "hidden": false
+    },
+    "fdfd87a1-0c5d-44db-9535-fdf4150ba8c4": {
+      "id": "fdfd87a1-0c5d-44db-9535-fdf4150ba8c4",
+      "position": [
+        495,
+        -1,
+        -495
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        10,
+        1,
+        10
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "6145ab84-b6cb-491f-9607-689dbec900d6": {
+          "id": "6145ab84-b6cb-491f-9607-689dbec900d6",
+          "name": "toon-ocean",
+          "parameters": {
+            "rippleFreq": 0.15,
+            "rippleHeight": 1,
+            "colorFoam": "#90bbfc",
+            "colorShallow": "#9ad5fc",
+            "colorDeep": "#7eacf2",
+            "rippleSpeed": 0.001,
+            "rippleMod": 8,
+            "causticSpeed": 0.001,
+            "causticStrength": 2,
+            "depthOpacity": 0.1,
+            "bandSharpness": 0.5,
+            "useBands": true,
+            "causticTint": "#0077b6",
+            "causticScale": 40,
+            "deepAlpha": 0.10000000000000142,
+            "meshScale": 0.1,
+            "deepOpacity": 0.95
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/ocean-stable.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Env_Ocean",
+      "order": 2.0943078424703025,
+      "hidden": false
+    },
+    "086c3dd7-8232-4ab8-b284-8b4eeb574c8b": {
+      "id": "086c3dd7-8232-4ab8-b284-8b4eeb574c8b",
+      "position": [
+        495,
+        -1,
+        495
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        10,
+        1,
+        10
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "6145ab84-b6cb-491f-9607-689dbec900d6": {
+          "id": "6145ab84-b6cb-491f-9607-689dbec900d6",
+          "name": "toon-ocean",
+          "parameters": {
+            "rippleFreq": 0.15,
+            "rippleHeight": 1,
+            "colorFoam": "#90bbfc",
+            "colorShallow": "#9ad5fc",
+            "colorDeep": "#7eacf2",
+            "rippleSpeed": 0.001,
+            "rippleMod": 8,
+            "causticSpeed": 0.001,
+            "causticStrength": 2,
+            "depthOpacity": 0.1,
+            "bandSharpness": 0.5,
+            "useBands": true,
+            "causticTint": "#0077b6",
+            "causticScale": 40,
+            "deepAlpha": 0.10000000000000142,
+            "meshScale": 0.1,
+            "deepOpacity": 0.95
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/ocean-stable.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Env_Ocean",
+      "order": 2.094719303820499,
+      "hidden": false
+    },
+    "1e944235-d80d-447a-a668-d51f93cefd92": {
+      "id": "1e944235-d80d-447a-a668-d51f93cefd92",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        5,
+        5,
+        5
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "b63df174-b6fe-4c13-b460-830ac23e7d03": {
+          "id": "b63df174-b6fe-4c13-b460-830ac23e7d03",
+          "name": "distance-fade",
+          "parameters": {
+            "camera": {
+              "type": "entity",
+              "id": "a608ddd9-9379-464d-966f-5d8d8674c83c"
+            },
+            "fadeInDistance": 220,
+            "fullyVisibleDistance": 230
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/boundary.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Boundary",
+      "order": 41.980377935775756
+    },
+    "5c4e2df6-a0d4-4a8e-bd72-1433fb1e96be": {
+      "id": "5c4e2df6-a0d4-4a8e-bd72-1433fb1e96be",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        30,
+        30,
+        30
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/pointer-arrow.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Pointer Arrow",
+      "order": -0.3877283062788769
+    },
+    "f97bf0e5-a7e8-495a-8e38-4d4bae084831": {
+      "id": "f97bf0e5-a7e8-495a-8e38-4d4bae084831",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "bfe98f44-af0e-4049-847a-9fab5f078a0a",
+      "components": {},
+      "ui": {
+        "flexDirection": "row",
+        "background": "#ffffff",
+        "backgroundOpacity": 0.5,
+        "width": 180,
+        "height": 60,
+        "type": "3d",
+        "borderRadius": 20,
+        "position": "absolute",
+        "top": "",
+        "left": "",
+        "bottom": "",
+        "right": 30,
+        "alignItems": "center",
+        "justifyContent": "flex-end"
+      },
+      "name": "UI_Gems",
+      "order": -0.40446985394789436
+    },
+    "4f19cfd5-4caa-4c5d-aeda-303f9ac5070d": {
+      "id": "4f19cfd5-4caa-4c5d-aeda-303f9ac5070d",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "f97bf0e5-a7e8-495a-8e38-4d4bae084831",
+      "components": {},
+      "ui": {
+        "width": 116,
+        "height": 60,
+        "text": "00",
+        "color": "#000000",
+        "fontSize": 50,
+        "type": "3d",
+        "font": {
+          "type": "font",
+          "font": "Press Start 2p"
+        },
+        "verticalTextAlign": "end"
+      },
+      "name": "UI_GemCounter",
+      "order": 1.3791106482069155
+    },
+    "06f5903b-3ec8-42ab-8bb0-8d9e9f9e7b40": {
+      "id": "06f5903b-3ec8-42ab-8bb0-8d9e9f9e7b40",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "f97bf0e5-a7e8-495a-8e38-4d4bae084831",
+      "components": {},
+      "ui": {
+        "type": "3d",
+        "width": 55,
+        "height": 55,
+        "image": {
+          "type": "asset",
+          "asset": "assets/polyhedron.png"
+        },
+        "backgroundOpacity": 1,
+        "backgroundSize": "contain"
+      },
+      "name": "UI_GemImage",
+      "order": -1.4604552908205295
+    },
+    "a8755180-7287-4ce5-bc25-d15185845541": {
+      "id": "a8755180-7287-4ce5-bc25-d15185845541",
+      "position": [
+        206.99357594796854,
+        -4.6927983814095615,
+        129.55082111050677
+      ],
+      "rotation": [
+        0,
+        -0.8284688773000839,
+        0,
+        0.5600351054578084
+      ],
+      "scale": [
+        36.527978903257036,
+        36.52797890325702,
+        36.527978903257036
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "37afde4d-b152-437f-bb9c-0441e0a523d5": {
+          "id": "37afde4d-b152-437f-bb9c-0441e0a523d5",
+          "name": "box-collider",
+          "parameters": {
+            "autoSize": false,
+            "debugVisualization": false,
+            "boxWidth": 33,
+            "boxHeight": 50,
+            "boxDepth": 43,
+            "offsetX": -7,
+            "offsetY": 10,
+            "offsetZ": 1
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/optimized_44.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Oil Rig",
+      "order": 43.68323888249646
+    },
+    "d9e4c448-4e8e-4281-83aa-d23a34483acf": {
+      "id": "d9e4c448-4e8e-4281-83aa-d23a34483acf",
+      "position": [
+        0,
+        483.7,
+        0
+      ],
+      "rotation": [
+        4.329780281177466e-17,
+        -0.7071067811865476,
+        0.7071067811865475,
+        4.329780281177467e-17
+      ],
+      "scale": [
+        0.9999999999999993,
+        0.9999999999999994,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "name": "TopDownCamera",
+      "camera": {
+        "type": "perspective"
+      },
+      "order": -4.163876360537646
+    },
+    "4246bf8f-3cfa-4fb1-9c2c-9cd6e91380b7": {
+      "id": "4246bf8f-3cfa-4fb1-9c2c-9cd6e91380b7",
+      "position": [
+        11.01462178840071,
+        -3,
+        186.5701897238841
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        30,
+        30,
+        30
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "71d859e7-48ca-41a2-837e-e60750871025": {
+          "id": "71d859e7-48ca-41a2-837e-e60750871025",
+          "name": "box-collider",
+          "parameters": {
+            "debugVisualization": false,
+            "autoSize": false,
+            "boxWidth": 25,
+            "boxHeight": 30,
+            "boxDepth": 25
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/island-1.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Small Island",
+      "order": 48.26925007412441
+    },
+    "893d0599-890f-4b13-a105-4761f7d1226e": {
+      "id": "893d0599-890f-4b13-a105-4761f7d1226e",
+      "position": [
+        -102.85718037251192,
+        -3,
+        -17.241974689914485
+      ],
+      "rotation": [
+        0,
+        -0.5912685649632283,
+        0,
+        0.8064747262539134
+      ],
+      "scale": [
+        30.000000000000004,
+        30,
+        30.000000000000004
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "71d859e7-48ca-41a2-837e-e60750871025": {
+          "id": "71d859e7-48ca-41a2-837e-e60750871025",
+          "name": "box-collider",
+          "parameters": {
+            "autoSize": false,
+            "debugVisualization": false,
+            "boxWidth": 25,
+            "boxHeight": 30,
+            "boxDepth": 25
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/island-2.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Small Island",
+      "order": 51.31516732059052
+    },
+    "3de1a000-70ae-42ff-b343-605d651692f1": {
+      "id": "3de1a000-70ae-42ff-b343-605d651692f1",
+      "position": [
+        -330.0574702415415,
+        -1.5,
+        -63.237363498219906
+      ],
+      "rotation": [
+        0,
+        -0.7557888485651632,
+        0,
+        0.6548154063433029
+      ],
+      "scale": [
+        208.59903558363987,
+        208.59903558363985,
+        208.59903558363987
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/optimized_46.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Big Island",
+      "order": 52.923868593041725
+    },
+    "6f970bb1-06cb-48ce-87e2-b03993ea03cd": {
+      "id": "6f970bb1-06cb-48ce-87e2-b03993ea03cd",
+      "position": [
+        -292.2597611229797,
+        -13.96214687182807,
+        -343.2323150932048
+      ],
+      "rotation": [
+        0,
+        0.9953795115091433,
+        0,
+        -0.09601889432720674
+      ],
+      "scale": [
+        208.99436149438893,
+        208.99436149438895,
+        208.99436149438893
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/volcano-island.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Big Island",
+      "order": 54.34779722168852
+    },
+    "ad5661e1-9ee7-4ca3-8248-c703abf499a7": {
+      "id": "ad5661e1-9ee7-4ca3-8248-c703abf499a7",
+      "position": [
+        -389.679237608293,
+        -1.5,
+        195.41208453726668
+      ],
+      "rotation": [
+        0,
+        0.9493908928706916,
+        0,
+        0.3140970113423415
+      ],
+      "scale": [
+        200.00000000000009,
+        200,
+        200.00000000000009
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/snow-island.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Big Island",
+      "order": 55.507303985860084
+    },
+    "09b65ead-000c-4502-b69c-f864a060ab75": {
+      "id": "09b65ead-000c-4502-b69c-f864a060ab75",
+      "position": [
+        146.77002351216308,
+        0,
+        -90.81986258402934
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        3,
+        3,
+        3
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "cc786a85-b7be-4a4c-b3c9-af0b149d852b": {
+          "id": "cc786a85-b7be-4a4c-b3c9-af0b149d852b",
+          "name": "particle-emitter",
+          "parameters": {
+            "emitterLife": 0,
+            "particlesPerShot": 4,
+            "emitDelay": 0,
+            "minimumLifespan": 0.2,
+            "maximumLifespan": 0.8,
+            "mass": 1,
+            "gravity": -0.1,
+            "scale": 2,
+            "forceX": 1,
+            "forceY": 5,
+            "forceZ": 1,
+            "spread": 120,
+            "radialVelocity": 10,
+            "spawnAreaType": "point",
+            "boundingZoneType": "sphere",
+            "resourceType": "model",
+            "resourceUrl": "assets/particle-mesh.glb",
+            "stopped": true,
+            "blendingMode": "add",
+            "randomDrift": true,
+            "randomDriftRange": 4,
+            "collisions": false,
+            "animateColor": true,
+            "colorStart": "#FFE500",
+            "colorEnd": "#FFE500"
+          }
+        },
+        "3891f6a2-18a3-406b-9c5d-03c785cdd39c": {
+          "id": "3891f6a2-18a3-406b-9c5d-03c785cdd39c",
+          "name": "CurveAnimator",
+          "parameters": {
+            "curveDataKey": "frog",
+            "trainMode": true,
+            "maintainSpacing": false,
+            "trackTightness": 0.7,
+            "lookAheadDistance": 0.2,
+            "duration": 30,
+            "debugVisualization": false,
+            "useCustomStartPosition": true,
+            "orientToDirection": true,
+            "loop": true
+          }
+        },
+        "5e567618-7fec-4dc0-9a76-3c9020824c29": {
+          "id": "5e567618-7fec-4dc0-9a76-3c9020824c29",
+          "name": "wave-height-sync",
+          "parameters": {
+            "ocean": {
+              "type": "entity",
+              "id": "29182b6b-f2f7-4ea1-9ad9-f54a8ed250ad"
+            }
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/frog.glb"
+        },
+        "animationClip": "Run",
+        "loop": true,
+        "timeScale": 2
+      },
+      "name": "Frog In Clogs",
+      "order": 56.567290586183674,
+      "audio": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/audio/laugh.mp3"
+        },
+        "loop": true,
+        "positional": true,
+        "distanceModel": "exponential",
+        "rolloffFactor": 1,
+        "refDistance": 15
+      },
+      "hidden": false
+    },
+    "3ad0c346-4d62-4885-a3d3-0ce618d3ea56": {
+      "id": "3ad0c346-4d62-4885-a3d3-0ce618d3ea56",
+      "position": [
+        0,
+        0.7995519192758046,
+        -1.7499999999999964
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.6666666666666666,
+        0.6666666666666666,
+        0.6666666666666666
+      ],
+      "geometry": {
+        "type": "polyhedron",
+        "radius": 1,
+        "faces": 12
+      },
+      "material": {
+        "type": "basic",
+        "color": "#fff700",
+        "wireframe": false
+      },
+      "parentId": "09b65ead-000c-4502-b69c-f864a060ab75",
+      "components": {
+        "9673be30-7286-4a2b-8303-11fe8f29c18a": {
+          "id": "9673be30-7286-4a2b-8303-11fe8f29c18a",
+          "name": "rotate-animation",
+          "parameters": {
+            "autoFrom": true,
+            "toY": 0,
+            "shortestPath": false,
+            "duration": 1000,
+            "toX": 360
+          }
+        }
+      },
+      "name": "Checkpoint_SpecialIndicator",
+      "order": 32.741540719439726,
+      "audio": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/audio/phaserUp4.mp3"
+        },
+        "paused": true,
+        "volume": 0.8
+      }
+    },
+    "6b94716e-0225-4b5f-80a7-395d8b1ae5a2": {
+      "id": "6b94716e-0225-4b5f-80a7-395d8b1ae5a2",
+      "position": [
+        93.16715430953667,
+        -1.5,
+        -391.8496917057023
+      ],
+      "rotation": [
+        0,
+        0.9988099627244349,
+        0,
+        -0.048771491287564694
+      ],
+      "scale": [
+        208.59903558363982,
+        208.59903558363985,
+        208.59903558363982
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/optimized_46.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Big Island",
+      "order": 53.466475243418365
+    },
+    "d787d901-f31a-4809-b678-2c4c1f032916": {
+      "id": "d787d901-f31a-4809-b678-2c4c1f032916",
+      "position": [
+        476.94842932346046,
+        -4.647762259436888,
+        -235.86002199783076
+      ],
+      "rotation": [
+        0,
+        0.9976476153068318,
+        0,
+        -0.06855097134681501
+      ],
+      "scale": [
+        317.9779019913285,
+        317.9779019913279,
+        317.9779019913285
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/optimized_46.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Big Island",
+      "order": 53.8107450154327
+    },
+    "de081e51-3eb2-4d97-996b-0f1186e4ab36": {
+      "id": "de081e51-3eb2-4d97-996b-0f1186e4ab36",
+      "position": [
+        538.3563932862203,
+        -5.9021839707572905,
+        171.5474546398006
+      ],
+      "rotation": [
+        0,
+        0.9912924014006719,
+        0,
+        -0.131679060314422
+      ],
+      "scale": [
+        274.0251977074804,
+        274.0251977074801,
+        274.02519770748023
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/snow-island.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Big Island",
+      "order": 56.1281369181402
+    },
+    "93167955-1aca-46ce-8927-ffd6d2e7d6d3": {
+      "id": "93167955-1aca-46ce-8927-ffd6d2e7d6d3",
+      "position": [
+        427.3578631599868,
+        -4.647762259436888,
+        -516.2377348210639
+      ],
+      "rotation": [
+        0,
+        -0.024975156404646422,
+        0,
+        0.9996880721317843
+      ],
+      "scale": [
+        317.9779019913287,
+        317.9779019913279,
+        317.9779019913287
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/optimized_46.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Big Island",
+      "order": 54.08173516446189
+    },
+    "97fdaa6a-be4b-4da7-a388-b35b873348f8": {
+      "id": "97fdaa6a-be4b-4da7-a388-b35b873348f8",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "bfe98f44-af0e-4049-847a-9fab5f078a0a",
+      "components": {},
+      "ui": {
+        "type": "3d",
+        "width": 650,
+        "height": 435,
+        "image": {
+          "type": "asset",
+          "asset": "assets/aqua-fury.png"
+        },
+        "backgroundOpacity": 1,
+        "backgroundSize": "contain",
+        "position": "absolute",
+        "top": "30%",
+        "left": "",
+        "bottom": "",
+        "right": ""
+      },
+      "name": "UI_Logo",
+      "order": -5.065798790549801,
+      "hidden": false
+    },
+    "a0085f6b-8c0b-40c8-a8b1-258262136fa1": {
+      "id": "a0085f6b-8c0b-40c8-a8b1-258262136fa1",
+      "position": [
+        289.98435468905154,
+        -28.40290958203723,
+        542.0784986069116
+      ],
+      "rotation": [
+        0,
+        0.3696164899273911,
+        0,
+        0.9291844006297968
+      ],
+      "scale": [
+        432.5221151126877,
+        432.52211511268735,
+        432.5221151126877
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/volcano-island.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Big Island",
+      "order": 54.93377729619891
+    },
+    "b6237487-0f0d-4381-8451-a50dd248e3b6": {
+      "id": "b6237487-0f0d-4381-8451-a50dd248e3b6",
+      "position": [
+        31.33475249883537,
+        -3,
+        -157.55847941214049
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        30,
+        30,
+        30
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "71d859e7-48ca-41a2-837e-e60750871025": {
+          "id": "71d859e7-48ca-41a2-837e-e60750871025",
+          "name": "box-collider",
+          "parameters": {
+            "debugVisualization": false,
+            "autoSize": false,
+            "boxWidth": 30,
+            "boxHeight": 30,
+            "boxDepth": 30
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/island-1.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Small Island",
+      "order": 50.20191184284554
+    },
+    "846a55f7-0711-4f9c-acc8-7038b7046843": {
+      "id": "846a55f7-0711-4f9c-acc8-7038b7046843",
+      "position": [
+        -76.25539848624865,
+        -3,
+        -130.71206780271206
+      ],
+      "rotation": [
+        0,
+        0.9032805798698176,
+        0,
+        0.42905033973887746
+      ],
+      "scale": [
+        30.000000000000007,
+        30,
+        30.000000000000007
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "71d859e7-48ca-41a2-837e-e60750871025": {
+          "id": "71d859e7-48ca-41a2-837e-e60750871025",
+          "name": "box-collider",
+          "parameters": {
+            "debugVisualization": false,
+            "autoSize": false,
+            "boxWidth": 25,
+            "boxHeight": 30,
+            "boxDepth": 25
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/island-1.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Small Island",
+      "order": 50.497007694148806
+    },
+    "3f54d2ad-7ca3-47b8-abd3-295f4aaa8c9f": {
+      "id": "3f54d2ad-7ca3-47b8-abd3-295f4aaa8c9f",
+      "position": [
+        108.19839634098355,
+        -3,
+        3.313863426179438
+      ],
+      "rotation": [
+        0,
+        -0.5912685649632284,
+        0,
+        0.8064747262539134
+      ],
+      "scale": [
+        30,
+        30,
+        30
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "71d859e7-48ca-41a2-837e-e60750871025": {
+          "id": "71d859e7-48ca-41a2-837e-e60750871025",
+          "name": "box-collider",
+          "parameters": {
+            "autoSize": false,
+            "debugVisualization": false,
+            "boxWidth": 25,
+            "boxHeight": 30,
+            "boxDepth": 25
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/island-2.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Small Island",
+      "order": 52.16570331341218
+    },
+    "dbb6a2b9-8e16-4ebe-a7ee-5ad3e4f6b0a6": {
+      "id": "dbb6a2b9-8e16-4ebe-a7ee-5ad3e4f6b0a6",
+      "position": [
+        194,
+        0,
+        -215
+      ],
+      "rotation": [
+        0,
+        -0.7071067811865475,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "1d8bba47-36e7-4072-a159-746f27b4052b": {
+          "id": "1d8bba47-36e7-4072-a159-746f27b4052b",
+          "name": "wave-height-sync",
+          "parameters": {
+            "ocean": {
+              "type": "entity",
+              "id": "29182b6b-f2f7-4ea1-9ad9-f54a8ed250ad"
+            },
+            "verticalOffset": -0.75,
+            "orientWithWave": true,
+            "yRotationOffset": 20,
+            "rollSensitivity": 0.5,
+            "pitchSensitivity": 0.5,
+            "maxPitchAngle": 100,
+            "maxRollAngle": 20,
+            "orientationDamping": 0.5,
+            "normalSmoothingEpsilon": 0.05,
+            "waveInfluence": 0.3,
+            "smoothing": 0.8
+          }
+        },
+        "3891f6a2-18a3-406b-9c5d-03c785cdd39c": {
+          "id": "3891f6a2-18a3-406b-9c5d-03c785cdd39c",
+          "name": "CurveAnimator",
+          "parameters": {
+            "curveDataKey": "cruiseShip2",
+            "trainMode": true,
+            "maintainSpacing": false,
+            "trackTightness": 0.7,
+            "lookAheadDistance": 0.2,
+            "duration": 150,
+            "debugVisualization": false,
+            "useCustomStartPosition": true,
+            "orientToDirection": true,
+            "loop": true
+          }
+        },
+        "e5721be1-61a6-4837-992e-5c73c34582af": {
+          "id": "e5721be1-61a6-4837-992e-5c73c34582af",
+          "name": "box-collider",
+          "parameters": {
+            "debugVisualization": false,
+            "rotationAware": true,
+            "extraHeight": 5,
+            "autoSize": false,
+            "boxWidth": 15,
+            "boxHeight": 30,
+            "boxDepth": 40
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/ship-ocean-liner.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "NPC_ShipLarge2",
+      "order": 5.544405359645524
+    },
+    "d6cb7e8d-b13d-4fe1-a7f3-ca4c794e2c1e": {
+      "id": "d6cb7e8d-b13d-4fe1-a7f3-ca4c794e2c1e",
+      "position": [
+        -191.0281703328903,
+        1.7469679254110987e-14,
+        132.14729391924018
+      ],
+      "rotation": [
+        0,
+        1,
+        0,
+        -6.123233995736766e-17
+      ],
+      "scale": [
+        1.9999999999999998,
+        2.0000000000000004,
+        2.000000000000001
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "components": {
+        "1d8bba47-36e7-4072-a159-746f27b4052b": {
+          "id": "1d8bba47-36e7-4072-a159-746f27b4052b",
+          "name": "wave-height-sync",
+          "parameters": {
+            "ocean": {
+              "type": "entity",
+              "id": "29182b6b-f2f7-4ea1-9ad9-f54a8ed250ad"
+            },
+            "verticalOffset": -0.75,
+            "orientWithWave": true,
+            "yRotationOffset": 20,
+            "rollSensitivity": 0.5,
+            "pitchSensitivity": 0.5,
+            "maxPitchAngle": 100,
+            "maxRollAngle": 20,
+            "orientationDamping": 0.5,
+            "normalSmoothingEpsilon": 0.05,
+            "waveInfluence": 0.3,
+            "smoothing": 0.8
+          }
+        },
+        "3891f6a2-18a3-406b-9c5d-03c785cdd39c": {
+          "id": "3891f6a2-18a3-406b-9c5d-03c785cdd39c",
+          "name": "CurveAnimator",
+          "parameters": {
+            "curveDataKey": "cruiseShip3",
+            "trainMode": true,
+            "maintainSpacing": false,
+            "trackTightness": 0.7,
+            "lookAheadDistance": 0.2,
+            "duration": 150,
+            "debugVisualization": false,
+            "useCustomStartPosition": true,
+            "orientToDirection": true,
+            "loop": true
+          }
+        },
+        "e5721be1-61a6-4837-992e-5c73c34582af": {
+          "id": "e5721be1-61a6-4837-992e-5c73c34582af",
+          "name": "box-collider",
+          "parameters": {
+            "debugVisualization": false,
+            "rotationAware": true,
+            "extraHeight": 5,
+            "autoSize": false,
+            "boxWidth": 15,
+            "boxHeight": 30,
+            "boxDepth": 40
+          }
+        }
+      },
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/watercraft/ship-ocean-liner.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "NPC_ShipLarge3",
+      "order": 5.869330074267874
+    }
+  },
+  "spaces": {
+    "88453035-dc0f-486d-868a-8ff7c2fda864": {
+      "id": "88453035-dc0f-486d-868a-8ff7c2fda864",
+      "name": "Default",
+      "activeCamera": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "reflections": {
+        "type": "url",
+        "url": "https://cdn.8thwall.com/web/assets/envmap/basic_env_map-m9hqpneh.jpg"
+      },
+      "sky": {
+        "type": "color",
+        "color": "#ffffff"
+      },
+      "fog": null
+    }
+  },
+  "entrySpaceId": "88453035-dc0f-486d-868a-8ff7c2fda864",
+  "inputs": {
+    "default": [
+      {
+        "name": "jump",
+        "bindings": [
+          {
+            "input": "keyboard:Space",
+            "modifiers": []
+          },
+          {
+            "input": "gamepad:button:0",
+            "modifiers": []
+          }
+        ]
+      },
+      {
+        "name": "boost",
+        "bindings": [
+          {
+            "input": "keyboard:ShiftLeft",
+            "modifiers": []
+          },
+          {
+            "input": "gamepad:button:1",
+            "modifiers": []
+          }
+        ]
+      },
+      {
+        "name": "backward",
+        "bindings": [
+          {
+            "input": "keyboard:KeyS",
+            "modifiers": []
+          },
+          {
+            "input": "keyboard:ArrowDown",
+            "modifiers": []
+          }
+        ]
+      },
+      {
+        "name": "forward",
+        "bindings": [
+          {
+            "input": "keyboard:KeyW",
+            "modifiers": []
+          },
+          {
+            "input": "gamepad:button:7",
+            "modifiers": []
+          },
+          {
+            "input": "keyboard:ArrowUp",
+            "modifiers": []
+          }
+        ]
+      },
+      {
+        "name": "left",
+        "bindings": [
+          {
+            "input": "keyboard:KeyA",
+            "modifiers": []
+          },
+          {
+            "input": "gamepad:axis:left:left",
+            "modifiers": []
+          },
+          {
+            "input": "keyboard:ArrowLeft",
+            "modifiers": []
+          }
+        ]
+      },
+      {
+        "name": "right",
+        "bindings": [
+          {
+            "input": "keyboard:KeyD",
+            "modifiers": []
+          },
+          {
+            "input": "gamepad:axis:left:right",
+            "modifiers": []
+          },
+          {
+            "input": "keyboard:ArrowRight",
+            "modifiers": []
+          }
+        ]
+      },
+      {
+        "name": "start",
+        "bindings": [
+          {
+            "input": "gamepad:button:9",
+            "modifiers": []
+          }
+        ]
+      }
+    ]
+  },
+  "runtimeVersion": {
+    "type": "version",
+    "level": "major",
+    "major": 2,
+    "minor": 0,
+    "patch": 0
+  },
+  "historyVersion": "mgsr236l"
+}

@@ -1,0 +1,95 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<div id="overlay" style="z-index: 2">
+  <h3>TAP TO THROW</h3>
+</div>
+
+<div id="bullseye" style="display: none;">
+  BULLSEYE
+</div>
+
+<a-scene
+  xrextras-gesture-detector
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="colorManagement: true"
+  gltf-model="dracoDecoderPath: https://cdn.8thwall.com/web/aframe/draco-decoder/"
+  physics="driver: ammo; debug: false"
+  win-checker
+  xrweb>
+  <!-- We can define assets here to be loaded when A-Frame initializes -->
+  <a-assets>
+    <!-- Credit to Poly by Google for the model: https://poly.google.com/view/5ZMAz7_ucTn -->
+    <a-asset-item id="blue" src="./assets/blue.glb"></a-asset-item>
+    <a-asset-item id="brown" src="./assets/brown.glb"></a-asset-item>
+    <a-asset-item id="green" src="./assets/green.glb"></a-asset-item>
+    <a-asset-item id="orange" src="./assets/orange.glb"></a-asset-item>
+    <a-asset-item id="red" src="./assets/red.glb"></a-asset-item>
+    <a-asset-item id="yellow" src="./assets/yellow.glb"></a-asset-item>
+    <a-asset-item id="tin" src="./assets/bullseye.glb"></a-asset-item>
+    <a-asset-item id="hider" src="./assets/hider.glb"></a-asset-item>
+    <a-asset-item id="background" src="./assets/background.glb"></a-asset-item>
+    <a-asset-item id="rim" src="./assets/rim.glb"></a-asset-item>
+    <a-asset-item id="shadow" src="./assets/shadow.glb"></a-asset-item>
+  </a-assets>
+
+  <!-- The raycaster will emit mouse events on scene objects specified with the cantap class -->
+  <a-camera id="camera" position="0 9 9">
+    <a-entity position="0 -1.5 0" id="shooter" projectile-shooter="speed: 12"></a-entity>
+  </a-camera>
+
+  <a-entity
+    light="
+      type: directional;
+      shadowBias: -0.0001
+      intensity: 0.8;
+      castShadow: true;
+      shadowMapHeight:2048;
+      shadowMapWidth:2048;
+      shadowCameraTop: 30;
+      shadowCameraBottom: -30;
+      shadowCameraRight: 30;
+      shadowCameraLeft: -30;
+      target: #bowl"
+    xrextras-attach="target: bowl; offset: 0 15 0"
+    position="1 3 2"
+    shadow>
+  </a-entity>
+
+          <a-entity
+        id="theshadow"
+    gltf-model="#shadow">
+  </a-entity>
+
+    <a-entity
+    gltf-model="#hider"
+    my-hider-material>
+  </a-entity>
+
+      <a-entity
+    gltf-model="#background">
+  </a-entity>
+
+        <a-entity
+    gltf-model="#rim"
+    reflections="type: realtime">
+  </a-entity>
+
+  <a-circle id="target" position="0 -10.63 0" radius="1.8" rotation="-90 0 0" visible="false"></a-circle>
+
+  <a-light type="ambient" intensity="0.8"></a-light>
+
+  <a-entity id="bowl" reflections="type: realtime" position="0 0 0" physics-object="model: #tin"></a-entity>
+
+  <!-- <a-box
+    id="ground"
+    scale="1000 2 1000"
+    position="0 -1 0"
+    material="shader: shadow; transparent: true; opacity: 0.4"
+    shadow
+    ammo-body="type: static"
+    ammo-shape="type: box;">
+  </a-box> -->
+</a-scene>
+

@@ -10,7 +10,7 @@ import {
 import type {BasicUiObject, BasicUiOptions} from './ui-utils'
 
 // Replace with your actual Discord Application Client ID
-const DISCORD_APPLICATION_CLIENT_ID = '1426353874913988708'
+const DISCORD_APPLICATION_CLIENT_ID = '<REMOVED>'
 
 // UI positioning constants
 const INITIAL_UI_HEIGHT = 1.5 // Height for channel/guild info display

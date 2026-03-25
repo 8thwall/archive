@@ -1,0 +1,50 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<div id="gradient" class="gradient-move absolute-fill">
+  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)">
+    <div class="spinner"></div>
+  </div>
+</div>
+<img id="poweredby" src="https://cdn.8thwall.com/web/img/almostthere/v2/poweredby-horiz-white-4.svg">
+
+<div class="compass">
+  <div class="arrow"></div>
+  <div class="compass-circle"></div>
+  <div class="my-point"></div>
+</div>
+<button class="start-btn"><img class="icon" src="./assets/compass.svg">start compass</button>
+
+<a-scene
+  renderer="color-management:true"
+  fog="color: white; type: exponential; density: 0.018;"
+  map-loading-screen>
+
+  <a-assets>
+      <a-asset-item id="doty" src="./assets/doty.glb"></a-asset-item>
+  </a-assets>
+  
+  <a-entity light="type: directional; intensity: 0.25; target: #m;" position="25 10 0"></a-entity>
+  <a-entity light="type: directional; intensity: 0.25; target: #m;" position="0 10 25"></a-entity>
+  <a-entity light="type: directional; intensity: 0.25; target: #m;" position="-25 10 0"></a-entity>
+  <a-entity light="type: directional; intensity: 0.25; target: #m;" position="0 10 -25"></a-entity>
+  <a-light type="ambient" intensity="0.8"></a-light>
+  
+  <a-camera 
+    near="1" 
+    far="200" 
+    lightship-map-controls="target: 0 5 0; min-distance: 7; max-distance: 25;">
+  </a-camera>
+
+  <a-sky radius="100" material="shader: lightship-map-sky-gradient"></a-sky>
+  
+  <lightship-map 
+    id="m"
+    scale="100 100 100" 
+    lightship-map-theme="theme: nighttime"
+    lightship-map-add-wayspots="primitive: a-cylinder; meters: 5;">
+    
+    <a-entity gltf-model="#doty" scale="0.15 0.15 0.15" compass></a-entity>
+
+  </lightship-map>
+</a-scene>

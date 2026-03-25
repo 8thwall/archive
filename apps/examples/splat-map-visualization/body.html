@@ -1,0 +1,84 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<div id="gradient" class="gradient-move absolute-fill">
+  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)">
+    <div class="spinner"></div>
+  </div>
+</div>
+
+<a-scene
+  renderer="color-management:true"
+  fog="color:#f0f0f0;type:exponential;density:0.0018;"
+  map-loading
+  zfocused-node
+  zscan-world-hud
+  xrextras-gesture-detector>
+  <a-entity id="land-mat" material="color:#d6d6d6;"></a-entity>
+  <a-entity id="building-mat" material="color:#ffffff;opacity:0.9;"></a-entity>
+  <a-entity id="park-mat" material="color:#e6e6e6"></a-entity>
+  <a-entity id="parking-mat" material="color:#c7c7c7"></a-entity>
+  <a-entity id="road-mat" material="color:#7a7a7a"></a-entity>
+  <a-entity id="transit-mat" material="color:#595959"></a-entity>
+  <a-entity id="sand-mat" material="color:#969696"></a-entity>
+  <a-entity id="water-mat" material="color:#000000"></a-entity>
+
+  <a-assets>
+    <a-asset-item id="doty-model" src="./assets/map-assets/doty.glb"></a-asset-item>
+    <a-asset-item id="poi-model" src="./assets/map-assets/poi-disc.glb"></a-asset-item>
+    <a-asset-item id="splat-model" src="./assets/map-assets/splatCircle.glb"></a-asset-item>
+    <a-asset-item id="drone-model" src="./assets/map-assets/NianticDrone.glb"></a-asset-item>
+  </a-assets>
+
+  <a-entity light="type: directional; intensity: 0.25; target: #m;" position="25 10 0"></a-entity>
+  <a-entity light="type: directional; intensity: 0.25; target: #m;" position="0 10 25"></a-entity>
+  <a-entity light="type: directional; intensity: 0.25; target: #m;" position="-25 10 0"></a-entity>
+  <a-entity light="type: directional; intensity: 0.25; target: #m;" position="0 10 -25"></a-entity>
+  <a-light type="ambient" intensity="0.8"></a-light>
+
+  <a-camera
+    near="1"
+    far="1500"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;"
+    lightship-map-controls="target: 0 1.5 0; min-distance: 3; max-distance: 150;">
+  </a-camera>
+
+  <a-sky radius="1000" material="shader: lightship-map-sky-gradient"></a-sky>
+
+  <lightship-map
+    id="m"
+    scale="1000 1000 1000"
+    enable-gps="false"
+    zlat-lng="37.427412 -122.143942"
+    lat-lng="37.7954 -122.3936"
+    zlightship-map-theme="theme: nighttime"
+    add-vps-coverage="primitive: coverage-node; meters: 7; min: 0;"
+    map-debug-controls
+    building-meters="6"
+    road-s-meters="2"
+    road-m-meters="4"
+    road-l-meters="8"
+    road-xl-meters="32"
+    transit-meters="8"
+    water-meters="6"
+    land-material="#land-mat"
+    building-material="#building-mat"
+    park-material="#park-mat"
+    parking-material="#parking-mat"
+    road-material="#road-mat"
+    transit-material="#transit-mat"
+    sand-material="#sand-mat"
+    water-material="#water-mat">
+    <a-entity
+      id="character"
+      gltf-model="#drone-model"
+      rotation="0 180 0"
+      position="0 0.002 0"
+      animation-mixer="clip:*; loop:repeat; timeScale:1.5;"
+      scale="0.005 0.005 0.005"
+      lightship-map-motion-direction
+      zlightship-map-walk-animation="idle: idle; walk: walk; run: walk;"
+      shadow>
+    </a-entity>
+  </lightship-map>
+</a-scene>
