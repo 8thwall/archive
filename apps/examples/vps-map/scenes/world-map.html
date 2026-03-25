@@ -1,0 +1,76 @@
+<a-scene
+  renderer="color-management:true"
+  fog="color: white; type: exponential; density: 0.018;"
+  gltf-model="draco-decoder-path: https://cdn.8thwall.com/web/aframe/draco-decoder/">
+
+  <a-assets>
+    <a-asset-item id="doty-model" src=".././assets/models/doty.glb"></a-asset-item>
+    <a-asset-item id="poi-model" src=".././assets/models/poi-disc.glb"></a-asset-item>
+  </a-assets>
+
+  <div id="ui-section">
+    <h3 id="wayspot-title"></h3>
+    <span>
+      <img src=".././assets/walk-icon.svg">
+      <p id="wayspot-distance"></p>
+      <button id="start-btn">Start AR</button>
+    </span>
+  </div>
+
+  <a-entity
+    light="type: directional;
+           intensity: 0.3;
+           cast-shadow: true;
+           shadow-map-height: 2048;
+           shadow-map-width: 2048;
+           shadow-camera-top: 15;
+           shadow-camera-bottom: -15;
+           shadow-camera-left: -15;
+           shadow-camera-right: 15;
+           shadow-radius: 4;
+           target: #character;"
+    position="0 10 0"
+    shadow>
+  </a-entity>
+  
+  <a-light type="ambient" intensity="0.8"></a-light>
+  
+  <a-camera 
+    near="1" 
+    far="200" 
+    lightship-map-controls="target: 0 4 0; min-distance: 5.5; max-distance: 25;">
+  </a-camera>
+
+  <a-sky radius="100" material="shader: lightship-map-sky-gradient"></a-sky>
+
+  <a-plane 
+    scale="100 100 1"
+    rotation="-90 0 0"
+    position="0 0.01 0" 
+    material="shader: shadow" 
+    shadow="cast: false; receive: true;"
+  ></a-plane>
+  
+  <lightship-map 
+    aenable-gps="false"
+    alat-lng="37.428216540923884, -122.14453710564766"
+    scale="100 100 100" 
+    lightship-map-theme="theme: natural"
+    lightship-map-add-wayspots="primitive: custom-wayspot; meters: 25; min: 0.05;">
+    <a-entity
+      id="character"
+      gltf-model="#doty-model"
+      rotation="0 180 0"
+      scale="0.1 0.1 0.1"
+      lightship-map-motion-direction
+      lightship-map-walk-animation="idle: idle; walk: walk"
+      shadow
+    ></a-entity>
+  </lightship-map>
+
+</a-scene>
+
+<!--FAR 37.42915801593158, -122.14475458861016-->
+<!--39m 37.42836684186793, -122.1448102109886-->
+<!--0m 37.428216540923884, -122.14453710564766-->
+

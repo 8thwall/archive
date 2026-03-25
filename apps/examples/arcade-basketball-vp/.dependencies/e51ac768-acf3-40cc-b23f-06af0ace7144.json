@@ -1,0 +1,10 @@
+{
+  "type": "module",
+  "dependencyId": "e26bf325-9f5b-499f-9989-3bf1d13221f5",
+  "moduleId": "a641209e-4d43-42ca-9b00-a40cf45d5351",
+  "alias": "vp-xrextras",
+  "target": {
+    "type": "branch",
+    "branch": "master"
+  }
+}

@@ -1,0 +1,137 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<div id="flipBg" class="absolute-fill"></div>
+
+<!--display only on mobile-->
+<div id="over">
+  <span id="promptText">Tap to spread love</span>
+  <img id="swap-cam-btn" src="./assets/camera-flip.svg">
+</div>
+
+<a-scene
+  swap-cam
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  xrextras-pause-on-hidden
+  renderer="maxCanvasWidth: 960; maxCanvasHeight: 960; colorManagement: true"
+  gltf-model="dracoDecoderPath: https://cdn.8thwall.com/web/aframe/draco-decoder/"
+  xrface="mirroredDisplay: true;  meshGeometry: eyes, face, mouth; cameraDirection: front; allowedDevices: any;">
+  
+  <a-assets>
+    <a-asset-item id="head-occluder" src="./assets/Models/head-occluder.glb"></a-asset-item>
+    <a-asset-item id="words" src="./assets/love.glb"></a-asset-item>
+    <a-asset-item id="heart" src="./assets/heart.glb"></a-asset-item>
+
+    <a-asset-item id="pModel" src="./assets/p.glb"></a-asset-item>
+    <a-asset-item id="rModel" src="./assets/r.glb"></a-asset-item>
+    <a-asset-item id="iModel" src="./assets/i.glb"></a-asset-item>
+    <a-asset-item id="dModel" src="./assets/d.glb"></a-asset-item>
+    <a-asset-item id="eModel" src="./assets/e.glb"></a-asset-item>
+
+    <img id="posx" src="./assets/textures/posx.jpg">
+    <img id="posy" src="./assets/textures/posy.jpg">
+    <img id="posz" src="./assets/textures/posz.jpg">
+    <img id="negx" src="./assets/textures/negx.jpg">
+    <img id="negy" src="./assets/textures/negy.jpg">
+    <img id="negz" src="./assets/textures/negz.jpg">
+  </a-assets>
+
+  <xrextras-resource id="faceImg" src="./assets/textures/face-mesh.png"></xrextras-resource>
+  <xrextras-resource id="alpha-soft-eyes" src="./assets/textures/soft-eyes-mouth.png"></xrextras-resource>
+  <xrextras-pbr-material id="face-mesh" tex="#faceImg" alpha="#alpha-soft-eyes" opacity="0.75">
+  </xrextras-pbr-material>
+  
+  <xrextras-capture-button></xrextras-capture-button>
+  <xrextras-capture-preview></xrextras-capture-preview>
+
+  <a-camera
+  id="camera"
+  look-controls="enabled: false" 
+  wasd-controls="enabled: false" 
+  position="0 2 0"
+  raycaster="objects: .cantap"
+  cursor="fuse: false; rayOrigin: mouse;">
+  </a-camera>
+  
+  <xrextras-faceanchor>
+    <a-entity gltf-model="#head-occluder" position="0 0 0.3" scale="1.3 1.3 1.3" xrextras-hider-material></a-entity>
+    
+    <xrextras-face-attachment point="noseBridge">
+      <!-- orbiting lights -->
+      <a-entity layout="type: circle; radius: 3" rotation="90 0 0" xrextras-spin="speed: 5000;">
+        <a-entity
+          geometry="primitive: sphere; radius: 0;"
+          material="shader: flat; color: #FF0018;"
+          light="type: point;
+                 intensity: 1.0;
+                 color: #FF0018"
+          shadow
+          position="0 0 -1">
+        </a-entity>
+    
+        <a-entity
+          geometry="primitive: sphere; radius: 0;"
+          material="shader: flat; color: #FFA52C;"
+          light="type: point;
+                 intensity: 1.0;
+                 color: #FFA52C"
+          shadow
+          position="-0.66 0 -0.66">
+        </a-entity>
+        
+        <a-entity
+          geometry="primitive: sphere; radius: 0;"
+          material="shader: flat; color: #FFFF41;"
+          light="type: point;
+                 intensity: 1.0;
+                 color: #FFFF41"
+          shadow
+          position="-0.66 0 0.66">
+        </a-entity>
+    
+        <a-entity
+          geometry="primitive: sphere; radius: 0;"
+          material="shader: flat; color: #008018;"
+          light="type: point;
+                 intensity: 1.0;
+                 color: #008018"
+          shadow
+          position="0 0 1">
+        </a-entity>
+
+        <a-entity
+          geometry="primitive: sphere; radius: 0;"
+          material="shader: flat; color: #0000F9;"
+          light="type: point;
+                 intensity: 1.0;
+                 color: #0000F9"
+          shadow
+          position="0.66 0 0.66">
+        </a-entity>
+
+        <a-entity
+          geometry="primitive: sphere; radius: 0;"
+          material="shader: flat; color: #86007D;"
+          light="type: point;
+                 intensity: 1.0;
+                 color: #86007D"
+          shadow
+          position="0.66 0 -0.66">
+        </a-entity>
+      </a-entity>
+
+      <a-entity gltf-model="#words" position="0 0.05 0.75" scale="0.2 0.2 0.2" xrextras-spin="speed: 5000; direction: reverse;" cubemap-static></a-entity>
+
+      <!--<a-cylinder position="-.04 .15 0.7" height="0.5" scale=".85 1 .85" open-ended="true" -->
+      <!--material="transparent: true; opacity: 0.7; blending: additive; side: double"></a-cylinder>-->
+      
+    </xrextras-face-attachment>
+
+    <xrextras-face-mesh material-resource="#face-mesh"></xrextras-face-mesh>
+    
+  </xrextras-faceanchor>
+  
+  <a-light type="ambient" intensity="0.25"></a-light>
+  
+</a-scene>

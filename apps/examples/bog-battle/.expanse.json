@@ -1,0 +1,1112 @@
+{
+  "objects": {
+    "05f67000-0b3d-4910-9e35-f9a71f26e094": {
+      "components": {
+        "335aa793-4e5e-46ec-bffa-a779a44e2992": {
+          "id": "335aa793-4e5e-46ec-bffa-a779a44e2992",
+          "name": "EnemyConfig",
+          "parameters": {
+            "animationSpeedScale": 0.75,
+            "asset": "//static.8thwall.app/assets/CloudEditor_BogBattle_Bug_v1_052924-7ji4vfu5i4.glb",
+            "attackAnimation": "attack",
+            "attackAnimationSpeedScale": 0.5,
+            "attackInterval": 1000,
+            "attackRange": 1.2,
+            "attackStrength": 1,
+            "hitAnimation": "hit",
+            "hitAnimationLength": 1000,
+            "hitAnimationSpeedScale": 1,
+            "idleAnimation": "Idle",
+            "idleAnimationSpeedScale": 0.75,
+            "moveAnimation": "walk",
+            "moveAnimationSpeedScale": 0.75,
+            "poofTexture": "//static.8thwall.app/assets/poof-ua1ku8cbhi.gif",
+            "scale": 12,
+            "speed": 0.0225,
+            "target": {
+              "id": "0647e629-ade7-42cb-b24f-2dcde939f293",
+              "type": "entity"
+            },
+            "targetFocus": 0.5
+          }
+        }
+      },
+      "geometry": null,
+      "id": "05f67000-0b3d-4910-9e35-f9a71f26e094",
+      "material": null,
+      "name": "EnemyConfig1",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "e0c55bf7-1223-449b-916e-812b76a5da0a",
+      "order": 1057
+    },
+    "0647e629-ade7-42cb-b24f-2dcde939f293": {
+      "components": {
+        "90684ec4-02bd-4de7-a099-0c11410bd5a0": {
+          "id": "90684ec4-02bd-4de7-a099-0c11410bd5a0",
+          "name": "EnemyGoal",
+          "parameters": {
+            "progressIndicator": {
+              "id": "4eb79e15-05e2-4db7-b8c9-abf46f264141",
+              "type": "entity"
+            }
+          }
+        },
+        "e703e0aa-f057-4d3b-94ba-1dfb20981e34": {
+          "id": "e703e0aa-f057-4d3b-94ba-1dfb20981e34",
+          "name": "Structure",
+          "parameters": {
+            "levelOneAsset": "//static.8thwall.app/assets/treasure-chest-r1airu32fr.glb",
+            "levelOneAttack": 0,
+            "levelOneAttackRange": 0,
+            "levelOneAttackRate": 0,
+            "levelOneCost": 2,
+            "levelOneHealth": 50,
+            "levelThreeAsset": "//static.8thwall.app/assets/CloudEditor_BogBattle_TreasureChest_v0_052524-i1pciu7nai.glb",
+            "levelThreeCost": 0,
+            "levelThreeHealth": 50,
+            "levelTwoAsset": "//static.8thwall.app/assets/CloudEditor_BogBattle_TreasureChest_v0_052524-i1pciu7nai.glb",
+            "levelTwoCost": 0,
+            "levelTwoHealth": 50,
+            "scale": 5,
+            "upgradeable": false,
+            "volume": 0.1,
+            "damageAudio": "//static.8thwall.app/assets/BogStructureDamage-bd47nau186.mp3",
+            "fireAudio": "//static.8thwall.app/assets/BogCannon-ooagok032e.mp3"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "0647e629-ade7-42cb-b24f-2dcde939f293",
+      "material": null,
+      "name": "Structure",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "0da3abfd-8dd7-4a12-aee8-3c766b1e3491": {
+      "audio": {
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "//static.8thwall.app/assets/BogBG-os6gonc1ue.mp3"
+        },
+        "volume": 0.3
+      },
+      "components": {
+        "1f4353a6-b6ed-46e2-b9b2-3f569485d4d1": {
+          "id": "1f4353a6-b6ed-46e2-b9b2-3f569485d4d1",
+          "name": "GrassField",
+          "parameters": {
+            "bladeCount": 10000,
+            "bladeHeight": 2,
+            "bladeHeightVariation": 0.3,
+            "bladeWidth": 0.3,
+            "grassTexture": "//static.8thwall.app/assets/grass-63p462i7n3.jpg",
+            "innerRadius": 16,
+            "planeTextureSize": 50,
+            "thickness": 5
+          }
+        }
+      },
+      "geometry": null,
+      "id": "0da3abfd-8dd7-4a12-aee8-3c766b1e3491",
+      "material": null,
+      "name": "GrassBorder",
+      "order": 82,
+      "parentId": "90a2d113-f70d-4be2-af0c-4daa8eb563ca",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    "26c61138-53ab-40e8-8165-40e049b938b6": {
+      "components": {
+        "0c6e1049-7798-45e4-93ca-adbae334f23f": {
+          "id": "0c6e1049-7798-45e4-93ca-adbae334f23f",
+          "name": "StructureConfig",
+          "parameters": {
+            "currentLevel": 2,
+            "damageAudio": "//static.8thwall.app/assets/BogStructureDamage-bd47nau186.mp3",
+            "fireAudio": "//static.8thwall.app/assets/BogCannon-ooagok032e.mp3",
+            "levelOneAsset": "//static.8thwall.app/assets/CloudEditor_BogBattle_WoodenFence_v0_052724-hhjbte65t9.glb",
+            "levelOneAttack": 0,
+            "levelOneAttackRange": 0,
+            "levelOneAttackRate": 0,
+            "levelOneCost": 1,
+            "levelOneHealth": 5,
+            "levelThreeAsset": "//static.8thwall.app/assets/CloudEditor_BogBattle_Tower_v0_052724-ble7nhi4a6.glb",
+            "levelThreeAttack": 3,
+            "levelThreeAttackRange": 5,
+            "levelThreeAttackRate": 0.5,
+            "levelThreeCost": 10,
+            "levelThreeHealth": 12,
+            "levelTwoAsset": "//static.8thwall.app/assets/CloudEditor_BogBattle_StoneWall_v0_052724-1lqphi7yla.glb",
+            "levelTwoAttack": 0,
+            "levelTwoAttackRange": 0,
+            "levelTwoAttackRate": 0,
+            "levelTwoCost": 5,
+            "levelTwoHealth": 8,
+            "scale": 1.6,
+            "upgradeable": true,
+            "volume": 0.5
+          }
+        }
+      },
+      "geometry": null,
+      "id": "26c61138-53ab-40e8-8165-40e049b938b6",
+      "material": null,
+      "name": "StructureConfig2",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "e0c55bf7-1223-449b-916e-812b76a5da0a",
+      "order": 990
+    },
+    "31d5d6ba-1c96-4ff6-a332-ce2f5bd8659c": {
+      "components": {
+        "8b341131-6c49-4a47-b13f-bee454414264": {
+          "id": "8b341131-6c49-4a47-b13f-bee454414264",
+          "name": "InfoBadge",
+          "parameters": {
+            "icon": "//static.8thwall.app/assets/Coin-y34nm2i18j.png",
+            "top": "50px"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "31d5d6ba-1c96-4ff6-a332-ce2f5bd8659c",
+      "material": null,
+      "name": "ResourceBadge",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "e0c55bf7-1223-449b-916e-812b76a5da0a",
+      "order": 968
+    },
+    "3adc35e8-e216-4596-9f33-bfd585f63ad0": {
+      "components": {
+        "335aa793-4e5e-46ec-bffa-a779a44e2992": {
+          "id": "335aa793-4e5e-46ec-bffa-a779a44e2992",
+          "name": "EnemyConfig",
+          "parameters": {
+            "animationSpeedScale": 0.75,
+            "asset": "//static.8thwall.app/assets/CloudEditor_BogBattle_Bug_v0_053124-omogoic7ce.glb",
+            "attackAnimation": "Attack",
+            "attackAnimationSpeedScale": 0.75,
+            "attackInterval": 4000,
+            "attackRange": 7,
+            "attackStrength": 2,
+            "deathAudio": "//static.8thwall.app/assets/BogEnemyDeath-lpdelku3zc.mp3",
+            "hitAnimation": "Damage & die",
+            "hitAnimationLength": 650,
+            "hitAnimationSpeedScale": 0.75,
+            "idleAnimation": "Fly / movement",
+            "idleAnimationSpeedScale": 0.75,
+            "moveAnimation": "Fly / movement",
+            "moveAnimationSpeedScale": 0.75,
+            "poofTexture": "//static.8thwall.app/assets/poof-ua1ku8cbhi.gif",
+            "scale": 1,
+            "speed": 0.0225,
+            "target": {
+              "id": "0647e629-ade7-42cb-b24f-2dcde939f293",
+              "type": "entity"
+            },
+            "targetFocus": 0.5
+          }
+        }
+      },
+      "geometry": null,
+      "id": "3adc35e8-e216-4596-9f33-bfd585f63ad0",
+      "material": null,
+      "name": "EnemyConfig2",
+      "order": 90,
+      "parentId": "05f67000-0b3d-4910-9e35-f9a71f26e094",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "3d98f806-d50f-48a3-9f46-b20fbf906d4b": {
+      "components": {
+        "15aee417-5185-4198-9555-1b14d261ca88": {
+          "id": "15aee417-5185-4198-9555-1b14d261ca88",
+          "name": "createGridComponent",
+          "parameters": {
+            "columns": 20,
+            "parent": {
+              "id": "90a2d113-f70d-4be2-af0c-4daa8eb563ca",
+              "type": "entity"
+            },
+            "rows": 20,
+            "textureUrl": "//static.8thwall.app/assets/grid-tile-xnfmxj64lj.png"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "3d98f806-d50f-48a3-9f46-b20fbf906d4b",
+      "material": null,
+      "name": "GridController",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "e0c55bf7-1223-449b-916e-812b76a5da0a",
+      "order": 819
+    },
+    "4275405b-d4a0-4f46-af9c-180e5dc60c1a": {
+      "components": {
+        "2680ecba-4491-4ba3-9b5d-2512b31602ef": {
+          "id": "2680ecba-4491-4ba3-9b5d-2512b31602ef",
+          "name": "EnemySpawnCycle",
+          "parameters": {
+            "blinkPeriod": 1000,
+            "cycleDuration": 15,
+            "icon": "//static.8thwall.app/assets/Alert-z8aob6o32k.png",
+            "isActive": true,
+            "right": "30px"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "4275405b-d4a0-4f46-af9c-180e5dc60c1a",
+      "material": null,
+      "name": "SpawnCycle",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "e0c55bf7-1223-449b-916e-812b76a5da0a",
+      "order": 812
+    },
+    "4eb79e15-05e2-4db7-b8c9-abf46f264141": {
+      "components": {
+        "c709dad9-70d4-45fd-9cd5-8f361665f8bc": {
+          "id": "c709dad9-70d4-45fd-9cd5-8f361665f8bc",
+          "name": "Indicator",
+          "parameters": {
+            "barBackground": "//static.8thwall.app/assets/Health-ade6yau4a5.png",
+            "camera": {
+              "id": "8964f09f-f883-4bd4-adbe-83a3d1ee810f",
+              "type": "entity"
+            },
+            "progress": 0.5,
+            "right": "10px",
+            "top": "120px"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "4eb79e15-05e2-4db7-b8c9-abf46f264141",
+      "material": null,
+      "name": "Health Indicator",
+      "position": [
+        0,
+        0.7999999999999999,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "e0c55bf7-1223-449b-916e-812b76a5da0a",
+      "order": 717
+    },
+    "606a876f-e1cc-471b-894f-aaf6591954ad": {
+      "components": {
+        "83dcc184-2b21-4251-9746-2e268075aca5": {
+          "id": "83dcc184-2b21-4251-9746-2e268075aca5",
+          "name": "ResourceManager",
+          "parameters": {
+            "infoBadge": {
+              "id": "31d5d6ba-1c96-4ff6-a332-ce2f5bd8659c",
+              "type": "entity"
+            },
+            "model": "//static.8thwall.app/assets/coin-6fd46ci3z3.glb",
+            "resources": 30,
+            "scale": 10,
+            "spawnInterval": 3000
+          }
+        }
+      },
+      "geometry": null,
+      "hidden": false,
+      "id": "606a876f-e1cc-471b-894f-aaf6591954ad",
+      "material": null,
+      "name": "ResourceManager",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "e0c55bf7-1223-449b-916e-812b76a5da0a",
+      "order": 612
+    },
+    "6f01ba7f-2484-4c44-9a85-c3f0121f6a9a": {
+      "components": {
+        "8b730257-8212-4abc-b3ae-4dd3c83c0a9e": {
+          "id": "8b730257-8212-4abc-b3ae-4dd3c83c0a9e",
+          "name": "BuildMode",
+          "parameters": {
+            "attack1": "//static.8thwall.app/assets/a1-ly7elsc25c.png",
+            "attack1Object": {
+              "id": "0647e629-ade7-42cb-b24f-2dcde939f293",
+              "type": "entity"
+            },
+            "attack2": "//static.8thwall.app/assets/a2-jvpd7pu7nb.png",
+            "attack2Object": {
+              "id": "0647e629-ade7-42cb-b24f-2dcde939f293",
+              "type": "entity"
+            },
+            "defense1": "//static.8thwall.app/assets/d1-w6am85032i.png",
+            "defense1Object": {
+              "id": "0647e629-ade7-42cb-b24f-2dcde939f293",
+              "type": "entity"
+            },
+            "defense2": "//static.8thwall.app/assets/d2-bsl7nnc6f6.png",
+            "defense2Object": {
+              "id": "0647e629-ade7-42cb-b24f-2dcde939f293",
+              "type": "entity"
+            },
+            "defense3": "//static.8thwall.app/assets/d3-k6xdw50a3b.png",
+            "defense3Object": {
+              "id": "0647e629-ade7-42cb-b24f-2dcde939f293",
+              "type": "entity"
+            },
+            "structure1Config": {
+              "id": "aa0e69e9-7e12-4dd6-b26a-8fe41f55b9dc",
+              "type": "entity"
+            },
+            "structure2Config": {
+              "id": "26c61138-53ab-40e8-8165-40e049b938b6",
+              "type": "entity"
+            },
+            "structure3Config": {
+              "id": "b5975b8c-0f00-47a7-aec1-17e30c108044",
+              "type": "entity"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "6f01ba7f-2484-4c44-9a85-c3f0121f6a9a",
+      "material": null,
+      "name": "BuildMode",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "e0c55bf7-1223-449b-916e-812b76a5da0a",
+      "order": 568
+    },
+    "7c04c30a-584e-459c-8901-2b2a6e873288": {
+      "components": {
+        "c19f1886-0755-4f10-9863-74b63fe1f93a": {
+          "id": "c19f1886-0755-4f10-9863-74b63fe1f93a",
+          "name": "EnemySpawner",
+          "parameters": {
+            "damageVolume": 0.5,
+            "enemyAsset1": "//static.8thwall.app/assets/CloudEditor_Crocodile_Animation_v0_052724-ytcnmo63oj.glb",
+            "enemyAsset2": "//static.8thwall.app/assets/CloudEditor_BogBattle_Bug_v0_053124-omogoic7ce.glb",
+            "enemyAudio": "//static.8thwall.app/assets/BogEnemyDamage-xucmxp03oj.mp3",
+            "enemyConfig1": {
+              "id": "05f67000-0b3d-4910-9e35-f9a71f26e094",
+              "type": "entity"
+            },
+            "enemyConfig2": {
+              "id": "3adc35e8-e216-4596-9f33-bfd585f63ad0",
+              "type": "entity"
+            },
+            "enemyTarget": {
+              "id": "0647e629-ade7-42cb-b24f-2dcde939f293",
+              "type": "entity"
+            },
+            "isActive": false,
+            "parent": {
+              "id": "90a2d113-f70d-4be2-af0c-4daa8eb563ca",
+              "type": "entity"
+            },
+            "spawnRadius": 19,
+            "spawnRate": 0.15,
+            "spawnWeight1": 1,
+            "spawnWeight2": 1
+          }
+        }
+      },
+      "geometry": null,
+      "id": "7c04c30a-584e-459c-8901-2b2a6e873288",
+      "material": null,
+      "name": "EnemySpawner",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "e0c55bf7-1223-449b-916e-812b76a5da0a",
+      "order": 477
+    },
+    "8964f09f-f883-4bd4-adbe-83a3d1ee810f": {
+      "camera": {
+        "type": "perspective"
+      },
+      "components": {
+        "f22aaabc-e087-4833-b222-e87a2d7eb772": {
+          "id": "f22aaabc-e087-4833-b222-e87a2d7eb772",
+          "name": "CameraNav",
+          "parameters": {
+            "factor": 20
+          }
+        }
+      },
+      "geometry": null,
+      "id": "8964f09f-f883-4bd4-adbe-83a3d1ee810f",
+      "material": null,
+      "name": "Camera",
+      "position": [
+        11.600000000000017,
+        13.899999999999974,
+        10.82267146428611
+      ],
+      "rotation": [
+        0.14644660940672627,
+        -0.8535533905932737,
+        0.3535533905932738,
+        0.35355339059327384
+      ],
+      "scale": [
+        8,
+        8,
+        8
+      ]
+    },
+    "90a2d113-f70d-4be2-af0c-4daa8eb563ca": {
+      "audio": {
+        "src": {
+          "type": "url",
+          "url": "//static.8thwall.app/assets/BogAmbient-p2chd1o3oe.mp3"
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "id": "90a2d113-f70d-4be2-af0c-4daa8eb563ca",
+      "material": null,
+      "name": "Root",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "98c7dc8d-e29c-4389-86ae-6eaf912c3af4": {
+      "components": {},
+      "geometry": {
+        "radius": 1,
+        "type": "circle"
+      },
+      "hidden": false,
+      "id": "98c7dc8d-e29c-4389-86ae-6eaf912c3af4",
+      "material": {
+        "color": "#0b343e",
+        "type": "basic"
+      },
+      "name": "Circle",
+      "position": [
+        0,
+        -0.05,
+        0
+      ],
+      "rotation": [
+        -0.7071067811865475,
+        0,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        24,
+        24,
+        24
+      ]
+    },
+    "9c311ef2-d1e4-41df-aadd-f0b9a451fe5c": {
+      "components": {},
+      "geometry": null,
+      "id": "9c311ef2-d1e4-41df-aadd-f0b9a451fe5c",
+      "light": {
+        "intensity": 1,
+        "type": "ambient"
+      },
+      "material": null,
+      "name": "Ambient Light",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "aa0e69e9-7e12-4dd6-b26a-8fe41f55b9dc": {
+      "components": {
+        "0c6e1049-7798-45e4-93ca-adbae334f23f": {
+          "id": "0c6e1049-7798-45e4-93ca-adbae334f23f",
+          "name": "StructureConfig",
+          "parameters": {
+            "currentLevel": 1,
+            "damageAudio": "//static.8thwall.app/assets/BogStructureDamage-bd47nau186.mp3",
+            "fireAudio": "//static.8thwall.app/assets/BogCannon-ooagok032e.mp3",
+            "levelOneAsset": "//static.8thwall.app/assets/CloudEditor_BogBattle_WoodenFence_v0_052724-hhjbte65t9.glb",
+            "levelOneAttack": 0,
+            "levelOneAttackRange": 0,
+            "levelOneAttackRate": 0,
+            "levelOneCost": 1,
+            "levelOneHealth": 5,
+            "levelThreeAsset": "//static.8thwall.app/assets/CloudEditor_BogBattle_Tower_v0_052724-ble7nhi4a6.glb",
+            "levelThreeAttack": 3,
+            "levelThreeAttackRange": 5,
+            "levelThreeAttackRate": 0.5,
+            "levelThreeCost": 10,
+            "levelThreeHealth": 12,
+            "levelTwoAsset": "//static.8thwall.app/assets/CloudEditor_BogBattle_StoneWall_v0_052724-1lqphi7yla.glb",
+            "levelTwoAttack": 0,
+            "levelTwoAttackRange": 0,
+            "levelTwoAttackRate": 0,
+            "levelTwoCost": 5,
+            "levelTwoHealth": 8,
+            "scale": 1.6,
+            "upgradeable": true,
+            "volume": 0.5
+          }
+        }
+      },
+      "geometry": null,
+      "id": "aa0e69e9-7e12-4dd6-b26a-8fe41f55b9dc",
+      "material": null,
+      "name": "StructureConfig1",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "e0c55bf7-1223-449b-916e-812b76a5da0a",
+      "order": 516
+    },
+    "ac1989e3-3b71-49e2-a05f-e682aeb18c36": {
+      "components": {},
+      "disabled": false,
+      "geometry": null,
+      "id": "ac1989e3-3b71-49e2-a05f-e682aeb18c36",
+      "light": {
+        "castShadow": false,
+        "intensity": 1,
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "type": "directional"
+      },
+      "material": null,
+      "name": "Directional Light",
+      "position": [
+        20.19999999999998,
+        20,
+        -21.800000000000004
+      ],
+      "rotation": [
+        2.3432602026631493e-17,
+        -0.9238795325112867,
+        0.3826834323650898,
+        5.657130561438501e-17
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "b5975b8c-0f00-47a7-aec1-17e30c108044": {
+      "components": {
+        "0c6e1049-7798-45e4-93ca-adbae334f23f": {
+          "id": "0c6e1049-7798-45e4-93ca-adbae334f23f",
+          "name": "StructureConfig",
+          "parameters": {
+            "currentLevel": 3,
+            "damageAudio": "//static.8thwall.app/assets/BogStructureDamage-bd47nau186.mp3",
+            "fireAudio": "//static.8thwall.app/assets/BogCannon-ooagok032e.mp3",
+            "levelOneAsset": "//static.8thwall.app/assets/CloudEditor_BogBattle_WoodenFence_v0_052724-hhjbte65t9.glb",
+            "levelOneAttack": 0,
+            "levelOneAttackRange": 0,
+            "levelOneAttackRate": 0,
+            "levelOneCost": 1,
+            "levelOneHealth": 5,
+            "levelThreeAsset": "//static.8thwall.app/assets/CloudEditor_BogBattle_Tower_v0_052724-ble7nhi4a6.glb",
+            "levelThreeAttack": 3,
+            "levelThreeAttackRange": 8,
+            "levelThreeAttackRate": 0.5,
+            "levelThreeCost": 10,
+            "levelThreeHealth": 12,
+            "levelTwoAsset": "//static.8thwall.app/assets/CloudEditor_BogBattle_StoneWall_v0_052724-1lqphi7yla.glb",
+            "levelTwoAttack": 0,
+            "levelTwoAttackRange": 0,
+            "levelTwoAttackRate": 0,
+            "levelTwoCost": 5,
+            "levelTwoHealth": 8,
+            "scale": 1.6,
+            "upgradeable": true,
+            "volume": 0.5
+          }
+        }
+      },
+      "geometry": null,
+      "id": "b5975b8c-0f00-47a7-aec1-17e30c108044",
+      "material": null,
+      "name": "StructureConfig3",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "e0c55bf7-1223-449b-916e-812b76a5da0a",
+      "order": 377
+    },
+    "bc5ee635-33d4-4ea6-99d1-01952ef94e97": {
+      "components": {
+        "d0a120e0-4825-4c6e-a2c9-d63d984b5b02": {
+          "id": "d0a120e0-4825-4c6e-a2c9-d63d984b5b02",
+          "name": "AttackLoop",
+          "parameters": {}
+        }
+      },
+      "geometry": null,
+      "id": "bc5ee635-33d4-4ea6-99d1-01952ef94e97",
+      "material": null,
+      "name": "AttackLoop",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "e3216e9a-7b54-42a7-b4c0-2f2cb5b853f9": {
+      "components": {
+        "09ee9ee2-bb0a-4c1e-b110-b7af422b2ef8": {
+          "id": "09ee9ee2-bb0a-4c1e-b110-b7af422b2ef8",
+          "name": "MenuConfig",
+          "parameters": {
+            "actionImage": "//static.8thwall.app/assets/Upgrade-1q6plo1uld.png",
+            "backgroundImage": "//static.8thwall.app/assets/PopUp-larel8c89c.png",
+            "camera": {
+              "id": "8964f09f-f883-4bd4-adbe-83a3d1ee810f",
+              "type": "entity"
+            },
+            "cancelImage": "//static.8thwall.app/assets/Close-oikgof064e.png",
+            "deleteImage": "//static.8thwall.app/assets/Delete-9sm69nc6q5.png",
+            "rotateImage": "//static.8thwall.app/assets/Refresh-fsrafnc898.png",
+            "upgradeImage": "//static.8thwall.app/assets/Upgrade-1q6plo1uld.png"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "e3216e9a-7b54-42a7-b4c0-2f2cb5b853f9",
+      "material": null,
+      "name": "MenuConfig",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "e0c55bf7-1223-449b-916e-812b76a5da0a",
+      "order": 349
+    },
+    "ed15043e-0d32-4045-ad30-6a42f827316a": {
+      "components": {
+        "5dc62dc3-ba27-48fe-8919-8c4826e6a878": {
+          "id": "5dc62dc3-ba27-48fe-8919-8c4826e6a878",
+          "name": "Environment",
+          "parameters": {
+            "enableACES": false,
+            "enableFog": false,
+            "enableShadows": false,
+            "skyBoxNegativeXTexture": "//static.8thwall.app/assets/nx-33s232i8k1.jpg",
+            "skyBoxNegativeYTexture": "//static.8thwall.app/assets/ny-qxui2ri96f.jpg",
+            "skyBoxNegativeZTexture": "//static.8thwall.app/assets/nz-g15b4u1j9c.jpg",
+            "skyBoxPositiveXTexture": "//static.8thwall.app/assets/px-ynhnmj657j.jpg",
+            "skyBoxPositiveYTexture": "//static.8thwall.app/assets/py-b5n7n46716.jpg",
+            "skyBoxPositiveZTexture": "//static.8thwall.app/assets/pz-ecz9qa0ap8.jpg"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "ed15043e-0d32-4045-ad30-6a42f827316a",
+      "material": null,
+      "name": "Environment",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "e0c55bf7-1223-449b-916e-812b76a5da0a",
+      "order": 278
+    },
+    "ef3cecbc-b8d0-4c83-a716-0e918b660c02": {
+      "components": {
+        "8cf96945-2644-4a23-adf3-cccfd38b3581": {
+          "id": "8cf96945-2644-4a23-adf3-cccfd38b3581",
+          "name": "GlobalConfig",
+          "parameters": {
+            "actionImage": "//static.8thwall.app/assets/upgrade-button-roeirk04af.png",
+            "cancelImage": "//static.8thwall.app/assets/cancel-button-zn3obj6xkf.png",
+            "deleteImage": "//static.8thwall.app/assets/delete-button-q6ji2505tf.png",
+            "xSize": 11,
+            "zSize": 11
+          }
+        }
+      },
+      "geometry": null,
+      "id": "ef3cecbc-b8d0-4c83-a716-0e918b660c02",
+      "material": null,
+      "name": "GlobalConfig",
+      "order": 28,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "e0c55bf7-1223-449b-916e-812b76a5da0a"
+    },
+    "f511824c-42e4-4b92-8030-9719e9977e1f": {
+      "components": {
+        "6bbac382-4b84-47a7-bf56-984ce922ae1d": {
+          "id": "6bbac382-4b84-47a7-bf56-984ce922ae1d",
+          "name": "Ground",
+          "parameters": {
+            "b1": 62,
+            "b2": 57,
+            "g1": 52,
+            "g2": 48,
+            "parent": {
+              "id": "90a2d113-f70d-4be2-af0c-4daa8eb563ca",
+              "type": "entity"
+            },
+            "r1": 11,
+            "r2": 12,
+            "tileOne": "//static.8thwall.app/assets/TCom_Grass0027_1_seamless_S-wd4m8au18i.jpg",
+            "tileThree": "//static.8thwall.app/assets/TCom_Grass0140_1_seamless_S-fbjaf965t8.jpg",
+            "tileTwo": "//static.8thwall.app/assets/TCom_Grass0120_1_seamless_S-pqehdlo4ae.jpg"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "f511824c-42e4-4b92-8030-9719e9977e1f",
+      "material": null,
+      "name": "Ground",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "e0c55bf7-1223-449b-916e-812b76a5da0a",
+      "order": 202
+    },
+    "f8b5ef07-0083-4a8f-be48-5608bc3ca7b8": {
+      "components": {
+        "8d4f44c1-b61a-4172-a11c-4d4f2de169c7": {
+          "id": "8d4f44c1-b61a-4172-a11c-4d4f2de169c7",
+          "name": "TrayMenu",
+          "parameters": {
+            "buildIcon": "//static.8thwall.app/assets/Build-mc3faa0xcu.png",
+            "structureIcon1": "//static.8thwall.app/assets/Fence-htjbto65t9.png",
+            "structureIcon2": "//static.8thwall.app/assets/Wall_Small-1a1p8cbl50.png",
+            "structureIcon3": "//static.8thwall.app/assets/Wall_Big-fijaff05t8.png"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "f8b5ef07-0083-4a8f-be48-5608bc3ca7b8",
+      "material": null,
+      "name": "BuildMenu",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "e0c55bf7-1223-449b-916e-812b76a5da0a",
+      "order": 79
+    },
+    "e0c55bf7-1223-449b-916e-812b76a5da0a": {
+      "id": "e0c55bf7-1223-449b-916e-812b76a5da0a",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {},
+      "name": "EDIT COMPONENTS IN HERE"
+    }
+  },
+  "activeCamera": "8964f09f-f883-4bd4-adbe-83a3d1ee810f",
+  "history": null
+}

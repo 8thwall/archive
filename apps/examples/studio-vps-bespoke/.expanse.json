@@ -1,0 +1,225 @@
+{
+  "objects": {
+    "47699d9e-18a5-4f88-a4f9-b8be92e8f74a": {
+      "components": {},
+      "geometry": null,
+      "id": "47699d9e-18a5-4f88-a4f9-b8be92e8f74a",
+      "light": {
+        "type": "ambient"
+      },
+      "material": null,
+      "name": "Ambient Light",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "order": 0.34633694965140926,
+      "parentId": "e4bde5d1-83f0-489f-bc23-f322a3163af2"
+    },
+    "a608ddd9-9379-464d-966f-5d8d8674c83c": {
+      "camera": {
+        "type": "perspective",
+        "xr": {
+          "desktop": "disabled",
+          "xrCameraType": "world",
+          "headset": "AR",
+          "phone": "AR",
+          "world": {
+            "enableVps": true
+          }
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "id": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "material": null,
+      "name": "Camera",
+      "position": [
+        1.6727950034148567,
+        1.5494421338197388,
+        6.820029855918676
+      ],
+      "rotation": [
+        -1.8412919444518387e-17,
+        0.9537169517857893,
+        -0.30070579621354565,
+        -5.839832572618051e-17
+      ],
+      "scale": [
+        0.9999998646558023,
+        0.9999999931513284,
+        0.9999998715044741
+      ],
+      "order": 3.0192984778650933,
+      "parentId": "e4bde5d1-83f0-489f-bc23-f322a3163af2"
+    },
+    "ac1989e3-3b71-49e2-a05f-e682aeb18c36": {
+      "components": {},
+      "geometry": null,
+      "id": "ac1989e3-3b71-49e2-a05f-e682aeb18c36",
+      "light": {
+        "intensity": 1,
+        "type": "directional",
+        "shadowBias": 0,
+        "color": "#fff9b8"
+      },
+      "material": null,
+      "name": "Directional Light",
+      "position": [
+        20,
+        20,
+        10
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "order": 2.346336949651409,
+      "parentId": "e4bde5d1-83f0-489f-bc23-f322a3163af2"
+    },
+    "220ace3c-5dca-4867-a3f0-2ac728df9d30": {
+      "id": "220ace3c-5dca-4867-a3f0-2ac728df9d30",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {
+        "098a2ec2-c6d3-47bc-8f67-c23c6e8804cf": {
+          "id": "098a2ec2-c6d3-47bc-8f67-c23c6e8804cf",
+          "name": "location-anchor",
+          "parameters": {}
+        }
+      },
+      "name": "California Park Sign",
+      "location": {
+        "name": "california-p-4a18",
+        "poiId": "4a18141f761735ccab53505d8d001340.16",
+        "lat": 37.429632999999995,
+        "lng": -122.14357,
+        "title": "California Park Sign",
+        "anchorNodeId": "5424B15C125949818151F99752D1E8A1",
+        "anchorSpaceId": "7FF3C3B80B144BFCBA7B796009C7F572",
+        "imageUrl": "https://lh3.googleusercontent.com/aN4o8tXc-YRCyesqU5p_MiMqEaOK9z60OR7Pot1ASF5IP2KcYMiTTlaccefGfwyhoNAHQ9Lnq1Z7xrD_iuqRDEVHCQ7Otw3rbiqzfFPang",
+        "anchorPayload": "ChUIk9COmL7o+qR0EIWx+PbCjou11wEY6pCPp9GqiQMqKAoWCNTIxOWlotakgQEQgaPlv6mqtPShARIJCgASBSUAAIA/HQAAgD8yGQoFJQAAgD8RAAAAoP22QkAZAAAAwDCJXsA="
+      },
+      "order": 3.346336949651409,
+      "hidden": false,
+      "parentId": "e4bde5d1-83f0-489f-bc23-f322a3163af2"
+    },
+    "7732ff22-2cb7-44af-ac59-4af458f526e0": {
+      "id": "7732ff22-2cb7-44af-ac59-4af458f526e0",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "220ace3c-5dca-4867-a3f0-2ac728df9d30",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/animated-model.glb"
+        },
+        "animationClip": "*",
+        "loop": true
+      },
+      "name": "animated-model",
+      "order": 2.579617695112203,
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "4ecc631c-5637-48d9-8627-5c6dc249503a": {
+      "id": "4ecc631c-5637-48d9-8627-5c6dc249503a",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "material": {
+        "type": "hider"
+      },
+      "parentId": "220ace3c-5dca-4867-a3f0-2ac728df9d30",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/mesh.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "hider-mesh",
+      "hidden": false
+    }
+  },
+  "spaces": {
+    "e4bde5d1-83f0-489f-bc23-f322a3163af2": {
+      "id": "e4bde5d1-83f0-489f-bc23-f322a3163af2",
+      "name": "Default",
+      "activeCamera": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "reflections": {
+        "type": "url",
+        "url": "https://cdn.8thwall.com/web/assets/envmap/hilly_terrain_01_1k-m89fuwlx.hdr"
+      }
+    }
+  },
+  "entrySpaceId": "e4bde5d1-83f0-489f-bc23-f322a3163af2",
+  "historyVersion": "mapmvty2"
+}

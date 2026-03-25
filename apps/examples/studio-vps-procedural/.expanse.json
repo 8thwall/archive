@@ -1,0 +1,159 @@
+{
+  "objects": {
+    "47699d9e-18a5-4f88-a4f9-b8be92e8f74a": {
+      "components": {},
+      "geometry": null,
+      "id": "47699d9e-18a5-4f88-a4f9-b8be92e8f74a",
+      "light": {
+        "type": "ambient"
+      },
+      "material": null,
+      "name": "Ambient Light",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "ad8a9e0f-166f-46fd-8fb1-691321820fa5",
+      "order": 0.5834390900087464
+    },
+    "a608ddd9-9379-464d-966f-5d8d8674c83c": {
+      "camera": {
+        "type": "perspective",
+        "xr": {
+          "desktop": "disabled",
+          "xrCameraType": "world",
+          "headset": "AR",
+          "phone": "AR",
+          "world": {
+            "enableVps": true
+          }
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "id": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "material": null,
+      "name": "Camera",
+      "position": [
+        73,
+        2,
+        5
+      ],
+      "rotation": [
+        -1.8412919444518387e-17,
+        0.9537169517857893,
+        -0.30070579621354565,
+        -5.839832572618051e-17
+      ],
+      "scale": [
+        0.9999998646558023,
+        0.9999999931513284,
+        0.9999998715044741
+      ],
+      "parentId": "ad8a9e0f-166f-46fd-8fb1-691321820fa5",
+      "order": 2.1251586350131197
+    },
+    "ac1989e3-3b71-49e2-a05f-e682aeb18c36": {
+      "components": {},
+      "geometry": null,
+      "id": "ac1989e3-3b71-49e2-a05f-e682aeb18c36",
+      "light": {
+        "intensity": 1,
+        "type": "directional",
+        "shadowBias": 0
+      },
+      "material": null,
+      "name": "Directional Light",
+      "position": [
+        20,
+        20,
+        10
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "ad8a9e0f-166f-46fd-8fb1-691321820fa5",
+      "order": 1.5834390900087465
+    },
+    "3544aa74-e4a5-46f7-a395-a7f210e17b6a": {
+      "id": "3544aa74-e4a5-46f7-a395-a7f210e17b6a",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {
+        "b060c898-f4d9-475b-aded-700884df8512": {
+          "id": "b060c898-f4d9-475b-aded-700884df8512",
+          "name": "location-anchor",
+          "parameters": {}
+        },
+        "95cabc6f-e09f-4ecd-9804-0a32f9e57dc4": {
+          "id": "95cabc6f-e09f-4ecd-9804-0a32f9e57dc4",
+          "name": "Colorful Shader",
+          "parameters": {}
+        }
+      },
+      "name": "California Avenue Fountain",
+      "location": {
+        "name": "california-a-7877",
+        "poiId": "7877f2cd7503498ab7cf4a46d40c1532.16",
+        "lat": 37.428995,
+        "lng": -122.142552,
+        "title": "California Avenue Fountain",
+        "anchorNodeId": "F387E0429D334D989DB7139AFC12BF72",
+        "anchorSpaceId": "A6C9C8BE53DB4866B031C8CABEE37061",
+        "imageUrl": "https://lh3.googleusercontent.com/o_7EwY0csf4S2tPsZjZN4hHrtaRgM9vVOPEXA-MG3QMzsYqoQ0rYFTgDtxrKqmfXbsEKP1vgrJt6nJSiwcGR0YNo0lY",
+        "anchorPayload": "ChUI4I2swN2m2KeoARCv/+KIrZLMsiwYiuGNl5yniQMqJwoVCPOPgpfU88ymmAEQne/O0MnfxN9yEgkKABIFJQAAgD8dAACAPzIZCgUlAACAPxEAAADA6rZCQBkAAABgH4lewA=="
+      },
+      "parentId": "ad8a9e0f-166f-46fd-8fb1-691321820fa5",
+      "order": 2.5834390900087465
+    }
+  },
+  "spaces": {
+    "ad8a9e0f-166f-46fd-8fb1-691321820fa5": {
+      "id": "ad8a9e0f-166f-46fd-8fb1-691321820fa5",
+      "name": "Default",
+      "activeCamera": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "reflections": {
+        "type": "url",
+        "url": "https://cdn.8thwall.com/web/assets/envmap/basic_env_map-m9hqpneh.jpg"
+      }
+    }
+  },
+  "entrySpaceId": "ad8a9e0f-166f-46fd-8fb1-691321820fa5",
+  "historyVersion": "maplw594"
+}

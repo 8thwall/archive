@@ -1,0 +1,7 @@
+import './spin'
+import './blink'
+import './delete-after'
+import './orbit'
+import './hold-drag'
+import './walk-to-click'
+import './moveOnSpacebar'

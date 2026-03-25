@@ -1,0 +1,72 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<div id="container">
+  <div id="score">
+    <h2>Score:</h2>
+    <h2>0</h2>
+  </div>
+  <div id="lives">
+    <div id="filled">
+      <img src="./assets/life.png" />
+      <img src="./assets/life.png" />
+      <img src="./assets/life.png" />
+    </div>
+    <div id="outline">
+      <img src="./assets/dead.png" class="hidden" />
+      <img src="./assets/dead.png" class="hidden" />
+      <img src="./assets/dead.png" class="hidden" />
+    </div>
+  </div>
+</div>
+
+<a-scene
+  xrextras-loading
+  xrextras-runtime-error
+  hand-coaching-overlay
+  renderer="colorManagement: true"
+  landing-page
+  xrhand="allowedDevices: any"
+  ui>
+  <a-assets>
+    <a-asset-item id="green" src="./assets/green.glb"></a-asset-item>
+    <a-asset-item id="orange" src="./assets/orange.glb"></a-asset-item>
+    <a-asset-item id="red" src="./assets/red.glb"></a-asset-item>
+    <a-asset-item id="pumpkin" src="./assets/pumpkin.glb"></a-asset-item>
+  </a-assets>
+
+  <a-camera position="0 2 0"></a-camera>
+
+  <!-- candy -->
+  <a-entity
+    id="greenCandy"
+    gltf-model="#green"
+    position="0 2.5 -0.4"
+    scale="0.15 0.15 0.15"
+    proximity></a-entity>
+  <a-entity
+    id="orangeCandy"
+    gltf-model="#orange"
+    position="0 2.5 -0.4"
+    scale="0.15 0.15 0.15"
+    proximity></a-entity>
+  <a-entity
+    id="redCandy"
+    gltf-model="#red"
+    position="0 2.5 -0.4"
+    scale="0.15 0.15 0.15"
+    proximity></a-entity>
+
+  <xrextras-hand-anchor id="hand">
+    <xrextras-hand-occluder show="false" adjustment="0.0025"></xrextras-hand-occluder>
+
+    <xrextras-hand-attachment point="palm" pointType="inner">
+      <a-entity position="0 0 0.05" rotation="90 0 0">
+        <a-entity
+          id="bowlEl"
+          scale="0.2 0.2 0.2"
+          rotation="0 -45 0"
+          gltf-model="#pumpkin"></a-entity>
+      </a-entity>
+    </xrextras-hand-attachment>
+  </xrextras-hand-anchor>
+</a-scene>

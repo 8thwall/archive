@@ -1,0 +1,34 @@
+body {
+  font-family: sans-serif;  
+}
+
+#swapBtn {
+  all: unset;
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #AD50FF;
+  color: white;
+  border-radius: 20px;
+  padding: 12px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+#mapScene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+#arScene {
+  all: unset;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}

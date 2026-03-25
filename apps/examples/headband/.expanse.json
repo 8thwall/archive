@@ -1,0 +1,305 @@
+{
+  "entrySpaceId": "8ebc8a8e-63e0-46eb-b443-c22ff469d45b",
+  "objects": {
+    "47699d9e-18a5-4f88-a4f9-b8be92e8f74a": {
+      "components": {},
+      "geometry": null,
+      "id": "47699d9e-18a5-4f88-a4f9-b8be92e8f74a",
+      "light": {
+        "type": "ambient",
+        "intensity": 0.7
+      },
+      "material": null,
+      "name": "Ambient Light",
+      "parentId": "8ebc8a8e-63e0-46eb-b443-c22ff469d45b",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "order": -3.6312301906276625,
+      "hidden": false
+    },
+    "a608ddd9-9379-464d-966f-5d8d8674c83c": {
+      "camera": {
+        "allowedDevices": "mobile",
+        "direction": "front",
+        "type": "perspective",
+        "xrCameraType": "face",
+        "xr": {
+          "desktop": "AR",
+          "face": {
+            "enableEars": false,
+            "maxDetections": 1,
+            "meshGeometryFace": true,
+            "mirroredDisplay": true,
+            "meshGeometryEyes": false
+          },
+          "phone": "AR",
+          "xrCameraType": "face"
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "hidden": false,
+      "id": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "material": null,
+      "name": "Camera",
+      "parentId": "8ebc8a8e-63e0-46eb-b443-c22ff469d45b",
+      "position": [
+        0,
+        2,
+        0
+      ],
+      "rotation": [
+        0,
+        1,
+        0,
+        -6.123233995736766e-17
+      ],
+      "scale": [
+        0.9999998646558023,
+        0.9999999931513284,
+        0.9999998715044741
+      ],
+      "order": -4.694238568224316
+    },
+    "66ed9bea-c576-43d9-a664-abca60350e0a": {
+      "components": {},
+      "geometry": null,
+      "id": "66ed9bea-c576-43d9-a664-abca60350e0a",
+      "light": {
+        "castShadow": false,
+        "intensity": 0.6,
+        "type": "directional"
+      },
+      "material": null,
+      "name": "Directional Light",
+      "position": [
+        1.5306061712204562,
+        5.186774162958127,
+        4.90661291852098
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "order": -3.302206910756895,
+      "parentId": "8ebc8a8e-63e0-46eb-b443-c22ff469d45b",
+      "hidden": false
+    },
+    "9ad33163-8e00-4957-9e58-0a54028a7bc8": {
+      "id": "9ad33163-8e00-4957-9e58-0a54028a7bc8",
+      "position": [
+        0,
+        0,
+        -0.11115085396528993
+      ],
+      "rotation": [
+        0,
+        1,
+        0,
+        -6.123233995736767e-17
+      ],
+      "scale": [
+        1.1,
+        1.2,
+        1.1
+      ],
+      "geometry": null,
+      "material": {
+        "type": "hider"
+      },
+      "parentId": "7a0827c0-51b7-42ba-8081-309452015504",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/head-occluder.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "Head Occluder"
+    },
+    "1adf1912-8f70-40a4-8101-c97144b0f9fd": {
+      "id": "1adf1912-8f70-40a4-8101-c97144b0f9fd",
+      "position": [
+        0,
+        2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {
+        "3887586e-59ba-4d2c-a7d4-cbd054a20d37": {
+          "id": "3887586e-59ba-4d2c-a7d4-cbd054a20d37",
+          "name": "face-anchor",
+          "parameters": {}
+        }
+      },
+      "face": {
+        "id": 1,
+        "addAttachmentState": false
+      },
+      "name": "Face",
+      "order": -2.8540220397495464,
+      "parentId": "8ebc8a8e-63e0-46eb-b443-c22ff469d45b"
+    },
+    "7a0827c0-51b7-42ba-8081-309452015504": {
+      "id": "7a0827c0-51b7-42ba-8081-309452015504",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": {
+        "type": "face",
+        "id": 1
+      },
+      "material": {
+        "type": "basic",
+        "color": "#FFFFFF",
+        "opacityMap": {
+          "type": "asset",
+          "asset": "assets/Alpha/soft-eyes-mouth.png"
+        },
+        "textureSrc": {
+          "type": "asset",
+          "asset": "assets/Textures/face-texture.png"
+        },
+        "opacity": 0.5,
+        "blending": "normal"
+      },
+      "parentId": "1adf1912-8f70-40a4-8101-c97144b0f9fd",
+      "components": {
+        "f7a9f20d-0ea1-4258-b61d-e75217e55f71": {
+          "id": "f7a9f20d-0ea1-4258-b61d-e75217e55f71",
+          "name": "face-mesh-anchor",
+          "parameters": {}
+        }
+      },
+      "name": "Face Mesh",
+      "order": 0.5631396623726721
+    },
+    "d0c90cec-65f8-4566-9474-775aa390a5fb": {
+      "id": "d0c90cec-65f8-4566-9474-775aa390a5fb",
+      "position": [
+        -0.00020399999630171806,
+        0.2865149974822998,
+        0.60726398229599
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "1adf1912-8f70-40a4-8101-c97144b0f9fd",
+      "components": {
+        "24951897-7e48-46ba-ac3a-798bec417022": {
+          "id": "24951897-7e48-46ba-ac3a-798bec417022",
+          "name": "face-attachment",
+          "parameters": {
+            "point": "forehead"
+          }
+        }
+      },
+      "name": "forehead"
+    },
+    "fb5ca8f3-ef4a-4254-ba08-9720e8dbf5e9": {
+      "id": "fb5ca8f3-ef4a-4254-ba08-9720e8dbf5e9",
+      "position": [
+        0,
+        -0.009020608888946402,
+        0
+      ],
+      "rotation": [
+        0,
+        1,
+        0,
+        -6.123233995736766e-17
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "parentId": "d0c90cec-65f8-4566-9474-775aa390a5fb",
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/headband.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "headband.glb"
+    }
+  },
+  "spaces": {
+    "8ebc8a8e-63e0-46eb-b443-c22ff469d45b": {
+      "activeCamera": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "id": "8ebc8a8e-63e0-46eb-b443-c22ff469d45b",
+      "name": "Default",
+      "sky": {
+        "type": "gradient",
+        "colors": [
+          "#ffffff",
+          "#ffffff"
+        ]
+      }
+    }
+  },
+  "historyVersion": "m8rzi02n"
+}

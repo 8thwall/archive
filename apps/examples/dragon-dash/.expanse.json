@@ -1,0 +1,6423 @@
+{
+  "inputs": {
+    "default": [
+      {
+        "name": "Jump",
+        "bindings": []
+      }
+    ]
+  },
+  "objects": {
+    "05f524e3-50ac-462e-b896-fe3e8b253a76": {
+      "components": {},
+      "disabled": false,
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Tower.glb"
+        }
+      },
+      "id": "05f524e3-50ac-462e-b896-fe3e8b253a76",
+      "material": null,
+      "name": "Bottom Obstacle (3)",
+      "order": 0.6560730697650181,
+      "parentId": "5551d30c-1004-47a7-b8d5-4a1ec31052a0",
+      "position": [
+        0,
+        -22,
+        0
+      ],
+      "rotation": [
+        0,
+        -0.7071067811865475,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        4,
+        6,
+        4
+      ]
+    },
+    "097e9eeb-b73d-4a0b-9788-99db77203b09": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 3,
+          "height": 8.2,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "e29a0f88-ea48-4302-96f4-a5a511797929": {
+          "id": "e29a0f88-ea48-4302-96f4-a5a511797929",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "097e9eeb-b73d-4a0b-9788-99db77203b09",
+      "material": null,
+      "name": "Bottom Obstacle Collider 5 (1)",
+      "order": 0.802387178269917,
+      "parentId": "5253c997-04ff-4188-ac13-11f727f13cdc",
+      "position": [
+        0,
+        1.0248598970989424,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "09adb891-3453-4249-bc3f-c218f204e29c": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 8,
+          "width": 0.1
+        }
+      },
+      "components": {
+        "3de34491-5142-4b4f-b803-24bb172bef61": {
+          "id": "3de34491-5142-4b4f-b803-24bb172bef61",
+          "name": "scoreCollider",
+          "parameters": {
+            "character": {
+              "type": "entity",
+              "id": "d0982379-0533-43b8-a96a-8e4c0b605538"
+            },
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "09adb891-3453-4249-bc3f-c218f204e29c",
+      "material": null,
+      "name": "Score Collider (6)",
+      "order": 3.4703789318963576,
+      "parentId": "b6e51606-dc9c-46d3-bba2-9c37da6d631f",
+      "position": [
+        1.9305139679944752,
+        1.6507481744102088,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "0b824531-a125-4ee6-91f4-b2a3771a4f83": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 3,
+          "height": 8.2,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "e29a0f88-ea48-4302-96f4-a5a511797929": {
+          "id": "e29a0f88-ea48-4302-96f4-a5a511797929",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "0b824531-a125-4ee6-91f4-b2a3771a4f83",
+      "material": null,
+      "name": "Bottom Obstacle Collider 5 (6)",
+      "order": 0.802387178269917,
+      "parentId": "ba239421-e004-4b33-bbdf-cfb23992965a",
+      "position": [
+        0,
+        1.0248598970989424,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "0c152065-19d7-4fc3-b7da-b377a391fbb2": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1.4,
+          "height": 3.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "96f7d4f0-32d6-4dad-8523-b4cfcb55ded4": {
+          "id": "96f7d4f0-32d6-4dad-8523-b4cfcb55ded4",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "0c152065-19d7-4fc3-b7da-b377a391fbb2",
+      "material": null,
+      "name": "Bottom Obstacle Collider 3 (6)",
+      "order": 0.802387178269917,
+      "parentId": "ba239421-e004-4b33-bbdf-cfb23992965a",
+      "position": [
+        0,
+        2.4528789554484147,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "0cc41e1f-1c74-4ed9-a194-686f4c04196a": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.6,
+          "width": 2
+        }
+      },
+      "components": {
+        "d5c79f9b-1364-4fc3-921e-1d4b4567f26f": {
+          "id": "d5c79f9b-1364-4fc3-921e-1d4b4567f26f",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "0cc41e1f-1c74-4ed9-a194-686f4c04196a",
+      "material": null,
+      "name": "Top Obstacle Collider 1 (2)",
+      "parentId": "6636907c-9944-4a11-8a0b-dcb592d28f74",
+      "position": [
+        0.20814494113153525,
+        0.15167895909602236,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047335,
+        0.7071068588683531
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "0ce1efa3-b82c-4e39-858d-4957d87c824e": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 3,
+          "height": 8.2,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "e29a0f88-ea48-4302-96f4-a5a511797929": {
+          "id": "e29a0f88-ea48-4302-96f4-a5a511797929",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "0ce1efa3-b82c-4e39-858d-4957d87c824e",
+      "material": null,
+      "name": "Bottom Obstacle Collider 5 (3)",
+      "order": 0.802387178269917,
+      "parentId": "05f524e3-50ac-462e-b896-fe3e8b253a76",
+      "position": [
+        0,
+        1.0248598970989424,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "0ce83f98-3b5f-4dea-9d39-f2316ec1a9ac": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 0.8,
+          "width": 0.7
+        }
+      },
+      "components": {
+        "4316e00e-62bf-4921-87ab-870224cf8002": {
+          "id": "4316e00e-62bf-4921-87ab-870224cf8002",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "0ce83f98-3b5f-4dea-9d39-f2316ec1a9ac",
+      "material": null,
+      "name": "Top Obstacle Collider 5",
+      "parentId": "3d15189f-24bc-4c13-9557-fee1034f7004",
+      "position": [
+        -2.356154733759273,
+        -0.4221935996034897,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "107c19b6-3755-443d-88da-e3460c34de52": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.1,
+          "width": 1.4
+        }
+      },
+      "components": {
+        "d453b25f-2675-4f17-a44a-5bea65a0f001": {
+          "id": "d453b25f-2675-4f17-a44a-5bea65a0f001",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "107c19b6-3755-443d-88da-e3460c34de52",
+      "material": null,
+      "name": "Top Obstacle Collider 3",
+      "parentId": "3d15189f-24bc-4c13-9557-fee1034f7004",
+      "position": [
+        1.431943257451858,
+        -0.11976427872712025,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "10ab4577-709b-4d11-ae77-259134c9d2b7": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.1,
+          "width": 1.6
+        }
+      },
+      "components": {
+        "c6925efc-09b7-4b4e-810a-06e5f5f3c3bc": {
+          "id": "c6925efc-09b7-4b4e-810a-06e5f5f3c3bc",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "10ab4577-709b-4d11-ae77-259134c9d2b7",
+      "material": null,
+      "name": "Top Obstacle Collider 2 (4)",
+      "parentId": "5842c242-3305-4d6e-ae3d-23cc30015c5e",
+      "position": [
+        -1.109690674130447,
+        -0.07505600387152456,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "11298ccf-adbe-44ce-9df0-f30f979b8396": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 3.5,
+          "height": 2.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "09486807-dc6e-47ad-9633-c8619fa9ae82": {
+          "id": "09486807-dc6e-47ad-9633-c8619fa9ae82",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "11298ccf-adbe-44ce-9df0-f30f979b8396",
+      "material": null,
+      "name": "Bottom Obstacle Collider 4 (6)",
+      "order": 0.802387178269917,
+      "parentId": "ba239421-e004-4b33-bbdf-cfb23992965a",
+      "position": [
+        0,
+        2.0455265167202565,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "1c10988f-0be8-4acb-bd26-744ac62deb8f": {
+      "components": {
+        "fa6ad602-0d2c-433b-8dff-6295fbdddf85": {
+          "id": "fa6ad602-0d2c-433b-8dff-6295fbdddf85",
+          "name": "UIController",
+          "parameters": {
+            "pointTitle": {
+              "type": "entity",
+              "id": "e09df4c7-c1de-4b84-b363-14ddd4b99727"
+            },
+            "pointValue": {
+              "type": "entity",
+              "id": "966c8577-f3ff-4558-8019-551cde1b2955"
+            },
+            "points": {
+              "type": "entity",
+              "id": "2438ef64-b462-4956-bc99-ee3c0461d6ff"
+            },
+            "restart": {
+              "type": "entity",
+              "id": "45c2cfaf-4fc4-420f-8a3b-fea063f49216"
+            },
+            "spaceRestart": {
+              "type": "entity",
+              "id": "2ac61b28-981a-4f90-bda4-b66bb11ed611"
+            },
+            "spaceTitle": {
+              "type": "entity",
+              "id": "9e826644-a527-4ddc-a65d-d4a5e56d287e"
+            },
+            "tapRestart": {
+              "type": "entity",
+              "id": "45c2cfaf-4fc4-420f-8a3b-fea063f49216"
+            },
+            "tapTitle": {
+              "type": "entity",
+              "id": "71a3c1f8-3f2b-4716-ab8f-3757e4b71edf"
+            },
+            "title": {
+              "type": "entity",
+              "id": "71a3c1f8-3f2b-4716-ab8f-3757e4b71edf"
+            }
+          }
+        }
+      },
+      "disabled": false,
+      "geometry": null,
+      "id": "1c10988f-0be8-4acb-bd26-744ac62deb8f",
+      "material": null,
+      "name": "UI",
+      "order": 8.589942447152888,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "a2b0871c-2ff7-4e5c-958a-7c361bb80c7b"
+    },
+    "1c46c321-3a5c-46ba-ba2a-f9828ae4570e": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 3.5,
+          "height": 2.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "09486807-dc6e-47ad-9633-c8619fa9ae82": {
+          "id": "09486807-dc6e-47ad-9633-c8619fa9ae82",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "1c46c321-3a5c-46ba-ba2a-f9828ae4570e",
+      "material": null,
+      "name": "Bottom Obstacle Collider 4 (1)",
+      "order": 0.802387178269917,
+      "parentId": "5253c997-04ff-4188-ac13-11f727f13cdc",
+      "position": [
+        0,
+        2.0455265167202565,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "1e22cfb5-79e0-4485-bb7e-633dc9130b2d": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.1,
+          "width": 1.4
+        }
+      },
+      "components": {
+        "d453b25f-2675-4f17-a44a-5bea65a0f001": {
+          "id": "d453b25f-2675-4f17-a44a-5bea65a0f001",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "1e22cfb5-79e0-4485-bb7e-633dc9130b2d",
+      "material": null,
+      "name": "Top Obstacle Collider 3 (2)",
+      "parentId": "6636907c-9944-4a11-8a0b-dcb592d28f74",
+      "position": [
+        1.431943257451858,
+        -0.11976427872712025,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "1f880491-ca8c-4971-a8d1-8a1c61870ebf": {
+      "components": {},
+      "geometry": null,
+      "id": "1f880491-ca8c-4971-a8d1-8a1c61870ebf",
+      "material": null,
+      "name": "Obstacle (7)",
+      "order": 0.5296035088752893,
+      "parentId": "5cd62040-7505-4d47-82a7-f3599f806b40",
+      "position": [
+        56,
+        -1,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "204737b1-13bc-4a6b-a0c7-5dd0406c477e": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1.4,
+          "height": 1,
+          "width": 1
+        }
+      },
+      "components": {
+        "613f20f4-f6ee-4e30-911b-5ef25b46c818": {
+          "id": "613f20f4-f6ee-4e30-911b-5ef25b46c818",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "204737b1-13bc-4a6b-a0c7-5dd0406c477e",
+      "material": null,
+      "name": "Bottom Obstacle Collider 2 (5)",
+      "order": 0.802387178269917,
+      "parentId": "6b8c0559-663e-47d9-b2b1-9f6621e8c8d6",
+      "position": [
+        6.607739720064891e-17,
+        3.2156446836747676,
+        -0.2975861414104547
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "20a6bd6a-7fb9-4451-8996-adbc5a42c385": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.6,
+          "width": 2
+        }
+      },
+      "components": {
+        "d5c79f9b-1364-4fc3-921e-1d4b4567f26f": {
+          "id": "d5c79f9b-1364-4fc3-921e-1d4b4567f26f",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "20a6bd6a-7fb9-4451-8996-adbc5a42c385",
+      "material": null,
+      "name": "Top Obstacle Collider 1 (6)",
+      "parentId": "e3ebd197-8a2d-4985-bff4-4988d2f1df99",
+      "position": [
+        0.20814494113153525,
+        0.15167895909602236,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047335,
+        0.7071068588683531
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "21400c1a-502c-4fa3-8d3b-743bfa47ce8e": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.6,
+          "width": 2
+        }
+      },
+      "components": {
+        "d5c79f9b-1364-4fc3-921e-1d4b4567f26f": {
+          "id": "d5c79f9b-1364-4fc3-921e-1d4b4567f26f",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "21400c1a-502c-4fa3-8d3b-743bfa47ce8e",
+      "material": null,
+      "name": "Top Obstacle Collider 1 (1)",
+      "parentId": "f585cbd0-9067-456c-a297-79b906a100b5",
+      "position": [
+        0.20814494113153525,
+        0.15167895909602236,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047335,
+        0.7071068588683531
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "2438ef64-b462-4956-bc99-ee3c0461d6ff": {
+      "components": {},
+      "disabled": false,
+      "geometry": null,
+      "hidden": false,
+      "id": "2438ef64-b462-4956-bc99-ee3c0461d6ff",
+      "material": null,
+      "name": "Points",
+      "order": -1.3498749741954237,
+      "parentId": "1c10988f-0be8-4acb-bd26-744ac62deb8f",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "2469499b-98b2-431f-8936-147dc0697b65": {
+      "components": {},
+      "disabled": false,
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Tower.glb"
+        }
+      },
+      "id": "2469499b-98b2-431f-8936-147dc0697b65",
+      "material": null,
+      "name": "Bottom Obstacle (4)",
+      "order": 0.6560730697650181,
+      "parentId": "27bf9339-f01b-4a89-a26b-04c87133f365",
+      "position": [
+        0,
+        -22,
+        0
+      ],
+      "rotation": [
+        0,
+        -0.7071067811865475,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        4,
+        6,
+        4
+      ]
+    },
+    "2649af62-965d-4be9-b8fb-948ebc755769": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.1,
+          "width": 1.6
+        }
+      },
+      "components": {
+        "c6925efc-09b7-4b4e-810a-06e5f5f3c3bc": {
+          "id": "c6925efc-09b7-4b4e-810a-06e5f5f3c3bc",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "2649af62-965d-4be9-b8fb-948ebc755769",
+      "material": null,
+      "name": "Top Obstacle Collider 2 (7)",
+      "parentId": "528a2c06-ecc4-417a-83b6-c3a18b7d9339",
+      "position": [
+        -1.109690674130447,
+        -0.07505600387152456,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "26b44afb-df42-4af3-bc43-0823a967a6c4": {
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Wall.glb"
+        }
+      },
+      "id": "26b44afb-df42-4af3-bc43-0823a967a6c4",
+      "name": "Ground Entity 10",
+      "parentId": "31634e19-f4a8-4cc0-9932-bf8c8c280211",
+      "position": [
+        -12,
+        -12.117148332891215,
+        8.49837589263916
+      ],
+      "rotation": [
+        0,
+        -0.70710676908493,
+        0,
+        0.7071067932881648
+      ],
+      "scale": [
+        2.9999998973143764,
+        3,
+        2.9999998973143764
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "2777b20c-9d96-497e-a99b-6533c9e7459e": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1.4,
+          "height": 3.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "96f7d4f0-32d6-4dad-8523-b4cfcb55ded4": {
+          "id": "96f7d4f0-32d6-4dad-8523-b4cfcb55ded4",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "2777b20c-9d96-497e-a99b-6533c9e7459e",
+      "material": null,
+      "name": "Bottom Obstacle Collider 3 (2)",
+      "order": 0.802387178269917,
+      "parentId": "c9b3216e-13e6-4f7c-a312-4ea0eb3e8cb4",
+      "position": [
+        0,
+        2.4528789554484147,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "27bf9339-f01b-4a89-a26b-04c87133f365": {
+      "components": {},
+      "geometry": null,
+      "id": "27bf9339-f01b-4a89-a26b-04c87133f365",
+      "material": null,
+      "name": "Obstacle (4)",
+      "order": 0.5296035088752893,
+      "parentId": "5cd62040-7505-4d47-82a7-f3599f806b40",
+      "position": [
+        32,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "28b2a108-92f4-46c4-990f-c82e51eb5d0c": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 0.4,
+          "height": 3.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "c3a18ec0-cbb2-4fb2-bf3a-86fa6b2a64d5": {
+          "id": "c3a18ec0-cbb2-4fb2-bf3a-86fa6b2a64d5",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "28b2a108-92f4-46c4-990f-c82e51eb5d0c",
+      "material": null,
+      "name": "Bottom Obstacle Collider 1 (6)",
+      "order": 0.802387178269917,
+      "parentId": "ba239421-e004-4b33-bbdf-cfb23992965a",
+      "position": [
+        0,
+        3.076238594308874,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "296e9c67-712d-44da-9f80-750fb39292b5": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1.4,
+          "height": 3.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "96f7d4f0-32d6-4dad-8523-b4cfcb55ded4": {
+          "id": "96f7d4f0-32d6-4dad-8523-b4cfcb55ded4",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "296e9c67-712d-44da-9f80-750fb39292b5",
+      "material": null,
+      "name": "Bottom Obstacle Collider 3 (7)",
+      "order": 0.802387178269917,
+      "parentId": "40b90c6c-8265-40a2-994a-4683ef22bb4b",
+      "position": [
+        0,
+        2.4528789554484147,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "2ac61b28-981a-4f90-bda4-b66bb11ed611": {
+      "components": {},
+      "disabled": false,
+      "geometry": null,
+      "hidden": false,
+      "id": "2ac61b28-981a-4f90-bda4-b66bb11ed611",
+      "material": null,
+      "name": "Space Restart",
+      "order": 2.4856598677561976,
+      "parentId": "1c10988f-0be8-4acb-bd26-744ac62deb8f",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "bottom": "15",
+        "height": 150,
+        "image": {
+          "type": "asset",
+          "asset": "assets/Images/spaceRestart.png"
+        },
+        "left": "",
+        "position": "absolute",
+        "right": "-5000",
+        "top": "",
+        "width": 300
+      }
+    },
+    "2c82b1ee-220e-4d51-967c-6d8f8f6b5493": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.1,
+          "width": 1.6
+        }
+      },
+      "components": {
+        "c6925efc-09b7-4b4e-810a-06e5f5f3c3bc": {
+          "id": "c6925efc-09b7-4b4e-810a-06e5f5f3c3bc",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "2c82b1ee-220e-4d51-967c-6d8f8f6b5493",
+      "material": null,
+      "name": "Top Obstacle Collider 2 (6)",
+      "parentId": "e3ebd197-8a2d-4985-bff4-4988d2f1df99",
+      "position": [
+        -1.109690674130447,
+        -0.07505600387152456,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "31326916-c83e-4edf-8c9a-2f4617355bd7": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 0.8,
+          "width": 0.7
+        }
+      },
+      "components": {
+        "ab964f9f-41af-4a3a-adf9-85147cc90bef": {
+          "id": "ab964f9f-41af-4a3a-adf9-85147cc90bef",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "31326916-c83e-4edf-8c9a-2f4617355bd7",
+      "material": null,
+      "name": "Top Obstacle Collider 4 (2)",
+      "parentId": "6636907c-9944-4a11-8a0b-dcb592d28f74",
+      "position": [
+        2.4968621049664943,
+        -0.4221950760084267,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "31634e19-f4a8-4cc0-9932-bf8c8c280211": {
+      "components": {
+        "c0f6b9d9-cb67-410c-b25e-93c4f2545187": {
+          "id": "c0f6b9d9-cb67-410c-b25e-93c4f2545187",
+          "name": "groundController",
+          "parameters": {
+            "groundMoveSpeed": 12,
+            "leftBound": -42
+          }
+        }
+      },
+      "geometry": null,
+      "hidden": false,
+      "id": "31634e19-f4a8-4cc0-9932-bf8c8c280211",
+      "material": null,
+      "name": "Ground Container",
+      "order": 6.363443066874986,
+      "position": [
+        21,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "a2b0871c-2ff7-4e5c-958a-7c361bb80c7b"
+    },
+    "3534d318-c635-4a41-87ad-0c270a881641": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.1,
+          "width": 1.6
+        }
+      },
+      "components": {
+        "c6925efc-09b7-4b4e-810a-06e5f5f3c3bc": {
+          "id": "c6925efc-09b7-4b4e-810a-06e5f5f3c3bc",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "3534d318-c635-4a41-87ad-0c270a881641",
+      "material": null,
+      "name": "Top Obstacle Collider 2 (1)",
+      "parentId": "f585cbd0-9067-456c-a297-79b906a100b5",
+      "position": [
+        -1.109690674130447,
+        -0.07505600387152456,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "3a16a70e-f0f2-4dca-9187-87b415e210f4": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.1,
+          "width": 1.4
+        }
+      },
+      "components": {
+        "d453b25f-2675-4f17-a44a-5bea65a0f001": {
+          "id": "d453b25f-2675-4f17-a44a-5bea65a0f001",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "3a16a70e-f0f2-4dca-9187-87b415e210f4",
+      "material": null,
+      "name": "Top Obstacle Collider 3 (1)",
+      "parentId": "f585cbd0-9067-456c-a297-79b906a100b5",
+      "position": [
+        1.431943257451858,
+        -0.11976427872712025,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "3a578dc8-4ac3-498c-85ad-0f838d35c815": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 0.8,
+          "width": 0.7
+        }
+      },
+      "components": {
+        "ab964f9f-41af-4a3a-adf9-85147cc90bef": {
+          "id": "ab964f9f-41af-4a3a-adf9-85147cc90bef",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "3a578dc8-4ac3-498c-85ad-0f838d35c815",
+      "material": null,
+      "name": "Top Obstacle Collider 4 (3)",
+      "parentId": "ad3aac54-d22c-4523-bb66-96e55a2a03c1",
+      "position": [
+        2.4968621049664943,
+        -0.4221950760084267,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "3d15189f-24bc-4c13-9557-fee1034f7004": {
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Cloud.glb"
+        }
+      },
+      "id": "3d15189f-24bc-4c13-9557-fee1034f7004",
+      "material": null,
+      "name": "Top Obstacle",
+      "order": 2.3121461395300362,
+      "parentId": "621d7f39-c387-4859-b7d6-da20a997d1a4",
+      "position": [
+        1.039391040802002,
+        15,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        -0.7071067811865475,
+        0.7071067811865476
+      ],
+      "scale": [
+        2.999999897314441,
+        1.9999982626129769,
+        2
+      ]
+    },
+    "3db785db-e31b-42ec-a371-0c3f712643bd": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1.4,
+          "height": 1,
+          "width": 1
+        }
+      },
+      "components": {
+        "613f20f4-f6ee-4e30-911b-5ef25b46c818": {
+          "id": "613f20f4-f6ee-4e30-911b-5ef25b46c818",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "3db785db-e31b-42ec-a371-0c3f712643bd",
+      "material": null,
+      "name": "Bottom Obstacle Collider 2 (3)",
+      "order": 0.802387178269917,
+      "parentId": "05f524e3-50ac-462e-b896-fe3e8b253a76",
+      "position": [
+        6.607739720064891e-17,
+        3.2156446836747676,
+        -0.2975861414104547
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "3ea57a5e-01fd-4a06-8601-1810f78b2f8d": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.6,
+          "width": 2
+        }
+      },
+      "components": {
+        "d5c79f9b-1364-4fc3-921e-1d4b4567f26f": {
+          "id": "d5c79f9b-1364-4fc3-921e-1d4b4567f26f",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "3ea57a5e-01fd-4a06-8601-1810f78b2f8d",
+      "material": null,
+      "name": "Top Obstacle Collider 1 (5)",
+      "parentId": "cf984795-0133-4a08-bb65-843736fb063b",
+      "position": [
+        0.20814494113153525,
+        0.15167895909602236,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047335,
+        0.7071068588683531
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "3f035125-9c0f-479c-b8a1-a9f440a52637": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1.4,
+          "height": 3.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "96f7d4f0-32d6-4dad-8523-b4cfcb55ded4": {
+          "id": "96f7d4f0-32d6-4dad-8523-b4cfcb55ded4",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "3f035125-9c0f-479c-b8a1-a9f440a52637",
+      "material": null,
+      "name": "Bottom Obstacle Collider 3 (1)",
+      "order": 0.802387178269917,
+      "parentId": "5253c997-04ff-4188-ac13-11f727f13cdc",
+      "position": [
+        0,
+        2.4528789554484147,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "40b90c6c-8265-40a2-994a-4683ef22bb4b": {
+      "components": {},
+      "disabled": false,
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Tower.glb"
+        }
+      },
+      "id": "40b90c6c-8265-40a2-994a-4683ef22bb4b",
+      "material": null,
+      "name": "Bottom Obstacle (7)",
+      "order": 0.6560730697650181,
+      "parentId": "1f880491-ca8c-4971-a8d1-8a1c61870ebf",
+      "position": [
+        0,
+        -22,
+        0
+      ],
+      "rotation": [
+        0,
+        -0.7071067811865475,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        4,
+        6,
+        4
+      ]
+    },
+    "40d31c90-d03c-4d16-82ca-9b64102b57c7": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1.4,
+          "height": 1,
+          "width": 1
+        }
+      },
+      "components": {
+        "613f20f4-f6ee-4e30-911b-5ef25b46c818": {
+          "id": "613f20f4-f6ee-4e30-911b-5ef25b46c818",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "40d31c90-d03c-4d16-82ca-9b64102b57c7",
+      "material": null,
+      "name": "Bottom Obstacle Collider 2",
+      "order": 0.802387178269917,
+      "parentId": "81b980d4-b42d-4312-a9eb-e95a5291779a",
+      "position": [
+        6.607739720064891e-17,
+        3.2156446836747676,
+        -0.2975861414104547
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "42558afa-ba5b-49ca-b566-907f982a0043": {
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Wall.glb"
+        }
+      },
+      "id": "42558afa-ba5b-49ca-b566-907f982a0043",
+      "name": "Ground Entity 7",
+      "parentId": "31634e19-f4a8-4cc0-9932-bf8c8c280211",
+      "position": [
+        -21,
+        -12.117148332891215,
+        8.49837589263916
+      ],
+      "rotation": [
+        0,
+        -0.70710676908493,
+        0,
+        0.7071067932881648
+      ],
+      "scale": [
+        2.9999998973143764,
+        3,
+        2.9999998973143764
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "43993c2d-30ce-478c-a2bf-8a13ef289e4e": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 3,
+          "height": 8.2,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "e29a0f88-ea48-4302-96f4-a5a511797929": {
+          "id": "e29a0f88-ea48-4302-96f4-a5a511797929",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "43993c2d-30ce-478c-a2bf-8a13ef289e4e",
+      "material": null,
+      "name": "Bottom Obstacle Collider 5",
+      "order": 0.802387178269917,
+      "parentId": "81b980d4-b42d-4312-a9eb-e95a5291779a",
+      "position": [
+        0,
+        1.0248598970989424,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "45c2cfaf-4fc4-420f-8a3b-fea063f49216": {
+      "components": {},
+      "disabled": false,
+      "geometry": null,
+      "hidden": false,
+      "id": "45c2cfaf-4fc4-420f-8a3b-fea063f49216",
+      "material": null,
+      "name": "Tap Restart",
+      "order": 2.4856598677561976,
+      "parentId": "1c10988f-0be8-4acb-bd26-744ac62deb8f",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "bottom": "15",
+        "height": 150,
+        "image": {
+          "type": "asset",
+          "asset": "assets/Images/tapRestart.png"
+        },
+        "left": "",
+        "position": "absolute",
+        "right": "-5000",
+        "top": "",
+        "width": 300
+      }
+    },
+    "47699d9e-18a5-4f88-a4f9-b8be92e8f74a": {
+      "components": {},
+      "geometry": null,
+      "id": "47699d9e-18a5-4f88-a4f9-b8be92e8f74a",
+      "light": {
+        "intensity": 0.6,
+        "type": "ambient"
+      },
+      "material": null,
+      "name": "Ambient Light",
+      "order": -4.712176993227209,
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "a2b0871c-2ff7-4e5c-958a-7c361bb80c7b"
+    },
+    "482399e7-bd2d-4311-b670-9326e954f15c": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 3.5,
+          "height": 2.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "09486807-dc6e-47ad-9633-c8619fa9ae82": {
+          "id": "09486807-dc6e-47ad-9633-c8619fa9ae82",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "482399e7-bd2d-4311-b670-9326e954f15c",
+      "material": null,
+      "name": "Bottom Obstacle Collider 4",
+      "order": 0.802387178269917,
+      "parentId": "81b980d4-b42d-4312-a9eb-e95a5291779a",
+      "position": [
+        0,
+        2.0455265167202565,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "491a246c-3140-4fcb-805f-00bfa7708a96": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 0.8,
+          "width": 0.7
+        }
+      },
+      "components": {
+        "4316e00e-62bf-4921-87ab-870224cf8002": {
+          "id": "4316e00e-62bf-4921-87ab-870224cf8002",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "491a246c-3140-4fcb-805f-00bfa7708a96",
+      "material": null,
+      "name": "Top Obstacle Collider 5 (2)",
+      "parentId": "6636907c-9944-4a11-8a0b-dcb592d28f74",
+      "position": [
+        -2.356154733759273,
+        -0.4221935996034897,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "51480051-d889-4745-8be2-e1589c043d2e": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 0.8,
+          "width": 0.7
+        }
+      },
+      "components": {
+        "4316e00e-62bf-4921-87ab-870224cf8002": {
+          "id": "4316e00e-62bf-4921-87ab-870224cf8002",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "51480051-d889-4745-8be2-e1589c043d2e",
+      "material": null,
+      "name": "Top Obstacle Collider 5 (3)",
+      "parentId": "ad3aac54-d22c-4523-bb66-96e55a2a03c1",
+      "position": [
+        -2.356154733759273,
+        -0.4221935996034897,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "515e7f6e-4f20-44cc-8b85-020a0e46b5fb": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.1,
+          "width": 1.4
+        }
+      },
+      "components": {
+        "d453b25f-2675-4f17-a44a-5bea65a0f001": {
+          "id": "d453b25f-2675-4f17-a44a-5bea65a0f001",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "515e7f6e-4f20-44cc-8b85-020a0e46b5fb",
+      "material": null,
+      "name": "Top Obstacle Collider 3 (5)",
+      "parentId": "cf984795-0133-4a08-bb65-843736fb063b",
+      "position": [
+        1.431943257451858,
+        -0.11976427872712025,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "523e8b72-2e43-403f-9ba0-5584286a3310": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1.4,
+          "height": 1,
+          "width": 1
+        }
+      },
+      "components": {
+        "613f20f4-f6ee-4e30-911b-5ef25b46c818": {
+          "id": "613f20f4-f6ee-4e30-911b-5ef25b46c818",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "523e8b72-2e43-403f-9ba0-5584286a3310",
+      "material": null,
+      "name": "Bottom Obstacle Collider 2 (6)",
+      "order": 0.802387178269917,
+      "parentId": "ba239421-e004-4b33-bbdf-cfb23992965a",
+      "position": [
+        6.607739720064891e-17,
+        3.2156446836747676,
+        -0.2975861414104547
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "5253c997-04ff-4188-ac13-11f727f13cdc": {
+      "components": {},
+      "disabled": false,
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Tower.glb"
+        }
+      },
+      "id": "5253c997-04ff-4188-ac13-11f727f13cdc",
+      "material": null,
+      "name": "Bottom Obstacle (1)",
+      "order": 0.6560730697650181,
+      "parentId": "96a9857e-b444-411b-9da8-960a2db71a0b",
+      "position": [
+        0,
+        -22,
+        0
+      ],
+      "rotation": [
+        0,
+        -0.7071067811865475,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        4,
+        6,
+        4
+      ]
+    },
+    "528a2c06-ecc4-417a-83b6-c3a18b7d9339": {
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Cloud.glb"
+        }
+      },
+      "id": "528a2c06-ecc4-417a-83b6-c3a18b7d9339",
+      "material": null,
+      "name": "Top Obstacle (7)",
+      "order": 2.3121461395300362,
+      "parentId": "1f880491-ca8c-4971-a8d1-8a1c61870ebf",
+      "position": [
+        1.039391040802002,
+        15,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        -0.7071067811865475,
+        0.7071067811865476
+      ],
+      "scale": [
+        2.999999897314441,
+        1.9999982626129769,
+        2
+      ]
+    },
+    "5551d30c-1004-47a7-b8d5-4a1ec31052a0": {
+      "components": {},
+      "geometry": null,
+      "id": "5551d30c-1004-47a7-b8d5-4a1ec31052a0",
+      "material": null,
+      "name": "Obstacle (3)",
+      "order": 0.5296035088752893,
+      "parentId": "5cd62040-7505-4d47-82a7-f3599f806b40",
+      "position": [
+        24,
+        -5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "55839793-68f8-4d7b-856a-7498eb2dee91": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.6,
+          "width": 2
+        }
+      },
+      "components": {
+        "d5c79f9b-1364-4fc3-921e-1d4b4567f26f": {
+          "id": "d5c79f9b-1364-4fc3-921e-1d4b4567f26f",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "55839793-68f8-4d7b-856a-7498eb2dee91",
+      "material": null,
+      "name": "Top Obstacle Collider 1 (7)",
+      "parentId": "528a2c06-ecc4-417a-83b6-c3a18b7d9339",
+      "position": [
+        0.20814494113153525,
+        0.15167895909602236,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047335,
+        0.7071068588683531
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "5842c242-3305-4d6e-ae3d-23cc30015c5e": {
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Cloud.glb"
+        }
+      },
+      "id": "5842c242-3305-4d6e-ae3d-23cc30015c5e",
+      "material": null,
+      "name": "Top Obstacle (4)",
+      "order": 2.3121461395300362,
+      "parentId": "27bf9339-f01b-4a89-a26b-04c87133f365",
+      "position": [
+        1.039391040802002,
+        15,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        -0.7071067811865475,
+        0.7071067811865476
+      ],
+      "scale": [
+        2.999999897314441,
+        1.9999982626129769,
+        2
+      ]
+    },
+    "5a3f4340-e9f7-4615-a2e8-4bc5b8d6af0e": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 0.8,
+          "width": 0.7
+        }
+      },
+      "components": {
+        "ab964f9f-41af-4a3a-adf9-85147cc90bef": {
+          "id": "ab964f9f-41af-4a3a-adf9-85147cc90bef",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "5a3f4340-e9f7-4615-a2e8-4bc5b8d6af0e",
+      "material": null,
+      "name": "Top Obstacle Collider 4 (1)",
+      "parentId": "f585cbd0-9067-456c-a297-79b906a100b5",
+      "position": [
+        2.4968621049664943,
+        -0.4221950760084267,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "5a8fe31c-3906-4337-920e-fc6b600a0663": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.1,
+          "width": 1.6
+        }
+      },
+      "components": {
+        "c6925efc-09b7-4b4e-810a-06e5f5f3c3bc": {
+          "id": "c6925efc-09b7-4b4e-810a-06e5f5f3c3bc",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "5a8fe31c-3906-4337-920e-fc6b600a0663",
+      "material": null,
+      "name": "Top Obstacle Collider 2 (3)",
+      "parentId": "ad3aac54-d22c-4523-bb66-96e55a2a03c1",
+      "position": [
+        -1.109690674130447,
+        -0.07505600387152456,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "5acf9abf-33e1-47ff-8a5e-45fadd293cd7": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 3,
+          "height": 8.2,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "e29a0f88-ea48-4302-96f4-a5a511797929": {
+          "id": "e29a0f88-ea48-4302-96f4-a5a511797929",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "5acf9abf-33e1-47ff-8a5e-45fadd293cd7",
+      "material": null,
+      "name": "Bottom Obstacle Collider 5 (5)",
+      "order": 0.802387178269917,
+      "parentId": "6b8c0559-663e-47d9-b2b1-9f6621e8c8d6",
+      "position": [
+        0,
+        1.0248598970989424,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "5cd62040-7505-4d47-82a7-f3599f806b40": {
+      "components": {
+        "bc5c3355-a0e2-42ad-83be-f8d4065c6830": {
+          "id": "bc5c3355-a0e2-42ad-83be-f8d4065c6830",
+          "name": "obstacleController",
+          "parameters": {
+            "leftBound": -64,
+            "minHeight": -6,
+            "obstacleMoveSpeed": 9
+          }
+        }
+      },
+      "geometry": null,
+      "id": "5cd62040-7505-4d47-82a7-f3599f806b40",
+      "material": null,
+      "name": "Obstacle Container",
+      "position": [
+        32,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "a2b0871c-2ff7-4e5c-958a-7c361bb80c7b"
+    },
+    "61ca9df9-c5d9-4f03-9882-1b3b2329957e": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1.4,
+          "height": 3.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "96f7d4f0-32d6-4dad-8523-b4cfcb55ded4": {
+          "id": "96f7d4f0-32d6-4dad-8523-b4cfcb55ded4",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "61ca9df9-c5d9-4f03-9882-1b3b2329957e",
+      "material": null,
+      "name": "Bottom Obstacle Collider 3 (4)",
+      "order": 0.802387178269917,
+      "parentId": "2469499b-98b2-431f-8936-147dc0697b65",
+      "position": [
+        0,
+        2.4528789554484147,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "621d7f39-c387-4859-b7d6-da20a997d1a4": {
+      "components": {},
+      "geometry": null,
+      "id": "621d7f39-c387-4859-b7d6-da20a997d1a4",
+      "material": null,
+      "name": "Obstacle",
+      "order": 0.5296035088752893,
+      "parentId": "5cd62040-7505-4d47-82a7-f3599f806b40",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "6403fa2e-e033-4451-a9e9-3fefc5921e4e": {
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Wall.glb"
+        }
+      },
+      "id": "6403fa2e-e033-4451-a9e9-3fefc5921e4e",
+      "name": "Ground Entity 12",
+      "parentId": "31634e19-f4a8-4cc0-9932-bf8c8c280211",
+      "position": [
+        -6,
+        -12.117148332891215,
+        8.49837589263916
+      ],
+      "rotation": [
+        0,
+        -0.70710676908493,
+        0,
+        0.7071067932881648
+      ],
+      "scale": [
+        2.9999998973143764,
+        3,
+        2.9999998973143764
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "6636907c-9944-4a11-8a0b-dcb592d28f74": {
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Cloud.glb"
+        }
+      },
+      "id": "6636907c-9944-4a11-8a0b-dcb592d28f74",
+      "material": null,
+      "name": "Top Obstacle (2)",
+      "order": 2.3121461395300362,
+      "parentId": "f2c450f0-d647-4a78-8ea2-003fadaf6d3a",
+      "position": [
+        1.039391040802002,
+        15,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        -0.7071067811865475,
+        0.7071067811865476
+      ],
+      "scale": [
+        2.999999897314441,
+        1.9999982626129769,
+        2
+      ]
+    },
+    "673edbbf-f075-43b8-8b86-231410ec18d0": {
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Wall.glb"
+        }
+      },
+      "id": "673edbbf-f075-43b8-8b86-231410ec18d0",
+      "name": "Ground Entity 4",
+      "parentId": "31634e19-f4a8-4cc0-9932-bf8c8c280211",
+      "position": [
+        -30,
+        -12.117148332891215,
+        8.49837589263916
+      ],
+      "rotation": [
+        0,
+        -0.70710676908493,
+        0,
+        0.7071067932881648
+      ],
+      "scale": [
+        2.9999998973143764,
+        3,
+        2.9999998973143764
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "6af57aff-b060-4bf7-bcac-fb5d0abf8161": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.6,
+          "width": 2
+        }
+      },
+      "components": {
+        "d5c79f9b-1364-4fc3-921e-1d4b4567f26f": {
+          "id": "d5c79f9b-1364-4fc3-921e-1d4b4567f26f",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "6af57aff-b060-4bf7-bcac-fb5d0abf8161",
+      "material": null,
+      "name": "Top Obstacle Collider 1 (3)",
+      "parentId": "ad3aac54-d22c-4523-bb66-96e55a2a03c1",
+      "position": [
+        0.20814494113153525,
+        0.15167895909602236,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047335,
+        0.7071068588683531
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "6b8c0559-663e-47d9-b2b1-9f6621e8c8d6": {
+      "components": {},
+      "disabled": false,
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Tower.glb"
+        }
+      },
+      "id": "6b8c0559-663e-47d9-b2b1-9f6621e8c8d6",
+      "material": null,
+      "name": "Bottom Obstacle (5)",
+      "order": 0.6560730697650181,
+      "parentId": "7040adab-68ae-4736-be84-f5561e761695",
+      "position": [
+        0,
+        -22,
+        0
+      ],
+      "rotation": [
+        0,
+        -0.7071067811865475,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        4,
+        6,
+        4
+      ]
+    },
+    "6c953373-b9da-4628-8a49-3f653a672786": {
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Wall.glb"
+        }
+      },
+      "id": "6c953373-b9da-4628-8a49-3f653a672786",
+      "name": "Ground Entity 3",
+      "parentId": "31634e19-f4a8-4cc0-9932-bf8c8c280211",
+      "position": [
+        -33,
+        -12.117148332891215,
+        8.49837589263916
+      ],
+      "rotation": [
+        0,
+        -0.70710676908493,
+        0,
+        0.7071067932881648
+      ],
+      "scale": [
+        2.9999998973143764,
+        3,
+        2.9999998973143764
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "6d550588-c44b-4dd2-99c8-97f1dc1fa135": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 0.8,
+          "width": 0.7
+        }
+      },
+      "components": {
+        "4316e00e-62bf-4921-87ab-870224cf8002": {
+          "id": "4316e00e-62bf-4921-87ab-870224cf8002",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "6d550588-c44b-4dd2-99c8-97f1dc1fa135",
+      "material": null,
+      "name": "Top Obstacle Collider 5 (7)",
+      "parentId": "528a2c06-ecc4-417a-83b6-c3a18b7d9339",
+      "position": [
+        -2.356154733759273,
+        -0.4221935996034897,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "6de07055-3b2a-40f5-9f87-dc00bc862417": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 3,
+          "height": 8.2,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "e29a0f88-ea48-4302-96f4-a5a511797929": {
+          "id": "e29a0f88-ea48-4302-96f4-a5a511797929",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "6de07055-3b2a-40f5-9f87-dc00bc862417",
+      "material": null,
+      "name": "Bottom Obstacle Collider 5 (4)",
+      "order": 0.802387178269917,
+      "parentId": "2469499b-98b2-431f-8936-147dc0697b65",
+      "position": [
+        0,
+        1.0248598970989424,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "6e417a38-709d-4330-95b8-0f7a0f624545": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 0.8,
+          "width": 0.7
+        }
+      },
+      "components": {
+        "4316e00e-62bf-4921-87ab-870224cf8002": {
+          "id": "4316e00e-62bf-4921-87ab-870224cf8002",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "6e417a38-709d-4330-95b8-0f7a0f624545",
+      "material": null,
+      "name": "Top Obstacle Collider 5 (1)",
+      "parentId": "f585cbd0-9067-456c-a297-79b906a100b5",
+      "position": [
+        -2.356154733759273,
+        -0.4221935996034897,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "7040adab-68ae-4736-be84-f5561e761695": {
+      "components": {},
+      "geometry": null,
+      "id": "7040adab-68ae-4736-be84-f5561e761695",
+      "material": null,
+      "name": "Obstacle (5)",
+      "order": 0.5296035088752893,
+      "parentId": "5cd62040-7505-4d47-82a7-f3599f806b40",
+      "position": [
+        40,
+        4,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "71a3c1f8-3f2b-4716-ab8f-3757e4b71edf": {
+      "components": {},
+      "disabled": false,
+      "geometry": null,
+      "id": "71a3c1f8-3f2b-4716-ab8f-3757e4b71edf",
+      "material": null,
+      "name": "Tap Title",
+      "order": 2.4856598677561976,
+      "parentId": "1c10988f-0be8-4acb-bd26-744ac62deb8f",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "bottom": "",
+        "height": 150,
+        "image": {
+          "type": "asset",
+          "asset": "assets/Images/tapBegin.png"
+        },
+        "left": "15",
+        "position": "absolute",
+        "right": "",
+        "top": "15",
+        "width": 300
+      }
+    },
+    "729478ae-d067-4e0c-a753-66c2e9efb625": {
+      "audio": {
+        "paused": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Audio/wingFlap.mp3"
+        }
+      },
+      "collider": {
+        "angularDamping": 0,
+        "eventOnly": false,
+        "friction": 0.5,
+        "geometry": {
+          "type": "box",
+          "width": 0.699999988079071,
+          "height": 0.65,
+          "depth": 1
+        },
+        "gravityFactor": 0,
+        "linearDamping": 0,
+        "lockXAxis": true,
+        "lockYAxis": true,
+        "lockZAxis": true,
+        "mass": 5,
+        "restitution": 0,
+        "rollingFriction": 0,
+        "spinningFriction": 0
+      },
+      "components": {
+        "530076d7-0ff1-4bb3-a5c9-62e152cc51cd": {
+          "id": "530076d7-0ff1-4bb3-a5c9-62e152cc51cd",
+          "name": "characterController",
+          "parameters": {
+            "character": {
+              "type": "entity",
+              "id": "d0982379-0533-43b8-a96a-8e4c0b605538"
+            },
+            "jumpForce": 28,
+            "activeGravityFactor": 8
+          }
+        }
+      },
+      "disabled": false,
+      "id": "729478ae-d067-4e0c-a753-66c2e9efb625",
+      "name": "Character Container",
+      "order": 1.3634430668749853,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "parentId": "a2b0871c-2ff7-4e5c-958a-7c361bb80c7b"
+    },
+    "75859d06-8482-42bb-b1e2-9cd60eb63129": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 3.5,
+          "height": 2.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "09486807-dc6e-47ad-9633-c8619fa9ae82": {
+          "id": "09486807-dc6e-47ad-9633-c8619fa9ae82",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "75859d06-8482-42bb-b1e2-9cd60eb63129",
+      "material": null,
+      "name": "Bottom Obstacle Collider 4 (4)",
+      "order": 0.802387178269917,
+      "parentId": "2469499b-98b2-431f-8936-147dc0697b65",
+      "position": [
+        0,
+        2.0455265167202565,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "766263e8-1883-45e2-9a12-0cc6f9d764a7": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 0.8,
+          "width": 0.7
+        }
+      },
+      "components": {
+        "ab964f9f-41af-4a3a-adf9-85147cc90bef": {
+          "id": "ab964f9f-41af-4a3a-adf9-85147cc90bef",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "766263e8-1883-45e2-9a12-0cc6f9d764a7",
+      "material": null,
+      "name": "Top Obstacle Collider 4 (7)",
+      "parentId": "528a2c06-ecc4-417a-83b6-c3a18b7d9339",
+      "position": [
+        2.4968621049664943,
+        -0.4221950760084267,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "7706da88-2fc7-4d00-aa44-cb765632a5a2": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 3.5,
+          "height": 2.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "09486807-dc6e-47ad-9633-c8619fa9ae82": {
+          "id": "09486807-dc6e-47ad-9633-c8619fa9ae82",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "7706da88-2fc7-4d00-aa44-cb765632a5a2",
+      "material": null,
+      "name": "Bottom Obstacle Collider 4 (5)",
+      "order": 0.802387178269917,
+      "parentId": "6b8c0559-663e-47d9-b2b1-9f6621e8c8d6",
+      "position": [
+        0,
+        2.0455265167202565,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "780196ec-377d-49b1-9cbf-021bdd117982": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 0.4,
+          "height": 3.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "c3a18ec0-cbb2-4fb2-bf3a-86fa6b2a64d5": {
+          "id": "c3a18ec0-cbb2-4fb2-bf3a-86fa6b2a64d5",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "780196ec-377d-49b1-9cbf-021bdd117982",
+      "material": null,
+      "name": "Bottom Obstacle Collider 1 (2)",
+      "order": 0.802387178269917,
+      "parentId": "c9b3216e-13e6-4f7c-a312-4ea0eb3e8cb4",
+      "position": [
+        0,
+        3.076238594308874,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "7ae4e8a7-f8e5-4df0-bef0-c62b2e6da5a1": {
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Wall.glb"
+        }
+      },
+      "id": "7ae4e8a7-f8e5-4df0-bef0-c62b2e6da5a1",
+      "name": "Ground Entity 2",
+      "parentId": "31634e19-f4a8-4cc0-9932-bf8c8c280211",
+      "position": [
+        -36,
+        -12.117148399353027,
+        8.49837589263916
+      ],
+      "rotation": [
+        0,
+        -0.70710676908493,
+        0,
+        0.7071067932881648
+      ],
+      "scale": [
+        2.9999998973143764,
+        3,
+        2.9999998973143764
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "7cf31411-c5e2-464e-a808-e16d4bf18c35": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 0.4,
+          "height": 3.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "c3a18ec0-cbb2-4fb2-bf3a-86fa6b2a64d5": {
+          "id": "c3a18ec0-cbb2-4fb2-bf3a-86fa6b2a64d5",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "7cf31411-c5e2-464e-a808-e16d4bf18c35",
+      "material": null,
+      "name": "Bottom Obstacle Collider 1 (5)",
+      "order": 0.802387178269917,
+      "parentId": "6b8c0559-663e-47d9-b2b1-9f6621e8c8d6",
+      "position": [
+        0,
+        3.076238594308874,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "7dfe984a-bf8a-4989-a13c-6bcb9e0b2f33": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.1,
+          "width": 1.4
+        }
+      },
+      "components": {
+        "d453b25f-2675-4f17-a44a-5bea65a0f001": {
+          "id": "d453b25f-2675-4f17-a44a-5bea65a0f001",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "7dfe984a-bf8a-4989-a13c-6bcb9e0b2f33",
+      "material": null,
+      "name": "Top Obstacle Collider 3 (6)",
+      "parentId": "e3ebd197-8a2d-4985-bff4-4988d2f1df99",
+      "position": [
+        1.431943257451858,
+        -0.11976427872712025,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "81b980d4-b42d-4312-a9eb-e95a5291779a": {
+      "components": {},
+      "disabled": false,
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Tower.glb"
+        }
+      },
+      "id": "81b980d4-b42d-4312-a9eb-e95a5291779a",
+      "material": null,
+      "name": "Bottom Obstacle",
+      "order": 0.6560730697650181,
+      "parentId": "621d7f39-c387-4859-b7d6-da20a997d1a4",
+      "position": [
+        0,
+        -22,
+        0
+      ],
+      "rotation": [
+        0,
+        -0.7071067811865475,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        4,
+        6,
+        4
+      ]
+    },
+    "824a67a1-32ac-4840-8b5e-13dd84faeb7a": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 8,
+          "width": 0.1
+        }
+      },
+      "components": {
+        "3de34491-5142-4b4f-b803-24bb172bef61": {
+          "id": "3de34491-5142-4b4f-b803-24bb172bef61",
+          "name": "scoreCollider",
+          "parameters": {
+            "character": {
+              "type": "entity",
+              "id": "d0982379-0533-43b8-a96a-8e4c0b605538"
+            },
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "824a67a1-32ac-4840-8b5e-13dd84faeb7a",
+      "material": null,
+      "name": "Score Collider",
+      "order": 3.4703789318963576,
+      "parentId": "621d7f39-c387-4859-b7d6-da20a997d1a4",
+      "position": [
+        1.9305139679944752,
+        1.6507481744102088,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "852d8b6f-362d-4559-babf-a59fc638ad3f": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1.4,
+          "height": 3.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "96f7d4f0-32d6-4dad-8523-b4cfcb55ded4": {
+          "id": "96f7d4f0-32d6-4dad-8523-b4cfcb55ded4",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "852d8b6f-362d-4559-babf-a59fc638ad3f",
+      "material": null,
+      "name": "Bottom Obstacle Collider 3 (5)",
+      "order": 0.802387178269917,
+      "parentId": "6b8c0559-663e-47d9-b2b1-9f6621e8c8d6",
+      "position": [
+        0,
+        2.4528789554484147,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "857857c1-f8b8-4046-8c7d-38dc46305fd7": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 0.8,
+          "width": 0.7
+        }
+      },
+      "components": {
+        "ab964f9f-41af-4a3a-adf9-85147cc90bef": {
+          "id": "ab964f9f-41af-4a3a-adf9-85147cc90bef",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "857857c1-f8b8-4046-8c7d-38dc46305fd7",
+      "material": null,
+      "name": "Top Obstacle Collider 4",
+      "parentId": "3d15189f-24bc-4c13-9557-fee1034f7004",
+      "position": [
+        2.4968621049664943,
+        -0.4221950760084267,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "85d265ee-49a9-4ed3-af46-abf411611e23": {
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Wall.glb"
+        }
+      },
+      "id": "85d265ee-49a9-4ed3-af46-abf411611e23",
+      "name": "Ground Entity 6",
+      "parentId": "31634e19-f4a8-4cc0-9932-bf8c8c280211",
+      "position": [
+        -24,
+        -12.117148332891215,
+        8.49837589263916
+      ],
+      "rotation": [
+        0,
+        -0.70710676908493,
+        0,
+        0.7071067932881648
+      ],
+      "scale": [
+        2.9999998973143764,
+        3,
+        2.9999998973143764
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "8906e967-c28a-4138-91c9-58f18cf0473c": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1.4,
+          "height": 1,
+          "width": 1
+        }
+      },
+      "components": {
+        "613f20f4-f6ee-4e30-911b-5ef25b46c818": {
+          "id": "613f20f4-f6ee-4e30-911b-5ef25b46c818",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "8906e967-c28a-4138-91c9-58f18cf0473c",
+      "material": null,
+      "name": "Bottom Obstacle Collider 2 (2)",
+      "order": 0.802387178269917,
+      "parentId": "c9b3216e-13e6-4f7c-a312-4ea0eb3e8cb4",
+      "position": [
+        6.607739720064891e-17,
+        3.2156446836747676,
+        -0.2975861414104547
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "8b778bbc-9d92-4183-9de2-52a124c96700": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 8,
+          "width": 0.1
+        }
+      },
+      "components": {
+        "3de34491-5142-4b4f-b803-24bb172bef61": {
+          "id": "3de34491-5142-4b4f-b803-24bb172bef61",
+          "name": "scoreCollider",
+          "parameters": {
+            "character": {
+              "type": "entity",
+              "id": "d0982379-0533-43b8-a96a-8e4c0b605538"
+            },
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "8b778bbc-9d92-4183-9de2-52a124c96700",
+      "material": null,
+      "name": "Score Collider (3)",
+      "order": 3.4703789318963576,
+      "parentId": "5551d30c-1004-47a7-b8d5-4a1ec31052a0",
+      "position": [
+        1.9305139679944752,
+        1.6507481744102088,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "8bd4bc0b-ee31-4818-8abb-78fc73be27dc": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 0.4,
+          "height": 3.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "c3a18ec0-cbb2-4fb2-bf3a-86fa6b2a64d5": {
+          "id": "c3a18ec0-cbb2-4fb2-bf3a-86fa6b2a64d5",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "8bd4bc0b-ee31-4818-8abb-78fc73be27dc",
+      "material": null,
+      "name": "Bottom Obstacle Collider 1 (3)",
+      "order": 0.802387178269917,
+      "parentId": "05f524e3-50ac-462e-b896-fe3e8b253a76",
+      "position": [
+        0,
+        3.076238594308874,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "8c6afe55-bac4-46dd-8bb4-f6b46caee28d": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1.4,
+          "height": 1,
+          "width": 1
+        }
+      },
+      "components": {
+        "613f20f4-f6ee-4e30-911b-5ef25b46c818": {
+          "id": "613f20f4-f6ee-4e30-911b-5ef25b46c818",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "8c6afe55-bac4-46dd-8bb4-f6b46caee28d",
+      "material": null,
+      "name": "Bottom Obstacle Collider 2 (1)",
+      "order": 0.802387178269917,
+      "parentId": "5253c997-04ff-4188-ac13-11f727f13cdc",
+      "position": [
+        6.607739720064891e-17,
+        3.2156446836747676,
+        -0.2975861414104547
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "8de5d681-d174-4d19-b7e2-1757503b659b": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.1,
+          "width": 1.6
+        }
+      },
+      "components": {
+        "c6925efc-09b7-4b4e-810a-06e5f5f3c3bc": {
+          "id": "c6925efc-09b7-4b4e-810a-06e5f5f3c3bc",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "8de5d681-d174-4d19-b7e2-1757503b659b",
+      "material": null,
+      "name": "Top Obstacle Collider 2",
+      "parentId": "3d15189f-24bc-4c13-9557-fee1034f7004",
+      "position": [
+        -1.109690674130447,
+        -0.07505600387152456,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "901efbc4-fb7e-4e94-8f1c-15e47e4c3cad": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.1,
+          "width": 1.4
+        }
+      },
+      "components": {
+        "d453b25f-2675-4f17-a44a-5bea65a0f001": {
+          "id": "d453b25f-2675-4f17-a44a-5bea65a0f001",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "901efbc4-fb7e-4e94-8f1c-15e47e4c3cad",
+      "material": null,
+      "name": "Top Obstacle Collider 3 (4)",
+      "parentId": "5842c242-3305-4d6e-ae3d-23cc30015c5e",
+      "position": [
+        1.431943257451858,
+        -0.11976427872712025,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "918df4ed-6af1-44dd-989d-9e0dc581a0e9": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 0.8,
+          "width": 0.7
+        }
+      },
+      "components": {
+        "4316e00e-62bf-4921-87ab-870224cf8002": {
+          "id": "4316e00e-62bf-4921-87ab-870224cf8002",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "918df4ed-6af1-44dd-989d-9e0dc581a0e9",
+      "material": null,
+      "name": "Top Obstacle Collider 5 (6)",
+      "parentId": "e3ebd197-8a2d-4985-bff4-4988d2f1df99",
+      "position": [
+        -2.356154733759273,
+        -0.4221935996034897,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "919cad73-9bca-4089-bb1d-be98cbe0a1a1": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 3,
+          "height": 8.2,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "e29a0f88-ea48-4302-96f4-a5a511797929": {
+          "id": "e29a0f88-ea48-4302-96f4-a5a511797929",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "919cad73-9bca-4089-bb1d-be98cbe0a1a1",
+      "material": null,
+      "name": "Bottom Obstacle Collider 5 (2)",
+      "order": 0.802387178269917,
+      "parentId": "c9b3216e-13e6-4f7c-a312-4ea0eb3e8cb4",
+      "position": [
+        0,
+        1.0248598970989424,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "91f7b9d7-ec54-4564-97d0-62d6ce622b5a": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 3.5,
+          "height": 2.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "09486807-dc6e-47ad-9633-c8619fa9ae82": {
+          "id": "09486807-dc6e-47ad-9633-c8619fa9ae82",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "91f7b9d7-ec54-4564-97d0-62d6ce622b5a",
+      "material": null,
+      "name": "Bottom Obstacle Collider 4 (3)",
+      "order": 0.802387178269917,
+      "parentId": "05f524e3-50ac-462e-b896-fe3e8b253a76",
+      "position": [
+        0,
+        2.0455265167202565,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "94ea2865-fa39-4b35-b13e-f0315d5eb3ff": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 0.8,
+          "width": 0.7
+        }
+      },
+      "components": {
+        "4316e00e-62bf-4921-87ab-870224cf8002": {
+          "id": "4316e00e-62bf-4921-87ab-870224cf8002",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "94ea2865-fa39-4b35-b13e-f0315d5eb3ff",
+      "material": null,
+      "name": "Top Obstacle Collider 5 (4)",
+      "parentId": "5842c242-3305-4d6e-ae3d-23cc30015c5e",
+      "position": [
+        -2.356154733759273,
+        -0.4221935996034897,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "966c8577-f3ff-4558-8019-551cde1b2955": {
+      "components": {},
+      "disabled": false,
+      "geometry": null,
+      "id": "966c8577-f3ff-4558-8019-551cde1b2955",
+      "material": null,
+      "name": "Point Value",
+      "order": 2.5409530482459672,
+      "parentId": "2438ef64-b462-4956-bc99-ee3c0461d6ff",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "color": "#b81f1f",
+        "font": {
+          "type": "url",
+          "url": "Futura"
+        },
+        "fontSize": 70,
+        "left": "-5000",
+        "position": "absolute",
+        "text": "0",
+        "top": "40",
+        "type": "overlay"
+      }
+    },
+    "96a9857e-b444-411b-9da8-960a2db71a0b": {
+      "components": {},
+      "geometry": null,
+      "id": "96a9857e-b444-411b-9da8-960a2db71a0b",
+      "material": null,
+      "name": "Obstacle (1)",
+      "order": 0.5296035088752893,
+      "parentId": "5cd62040-7505-4d47-82a7-f3599f806b40",
+      "position": [
+        8,
+        3,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "9e826644-a527-4ddc-a65d-d4a5e56d287e": {
+      "components": {},
+      "disabled": false,
+      "geometry": null,
+      "id": "9e826644-a527-4ddc-a65d-d4a5e56d287e",
+      "material": null,
+      "name": "Space Title",
+      "order": 2.4856598677561976,
+      "parentId": "1c10988f-0be8-4acb-bd26-744ac62deb8f",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "bottom": "",
+        "height": 150,
+        "image": {
+          "type": "asset",
+          "asset": "assets/Images/spaceBegin.png"
+        },
+        "left": "-5000",
+        "position": "absolute",
+        "right": "",
+        "top": "15",
+        "width": 300
+      }
+    },
+    "a251a0f2-e91a-4de0-8700-1db7cb4bd58b": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.1,
+          "width": 1.4
+        }
+      },
+      "components": {
+        "d453b25f-2675-4f17-a44a-5bea65a0f001": {
+          "id": "d453b25f-2675-4f17-a44a-5bea65a0f001",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "a251a0f2-e91a-4de0-8700-1db7cb4bd58b",
+      "material": null,
+      "name": "Top Obstacle Collider 3 (7)",
+      "parentId": "528a2c06-ecc4-417a-83b6-c3a18b7d9339",
+      "position": [
+        1.431943257451858,
+        -0.11976427872712025,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "a43403b1-1e1f-48e3-8412-f9bc9c26310e": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 3,
+          "height": 8.2,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "e29a0f88-ea48-4302-96f4-a5a511797929": {
+          "id": "e29a0f88-ea48-4302-96f4-a5a511797929",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "a43403b1-1e1f-48e3-8412-f9bc9c26310e",
+      "material": null,
+      "name": "Bottom Obstacle Collider 5 (7)",
+      "order": 0.802387178269917,
+      "parentId": "40b90c6c-8265-40a2-994a-4683ef22bb4b",
+      "position": [
+        0,
+        1.0248598970989424,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "a603adb2-555c-4429-863a-3c9df00ba9aa": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 8,
+          "width": 0.1
+        }
+      },
+      "components": {
+        "3de34491-5142-4b4f-b803-24bb172bef61": {
+          "id": "3de34491-5142-4b4f-b803-24bb172bef61",
+          "name": "scoreCollider",
+          "parameters": {
+            "character": {
+              "type": "entity",
+              "id": "d0982379-0533-43b8-a96a-8e4c0b605538"
+            },
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "a603adb2-555c-4429-863a-3c9df00ba9aa",
+      "material": null,
+      "name": "Score Collider (5)",
+      "order": 3.4703789318963576,
+      "parentId": "7040adab-68ae-4736-be84-f5561e761695",
+      "position": [
+        1.9305139679944752,
+        1.6507481744102088,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "a608ddd9-9379-464d-966f-5d8d8674c83c": {
+      "camera": {
+        "bottom": -0.5,
+        "left": -1,
+        "right": 1,
+        "top": 0.5,
+        "type": "perspective",
+        "xr": {
+          "desktop": "3D",
+          "xrCameraType": "3dOnly",
+          "headset": "disabled"
+        },
+        "zoom": 2
+      },
+      "components": {
+        "0261ff78-f722-4f0e-9991-6b4452201ec0": {
+          "id": "0261ff78-f722-4f0e-9991-6b4452201ec0",
+          "name": "cameraController",
+          "parameters": {
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "material": null,
+      "name": "Camera",
+      "order": 10.573539175964779,
+      "position": [
+        0,
+        0,
+        32
+      ],
+      "rotation": [
+        0,
+        1,
+        0,
+        -6.123234262925839e-17
+      ],
+      "scale": [
+        0.9999998211860657,
+        1,
+        0.9999998211860657
+      ],
+      "parentId": "a2b0871c-2ff7-4e5c-958a-7c361bb80c7b"
+    },
+    "a8cf8fda-6503-4c29-bfaf-1bb972c05381": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.1,
+          "width": 1.6
+        }
+      },
+      "components": {
+        "c6925efc-09b7-4b4e-810a-06e5f5f3c3bc": {
+          "id": "c6925efc-09b7-4b4e-810a-06e5f5f3c3bc",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "a8cf8fda-6503-4c29-bfaf-1bb972c05381",
+      "material": null,
+      "name": "Top Obstacle Collider 2 (5)",
+      "parentId": "cf984795-0133-4a08-bb65-843736fb063b",
+      "position": [
+        -1.109690674130447,
+        -0.07505600387152456,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "a940e009-a249-4b7a-bb1b-185ca91d9775": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 0.8,
+          "width": 0.7
+        }
+      },
+      "components": {
+        "ab964f9f-41af-4a3a-adf9-85147cc90bef": {
+          "id": "ab964f9f-41af-4a3a-adf9-85147cc90bef",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "a940e009-a249-4b7a-bb1b-185ca91d9775",
+      "material": null,
+      "name": "Top Obstacle Collider 4 (4)",
+      "parentId": "5842c242-3305-4d6e-ae3d-23cc30015c5e",
+      "position": [
+        2.4968621049664943,
+        -0.4221950760084267,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "a9dfd296-b238-433e-86fa-cc283d4d1e0d": {
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "components": {
+        "bce3e1e3-ebd4-4b40-9b9c-3450fccff316": {
+          "id": "bce3e1e3-ebd4-4b40-9b9c-3450fccff316",
+          "name": "floorManager",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": {
+        "depth": 1,
+        "height": 1,
+        "type": "box",
+        "width": 1
+      },
+      "hidden": false,
+      "id": "a9dfd296-b238-433e-86fa-cc283d4d1e0d",
+      "material": {
+        "blending": "normal",
+        "color": "#ffffff",
+        "depthTest": true,
+        "depthWrite": true,
+        "emissiveColor": "#ffffff",
+        "emissiveIntensity": 0,
+        "emissiveMap": "",
+        "metalness": 0.5,
+        "metalnessMap": "",
+        "offsetX": 0,
+        "offsetY": 0,
+        "opacity": 0,
+        "opacityMap": "",
+        "repeatX": 1,
+        "repeatY": 1,
+        "roughness": 0.5,
+        "roughnessMap": "",
+        "side": "front",
+        "textureSrc": "",
+        "type": "basic",
+        "wireframe": false
+      },
+      "name": "Floor",
+      "order": 3.3634430668749853,
+      "position": [
+        0,
+        -13,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "a2b0871c-2ff7-4e5c-958a-7c361bb80c7b"
+    },
+    "aa4328d2-caca-4d60-b432-b89621750a5d": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 0.8,
+          "width": 0.7
+        }
+      },
+      "components": {
+        "ab964f9f-41af-4a3a-adf9-85147cc90bef": {
+          "id": "ab964f9f-41af-4a3a-adf9-85147cc90bef",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "aa4328d2-caca-4d60-b432-b89621750a5d",
+      "material": null,
+      "name": "Top Obstacle Collider 4 (5)",
+      "parentId": "cf984795-0133-4a08-bb65-843736fb063b",
+      "position": [
+        2.4968621049664943,
+        -0.4221950760084267,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "acb63ba9-9ed3-4ed1-8938-034d2e197451": {
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Wall.glb"
+        }
+      },
+      "id": "acb63ba9-9ed3-4ed1-8938-034d2e197451",
+      "name": "Ground Entity 9",
+      "parentId": "31634e19-f4a8-4cc0-9932-bf8c8c280211",
+      "position": [
+        -15,
+        -12.117148399353027,
+        8.49837589263916
+      ],
+      "rotation": [
+        0,
+        -0.70710676908493,
+        0,
+        0.7071067932881648
+      ],
+      "scale": [
+        2.9999998973143764,
+        3,
+        2.9999998973143764
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "ad3aac54-d22c-4523-bb66-96e55a2a03c1": {
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Cloud.glb"
+        }
+      },
+      "id": "ad3aac54-d22c-4523-bb66-96e55a2a03c1",
+      "material": null,
+      "name": "Top Obstacle (3)",
+      "order": 2.3121461395300362,
+      "parentId": "5551d30c-1004-47a7-b8d5-4a1ec31052a0",
+      "position": [
+        1.039391040802002,
+        15,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        -0.7071067811865475,
+        0.7071067811865476
+      ],
+      "scale": [
+        2.999999897314441,
+        1.9999982626129769,
+        2
+      ]
+    },
+    "b382ed0e-4d73-4cdc-a9c3-a4fedd531733": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.1,
+          "width": 1.6
+        }
+      },
+      "components": {
+        "c6925efc-09b7-4b4e-810a-06e5f5f3c3bc": {
+          "id": "c6925efc-09b7-4b4e-810a-06e5f5f3c3bc",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "b382ed0e-4d73-4cdc-a9c3-a4fedd531733",
+      "material": null,
+      "name": "Top Obstacle Collider 2 (2)",
+      "parentId": "6636907c-9944-4a11-8a0b-dcb592d28f74",
+      "position": [
+        -1.109690674130447,
+        -0.07505600387152456,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "b55836d6-b13b-41df-a028-7956e7fcd20a": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 8,
+          "width": 0.1
+        }
+      },
+      "components": {
+        "3de34491-5142-4b4f-b803-24bb172bef61": {
+          "id": "3de34491-5142-4b4f-b803-24bb172bef61",
+          "name": "scoreCollider",
+          "parameters": {
+            "character": {
+              "type": "entity",
+              "id": "d0982379-0533-43b8-a96a-8e4c0b605538"
+            },
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "b55836d6-b13b-41df-a028-7956e7fcd20a",
+      "material": null,
+      "name": "Score Collider (1)",
+      "order": 3.4703789318963576,
+      "parentId": "96a9857e-b444-411b-9da8-960a2db71a0b",
+      "position": [
+        1.9305139679944752,
+        1.6507481744102088,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "b6e51606-dc9c-46d3-bba2-9c37da6d631f": {
+      "components": {},
+      "geometry": null,
+      "id": "b6e51606-dc9c-46d3-bba2-9c37da6d631f",
+      "material": null,
+      "name": "Obstacle (6)",
+      "order": 0.5296035088752893,
+      "parentId": "5cd62040-7505-4d47-82a7-f3599f806b40",
+      "position": [
+        48,
+        2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "b6e5e49e-f9f5-4b3c-a551-e588b23e95eb": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 0.4,
+          "height": 3.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "c3a18ec0-cbb2-4fb2-bf3a-86fa6b2a64d5": {
+          "id": "c3a18ec0-cbb2-4fb2-bf3a-86fa6b2a64d5",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "b6e5e49e-f9f5-4b3c-a551-e588b23e95eb",
+      "material": null,
+      "name": "Bottom Obstacle Collider 1 (1)",
+      "order": 0.802387178269917,
+      "parentId": "5253c997-04ff-4188-ac13-11f727f13cdc",
+      "position": [
+        0,
+        3.076238594308874,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "b7bd40ed-3713-414e-8fec-bfda9b4082f0": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 0.4,
+          "height": 3.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "c3a18ec0-cbb2-4fb2-bf3a-86fa6b2a64d5": {
+          "id": "c3a18ec0-cbb2-4fb2-bf3a-86fa6b2a64d5",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "b7bd40ed-3713-414e-8fec-bfda9b4082f0",
+      "material": null,
+      "name": "Bottom Obstacle Collider 1 (4)",
+      "order": 0.802387178269917,
+      "parentId": "2469499b-98b2-431f-8936-147dc0697b65",
+      "position": [
+        0,
+        3.076238594308874,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "ba239421-e004-4b33-bbdf-cfb23992965a": {
+      "components": {},
+      "disabled": false,
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Tower.glb"
+        }
+      },
+      "id": "ba239421-e004-4b33-bbdf-cfb23992965a",
+      "material": null,
+      "name": "Bottom Obstacle (6)",
+      "order": 0.6560730697650181,
+      "parentId": "b6e51606-dc9c-46d3-bba2-9c37da6d631f",
+      "position": [
+        0,
+        -22,
+        0
+      ],
+      "rotation": [
+        0,
+        -0.7071067811865475,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        4,
+        6,
+        4
+      ]
+    },
+    "bc0f6487-dac6-46be-995c-580283185541": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1.4,
+          "height": 1,
+          "width": 1
+        }
+      },
+      "components": {
+        "613f20f4-f6ee-4e30-911b-5ef25b46c818": {
+          "id": "613f20f4-f6ee-4e30-911b-5ef25b46c818",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "bc0f6487-dac6-46be-995c-580283185541",
+      "material": null,
+      "name": "Bottom Obstacle Collider 2 (7)",
+      "order": 0.802387178269917,
+      "parentId": "40b90c6c-8265-40a2-994a-4683ef22bb4b",
+      "position": [
+        6.607739720064891e-17,
+        3.2156446836747676,
+        -0.2975861414104547
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "be01aab9-a626-4ad5-8f83-3efc9e9dbac6": {
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Wall.glb"
+        }
+      },
+      "id": "be01aab9-a626-4ad5-8f83-3efc9e9dbac6",
+      "name": "Ground Entity 13",
+      "parentId": "31634e19-f4a8-4cc0-9932-bf8c8c280211",
+      "position": [
+        -3,
+        -12.117148332891215,
+        8.49837589263916
+      ],
+      "rotation": [
+        0,
+        -0.70710676908493,
+        0,
+        0.7071067932881648
+      ],
+      "scale": [
+        2.9999998973143764,
+        3,
+        2.9999998973143764
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "c580b38d-2984-41cb-9270-7c2fe32626e1": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1.4,
+          "height": 3.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "96f7d4f0-32d6-4dad-8523-b4cfcb55ded4": {
+          "id": "96f7d4f0-32d6-4dad-8523-b4cfcb55ded4",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "c580b38d-2984-41cb-9270-7c2fe32626e1",
+      "material": null,
+      "name": "Bottom Obstacle Collider 3",
+      "order": 0.802387178269917,
+      "parentId": "81b980d4-b42d-4312-a9eb-e95a5291779a",
+      "position": [
+        0,
+        2.4528789554484147,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "c9b3216e-13e6-4f7c-a312-4ea0eb3e8cb4": {
+      "components": {},
+      "disabled": false,
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Tower.glb"
+        }
+      },
+      "id": "c9b3216e-13e6-4f7c-a312-4ea0eb3e8cb4",
+      "material": null,
+      "name": "Bottom Obstacle (2)",
+      "order": 0.6560730697650181,
+      "parentId": "f2c450f0-d647-4a78-8ea2-003fadaf6d3a",
+      "position": [
+        0,
+        -22,
+        0
+      ],
+      "rotation": [
+        0,
+        -0.7071067811865475,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        4,
+        6,
+        4
+      ]
+    },
+    "caca7911-c61d-4596-b329-e5c5b82dd4c6": {
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Wall.glb"
+        }
+      },
+      "id": "caca7911-c61d-4596-b329-e5c5b82dd4c6",
+      "name": "Ground Entity 8",
+      "parentId": "31634e19-f4a8-4cc0-9932-bf8c8c280211",
+      "position": [
+        -18,
+        -12.117148332891215,
+        8.49837589263916
+      ],
+      "rotation": [
+        0,
+        -0.70710676908493,
+        0,
+        0.7071067932881648
+      ],
+      "scale": [
+        2.9999998973143764,
+        3,
+        2.9999998973143764
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "cf12f3bf-ffa9-439f-8787-e326ae857aee": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 8,
+          "width": 0.1
+        }
+      },
+      "components": {
+        "3de34491-5142-4b4f-b803-24bb172bef61": {
+          "id": "3de34491-5142-4b4f-b803-24bb172bef61",
+          "name": "scoreCollider",
+          "parameters": {
+            "character": {
+              "type": "entity",
+              "id": "d0982379-0533-43b8-a96a-8e4c0b605538"
+            },
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "cf12f3bf-ffa9-439f-8787-e326ae857aee",
+      "material": null,
+      "name": "Score Collider (7)",
+      "order": 3.4703789318963576,
+      "parentId": "1f880491-ca8c-4971-a8d1-8a1c61870ebf",
+      "position": [
+        1.9305139679944752,
+        1.6507481744102088,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "cf8e40d2-3634-4c5c-ada2-2672bbad212c": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 0.8,
+          "width": 0.7
+        }
+      },
+      "components": {
+        "ab964f9f-41af-4a3a-adf9-85147cc90bef": {
+          "id": "ab964f9f-41af-4a3a-adf9-85147cc90bef",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "cf8e40d2-3634-4c5c-ada2-2672bbad212c",
+      "material": null,
+      "name": "Top Obstacle Collider 4 (6)",
+      "parentId": "e3ebd197-8a2d-4985-bff4-4988d2f1df99",
+      "position": [
+        2.4968621049664943,
+        -0.4221950760084267,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "cf984795-0133-4a08-bb65-843736fb063b": {
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Cloud.glb"
+        }
+      },
+      "id": "cf984795-0133-4a08-bb65-843736fb063b",
+      "material": null,
+      "name": "Top Obstacle (5)",
+      "order": 2.3121461395300362,
+      "parentId": "7040adab-68ae-4736-be84-f5561e761695",
+      "position": [
+        1.039391040802002,
+        15,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        -0.7071067811865475,
+        0.7071067811865476
+      ],
+      "scale": [
+        2.999999897314441,
+        1.9999982626129769,
+        2
+      ]
+    },
+    "d0982379-0533-43b8-a96a-8e4c0b605538": {
+      "components": {},
+      "disabled": false,
+      "gltfModel": {
+        "animationClip": "Flying_Idle",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Dragon.glb"
+        }
+      },
+      "id": "d0982379-0533-43b8-a96a-8e4c0b605538",
+      "name": "Character",
+      "parentId": "729478ae-d067-4e0c-a753-66c2e9efb625",
+      "position": [
+        -0.08662565797567368,
+        -1.2176241388758402,
+        0
+      ],
+      "rotation": [
+        0,
+        0.7071067690849299,
+        0,
+        0.707106793288165
+      ],
+      "scale": [
+        0.49999989347876533,
+        0.5,
+        0.49999989347876533
+      ]
+    },
+    "d146afe2-4c28-4207-a10c-29fb73386770": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.1,
+          "width": 1.4
+        }
+      },
+      "components": {
+        "d453b25f-2675-4f17-a44a-5bea65a0f001": {
+          "id": "d453b25f-2675-4f17-a44a-5bea65a0f001",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "d146afe2-4c28-4207-a10c-29fb73386770",
+      "material": null,
+      "name": "Top Obstacle Collider 3 (3)",
+      "parentId": "ad3aac54-d22c-4523-bb66-96e55a2a03c1",
+      "position": [
+        1.431943257451858,
+        -0.11976427872712025,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "d14ab3fc-7f05-4a43-b4b5-eda3eb89f135": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 0.4,
+          "height": 3.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "c3a18ec0-cbb2-4fb2-bf3a-86fa6b2a64d5": {
+          "id": "c3a18ec0-cbb2-4fb2-bf3a-86fa6b2a64d5",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "d14ab3fc-7f05-4a43-b4b5-eda3eb89f135",
+      "material": null,
+      "name": "Bottom Obstacle Collider 1",
+      "order": 0.802387178269917,
+      "parentId": "81b980d4-b42d-4312-a9eb-e95a5291779a",
+      "position": [
+        0,
+        3.076238594308874,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "d21914b8-ce36-4fa1-a2b8-bfe74f0b3145": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 3.5,
+          "height": 2.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "09486807-dc6e-47ad-9633-c8619fa9ae82": {
+          "id": "09486807-dc6e-47ad-9633-c8619fa9ae82",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "d21914b8-ce36-4fa1-a2b8-bfe74f0b3145",
+      "material": null,
+      "name": "Bottom Obstacle Collider 4 (2)",
+      "order": 0.802387178269917,
+      "parentId": "c9b3216e-13e6-4f7c-a312-4ea0eb3e8cb4",
+      "position": [
+        0,
+        2.0455265167202565,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "d28272a7-2f76-4882-8549-4434e8cec0b5": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.6,
+          "width": 2
+        }
+      },
+      "components": {
+        "d5c79f9b-1364-4fc3-921e-1d4b4567f26f": {
+          "id": "d5c79f9b-1364-4fc3-921e-1d4b4567f26f",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "d28272a7-2f76-4882-8549-4434e8cec0b5",
+      "material": null,
+      "name": "Top Obstacle Collider 1 (4)",
+      "parentId": "5842c242-3305-4d6e-ae3d-23cc30015c5e",
+      "position": [
+        0.20814494113153525,
+        0.15167895909602236,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047335,
+        0.7071068588683531
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "d4024178-8202-4811-b694-8aea17f56bfb": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 0.4,
+          "height": 3.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "c3a18ec0-cbb2-4fb2-bf3a-86fa6b2a64d5": {
+          "id": "c3a18ec0-cbb2-4fb2-bf3a-86fa6b2a64d5",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "d4024178-8202-4811-b694-8aea17f56bfb",
+      "material": null,
+      "name": "Bottom Obstacle Collider 1 (7)",
+      "order": 0.802387178269917,
+      "parentId": "40b90c6c-8265-40a2-994a-4683ef22bb4b",
+      "position": [
+        0,
+        3.076238594308874,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "d71624be-ff30-4953-9acc-0351571fb157": {
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Wall.glb"
+        }
+      },
+      "id": "d71624be-ff30-4953-9acc-0351571fb157",
+      "name": "Ground Entity 11",
+      "parentId": "31634e19-f4a8-4cc0-9932-bf8c8c280211",
+      "position": [
+        -9,
+        -12.117148332891215,
+        8.49837589263916
+      ],
+      "rotation": [
+        0,
+        -0.70710676908493,
+        0,
+        0.7071067932881648
+      ],
+      "scale": [
+        2.9999998973143764,
+        3,
+        2.9999998973143764
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "df25d727-bc29-4f10-9b91-338d70dce295": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 0.8,
+          "width": 0.7
+        }
+      },
+      "components": {
+        "4316e00e-62bf-4921-87ab-870224cf8002": {
+          "id": "4316e00e-62bf-4921-87ab-870224cf8002",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "df25d727-bc29-4f10-9b91-338d70dce295",
+      "material": null,
+      "name": "Top Obstacle Collider 5 (5)",
+      "parentId": "cf984795-0133-4a08-bb65-843736fb063b",
+      "position": [
+        -2.356154733759273,
+        -0.4221935996034897,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047336,
+        0.707106858868353
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    },
+    "df5504fe-8302-44da-b43f-448bc846c633": {
+      "audio": {
+        "paused": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Audio/bonk.mp3"
+        }
+      },
+      "components": {
+        "92329118-212d-48b6-9ff1-f729f7b9b88a": {
+          "id": "92329118-212d-48b6-9ff1-f729f7b9b88a",
+          "name": "gameManager",
+          "parameters": {
+            "astronautEntity": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "floor": {
+              "type": "entity",
+              "id": "a9dfd296-b238-433e-86fa-cc283d4d1e0d"
+            },
+            "groundContainer": {
+              "type": "entity",
+              "id": "31634e19-f4a8-4cc0-9932-bf8c8c280211"
+            },
+            "obstacleContainer": {
+              "type": "entity",
+              "id": "5cd62040-7505-4d47-82a7-f3599f806b40"
+            },
+            "startBox": {
+              "type": "entity",
+              "id": "d79b5105-598b-4ddd-85b6-bdc31b8d0ec7"
+            }
+          }
+        }
+      },
+      "geometry": {
+        "height": 39.7,
+        "type": "plane",
+        "width": 39.7
+      },
+      "id": "df5504fe-8302-44da-b43f-448bc846c633",
+      "material": {
+        "blending": "normal",
+        "color": "#ffffff",
+        "depthTest": true,
+        "depthWrite": true,
+        "emissiveColor": "#ffffff",
+        "emissiveIntensity": 0,
+        "emissiveMap": "",
+        "metalness": 0.5,
+        "metalnessMap": "",
+        "offsetX": 0,
+        "offsetY": 0,
+        "opacity": 0,
+        "opacityMap": "",
+        "repeatX": 1,
+        "repeatY": 1,
+        "roughness": 0.5,
+        "roughnessMap": "",
+        "side": "front",
+        "textureSrc": "",
+        "type": "basic",
+        "wireframe": false
+      },
+      "name": "Game Manager",
+      "order": 5.363443066874986,
+      "position": [
+        -0.5069606995570552,
+        0,
+        12.675150501470046
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1.0000001343588654,
+        1.0000001343588654
+      ],
+      "parentId": "a2b0871c-2ff7-4e5c-958a-7c361bb80c7b"
+    },
+    "e0886926-393b-4213-8b29-55fee7ff55a5": {
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Wall.glb"
+        }
+      },
+      "id": "e0886926-393b-4213-8b29-55fee7ff55a5",
+      "name": "Ground Entity 1",
+      "parentId": "31634e19-f4a8-4cc0-9932-bf8c8c280211",
+      "position": [
+        -39,
+        -12.117148332891215,
+        8.49837589263916
+      ],
+      "rotation": [
+        0,
+        -0.70710676908493,
+        0,
+        0.7071067932881648
+      ],
+      "scale": [
+        2.9999998973143764,
+        3,
+        2.9999998973143764
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "e09df4c7-c1de-4b84-b363-14ddd4b99727": {
+      "components": {},
+      "disabled": false,
+      "geometry": null,
+      "id": "e09df4c7-c1de-4b84-b363-14ddd4b99727",
+      "material": null,
+      "name": "Point Title",
+      "order": 0.7311319814659085,
+      "parentId": "2438ef64-b462-4956-bc99-ee3c0461d6ff",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "ui": {
+        "color": "#b81f1f",
+        "font": {
+          "type": "url",
+          "url": "Futura"
+        },
+        "fontSize": 30,
+        "left": "-5000",
+        "position": "absolute",
+        "text": "Points",
+        "top": "16"
+      }
+    },
+    "e36dd1e5-19eb-4b72-aea5-b8224382480e": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 8,
+          "width": 0.1
+        }
+      },
+      "components": {
+        "3de34491-5142-4b4f-b803-24bb172bef61": {
+          "id": "3de34491-5142-4b4f-b803-24bb172bef61",
+          "name": "scoreCollider",
+          "parameters": {
+            "character": {
+              "type": "entity",
+              "id": "d0982379-0533-43b8-a96a-8e4c0b605538"
+            },
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "e36dd1e5-19eb-4b72-aea5-b8224382480e",
+      "material": null,
+      "name": "Score Collider (2)",
+      "order": 3.4703789318963576,
+      "parentId": "f2c450f0-d647-4a78-8ea2-003fadaf6d3a",
+      "position": [
+        1.9305139679944752,
+        1.6507481744102088,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "e3ebd197-8a2d-4985-bff4-4988d2f1df99": {
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Cloud.glb"
+        }
+      },
+      "id": "e3ebd197-8a2d-4985-bff4-4988d2f1df99",
+      "material": null,
+      "name": "Top Obstacle (6)",
+      "order": 2.3121461395300362,
+      "parentId": "b6e51606-dc9c-46d3-bba2-9c37da6d631f",
+      "position": [
+        1.039391040802002,
+        15,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        -0.7071067811865475,
+        0.7071067811865476
+      ],
+      "scale": [
+        2.999999897314441,
+        1.9999982626129769,
+        2
+      ]
+    },
+    "e5764c48-3739-4fce-a3b9-a76d9b4eba54": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1.4,
+          "height": 1,
+          "width": 1
+        }
+      },
+      "components": {
+        "613f20f4-f6ee-4e30-911b-5ef25b46c818": {
+          "id": "613f20f4-f6ee-4e30-911b-5ef25b46c818",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "e5764c48-3739-4fce-a3b9-a76d9b4eba54",
+      "material": null,
+      "name": "Bottom Obstacle Collider 2 (4)",
+      "order": 0.802387178269917,
+      "parentId": "2469499b-98b2-431f-8936-147dc0697b65",
+      "position": [
+        6.607739720064891e-17,
+        3.2156446836747676,
+        -0.2975861414104547
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "e6154f09-7045-4c6e-a09a-6c5f7a6d804b": {
+      "components": {},
+      "geometry": null,
+      "id": "e6154f09-7045-4c6e-a09a-6c5f7a6d804b",
+      "light": {
+        "castShadow": true,
+        "intensity": 0.5,
+        "shadowBias": 1,
+        "shadowNormalBias": 1,
+        "type": "directional"
+      },
+      "material": null,
+      "name": "Directional Light",
+      "order": -2.344613170635175,
+      "position": [
+        49.03276824951172,
+        26.924214161790573,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "a2b0871c-2ff7-4e5c-958a-7c361bb80c7b"
+    },
+    "e810f34d-f600-45fa-b736-0e0973228ac5": {
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Wall.glb"
+        }
+      },
+      "id": "e810f34d-f600-45fa-b736-0e0973228ac5",
+      "name": "Ground Entity 5",
+      "parentId": "31634e19-f4a8-4cc0-9932-bf8c8c280211",
+      "position": [
+        -27,
+        -12.117148332891215,
+        8.49837589263916
+      ],
+      "rotation": [
+        0,
+        -0.70710676908493,
+        0,
+        0.7071067932881648
+      ],
+      "scale": [
+        2.9999998973143764,
+        3,
+        2.9999998973143764
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "e96a2ba5-fe88-4212-b04c-dee18ff20423": {
+      "audio": {
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Audio/backgroundMusic.mp3"
+        },
+        "volume": 1
+      },
+      "components": {
+        "6120baf2-9de9-4881-a0d4-eb73ecf31e42": {
+          "id": "6120baf2-9de9-4881-a0d4-eb73ecf31e42",
+          "name": "backgroundController",
+          "parameters": {}
+        }
+      },
+      "geometry": {
+        "height": 27,
+        "type": "plane",
+        "width": 27
+      },
+      "id": "e96a2ba5-fe88-4212-b04c-dee18ff20423",
+      "material": {
+        "blending": "normal",
+        "color": "#ffffff",
+        "depthTest": true,
+        "depthWrite": true,
+        "emissiveColor": "#cfcfcf",
+        "emissiveIntensity": 0,
+        "emissiveMap": "assets/BG.jpg",
+        "metalness": 0,
+        "metalnessMap": "",
+        "normalScale": 0,
+        "offsetX": 0,
+        "offsetY": 0,
+        "opacity": 1,
+        "opacityMap": "",
+        "repeatX": 1,
+        "repeatY": 1,
+        "roughness": 0,
+        "roughnessMap": "",
+        "side": "front",
+        "textureSrc": {
+          "type": "asset",
+          "asset": "assets/Images/BG.jpg"
+        },
+        "type": "basic",
+        "wireframe": false
+      },
+      "name": "Background",
+      "order": 4.363443066874986,
+      "position": [
+        0,
+        4.388907101948192,
+        -11.49631118774414
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1.75,
+        1.0000001192092896
+      ],
+      "shadow": {
+        "receiveShadow": false
+      },
+      "parentId": "a2b0871c-2ff7-4e5c-958a-7c361bb80c7b"
+    },
+    "ec5d321d-e7a8-4c47-975b-70d0d3ada81e": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 3.5,
+          "height": 2.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "09486807-dc6e-47ad-9633-c8619fa9ae82": {
+          "id": "09486807-dc6e-47ad-9633-c8619fa9ae82",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "ec5d321d-e7a8-4c47-975b-70d0d3ada81e",
+      "material": null,
+      "name": "Bottom Obstacle Collider 4 (7)",
+      "order": 0.802387178269917,
+      "parentId": "40b90c6c-8265-40a2-994a-4683ef22bb4b",
+      "position": [
+        0,
+        2.0455265167202565,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "ed0a8aff-f8f0-46cc-997f-75412d5a0808": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1.4,
+          "height": 3.7,
+          "width": 0.5
+        }
+      },
+      "components": {
+        "96f7d4f0-32d6-4dad-8523-b4cfcb55ded4": {
+          "id": "96f7d4f0-32d6-4dad-8523-b4cfcb55ded4",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "ed0a8aff-f8f0-46cc-997f-75412d5a0808",
+      "material": null,
+      "name": "Bottom Obstacle Collider 3 (3)",
+      "order": 0.802387178269917,
+      "parentId": "05f524e3-50ac-462e-b896-fe3e8b253a76",
+      "position": [
+        0,
+        2.4528789554484147,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.25,
+        0.16666666666666666,
+        0.25
+      ]
+    },
+    "f2c450f0-d647-4a78-8ea2-003fadaf6d3a": {
+      "components": {},
+      "geometry": null,
+      "id": "f2c450f0-d647-4a78-8ea2-003fadaf6d3a",
+      "material": null,
+      "name": "Obstacle (2)",
+      "order": 0.5296035088752893,
+      "parentId": "5cd62040-7505-4d47-82a7-f3599f806b40",
+      "position": [
+        16,
+        -2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "f585cbd0-9067-456c-a297-79b906a100b5": {
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Cloud.glb"
+        }
+      },
+      "id": "f585cbd0-9067-456c-a297-79b906a100b5",
+      "material": null,
+      "name": "Top Obstacle (1)",
+      "order": 2.3121461395300362,
+      "parentId": "96a9857e-b444-411b-9da8-960a2db71a0b",
+      "position": [
+        1.039391040802002,
+        15,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        -0.7071067811865475,
+        0.7071067811865476
+      ],
+      "scale": [
+        2.999999897314441,
+        1.9999982626129769,
+        2
+      ]
+    },
+    "f855c679-e5a1-4da8-b7e5-71148234b626": {
+      "collider": {
+        "eventOnly": true,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 8,
+          "width": 0.1
+        }
+      },
+      "components": {
+        "3de34491-5142-4b4f-b803-24bb172bef61": {
+          "id": "3de34491-5142-4b4f-b803-24bb172bef61",
+          "name": "scoreCollider",
+          "parameters": {
+            "character": {
+              "type": "entity",
+              "id": "d0982379-0533-43b8-a96a-8e4c0b605538"
+            },
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "f855c679-e5a1-4da8-b7e5-71148234b626",
+      "material": null,
+      "name": "Score Collider (4)",
+      "order": 3.4703789318963576,
+      "parentId": "27bf9339-f01b-4a89-a26b-04c87133f365",
+      "position": [
+        1.9305139679944752,
+        1.6507481744102088,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "fc5fa3a5-f3e2-43c8-913a-6f24fc084d45": {
+      "components": {},
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "asset",
+          "asset": "assets/Models/Wall.glb"
+        }
+      },
+      "id": "fc5fa3a5-f3e2-43c8-913a-6f24fc084d45",
+      "name": "Ground Entity 14",
+      "parentId": "31634e19-f4a8-4cc0-9932-bf8c8c280211",
+      "position": [
+        0,
+        -12.117148332891215,
+        8.49837589263916
+      ],
+      "rotation": [
+        0,
+        -0.70710676908493,
+        0,
+        0.7071067932881648
+      ],
+      "scale": [
+        2.9999998973143764,
+        3,
+        2.9999998973143764
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "fcb06467-d92c-445b-af47-829ac890771d": {
+      "collider": {
+        "eventOnly": true,
+        "friction": 0.48,
+        "geometry": {
+          "type": "box",
+          "depth": 1,
+          "height": 1.6,
+          "width": 2
+        }
+      },
+      "components": {
+        "d5c79f9b-1364-4fc3-921e-1d4b4567f26f": {
+          "id": "d5c79f9b-1364-4fc3-921e-1d4b4567f26f",
+          "name": "gameOverCollider",
+          "parameters": {
+            "characterContainer": {
+              "type": "entity",
+              "id": "729478ae-d067-4e0c-a753-66c2e9efb625"
+            },
+            "gameManager": {
+              "type": "entity",
+              "id": "df5504fe-8302-44da-b43f-448bc846c633"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "fcb06467-d92c-445b-af47-829ac890771d",
+      "material": null,
+      "name": "Top Obstacle Collider 1",
+      "parentId": "3d15189f-24bc-4c13-9557-fee1034f7004",
+      "position": [
+        0.20814494113153525,
+        0.15167895909602236,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.7071067035047335,
+        0.7071068588683531
+      ],
+      "scale": [
+        0.9999999999999999,
+        0.9999999999999999,
+        1
+      ]
+    }
+  },
+  "spaces": {
+    "a2b0871c-2ff7-4e5c-958a-7c361bb80c7b": {
+      "id": "a2b0871c-2ff7-4e5c-958a-7c361bb80c7b",
+      "name": "Default",
+      "activeCamera": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "sky": {
+        "type": "gradient",
+        "colors": [
+          "#ffffff",
+          "#ffffff"
+        ]
+      }
+    }
+  },
+  "entrySpaceId": "a2b0871c-2ff7-4e5c-958a-7c361bb80c7b",
+  "historyVersion": "m751oa43"
+}

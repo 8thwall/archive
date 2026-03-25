@@ -1,0 +1,178 @@
+{
+  "objects": {
+    "47699d9e-18a5-4f88-a4f9-b8be92e8f74a": {
+      "components": {},
+      "geometry": null,
+      "id": "47699d9e-18a5-4f88-a4f9-b8be92e8f74a",
+      "light": {
+        "type": "ambient"
+      },
+      "material": null,
+      "name": "Ambient Light",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "order": 0.8593693079081488,
+      "parentId": "0f39ace9-dd03-4542-990e-ed180e585c50"
+    },
+    "a608ddd9-9379-464d-966f-5d8d8674c83c": {
+      "camera": {
+        "type": "perspective",
+        "xrCameraType": "3dOnly",
+        "allowedDevices": "any",
+        "xr": {
+          "phone": "AR",
+          "xrCameraType": "world"
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "id": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "material": null,
+      "name": "Camera",
+      "position": [
+        0,
+        5,
+        10
+      ],
+      "rotation": [
+        1.0632884247878856e-17,
+        -0.984807753012208,
+        0.17364817766693033,
+        6.030208312509488e-17
+      ],
+      "scale": [
+        0.9999998807907104,
+        0.9999999999999998,
+        0.9999998807907102
+      ],
+      "order": 1.8593693079081488,
+      "parentId": "0f39ace9-dd03-4542-990e-ed180e585c50"
+    },
+    "ac1989e3-3b71-49e2-a05f-e682aeb18c36": {
+      "components": {},
+      "id": "ac1989e3-3b71-49e2-a05f-e682aeb18c36",
+      "light": {
+        "intensity": 1,
+        "type": "directional",
+        "targetX": 0,
+        "targetY": 0,
+        "targetZ": 0,
+        "shadowNormalBias": 0,
+        "shadowBias": 0.001,
+        "shadowBlurSamples": 8,
+        "shadowRadius": 1,
+        "shadowMapSizeHeight": 1024,
+        "shadowMapSizeWidth": 1024,
+        "shadowCameraNear": 0.5,
+        "shadowCameraFar": 200,
+        "shadowCameraLeft": -50,
+        "shadowCameraRight": 50,
+        "shadowCameraTop": 50,
+        "shadowCameraBottom": -50,
+        "distance": 0,
+        "decay": 2,
+        "castShadow": true,
+        "shadowAutoUpdate": true,
+        "color": "#ffffff"
+      },
+      "name": "Directional Light",
+      "position": [
+        20,
+        20,
+        10.000000000000002
+      ],
+      "rotation": [
+        -1.554312232820858e-15,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1.0000000000000036,
+        1.0000000000000038
+      ],
+      "order": -0.283296931157071,
+      "parentId": "0f39ace9-dd03-4542-990e-ed180e585c50"
+    },
+    "e9f9d4bf-c8c4-4b2c-9d61-a807949de795": {
+      "id": "e9f9d4bf-c8c4-4b2c-9d61-a807949de795",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        -0.7071068286895767,
+        0,
+        0,
+        0.7071067336835151
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": {
+        "type": "plane",
+        "width": 1000,
+        "height": 1000
+      },
+      "material": {
+        "type": "shadow",
+        "color": "#000000",
+        "opacity": 0.5,
+        "side": "front",
+        "depthTest": true,
+        "depthWrite": true
+      },
+      "components": {
+        "0c2d0a71-f84e-427d-a0d8-4ac702d5a90e": {
+          "id": "0c2d0a71-f84e-427d-a0d8-4ac702d5a90e",
+          "name": "Tap Place",
+          "parameters": {
+            "groundEntity": {
+              "type": "entity",
+              "id": "e9f9d4bf-c8c4-4b2c-9d61-a807949de795"
+            },
+            "minScale": 2,
+            "maxScale": 4,
+            "entityToSpawn": {
+              "type": "entity",
+              "id": "319da7b6-2b6f-4628-9508-5d47c51221e7"
+            }
+          }
+        }
+      },
+      "name": "Ground",
+      "shadow": {
+        "receiveShadow": true
+      },
+      "order": 2.859369307908149,
+      "parentId": "0f39ace9-dd03-4542-990e-ed180e585c50"
+    }
+  },
+  "spaces": {
+    "0f39ace9-dd03-4542-990e-ed180e585c50": {
+      "id": "0f39ace9-dd03-4542-990e-ed180e585c50",
+      "name": "Default",
+      "activeCamera": "a608ddd9-9379-464d-966f-5d8d8674c83c"
+    }
+  },
+  "entrySpaceId": "0f39ace9-dd03-4542-990e-ed180e585c50",
+  "historyVersion": "m8diz1rh"
+}

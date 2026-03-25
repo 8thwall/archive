@@ -1,0 +1,161 @@
+{
+  "activeCamera": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+  "objects": {
+    "47699d9e-18a5-4f88-a4f9-b8be92e8f74a": {
+      "components": {},
+      "geometry": null,
+      "id": "47699d9e-18a5-4f88-a4f9-b8be92e8f74a",
+      "light": {
+        "type": "ambient"
+      },
+      "material": null,
+      "name": "Ambient Light",
+      "position": [
+        10,
+        5,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "729478ae-d067-4e0c-a753-66c2e9efb625": {
+      "components": {},
+      "geometry": {
+        "depth": 1,
+        "height": 1,
+        "type": "box",
+        "width": 1
+      },
+      "id": "729478ae-d067-4e0c-a753-66c2e9efb625",
+      "material": {
+        "color": "#5577ff",
+        "type": "basic"
+      },
+      "name": "Box",
+      "position": [
+        0,
+        1.763975406479939,
+        0
+      ],
+      "rotation": [
+        0,
+        0.3897781759669001,
+        0,
+        0.9209087759055814
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "a608ddd9-9379-464d-966f-5d8d8674c83c": {
+      "camera": {
+        "type": "perspective",
+        "xr": {
+          "desktop": "3D",
+          "xrCameraType": "world",
+          "headset": "AR",
+          "phone": "AR"
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "id": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "material": null,
+      "name": "Camera",
+      "position": [
+        0,
+        5.202330467552535,
+        6.820029855918676
+      ],
+      "rotation": [
+        -1.8412919444518387e-17,
+        0.9537169517857893,
+        -0.30070579621354565,
+        -5.839832572618051e-17
+      ],
+      "scale": [
+        0.9999998646558023,
+        0.9999999931513284,
+        0.9999998715044741
+      ]
+    },
+    "ac1989e3-3b71-49e2-a05f-e682aeb18c36": {
+      "components": {},
+      "geometry": null,
+      "id": "ac1989e3-3b71-49e2-a05f-e682aeb18c36",
+      "light": {
+        "intensity": 1,
+        "type": "directional"
+      },
+      "material": null,
+      "name": "Directional Light",
+      "position": [
+        20,
+        20,
+        10
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "4055d890-1d5b-411b-a052-c74d25d565f2": {
+      "id": "4055d890-1d5b-411b-a052-c74d25d565f2",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        -0.7071068,
+        0,
+        0,
+        0.7071068
+      ],
+      "scale": [
+        10,
+        10,
+        10
+      ],
+      "geometry": {
+        "type": "plane",
+        "width": 1,
+        "height": 1
+      },
+      "material": {
+        "type": "shadow",
+        "color": "#212121",
+        "opacity": 0.4
+      },
+      "components": {},
+      "name": "Plane",
+      "shadow": {
+        "receiveShadow": true,
+        "castShadow": true
+      }
+    }
+  },
+  "history": "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"
+}
