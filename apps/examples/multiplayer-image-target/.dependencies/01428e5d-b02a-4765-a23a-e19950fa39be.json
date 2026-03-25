@@ -1,0 +1,10 @@
+{
+  "type": "module",
+  "dependencyId": "dba9baa0-9157-42e2-b236-46d05dfa264e",
+  "moduleId": "83148975-05a5-447f-835a-17b38c98aeda",
+  "alias": "shared-ar",
+  "target": {
+    "type": "branch",
+    "branch": "master"
+  }
+}

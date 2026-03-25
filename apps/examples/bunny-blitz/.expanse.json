@@ -1,0 +1,719 @@
+{
+  "objects": {
+    "1bd3a710-3daf-4114-9617-c9ebbae3ec54": {
+      "audio": {
+        "paused": true,
+        "src": {
+          "type": "url",
+          "url": "//static.8thwall.app/assets/Bunny_Eaten-4oh2sk0572.mp3"
+        },
+        "volume": 0.2
+      },
+      "components": {
+        "a718fc2f-9436-4f33-bb47-ef7fe93d37ef": {
+          "id": "a718fc2f-9436-4f33-bb47-ef7fe93d37ef",
+          "name": "eventManager",
+          "parameters": {
+            "bunnyDestroyAudio": "//static.8thwall.app/assets/Bunny_Eaten-4oh2sk0572.mp3",
+            "bunnyParticleModel": "//static.8thwall.app/assets/poofParticle-kcndwa071b.glb",
+            "carrotParticleModel": "//static.8thwall.app/assets/carrotParticle-uhhkue657h.glb"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "1bd3a710-3daf-4114-9617-c9ebbae3ec54",
+      "material": null,
+      "name": "EventManager",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "34c48db7-42a6-49d0-9cd9-f2e91cf67b1c",
+      "order": 259
+    },
+    "3b02b998-7564-413e-9aa7-67a238d60174": {
+      "audio": {
+        "paused": true,
+        "positional": false,
+        "src": {
+          "type": "url",
+          "url": "//static.8thwall.app/assets/UI_Click-dbu9196967.mp3"
+        },
+        "volume": 0.2
+      },
+      "components": {
+        "85ab79a5-7c5b-4372-aa9b-fbcf37a7858a": {
+          "id": "85ab79a5-7c5b-4372-aa9b-fbcf37a7858a",
+          "name": "SimpleButton",
+          "parameters": {
+            "height": "64px",
+            "imageUrl": "//static.8thwall.app/assets/Swap-f2baf1o3d8.png",
+            "right": "30px",
+            "top": "30px",
+            "width": "64px"
+          }
+        }
+      },
+      "id": "3b02b998-7564-413e-9aa7-67a238d60174",
+      "name": "ModeSwitchButton",
+      "position": [
+        0,
+        5,
+        -8.699999809265137
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        0.9999999999999998
+      ],
+      "scale": [
+        1.7999999523162842,
+        1.7999999523162842,
+        1.7999999523162842
+      ],
+      "parentId": "34c48db7-42a6-49d0-9cd9-f2e91cf67b1c",
+      "order": 304
+    },
+    "4059447c-7821-42bd-a2fa-9e9616c5786a": {
+      "components": {
+        "3297353f-35ca-43ea-95e9-047ebcd62cee": {
+          "id": "3297353f-35ca-43ea-95e9-047ebcd62cee",
+          "name": "InfluencerSpawner",
+          "parameters": {
+            "attract": false,
+            "attractAudio": "//static.8thwall.app/assets/Carrot_Apear-cd38caux70.mp3",
+            "attractModel": "//static.8thwall.app/assets/CloudEditor-carrot-52924-buj7np05t6.glb",
+            "attractScale": 5,
+            "audioVolume": 0.3,
+            "camera": {
+              "id": "6fd3975c-ad55-4a4c-bcb2-a3340f5a23a1",
+              "type": "entity"
+            },
+            "health": 50,
+            "influencerFollower": {
+              "id": "5e526466-14cc-46f3-abab-fdaa54b9b124",
+              "type": "entity"
+            },
+            "parent": {
+              "id": "def8949a-27a6-4b0e-871d-e4537846b903",
+              "type": "entity"
+            },
+            "repelIdleAnimation": "Idle",
+            "repelModel": "//static.8thwall.app/assets/CloudEditor_Fox_Animation_v1_052724-7wz4vqoap4.glb",
+            "repelMoveAnimation": "Running",
+            "repelScale": 6
+          }
+        }
+      },
+      "geometry": null,
+      "id": "4059447c-7821-42bd-a2fa-9e9616c5786a",
+      "material": null,
+      "name": "InfluencerSpawner",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "34c48db7-42a6-49d0-9cd9-f2e91cf67b1c",
+      "order": 267
+    },
+    "45d431c0-98e1-4a2e-ac21-5a064eaa9688": {
+      "components": {
+        "e5c170ed-4aa3-4ad8-8ef2-439c3a6367de": {
+          "id": "e5c170ed-4aa3-4ad8-8ef2-439c3a6367de",
+          "name": "InfluencerConfig",
+          "parameters": {
+            "activeRadius": 7,
+            "activeRadiusImage": "//static.8thwall.app/assets/Middle-5mz3hicap2.png",
+            "alertRadius": 10,
+            "alertRadiusImage": "//static.8thwall.app/assets/Outer-tlck5hi3og.png",
+            "displayRadii": true,
+            "eventRadiusImage": "//static.8thwall.app/assets/Inner-5x33hrix2x.png",
+            "scale": 1,
+            "eventRadius": 3,
+            "attract": false
+          }
+        }
+      },
+      "geometry": null,
+      "id": "45d431c0-98e1-4a2e-ac21-5a064eaa9688",
+      "material": null,
+      "name": "InfluencerConfig",
+      "position": [
+        0.01,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "34c48db7-42a6-49d0-9cd9-f2e91cf67b1c",
+      "order": 168
+    },
+    "49d773d5-7134-411d-9130-0876fb7fcc20": {
+      "components": {
+        "5e59c885-132e-41d4-b308-02653e6b359c": {
+          "id": "5e59c885-132e-41d4-b308-02653e6b359c",
+          "name": "GlobalConfig",
+          "parameters": {
+            "radius": 27,
+            "xBound": 10,
+            "zBound": 10
+          }
+        }
+      },
+      "geometry": null,
+      "id": "49d773d5-7134-411d-9130-0876fb7fcc20",
+      "material": null,
+      "name": "GlobalConfig",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "34c48db7-42a6-49d0-9cd9-f2e91cf67b1c",
+      "order": 273
+    },
+    "4dfbfef0-02aa-45b4-9d02-77bf82c923c5": {
+      "audio": {
+        "src": {
+          "type": "url",
+          "url": "//static.8thwall.app/assets/Bunny_BG_3-9rj69mi5t5.mp3"
+        }
+      },
+      "components": {},
+      "gltfModel": {
+        "loop": false,
+        "src": {
+          "type": "url",
+          "url": "//static.8thwall.app/assets/CloudEditor_BunnyWorld_GroundWithStones_v0_052924-nrffzmi4ld.glb"
+        }
+      },
+      "hidden": false,
+      "id": "4dfbfef0-02aa-45b4-9d02-77bf82c923c5",
+      "name": "Ground With Stones",
+      "parentId": "def8949a-27a6-4b0e-871d-e4537846b903",
+      "position": [
+        0,
+        0.75,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "shadow": {
+        "receiveShadow": true
+      }
+    },
+    "5e526466-14cc-46f3-abab-fdaa54b9b124": {
+      "components": {
+        "84d7159c-dc9f-4791-ab4c-9c81049787a8": {
+          "id": "84d7159c-dc9f-4791-ab4c-9c81049787a8",
+          "name": "FollowInfluencer",
+          "parameters": {
+            "lerpAmount": 0.029999999329447746
+          }
+        }
+      },
+      "id": "5e526466-14cc-46f3-abab-fdaa54b9b124",
+      "name": "Camera LookAt Target - Smooth Follow Influencer",
+      "position": [
+        -1.6157587766647339,
+        0,
+        -5.644985198974609
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "22a900b0-1ead-430a-a2b3-e8222a664715"
+    },
+    "6663a82b-531f-48fc-89e1-6312cf973adb": {
+      "components": {},
+      "gltfModel": {
+        "loop": false,
+        "src": {
+          "type": "url",
+          "url": "//static.8thwall.app/assets/CloudEditor_BunnyWorld_Fence_v0_052924-fumafp06q8.glb"
+        }
+      },
+      "hidden": false,
+      "id": "6663a82b-531f-48fc-89e1-6312cf973adb",
+      "name": "Fence",
+      "parentId": "def8949a-27a6-4b0e-871d-e4537846b903",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        2,
+        2,
+        2
+      ]
+    },
+    "698442b6-33e3-46de-8356-542505746dcd": {
+      "components": {},
+      "geometry": {
+        "radius": 1,
+        "type": "circle"
+      },
+      "id": "698442b6-33e3-46de-8356-542505746dcd",
+      "material": {
+        "color": "#5c9f09",
+        "metalness": 0.5,
+        "metalnessMap": "",
+        "opacity": 1,
+        "roughness": 0.5,
+        "roughnessMap": "",
+        "textureSrc": "",
+        "type": "basic"
+      },
+      "name": "SubGround",
+      "order": 56,
+      "parentId": "def8949a-27a6-4b0e-871d-e4537846b903",
+      "position": [
+        0,
+        -0.01,
+        0
+      ],
+      "rotation": [
+        -0.7071067811865475,
+        0,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        73.0549212367475,
+        73.0549212367475,
+        73.0549212367475
+      ]
+    },
+    "6fd3975c-ad55-4a4c-bcb2-a3340f5a23a1": {
+      "camera": {
+        "type": "perspective",
+        "fov": 60,
+        "xr": {
+          "farClip": 1000
+        }
+      },
+      "components": {
+        "aa52e603-dc93-4b04-8898-9e81bb8304d1": {
+          "id": "aa52e603-dc93-4b04-8898-9e81bb8304d1",
+          "name": "look-at-animation",
+          "parameters": {
+            "target": {
+              "id": "5e526466-14cc-46f3-abab-fdaa54b9b124",
+              "type": "entity"
+            }
+          }
+        }
+      },
+      "geometry": null,
+      "id": "6fd3975c-ad55-4a4c-bcb2-a3340f5a23a1",
+      "material": null,
+      "name": "Camera",
+      "position": [
+        0,
+        14.14370067683653,
+        29.81707816782754
+      ],
+      "rotation": [
+        -4.5231071649296654e-17,
+        0.9489808900219191,
+        -0.3153335858629815,
+        -4.1274079203670057e-17
+      ],
+      "scale": [
+        1.0000000000000093,
+        1.0000000000000027,
+        1.0000000000000062
+      ],
+      "parentId": "22a900b0-1ead-430a-a2b3-e8222a664715"
+    },
+    "9c311ef2-d1e4-41df-aadd-f0b9a451fe5c": {
+      "components": {},
+      "geometry": null,
+      "hidden": false,
+      "id": "9c311ef2-d1e4-41df-aadd-f0b9a451fe5c",
+      "light": {
+        "color": "#ffffff",
+        "type": "ambient"
+      },
+      "material": null,
+      "name": "Ambient Light",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "22a900b0-1ead-430a-a2b3-e8222a664715"
+    },
+    "aa208c31-473a-4511-9829-5029890e4d21": {
+      "components": {
+        "088c2195-2c8b-4d63-912b-18275a72bdbf": {
+          "id": "088c2195-2c8b-4d63-912b-18275a72bdbf",
+          "name": "GrassField",
+          "parameters": {
+            "bladeCount": 50000,
+            "bladeHeight": 2,
+            "bladeHeightVariation": 0.2,
+            "bladeWidth": 0.5,
+            "grassTexture": "//static.8thwall.app/assets/grass-nkrfzgo89d.jpg",
+            "innerRadius": 30,
+            "outerRadius": 70,
+            "planeTextureSize": 50
+          }
+        }
+      },
+      "geometry": null,
+      "id": "aa208c31-473a-4511-9829-5029890e4d21",
+      "material": null,
+      "name": "Grass Field",
+      "order": 60,
+      "parentId": "def8949a-27a6-4b0e-871d-e4537846b903",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "ac1989e3-3b71-49e2-a05f-e682aeb18c36": {
+      "components": {},
+      "geometry": null,
+      "hidden": false,
+      "id": "ac1989e3-3b71-49e2-a05f-e682aeb18c36",
+      "light": {
+        "color": "#ffffff",
+        "intensity": 1,
+        "type": "directional"
+      },
+      "material": null,
+      "name": "Directional Light",
+      "position": [
+        13.708359485436887,
+        20,
+        7.470913140338837
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "22a900b0-1ead-430a-a2b3-e8222a664715"
+    },
+    "b7cc30e9-38da-4e3f-8d2f-d272ca69f67c": {
+      "components": {
+        "0fd673d4-165e-425e-b673-50a8e5c9f5ec": {
+          "id": "0fd673d4-165e-425e-b673-50a8e5c9f5ec",
+          "name": "agentSpawner",
+          "parameters": {
+            "baseModel": "//static.8thwall.app/assets/CloudEditor_BunnyWorld_Bunny_v0_053124-j97d77i25b.glb",
+            "biteAudio": "//static.8thwall.app/assets/Chew-25w1e469s1.mp3",
+            "biteVolume": 0.2,
+            "numberOfAgents": 20,
+            "parent": {
+              "id": "def8949a-27a6-4b0e-871d-e4537846b903",
+              "type": "entity"
+            },
+            "scale": 3,
+            "xLimit": 20,
+            "zLimit": 20
+          }
+        }
+      },
+      "geometry": null,
+      "hidden": false,
+      "id": "b7cc30e9-38da-4e3f-8d2f-d272ca69f67c",
+      "material": null,
+      "name": "AgentSpawner",
+      "order": 34,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "34c48db7-42a6-49d0-9cd9-f2e91cf67b1c"
+    },
+    "def8949a-27a6-4b0e-871d-e4537846b903": {
+      "audio": {
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "//static.8thwall.app/assets/Bunny_BG_4-395237i1j1.mp3"
+        },
+        "volume": 0.5
+      },
+      "components": {},
+      "geometry": null,
+      "id": "def8949a-27a6-4b0e-871d-e4537846b903",
+      "material": null,
+      "name": "Root",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "22a900b0-1ead-430a-a2b3-e8222a664715"
+    },
+    "df2f77a8-5d76-43f2-9fd9-947af3fda59e": {
+      "components": {
+        "856d33b5-387d-403d-90b3-959343121522": {
+          "id": "856d33b5-387d-403d-90b3-959343121522",
+          "name": "AgentConfig",
+          "parameters": {
+            "activeAnimation": "Hop",
+            "alertAnimation": "Alert",
+            "animated": true,
+            "eventAnimation": "Eating",
+            "idleAnimation": "idle",
+            "idleMovementAnimation": "Hop",
+            "speed": 0.08,
+            "yOffset": -0.3
+          }
+        }
+      },
+      "geometry": null,
+      "id": "df2f77a8-5d76-43f2-9fd9-947af3fda59e",
+      "material": null,
+      "name": "AgentConfig",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "34c48db7-42a6-49d0-9cd9-f2e91cf67b1c",
+      "order": 140
+    },
+    "e269d229-d1cf-49ee-92a5-7b032d2e185a": {
+      "components": {
+        "c84706c3-0880-4f74-abdb-4ae6dcc2fca6": {
+          "id": "c84706c3-0880-4f74-abdb-4ae6dcc2fca6",
+          "name": "SkyBox",
+          "parameters": {
+            "texture": "//static.8thwall.app/assets/T_ENV_SKYBOX_day-t7ik55u5ig.png"
+          }
+        }
+      },
+      "geometry": null,
+      "id": "e269d229-d1cf-49ee-92a5-7b032d2e185a",
+      "material": null,
+      "name": "Skybox",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "parentId": "34c48db7-42a6-49d0-9cd9-f2e91cf67b1c",
+      "order": 239
+    },
+    "34c48db7-42a6-49d0-9cd9-f2e91cf67b1c": {
+      "id": "34c48db7-42a6-49d0-9cd9-f2e91cf67b1c",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {},
+      "name": "EDIT COMPONENTS HERE",
+      "parentId": "22a900b0-1ead-430a-a2b3-e8222a664715"
+    },
+    "70808a18-370d-4f92-8365-a7ec17a09b97": {
+      "id": "70808a18-370d-4f92-8365-a7ec17a09b97",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.9,
+        0.9,
+        0.9
+      ],
+      "geometry": null,
+      "material": null,
+      "components": {},
+      "gltfModel": {
+        "src": {
+          "type": "asset",
+          "asset": "assets/treeRing.glb"
+        },
+        "animationClip": "",
+        "loop": true
+      },
+      "name": "treeRing.glb",
+      "parentId": "22a900b0-1ead-430a-a2b3-e8222a664715"
+    }
+  },
+  "spaces": {
+    "22a900b0-1ead-430a-a2b3-e8222a664715": {
+      "id": "22a900b0-1ead-430a-a2b3-e8222a664715",
+      "name": "Default",
+      "activeCamera": "6fd3975c-ad55-4a4c-bcb2-a3340f5a23a1",
+      "sky": {
+        "type": "image",
+        "src": {
+          "type": "asset",
+          "asset": "assets/T_ENV_SKYBOX_day.png"
+        }
+      }
+    }
+  },
+  "entrySpaceId": "22a900b0-1ead-430a-a2b3-e8222a664715",
+  "historyVersion": "m751y4uu"
+}

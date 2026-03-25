@@ -1,0 +1,101 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<a-scene
+  xrextras-pwa-installer
+  reset-button
+  landing-page
+  xrextras-loading
+  xrextras-gesture-detector
+  xrextras-runtime-error
+  responsive-immersive
+  networked-scene="debug: true; connectOnLoad: false;"
+  config-targets="targets: portal"
+  renderer="colorManagement:true"
+  gltf-model="dracoDecoderPath: https://cdn.8thwall.com/web/aframe/draco-decoder/"
+  xrweb="
+    disableWorldTracking: false;
+    allowedDevices: any; 
+    disableDesktopCameraControls: true; 
+    disableDefaultEnvironment: true;
+    defaultEnvironmentSkyTopColor: #73E8F9; 
+    defaultEnvironmentSkyBottomColor: #FFFFFF;
+    defaultEnvironmentSkyGradientStrength: 0.4;
+    defaultEnvironmentFogIntensity: 0.4;
+  ">
+  
+  <a-assets>
+    <a-asset-item id="sky" src="../assets/models/sky.glb"></a-asset-item>
+    <a-asset-item id="robot_model" src="../assets/models/robot.glb"></a-asset-item>
+    <a-asset-item id="hider-wall-obj" src="../assets/models/hider-wall.glb"></a-asset-item>
+    <a-asset-item id="border" src="../assets/models/border.glb"></a-asset-item>
+
+
+    <template id="portal-template">
+      <a-entity image-target-portal="name: portal"></a-entity>
+    </template>
+
+    <template id="offset-template">
+      <a-entity id="offset" position="0 -.7 0"></a-entity>
+    </template>
+
+    <template id="avatar-template">
+      <a-entity
+        class="avatar"
+        random-color
+        character-animation
+        gltf-model="#robot_model"
+        scale="0.08 0.08 0.08"
+        shadow>
+      </a-entity>
+    </template>
+  </a-assets>
+  
+  <a-camera id="camera" position="0 1 0.5" rotation="-20 0 0"></a-camera>
+  
+  <a-entity id="img-portal" networked="template:#portal-template">
+    <a-entity
+      light="
+        type: directional;
+        shadowBias: -0.0001;
+        intensity: 0.65;
+        castShadow: true;
+        shadowMapHeight:2048;
+        shadowMapWidth:2048;
+        shadowCameraTop: 10;
+        shadowCameraBottom: -10;
+        shadowCameraRight: 10;
+        shadowCameraLeft: -10;
+        target: #camera"
+      xrextras-attach="target: camera; offset: 8 15 4"
+      position="1 4.3 2.5"
+      shadow>
+    </a-entity>
+
+    <a-light type="ambient" intensity="0.4"></a-light>
+
+    <a-entity id="hider-wall" gltf-model="#hider-wall-obj" my-hider-material><a-entity gltf-model="#border"></a-entity></a-entity>
+
+    <a-entity networked="template:#offset-template">
+        <a-entity
+          id="character"
+          position="0 0 -0.5"
+          character-input
+          networked="template:#avatar-template"
+          >
+        </a-entity>
+  
+      <a-entity gltf-model="#sky"></a-entity>
+      
+      <a-box
+        id="portal-ground"
+        height="1"
+        depth="30"
+        width="30"
+        position="0 -0.5 -15.1"
+        material="color: #7EB469"
+        shadow>
+      </a-box>
+    </a-entity>
+
+  </a-entity>
+  
+</a-scene>

@@ -1,0 +1,80 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<!-- <div class="over">
+  <span id="promptText"></span>
+  <img id="pauseBtn" class="media-btn" src="./assets/icons/pause.svg" style="display: none;">
+  <img id="muteBtn" class="media-btn" src="./assets/icons/sound.svg" style="display: none;">
+  <div id="gradient-box"></div>
+</div> -->
+ <div class="bottom-cta"><img src="./assets/images/jar-icon.png" loading="lazy" alt="" class="image">
+    <h1 class="heading">Welcome to <span class="text-span-2">Tipj</span><span class="text-span-3">AR!</span><br><span class="text-span">To open this tip jar, you need<br>to tap it and then deposit a tip!<br></span></h1>
+  </div>
+  <div class="text-blocktop"><span class="text-span-4a">Relax. this is a demo, so it&#x27;s just pretend money 😜)</span></div>
+<a-scene
+  xrextras-gesture-detector
+  xrextras-loading
+  xrextras-runtime-error
+  access-pass
+  renderer="antialias: true; colorManagement: true; physicallyCorrectLights: true;"
+  xrweb="allowedDevices: any">
+
+  <xrextras-resource id="logo" src="./assets/icons/arcturus-logo.png"></xrextras-resource>
+  <a-light type="point" color="#add8e6" position="1 2 3"></a-light>
+
+  <a-light type="point" color="#ffcc99" position="-1 2 -3"></a-light>
+  
+  <a-camera
+    id="camera"
+    position="0 2 3"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;">
+  </a-camera>
+  <!-- Ambient Light -->
+  <a-light type="ambient" color="#fff" intensity="0.5"></a-light>
+
+  <!-- Directional Light -->
+  <a-light type="directional" color="#fff" intensity="0.5" position="-2 4 -4"></a-light>
+
+  <a-entity
+    light="
+      type: directional;
+      intensity: 1.8;
+      castShadow: true;
+      shadowMapHeight:2048;
+      shadowMapWidth:2048;
+      shadowCameraTop: 10;
+      target: #holo;"
+    xrextras-attach="target: holo; offset: 0 15 0;"
+    shadow>
+  </a-entity>
+ 
+
+<a-assets>
+  <a-asset-item id="tipjarModel" src="./assets/tipjar.glb"></a-asset-item>
+</a-assets>
+
+<a-entity 
+  gltf-model="#tipjarModel" 
+  id="animatedModel"
+  position="0 0.75 0"
+  visible="true"
+  scale="1.5 1.5 1.5"
+  glass-material
+  >
+</a-entity>
+
+
+<a-box position="0 0.5 0" color="red" id="jar" class="cantap" jar-listener material="opacity: 0.01;"></a-box>
+
+  
+  <a-entity
+    id="ground"
+    class="cantap"
+    geometry="primitive: box"
+    material="shader: shadow; transparent: true; opacity: 0.4"
+    scale="1000 2 1000"
+    position="0 -1 0"
+    shadow="cast: false">
+  </a-entity>
+</a-scene>
+

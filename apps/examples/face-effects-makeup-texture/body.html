@@ -1,0 +1,45 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<a-scene 
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  xrextras-pause-on-hidden
+  renderer="maxCanvasWidth: 960; maxCanvasHeight: 960"
+  xrface="mirroredDisplay: true;  meshGeometry: eyes, face, mouth; cameraDirection: front; allowedDevices: any;">
+  
+  <a-assets>
+    <a-asset-item id="head-occluder" src="./assets/models/head-occluder.glb"></a-asset-item>
+    <img id="eyelash-left" src="./assets/textures/eyelash_left.png">
+    <img id="eyelash-right" src="./assets/textures/eyelash_right.png">
+  </a-assets>
+
+  <xrextras-resource id="makeup" src="./assets/textures/makeup-texture1.png"></xrextras-resource>
+  <xrextras-resource id="alpha" src="./assets/alpha/soft-eyes-mouth.png"> </xrextras-resource>
+  <xrextras-basic-material id="mask" tex="#makeup" alpha="#alpha" opacity="0.9"></xrextras-basic-material>
+  
+  <xrextras-capture-button></xrextras-capture-button>
+  <xrextras-capture-config></xrextras-capture-config>
+  <xrextras-capture-preview></xrextras-capture-preview>
+
+  <a-camera look-controls="enabled: false" wasd-controls="enabled: false" position="0 1.6 0"></a-camera>
+  
+  <xrextras-faceanchor>
+
+    <xrextras-face-mesh material-resource="#mask"></xrextras-face-mesh>
+    
+    <xrextras-face-attachment point="leftEye">
+     <a-plane src="#eyelash-left" position="0 0.04 -0.03" rotation="140 0 180" scale="0.3 0.3 0.3" material="transparent: true"></a-plane>
+    </xrextras-face-attachment>
+
+    <xrextras-face-attachment point="rightEye">
+     <a-plane src="#eyelash-right" position="0 0.04 -0.03" rotation="140 0 180" scale="0.3 0.3 0.3" material="transparent: true"></a-plane>
+    </xrextras-face-attachment>
+
+  </xrextras-faceanchor>
+  
+  <a-light type="directional" target="#face" position="0 1.8 3" intensity="0.8"></a-light>
+  <a-light type="ambient" intensity="0.8"></a-light>
+  
+</a-scene>

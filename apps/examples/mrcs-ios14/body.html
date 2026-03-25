@@ -1,0 +1,56 @@
+<!-- Copyright (c) 2020 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<div class="over">
+  <span id="promptText"></span>
+</div>
+
+<a-scene
+  xrextras-gesture-detector
+  xrextras-almost-there
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="antialias: true; colorManagement: true; physicallyCorrectLights: true;"
+  xrweb>
+
+  <a-camera
+    id="camera"
+    position="0 10 3"
+    raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;">
+  </a-camera>
+  
+  <a-entity
+    light="type: directional;
+           intensity: 0.8;
+           castShadow: true;
+           shadowMapHeight:2048;
+           shadowMapWidth:2048;
+           shadowCameraTop: 10;
+           target: #holo;"
+    xrextras-attach="target: holo; offset: 0 15 0;"
+    shadow>
+  </a-entity>
+
+  <a-light type="ambient" intensity="1"></a-light>
+
+  <holo-cap 
+    id="holo"
+    src="./assets/soccer.hcap"
+    holo-scale="6"
+    holo-touch-target="1.65 0.35"
+    xrextras-hold-drag
+    xrextras-two-finger-rotate 
+    xrextras-pinch-scale="scale: 6">
+  </holo-cap>
+  
+  <a-entity
+    id="ground"
+    class="cantap"
+    geometry="primitive: box"
+    material="shader: shadow; transparent: true; opacity: 0.4"
+    scale="1000 2 1000"
+    position="0 -1 0"
+    shadow="cast: false">
+  </a-entity>
+</a-scene>

@@ -1,0 +1,44 @@
+<button id="swapBtn">Start AR</button>
+
+<a-scene
+  id="mapScene"
+  renderer="color-management:true"
+  fog="color: white; type: exponential; density: 0.018;"
+  swap-scene>
+
+  <a-entity light="type: directional; intensity: 0.25; target: #m;" position="25 10 0"></a-entity>
+  <a-entity light="type: directional; intensity: 0.25; target: #m;" position="0 10 25"></a-entity>
+  <a-entity light="type: directional; intensity: 0.25; target: #m;" position="-25 10 0"></a-entity>
+  <a-entity light="type: directional; intensity: 0.25; target: #m;" position="0 10 -25"></a-entity>
+  <a-light type="ambient" intensity="0.8"></a-light>
+  
+  <a-camera 
+    near="1" 
+    far="200" 
+    lightship-map-controls="target: 0 5 0; min-distance: 7; max-distance: 25;">
+  </a-camera>
+
+  <a-sky radius="100" material="shader: lightship-map-sky-gradient"></a-sky>
+  
+  <lightship-map 
+    id="m"
+    scale="100 100 100" 
+    lightship-map-theme="theme: nighttime"
+    lightship-map-add-wayspots="primitive: a-cylinder; meters: 5;">
+    <a-cone
+      rotation="-90 0 0"
+      material="color: #C724B1; metalness: .7; roughness: .3"
+      height=".02"
+      radius-top="0"
+      radius-bottom=".005"
+      lightship-map-motion-direction>
+    </a-cone>
+  </lightship-map>
+</a-scene>
+
+<iframe
+  id="arScene"
+  allow="camera;gyroscope;accelerometer;magnetometer;xr-spatial-tracking;microphone;">
+</iframe>
+
+  <!-- src="https://8thwall.8thwall.app/iframe-ar" -->

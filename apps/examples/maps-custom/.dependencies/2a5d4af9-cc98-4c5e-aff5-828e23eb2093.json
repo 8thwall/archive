@@ -1,0 +1,13 @@
+{
+  "type": "module",
+  "dependencyId": "98f71e0c-f7bf-4830-b809-d3a382a2c2d8",
+  "moduleId": "aaf96d29-04a6-49ac-b19b-488c5a947851",
+  "alias": "lightship-maps",
+  "target": {
+    "type": "version",
+    "level": "major",
+    "major": 1,
+    "minor": 0,
+    "patch": 1
+  }
+}
