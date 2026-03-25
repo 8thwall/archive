@@ -1,0 +1,1658 @@
+{
+  "activeCamera": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+  "objects": {
+    "0828899a-b871-410e-a2ea-ba8d2cf75728": {
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "components": {},
+      "geometry": {
+        "depth": 4,
+        "height": 4,
+        "type": "box",
+        "width": 4
+      },
+      "hidden": true,
+      "id": "0828899a-b871-410e-a2ea-ba8d2cf75728",
+      "material": {
+        "color": "#80aaff",
+        "type": "basic"
+      },
+      "name": "Box Collider  (1)",
+      "parentId": "47e08735-4be8-4052-a04d-c1e5d24a8ca4",
+      "position": [
+        -0.9895086787299786,
+        -0.7406345807402497,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        -0.224951054343865,
+        0.9743700647852352
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "10ba26d7-1bef-4c63-b7b0-2f8f5e42ab65": {
+      "collider": {
+        "geometry": {
+          "depth": 4,
+          "height": 4,
+          "type": "box",
+          "width": 4
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/blue-cube-ll3elhixc9.glb"
+        }
+      },
+      "id": "10ba26d7-1bef-4c63-b7b0-2f8f5e42ab65",
+      "material": null,
+      "name": "Blue Cube 5",
+      "position": [
+        10,
+        2.008234315647156,
+        -12
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "1b7145b7-29ff-4a23-833c-9ed82fb426eb": {
+      "collider": {
+        "geometry": {
+          "depth": 2,
+          "height": 2,
+          "type": "box",
+          "width": 2
+        },
+        "mass": 1
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/green-box-tlak5hi32g.glb"
+        }
+      },
+      "id": "1b7145b7-29ff-4a23-833c-9ed82fb426eb",
+      "material": null,
+      "name": "Green Dynamic Box",
+      "position": [
+        -2.6997103066976944,
+        1.0938183460531246,
+        3.24643661322834
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "22e2a2d1-aae4-42fe-b11f-ec2a9e0d5e79": {
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/yellow-ramp-ni6fzf01ud.glb"
+        }
+      },
+      "id": "22e2a2d1-aae4-42fe-b11f-ec2a9e0d5e79",
+      "material": null,
+      "name": "Yellow Ramp2",
+      "position": [
+        -6,
+        2,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "2864a807-cde0-4fec-90a7-606cfc833bf7": {
+      "collider": {
+        "geometry": {
+          "depth": 4,
+          "height": 0.5,
+          "type": "box",
+          "width": 4
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/bridge-brr7nmi896.glb"
+        }
+      },
+      "id": "2864a807-cde0-4fec-90a7-606cfc833bf7",
+      "material": null,
+      "name": "Bridge3",
+      "position": [
+        -2,
+        3.749999999999999,
+        -3.9999999999999996
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "2b613c52-2ffc-4331-a12e-08f5c9121abd": {
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "components": {},
+      "geometry": {
+        "depth": 4,
+        "height": 4,
+        "type": "box",
+        "width": 4
+      },
+      "hidden": true,
+      "id": "2b613c52-2ffc-4331-a12e-08f5c9121abd",
+      "material": {
+        "color": "#80aaff",
+        "type": "basic"
+      },
+      "name": "Box Collider  (3)",
+      "parentId": "fd02183b-60f9-4077-9535-bb6662af4653",
+      "position": [
+        -0.9895086787299786,
+        -0.7406345807402497,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        -0.224951054343865,
+        0.9743700647852352
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "360878ea-cc39-4462-b68b-2efc3dcacd05": {
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/yellow-ramp-ni6fzf01ud.glb"
+        }
+      },
+      "id": "360878ea-cc39-4462-b68b-2efc3dcacd05",
+      "material": null,
+      "name": "Yellow Ramp 4",
+      "position": [
+        10.022908228939517,
+        2,
+        -8
+      ],
+      "rotation": [
+        0,
+        -0.7071067811865475,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "4156b230-fa81-406d-8581-d57e827dcbad": {
+      "collider": {
+        "geometry": {
+          "depth": 4,
+          "height": 2,
+          "type": "box",
+          "width": 4
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/blue-cube-small-r6hir5057f.glb"
+        }
+      },
+      "id": "4156b230-fa81-406d-8581-d57e827dcbad",
+      "material": null,
+      "name": "Blue Cube Small 2",
+      "position": [
+        9.983361808288109,
+        1,
+        -4
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "42948f90-4a83-4133-811a-929b5a20d936": {
+      "collider": {
+        "geometry": {
+          "depth": 4,
+          "height": 4,
+          "type": "box",
+          "width": 4
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/blue-cube-ll3elhixc9.glb"
+        }
+      },
+      "id": "42948f90-4a83-4133-811a-929b5a20d936",
+      "material": null,
+      "name": "Blue Cube 6",
+      "position": [
+        6,
+        2.008234315647156,
+        -4
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "43649cae-a0e7-42da-ba69-5710836e8e18": {
+      "collider": {
+        "geometry": {
+          "depth": 4,
+          "height": 0.5,
+          "type": "box",
+          "width": 4
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/bridge-brr7nmi896.glb"
+        }
+      },
+      "id": "43649cae-a0e7-42da-ba69-5710836e8e18",
+      "material": null,
+      "name": "Bridge2",
+      "position": [
+        -6.006851384928814,
+        3.7499999999999996,
+        -4
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "46d46867-a9c7-417a-a155-e7925d4ee7c9": {
+      "collider": {
+        "geometry": {
+          "depth": 4,
+          "height": 0.5,
+          "type": "box",
+          "width": 4
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/bridge-brr7nmi896.glb"
+        }
+      },
+      "id": "46d46867-a9c7-417a-a155-e7925d4ee7c9",
+      "material": null,
+      "name": "Bridge",
+      "position": [
+        2,
+        3.749999999999999,
+        -3.9999999999999996
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "47e08735-4be8-4052-a04d-c1e5d24a8ca4": {
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/yellow-ramp-ni6fzf01ud.glb"
+        }
+      },
+      "id": "47e08735-4be8-4052-a04d-c1e5d24a8ca4",
+      "material": null,
+      "name": "Yellow Ramp 3",
+      "position": [
+        10.022908228939517,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        -0.7071067811865475,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "500e0ff6-eb47-4eda-86df-c4b77e1c63fc": {
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/yellow-ramp-ni6fzf01ud.glb"
+        }
+      },
+      "id": "500e0ff6-eb47-4eda-86df-c4b77e1c63fc",
+      "material": null,
+      "name": "Yellow Ramp",
+      "position": [
+        -2,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "56884c40-2282-4657-bca6-079b9650d055": {
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "components": {},
+      "geometry": {
+        "depth": 4,
+        "height": 4,
+        "type": "box",
+        "width": 4
+      },
+      "hidden": true,
+      "id": "56884c40-2282-4657-bca6-079b9650d055",
+      "material": {
+        "color": "#80aaff",
+        "type": "basic"
+      },
+      "name": "Box Collider ",
+      "parentId": "500e0ff6-eb47-4eda-86df-c4b77e1c63fc",
+      "position": [
+        -0.9895086787299786,
+        -0.7406345807402497,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        -0.224951054343865,
+        0.9743700647852352
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "587eb129-c234-4848-9c11-5905e3228b98": {
+      "collider": {
+        "geometry": {
+          "depth": 32,
+          "height": 0.5,
+          "type": "box",
+          "width": 32
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/ground-fv5afpu1j8.glb"
+        }
+      },
+      "id": "587eb129-c234-4848-9c11-5905e3228b98",
+      "material": null,
+      "name": "Ground",
+      "position": [
+        0,
+        -0.25,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "5a9cd066-bb8c-4e77-ae50-f6468c47090b": {
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "components": {},
+      "geometry": {
+        "depth": 4,
+        "height": 4,
+        "type": "box",
+        "width": 4
+      },
+      "hidden": true,
+      "id": "5a9cd066-bb8c-4e77-ae50-f6468c47090b",
+      "material": {
+        "color": "#80aaff",
+        "type": "basic"
+      },
+      "name": "Box Collider",
+      "parentId": "22e2a2d1-aae4-42fe-b11f-ec2a9e0d5e79",
+      "position": [
+        -0.9895086787299786,
+        -0.7406345807402497,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        -0.224951054343865,
+        0.9743700647852352
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "5ba80126-8d96-4228-9ba0-d8ed410f5056": {
+      "collider": {
+        "geometry": {
+          "depth": 4,
+          "height": 4,
+          "type": "box",
+          "width": 4
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/blue-cube-ll3elhixc9.glb"
+        }
+      },
+      "id": "5ba80126-8d96-4228-9ba0-d8ed410f5056",
+      "material": null,
+      "name": "Blue Cube 3",
+      "position": [
+        -10,
+        2.008234315647156,
+        -8
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "5e8ef13a-141f-4057-bcd2-740ced2ccf62": {
+      "collider": {
+        "geometry": {
+          "depth": 2,
+          "height": 2,
+          "type": "box",
+          "width": 2
+        },
+        "mass": 1
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/green-box-tlak5hi32g.glb"
+        }
+      },
+      "id": "5e8ef13a-141f-4057-bcd2-740ced2ccf62",
+      "material": null,
+      "name": "Green Dynamic Box 4",
+      "position": [
+        -9.914603734841474,
+        9.102629848639824,
+        -12.215298039057918
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "6f6ad3f5-34cc-41e5-9132-9ce87fb6cb70": {
+      "collider": {
+        "geometry": {
+          "depth": 2,
+          "height": 2,
+          "type": "box",
+          "width": 2
+        },
+        "mass": 1
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/green-box-tlak5hi32g.glb"
+        }
+      },
+      "id": "6f6ad3f5-34cc-41e5-9132-9ce87fb6cb70",
+      "material": null,
+      "name": "Green Dynamic Box2",
+      "position": [
+        -9.963733080142918,
+        5.191991737947437,
+        0.2746991482110177
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "72a2487f-3860-4d9e-88e9-f1b98aab9ef1": {
+      "collider": {
+        "geometry": {
+          "depth": 0.5,
+          "height": 4,
+          "type": "box",
+          "width": 4
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/wall-jjxd7fua3b.glb"
+        }
+      },
+      "id": "72a2487f-3860-4d9e-88e9-f1b98aab9ef1",
+      "material": null,
+      "name": "Wall",
+      "position": [
+        2,
+        1.7747684895936857,
+        -5.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        0.85,
+        1
+      ],
+      "shadow": {
+        "castShadow": true
+      }
+    },
+    "9401ce01-e0a1-4834-951d-eaf6a4448204": {
+      "collider": {
+        "geometry": {
+          "depth": 0.5,
+          "height": 4,
+          "type": "box",
+          "width": 4
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/wall-jjxd7fua3b.glb"
+        }
+      },
+      "id": "9401ce01-e0a1-4834-951d-eaf6a4448204",
+      "material": null,
+      "name": "Wall2",
+      "position": [
+        -2,
+        1.7747684895936857,
+        -5.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        0.85,
+        1
+      ],
+      "shadow": {
+        "castShadow": true
+      }
+    },
+    "9533c024-405f-4b9f-95a6-2ecfedac51d3": {
+      "collider": {
+        "geometry": {
+          "depth": 4,
+          "height": 4,
+          "type": "box",
+          "width": 4
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/blue-cube-ll3elhixc9.glb"
+        }
+      },
+      "id": "9533c024-405f-4b9f-95a6-2ecfedac51d3",
+      "material": null,
+      "name": "Blue Cube 4",
+      "position": [
+        -10,
+        2.008234315647156,
+        -12
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "9c311ef2-d1e4-41df-aadd-f0b9a451fe5c": {
+      "components": {},
+      "geometry": null,
+      "id": "9c311ef2-d1e4-41df-aadd-f0b9a451fe5c",
+      "light": {
+        "type": "ambient"
+      },
+      "material": null,
+      "name": "Ambient Light",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "9ea24912-15e4-4990-b342-d1efb32d3d66": {
+      "collider": {
+        "geometry": {
+          "depth": 0.5,
+          "height": 4,
+          "type": "box",
+          "width": 32
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/outer-wall-jqvd7lo9hb.glb"
+        }
+      },
+      "id": "9ea24912-15e4-4990-b342-d1efb32d3d66",
+      "material": null,
+      "name": "Top Wall",
+      "position": [
+        0,
+        2.1994499550127395,
+        -17.623256008091246
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "a3bd5529-1ae0-4c61-8f6b-16b2a0629806": {
+      "collider": {
+        "geometry": {
+          "depth": 4,
+          "height": 4,
+          "type": "box",
+          "width": 4
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/blue-cube-ll3elhixc9.glb"
+        }
+      },
+      "id": "a3bd5529-1ae0-4c61-8f6b-16b2a0629806",
+      "material": null,
+      "name": "Blue Cube 2",
+      "position": [
+        -10,
+        2.008234315647156,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "a5136fcf-79ac-44b2-b190-c80a30270476": {
+      "collider": {
+        "geometry": {
+          "type": "auto"
+        }
+      },
+      "components": {},
+      "geometry": {
+        "depth": 4,
+        "height": 4,
+        "type": "box",
+        "width": 4
+      },
+      "hidden": true,
+      "id": "a5136fcf-79ac-44b2-b190-c80a30270476",
+      "material": {
+        "color": "#80aaff",
+        "type": "basic"
+      },
+      "name": "Box Collider  (2)",
+      "parentId": "360878ea-cc39-4462-b68b-2efc3dcacd05",
+      "position": [
+        -0.9895086787299786,
+        -0.7406345807402497,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        -0.224951054343865,
+        0.9743700647852352
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "a608ddd9-9379-464d-966f-5d8d8674c83c": {
+      "camera": {
+        "type": "perspective"
+      },
+      "components": {},
+      "geometry": null,
+      "id": "a608ddd9-9379-464d-966f-5d8d8674c83c",
+      "material": null,
+      "name": "Camera",
+      "position": [
+        0,
+        16.19655783327217,
+        15
+      ],
+      "rotation": [
+        1.841291974239769e-17,
+        -0.9537169507482269,
+        0.3007057995042731,
+        5.83983205513195e-17
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "ac1989e3-3b71-49e2-a05f-e682aeb18c36": {
+      "components": {},
+      "geometry": null,
+      "id": "ac1989e3-3b71-49e2-a05f-e682aeb18c36",
+      "light": {
+        "intensity": 1,
+        "type": "directional"
+      },
+      "material": null,
+      "name": "Directional Light",
+      "position": [
+        20,
+        20,
+        10
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "aeaacdf8-f719-40b4-8fb3-f9247a8d226f": {
+      "collider": {
+        "geometry": {
+          "depth": 0.5,
+          "height": 4,
+          "type": "box",
+          "width": 32
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/outer-wall-jqvd7lo9hb.glb"
+        }
+      },
+      "id": "aeaacdf8-f719-40b4-8fb3-f9247a8d226f",
+      "material": null,
+      "name": "left Wall",
+      "position": [
+        -15.678383231644986,
+        2.1994499550127395,
+        -1.6163047719931747
+      ],
+      "rotation": [
+        0,
+        0.7071067811865475,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true
+      }
+    },
+    "cd4ab54b-255d-4b34-bfe4-356f1f83233d": {
+      "collider": {
+        "geometry": {
+          "depth": 4,
+          "height": 2,
+          "type": "box",
+          "width": 4
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/blue-cube-small-r6hir5057f.glb"
+        }
+      },
+      "id": "cd4ab54b-255d-4b34-bfe4-356f1f83233d",
+      "material": null,
+      "name": "Blue Small Cube 3",
+      "position": [
+        9.983361808288107,
+        0.9999999999999999,
+        -8
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "d357326a-daef-410c-ae6e-117c8cf3a72c": {
+      "collider": {
+        "geometry": {
+          "depth": 4,
+          "height": 4,
+          "type": "box",
+          "width": 4
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/blue-cube-ll3elhixc9.glb"
+        }
+      },
+      "id": "d357326a-daef-410c-ae6e-117c8cf3a72c",
+      "material": null,
+      "name": "Blue Cube 9",
+      "position": [
+        6,
+        2.008234315647156,
+        -12
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "d717bc14-786d-4b21-ad7b-8962a954f765": {
+      "collider": {
+        "geometry": {
+          "depth": 4,
+          "height": 4,
+          "type": "box",
+          "width": 4
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/blue-cube-ll3elhixc9.glb"
+        }
+      },
+      "id": "d717bc14-786d-4b21-ad7b-8962a954f765",
+      "material": null,
+      "name": "Blue Cube 7",
+      "position": [
+        6,
+        2.008234315647156,
+        -8
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "d89bf113-e6a2-417e-a9c3-d9c37c5ad542": {
+      "collider": {
+        "geometry": {
+          "depth": 4,
+          "height": 4,
+          "type": "box",
+          "width": 4
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/blue-cube-ll3elhixc9.glb"
+        }
+      },
+      "id": "d89bf113-e6a2-417e-a9c3-d9c37c5ad542",
+      "material": null,
+      "name": "Blue Cube",
+      "position": [
+        -10,
+        2.008234315647156,
+        -4
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "dd2c3e57-f02b-424d-aade-e9b8020c3793": {
+      "collider": {
+        "geometry": {
+          "depth": 4,
+          "height": 2,
+          "type": "box",
+          "width": 4
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/blue-cube-small-r6hir5057f.glb"
+        }
+      },
+      "id": "dd2c3e57-f02b-424d-aade-e9b8020c3793",
+      "material": null,
+      "name": "Blue Cube Small",
+      "position": [
+        -6,
+        1,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "df384666-48b1-4f29-a1ef-2b472cefb639": {
+      "collider": {
+        "geometry": {
+          "depth": 4,
+          "height": 4,
+          "type": "box",
+          "width": 4
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/blue-cube-ll3elhixc9.glb"
+        }
+      },
+      "id": "df384666-48b1-4f29-a1ef-2b472cefb639",
+      "material": null,
+      "name": "Blue Cube 5",
+      "position": [
+        -10,
+        6,
+        -12
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "e3aa2fbb-6341-47c3-bff3-b2a3242eaa36": {
+      "collider": {
+        "geometry": {
+          "depth": 4,
+          "height": 0.5,
+          "type": "box",
+          "width": 4
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/bridge-brr7nmi896.glb"
+        }
+      },
+      "id": "e3aa2fbb-6341-47c3-bff3-b2a3242eaa36",
+      "material": null,
+      "name": "Bridge4",
+      "position": [
+        2.0399010530328043,
+        3.75,
+        -12
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "e3ec8c39-58a0-450e-a037-80f84d6e9eaf": {
+      "collider": {
+        "geometry": {
+          "depth": 2,
+          "height": 2,
+          "type": "box",
+          "width": 2
+        },
+        "mass": 1
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/green-box-tlak5hi32g.glb"
+        }
+      },
+      "id": "e3ec8c39-58a0-450e-a037-80f84d6e9eaf",
+      "material": null,
+      "name": "Green Dynamic Box 3",
+      "position": [
+        10.11902913289459,
+        5.191991737947437,
+        -11.438404243741727
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "f0da6099-d50d-43d6-87f4-a8eeceb6ee09": {
+      "collider": {
+        "geometry": {
+          "depth": 4,
+          "height": 4,
+          "type": "box",
+          "width": 4
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/blue-cube-ll3elhixc9.glb"
+        }
+      },
+      "id": "f0da6099-d50d-43d6-87f4-a8eeceb6ee09",
+      "material": null,
+      "name": "Blue Cube 8",
+      "position": [
+        -2,
+        2.0082343156471554,
+        -12
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        0.9999999999999998
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "f5786c4b-0595-48f2-8d1a-fe3e203eb388": {
+      "collider": {
+        "geometry": {
+          "depth": 0.5,
+          "height": 4,
+          "type": "box",
+          "width": 32
+        }
+      },
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/outer-wall-jqvd7lo9hb.glb"
+        }
+      },
+      "id": "f5786c4b-0595-48f2-8d1a-fe3e203eb388",
+      "material": null,
+      "name": "Right Wall",
+      "position": [
+        15.653282507829244,
+        2.1994499550127395,
+        -1.6163047719931747
+      ],
+      "rotation": [
+        0,
+        -0.7071067811865475,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "f687cdfd-cc08-4755-b2f2-5386dcfabe0b": {
+      "collider": {
+        "angularDamping": 0,
+        "friction": 4,
+        "geometry": {
+          "radius": 0.8,
+          "type": "sphere"
+        },
+        "linearDamping": 0,
+        "mass": 1,
+        "restitution": 0,
+        "rollingFriction": 0.6,
+        "spinningFriction": 0.6
+      },
+      "components": {
+        "65d89d27-65d1-4e28-b16e-8a23ecc39c36": {
+          "id": "65d89d27-65d1-4e28-b16e-8a23ecc39c36",
+          "name": "characterController",
+          "parameters": {
+            "force": 18,
+            "jumpForce": 400
+          }
+        }
+      },
+      "geometry": {
+        "radius": 0.75,
+        "type": "sphere"
+      },
+      "id": "f687cdfd-cc08-4755-b2f2-5386dcfabe0b",
+      "material": {
+        "color": "#FFFFFF",
+        "textureSrc": {
+          "type": "url",
+          "url": "https://helpx-prod.scene7.com/is/image/HelpxProd/checker-1-1?$png$&jpegSize=100&wid=256"
+        },
+        "type": "basic"
+      },
+      "name": "PlayerBall",
+      "position": [
+        5.008060436340202,
+        0.7718212569253782,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    },
+    "fd02183b-60f9-4077-9535-bb6662af4653": {
+      "components": {},
+      "geometry": null,
+      "gltfModel": {
+        "animationClip": "",
+        "loop": true,
+        "src": {
+          "type": "url",
+          "url": "https://static.8thwall.app/assets/yellow-ramp-ni6fzf01ud.glb"
+        }
+      },
+      "id": "fd02183b-60f9-4077-9535-bb6662af4653",
+      "material": null,
+      "name": "Yelloew Ramp 5",
+      "position": [
+        -2,
+        4,
+        -12
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "shadow": {
+        "castShadow": true,
+        "receiveShadow": true
+      }
+    }
+  }
+}

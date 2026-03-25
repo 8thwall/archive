@@ -1,0 +1,159 @@
+<!-- Copyright (c) 2023 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<div id="nianticlogo"></div>
+<div id="mobile-only" style="display: none">
+  <div id="gradient" class="gradient-move absolute-fill">
+    <img id="title" src="./assets/icons/Take_an_elfie.png">
+    <div class="spinner-container">
+      <div class="spinner"></div>
+    </div>
+    <p id="safety">While using AR, make sure <br> you're in a safe location at all times.</p>
+    <div id="bottomLogosStart">
+      <div id="thWallLogoWhite"></div>
+    </div>
+  </div>
+
+  <!--<div id="introContainer">
+    <div id="introCard">
+      <div id="cardContainer">
+        <img id="title2" src="./assets/icons/Take_an_elfie.png">
+        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27" fill="none" id="star">
+          <path d="M13.8936 0.545715L17.6167 10.3234L27.3944 14.0466L17.6167 17.7697L13.8936 27.5474L10.1704 17.7697L0.392731 14.0466L10.1704 10.3234L13.8936 0.545715Z" fill="#D9D9D9"/>
+        </svg>
+        <div id="conditionsText">
+          <p class="terms-conditions">Please review and accept <a href="#">Term and Conditions</a>, <a href="#">Content Guidelines</a> and <a href="#">Privacy Policy</a></p>
+          <p class="age-message">Ask Santa is only available for users age 13 or older. By clicking accept you confirm that you are 13+.</p>
+        </div>
+      </div>
+    </div>
+    <div id="terms-buttons">
+      <button id="decline" class="white-button">Decline</button>
+      <button id="accept">Accept</button>
+    </div>
+  </div>-->
+
+  <div id="introContainer2">
+    <div id="introCard2">
+      <img class="title3" src="./assets/icons/Take_an_elfie.png">
+      <img id="introImg1" src="./assets/icons/ear.png">
+      <p class="tip-text">Uncover your ears!</p>
+      <button id="okay">Next</button>
+      <img id="dots1" src="./assets/icons/dots1.png">
+    </div>
+  </div>
+
+  <div id="introContainer3">
+    <div id="introCard3">
+      <img class="title3" src="./assets/icons/Take_an_elfie.png">
+      <img id="introImg2" src="./assets/icons/tap.png">
+      <p class="tip-text">Tap to change skin tone</p>
+      <button id="gotIt">Got it</button>
+      <img id="dots2" src="./assets/icons/dots2.png">
+    </div>
+  </div>
+</div>
+<a-scene
+  xrextras-loading="
+    loadBackgroundColor: #447f42;
+    cameraBackgroundColor: #447f42;
+    loadImage: #loading-spinner;"
+  landing-page
+  xrextras-loading
+  renderer="colorManagement:true"
+  xrextras-runtime-error
+  xrface="allowedDevices: any; uvType: standard; maxDetections:1; cameraDirection: front; meshGeometry: eyes, face, mouth; mirroredDisplay: true; enableEars:true"
+  ui-manager
+  load-screen>
+  <!-- 3D models, images, videos -->
+  <a-assets>
+    <img id="loading-spinner" src="./assets/icons/loading-spinner.png"/>
+    <a-asset-item id="head-occluder" src="./assets/noEarHeadOccluder.glb"></a-asset-item>
+    <a-asset-item id="elfEar" src="./assets/models/elfEar.glb"></a-asset-item>
+    <a-asset-item id="elfEarLeft" src="./assets/models/elfEarLeft.glb"></a-asset-item>
+    <a-asset-item id="elfHat" src="./assets/models/elfHat.glb"></a-asset-item>
+    <img id="elfMakeup" src="./assets/elfMakeup.png" />
+    <img id="i-share" src="./assets/icons/shareIcon.png" />
+  </a-assets>
+
+  <!-- add capture button -->
+  <xrextras-capture-button capture-mode="standard"></xrextras-capture-button>
+  
+  <!-- configure capture settings -->
+  <xrextras-capture-config
+    watermark-max-width="100"
+    watermark-max-height="10"
+    file-name-prefix="take-an-elfie-"
+    request-mic="manual"
+    watermark-image-url="./assets/icons/watermarkElfie.png"
+    watermark-location="bottomMiddle"
+    enable-end-card="false"
+  ></xrextras-capture-config>
+  
+  <!-- add capture preview -->
+  <xrextras-capture-preview></xrextras-capture-preview>
+
+  <a-camera
+    look-controls="enabled: false"
+    wasd-controls="enabled: false"
+    position="0 2 0"></a-camera>
+
+  <!-- content anchored to face -->
+  <xrextras-faceanchor>
+    <xrextras-face-mesh
+      id="makeup"
+      material="shader:standard; visible: true; src:#elfMakeup; transparent:true; opacity:0.6">
+    </xrextras-face-mesh>
+
+    <a-entity
+      gltf-model="#head-occluder"
+      position="0.01 0.35 0.17"
+      scale="1.2 0.7 0.9"
+      xrextras-hider-material></a-entity>
+
+    <xrextras-face-mesh position="0 0 0.09" xrextras-hider-material></xrextras-face-mesh>
+
+    <xrextras-face-attachment point="forehead">
+      <a-entity
+        zhide-ears
+        id="elfHatEntity"
+        position="-.04 0.16 0.8"
+        rotation="7 0 0"
+        gltf-model="#elfHat"
+        scale="1.8 1.37 1.8"></a-entity>
+    </xrextras-face-attachment>
+
+    <xrextras-face-attachment point="leftCanal">
+      <a-entity
+        change-color
+        id="leftElfEar"
+        position="0.02 -.04 0"
+        rotation="0 180 0"
+        gltf-model="#elfEarLeft"
+        scale="9 10 10"></a-entity>
+    </xrextras-face-attachment>
+
+    <xrextras-face-attachment point="rightCanal">
+      <a-entity
+        id="rightElfEar"
+        position="0 -.03 0"
+        rotation="0 180 0"
+        gltf-model="#elfEar"
+        scale="9 10 10"></a-entity>
+    </xrextras-face-attachment>
+  </xrextras-faceanchor>
+
+  <a-light type="directional" target="#face" position="0 1.8 3" intensity="0.8"></a-light>
+  <a-light type="ambient" intensity="0.5"></a-light>
+</a-scene>
+
+
+<div class="gift-container" id="gift-container">
+  <div id="leftGiftContainer">
+    <img id="leftGift" src="./assets/icons/Gift.png">
+    <img id="leftPlant" src="./assets/icons/plant1.png">
+  </div>
+  <div id="rightGiftContainer">
+    <img id="rightGift" src="./assets/icons/Gift.png">
+    <img id="rightPlant" src="./assets/icons/plant2.png">
+  </div>
+</div>
