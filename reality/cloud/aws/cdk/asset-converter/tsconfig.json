@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "lib": ["es2020"],
+    "module": "commonjs",
+    "target": "es2020",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "preserveConstEnums": true,
+    "noEmit": true,
+    "sourceMap": false,
+    "isolatedModules": true,
+    "removeComments": true,
+    "paths": {
+      "@nia/*": ["../../../../../*"]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "cdk.out",
+  ]
+}

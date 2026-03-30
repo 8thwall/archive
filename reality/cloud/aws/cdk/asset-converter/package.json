@@ -1,0 +1,29 @@
+{
+  "name": "asset-converter",
+  "version": "0.1.0",
+  "bin": {
+    "asset-converter": "bin/asset-converter.js"
+  },
+  "scripts": {
+    "cdk": "cdk"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.125",
+    "@types/node": "20.14.9",
+    "aws-cdk": "^2.150.0",
+    "esbuild": "^0.23.0",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.5.3"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.624.0",
+    "@aws-sdk/client-s3": "^3.624.0",
+    "@aws-sdk/lib-storage": "^3.632.0",
+    "@aws-sdk/s3-request-presigner": "^3.624.0",
+    "@types/archiver": "^6.0.2",
+    "archiver": "^7.0.1",
+    "aws-cdk-lib": "2.150.0",
+    "constructs": "^10.0.0",
+    "source-map-support": "^0.5.21"
+  }
+}
