@@ -1,0 +1,15 @@
+---
+ Environment:
+   Variables:
+     IMAGE_TARGET_BUCKET: 8w-us-west-2-image-targets
+ MemorySize: 512
+ Role: arn:aws:iam::411668614133:role/8w-public-api
+ Runtime: nodejs14.x
+ Timeout: 30
+ VpcConfig:
+   SubnetIds:
+     - subnet-a50cd1ec
+     - subnet-684cf70f
+     - subnet-21053a79
+   SecurityGroupIds:
+     - sg-6023e41f

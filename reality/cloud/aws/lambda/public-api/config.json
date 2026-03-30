@@ -1,0 +1,26 @@
+{
+  "Runtime": "nodejs20.x",
+  "Role": "arn:aws:iam::411668614133:role/8w-public-api",
+  "Handler": "index.handler",
+  "Timeout": 30,
+  "MemorySize": 512,
+  "VpcConfig": {
+    "SubnetIds": [
+      "subnet-a50cd1ec",
+      "subnet-684cf70f",
+      "subnet-21053a79"
+    ],
+    "SecurityGroupIds": [
+      "sg-6023e41f"
+    ],
+    "VpcId": "vpc-21187846",
+    "Ipv6AllowedForDualStack": false
+  },
+  "Environment": {
+    "Variables": {
+      "SECRET_NAMESPACE": "Dev",
+      "NODE_OPTIONS": "--enable-source-maps",
+      "IMAGE_TARGET_BUCKET": "8w-us-west-2-image-targets"
+    }
+  }
+}

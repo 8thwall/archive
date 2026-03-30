@@ -1,0 +1,29 @@
+{
+  "name": "public-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sync-models": "find ../../../xrhome/storage/schema -type f | grep -v 'index.js$' | xargs -I {} cp {} models",
+    "test": "NODE_ENV=test npx mocha --exit test/**-test.*",
+    "test-file": "NODE_ENV=test npx mocha --exit"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "busboy": "^1.6.0",
+    "form-data": "^4.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.4.2",
+    "sequelize": "^6.37.3",
+    "uuid": "^8.3.1"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-s3": "^3.614.0",
+    "@aws-sdk/client-ssm": "^3.614.0",
+    "@types/busboy": "^1.5.4",
+    "sharp": "^0.32.6",
+    "sqlite3": "^5.0.0",
+    "ts-essentials": "^4.0.0"
+  }
+}
