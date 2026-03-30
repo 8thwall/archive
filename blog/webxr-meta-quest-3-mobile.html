@@ -1,0 +1,3380 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en" > <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en" >        <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en" >               <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+ <!--<![endif]-->
+ <head> 
+  <meta charset="utf-8"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+  <meta name="author" content="8th Wall"> 
+  <meta name="description" content="A look at how participants in the Niantic Innovation Lab created sample WebXR experiences that seamlessly deploy across devices and platforms"> 
+  <meta name="generator" content="HubSpot"> 
+  <title>A Quest to Innovate: Building cross-platform WebXR experiences for Meta Quest 3 and mobile</title> 
+  <link rel="shortcut icon" href="images/nianticspatial-logo-black-icononly.png"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <script src="/hs/hsstatic/jquery-libs/static-1.1/jquery/jquery-1.7.1.js"></script> 
+  <script>hsjQuery = window['jQuery'];</script> 
+  <meta property="og:description" content="A look at how participants in the Niantic Innovation Lab created sample WebXR experiences that seamlessly deploy across devices and platforms"> 
+  <meta property="og:title" content="A Quest to Innovate: Building cross-platform WebXR experiences for Meta Quest 3 and mobile"> 
+  <meta name="twitter:description" content="A look at how participants in the Niantic Innovation Lab created sample WebXR experiences that seamlessly deploy across devices and platforms"> 
+  <meta name="twitter:title" content="A Quest to Innovate: Building cross-platform WebXR experiences for Meta Quest 3 and mobile"> 
+  <style>
+a.cta_button{-moz-box-sizing:content-box !important;-webkit-box-sizing:content-box !important;box-sizing:content-box !important;vertical-align:middle}.hs-breadcrumb-menu{list-style-type:none;margin:0px 0px 0px 0px;padding:0px 0px 0px 0px}.hs-breadcrumb-menu-item{float:left;padding:10px 0px 10px 10px}.hs-breadcrumb-menu-divider:before{content:'›';padding-left:10px}.hs-featured-image-link{border:0}.hs-featured-image{float:right;margin:0 0 20px 20px;max-width:50%}@media (max-width: 568px){.hs-featured-image{float:none;margin:0;width:100%;max-width:100%}}.hs-screen-reader-text{clip:rect(1px, 1px, 1px, 1px);height:1px;overflow:hidden;position:absolute !important;width:1px}
+</style> 
+  <style>.hs-cluster-context__pillar-page-link{padding:20px 0px}</style>
+<style>
+  .container, .container-fluid {
+  	padding: 0;
+  }
+</style> 
+  <meta property="og:image" content="images/HMD_vs._Mobile_Experience_(Facebook_Shops_Ad).png"> 
+  <meta property="og:image:width" content="1200"> 
+  <meta property="og:image:height" content="628"> 
+  <meta name="twitter:image" content="images/HMD_vs._Mobile_Experience_(Facebook_Shops_Ad).png"> 
+  <script>var hsVars = { app_hs_base_url: 'https://app.hubspot.com' };</script> 
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:type" content="article"> 
+  <script src="http://platform.linkedin.com/in.js" type="text/javascript">
+    lang: en_US
+</script> 
+  <meta http-equiv="content-language" content="en"> 
+  <style>.row-fluid{width:100%;*zoom:1}.row-fluid:after,.row-fluid:before{content:"";display:table}.row-fluid:after{clear:both}.row-fluid [class*=span]{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;display:block;float:left;margin-left:2.127659574%;*margin-left:2.0744680846382977%;min-height:28px;width:100%}.row-fluid [class*=span]:first-child{margin-left:0}.row-fluid .span12{width:99.99999998999999%;*width:99.94680850063828%}.row-fluid .span11{width:91.489361693%;*width:91.4361702036383%}.row-fluid .span10{width:82.97872339599999%;*width:82.92553190663828%}.row-fluid .span9{width:74.468085099%;*width:74.4148936096383%}.row-fluid .span8{width:65.95744680199999%;*width:65.90425531263828%}.row-fluid .span7{width:57.446808505%;*width:57.3936170156383%}.row-fluid .span6{width:48.93617020799999%;*width:48.88297871863829%}.row-fluid .span5{width:40.425531911%;*width:40.3723404216383%}.row-fluid .span4{width:31.914893614%;*width:31.8617021246383%}.row-fluid .span3{width:23.404255317%;*width:23.3510638276383%}.row-fluid .span2{width:14.89361702%;*width:14.8404255306383%}.row-fluid .span1{width:6.382978723%;*width:6.329787233638298%}.container-fluid{*zoom:1}.container-fluid:after,.container-fluid:before{content:"";display:table}.container-fluid:after{clear:both}@media (max-width:767px){.row-fluid{width:100%}.row-fluid [class*=span]{display:block;float:none;margin-left:0;width:auto}}@media (min-width:768px) and (max-width:1139px){.row-fluid{width:100%;*zoom:1}.row-fluid:after,.row-fluid:before{content:"";display:table}.row-fluid:after{clear:both}.row-fluid [class*=span]{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;display:block;float:left;margin-left:2.762430939%;*margin-left:2.709239449638298%;min-height:28px;width:100%}.row-fluid [class*=span]:first-child{margin-left:0}.row-fluid .span12{width:99.999999993%;*width:99.9468085036383%}.row-fluid .span11{width:91.436464082%;*width:91.38327259263829%}.row-fluid .span10{width:82.87292817100001%;*width:82.8197366816383%}.row-fluid .span9{width:74.30939226%;*width:74.25620077063829%}.row-fluid .span8{width:65.74585634900001%;*width:65.6926648596383%}.row-fluid .span7{width:57.182320438000005%;*width:57.129128948638304%}.row-fluid .span6{width:48.618784527%;*width:48.5655930376383%}.row-fluid .span5{width:40.055248616%;*width:40.0020571266383%}.row-fluid .span4{width:31.491712705%;*width:31.4385212156383%}.row-fluid .span3{width:22.928176794%;*width:22.874985304638297%}.row-fluid .span2{width:14.364640883%;*width:14.311449393638298%}.row-fluid .span1{width:5.801104972%;*width:5.747913482638298%}}@media (min-width:1280px){.row-fluid{width:100%;*zoom:1}.row-fluid:after,.row-fluid:before{content:"";display:table}.row-fluid:after{clear:both}.row-fluid [class*=span]{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;display:block;float:left;margin-left:2.564102564%;*margin-left:2.510911074638298%;min-height:28px;width:100%}.row-fluid [class*=span]:first-child{margin-left:0}.row-fluid .span12{width:100%;*width:99.94680851063829%}.row-fluid .span11{width:91.45299145300001%;*width:91.3997999636383%}.row-fluid .span10{width:82.905982906%;*width:82.8527914166383%}.row-fluid .span9{width:74.358974359%;*width:74.30578286963829%}.row-fluid .span8{width:65.81196581200001%;*width:65.7587743226383%}.row-fluid .span7{width:57.264957265%;*width:57.2117657756383%}.row-fluid .span6{width:48.717948718%;*width:48.6647572286383%}.row-fluid .span5{width:40.170940171000005%;*width:40.117748681638304%}.row-fluid .span4{width:31.623931624%;*width:31.5707401346383%}.row-fluid .span3{width:23.076923077%;*width:23.0237315876383%}.row-fluid .span2{width:14.529914530000001%;*width:14.4767230406383%}.row-fluid .span1{width:5.982905983%;*width:5.929714493638298%}}.clearfix{*zoom:1}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.hide{display:none}.show{display:block}.hidden,.invisible{visibility:hidden}.hidden{display:none}.hidden-desktop,.visible-phone,.visible-tablet{display:none!important}@media (max-width:767px){.visible-phone{display:inherit!important}.hidden-phone{display:none!important}.hidden-desktop{display:inherit!important}.visible-desktop{display:none!important}}@media (min-width:768px) and (max-width:1139px){.visible-tablet{display:inherit!important}.hidden-tablet{display:none!important}.hidden-desktop{display:inherit!important}.visible-desktop{display:none!important}}</style> 
+  <style>@import url(http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic);
+@import url(http://fonts.googleapis.com/css?family=Montserrat:700,400);
+@import url(//designers.hubspot.com/hs-fs/hub/327485/file-2054199286-css/font-awesome.css);
+
+/**
+ * CSS @imports must be at the top of the file.      
+ * Add them above this section.                             
+ */
+
+
+
+/* ==========================================================================
+   HS COS Boilerplate v1.3.0   
+*/
+
+/* This responsive framework is required for all styles.*/ 
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    border: 0;
+    -ms-interpolation-mode: bicubic;
+    vertical-align: bottom; /* Suppress the space beneath the baseline */
+}
+img.alignRight, img.alignright{ margin: 0 0 5px 15px; }
+img.alignLeft, img.alignleft{ margin: 0 15px 5px 0; }
+
+/* Reduces min-height on bootstrap structure */
+.row-fluid [class*="span"] { min-height: 1px; }
+
+/* Blog Social Sharing */
+.hs-blog-social-share .hs-blog-social-share-list {
+    margin: 0;
+    list-style: none !important;
+}
+.hs-blog-social-share .hs-blog-social-share-list .hs-blog-social-share-item {
+    height: 30px;
+    list-style: none !important;
+}
+@media (max-width: 479px){
+    .hs-blog-social-share .hs-blog-social-share-list .hs-blog-social-share-item:nth-child(2) {
+        float: none !important; /* Stack social icons into two rows on phones */
+    }
+}
+.hs-blog-social-share .hs-blog-social-share-list .hs-blog-social-share-item .fb-like > span{
+    vertical-align: top !important; /* Aligns Facebook icon with other social media icons */
+}
+.hs-blog-social-share-list li.hs-blog-social-share-item.hs-blog-social-share-item-linkedin .IN-widget {
+    vertical-align: top !important;
+}
+
+
+/* Captcha */
+#recaptcha_response_field {
+    width: auto !important;
+    display: inline-block !important;
+}
+
+/* line height fix for reCaptcha theme */
+#recaptcha_table td {line-height: 0;}
+.recaptchatable #recaptcha_response_field { min-height: 0;line-height: 12px; }
+
+@media all and (max-width: 400px) {
+/* beat recaptcha into being responsive, !importants and specificity are necessary */
+    #captcha_wrapper,
+    #recaptcha_area,
+    #recaptcha_area table#recaptcha_table,
+    #recaptcha_area table#recaptcha_table .recaptcha_r1_c1 {
+        width: auto !important;
+        overflow: hidden; 
+    }
+    #recaptcha_area table#recaptcha_table .recaptcha_r4_c4 { width: 67px !important; }
+    #recaptcha_area table#recaptcha_table #recaptcha_image { width:280px !important; }
+}
+
+/* Videos */
+video {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Date Picker */
+#calroot {
+    width: 202px !important;
+    line-height: normal;
+}
+#calroot,
+#calroot *,
+#calroot *:before,
+#calroot *:after {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+} 
+#calroot select {
+    min-height: 0 !important;
+    padding: 1px 2px !important;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", "Bitstream Vera Sans", "Trebuchet MS", Verdana, sans-serif !important;
+    font-size: 10px !important;
+    line-height: 18px !important;
+    font-weight: normal !important;
+} 
+#caldays {
+    margin-bottom: 4px;
+}
+
+/* Responsive Embed Container (iFrame, Object, Embed) */
+.hs-responsive-embed,
+.hs-responsive-embed.hs-responsive-embed-youtube,
+.hs-responsive-embed.hs-responsive-embed-wistia,
+.hs-responsive-embed.hs-responsive-embed-vimeo {
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    padding-left: 0;
+    padding-right: 0;
+}
+.hs-responsive-embed iframe, 
+.hs-responsive-embed object, 
+.hs-responsive-embed embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+.hs-responsive-embed.hs-responsive-embed-instagram {
+    padding-top: 0px;
+    padding-bottom: 116.01%;
+}
+.hs-responsive-embed.hs-responsive-embed-pinterest {
+    height: auto;
+    overflow: visible;
+    padding: 0 0 0 0;
+}
+.hs-responsive-embed.hs-responsive-embed-pinterest iframe {
+    position: static;
+    width: auto;
+    height: auto;
+}
+iframe[src^="http://www.slideshare.net/slideshow/embed_code/"] {
+    width: 100%;
+    max-width: 100%;
+}
+@media (max-width: 568px) {
+    iframe {
+        max-width: 100%;
+    }
+}
+
+/* Forms */
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"]
+select {
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* Fix radio button and check box fields in multi column forms*/
+.hs-form fieldset[class*="form-columns"] input[type="checkbox"].hs-input,
+.hs-form fieldset[class*="form-columns"] input[type="radio"].hs-input {
+    width: auto;
+}
+
+/* System Template Forms */
+#email-prefs-form .email-edit {
+    width: 100% !important;
+    max-width: 507px !important;
+}
+#hs-pwd-widget-password {
+    height: auto !important;
+}
+
+/* Menus */
+.hs-menu-wrapper ul {
+    padding: 0; 
+}
+
+/* Horizontal Menu
+   ========================================================================== */
+
+.hs-menu-wrapper.hs-menu-flow-horizontal ul {
+    list-style: none;
+    margin: 0;
+}
+.hs-menu-wrapper.hs-menu-flow-horizontal > ul {
+    display: inline-block;
+}
+.hs-menu-wrapper.hs-menu-flow-horizontal > ul:before {
+    content: " ";
+    display: table;
+}
+.hs-menu-wrapper.hs-menu-flow-horizontal > ul:after {
+    content: " ";
+    display: table;
+    clear: both;
+}
+.hs-menu-wrapper.hs-menu-flow-horizontal > ul li.hs-menu-depth-1 {
+    float: left;
+}
+.hs-menu-wrapper.hs-menu-flow-horizontal > ul li a {
+    display: inline-block;
+}
+.hs-menu-wrapper.hs-menu-flow-horizontal > ul li.hs-item-has-children {
+    position: relative;
+}
+.hs-menu-wrapper.hs-menu-flow-horizontal.flyouts > ul li.hs-item-has-children ul.hs-menu-children-wrapper {
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: opacity 0.4s;
+    position: absolute;
+    z-index: 10;
+    left: 0;
+}
+.hs-menu-wrapper.hs-menu-flow-horizontal > ul li.hs-item-has-children ul.hs-menu-children-wrapper li a {
+    display: block;
+    white-space: nowrap;
+}
+.hs-menu-wrapper.hs-menu-flow-horizontal.flyouts > ul li.hs-item-has-children ul.hs-menu-children-wrapper li.hs-item-has-children ul.hs-menu-children-wrapper {
+    left: 100%;
+    top: 0;
+}
+.hs-menu-wrapper.hs-menu-flow-horizontal.flyouts > ul li.hs-item-has-children:hover > ul.hs-menu-children-wrapper {
+    opacity: 1;
+    visibility: visible;
+}
+.row-fluid-wrapper:last-child .hs-menu-wrapper.hs-menu-flow-horizontal > ul {
+    margin-bottom: 0;
+}
+.hs-menu-wrapper.hs-menu-flow-horizontal.hs-menu-show-active-branch {
+    position: relative;
+}
+.hs-menu-wrapper.hs-menu-flow-horizontal.hs-menu-show-active-branch > ul {
+    margin-bottom: 0;
+}
+.hs-menu-wrapper.hs-menu-flow-horizontal.hs-menu-show-active-branch > ul li.hs-item-has-children {
+    position: static;
+}
+.hs-menu-wrapper.hs-menu-flow-horizontal.hs-menu-show-active-branch > ul li.hs-item-has-children ul.hs-menu-children-wrapper {
+    display: none;
+}
+.hs-menu-wrapper.hs-menu-flow-horizontal.hs-menu-show-active-branch > ul li.hs-item-has-children.active-branch > ul.hs-menu-children-wrapper {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+}
+.hs-menu-wrapper.hs-menu-flow-horizontal.hs-menu-show-active-branch > ul li.hs-item-has-children.active-branch > ul.hs-menu-children-wrapper:before {
+    content: " ";
+    display: table;
+}
+.hs-menu-wrapper.hs-menu-flow-horizontal.hs-menu-show-active-branch > ul li.hs-item-has-children.active-branch > ul.hs-menu-children-wrapper:after {
+    content: " ";
+    display: table;
+    clear: both;
+}
+.hs-menu-wrapper.hs-menu-flow-horizontal.hs-menu-show-active-branch > ul li.hs-item-has-children.active-branch > ul.hs-menu-children-wrapper > li {
+    float: left;
+}
+.hs-menu-wrapper.hs-menu-flow-horizontal.hs-menu-show-active-branch > ul li.hs-item-has-children.active-branch > ul.hs-menu-children-wrapper > li a {
+    display: inline-block;
+}
+
+/* Vertical Menu
+   ========================================================================== */ 
+
+.hs-menu-wrapper.hs-menu-flow-vertical {
+    width: 100%;
+}
+.hs-menu-wrapper.hs-menu-flow-vertical ul {
+    list-style: none;
+    margin: 0;
+}
+.hs-menu-wrapper.hs-menu-flow-vertical li a {
+    display: block;
+}
+.hs-menu-wrapper.hs-menu-flow-vertical > ul {
+    margin-bottom: 0;
+}
+.hs-menu-wrapper.hs-menu-flow-vertical > ul li.hs-menu-depth-1 > a {
+    width: auto;
+}
+.hs-menu-wrapper.hs-menu-flow-vertical > ul li.hs-item-has-children {
+    position: relative;
+}
+
+/* Flyouts */
+.hs-menu-wrapper.hs-menu-flow-vertical.flyouts > ul li.hs-item-has-children ul.hs-menu-children-wrapper {
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: opacity 0.4s;
+    position: absolute;
+    z-index: 10;
+    left: 0;
+}
+.hs-menu-wrapper.hs-menu-flow-vertical > ul li.hs-item-has-children ul.hs-menu-children-wrapper li a {
+    display: block;
+    white-space: nowrap;
+}
+.hs-menu-wrapper.hs-menu-flow-vertical.flyouts > ul li.hs-item-has-children ul.hs-menu-children-wrapper {
+    left: 100%;
+    top: 0;
+}
+.hs-menu-wrapper.hs-menu-flow-vertical.flyouts > ul li.hs-item-has-children:hover > ul.hs-menu-children-wrapper {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+@media (max-width: 767px) {
+    .hs-menu-wrapper, .hs-menu-wrapper * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        display: block;
+        width: 100%;
+    }
+    .hs-menu-wrapper.hs-menu-flow-horizontal ul {
+        list-style: none;
+        margin: 0;
+        display: block;
+    }
+    .hs-menu-wrapper.hs-menu-flow-horizontal > ul {
+        display: block;
+    }
+    .hs-menu-wrapper.hs-menu-flow-horizontal > ul li.hs-menu-depth-1 {
+        float: none;
+    }
+    .hs-menu-wrapper.hs-menu-flow-horizontal > ul li a,
+    .hs-menu-wrapper.hs-menu-flow-horizontal > ul li.hs-item-has-children ul.hs-menu-children-wrapper li a,
+    .hs-menu-wrapper.hs-menu-flow-horizontal.hs-menu-show-active-branch > ul li.hs-item-has-children.active-branch > ul.hs-menu-children-wrapper > li a {
+        display: block;
+    }
+
+    /* Stacking Horizontal Nav for Mobile */
+    .hs-menu-wrapper.hs-menu-flow-horizontal>ul li.hs-item-has-children ul.hs-menu-children-wrapper {
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: static !important;
+    }
+    .hs-menu-wrapper.hs-menu-flow-horizontal ul ul ul {
+        padding: 0;
+    }
+    .hs-menu-wrapper.hs-menu-flow-horizontal>ul li.hs-item-has-children ul.hs-menu-children-wrapper li a {
+        white-space: normal;
+    }
+
+    /* Stacking Vertical Nav for Mobile */
+    .hs-menu-wrapper.hs-menu-flow-vertical.flyouts > ul li.hs-item-has-children ul.hs-menu-children-wrapper  {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.hs-menu-wrapper.hs-menu-flow-vertical.no-flyouts .hs-menu-children-wrapper {
+    visibility: visible;
+    opacity: 1;
+}
+.hs-menu-wrapper.hs-menu-flow-horizontal.no-flyouts > ul li.hs-item-has-children ul.hs-menu-children-wrapper {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Space Module */
+.widget-type-space { visibility: hidden; }
+
+/* Blog Author Section */
+.hs-author-social-links { display: inline-block; }
+.hs-author-social-links a.hs-author-social-link {
+    width: 24px;
+    height: 24px;
+    border-width: 0px;
+    border: 0px;
+    line-height: 24px;
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    text-indent: -99999px;
+}
+.hs-author-social-links a.hs-author-social-link.hs-social-facebook {
+    background-image: url("//static.hubspot.com/final/img/common/icons/social/facebook-24x24.png");
+}
+.hs-author-social-links a.hs-author-social-link.hs-social-linkedin {
+    background-image: url("//static.hubspot.com/final/img/common/icons/social/linkedin-24x24.png");
+}
+.hs-author-social-links a.hs-author-social-link.hs-social-twitter {
+    background-image: url("//static.hubspot.com/final/img/common/icons/social/twitter-24x24.png");
+}
+.hs-author-social-links a.hs-author-social-link.hs-social-google-plus {
+    background-image: url("//static.hubspot.com/final/img/common/icons/social/googleplus-24x24.png");
+}
+
+/* Fix for CTA border box issue */
+.hs-cta-wrapper a {
+box-sizing: content-box;
+-moz-box-sizing: content-box;
+-webkit-box-sizing: content-box;
+}
+
+/*
+ * jQuery FlexSlider v2.0
+ * http://www.woothemes.com/flexslider/
+ *
+ * Copyright 2012 WooThemes
+ * Free to use under the GPLv2 license.
+ * http://www.gnu.org/licenses/gpl-2.0.html
+ *
+ * Contributing author: Tyler Smith (@mbmufffin)
+ */
+
+/* Wrapper */
+.hs_cos_wrapper_type_image_slider {
+    display: block;
+    overflow: hidden
+}
+
+/* Browser Resets */
+.hs_cos_flex-container a:active,
+.hs_cos_flex-slider a:active,
+.hs_cos_flex-container a:focus,
+.hs_cos_flex-slider a:focus  {outline: none;}
+.hs_cos_flex-slides,
+.hs_cos_flex-control-nav,
+.hs_cos_flex-direction-nav {margin: 0; padding: 0; list-style: none;}
+
+/* No JavaScript Fallback */
+/* If you are not using another script, such as Modernizr, make sure you
+ * include js that eliminates this class on page load */
+
+/* FlexSlider Default Theme
+*********************************/
+.hs_cos_flex-slider {margin: 0 0 60px; padding: 0; background: #fff; border: 0; position: relative; -webkit-border-radius: 4px; -moz-border-radius: 4px; -o-border-radius: 4px; border-radius: 4px; zoom: 1;}
+.hs_cos_flex-viewport {max-height: 2000px; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; transition: all 1s ease;}
+.loading .hs_cos_flex-viewport {max-height: 300px;}
+.hs_cos_flex-slider .hs_cos_flex-slides {zoom: 1;}
+
+.carousel li {margin-right: 5px}
+
+/* FlexSlider Necessary Styles
+*********************************/
+.hs_cos_flex-slider .hs_cos_flex-slides > li {display: none; -webkit-backface-visibility: hidden; position: relative;} /* Hide the slides before the JS is loaded. Avoids image jumping */
+.hs_cos_flex-slider .hs_cos_flex-slides img {width: 100%; display: block; border-radius: 0px;}
+.hs_cos_flex-pauseplay span {text-transform: capitalize;}
+
+/* Clearfix for the .hs_cos_flex-slides element */
+.hs_cos_flex-slides:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;}
+html[xmlns] .hs_cos_flex-slides {display: block;}
+* html .hs_cos_flex-slides {height: 1%;}
+
+
+/* Direction Nav */
+.hs_cos_flex-direction-nav {*height: 0;}
+.hs_cos_flex-direction-nav a {width: 30px; height: 30px; margin: -20px 0 0; display: block; background: url("//cdn2.hubspotqa.net/local/hub/124/file-52894-png/bg_direction_nav.png") no-repeat 0 0; position: absolute; top: 50%; z-index: 10; cursor: pointer; text-indent: -9999px; opacity: 0; -webkit-transition: all .3s ease;}
+.hs_cos_flex-direction-nav .hs_cos_flex-next {background-position: 100% 0; right: -36px; }
+.hs_cos_flex-direction-nav .hs_cos_flex-prev {left: -36px;}
+.hs_cos_flex-slider:hover .hs_cos_flex-next {opacity: 0.8; right: 5px;}
+.hs_cos_flex-slider:hover .hs_cos_flex-prev {opacity: 0.8; left: 5px;}
+.hs_cos_flex-slider:hover .hs_cos_flex-next:hover, .hs_cos_flex-slider:hover .hs_cos_flex-prev:hover {opacity: 1;}
+.hs_cos_flex-direction-nav .hs_cos_flex-disabled {opacity: .3!important; filter:alpha(opacity=30); cursor: default;}
+
+/* Direction Nav for the Thumbnail Carousel */
+.hs_cos_flex_thumbnavs-direction-nav {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    }
+.hs_cos_flex_thumbnavs-direction-nav {*height: 0;}
+.hs_cos_flex_thumbnavs-direction-nav a {width: 30px; height: 140px; margin: -60px 0 0; display: block; background: url("//cdn2.hubspotqa.net/local/hub/124/file-52894-png/bg_direction_nav.png") no-repeat 0 40%; position: absolute; top: 50%; z-index: 10; cursor: pointer; text-indent: -9999px; opacity: 1; -webkit-transition: all .3s ease;}
+.hs_cos_flex_thumbnavs-direction-nav .hs_cos_flex_thumbnavs-next {background-position: 100% 40%; right: 0px; }
+.hs_cos_flex_thumbnavs-direction-nav .hs_cos_flex_thumbnavs-prev {left: 0px;}
+.hs-cos-flex-slider-control-panel img { cursor: pointer; }
+.hs-cos-flex-slider-control-panel img:hover { opacity:.8; }
+.hs-cos-flex-slider-control-panel { margin-top: -30px; }
+
+
+
+/* Control Nav */
+.hs_cos_flex-control-nav {width: 100%; position: absolute; bottom: -40px; text-align: center;}
+.hs_cos_flex-control-nav li {margin: 0 6px; display: inline-block; zoom: 1; *display: inline;}
+.hs_cos_flex-control-paging li a {width: 11px; height: 11px; display: block; background: #666; background: rgba(0,0,0,0.5); cursor: pointer; text-indent: -9999px; -webkit-border-radius: 20px; -moz-border-radius: 20px; -o-border-radius: 20px; border-radius: 20px; box-shadow: inset 0 0 3px rgba(0,0,0,0.3);}
+.hs_cos_flex-control-paging li a:hover { background: #333; background: rgba(0,0,0,0.7); }
+.hs_cos_flex-control-paging li a.hs_cos_flex-active { background: #000; background: rgba(0,0,0,0.9); cursor: default; }
+
+.hs_cos_flex-control-thumbs {margin: 5px 0 0; position: static; overflow: hidden;}
+.hs_cos_flex-control-thumbs li {width: 25%; float: left; margin: 0;}
+.hs_cos_flex-control-thumbs img {width: 100%; display: block; opacity: .7; cursor: pointer;}
+.hs_cos_flex-control-thumbs img:hover {opacity: 1;}
+.hs_cos_flex-control-thumbs .hs_cos_flex-active {opacity: 1; cursor: default;}
+
+@media screen and (max-width: 860px) {
+  .hs_cos_flex-direction-nav .hs_cos_flex-prev {opacity: 1; left: 0;}
+  .hs_cos_flex-direction-nav .hs_cos_flex-next {opacity: 1; right: 0;}
+}
+
+.hs_cos_flex-slider .caption {
+    background-color: black;
+    position: static;
+    font-size: 2em;
+    line-height: 1.1em;
+    color: white;
+    padding: 0px 5% 0px 5%;
+    width: 100%;
+    top: 40%;
+    text-align: center;
+}
+.hs_cos_flex-slider .superimpose .caption {
+    color: white;
+    font-size: 3em;
+    line-height: 1.1em;
+    position: absolute;
+    padding: 0px 5% 0px 5%;
+    width: 90%;
+    top: 40%;
+    text-align: center;
+    background-color: transparent;
+}
+
+@media all and (max-width: 400px) {
+    .hs_cos_flex-slider .superimpose .caption {
+        background-color: black;
+        position: static;
+        font-size: 2em;
+        line-height: 1.1em;
+        color: white;
+        width: 90%;
+        padding: 0px 5% 0px 5%;
+        top: 40%;
+        text-align: center;
+    }
+}
+
+.hs_cos_flex-slider h1,
+.hs_cos_flex-slider h2,
+.hs_cos_flex-slider h3,
+.hs_cos_flex-slider h4,
+.hs_cos_flex-slider h5,
+.hs_cos_flex-slider h6,
+.hs_cos_flex-slider p {
+    color: white;
+}
+/* Thumbnail only version of the gallery */
+.hs-gallery-thumbnails li {
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+    margin-right:-4px;
+}
+.hs-gallery-thumbnails.fixed-height li img {
+    max-height: 150px;
+    margin: 0px;
+    padding: 0px;
+    border-width: 0px;
+}
+
+/* responsive pre elements */
+pre { overflow-x: auto; }
+
+/* responsive pre tables */
+table pre { white-space: pre-wrap; }
+
+/* Corrects width issues in table elements created via the wysiwyg editor */
+table tr td img { max-width: initial; }
+
+/* adding minimal spacing for blog comments */
+.comment { margin: 10px 0 10px 0; }
+
+/* make sure lines with no whitespace don't interefere with layout */
+.hs_cos_wrapper_type_rich_text,
+.hs_cos_wrapper_type_text,
+.hs_cos_wrapper_type_header,
+.hs_cos_wrapper_type_section_header,
+.hs_cos_wrapper_type_raw_html,
+.hs_cos_wrapper_type_raw_jinja,
+.hs_cos_wrapper_type_page_footer {
+    word-wrap: break-word;
+}
+
+/* HTML 5 Reset */
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
+    display: block;
+}
+audio, canvas, video {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+audio:not([controls]) {
+    display: none;
+}
+
+/* Support migrations from wordpress */
+.wp-float-left {
+    float: left;
+    margin: 0 20px 20px 0;
+}
+
+.wp-float-right {
+    float: right;
+    margin: 0 0 20px 20px;
+}
+
+#map_canvas img, .google-maps img { max-width: none; }
+
+
+
+/*=====================================*/
+/*======= Custom Modules Style ========*/
+/*=====================================*/
+
+
+/* Services/ Product */
+.service-group::after {
+   content: " ";
+   display: block; 
+   height: 0; 
+   clear: both;    
+}
+
+
+ 
+/* ==========================================================================
+
+   Index:         
+
+  1. BASE STYLES   
+    - Variables
+    - Macros
+    - Base
+    - Typography
+
+  2. COS STRUCTURE
+    - Structure
+    - Header
+    - Content
+    - Footer
+
+  3. MAIN NAVIGATION
+    - Custom Menu Primary
+    - Mobile Menu
+
+  4. TEMPLATE MODULE CLASSES
+    - Common Template Classes
+    - Site Pages
+    - Landing Pages
+    - System Pages
+
+  5. COS COMPONENTS
+    - Blog
+    - Forms
+    - Buttons
+
+  6. MISCELLANEOUS
+
+  7. MOBILE MEDIA QUERIES
+
+   ========================================================================== */
+
+
+
+
+
+
+
+
+/* ==========================================================================
+
+
+   1. BASE STYLES                                             
+
+
+   ========================================================================== */
+
+
+
+
+
+/* ==========================================================================
+   Variables                                               
+   ========================================================================== */
+
+
+/**
+ * Find the most consistently used font styles, colors, and container widths 
+ * for your site and assign them to the jinja variables below for easy use 
+ * and reference. 
+ *
+ * Apply the variable as shown below.  Ignore the jingja comment tags.
+ *
+ * 
+ */
+
+/* Colors */
+    /*  */
+   
+    /*  */
+    /*  */
+    /*  */
+
+/* Typography */
+            /*  */
+                         /*  */
+                          /*  */
+ /*  */
+  /*  */
+  /*  */
+
+/* Structure */
+      /*  */
+
+/* Containers */
+ /* Used on '.page-center' in 'Base' and in the 'Portrait tablet to landscape and desktop' media query */
+
+
+
+
+/* ==========================================================================
+   Macros                                                  
+   ========================================================================== */
+
+
+/** 
+  * Create jinja macros for CSS3 properties that need browser prefixes.
+  *
+  * Apply the style as shown below.  Ignore the jinja comment tags. 
+  *
+  * 
+  */
+  
+
+/* Transition */
+ 
+
+/* Animation Delay */
+ 
+
+/* Box Shadow */
+
+
+/* Background Size */
+
+
+
+/* User Select */
+
+
+/* Opacity*/
+
+
+
+
+
+/* ==========================================================================
+   Base                                                    
+   ========================================================================== */
+
+
+/** 
+ * Box Sizing
+ * 
+ * Applies a natural box layout model to all elements so that width and padding 
+ * are essentially combined, making responsive styles easier to manage.
+ */
+
+*, *:before, *:after {
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+
+html, body {
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+} 
+
+/* Website background color and default font styles */
+body {
+    background: #fff;
+    color: #666;
+    font-family: 'Lato', arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+hr{
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);}
+/**
+ * Page Center
+ *
+ * Apply .page-center to full-width modules.
+ */
+
+.container-fluid .row-fluid .page-center {
+    float: none;
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+a { 
+    text-decoration: none;
+    color: #34495e;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+a:hover,
+a:focus {
+    color: #02172c;
+}
+
+/* Highlighted Text */
+::-moz-selection {
+    color: #fff;
+    background: #666;
+    text-shadow: none;
+}
+::selection {
+    color: #fff;
+    background: #666;
+    text-shadow: none;
+}
+
+
+
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+
+/* Basic text */
+p { margin: 10px 0; } 
+
+small {}
+strong {}
+em {}
+cite {}
+code {}
+pre {}
+
+sup, sub {
+    position: relative;
+    font-size: 75%;
+    line-height: 0;
+    vertical-align: baseline;
+}
+
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    margin: 10px 0;
+    text-rendering: optimizelegibility;
+}
+h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child {
+    margin-top: 0px;   
+}
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {}
+
+h1 { font-size: 36px; }
+h2 { font-size: 30px; }
+h3 { font-size: 24px; }
+h4 { font-size: 18px; }
+h5 { font-size: 14px; }
+h6 { font-size: 12px; }
+
+/* Lists */
+ul, ol {}
+ul ul, ul ol, ol ol, ol ul {}
+li {}
+
+ul.unstyled, ol.unstyled {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Quotes */
+blockquote {}
+blockquote p {}
+blockquote small {}
+blockquote small:before {}
+
+q:before, q:after, blockquote:before, blockquote:after {}
+
+.text-center { text-align: center; }
+
+
+
+
+
+
+
+
+/* ==========================================================================
+
+
+   2. COS STRUCTURE                                            
+
+
+   ========================================================================== */
+
+
+
+
+
+/* ==========================================================================
+   Structure                                               
+   ========================================================================== */
+
+
+/* The outer wrappers of your website */
+.header-container-wrapper, 
+.body-container-wrapper, 
+.footer-container-wrapper {}
+
+/* The inner wrappers of your website */
+.header-container, 
+.body-container, 
+.footer-container {}
+
+
+
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+
+.header-container-wrapper {
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+}
+.header-container {
+    padding: 10px 0;
+    background: #fff;
+    z-index: 9999;
+}
+.global-header .logo {
+    padding: 10px 0;
+    min-height: 50px;
+    max-width: 100%;
+}
+.global-header .logo a {
+    max-width: 100%;
+}
+
+.header-cta{
+    margin-top: 13px;
+    -webkit-transition: all .1s ease-in-out;
+    -moz-transition: all .1s ease-in-out;
+    -o-transition: all .1s ease-in-out;
+    -ms-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+
+/* Logo styling */
+.header-container .hs_cos_wrapper_type_logo a{
+    position: relative;
+    display: inline-block;
+}
+.header-container .hs_cos_wrapper_type_logo a:after{
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #fff;
+    z-index: 99999;
+    content: '';
+}
+
+/* Header Small */
+.small-header .header-container { padding: 5px 0; }
+.small-header .header-container .hs_cos_wrapper_type_logo a img { max-width: 200px; }
+.small-header .custom-menu-primary .hs-menu-wrapper>ul { padding-top: 5px; }
+.small-header .header-cta { margin-top: 7px; }
+
+
+
+/* ==========================================================================
+   Content                                                 
+   ========================================================================== */
+
+
+.body-container-wrapper {}
+.body-container {}
+
+
+/* Unique Pages
+   ========================================================================== */
+
+/* Homepage */
+.background-image {
+    display: none !important;
+}
+#banner-background-image{
+    position: relative;
+    background-color: #444;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    min-height: 620px;   
+}
+#banner-background-image:before {
+    background-color: rgba(0,0,0,.1);
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+#banner-background-image .header-text {
+    margin-top: 30px;
+    width: auto;
+    position: relative;
+}
+#banner-background-image h1 {
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(0,0,0,.5);
+    max-width: 700px;
+    margin-bottom: 0px;
+    padding: 5px 5px 5px 10px;
+}
+#banner-background-image h3 {
+    color: #fff;
+    font-size: 22px;
+    max-width: 680px;
+    margin-bottom: 15px;
+    font-family: 'Lato', arial, sans-serif;
+    font-weight: normal;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    padding: 5px 5px 5px 10px;
+}
+#banner-background-image .subscribe-form h3{
+    padding: 0px;
+    background: none;
+}
+#banner-background-image .cta_solid_button {
+    background: #fff;
+    border-style: solid;
+    border-width: 2px;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    font-family: 'Montserrat', sans-serif;
+    padding: 8px 16px;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-decoration: none;
+    color: #34495e;
+    border-color: #34495e;
+}
+#banner-background-image .cta-container {
+    margin-bottom: 10px;
+    padding: 5px 5px 5px 10px;
+}
+#banner-background-image .cta_solid_button:hover{
+    border: 2px solid #FFF;
+    background: #34495e;
+    color: #FFF;
+}
+.homepage .subscribe-form {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 30px 0;
+    padding-bottom: 80px;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+}
+.home-sub-form {
+    max-width: 475px;
+    margin: 0 auto;
+    float: none !important;
+    margin-left: auto !important;
+}
+.homepage .subscribe-form form {
+    position: relative;
+    float: left;
+}
+.homepage .subscribe-form .title {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.6);   
+    font-weight: 700;
+}
+.homepage .subscribe-form input[type="email"] {
+    max-width: 400px;   
+    height: 37px;
+}
+.homepage .subscribe-form .hs_email {
+    display: inline-block;
+    width: 354px;
+    margin-right: 5px;
+    bottom: 0;
+    float: left;
+    margin-bottom: 1px;
+    position: relative;
+}
+.homepage .subscribe-form .hs_email .hs-error-msgs {
+    position: absolute;
+    margin-top: 40px;
+}
+.homepage .subscribe-form .hs_submit {
+    display: inline-block;
+    float: left;
+    bottom: 0;
+    position: absolute;
+}
+.homepage .subscribe-form .hs-button.primary {
+    border-style: solid;
+    border-width: 2px;
+    color: #FFF; 
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    margin: 0;
+    border-color: #34495e;
+    background: #34495e;
+    text-transform: uppercase;
+    padding: 8px 12px;
+}
+.homepage .subscribe-form .hs-button.primary:hover {
+    background: #fff;
+    border-style: solid;
+    border-width: 2px;      
+    border-color: #34495e;
+    color: #34495e;
+}
+.social-media {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 0px;
+}
+.social-media:before {
+    -webkit-opacity: 0.6;
+    -moz-opacity: 0.6;
+    opacity: 0.6;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: "";
+    background: #34495e;
+    z-index: 1;
+}
+.social-media > .page-center {
+    position: relative;
+    z-index: 2;
+}
+.social-media a{
+    padding-right: 5px;   
+}
+.social-tagline {
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.6);
+    font-weight: 700;
+    font-size: 13px;
+    text-align: right;
+}
+.logo-bar-background{
+    background: #f5f5f5;
+    height: 100px;
+}
+#offer-background-image{
+    position: relative;
+    background-color: #444;
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    min-height: 450px;
+    float: left;
+    width: 100%;
+}
+#offer-background-image .offer-section-text {
+    margin-top: 30px;
+    background-color: rgba(0,0,0,0.2);
+    width: auto;
+}
+#offer-background-image h1 {
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(0,0,0,.5);
+    max-width: 700px;
+    margin-bottom: 0px;
+    padding: 5px 5px 5px 10px;
+}
+#offer-background-image h3 {
+    color: #fff;
+    font-size: 22px;
+    max-width: 680px;
+    margin-bottom: 15px;
+    font-family: 'Lato', arial, sans-serif;
+    font-weight: normal;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    padding: 5px 5px 5px 10px;
+}
+.offer-image { display: none !important; }
+
+#offer-background-image .hs-form-field>label{
+    color: #fff;
+}
+#offer-background-image .offer-form h3{
+    background: none;
+}
+.homepage .main-content h2 { margin: 0px; }
+.homepage .main-content .sub-headline { font-size: 18px; }
+.faq-background { background: #f5f5f5; }
+
+.homepage .fb_iframe_widget {
+    top: -2px;
+}
+.homepage .fb_iframe_widget > span,
+.homepage .linked-in-share {
+    vertical-align: top !important;
+}
+.homepage #twitter-widget-0 {
+    width: 80px !important;
+}
+.homepage .social-share-data {
+    position: relative;
+    top: 3px;
+}
+
+
+/* Reusable Components
+   ========================================================================== */
+
+/* FAQ Module */
+.accordion { margin-bottom: 20px; }
+.accordion_group {
+    margin-bottom: 2px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #f0f0f0;
+    padding: 5px 10px;
+}
+
+/* Testimonial Module */
+.quote-box {
+    border-radius: 4px;
+}
+
+
+
+/* Page Title Background */
+.title-background{
+    background: #f5f5f5;
+}
+.title-background h1, .title-background h2{
+    margin-bottom: 0px;
+}
+
+
+/* Blog Subscribe Module */
+.subscribe-form {
+    background: #f5f5f5;
+}
+.subscribe-form.page-center label {
+    min-height: 24px;
+    display: block;
+    margin-bottom: 0px;
+}
+.subscribe-form .widget-type-blog_subscribe input[type="email"] {
+    max-width: initial;   
+    height: 38px;
+    width: 100%;
+    margin: 0;
+}
+.subscribe-form .hs_email {
+    display: inline-block;
+    width: 300px;
+    margin-right: 5px;
+    vertical-align: top;
+}
+.subscribe-form .hs_submit {
+    display: inline-block;
+    margin-top: 25px;
+}
+.subscribe-form .hs-button.primary {
+    border-style: solid;
+    border-width: 2px;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    border-color: #34495e;
+    margin: 0;
+}
+.subscribe-form .hs-button.primary:hover {
+    border-style: solid;
+    color: #fff;
+    border-color: #34495e;
+    background: #34495e;
+    border-width: 2px;       
+}
+.subscribe-form .hs-error-msgs {
+    position: absolute;
+    margin: 0;
+    margin-top: 40px;
+}
+
+
+/* Team member Module */
+.team-member-headshot img {
+    border-color: #34495e;
+}
+.team-member-social a{
+    color: #34495e;
+}
+.team-member-social a:hover,
+.hs-author-social-links a.hs-author-social-link:hover {
+    color: #ccc;
+}
+.team-member-title{
+    color: #34495e;
+}
+
+
+/* Pricing Module */
+.pricing-table h3.heading {
+    color: #fff;
+    margin: 0px;
+    text-align: center;
+    padding: 5px 0px;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+    -moz-border-radius-topleft: 4px;
+    -moz-border-radius-topright: 4px;
+    border-top-left-radius: 4px;
+    background: #34495e;
+    border-top-right-radius: 4px;
+    }
+.pricing-table .label{
+    padding: 5px 10px;
+    right: 15px;
+    font-size: 12px;
+    color: #fff;
+    border-radius: 4px;
+    margin-left: 10px;
+    vertical-align: middle;
+    background: #02172c;
+}    
+.pricing-table .content {
+    background: #f5f5f5;
+    padding: 30px;
+    text-align: center;
+    -webkit-border-bottom-right-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-bottomright: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    }
+.pricing-table .content ul{
+    list-style: none;
+    padding-left: 0px;
+        
+    }
+.pricing-table .content ul li{
+    padding: 10px 0px;  
+    }
+.pricing-table .number{    
+    font-size: 60px;
+    font-weight: 700;
+    }
+.pricing-table .currency{
+    font-size: 24px;
+    position: relative;
+    top: -25px;
+    }
+.pricing-table .unit{
+    font-size: 12px;
+    color: #ccc;
+    text-transform: uppercase;
+    } 
+.pricing-table .content a{
+    padding: 10px 25px;
+}   
+.icon-width i {
+    color: #34495e;
+}
+
+/* This rule styles the entire unordered list */
+.hs_cos_wrapper_type_rich_text ul {
+  list-style-type: disc;      /* This creates the solid circle bullet */
+  list-style-position: outside; /* This ensures standard bullet alignment */
+  padding-left: 40px;         /* This controls the indentation of the list */
+}
+
+
+/* The old rule for '.hs_cos_wrapper_type_rich_text ul li' has been removed to prevent conflicts.
+  The original :before pseudo-element for FontAwesome icons should remain commented out or deleted.
+*/
+/*
+.hs_cos_wrapper_type_rich_text ul li:before {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: "\f058";
+    margin-right: 8px;
+    color: #34495e;
+    font-size: 18px;
+}  
+*/
+
+/* Tabber Module */
+.tabber-tabs {
+    border-bottom: 1px solid #ddd;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 -2px;
+}
+.tabber-tabs > li {
+    float: left;
+}
+.tabber-tabs > li > a {
+    padding-right: 12px;
+    padding-left: 12px;
+    margin-right: 2px;
+    line-height: 14px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    line-height: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    text-decoration: none;
+    display: block;
+    border-radius: 4px;  
+}
+.tabber-tabs > .active > a, 
+.tabber-tabs > .active > a:hover, 
+.tabber-tabs > .active > a:focus {
+    color: #555555;
+    cursor: default;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.tabber-content .tab-pane {
+    background: #fff;
+    padding: 0;
+    border: 0;
+    border-radius: 4px;
+}
+.tabber-content .tab-pane.active:nth-child(1) {
+    border-top-left-radius: 0;
+}
+.body-container .tabber-content ul {
+    padding: 0;
+    margin: 0;
+}
+.tabber-content .block h3 {
+    display: none;
+}
+.blog-tabber .hs-rss-item.hs-with-featured-image .hs-rss-featured-image {
+    float: left;
+    width: 40%;
+    border-radius: 4px;
+}
+.blog-tabber .hs-rss-item.hs-with-featured-image .hs-rss-item-text {
+    float: right;
+    width: 60%;
+    padding: 0 0 0 15px;
+}
+.blog-tabber .hs-rss-item:last-child {
+    margin-bottom: 10px;
+}
+
+.hs-rss-item.hs-with-featured-image .hs-rss-item-image-wrapper {
+display: block;
+width: auto;
+}
+.custom-tabber-wrap .tabber-content .tab-pane {
+    border-radius: 4px; 
+}
+
+
+/* Flex Slider */
+.hs_cos_flex-slider .caption {
+    background: #34495e;
+}
+
+    
+/* Modular Selectors
+   ========================================================================== */
+
+/* Colors */
+.accentColor1 { color: #34495e; }
+.accentColor2 { color: #ccc; }
+.accentColor3 { color: #ddd; }
+
+
+/* Paddings */
+.padding10tb { padding: 10px 0px; }
+.padding20tb { padding: 20px 0px; }
+.padding40tb { padding: 40px 0px; }
+.padding60tb { padding: 60px 0px; }
+.padding80tb { padding: 80px 0px; }
+.padding100tb { padding: 100px 0px; }
+
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+
+.footer-container-wrapper {}
+.footer-container {}
+
+.footer-background,
+.footer-background a,
+.footer-copyright a,
+.footer-container-wrapper .more-links a, 
+.footer-container-wrapper .contact-us a, 
+.footer-container-wrapper .about-us a {
+    color: #fff;
+}
+.footer-background, 
+.footer-background a {
+    background: #34495e;
+}
+.footer-container-wrapper .more-links a:hover, 
+.footer-container-wrapper .contact-us a:hover, 
+.footer-container-wrapper .about-us a:hover {
+    color: #FFF;
+}
+.footer-container-wrapper .more-links a {
+    margin: 10px 0px;
+}
+.footer-container-wrapper .more-links .footer-nav li:before {
+    content: "\f0da";
+    font-family: FontAwesome;
+    display: inline-block;
+    float: left;
+    margin-right: 5px;
+    margin-top: 1px;
+}
+.footer-container-wrapper .icon {
+    margin-bottom: 5px;
+}
+.footer-container-wrapper .icon i {
+    float: left;
+    margin-top: 3px;
+}
+.footer-container-wrapper .contact-us {
+    word-wrap: break-word;
+}
+.footer-container-wrapper .contact-info {
+    margin-left: 25px;
+}
+.footer-container-wrapper .footer-copyright {
+    background: #666;
+    color: #ccc;
+    padding: 5px 0 0 0;
+    font-size: 12px;
+    position: relative;
+}
+
+.footer-copyright .copyright-text {
+    padding: 10px 0;
+}
+.footer-container-wrapper .social-icons .fa{
+    font-size: 20px;
+    padding-right: 5px;
+}
+
+/* Back to Top */
+.back-to-top a {
+    color: #cdcdcd;
+}
+
+/*  Follow Me Module */
+.footer-follow-me{
+    text-align: right;
+    position: absolute;
+    right: 50px;
+}
+.footer-copyright .footer-follow-me a {
+    background: transparent;
+    width: 32px;
+    height: 32px;
+    font-size: 25px;
+    font-family: FontAwesome;
+    padding: 0 8px;
+    color: ;
+}
+.footer-copyright .footer-follow-me a:hover {
+    color: #34495e;
+}
+.footer-follow-me a span {
+    display: none !important;
+}
+.footer-follow-me a.fm_facebook:before {
+    content: "\f082";
+}
+.footer-follow-me a.fm_twitter:before {
+    content: "\f099";
+}
+.footer-follow-me a.fm_linkedin:before {
+    content: "\f0e1";
+}
+.footer-follow-me a.fm_googleplus:before {
+    content: "\f0d5";
+}
+.footer-follow-me a.fm_xing:before {
+    content: "\f168";
+}
+.footer-follow-me a.fm_pinterest:before {
+    content: "\f0d2";
+}
+.footer-follow-me a.fm_youtube:before {
+    content: "\f167";
+}
+.footer-follow-me a.fm_rss:before {
+    content: "\f09e";
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+
+
+   3. MAIN NAVIGATION                                            
+
+
+   ========================================================================== */
+
+
+
+
+
+/* ==========================================================================
+   Custom Menu Primary
+   ========================================================================== */
+
+
+ /* Set ul background color */
+ /* Set li background Color */
+ /* Set link Color */
+ /* Set link Hover Color */
+
+/* Parent List */
+.custom-menu-primary .hs-menu-wrapper > ul{ 
+    background:;
+    padding-top: 10px;
+    float: right;
+    -webkit-transition: all .1s ease-in-out;
+    -moz-transition: all .1s ease-in-out;
+    -o-transition: all .1s ease-in-out;
+    -ms-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+.custom-menu-primary .hs-menu-wrapper > ul > li{
+    background:
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-right: 10px;
+}
+.custom-menu-primary .hs-menu-wrapper > ul > li > a{
+    padding: 10px;
+    position: relative;
+    color: #34495e;
+    display: block;
+}
+.custom-menu-primary .hs-menu-wrapper > ul > li > a:hover{
+    color:;
+}
+
+/* Child List */
+.custom-menu-primary .hs-menu-wrapper > ul ul{
+    left: 15px!important;
+    background: #fff;
+    padding: 10px 0px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    min-width: 150px;
+}
+.custom-menu-primary .hs-menu-wrapper > ul ul li:hover {
+    background: #34495e;
+}
+.custom-menu-primary .hs-menu-wrapper > ul > li > ul:before {
+    content: "\f0d8";
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 18px;
+    color: #fff;
+    position: absolute;
+    top: -12px;
+    left: 0;
+    width: 100%;
+    padding-left: 10px;
+    text-shadow: 0px -1px 0px #ccc;
+}
+.custom-menu-primary .hs-menu-wrapper > ul ul li{
+    background:;
+}
+.custom-menu-primary .hs-menu-wrapper > ul ul li a{
+    color:;
+    padding: 3px 10px;
+}
+.custom-menu-primary .hs-menu-wrapper > ul ul li a:hover{
+    color: #FFF;
+}
+
+/* Override max width on menu links */
+.custom-menu-primary .hs-menu-wrapper > ul li a, 
+.hs-menu-wrapper.hs-menu-flow-horizontal > ul li.hs-item-has-children ul.hs-menu-children-wrapper li a {
+    overflow: visible !important;
+    max-width: none !important;
+    width: auto !important;
+}
+
+/* Carret after Menu items with dropdown */
+.hs-menu-wrapper.hs-menu-flow-horizontal>ul li.hs-item-has-children > a:after {
+    content: "\f0d7";
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-left: 7px;
+    font-size: 13px;
+}
+.hs-menu-wrapper.hs-menu-flow-horizontal>ul li.hs-item-has-children:after  {
+    border-top-color: #34495e;
+}
+
+/* Show menu and remove background color on desktop after toggling mobile menu */
+@media screen and (min-width:769px) {
+  .custom-menu-primary .hs-menu-wrapper { 
+      display:block !important;
+      background: transparent !important;
+  }
+}
+
+/* Force header to trigger mobile layout on iPads */
+@media (max-width: 768px){
+  .header-container-wrapper .container-fluid  .row-fluid [class*="span"] {
+    display: block;
+    float: none !important;
+    width: auto !important;
+    margin-left: 0 !important;
+  }
+}
+
+
+
+
+/* ==========================================================================
+   Mobile Menu - Hubspot Standard Toggle Menu
+   ========================================================================== */
+
+
+/**
+ * Special Note
+ *
+ * When the menu is open, a class of .mobile-open is applied to the body. You can 
+ * use this for custom styling on any element when the menu is in the open position.                     
+ */
+
+.mobile-trigger, .child-trigger{
+    display: none !important; /* Hide button on Desktop */
+}
+
+@media (max-width: 768px){
+
+
+  /* Variables
+     ========================================================================== */
+
+     /* Set Mobile Menu Background Color */
+        /* Set Link Color */
+   /* Set Link Hover Color */
+
+  /* 
+    * Menu Reset
+    *
+    * Remove styling from desktop version of custom-menu-primary. Place any 
+    * additional CSS you want removed from the mobile menu in this reset 
+    */
+
+  .custom-menu-primary,
+  .custom-menu-primary .hs-menu-wrapper > ul,
+  .custom-menu-primary .hs-menu-wrapper > ul li,
+  .custom-menu-primary .hs-menu-wrapper > ul li a{
+    display: block;
+    float: none;
+    position: static;
+    top: auto;
+    right: auto;
+    left: auto;
+    bottom: auto;
+    padding: 0px;
+    margin: 0px;
+    background-image: none;
+    background-color: transparent;
+    border: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow:    none;
+    box-shadow:         none; 
+    max-width: none;
+    width: 100%;
+    height: auto;
+    line-height: 1;  
+    font-weight: normal;
+    text-decoration: none;
+    text-indent: 0px;
+    text-align: left;
+    color:#ffffff;
+  }
+
+
+  /* Toggle Button
+     ========================================================================== */
+
+  .mobile-trigger{
+    display: inline-block !important; /* Hide button on Desktop */
+    cursor: pointer; /* Mouse pointer type on hover */
+    position: absolute; /*******************************************/
+    top: 32px;          /* Position Button at top right of screen  */
+    right: 10px;        /*******************************************/
+    width: auto; /* Button width */
+    height: auto; /* Button height */      
+    padding: 6px 12px;
+    margin-top: -16px;
+    z-index: 99999999999; /* Z-index to keep button on top of other layers */
+    font-size: 16px;
+    text-align: center;
+    font-weight: normal;
+    text-align: left;
+    text-transform: uppercase;
+  }
+  .mobile-trigger:hover{
+    text-decoration: none; /* Removes link text underline on button */
+  }
+
+  /* Change button when menu is open */
+  .mobile-open .mobile-trigger{}
+
+
+  /* Toggle Button Icon & Animations
+     ========================================================================== */
+
+  .mobile-trigger i{
+    display: inline;
+    position: relative;
+    top: -5px;
+  }
+  .mobile-trigger i:before, .mobile-trigger i:after{
+    position: absolute;
+    content: '';
+  }
+  .mobile-trigger i, .mobile-trigger i:before, .mobile-trigger i:after{
+    width: 25px; /* Icon line width */
+    height: 2px; /* Icon line height */
+    background-color: #ffffff; /* Icon color */
+    display: inline-block;
+  }
+  .mobile-trigger i:before{
+    margin-top: -6px; /* Position top line */
+  }
+  .mobile-trigger i:after{
+    margin-top: 6px; /* Position bottom line */
+  }
+
+
+  /* Child Toggle Button
+     ========================================================================== */
+
+  .child-trigger{
+    display: block !important; /* Hide button on Desktop */
+    cursor: pointer; /* Mouse pointer type on hover */
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 55px !important; /* Button width */
+    min-width: 55px !important;
+    height: 45px !important; /* Button height */  
+    padding: 0 !important;
+    border-left: 1px dotted rgba(255, 255, 255, .20);
+  }
+  .child-trigger:hover{
+    text-decoration: none;
+  }
+
+
+  /* Child Toggle Button Icon & Animations
+     ========================================================================== */
+
+  .child-trigger i{
+    position: relative;
+    top: 50%; /* Centers icon inside button */
+    margin: 0 auto !important;
+  }
+  .child-trigger i:after{
+    position: absolute;
+    content: '';
+  }
+  .child-trigger i, .child-trigger i:after{
+    width: 10px; /* Icon line width */
+    height: 1px; /* Icon line height */
+    background-color:#ffffff; /* Icon color */
+    display: block;
+  }
+  .child-trigger i:after{
+    -webkit-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+  }
+  .child-trigger.child-open i:after{
+    -webkit-transform: rotate(-180deg);
+    -ms-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+  }
+  .child-trigger.child-open i{
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+
+    
+  /* Menu Styles on Mobile Devices
+     ========================================================================== */  
+
+  /* Hide menu on mobile */
+  .custom-menu-primary.js-enabled .hs-menu-wrapper,
+  .custom-menu-primary.js-enabled .hs-menu-children-wrapper{
+    display: none;
+  }  
+
+  /* Make child lists appear below parent items */
+  .custom-menu-primary ul.hs-menu-children-wrapper{
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: static !important;
+    display: none;
+  }
+
+  /* Mobile Menu Styles */
+  .custom-menu-primary.js-enabled .hs-menu-wrapper{
+    position: relative; /**************************************************************/
+    top: 0;             /* Positions the menu to drop from the very top of the screen */
+    left: 0px;          /**************************************************************/                                              
+    width: 100%;   
+    -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    -o-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    -ms-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  }
+  .custom-menu-primary .hs-menu-wrapper{
+    padding: 0 0 0 0;
+    width: 100%; /* Full screen width */
+    z-index: 8888;
+  }
+
+   /* Level 1 Menu List Styles */
+   .custom-menu-primary .hs-menu-wrapper > ul {
+    background: #34495e;
+   }
+  .custom-menu-primary .hs-menu-wrapper > ul > li{
+    position: relative;
+  }
+  .custom-menu-primary .hs-menu-wrapper > ul > li a{
+    font-size: 22px; /* Font size of top level list items */
+    line-height: 45px;
+    overflow: visible;
+  }
+
+  /* Level 1 and Higher Menu List Styles */
+  .custom-menu-primary .hs-menu-wrapper > ul li{
+    border-top: 1px dotted rgba(255, 255, 255, .35); /* Adds transparent dark highlights to top of top level list items */
+  }
+  
+  .custom-menu-primary .hs-menu-wrapper >  ul li a{
+    padding: 0 10px;
+    color:#ffffff !important; /* link color set by global mobile-aColor variable */
+  }
+  .custom-menu-primary .hs-menu-wrapper > ul li a:hover{
+    color:#ffffff !important; /* link hover color set by global mobile-aColorHover variable */
+  }
+  .hs-menu-wrapper.hs-menu-flow-horizontal>ul li.hs-item-has-children > a:after {
+      display: none;
+  }
+
+  /* Level 2 and Higher Menu List Styles */
+  .custom-menu-primary .hs-menu-wrapper > ul ul{
+    background: transparent;  
+    border: 0px;
+    padding: 0px;
+  }
+  .custom-menu-primary .hs-menu-wrapper > ul ul li{
+    background-color: rgba(255, 255, 255, .08);
+  }
+  .custom-menu-primary .hs-menu-wrapper > ul ul li a{
+    text-indent: 10px; /* Indent Child lists */
+    font-size: 16px; /* Font size of child lists */
+  }
+  .hs-menu-wrapper.hs-menu-flow-horizontal>ul li.hs-item-has-children:after{
+      display: none;
+  }
+  .custom-menu-primary .hs-menu-wrapper>ul>li>ul:before {
+      display: none;
+  }
+
+  /* Level 3 and Higher Menu List Styles */
+  .custom-menu-primary .hs-menu-wrapper > ul ul ul li a{
+    text-indent: 30px; /* Indent Child lists */
+  }
+  .custom-menu-primary .hs-menu-wrapper > ul ul ul ul li a{
+    text-indent: 50px; /* Indent Child lists */
+  }
+
+}
+
+
+/* ==========================================================================
+
+
+   4. TEMPLATE MODULE SELECTORS                                         
+
+
+   ========================================================================== */
+
+
+
+
+/* Common Template Selectors                                             
+   ========================================================================== */
+
+body.one-column {}
+body.two-column {}
+body.three-column {}
+.content-wrapper {}
+.main-content {}
+.sidebar{}
+.blog-sidebar ul, .sidebar ul{
+    padding-left: 10px;
+    list-style: none;
+}
+
+.sidebar.right{}
+.sidebar.left{}
+
+/* Common One Column Selectors */
+body.site-page.one-column, 
+body.landing-page.one-column, 
+body.error-template.one-column, 
+body.password-template.one-column, 
+body.subscription-template.one-column {}
+
+body.site-page.one-column .main-content, 
+body.landing-page.one-column .main-content, 
+body.error-template .main-content, 
+body.password-template .main-content, 
+body.subscription-template .main-content {}
+
+/* Common Two Column Selectors */
+body.site-page.two-column, 
+body.landing-page.two-column, 
+body.blog {}  
+
+body.site-page.two-column .main-content, 
+body.landing-page.two-column .main-content, 
+body.blog .blog-content {}
+
+/* Common Three Column Selectors */
+body.site-page.three-column, 
+body.landing-page.three-column {}
+
+body.site-page.three-column .main-content, 
+body.landing-page.three-column .main-content {}
+
+
+/* Site Pages                                            
+   ========================================================================== */
+
+/* One Column Template */
+body.site-page.one-column {}
+body.site-page.one-column .content-wrapper {}
+body.site-page.one-column .main-content {}
+
+/* Two Column Template */
+body.site-page.two-column {}
+body.site-page.two-column .content-wrapper {}
+body.site-page.two-column .main-content {}
+body.site-page.two-column .sidebar.right {}
+
+/* Three Column Template */
+body.site-page.three-column {}
+body.site-page.three-column .content-wrapper {}
+body.site-page.three-column .main-content {}
+
+
+/* Landing Pages                                           
+   ========================================================================== */
+
+/* One Column Template */
+body.landing-page.one-column {}
+body.landing-page.one-column .content-wrapper {}
+body.landing-page.one-column .main-content {}
+
+/* Two Column Template */
+body.landing-page.two-column {}
+body.landing-page.two-column .content-wrapper {}
+body.landing-page.two-column .main-content {}
+body.landing-page.two-column .sidebar.right {}
+
+/* Three Column Template */
+body.landing-page.three-column {}
+body.landing-page.three-column .content-wrapper {}
+body.landing-page.three-column .main-content {}
+
+
+/* System Pages                                          
+   ========================================================================== */
+
+/* Error Templates 404, 500 */
+body.error-template.one-column {}
+body.error-template.one-column .content-wrapper {}
+body.error-template.one-column .main-content {}
+
+/* Password template */
+body.password-template.one-column {}
+body.password-template.one-column .content-wrapper {}
+body.password-template.one-column .main-content {}
+body.password-template form input {
+    margin-bottom: 10px;
+}
+
+/* Email Subscribition templates */
+body.subscription-template.one-column {}
+body.subscription-template.one-column .content-wrapper {}
+body.subscription-template.one-column .main-content {}
+
+
+/* Well Module */
+
+
+
+
+
+
+
+
+
+
+#well .default{
+    background: #34495e;
+    border-color: #02172c;
+}
+#well .primary{
+    background: #74bdfc;
+    border: 1px solid #428bca;
+}    
+#well .success{
+    background: #8eea8e;
+    border: 1px solid #5cb85c;
+}    
+#well .danger{
+    background: #db7674;
+    border: 1px solid #a94442;
+}    
+#well .info{
+    background: #8df2ff;
+    border: 1px solid #5bc0de;        
+}   
+#well .plain{
+    background:#f5f5f5;
+    color: #666;
+    border: 1px solid #ddd;
+}
+#well .close{
+    color: #666;
+}
+
+
+
+
+
+/* ==========================================================================
+
+
+   5. COS COMPONENTS                                        
+
+
+   ========================================================================== */
+
+
+
+
+
+/* ==========================================================================
+   Blog                                         
+   ========================================================================== */
+
+
+/* Blog Post and Listing Body Class */
+body.blog {}
+
+/* Blog Post */
+body.hs-blog-post {}
+
+/* Blog Listing */
+body.hs-blog-listing {}
+
+/* Blog Columns Wrapper */
+.blog .content-wrapper {}
+
+
+/* Blog Content Column
+   ========================================================================== */
+
+.blog .blog-content {}
+
+/* Use this to style the main wrapper for the blog listing pages */
+.blog-listing-wrapper {}
+
+/* Use this to style the main wrapper for the blog post pages */
+.blog-post-wrapper {}
+
+/* Blog Title */
+.hs-blog-header h1 a{}
+
+/* Blog Post Title */
+.post-header h2  {
+    margin-bottom: 0;
+}
+
+.post-header p{
+    font-size: 13px;
+}
+/* Blog Author and Avatar */
+#hubspot-author_data {
+    float: left;
+}
+#hubspot-author_data a.author-link {}
+.hs-author-avatar {}
+.hs-author-avatar img {}
+
+p.custom_listing_comments{
+    float: right;
+}
+
+.hs-blog-social-share{
+    float: left;
+}
+
+/* Use this to set up different styling for your blog posts */
+.blog-listing-wrapper .post-listing .post-item {
+    padding-bottom: 60px;
+}
+.blog-listing-wrapper .post-listing .post-item .post-body {}
+.blog-post-wrapper .post-body {}
+
+/* Post Featured Image on Listings Page */
+.hs-featured-image-wrapper {}
+.hs-featured-image-wrapper .hs-featured-image-link { display: block; }
+.hs-featured-image-wrapper .hs-featured-image-link img.hs-featured-image{
+    border-width: 0;
+    max-height: 300px;
+    max-width: 100%;
+    display: inline-block !important;
+    float: none!important;
+    margin: 10px 0px 10px 0px;
+}
+
+/* Read More Link */
+a.more-link {}
+
+/* Blog Topics List */
+#hubspot-topic_data {}
+#hubspot-topic_data a.topic-link {}
+
+/** 
+ * Blog Social Sharing icons
+ *
+ * Overrides defaults to better align icons and prevent overlapping 
+ */
+.social-sharing-wrapper {
+    clear: both;
+}
+.hs-blog-social-share {
+    padding: 10px 0 0 0;
+    height: auto;
+}
+
+
+/** 
+ * Blog Commments 
+ *
+ * Custom styles are listed below, as the COS does not provide default styles.
+ */
+
+#comments-listing {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+.comment {
+    margin: 10px 0;
+    border-top: 1px solid #ccc;
+    padding: 15px 0;
+}
+.comment-date { font-size: 13px; text-align: right; }
+.comment-from { font-weight: bold; }
+.comment-body { padding: 10px 0; }
+
+/* Pagination */
+.blog-pagination {
+    text-align: center;
+}
+.blog-pagination .previous-posts-link {
+    float: left;
+}
+.blog-pagination .all-posts-link {}
+.blog-pagination .next-posts-link {
+    float: right;
+}
+
+/* Blog Author Page */
+.hs-author-social-label {
+    display: inline-block;
+    margin-right: 8px;
+    font-weight: bold;
+    vertical-align: middle;
+}
+.hs-author-social-links a.hs-author-social-link {
+    font-size: 30px;
+    display: inline-block;
+    padding-right: 5px !important;
+    background: none !important;
+    vertical-align: middle;
+}
+
+
+
+/* Blog Sidebar
+   ========================================================================== */
+
+.blog .blog-sidebar {}
+
+.blog-sidebar-filter-list li {
+    padding: 2px 0;
+}
+
+/* Blog Modules */
+
+.blog .blog-sidebar .widget-span {
+    padding: 0px 0px 40px 0px;
+}
+
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+
+
+/* All Global Forms
+   ========================================================================== */
+
+/* Form Field */
+body .hs-form-field { margin-bottom: 15px; }
+
+/* Descriptions */
+body .hs-field-desc {}
+
+/* Labels */
+body label {
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+body .hs-form-field > label {}
+
+/* One Line Inputs */
+body input[type="text"],
+body input[type="password"], 
+body input[type="datetime"], 
+body input[type="datetime-local"], 
+body input[type="date"], 
+body input[type="month"], 
+body input[type="time"], 
+body input[type="week"], 
+body input[type="number"], 
+body input[type="email"], 
+body input[type="url"], 
+body input[type="search"], 
+body input[type="tel"], 
+body input[type="color"],
+body input[type="file"],
+body textarea,
+body select {
+    width: 100%;
+    font-family: 'Lato', arial, sans-serif;
+    font-size: 16px;
+    display: block;
+    height: 34px;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -o-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -ms-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    -moz-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    -ms-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+body input[type="text"]:focus,
+body input[type="password"]:focus, 
+body input[type="datetime"]:focus, 
+body input[type="datetime-local"]:focus, 
+body input[type="date"]:focus, 
+body input[type="month"]:focus, 
+body input[type="time"]:focus, 
+body input[type="week"]:focus, 
+body input[type="number"]:focus, 
+body input[type="email"]:focus, 
+body input[type="url"]:focus, 
+body input[type="search"]:focus, 
+body input[type="tel"]:focus, 
+body input[type="color"]:focus,
+body input[type="file"]:focus,
+body textarea:focus,
+body select:focus {
+    outline: 0;
+    border-color: #34495e;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0,0,0,.6);
+    -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0,0,0,.6);
+    -o-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0,0,0,.6);
+    -ms-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0,0,0,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0,0,0,.6);
+}
+
+/* Separate Styles for Multiple Line Inputs */
+body textarea {
+    min-height: 200px;
+}
+body textarea:focus {}
+
+/* Separate Styles for Drop Downs */
+body select {}
+body select:focus {}
+
+/* Multiple Selection Inputs */
+body form.hs-form .hs-form-field ul.inputs-list {
+  list-style: none;
+  padding: 0;
+}
+body form.hs-form .hs-form-field ul.inputs-list li input {}
+body input[type="radio"] {}
+body input[type="checkbox"] {}
+
+/* Required */
+body input:focus:required:invalid, 
+body textarea:focus:required:invalid, 
+body select:focus:required:invalid {}
+
+body input:focus:required:invalid:focus, 
+body textarea:focus:required:invalid:focus, 
+body select:focus:required:invalid:focus {}
+
+/* Placeholder Text */
+::-webkit-input-placeholder { /* Webkit Browsers */
+   /* color: #555;
+   opacity: 1; */
+}
+:-moz-placeholder { /* Firefox 18- */
+   /* color: #555;
+   opacity: 1; */
+}
+::-moz-placeholder { /* Firefox 19+ */
+   /* color: #555;
+   opacity: 1; */
+}
+:-ms-input-placeholder { /* IE10 */
+   /* color: #555;
+   opacity: 1; */
+}
+
+
+/* Form Module
+   ========================================================================== */
+
+/* Form Field */
+.hs_cos_wrapper_type_form .hs-form-field {}
+
+/* Descriptions */
+.hs_cos_wrapper_type_form .hs-field-desc {}
+
+/* Labels */
+.hs_cos_wrapper_type_form label {}
+.hs_cos_wrapper_type_form .hs-form-field > label {}
+
+/* One Line Inputs */
+.hs_cos_wrapper_type_form input[type="text"],
+.hs_cos_wrapper_type_form input[type="password"], 
+.hs_cos_wrapper_type_form input[type="datetime"], 
+.hs_cos_wrapper_type_form input[type="datetime-local"], 
+.hs_cos_wrapper_type_form input[type="date"], 
+.hs_cos_wrapper_type_form input[type="month"], 
+.hs_cos_wrapper_type_form input[type="time"], 
+.hs_cos_wrapper_type_form input[type="week"], 
+.hs_cos_wrapper_type_form input[type="number"], 
+.hs_cos_wrapper_type_form input[type="email"], 
+.hs_cos_wrapper_type_form input[type="url"], 
+.hs_cos_wrapper_type_form input[type="search"], 
+.hs_cos_wrapper_type_form input[type="tel"], 
+.hs_cos_wrapper_type_form input[type="color"],
+.hs_cos_wrapper_type_form input[type="file"],
+.hs_cos_wrapper_type_form textarea,
+.hs_cos_wrapper_type_form select {}
+
+.hs_cos_wrapper_type_form input[type="text"]:focus,
+.hs_cos_wrapper_type_form input[type="password"]:focus, 
+.hs_cos_wrapper_type_form input[type="datetime"]:focus, 
+.hs_cos_wrapper_type_form input[type="datetime-local"]:focus, 
+.hs_cos_wrapper_type_form input[type="date"]:focus, 
+.hs_cos_wrapper_type_form input[type="month"]:focus, 
+.hs_cos_wrapper_type_form input[type="time"]:focus, 
+.hs_cos_wrapper_type_form input[type="week"]:focus, 
+.hs_cos_wrapper_type_form input[type="number"]:focus, 
+.hs_cos_wrapper_type_form input[type="email"]:focus, 
+.hs_cos_wrapper_type_form input[type="url"]:focus, 
+.hs_cos_wrapper_type_form input[type="search"]:focus, 
+.hs_cos_wrapper_type_form input[type="tel"]:focus, 
+.hs_cos_wrapper_type_form input[type="color"]:focus,
+.hs_cos_wrapper_type_form input[type="file"]:focus,
+.hs_cos_wrapper_type_form textarea:focus,
+.hs_cos_wrapper_type_form select:focus {}
+
+/* Separate Styles for Multiple Line Inputs */
+.hs_cos_wrapper_type_form textarea {}
+.hs_cos_wrapper_type_form textarea:focus {}
+
+/* Separate Styles for Drop Downs */
+.hs_cos_wrapper_type_form select {}
+.hs_cos_wrapper_type_form select:focus {}
+
+/* Multiple Selection Inputs */
+.hs_cos_wrapper_type_form form.hs-form .hs-form-field ul.inputs-list li input {}
+.hs_cos_wrapper_type_form input[type="radio"] {}
+.hs_cos_wrapper_type_form input[type="checkbox"] {}
+
+
+/* Blog Comment Form
+   ========================================================================== */
+
+/* Label */
+#comment-form .hs-form-field > label {}
+#comment-form label {}
+
+/* Inputs */
+#comment-form input[type="text"] {
+    display: inline-block;
+}
+#comment-form input[type="text"]:focus {}
+
+#comment-form textarea {}
+#comment-form textarea:focus {}
+
+#comment-form input[type="checkbox"] {}
+
+/* Error */
+body .hs-common-error-message {}
+
+
+/* Blog Subscription Form
+   ========================================================================== */
+
+/* Label */
+#hs_form_target_blog_subscription .hs-form-field > label {}
+#hs_form_target_blog_subscription label {}
+
+/* Inputs */
+#hs_form_target_blog_subscription input[type="email"], .widget-type-blog_subscribe input[type="email"]{
+    width: 100%;
+    float: left;
+    height: 36px;
+    margin-bottom: 10px;
+}
+.blog-sidebar #hs_form_target_blog_subscription input[type="email"] {}
+
+#hs_form_target_blog_subscription input[type="email"]:focus {}
+
+#hs_form_target_blog_subscription input[type="radio"] {}
+
+
+/* Google Search Form
+   ========================================================================== */
+
+/* Label */
+.widget-type-google_search label {
+    font-size: 24px;
+    font-weight: 700;
+    font-family: 'Montserrat',sans-serif;
+    display: block;
+    text-rendering: optimizelegibility;
+    margin: 0px 0px 20px;
+}
+
+/* Input */
+.widget-type-google_search input[type="text"] {
+    width: 60%;
+    float: left;
+    margin-top: 0px;
+    height: 36px;
+}
+.widget-type-google_search input[type="focus"] {}
+
+.widget-type-google_search .hs-button.primary {
+    float: left;
+    margin-left: 2px;
+}
+
+/* Multi Column Form
+   ========================================================================== */
+
+body .hs-form fieldset.form-columns-1 {}
+body .hs-form fieldset.form-columns-1 .hs-form-field {}
+
+body .hs-form fieldset.form-columns-2 {}
+body .hs-form fieldset.form-columns-2 .hs-form-field {}
+
+body .hs-form fieldset.form-columns-3 {}
+body .hs-form fieldset.form-columns-3 .hs-form-field {}
+
+/* Multiple Selection Inputs */
+body form.hs-form .hs-form-field ul.inputs-list li input {}
+body input[type="radio"] {}
+body input[type="checkbox"] {}
+body form.hs-form fieldset { max-width: none; }
+body form.hs-form fieldset .hs-form-field { padding: 0 10px 0 0; }
+body form.hs-form fieldset[class*="form-columns"] .input { margin-right: 0; }
+body form.hs-form fieldset[class*="form-columns"] .hs-input { width: 100%; }
+body form.hs-form fieldset[class*="form-columns"] .hs-input[type="checkbox"] { width: auto; }
+body form.hs-form fieldset.form-columns-3 .hs-form-field { width: 33.33%; }
+
+@media (max-width: 400px) {
+  body form.hs-form fieldset .hs-form-field { padding: 0; }
+  body form.hs-form fieldset.form-columns-3 .hs-form-field,
+  body form.hs-form .form-columns-2 .hs-form-field .hs-input, 
+  body form.hs-form .form-columns-3 .hs-form-field .hs-input { width: 100%; }
+  body form.hs-form .form-columns-3 .hs-form-field .hs-input[type="checkbox"] { width: auto; }
+}
+
+/* Form Error Selectors
+   ========================================================================== */
+.hsformerror{
+    font-size: 12px!important;
+    border: 0 !important;
+    color: #FFF!important;
+    background-image: none!important;
+    -webkit-box-shadow: none!important;
+    -moz-box-shadow: none!important;
+    box-shadow: none!important;
+    z-index: 99999 !important;
+    border-color: #34495e !important;
+    background: #34495e !important;
+    -webkit-transform: none !important;
+    transform: none !important;
+}
+.hsformerror .close-form-error {
+    color: #34495e;
+}
+.hsformerror em {
+    border-color: #34495e transparent transparent !important;
+}
+
+
+
+
+/* ==========================================================================
+   Buttons                                              
+   ========================================================================== */
+
+
+/* All Global Buttons (Excluding CTAs)
+   ========================================================================== */
+
+body .hs-button.primary,
+body input[type="submit"],
+body input[type="button"] {
+    background: #fff;
+    border-style: solid;
+    border-width: 2px;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    font-family: 'Montserrat', sans-serif;
+    padding: 8px 16px;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-decoration: none;
+    color: #34495e;
+    border-color: #34495e;
+    -webkit-appearance: none;
+}
+
+body .hs-button.primary:hover,
+body input[type="submit"]:hover,
+body input[type="button"]:hover {
+    border: 2px solid #FFF;
+    border-color: #34495e;
+    background: #34495e;
+    color: #FFF;
+}
+
+body .hs-button.primary:focus,
+body input[type="submit"]:focus,
+body input[type="button"]:focus {}
+
+
+/* Form Module Button
+   ========================================================================== */
+
+.hs_cos_wrapper_type_form .hs-button.primary.large {}
+.hs_cos_wrapper_type_form .hs-button.primary.large:hover {}
+.hs_cos_wrapper_type_form .hs-button.primary.large:focus {}
+
+
+/* Blog Comment Button
+   ========================================================================== */
+#add-comment-button.hs-button.primary {}
+#add-comment-button.hs-button.primary:hover {}
+#add-comment-button.hs-button.primary:focus {}
+
+/* Blog comment "reply to" section */
+.comment-reply-to{
+    color: #666!important;
+    background: none!important;
+    padding-left: 0px!important;
+}
+.comment-reply-to:before{
+    content: "\f112";
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-right: 7px;
+    font-size: 15px;
+    color: #34495e;
+    vertical-align: top;
+}
+/* Blog Subscription Button
+   ========================================================================== */
+#hs_form_target_blog_subscription .hs-button.primary.large {}
+#hs_form_target_blog_subscription .hs-button.primary.large:hover {}
+#hs_form_target_blog_subscription .hs-button.primary.large:focus {}
+
+
+/* Google Search Button
+   ========================================================================== */
+.widget-type-google_search .hs-button.primary {}
+.widget-type-google_search .hs-button.primary:hover {}
+.widget-type-google_search .hs-button.primary:focus {}
+
+
+/* CTA Buttons
+   ========================================================================== */
+
+/** 
+ * Override global CTA styles by wrapping the CTA module in a module group 
+ * that has an ID, and use that ID to prefix your CTA selector. Example shown below.
+ *
+ * All overriding properties require !important tags. 
+*/
+
+/* CTA button with border */
+.cta_border_button {
+    background: #fff;
+    border-style: solid;
+    border-width: 2px;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    font-family: 'Montserrat', sans-serif;
+    padding: 8px 16px;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-decoration: none;
+    color: #34495e;
+    border-color: #34495e;
+    -webkit-appearance: none;
+}
+.cta_border_button:hover {
+    border: 2px solid #FFF;
+    color: #34495e;
+    border-color: #34495e;
+    background: #34495e;
+    color: #FFF;
+}
+
+/* CTA button with Solid Background */
+.cta_solid_button {
+    border-style: solid;
+    border-width: 2px;
+    color: #FFF;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    font-family: 'Montserrat', sans-serif;
+    padding: 8px 16px;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-color: #34495e;
+    -webkit-appearance: none;
+}
+.cta_solid_button:hover {
+    background: #FFF;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #34495e;
+    background: #34495e;
+    text-transform: uppercase;
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+
+
+   6. MISCELLANOUS                                        
+
+
+   ========================================================================== */
+
+
+
+
+
+/** 
+ * Styles that do not fit into available sections above can go here.
+ * For example, one would place 3rd party plugin overriding styles here.
+ *
+ * This section is NOT for 'Custom' styles.  All custom styles must go in the
+ * proper sections above.
+ *
+ * For instance, custom header and footer styles must go in the HEADER and 
+ * FOOTER sections.  Custom styles for anything in-between the header and footer 
+ * (such as, styles that are unique to the HOMEPAGE only), must go in the 
+ * CONTENT section.
+*/ 
+
+
+
+
+
+
+
+
+/* ==========================================================================
+
+
+   7. MOBILE MEDIA QUERIES                              
+
+
+   ========================================================================== */
+
+
+
+   
+
+/* Screen sizes smaller than site maxWidth (.page-center)
+   ========================================================================== */
+
+@media (max-width: 1080px) {
+    .container-fluid .row-fluid .page-center {
+        padding: 10px;    
+    }
+    .container-fluid .footer-copyright .row-fluid .page-center {
+        padding: 0 10px;
+    }
+}
+
+
+/* Landscape tablet and smaller devices
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .header-container-wrapper{
+        position: relative;
+    }
+    
+    .header-container{
+        padding: 0;
+    }
+    
+    .header-container-wrapper .container-fluid .row-fluid .page-center{
+        padding: 0;
+    }
+    
+    .header-container .hs_cos_wrapper_type_logo a img {
+        max-width: 200px;
+        margin: 5px 0 5px 10px;
+    }
+    
+    .row-fluid [class*="span"].header-cta{
+        display: none !important;
+    }
+    
+    /* General */
+    .body-container-wrapper {
+        padding-top: 0;
+    }
+    .padding40tb {
+        padding: 25px 0;
+    }
+    .sidebar.right,
+    .main-content,
+    .blog-sidebar {
+        margin: 25px 0;
+    }
+    
+    /* Team Member Social */
+    .three-column .team-member-social a {
+        display: inline-block;
+    }
+    .three-column .team-member-social i {
+        padding-right: 5px;
+    }   
+    .three-column .team-member-social a:last-child i {
+        padding-right: 0;
+    }
+    .team-member-name,
+    .team-member-title {
+        text-align: center;
+    }
+    
+    /* Footer */
+    .footer-container-wrapper .more-links a i {
+        display: inline-block;
+        width: auto;
+    }
+    .footer-container .about-us,
+    .footer-container .more-links {
+        margin-bottom: 25px;
+    }
+    .footer-copyright .copyright-text {
+        text-align: center;
+    }
+    .footer-follow-me{
+        text-align: center;
+        position: relative;
+        right: auto;
+    }
+    
+    /* Homepage */
+    .service-group h4,
+    .service-group-icon,
+    #offer-background-image h1,
+    #banner-background-image {
+        text-align: center !important;
+    }
+    .homepage .subscribe-form {
+        padding-top: 10px;
+        position: relative;
+    }
+    .homepage .subscribe-form form {
+        float: none;
+    }
+    .homepage .subscribe-form .hs_email {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    #banner-background-image {
+        min-height: 650px;
+    }
+    #banner-background-image h1 {
+        font-size: 32px;
+        margin-bottom: 15px;
+        margin-top: 55px;
+    }
+    #banner-background-image h3 {
+        display: none;
+    }
+    .homepage .subscribe-form {
+        width: 100%;
+    }
+    .social-tagline {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .homepage .subscribe-form {
+        padding-bottom: 150px;
+    }
+    .homepage .subscribe-form .hs_email .hs-error-msgs {
+        position: relative;
+        margin-top: 0;
+        display: inline-block !important;
+    }
+    .homepage .subscribe-form .hs_submit {
+        display: block;
+        position: relative;
+        width: 100%;
+    }
+    
+    /* Blog */
+    #comment-form {
+        margin-bottom: 25px;
+    }
+}
+     
+
+/* Landscape phones and smaller devices
+   ========================================================================== */
+
+@media (max-width: 479px) {}</style> 
+ </head> 
+ <body class="blog   hs-content-id-159697601334 hs-blog-post hs-blog-id-26134608181" style="">
+<div class="header-container-wrapper"> 
+   <div class="header-container container-fluid"> 
+   </div>
+   <!--end header --> 
+  </div>
+  <!--end header wrapper --> 
+  <div class="body-container-wrapper"> 
+   <div class="body-container container-fluid"> 
+    <div class="row-fluid-wrapper row-depth-1 row-number-1 "> 
+     <div class="row-fluid "> 
+      <div class="span12 widget-span widget-type-cell title-background padding20tb" style="" data-widget-type="cell" data-x="0" data-w="12"> 
+       <div class="row-fluid-wrapper row-depth-1 row-number-2 "> 
+        <div class="row-fluid "> 
+         <div class="span12 widget-span widget-type-cell page-center" style="" data-widget-type="cell" data-x="0" data-w="12"> 
+          <div class="row-fluid-wrapper row-depth-1 row-number-3 "> 
+           <div class="row-fluid "> 
+            <div class="span12 widget-span widget-type-custom_widget " style="" data-widget-type="custom_widget" data-x="0" data-w="12"> 
+             <div id="hs_cos_wrapper_module_161222328056076" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-linked_image" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"> 
+              <span id="hs_cos_wrapper_module_161222328056076_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_linked_image" style="" data-hs-cos-general-type="widget" data-hs-cos-type="linked_image"><img src="images/HMD_vs._Mobile_Experience_(Facebook_Shops_Ad).png" class="hs-image-widget " style="max-width: 100%; height: auto;" alt="HMD vs. Mobile Experience (Facebook Shops Ad)" title="HMD vs. Mobile Experience (Facebook Shops Ad)"></span>
+             </div> 
+            </div>
+            <!--end widget-span --> 
+           </div>
+           <!--end row--> 
+          </div>
+          <!--end row-wrapper --> 
+         </div>
+         <!--end widget-span --> 
+        </div>
+        <!--end row--> 
+       </div>
+       <!--end row-wrapper --> 
+      </div>
+      <!--end widget-span --> 
+     </div>
+     <!--end row--> 
+    </div>
+    <!--end row-wrapper --> 
+    <div class="row-fluid-wrapper row-depth-1 row-number-4 "> 
+     <div class="row-fluid "> 
+      <div class="span12 widget-span widget-type-cell page-center content-wrapper padding40tb" style="" data-widget-type="cell" data-x="0" data-w="12"> 
+       <div class="row-fluid-wrapper row-depth-1 row-number-5 "> 
+        <div class="row-fluid "> 
+         <div class="span12 widget-span widget-type-cell blog-content" style="" data-widget-type="cell" data-x="0" data-w="12"> 
+          <div class="row-fluid-wrapper row-depth-1 row-number-6 "> 
+           <div class="row-fluid "> 
+            <div class="span12 widget-span widget-type-custom_widget " style="" data-widget-type="custom_widget" data-x="0" data-w="12"> 
+             <div id="hs_cos_wrapper_module_151811850626664" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-blog_content" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"> 
+              <div class="blog-section"> 
+               <div class="blog-post-wrapper cell-wrapper"> 
+                <div class="section post-header clearfix"> 
+                 <h2> <span id="hs_cos_wrapper_name" class="hs_cos_wrapper hs_cos_wrapper_meta_field hs_cos_wrapper_type_text" style="" data-hs-cos-general-type="meta_field" data-hs-cos-type="text">A Quest to Innovate: Building cross-platform WebXR experiences for Meta Quest 3 and mobile</span> </h2> 
+                </div> 
+                <div class="section post-body">
+                  A look at how participants in the Niantic Innovation Lab created sample WebXR experiences that seamlessly deploy across devices and platforms 
+                </div> 
+                <div class="section post-body"> 
+                 <span id="hs_cos_wrapper_post_body" class="hs_cos_wrapper hs_cos_wrapper_meta_field hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="meta_field" data-hs-cos-type="rich_text"><p style="font-size: 19px;"><span style="color: #000000;">At Niantic, we're committed to fostering the true potential of AR - using technology to improve our reality, promote connection, and be more than an indoor fascination. In late 2023, we teamed up with Meta to host our second Niantic Innovation Labs. The focus of this innovation lab was to bring mixed reality to mobile and Meta Quest devices via the browser by working with leading developers who would focus on building experiences optimized for the Quest device line that also work on mobile, create a multiplayer headset experience that connects with other headset or mobile players, and to create a headset-first experience that demonstrates how mobile can extend play outdoors.&nbsp;<br></span><br><span style="color: #000000;">At the center of this cohort was the use of Niantic 8th Wall's Metaversal Deployment. This powerful feature enables developers to create WebAR experiences and deploy them across various platforms like Meta Quest devices on browser or smartphones. As we await the mass adoption of HMDs, this feature makes it possible to democratize access to immersive experiences and ensure mixed reality experiences are accessible to a broader audience, regardless of their hardware.&nbsp;<br></span><br><span style="color: #000000;">Over ten weeks, three teams embarked on a voyage of creativity and technological innovation, with just two mandates: their creations must thrive on both headsets and mobile, leveraging our Metaversal Deployment and multiplayer module. Beyond these parameters, they were free to innovate without bounds.<br></span><br><span style="color: #000000;">The outcomes were impressive, underscoring WebAR's dynamic capability to forge connections and deliver captivating experiences across diverse devices, bringing people together in a shared digital continuum.</span></p> 
+                  <!--more--> <p style="font-size: 19px;">&nbsp;</p> <p style="font-size: 20px;"><span style="color: #000000;"><strong>BeeQuest by Indie Devs&nbsp;</strong></span></p> <p style="font-size: 19px;"><span style="color: #000000;">BeeQuest, an asymmetrical sample game optimized for Meta Quest and Mobile, emerged as a shining example of how a game can leverage mobile and HMDs to encourage both outdoor exploration and indoor engagement. In the game, players are plunged into the charming world of a honey bee, tasked with collecting resources, expanding their colony, and fending off wasp invasion.<br>&nbsp;<br></span></p> 
+                  <div class="hs-embed-wrapper" data-service="youtube" data-responsive="true" style="position: relative; overflow: hidden; width: 100%; height: auto; padding: 0px; max-width: 750px; min-width: 256px; display: block; margin: auto;">
+                   <div class="hs-embed-content-wrapper">
+                    <div style="position: relative; overflow: hidden; max-width: 100%; padding-bottom: 56.25%; margin: 0px;" data-mce-style="position: relative; overflow: hidden; max-width: 100%; padding-bottom: 56.25%; margin: 0px;">
+                     <iframe width="256" height="144.64" src="https://www.youtube.com/embed/cSETeOZadKU?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen title="BeeQuest by Indie Devs" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; border: none;" xml="lang" data-mce-src="https://www.youtube.com/embed/cSETeOZadKU?feature=oembed" data-mce-style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; border: none;"></iframe>
+                    </div>
+                   </div>
+                  </div> <p><span style="font-size: 19px; color: #000000;"><br>The game's design leverages the strengths of each platform: precise tracking for HMDs and location-based experiences for mobile devices. In the real world, players can use their phones to follow the map and uncover AR flowers, where they assign players to harvest pollen and nectar. With these resources in tow, they can either continue playing on mobile or switch to a headset to manage their resources and use the pollen and nectar to create more honey and bees. On Meta Quest 3, players can also enter a battle mode to protect their hive from pesky wasps wanting to steal their honey.&nbsp;<br></span><span style="font-size: 11px; color: #000000;"><br></span></p> <p style="font-size: 19px;"><span style="color: #000000;"><img src="images/2-Mar-06-2024-09-02-39-6292-PM.png" width="700" height="408" loading="lazy" alt="2-Mar-06-2024-09-02-39-6292-PM" style="height: auto; max-width: 100%; width: 700px; margin-left: auto; margin-right: auto; display: block;"><span style="font-weight: bold;"><br></span></span><span style="color: #000000;">This demo experience used the <a href="https://www.8thwall.com/8thwall/modules/shared-ar" rel="noopener" target="_blank" style="text-decoration: underline;">Multiplayer Module</a> and <a href="https://www.8thwall.com/blog/post/90170028429/introducing-niantic-lightship-maps-for-web" rel="noopener" target="_blank" style="text-decoration: underline;">Lightship Maps Module</a> to get up and running quickly with location-based experiences on 8th Wall. Indie Devs also leaned on <a href="https://www.8thwall.com/blog/post/117374897448/mixed-reality-meet-metaversal-deployment" rel="noopener" target="_blank" style="text-decoration: underline;">Metaversal Deployment</a> and React Three Fiber to create cross-platform components to make development faster.&nbsp;<br><br></span><span style="color: #000000;"></span></p> <p style="font-weight: bold; font-size: 19px;"><span style="color: #000000;">Dive Into Magical Forest by Designium</span><span style="color: #000000;"></span></p> <p style="font-weight: normal; font-size: 19px;"><span style="color: #000000;">Dive Into Magical Forest was created by the team at Designium and transports players to a magical AR forest inhabited by a fairy named Kobbito. In this adventure, players are invited to explore this magical realm and asked to aid Kobbito in finding missing magical bugs in the forest.&nbsp;<br><br></span></p> 
+                  <div class="hs-embed-wrapper" data-service="youtube" data-responsive="true" style="position: relative; overflow: hidden; width: 100%; height: auto; padding: 0px; max-width: 700px; min-width: 256px; display: block; margin: auto;">
+                   <div class="hs-embed-content-wrapper">
+                    <div style="position: relative; overflow: hidden; max-width: 100%; padding-bottom: 56.25%; margin: 0px;" data-mce-style="position: relative; overflow: hidden; max-width: 100%; padding-bottom: 56.25%; margin: 0px;">
+                     <iframe width="256" height="144.64" src="https://www.youtube.com/embed/yT8HrC3cmmM?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen title="Magical Forest－Using Generative #AI for #WebAR Development" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; border: none;" xml="lang" data-mce-src="https://www.youtube.com/embed/yT8HrC3cmmM?feature=oembed" data-mce-style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; border: none;"></iframe>
+                    </div>
+                   </div>
+                  </div> <p><span style="font-size: 19px; color: #000000;"><br>This sample experience, built on Shared AR through the Multiplayer Module, invites players into a cooperative exploration, enhancing the social aspect of gaming. The project underscores the potential of mixed reality to create compelling, interactive narratives that merge the digital and physical worlds.&nbsp;</span><br><br><span style="font-weight: bold; font-size: 20px; color: #000000;">Cardboard Crashers by MousePack</span><br><span style="font-size: 19px; color: #000000;">Cardboard Crashers introduces a fun, competitive edge to the mixed reality experience created by this innovation lab cohort. This multiplayer, turn-based experience has players navigating balloon-powered vehicles in a quest to be the last one standing. The game demonstrates the precision of 8th Wall physics as the collisions cause cars to crash to the floor, creating a lively, competitive environment.&nbsp;<br></span></p> 
+                  <div class="hs-embed-wrapper" data-service="youtube" data-responsive="true" style="position: relative; overflow: hidden; width: 100%; height: auto; padding: 0px; max-width: 700px; min-width: 256px; display: block; margin: auto;">
+                   <div class="hs-embed-content-wrapper">
+                    <div style="position: relative; overflow: hidden; max-width: 100%; padding-bottom: 56.25%; margin: 0px;" data-mce-style="position: relative; overflow: hidden; max-width: 100%; padding-bottom: 56.25%; margin: 0px;">
+                     <iframe width="256" height="144.64" src="https://www.youtube.com/embed/KC1otJmLgmU?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen title="Cardboard Crashers by MousePack" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; border: none;" xml="lang" data-mce-src="https://www.youtube.com/embed/KC1otJmLgmU?feature=oembed" data-mce-style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; border: none;"></iframe>
+                    </div>
+                   </div>
+                  </div> <p><span style="font-size: 19px; color: #000000;">Available across mobile and HMD, this sample experience shows how players can engage in shared gameplay, even if not all players have an HMD themselves, creating an engaging and collaborative environment. </span><br><br></p> 
+                  <hr> <p style="font-weight: normal; font-size: 19px;"><span style="font-size: 19px;"><span style="color: #000000;"><br>This Niantic Innovation Labs cohort redefined the possibilities of mixed reality and set exciting examples of what can happen when we blend the digital and physical world with unparalleled creativity. Through BeeQuest's strategic gameplay, Dive Into Magical Forest's enchanting exploration, and Cardboard Crashers' dynamic competition, we've seen how AR can connect and captivate us in new ways. As we move forward, these projects not only inspire future innovations but also make us excited about how asymmetrical experiences across devices can help people explore the world together. </span><span style="color: #000000;"><br></span><span style="color: #000000;"><br></span><span style="color: #000000;">Learn more about building with <a href="https://www.8thwall.com/blog/post/117374897448/mixed-reality-meet-metaversal-deployment" rel="noopener" target="_blank" style="text-decoration: underline;">Metaversal Deployment</a> or sign-up now for your <a href="https://www.8thwall.com/start-your-free-trial" rel="noopener" target="_blank" style="text-decoration: underline;">14-day free trial</a> to start building with 8th Wall. To learn more about joining future Niantic Innovation labs, <a href="https://docs.google.com/forms/d/1bvxi0J4S3mmcZrv2lpTz4yCStYjogpchZA_hktlO9qc/edit" rel="noopener" target="_blank" style="text-decoration: underline;">fill out this form</a> to connect with our team.&nbsp;<br><br></span></span></p></span> 
+                </div> 
+                <div class="about-author-sec row-fluid"> 
+                 <div class="span2"> 
+                  <img width="100" height="100" alt="8th Wall" src="images/b.png"> 
+                 </div> 
+                 <div class="span10"> 
+                  <h4>Written by 8th Wall</h4> 
+                  <p>8th Wall is the 3D engine for the AI era, built for developers who can’t wait. We make it faster to bring ideas to life with AI-powered creation, a flexible editor, and instant publishing to web and native apps. Trusted by developers, creators, and global brands, 8th Wall powers thousands of real-world projects, from interactive experiences to full games, redefining how the next generation of worlds are built and shared.</p> 
+                 </div> 
+                </div> 
+               </div> 
+              </div> 
+             </div> 
+            </div>
+            <!--end widget-span --> 
+           </div>
+           <!--end row--> 
+          </div>
+          <!--end row-wrapper --> 
+          <div class="row-fluid-wrapper row-depth-1 row-number-7 "> 
+           <div class="row-fluid "> 
+            <div class="span12 widget-span widget-type-custom_widget " style="" data-widget-type="custom_widget" data-x="0" data-w="12"> 
+             <div id="hs_cos_wrapper_module_1549377577298134" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"> 
+             </div> 
+            </div>
+            <!--end widget-span --> 
+           </div>
+           <!--end row--> 
+          </div>
+          <!--end row-wrapper --> 
+         </div>
+         <!--end widget-span --> 
+        </div>
+        <!--end row--> 
+       </div>
+       <!--end row-wrapper --> 
+      </div>
+      <!--end widget-span --> 
+     </div>
+     <!--end row--> 
+    </div>
+    <!--end row-wrapper --> 
+   </div>
+   <!--end body --> 
+  </div>
+  <!--end body wrapper --> 
+  <div class="footer-container-wrapper"> 
+   <div class="footer-container container-fluid"> 
+   </div>
+   <!--end footer --> 
+  </div>
+  <!--end footer wrapper --> 
+  <script src="images/hub_generated_template_assets_1_26134406005_1743447219825_template_vast-main.min.js"></script> 
+  <script>
+var hsVars = hsVars || {}; hsVars['language'] = 'en';
+</script> 
+  <script src="/hs/hsstatic/cos-i18n/static-1.53/bundles/project.js"></script> 
+  <!-- Start of HubSpot Analytics Code Not Loaded --> 
+  <script>
+(function(){
+  const timeoutEvent = document.createEvent('CustomEvent');
+  timeoutEvent.initCustomEvent("content-analytics-code-not-loaded", true, true, { detail: "Not loaded in preview mode" });
+  window.dispatchEvent(timeoutEvent);
+})();
+</script> 
+  <!-- End of HubSpot Analytics Code Not Loaded --> 
+  <script type="text/javascript">
+var hsVars = {
+    render_id: "d5acbeb2-2bc7-405f-ad32-e0c19ffe356c",
+    ticks: 1774469824370,
+    page_id: 159697601334,
+    
+    content_group_id: 26134608181,
+    portal_id: 7182223,
+    app_hs_base_url: "https://app.hubspot.com",
+    cp_hs_base_url: "https://cp.hubspot.com",
+    language: "en",
+    analytics_page_type: "blog-post",
+    scp_content_type: "",
+    
+    analytics_page_id: "159697601334",
+    category_id: 3,
+    folder_id: 0,
+    is_hubspot_user: null
+}
+</script> 
+  <script defer src="/hs/hsstatic/HubspotToolsMenu/static-1.640/js/index.js"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> 
+  <div id="fb-root"></div> 
+  <script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.0";
+  fjs.parentNode.insertBefore(js, fjs);
+ }(document, 'script', 'facebook-jssdk'));</script> 
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script> 
+  <!-- Generated by the HubSpot Template Builder - template version 1.03 --> 
+ </body>
+</html>
