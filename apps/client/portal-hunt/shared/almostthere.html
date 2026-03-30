@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+  <title>Almost there!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+  <!-- client code -->
+  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="almostthere.css">
+  <link rel="stylesheet" href="https://use.typekit.net/pgp7jlo.css">
+  <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
+</head>
+
+<body class="share-tech">
+
+  <div id="menu" style="font-size: 4vmin; z-index: 500; display: none;">
+    <a href="?m=desktop&u=cmb.com/ar1">Desktop</a><br>
+    <a href="?m=camera&u=cmb.com/ar2&b=safari">Camera Safari</a><br>
+    <a href="?m=camera&u=cmb.com/ar3&b=chrome">Camera Chrome</a><br>
+    <a href="?m=camera&u=cmb.com/ar4&b=samsung">Camera Samsung</a><br>
+    <a href="?m=motion&u=cmb.com/ar5">Motion</a><br>
+    <a href="?m=unsupported&u=cmb.com/ar6">Unsupported</a><br>
+    <a href="?m=update&u=cmb.com/ar7">Update</a><br>
+    <a href="?m=webview&u=cmb.com/ar8">Webview</a><br>
+    <a href="?">Unknown</a><br>
+    <a href="?u=cmb.com/ar9">Unknown link</a><br>
+  </div>
+
+  <a href="/portalhunt" class="logbook-container hide-if-desktop">
+    <img src="/shared/svg/logbook.svg">
+  </a>
+
+  <h1 class="futura show-if-motion show-if-camera show-if-webview">You're almost there!</h1>
+  <h1 class="futura show-if-update show-if-unsupported">Something went wrong.</h1>
+
+  <div class="show-if-motion">
+    <p>It seems device motion access is disabled. </p>
+
+    To continue:
+    <ol>
+      <li>Open <img src="https://cdn.8thwall.com/web/img/loading/v1/settings-icon-ios.png" class="instruction-icon">Settings</li>
+      <li>Select <img src="https://cdn.8thwall.com/web/img/loading/v1/safari-icon.png" class="instruction-icon">Safari</li>
+      <li>Enable <span class="highlight">Motion &amp; Orientation Access</span></li>
+    </ol>
+  </div>
+
+  <div class="show-if-camera">
+    <p>There was an issue opening the camera feed.</p>
+
+    <p class="show-if-safari">Please accept the camera request to begin the experience.</p>
+
+    <!--Permission error, Android-->
+    <div class="show-if-chrome show-if-samsung">
+      The rejection of permissions may have been cached. To remove the preference:
+      <ol class="show-if-chrome">
+        <li>Tap the <img src="//cdn.8thwall.com/web/img/loading/v1/ellipsis.png"  class="instruction-icon" style="margin: 0"> in the top right</li>
+        <li>Tap <span class="highlight">Settings</span></li>
+        <li><span class="highlight">Site settings</span></li>
+        <li><span class="highlight">Camera</span></li>
+        <li>Blocked: <span class="fill-domain highlight">[domain]</span></li>
+        <li>Tap <span class="highlight">CLEAR & RESET</span></li>
+      </ol>
+      <ol class="show-if-samsung">
+        <li>Tap the hamburger menu, then <span class="highlight">Settings</span></li>
+        <li>Tap <span class="highlight">Sites and downloads</span></li>
+        <li><span class="highlight">Manage website data</span></li>
+        <li>Press and hold <span class="fill-domain highlight">[domain]</span></li>
+        <li>Tap <span class="highlight">Delete</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="show-if-desktop desktop-view">
+    <div class="desktop-view-inner">
+      <div id="qrcode"></div>
+      <h1 class="futura centered-x">Looks like you're on desktop.</h1>
+      <p>For the augmented reality experience, scan this code or visit <span class="highlight fill-raw-url">[url]</span> on a smartphone or tablet.</p>
+    </div>
+  </div>
+
+  <p class="show-if-update">To view this experience on your iPhone, please update to a newer version of iOS.<p>
+
+  <div class="show-if-unsupported">
+    <p>You are on a browser that does not support the features necessary for this experience.</p>
+    <p>You may need to update your browser, use a different browser, or update your operating system.</p>
+    <p class="centered-x">
+      Link: <span class="fill-raw-url highlight">[url]</span><button class="copy-button" onclick="copyUrl()"></button>
+    </p>
+
+  </div>
+
+  <div class="show-if-webview">
+    <p>Browser camera access is restricted to Safari on iOS.</p>
+
+    <div class="centered-x">
+      <p>
+        Please open<br>
+        <span class="fill-raw-url highlight">[url]</span><button class="copy-button" onclick="copyUrl()"></button><br>
+        in Safari.
+    </p>
+    </div>
+  </div>
+
+  <div class="hide-if-message">
+    <h1 class="futura">Something went wrong.</h1>
+    <p class="show-if-url">Click continue to go back to the experience.</p>
+  </div>
+
+  <a id="continue" href="" style="display: none">Continue</a>
+
+  <script src="almostthere.js"></script>
+</body>
+</html>

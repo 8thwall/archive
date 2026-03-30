@@ -1,0 +1,43 @@
+.joystick-container {
+  pointer-events: none;
+  opacity: 0;
+  transition: 0.2s opacity;
+}
+
+.joystick-container.visible {
+  opacity: 1;
+}
+
+.joystick {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border-radius: 10000px;
+}
+
+.joystick.position {
+  width: 15vmin;
+  height: 15vmin;
+  background-color: white;
+  z-index: 10;
+}
+
+.joystick.origin {
+  width: 40vmin;
+  height: 40vmin;
+  border: 2vmin solid white;
+}
+
+.reset {
+  position: absolute;
+  width: 20vmin;
+  height: 20vmin;
+  bottom: 2vmax;
+  border-radius: 7.5vmin;
+  left: 88%;
+  transform: translateX(-50%);
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  pointer-events: auto;
+  background-image: url('reset.svg');
+}

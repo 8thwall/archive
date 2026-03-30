@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+  <title>Curiosity - AWE Portal Hunt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+  <script src="//cdn.8thwall.com/web/aframe/8frame-0.8.2.min.js"></script>
+  <script src="//cdn.8thwall.com/web/aframe/aframe-animation-component-5.1.2.min.js"></script>
+
+  <script src="//cdn.8thwall.com/web/xrextras/xrextras.js"></script>
+
+  <script src="//apps.8thwall.com/xrweb?appKey=t2bFisHW7JFz8sgbJnIV4t9WnZ1YOGbGSEUTB1yGqDmCS4c7YZ83VZQUOHf36n0F4ZrVgJ"></script>
+
+  <!-- Common -->
+  <link rel="stylesheet" href="https://use.typekit.net/pgp7jlo.css">
+  <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
+  <link rel="stylesheet" href="/shared/portal.css">
+  <link rel="stylesheet" href="/shared/common.css">
+  <script src="/shared/portal.js"></script>
+
+  <!-- Individual -->
+  <script src="/shared/ammo.js"></script>
+  <link rel="stylesheet" href="index.css">
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <!-- Loading screen -->
+  <div class="loading-container absolute-fill">
+    <div class="loading-logos">
+      <img class="awe-logo" src="/shared/load-awe.svg" alt="AWE logo">
+      <img class="portal-hunt-logo" src="/shared/load-portalhunt.svg" alt="Portal Hunt logo">
+    </div>
+    <h1 class="portal-title share-tech caps">curiosity</h1>
+    <div class="loading-footer">
+      <img src="/shared/load-8.svg" alt="8th Wall logo">
+    </div>
+  </div>
+
+  <div class="relic absolute-center shadowed">
+    <div class="relic-loader absolute-center">
+      <svg viewBox="0 0 38 38" class="relic-loader-svg">
+        <circle class="relic-loader-circle" stroke-dashoffset="100"></circle>
+      </svg>
+    </div>
+    <img class="relic-icon absolute-center" src="/shared/svg/curiosity.svg">
+  </div>
+  <!-- End loading screen -->
+
+  <a-scene
+    antialias="true"
+    renderer="sortObjects: true"
+    xrextras-gesture-detector
+    portal-loading
+    almost-there="url: 8th.io/curiosity; domain: awe.8thwall.app"
+    rover
+    xrweb="disableWorldTracking: true">
+
+    <a-assets>
+      <img id="sky" src="/shared/grad-mars.png">
+      <a-asset-item id="craterModel" src="models/crater.glb"></a-asset-item>
+      <a-asset-item id="hill1Model" src="models/hill1.glb"></a-asset-item>
+      <a-asset-item id="hill2Model" src="models/hill2.glb"></a-asset-item>
+      <a-asset-item id="hill3Model" src="models/hill3.glb"></a-asset-item>
+      <a-asset-item id="flagModel" src="models/flag.glb"></a-asset-item>
+      <a-asset-item id="roverBodyModel" src="models/body.glb"></a-asset-item>
+      <a-asset-item id="roverHeadModel" src="models/head.glb"></a-asset-item>
+      <a-asset-item id="roverWheelModel" src="models/wheel.glb"></a-asset-item>
+      <a-asset-item id="fragmentModel1" src="models/relicPiece1.glb"></a-asset-item>
+      <a-asset-item id="fragmentModel2" src="models/relicPiece2.glb"></a-asset-item>
+      <a-asset-item id="fragmentModel3" src="models/relicPiece3.glb"></a-asset-item>
+      <a-asset-item id="relicModel" src="/shared/relics/curiosity.glb"></a-asset-item>
+    </a-assets>
+
+    <a-camera id="camera" position="0 4 5"></a-camera>
+
+    <a-light id="ambientLight" type="ambient" intensity="0.5"></a-light>
+    <a-light id="directionalLight" type="directional" color="#e5810d" intensity="1" position="2 2 0.6" castShadow="true"></a-light>
+  </a-scene>
+</body>
+</html>

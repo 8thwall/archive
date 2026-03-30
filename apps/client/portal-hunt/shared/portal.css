@@ -1,0 +1,283 @@
+.loading-container {
+  background-color: black;
+  z-index: 90;
+  pointer-events: auto;
+}
+
+.loaded .loading-container {
+  pointer-events: none;
+  opacity: 0;
+  transition: 0.5s opacity;
+}
+
+.loading-logos {
+  position: absolute;
+  top: calc(25% - 14vmin);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 80vmin;
+  height: 20%;
+  max-height: calc(50% - 28vmin);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.loading-logos img {
+  min-width: 0;
+  min-height: 0;
+}
+
+.awe-logo {
+  flex: 6 0 0;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+
+.portal-hunt-logo {
+  flex: 3 0 0;
+}
+
+.portal-title {
+  position: absolute;
+  top: calc(50% + 25vmin);
+  left: 0;
+  width: 100%;
+  margin: 0;
+  font-size: 4vh;
+  text-align: center;
+  font-weight: normal;
+}
+
+.loading-footer {
+  position: absolute;
+  left: 50%;
+  bottom: 2vh;
+  transform: translateX(-50%);
+}
+
+.loading-footer img {
+  width: 100%;
+  max-width: 20vmin;
+  max-height: 7vh;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.relic {
+  width: 50vmin;
+  height: 50vmin;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.scanned.loaded .relic {
+  opacity: 0;
+  transition: 0.5s opacity;
+}
+
+.relic-icon {
+  width: 25vmin;
+  height: 25vmin;
+  filter: drop-shadow(0 0 1vmin #0004);
+}
+
+.loaded .relic-icon {
+  transition: 1s transform;
+  transition-delay: 0.5s;
+  transform: translate(-50%, -50%) scale(2);
+}
+
+.relic-loader {
+  width: 100%;
+  height: 100%;
+}
+
+.relic-loader-circle {
+  opacity: 0;
+  transition: 5s stroke-dashoffset;
+  transition-timing-function: cubic-bezier(.54,.82,.62,1);
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  stroke: white;
+  stroke-dasharray: 100.531 100.531;
+  stroke-dashoffset: 100 !important;
+  fill: transparent;
+  r: 16;
+  cx: 19;
+  cy: 19;
+}
+
+.loading .relic-loader-circle {
+  opacity: 1;
+  stroke-dashoffset: 5 !important;
+}
+
+.loaded .relic-loader-circle {
+  transition: 0.75s stroke-dashoffset, 0.75s opacity;
+  transition-timing-function: ease;
+  opacity: 0;
+  stroke-dashoffset: 0 !important;
+}
+
+#overlay {
+  z-index: 10;
+  pointer-events: none;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2vh 2vh;
+  position: relative;
+}
+
+.top-bar > * {
+  flex: 0 0 auto;
+}
+
+.logbook-container {
+  display: block;
+  position: relative;
+  height: 10vmin;
+  width: 10vmin;
+  pointer-events: auto;
+}
+
+.logbook-icon {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0 auto;
+  pointer-events: none;
+}
+
+.logbook-marker {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(50%, -50%) scale(30);
+  border-radius: 9999px;
+  width: 2vh;
+  height: 2vh;
+  background-color: #22aa44;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.collected .logbook-marker {
+  transition: 1.5s transform, 1.5s opacity;
+  transition-timing-function: cubic-bezier(.66,.82,.81,.96);
+  transform: translate(50%, -50%) scale(1);
+  opacity: 1;
+}
+
+.objective-prompt {
+  font-size: 2vh;
+  text-transform: uppercase;
+}
+
+.objective-progress {
+  font-size: 3vh;
+  text-align: right;
+  min-width: 10vmin;
+}
+
+#alertBar {
+  opacity: 0;
+  font-size: 3vh;
+  text-align: center;
+}
+
+.interaction-prompt {
+  position: absolute;
+  bottom: 30vh;
+  transform: translateY(50%);
+  width: 90%;
+  left: 5%;
+  font-size: 3.5vh;
+  text-align: center;
+  white-space: pre-line
+}
+
+.interaction-image {
+  max-width: 6em;
+  margin: 0 auto;
+}
+
+.animate-in {animation: animate-in 0.5s ease-out forwards;}
+@keyframes animate-in {
+  0% {transform: translateX(-10%);opacity: 0;}
+  100% {transform: translateX(0%);opacity: 1;}
+}
+
+.animate-out {animation: animate-out 0.5s ease-in forwards;}
+@keyframes animate-out {
+  0% {transform: translateX(0%); opacity: 1;}
+  100% {transform: translateX(10%); opacity: 0;}
+}
+
+.fade-in-on-scan {
+  opacity: 0;
+  pointer-events: none;
+  transition: 1s opacity;
+}
+
+.scanned .fade-in-on-scan {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.sign-up-modal {
+  width: 80vmin;
+  font-size: 3vh;
+  background-color: black;
+  padding: 1em;
+  text-align: center;
+  z-index: 100;
+  opacity: 0;
+  transition: 0.5s opacity;
+  pointer-events: none;
+}
+
+.collected.sign-up .sign-up-modal {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sign-up-link {
+  display: block;
+  font-size: 4vh;
+  color: black;
+  background-color: white;
+  padding: 0.5em;
+  margin: 0.5em auto;
+}
+
+.replay-button {
+  position: absolute;
+  right: 0;
+  bottom: 1em;
+  font-size: 3vh;
+  background-color: black;
+  padding: 0.5em;
+  font-family: inherit;
+  color: white;
+  border: none;
+  outline: none;
+  pointer-events: none;
+  opacity: 0;
+  transition: 0.5s opacity, 0.5s right;
+}
+
+.replay-button:focus {
+  outline: 2px solid white;
+}
+
+.show-replay .replay-button {
+  right: 1em;
+  opacity: 1;
+  pointer-events: auto;
+}

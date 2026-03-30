@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+  <title>Voyager - AWE Portal Hunt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+  <script src="//cdn.8thwall.com/web/aframe/8frame-0.8.2.min.js"></script>
+  <script src="//cdn.8thwall.com/web/aframe/aframe-animation-component-5.1.2.min.js"></script>
+  <script src="//cdn.8thwall.com/web/aframe/aframe-extras-4.2.0.min.js"></script>
+
+  <script src="//apps.8thwall.com/xrweb?appKey=wVEbTh5DjCnkmdYHkWl9Z7uZu1adldhJbWa2IqitkUyNm7PXk5HPYGjuPZcQq5KR3UoBvO"></script>
+
+  <!-- Common -->
+  <link rel="stylesheet" href="https://use.typekit.net/pgp7jlo.css">
+  <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
+  <link rel="stylesheet" href="/shared/portal.css">
+  <link rel="stylesheet" href="/shared/common.css">
+  <script src="/shared/portal.js"></script>
+
+  <!-- Individual -->
+  <link rel="stylesheet" href="index.css">
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <!-- Loading screen -->
+  <div class="loading-container absolute-fill">
+    <div class="loading-logos">
+      <img class="awe-logo" src="/shared/load-awe.svg" alt="AWE logo">
+      <img class="portal-hunt-logo" src="/shared/load-portalhunt.svg" alt="Portal Hunt logo">
+    </div>
+    <h1 class="portal-title share-tech caps">voyager</h1>
+    <div class="loading-footer">
+      <img src="/shared/load-8.svg" alt="8th Wall logo">
+    </div>
+  </div>
+
+  <div class="relic absolute-center shadowed">
+    <div class="relic-loader absolute-center">
+      <svg viewBox="0 0 38 38" class="relic-loader-svg">
+        <circle class="relic-loader-circle" stroke-dashoffset="100"></circle>
+      </svg>
+    </div>
+    <img class="relic-icon absolute-center" src="/shared/svg/voyager.svg">
+  </div>
+  <!-- End loading screen -->
+
+  <a-scene
+    antialias="true"
+    renderer="sortObjects: true"
+    portal-loading
+    almost-there="url: 8th.io/voyager; domain: awe.8thwall.app"
+    sighting
+    xrweb="disableWorldTracking: true">
+
+    <a-assets>
+      <img id="sky" src="/shared/grad-purp-blue.png">
+      <a-asset-item id="alien" src="/shared/models/alien-anim.glb"></a-asset-item>
+      <a-asset-item id="mountainModel" src="models/mountains.glb"></a-asset-item>
+      <a-asset-item id="rock1" src="models/rock-1.glb"></a-asset-item>
+      <a-asset-item id="rock2" src="models/rock-2.glb"></a-asset-item>
+      <a-asset-item id="rock3" src="models/rock-3.glb"></a-asset-item>
+      <a-asset-item id="relicModel" src="/shared/relics/voyager.glb"></a-asset-item>
+    </a-assets>
+
+    <a-camera id="camera" position="0 4 10"></a-camera>
+
+    <a-light id="ambientLight" type="ambient" intensity="0.25"></a-light>
+    <a-light id="directionalLight" type="directional" intensity="0.5" position="1 1.5 2"></a-light>
+  </a-scene>
+</body>
+</html>

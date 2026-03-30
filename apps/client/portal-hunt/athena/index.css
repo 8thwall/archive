@@ -1,0 +1,56 @@
+button {
+  font-family: inherit;
+  font-size: 6vmin;
+  padding: 2.5vmin;
+  background: white;
+  color: black;
+  border: none;
+  border-radius: 500px;
+  pointer-events: auto;
+}
+
+#paletteButton {
+  position: absolute;
+  pointer-events: auto;
+  background-color: cyan;
+  width: 12vmin;
+  height: 12vmin;
+  bottom: 2vh;
+  right: 2vh;
+  border: 3px solid white;
+  border-radius: 1.5vmin;
+}
+
+#toggleEraseButton {
+  position: absolute;
+  left: 2vh;
+  bottom: calc(2vh + 6vmin);
+  transform: translateY(50%);
+  outline: none;
+  border: 3px solid transparent;
+}
+
+#toggleEraseButton.erasing {
+  background-color: transparent;
+  color: white;
+  border-color: white;
+}
+
+.palette-default {
+  position: absolute;
+  background-color: white;
+  width: 0vmin;
+  height: 0vmin;
+  right: calc(4vh + 12vmin);
+  bottom: calc(4vh + 12vmin);
+  pointer-events: auto;
+  background-image: url('palette.jpg');
+  background-size: contain;
+  background-attachment: center center;
+  transition: 0.25s;
+}
+
+.palette-expanded {
+  width: 60vmin;
+  height: 36vmin;
+}
