@@ -1,0 +1,686 @@
+From 3dab87bb2a0aab42ab76e58a6b90779439c3267d Mon Sep 17 00:00:00 2001
+From: Johnny Tran <jtran@8thwall.com>
+Date: Mon, 15 Sep 2025 22:33:11 -0700
+Subject: [PATCH 1/6] [studiohub] Add electron update modal
+
+---
+ reality/cloud/studiohub/app/BUILD             |   8 +
+ reality/cloud/studiohub/app/loader.ts         |  46 +++++
+ reality/cloud/studiohub/app/start.ts          | 167 +++++++++++++++---
+ reality/cloud/studiohub/builder.config.js     |   3 +-
+ reality/cloud/xrhome/src/client/desktop/BUILD |   0
+ 5 files changed, 199 insertions(+), 25 deletions(-)
+ create mode 100644 reality/cloud/studiohub/app/loader.ts
+ create mode 100644 reality/cloud/xrhome/src/client/desktop/BUILD
+
+diff --git a/reality/cloud/studiohub/app/BUILD b/reality/cloud/studiohub/app/BUILD
+index 327d253cc94..ef8d0f6c634 100644
+--- a/reality/cloud/studiohub/app/BUILD
++++ b/reality/cloud/studiohub/app/BUILD
+@@ -15,6 +15,7 @@ js_binary(
+     target = "node",
+     deps = [
+         "//reality/cloud/studiohub:application-state",
++        "//reality/cloud/studiohub/app:loader",
+         "//reality/cloud/studiohub/app/desktop-app:dev-cookie",
+         "//reality/cloud/studiohub/app/desktop-app:protocol",
+         "//reality/cloud/studiohub/app/desktop-app:register-on-open-url-handler",
+@@ -60,3 +61,10 @@ js_library(
+         "//reality/shared/studiohub:app-server-url-types",
+     ],
+ )
++
++js_library(
++    name = "loader",
++    srcs = [
++        "loader.ts",
++    ],
++)
+diff --git a/reality/cloud/studiohub/app/loader.ts b/reality/cloud/studiohub/app/loader.ts
+new file mode 100644
+index 00000000000..46a5bb7f8f3
+--- /dev/null
++++ b/reality/cloud/studiohub/app/loader.ts
+@@ -0,0 +1,46 @@
++const loaderHtml = `
++    <!DOCTYPE html>
++    <html>
++    <head>
++      <style>
++        body {
++          margin: 0;
++          padding: 0;
++          background: #2d3748;
++          color: white;
++          font-family: -apple-system, BlinkMacSystemFont, sans-serif;
++          display: flex;
++          flex-direction: column;
++          justify-content: center;
++          align-items: center;
++          height: 100vh;
++        }
++        .spinner {
++          border: 4px solid rgba(255, 255, 255, 0.3);
++          border-radius: 50%;
++          border-top: 4px solid #4299e1;
++          width: 40px;
++          height: 40px;
++          animation: spin 1s linear infinite;
++          margin-bottom: 20px;
++        }
++        @keyframes spin {
++          0% { transform: rotate(0deg); }
++          100% { transform: rotate(360deg); }
++        }
++        .message {
++          text-align: center;
++          font-size: 16px;
++        }
++      </style>
++    </head>
++    <body>
++      <div class="spinner"></div>
++      <div class="message">Checking for updates...</div>
++    </body>
++    </html>
++  `
++
++export {
++  loaderHtml,
++}
+diff --git a/reality/cloud/studiohub/app/start.ts b/reality/cloud/studiohub/app/start.ts
+index c8e31a67921..bc45884c1e7 100644
+--- a/reality/cloud/studiohub/app/start.ts
++++ b/reality/cloud/studiohub/app/start.ts
+@@ -8,6 +8,8 @@ import path from 'path'
+ import {app, BrowserWindow, protocol, dialog} from 'electron'
+ import {autoUpdater} from 'electron-updater'
+ 
++import log from 'electron-log'
++
+ import {initDb} from '../application-state'
+ import {FILE_SYNC_SCHEME, registerFileSyncHandler} from './file-sync/protocol'
+ import {
+@@ -20,17 +22,145 @@ import {setUpMainFileWatchPort} from './file-watch/ports'
+ import {createStudioMcpWebsocketServer} from './studio-use/mcp-websocket-server'
+ import {PREFERENCES_SCHEME, registerPreferencesHandler} from './preferences/protocol'
+ import {maybeInterceptAndReapplyDevCookie} from './desktop-app/dev-cookie'
++import {maybeInterceptOriginFor3rdPartyApi} from './desktop-app/third-party-origin'
++import {loaderHtml} from './loader'
+ 
+ const MCP_WEBSOCKET_PORT: number = parseInt(process.env.STUDIO_HUB_MCP_WEBSOCKET_PORT || '8080', 10)
+ const UPDATE_CHECK_INTERVAL = 60 * 60 * 1000
+ 
+-const setupAutoUpdater = (win: BrowserWindow) => {
+-  autoUpdater.checkForUpdatesAndNotify()
++const createWindow = () => {
++  const win = new BrowserWindow({
++    width: 1600,
++    height: 1200,
++    minWidth: 900,
++    minHeight: 700,
++    webPreferences: {
++      preload: path.join(__dirname, 'preload.js'),
++    },
++  })
++  win.loadURL('desktop://dist/index.html')
++  registerWindowOpenHandler(win)
++  registerOnOpenUrlHandler(win)
++  return win
++}
++
++const createLoaderWindow = () => {
++  const loaderWin = new BrowserWindow({
++    width: 400,
++    height: 300,
++    frame: false,
++    alwaysOnTop: true,
++    center: true,
++    resizable: false,
++    webPreferences: {
++      nodeIntegration: true,
++      contextIsolation: false,
++    },
++  })
++
++  loaderWin.loadURL(`data:text/html;charset=utf-8,${encodeURIComponent(loaderHtml)}`)
++  return loaderWin
++}
++
++const checkForUpdates = async (): Promise<BrowserWindow> => new Promise((resolve) => {
++  let loaderWin: BrowserWindow | null = null
++  let updateCheckComplete = false
++
++  // Set up auto updater configuration
++  // autoUpdater.autoInstallOnAppQuit = false  // We'll handle restart manually
++
++  const createMainWindow = () => {
++    if (loaderWin) {
++      loaderWin.close()
++      loaderWin = null
++    }
++    const win = createWindow()
++    resolve(win)
++    return win
++  }
++
++  // Remove any existing listeners to prevent duplicates
++  autoUpdater.removeAllListeners('update-not-available')
++  autoUpdater.removeAllListeners('update-available')
++  autoUpdater.removeAllListeners('download-progress')
++  autoUpdater.removeAllListeners('update-downloaded')
++  autoUpdater.removeAllListeners('error')
++
++  // Handle when no update is available
++  const handleUpdateNotAvailable = () => {
++    log.info('No update available')
++    updateCheckComplete = true
++    createMainWindow()
++  }
++
++  // Handle when update is available - show loader
++  const handleUpdateAvailable = () => {
++    log.info('Update available, showing loader')
++    loaderWin = createLoaderWindow()
++    loaderWin.webContents.executeJavaScript(`
++        document.querySelector('.message').textContent = 'Downloading update...';
++      `)
++  }
++
++  // Handle download progress
++  const handleDownloadProgress = (progressObj: any) => {
++    if (loaderWin) {
++      log.info(`Download progress: ${progressObj.percent}%`)
++      const percent = Math.round(progressObj.percent)
++      loaderWin.webContents.executeJavaScript(`
++          document.querySelector('.message').textContent = 'Downloading update... ${percent}%';
++        `)
++    }
++  }
+ 
++  // Handle when update is downloaded - restart immediately
++  const handleUpdateDownloaded = () => {
++    log.info('Update downloaded, restarting app')
++    if (loaderWin) {
++      loaderWin.webContents.executeJavaScript(`
++          document.querySelector('.message').textContent = 'Update downloaded. Restarting...';
++        `)
++    }
++
++    // Wait a moment for the user to see the message, then restart
++    setTimeout(() => {
++      log.info('Quitting and installing update')
++      // autoUpdater.quitAndInstall()
++    }, 1000)
++  }
++
++  // Handle errors - proceed to main window
++  const handleError = (error: any) => {
++    log.error('Auto updater error:', error)
++    updateCheckComplete = true
++    createMainWindow()
++  }
++
++  // Set up one-time listeners for initial update check
++  autoUpdater.once('update-not-available', handleUpdateNotAvailable)
++  autoUpdater.once('update-available', handleUpdateAvailable)
++  autoUpdater.on('download-progress', handleDownloadProgress)
++  autoUpdater.once('update-downloaded', handleUpdateDownloaded)
++  autoUpdater.once('error', handleError)
++
++  // Start the update check
++  autoUpdater.checkForUpdates()
++
++  // Fallback timeout in case update check hangs
++  setTimeout(() => {
++    if (!updateCheckComplete && !loaderWin) {
++      updateCheckComplete = true
++      createMainWindow()
++    }
++  }, 10000)  // 10 second timeout
++})
++
++const setupPeriodicUpdateCheck = (win: BrowserWindow) => {
+   setInterval(() => {
+     autoUpdater.checkForUpdatesAndNotify()
+   }, UPDATE_CHECK_INTERVAL)
+ 
++  // Handle periodic updates with user confirmation
+   autoUpdater.on('update-downloaded', () => {
+     const result = dialog.showMessageBoxSync(win, {
+       type: 'info',
+@@ -66,23 +196,6 @@ try {
+ 
+ app.commandLine.appendSwitch('ignore-certificate-errors')
+ 
+-const createWindow = () => {
+-  const win = new BrowserWindow({
+-    width: 1600,
+-    height: 1200,
+-    minWidth: 900,
+-    minHeight: 700,
+-    webPreferences: {
+-      preload: path.join(__dirname, 'preload.js'),
+-    },
+-    backgroundColor: '#fff',
+-  })
+-  win.loadURL('desktop://dist/index.html')
+-  registerWindowOpenHandler(win)
+-  registerOnOpenUrlHandler(win)
+-  return win
+-}
+-
+ const ws = createStudioMcpWebsocketServer(MCP_WEBSOCKET_PORT)
+ 
+ app.on('before-quit', () => {
+@@ -105,14 +218,20 @@ app.whenReady()
+     registerPreferencesHandler()
+     maybeUpdateOnBeforeRequest()
+     maybeInterceptAndReapplyDevCookie()
++    maybeInterceptOriginFor3rdPartyApi()
+ 
+-    const win = createWindow()
++    let win: BrowserWindow
++    if (app.isPackaged) {
++      // Check for updates first, then create window
++      win = await checkForUpdates()
++      // Set up periodic update checks after initial startup
++      setupPeriodicUpdateCheck(win)
++    } else {
++      // In development, skip update check and create window directly
++      win = createWindow()
++    }
+ 
+     win.webContents.on('did-finish-load', () => {
+       setUpMainFileWatchPort(win)
+     })
+-
+-    if (app.isPackaged) {
+-      setupAutoUpdater(win)
+-    }
+   })
+diff --git a/reality/cloud/studiohub/builder.config.js b/reality/cloud/studiohub/builder.config.js
+index d6bb560f8a7..ae0fadae950 100644
+--- a/reality/cloud/studiohub/builder.config.js
++++ b/reality/cloud/studiohub/builder.config.js
+@@ -70,7 +70,8 @@ module.exports = {
+     provider: 's3',
+     bucket: `${S3_BUCKET_KEY}`,
+     region: 'us-west-2',
+-    path: `/${DEPLOY_STAGE}`,
++    // path: `/${DEPLOY_STAGE}`,
++    path: '/test-updates',
+     acl: null,
+   },
+ }
+diff --git a/reality/cloud/xrhome/src/client/desktop/BUILD b/reality/cloud/xrhome/src/client/desktop/BUILD
+new file mode 100644
+index 00000000000..e69de29bb2d
+
+From fecdcd453598510b3d8c0ed465e11dbff1371616 Mon Sep 17 00:00:00 2001
+From: Johnny Tran <jtran@8thwall.com>
+Date: Tue, 16 Sep 2025 15:32:52 -0700
+Subject: [PATCH 2/6] [studiohub] Add electron update modal
+
+---
+ reality/cloud/studiohub/app/start.ts      | 27 ++++++++++++++---------
+ reality/cloud/studiohub/builder.config.js | 21 +++++++++++++++---
+ 2 files changed, 35 insertions(+), 13 deletions(-)
+
+diff --git a/reality/cloud/studiohub/app/start.ts b/reality/cloud/studiohub/app/start.ts
+index bc45884c1e7..a164768a1f3 100644
+--- a/reality/cloud/studiohub/app/start.ts
++++ b/reality/cloud/studiohub/app/start.ts
+@@ -17,17 +17,24 @@ import {
+   registerWindowOpenHandler,
+ } from './desktop-app/protocol'
+ import {registerOnOpenUrlHandler} from './desktop-app/register-on-open-url-handler'
+-import {STUDIO_HUB_PROTOCOL} from '../../../shared/studiohub/create-studio-hub-url'
++import {STUDIO_HUB_PROTOCOL} from './studiohub-protocol'
+ import {setUpMainFileWatchPort} from './file-watch/ports'
+ import {createStudioMcpWebsocketServer} from './studio-use/mcp-websocket-server'
+ import {PREFERENCES_SCHEME, registerPreferencesHandler} from './preferences/protocol'
+ import {maybeInterceptAndReapplyDevCookie} from './desktop-app/dev-cookie'
+-import {maybeInterceptOriginFor3rdPartyApi} from './desktop-app/third-party-origin'
+-import {loaderHtml} from './loader'
++// import {maybeInterceptOriginFor3rdPartyApi} from './desktop-app/third-party-origin'
+ 
+ const MCP_WEBSOCKET_PORT: number = parseInt(process.env.STUDIO_HUB_MCP_WEBSOCKET_PORT || '8080', 10)
+ const UPDATE_CHECK_INTERVAL = 60 * 60 * 1000
+ 
++if (process.env.DEPLOY_STAGE === 'prod') {
++  // Note(cindyhu): app.getName() reads from package.json and electron-builder does not override
++  // that. We want to override it to "8th Wall" for production builds so application data is
++  // created under the */8th Wall/ folder.
++  app.setName('8th Wall')
++} else {
++  // TODO(cindyhu): append deploy stage for internal builds
++}
+ const createWindow = () => {
+   const win = new BrowserWindow({
+     width: 1600,
+@@ -46,10 +53,10 @@ const createWindow = () => {
+ 
+ const createLoaderWindow = () => {
+   const loaderWin = new BrowserWindow({
+-    width: 400,
+-    height: 300,
+-    frame: false,
++    width: 350,
++    height: 400,
+     alwaysOnTop: true,
++    frame: false,
+     center: true,
+     resizable: false,
+     webPreferences: {
+@@ -58,7 +65,7 @@ const createLoaderWindow = () => {
+     },
+   })
+ 
+-  loaderWin.loadURL(`data:text/html;charset=utf-8,${encodeURIComponent(loaderHtml)}`)
++  loaderWin.loadFile(path.join(__dirname, 'updater.html'))
+   return loaderWin
+ }
+ 
+@@ -185,7 +192,7 @@ const distRoot = (() => {
+ })()
+ 
+ try {
+-  // Write to ~/Library/Application Support/studiohub on mac
++  // Write to ~/Library/Application Support/studiohub (or 8th Wall on prod) on mac
+   const userDataPath = app.getPath('userData')
+   initDb(userDataPath)
+ } catch (error) {
+@@ -218,7 +225,7 @@ app.whenReady()
+     registerPreferencesHandler()
+     maybeUpdateOnBeforeRequest()
+     maybeInterceptAndReapplyDevCookie()
+-    maybeInterceptOriginFor3rdPartyApi()
++    // maybeInterceptOriginFor3rdPartyApi()
+ 
+     let win: BrowserWindow
+     if (app.isPackaged) {
+@@ -228,7 +235,7 @@ app.whenReady()
+       setupPeriodicUpdateCheck(win)
+     } else {
+       // In development, skip update check and create window directly
+-      win = createWindow()
++      win = createLoaderWindow()
+     }
+ 
+     win.webContents.on('did-finish-load', () => {
+diff --git a/reality/cloud/studiohub/builder.config.js b/reality/cloud/studiohub/builder.config.js
+index ae0fadae950..55231a749a4 100644
+--- a/reality/cloud/studiohub/builder.config.js
++++ b/reality/cloud/studiohub/builder.config.js
+@@ -1,9 +1,24 @@
+ const {S3_BUCKET_KEY, DEPLOY_STAGE} = process.env
+ 
++const getAppConfig = () => {
++  if (DEPLOY_STAGE === 'prod') {
++    return {
++      appId: 'com.the8thwall.desktop',
++      productName: '8th Wall',
++      executableName: '8th Wall',
++    }
++  } else {
++    // TODO(cindyhu): append deploy stage for internal builds
++    return {
++      appId: 'com.the8thwall.studiohub',
++      productName: 'studiohub',
++      executableName: 'studiohub',
++    }
++  }
++}
++
+ module.exports = {
+-  appId: 'com.8thwall.studiohub',
+-  productName: 'studiohub',
+-  executableName: 'studiohub',
++  ...getAppConfig(),
+   directories: {
+     output: 'out',
+   },
+
+From 6cf58bee53f524f29ba00a754859693d66491c83 Mon Sep 17 00:00:00 2001
+From: Johnny Tran <jtran@8thwall.com>
+Date: Tue, 16 Sep 2025 15:38:24 -0700
+Subject: [PATCH 3/6] [studiohub] Add electron update modal
+
+---
+ reality/cloud/xrhome/src/client/desktop/BUILD | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ delete mode 100644 reality/cloud/xrhome/src/client/desktop/BUILD
+
+diff --git a/reality/cloud/xrhome/src/client/desktop/BUILD b/reality/cloud/xrhome/src/client/desktop/BUILD
+deleted file mode 100644
+index e69de29bb2d..00000000000
+
+From 081efeb491cd960c4df8f17388476bb97000aabf Mon Sep 17 00:00:00 2001
+From: Johnny Tran <jtran@8thwall.com>
+Date: Tue, 16 Sep 2025 15:46:21 -0700
+Subject: [PATCH 4/6] [studiohub] Add electron update modal
+
+---
+ reality/cloud/studiohub/app-build.sh     |  3 ++
+ reality/cloud/studiohub/app/updater.html | 59 ++++++++++++++++++++++++
+ 2 files changed, 62 insertions(+)
+ create mode 100644 reality/cloud/studiohub/app/updater.html
+
+diff --git a/reality/cloud/studiohub/app-build.sh b/reality/cloud/studiohub/app-build.sh
+index f7493ad47eb..a96033d166b 100755
+--- a/reality/cloud/studiohub/app-build.sh
++++ b/reality/cloud/studiohub/app-build.sh
+@@ -15,3 +15,6 @@ require('./start.js')
+ EOF
+ 
+ bazel build //reality/cloud/studiohub/app:preload && cp ../../../bazel-bin/reality/cloud/studiohub/app/preload.js app/dist/preload.js
++
++# Copy updater.html to dist folder
++cp app/updater.html app/dist/updater.html
+diff --git a/reality/cloud/studiohub/app/updater.html b/reality/cloud/studiohub/app/updater.html
+new file mode 100644
+index 00000000000..91d3b59a571
+--- /dev/null
++++ b/reality/cloud/studiohub/app/updater.html
+@@ -0,0 +1,59 @@
++<!DOCTYPE html>
++<html>
++
++<head>
++  <meta charset="UTF-8">
++  <title>8th Wall</title>
++  <link rel="preconnect" href="https://fonts.googleapis.com">
++  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
++  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700;800&display=swap"
++    rel="stylesheet">
++  <style>
++    body {
++      margin: 0;
++      padding: 0;
++      background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
++      color: white;
++      font-family: 'Geist Mono', monospace;
++      display: flex;
++      gap: 2rem;
++      flex-direction: column;
++      justify-content: center;
++      align-items: center;
++      height: 100vh;
++    }
++
++    .spinner {
++      border: 4px solid rgba(255, 255, 255, 0.3);
++      border-radius: 50%;
++      border-top: 4px solid #4299e1;
++      width: 40px;
++      height: 40px;
++      animation: spin 1s linear infinite;
++      margin-bottom: 20px;
++    }
++
++    @keyframes spin {
++      0% {
++        transform: rotate(0deg);
++      }
++
++      100% {
++        transform: rotate(360deg);
++      }
++    }
++
++    .message {
++      text-align: center;
++      font-size: 16px;
++    }
++  </style>
++</head>
++
++<body>
++  <h1>8th Wall</h1>
++  <div class="spinner"></div>
++  <div class="message">Checking for updates...</div>
++</body>
++
++</html>
+
+From 89bf9836bd6988ff559b5b90f6cf46f46d5dfb64 Mon Sep 17 00:00:00 2001
+From: Johnny Tran <jtran@8thwall.com>
+Date: Tue, 16 Sep 2025 15:48:02 -0700
+Subject: [PATCH 5/6] [studiohub] Add electron update modal
+
+---
+ reality/cloud/studiohub/app/start.ts | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/reality/cloud/studiohub/app/start.ts b/reality/cloud/studiohub/app/start.ts
+index a164768a1f3..de9d58f7e7c 100644
+--- a/reality/cloud/studiohub/app/start.ts
++++ b/reality/cloud/studiohub/app/start.ts
+@@ -22,7 +22,6 @@ import {setUpMainFileWatchPort} from './file-watch/ports'
+ import {createStudioMcpWebsocketServer} from './studio-use/mcp-websocket-server'
+ import {PREFERENCES_SCHEME, registerPreferencesHandler} from './preferences/protocol'
+ import {maybeInterceptAndReapplyDevCookie} from './desktop-app/dev-cookie'
+-// import {maybeInterceptOriginFor3rdPartyApi} from './desktop-app/third-party-origin'
+ 
+ const MCP_WEBSOCKET_PORT: number = parseInt(process.env.STUDIO_HUB_MCP_WEBSOCKET_PORT || '8080', 10)
+ const UPDATE_CHECK_INTERVAL = 60 * 60 * 1000
+@@ -44,6 +43,7 @@ const createWindow = () => {
+     webPreferences: {
+       preload: path.join(__dirname, 'preload.js'),
+     },
++    backgroundColor: '#fff',
+   })
+   win.loadURL('desktop://dist/index.html')
+   registerWindowOpenHandler(win)
+@@ -225,17 +225,16 @@ app.whenReady()
+     registerPreferencesHandler()
+     maybeUpdateOnBeforeRequest()
+     maybeInterceptAndReapplyDevCookie()
+-    // maybeInterceptOriginFor3rdPartyApi()
+ 
+     let win: BrowserWindow
+-    if (app.isPackaged) {
++    if (app.isPackaged || true) {
+       // Check for updates first, then create window
+       win = await checkForUpdates()
+       // Set up periodic update checks after initial startup
+       setupPeriodicUpdateCheck(win)
+     } else {
+       // In development, skip update check and create window directly
+-      win = createLoaderWindow()
++      win = createWindow()
+     }
+ 
+     win.webContents.on('did-finish-load', () => {
+
+From dba9b8f28d05a7e80bc61da87bc34e3abf2ed7d0 Mon Sep 17 00:00:00 2001
+From: Johnny Tran <jtran@8thwall.com>
+Date: Tue, 16 Sep 2025 15:57:54 -0700
+Subject: [PATCH 6/6] [studiohub] Add electron update modal
+
+---
+ reality/cloud/studiohub/app-build.sh      |  1 -
+ reality/cloud/studiohub/app/start.ts      | 11 ++++-------
+ reality/cloud/studiohub/builder.config.js |  4 ++--
+ 3 files changed, 6 insertions(+), 10 deletions(-)
+
+diff --git a/reality/cloud/studiohub/app-build.sh b/reality/cloud/studiohub/app-build.sh
+index a96033d166b..e5aa336f61b 100755
+--- a/reality/cloud/studiohub/app-build.sh
++++ b/reality/cloud/studiohub/app-build.sh
+@@ -16,5 +16,4 @@ EOF
+ 
+ bazel build //reality/cloud/studiohub/app:preload && cp ../../../bazel-bin/reality/cloud/studiohub/app/preload.js app/dist/preload.js
+ 
+-# Copy updater.html to dist folder
+ cp app/updater.html app/dist/updater.html
+diff --git a/reality/cloud/studiohub/app/start.ts b/reality/cloud/studiohub/app/start.ts
+index de9d58f7e7c..cc9dfd08e5f 100644
+--- a/reality/cloud/studiohub/app/start.ts
++++ b/reality/cloud/studiohub/app/start.ts
+@@ -7,7 +7,6 @@
+ import path from 'path'
+ import {app, BrowserWindow, protocol, dialog} from 'electron'
+ import {autoUpdater} from 'electron-updater'
+-
+ import log from 'electron-log'
+ 
+ import {initDb} from '../application-state'
+@@ -34,6 +33,7 @@ if (process.env.DEPLOY_STAGE === 'prod') {
+ } else {
+   // TODO(cindyhu): append deploy stage for internal builds
+ }
++
+ const createWindow = () => {
+   const win = new BrowserWindow({
+     width: 1600,
+@@ -59,10 +59,7 @@ const createLoaderWindow = () => {
+     frame: false,
+     center: true,
+     resizable: false,
+-    webPreferences: {
+-      nodeIntegration: true,
+-      contextIsolation: false,
+-    },
++    backgroundColor: '#fff',
+   })
+ 
+   loaderWin.loadFile(path.join(__dirname, 'updater.html'))
+@@ -132,7 +129,7 @@ const checkForUpdates = async (): Promise<BrowserWindow> => new Promise((resolve
+     // Wait a moment for the user to see the message, then restart
+     setTimeout(() => {
+       log.info('Quitting and installing update')
+-      // autoUpdater.quitAndInstall()
++      autoUpdater.quitAndInstall()
+     }, 1000)
+   }
+ 
+@@ -227,7 +224,7 @@ app.whenReady()
+     maybeInterceptAndReapplyDevCookie()
+ 
+     let win: BrowserWindow
+-    if (app.isPackaged || true) {
++    if (app.isPackaged) {
+       // Check for updates first, then create window
+       win = await checkForUpdates()
+       // Set up periodic update checks after initial startup
+diff --git a/reality/cloud/studiohub/builder.config.js b/reality/cloud/studiohub/builder.config.js
+index 55231a749a4..98311f6bfb9 100644
+--- a/reality/cloud/studiohub/builder.config.js
++++ b/reality/cloud/studiohub/builder.config.js
+@@ -1,4 +1,4 @@
+-const {S3_BUCKET_KEY, DEPLOY_STAGE} = process.env
++const { S3_BUCKET_KEY, DEPLOY_STAGE, DEPLOY_PATH } = process.env
+ 
+ const getAppConfig = () => {
+   if (DEPLOY_STAGE === 'prod') {
+@@ -85,7 +85,7 @@ module.exports = {
+     provider: 's3',
+     bucket: `${S3_BUCKET_KEY}`,
+     region: 'us-west-2',
+-    // path: `/${DEPLOY_STAGE}`,
++    // path: `/${DEPLOY_PATH}`,
+     path: '/test-updates',
+     acl: null,
+   },

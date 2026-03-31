@@ -1,0 +1,268 @@
+From a1f2f4be0e7b53f92bdf16a801134d95eaa65404 Mon Sep 17 00:00:00 2001
+From: cocozhang <cocozhang@nianticlabs.com>
+Date: Tue, 20 May 2025 15:53:55 -0700
+Subject: [PATCH 1/4] [runtime] Fix one frame late active space update
+
+---
+ c8/ecs/src/runtime/application.ts | 17 ++++++++---------
+ 1 file changed, 8 insertions(+), 9 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/application.ts b/c8/ecs/src/runtime/application.ts
+index 5a88e371638..125804ed9b9 100644
+--- a/c8/ecs/src/runtime/application.ts
++++ b/c8/ecs/src/runtime/application.ts
+@@ -10,7 +10,6 @@ import type * as THREE_TYPES from './three-types'
+ import {createSceneBackground, updateSkyBoxMaterial} from './create-scene-background'
+ import {ready} from './init-ready'
+ import {getSkyFromSceneGraph} from '../shared/get-sky-from-scene-graph'
+-import {ACTIVE_SPACE_CHANGE} from '../shared/space-constants'
+ import {getActiveCameraFromSceneGraph} from '../shared/get-camera-from-scene-graph'
+ import {addChild, maybeRefreshWorldMatrices} from './matrix-refresh'
+ import {createMotionRenderPass} from './motion-render-pass'
+@@ -40,6 +39,7 @@ const makeApplication = (): IApplication => {
+   let skyBox: THREE_TYPES.Mesh | undefined
+   let needsSkyboxUpdate = false
+   let pendingCameraType: XrCameraType | null = null
++  let currentSpaceId: string | undefined
+ 
+   return {
+     getWorld: () => world,
+@@ -59,8 +59,8 @@ const makeApplication = (): IApplication => {
+           return
+         }
+ 
+-        const spaceId = sceneHandle?.getActiveSpace()?.id ?? sceneGraph.entrySpaceId
+-        const graphSky = getSkyFromSceneGraph(sceneGraph, spaceId)
++        currentSpaceId = sceneHandle?.getActiveSpace()?.id ?? sceneGraph.entrySpaceId
++        const graphSky = getSkyFromSceneGraph(sceneGraph, currentSpaceId)
+ 
+         if (!skyBox) {
+           skyBox = await createSceneBackground(graphSky)
+@@ -122,12 +122,6 @@ const makeApplication = (): IApplication => {
+         requestSkyboxUpdate(getCameraTypeFromWorld(world))
+       }
+ 
+-      const handleSpaceChange = () => {
+-        requestSkyboxUpdate(getCameraTypeFromWorld(world))
+-      }
+-
+-      world.events.addListener(world.events.globalId, ACTIVE_SPACE_CHANGE, handleSpaceChange)
+-
+       // Start the world
+       sceneHandle = world.loadScene(sceneGraph, handle => world.setSceneHook(handle))
+       world.pointer.attach()
+@@ -154,6 +148,11 @@ const makeApplication = (): IApplication => {
+           renderer?.render(scene, currentCamera)
+         }
+ 
++        if (sceneHandle?.getActiveSpace()?.id !== currentSpaceId) {
++          currentSpaceId = sceneHandle?.getActiveSpace()?.id
++          requestSkyboxUpdate(getCameraTypeFromWorld(world))
++        }
++
+         if (world.three.scene.userData.spaceWarpEnabled) {
+           motionPass.render(renderer, frame)
+         }
+
+From 866b793e52b53747bbf6e281aa8e5d8727c4696a Mon Sep 17 00:00:00 2001
+From: cocozhang <cocozhang@nianticlabs.com>
+Date: Tue, 20 May 2025 15:55:10 -0700
+Subject: [PATCH 2/4] [runtime] Fix one frame late active space update
+
+
+From 61e2a223418f57d5baeff69930be8da591c35f49 Mon Sep 17 00:00:00 2001
+From: cocozhang <cocozhang@nianticlabs.com>
+Date: Tue, 20 May 2025 16:02:48 -0700
+Subject: [PATCH 3/4] [runtime] Fix one frame late active space update
+
+---
+ c8/ecs/src/runtime/BUILD | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/BUILD b/c8/ecs/src/runtime/BUILD
+index fc575cbaee6..9f953bc0565 100644
+--- a/c8/ecs/src/runtime/BUILD
++++ b/c8/ecs/src/runtime/BUILD
+@@ -101,7 +101,7 @@ js_library(
+         "application.ts",
+     ],
+     deps = [
+-        "//c8/ecs/src/runtime:camera-events",
++        "//c8/ecs/src/runtime:camera-manager-types",
+         "//c8/ecs/src/runtime:create-scene-background",
+         "//c8/ecs/src/runtime:dispose",
+         "//c8/ecs/src/runtime:init-ready",
+@@ -116,7 +116,6 @@ js_library(
+         "//c8/ecs/src/shared:get-camera-from-scene-graph",
+         "//c8/ecs/src/shared:get-sky-from-scene-graph",
+         "//c8/ecs/src/shared:scene-graph",
+-        "//c8/ecs/src/shared:space-constants",
+     ],
+ )
+ 
+
+From 6f8c959042371e8fa1c3e3899f82cf35817411d3 Mon Sep 17 00:00:00 2001
+From: cocozhang <cocozhang@nianticlabs.com>
+Date: Fri, 23 May 2025 13:23:45 -0700
+Subject: [PATCH 4/4] [runtime] Fix one frame late active space update
+
+---
+ c8/ecs/src/runtime/BUILD          | 53 +++++++++++++++++++++++++------
+ c8/ecs/src/runtime/application.ts | 12 +++----
+ 2 files changed, 50 insertions(+), 15 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/BUILD b/c8/ecs/src/runtime/BUILD
+index 9f953bc0565..11d967430c5 100644
+--- a/c8/ecs/src/runtime/BUILD
++++ b/c8/ecs/src/runtime/BUILD
+@@ -84,6 +84,7 @@ js_library(
+         "//c8/ecs/src/runtime:camera-events",
+         "//c8/ecs/src/runtime:core-api",
+         "//c8/ecs/src/runtime:disabled",
++        "//c8/ecs/src/runtime:entity-types",
+         "//c8/ecs/src/runtime:event-ids",
+         "//c8/ecs/src/runtime:fly-controller",
+         "//c8/ecs/src/runtime:init-ready",
+@@ -710,6 +711,7 @@ js_library(
+         "state-machine.ts",
+     ],
+     deps = [
++        "//c8/ecs/src/runtime:entity-types",
+         "//c8/ecs/src/runtime:events",
+         "//c8/ecs/src/runtime:state-definer",
+         "//c8/ecs/src/runtime:state-machine-types",
+@@ -975,6 +977,8 @@ js_library(
+         "//c8/ecs/src/runtime:camera-manager-types",
+         "//c8/ecs/src/runtime:components",
+         "//c8/ecs/src/runtime:entity",
++        "//c8/ecs/src/runtime:entity-impl",
++        "//c8/ecs/src/runtime:entity-types",
+         "//c8/ecs/src/runtime:events",
+         "//c8/ecs/src/runtime:input-events",
+         "//c8/ecs/src/runtime:input-manager",
+@@ -1003,6 +1007,7 @@ js_library(
+ js_library(
+     name = "world",
+     srcs = [
++        "entity-types.ts",
+         "world.ts",
+         "world-attribute.ts",
+     ],
+@@ -1189,6 +1194,7 @@ js_test(
+         "//bzl/js:chai-js",
+         "//c8/ecs/src/runtime:test-env",
+         "//c8/ecs/src/runtime:test-runtime-lib",
++        "//c8/ecs/src/runtime:world",
+     ],
+ )
+ 
+@@ -1737,16 +1743,15 @@ js_test(
+     name = "entity-impl-test",
+     size = "small",
+     esnext = 1,
++    externalize_npm = 1,
+     main = [
+         "entity-impl-test.ts",
+     ],
+     npm_rule = "@npm-ecs//:npm-ecs",
+     deps = [
+         "//bzl/js:chai-js",
+-        "//c8/ecs/src/runtime:api",
+-        "//c8/ecs/src/runtime:entity-impl",
+-        "//c8/ecs/src/runtime:set-three",
+         "//c8/ecs/src/runtime:test-env",
++        "//c8/ecs/src/runtime:test-runtime-lib",
+         "//c8/ecs/src/runtime:world",
+     ],
+ )
+@@ -1770,13 +1775,9 @@ js_library(
+ 
+ js_library(
+     name = "entity-types",
+-    srcs = [
+-        "entity-types.ts",
+-    ],
++    srcs = [],
+     deps = [
+-        "//c8/ecs/src/runtime:transform-manager-types",
+-        "//c8/ecs/src/runtime:world-attribute",
+-        "//c8/ecs/src/shared:schema",
++        ":world",
+     ],
+ )
+ 
+@@ -1832,6 +1833,7 @@ js_library(
+         "//c8/ecs/src/runtime:components",
+         "//c8/ecs/src/runtime:event-ids",
+         "//c8/ecs/src/runtime:three-types",
++        "//c8/ecs/src/runtime:video-types",
+         "//c8/ecs/src/runtime:world",
+         "//c8/ecs/src/shared:instanced",
+         "//c8/ecs/src/shared:schema",
+@@ -1876,3 +1878,36 @@ js_test(
+         "//c8/ecs/src/shared:schema",
+     ],
+ )
++
++js_library(
++    name = "video-types",
++    srcs = [
++        "video-types.ts",
++    ],
++    visibility = [
++        "//visibility:public",
++    ],
++    deps = [
++        "//c8/ecs/src/runtime:components",
++        "//c8/ecs/src/runtime:world-attribute",
++        "//c8/ecs/src/shared:schema",
++    ],
++)
++
++js_test(
++    name = "state-machine-test",
++    size = "small",
++    esnext = 1,
++    externalize_npm = 1,
++    main = [
++        "state-machine-test.ts",
++    ],
++    npm_rule = "@npm-ecs//:npm-ecs",
++    deps = [
++        "//bzl/js:chai-js",
++        "//c8/ecs/src/runtime:state-machine",
++        "//c8/ecs/src/runtime:test-env",
++        "//c8/ecs/src/runtime:test-runtime-lib",
++        "//c8/ecs/src/runtime:world",
++    ],
++)
+diff --git a/c8/ecs/src/runtime/application.ts b/c8/ecs/src/runtime/application.ts
+index 125804ed9b9..5abf21f18f6 100644
+--- a/c8/ecs/src/runtime/application.ts
++++ b/c8/ecs/src/runtime/application.ts
+@@ -132,12 +132,6 @@ const makeApplication = (): IApplication => {
+       const motionPass = createMotionRenderPass(scene)
+ 
+       const render = (dt: number, frame?: any) => {
+-        if (needsSkyboxUpdate && pendingCameraType) {
+-          updateSkybox(pendingCameraType)
+-          needsSkyboxUpdate = false
+-          pendingCameraType = null
+-        }
+-
+         world.tick(dt)
+         maybeRefreshWorldMatrices(scene)
+         if (world.three.activeCamera !== currentCamera) {
+@@ -157,6 +151,12 @@ const makeApplication = (): IApplication => {
+           motionPass.render(renderer, frame)
+         }
+ 
++        if (needsSkyboxUpdate && pendingCameraType) {
++          updateSkybox(pendingCameraType)
++          needsSkyboxUpdate = false
++          pendingCameraType = null
++        }
++
+         world.tock()
+       }
+ 

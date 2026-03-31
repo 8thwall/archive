@@ -1,0 +1,350 @@
+From c14b307f8e1a9327bda58534db2607e4088880f7 Mon Sep 17 00:00:00 2001
+From: Owen Mech <owen@nianticspatial.com>
+Date: Thu, 24 Jul 2025 11:23:27 -0700
+Subject: [PATCH 1/5] [runtime] raycast from screen position
+
+---
+ c8/ecs/gen/ecs-definition-file.ts    |  4 ++++
+ c8/ecs/src/runtime/BUILD             |  1 +
+ c8/ecs/src/runtime/pointer-events.ts |  2 +-
+ c8/ecs/src/runtime/raycast.ts        | 27 +++++++++++++++++++++++++++
+ c8/ecs/src/runtime/world-create.ts   |  3 ++-
+ c8/ecs/src/runtime/world.ts          |  5 +++++
+ 6 files changed, 40 insertions(+), 2 deletions(-)
+
+diff --git a/c8/ecs/gen/ecs-definition-file.ts b/c8/ecs/gen/ecs-definition-file.ts
+index f0a3e13f102..c4ad07e702c 100644
+--- a/c8/ecs/gen/ecs-definition-file.ts
++++ b/c8/ecs/gen/ecs-definition-file.ts
+@@ -2531,6 +2531,10 @@ interface LateWorld {
+ 	getChildren: (eid: Eid) => Generator<Eid>;
+ 	raycast: (origin: Vec3Source, direction: Vec3Source, near?: number, far?: number) => IntersectionResult[];
+ 	raycastFrom: (eid: Eid, near?: number, far?: number) => IntersectionResult[];
++	raycastScreenPosition: (screenPosition: [
++		number,
++		number
++	], near?: number, far?: number) => IntersectionResult[];
+ 	audio: AudioControls;
+ 	camera: CameraManager;
+ 	pointer: PointerApi;
+diff --git a/c8/ecs/src/runtime/BUILD b/c8/ecs/src/runtime/BUILD
+index d43947e9341..ff84dd47510 100644
+--- a/c8/ecs/src/runtime/BUILD
++++ b/c8/ecs/src/runtime/BUILD
+@@ -1532,6 +1532,7 @@ js_library(
+         "raycast.ts",
+     ],
+     deps = [
++        "//c8/ecs/src/runtime:pointer-events",
+         "//c8/ecs/src/runtime:raycast-types",
+         "//c8/ecs/src/runtime:three",
+         "//c8/ecs/src/runtime:three-types",
+diff --git a/c8/ecs/src/runtime/pointer-events.ts b/c8/ecs/src/runtime/pointer-events.ts
+index 97fbce335aa..0335eededd5 100644
+--- a/c8/ecs/src/runtime/pointer-events.ts
++++ b/c8/ecs/src/runtime/pointer-events.ts
+@@ -93,7 +93,7 @@ type MaybeTargetedEvent = ScreenTouchStartEvent | ScreenTouchMoveEvent | ScreenT
+ 
+ const getProportionalPosition = (
+   element: HTMLElement,
+-  event: PointerEvent
++  event: Pick<PointerEvent, 'clientX' | 'clientY'>
+ ): ScreenPosition => {
+   const rect = element.getBoundingClientRect()
+   return ({
+diff --git a/c8/ecs/src/runtime/raycast.ts b/c8/ecs/src/runtime/raycast.ts
+index 653029990cb..13a68f44fe9 100644
+--- a/c8/ecs/src/runtime/raycast.ts
++++ b/c8/ecs/src/runtime/raycast.ts
+@@ -8,7 +8,9 @@ import {mat4} from './math/mat4'
+ import {quat} from './math/quat'
+ import THREE from './three'
+ import {makeRaycastIntersections} from '../shared/custom-sorting'
++import {getProportionalPosition} from './pointer-events'
+ 
++const origin_ = new THREE.Vector2()
+ const tempRayVector = vec3.zero()
+ const tempRaycaster = new THREE.Raycaster()
+ const tempMat4 = mat4.i()
+@@ -59,7 +61,32 @@ const raycastFrom = (
+   return raycast(world, tempTrs.t, tempRayVector, near, far)
+ }
+ 
++const raycastScreenPosition = (
++  world: World,
++  screenPosition: [number, number],
++  near: number = 0,
++  far: number = Infinity
++) => {
++  const {activeCamera} = world.three
++  if (!activeCamera) {
++    console.warn('No active camera for raycasting from screen position')
++    return []
++  }
++  tempRaycaster.near = near
++  tempRaycaster.far = far
++  tempRaycaster.camera = activeCamera
++  const mockEvent = {clientX: screenPosition[0], clientY: screenPosition[1]}
++  const proportionalPosition = getProportionalPosition(world.three.renderer.domElement, mockEvent)
++  origin_.set(proportionalPosition.x * 2 - 1, -proportionalPosition.y * 2 + 1)
++  tempRaycaster.setFromCamera(origin_, activeCamera)
++
++  const intersectedObjects: Intersection[] = makeRaycastIntersections([])
++  tempRaycaster.intersectObjects(world.three.scene.children, true, intersectedObjects)
++  return processRaycastResults(intersectedObjects)
++}
++
+ export {
+   raycast,
+   raycastFrom,
++  raycastScreenPosition,
+ }
+diff --git a/c8/ecs/src/runtime/world-create.ts b/c8/ecs/src/runtime/world-create.ts
+index 7b3c8d42d6b..b9f3c161b18 100644
+--- a/c8/ecs/src/runtime/world-create.ts
++++ b/c8/ecs/src/runtime/world-create.ts
+@@ -26,7 +26,7 @@ import type {PrefabsHandle, SceneHandle, SpacesHandle} from './scene-types'
+ import {notifyChanged} from './matrix-refresh'
+ import {spawnScene} from './scene-handle'
+ import {spawnIntoObject} from './spawn-into-object'
+-import {raycast, raycastFrom} from './raycast'
++import {raycast, raycastFrom, raycastScreenPosition} from './raycast'
+ import {createTransformManager} from './transform-manager'
+ import {getInstanceChild, spawnPrefab} from './prefab-entity'
+ import {createEntityReference} from './entity-impl'
+@@ -290,6 +290,7 @@ const createWorld = (
+     getChildren: getChildren.bind(null, world),
+     raycast: raycast.bind(null, world),
+     raycastFrom: raycastFrom.bind(null, world),
++    raycastScreenPosition: raycastScreenPosition.bind(null, world),
+     audio: audioControls,
+     getEntity,
+     camera: cameraManager,
+diff --git a/c8/ecs/src/runtime/world.ts b/c8/ecs/src/runtime/world.ts
+index 3235b1cdb42..233412132cd 100644
+--- a/c8/ecs/src/runtime/world.ts
++++ b/c8/ecs/src/runtime/world.ts
+@@ -87,6 +87,11 @@ interface LateWorld {
+     far?: number
+   ) => IntersectionResult[]
+   raycastFrom: (eid: Eid, near?: number, far?: number) => IntersectionResult[]
++  raycastScreenPosition: (
++    screenPosition: [number, number],
++    near?: number,
++    far?: number
++  ) => IntersectionResult[]
+   audio: AudioControls
+   camera: CameraManager
+   pointer: PointerApi
+
+From 681ab3ba6b090367586bcff96f223ae016188695 Mon Sep 17 00:00:00 2001
+From: Owen Mech <owen@nianticspatial.com>
+Date: Thu, 24 Jul 2025 11:26:16 -0700
+Subject: [PATCH 2/5] [runtime] raycast from screen position
+
+---
+ c8/ecs/src/runtime/raycast.ts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/c8/ecs/src/runtime/raycast.ts b/c8/ecs/src/runtime/raycast.ts
+index 13a68f44fe9..1ca651442fc 100644
+--- a/c8/ecs/src/runtime/raycast.ts
++++ b/c8/ecs/src/runtime/raycast.ts
+@@ -69,9 +69,9 @@ const raycastScreenPosition = (
+ ) => {
+   const {activeCamera} = world.three
+   if (!activeCamera) {
+-    console.warn('No active camera for raycasting from screen position')
+     return []
+   }
++
+   tempRaycaster.near = near
+   tempRaycaster.far = far
+   tempRaycaster.camera = activeCamera
+
+From bb46c340937b371205b977a12a68636c940648db Mon Sep 17 00:00:00 2001
+From: Owen Mech <owen@nianticspatial.com>
+Date: Thu, 24 Jul 2025 14:49:35 -0700
+Subject: [PATCH 3/5] [runtime] raycast from screen position
+
+---
+ c8/ecs/src/runtime/raycast.ts | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/raycast.ts b/c8/ecs/src/runtime/raycast.ts
+index 1ca651442fc..8f08d031064 100644
+--- a/c8/ecs/src/runtime/raycast.ts
++++ b/c8/ecs/src/runtime/raycast.ts
+@@ -8,7 +8,7 @@ import {mat4} from './math/mat4'
+ import {quat} from './math/quat'
+ import THREE from './three'
+ import {makeRaycastIntersections} from '../shared/custom-sorting'
+-import {getProportionalPosition} from './pointer-events'
++import {getProportionalPosition, ScreenPosition} from './pointer-events'
+ 
+ const origin_ = new THREE.Vector2()
+ const tempRayVector = vec3.zero()
+@@ -63,7 +63,7 @@ const raycastFrom = (
+ 
+ const raycastScreenPosition = (
+   world: World,
+-  screenPosition: [number, number],
++  screenPosition: ScreenPosition | [number, number],
+   near: number = 0,
+   far: number = Infinity
+ ) => {
+@@ -75,7 +75,9 @@ const raycastScreenPosition = (
+   tempRaycaster.near = near
+   tempRaycaster.far = far
+   tempRaycaster.camera = activeCamera
+-  const mockEvent = {clientX: screenPosition[0], clientY: screenPosition[1]}
++  const mockEvent = Array.isArray(screenPosition)
++    ? {clientX: screenPosition[0], clientY: screenPosition[1]}
++    : {clientX: screenPosition.x, clientY: screenPosition.y}
+   const proportionalPosition = getProportionalPosition(world.three.renderer.domElement, mockEvent)
+   origin_.set(proportionalPosition.x * 2 - 1, -proportionalPosition.y * 2 + 1)
+   tempRaycaster.setFromCamera(origin_, activeCamera)
+
+From 6e314ecf099658140b8ad049ab6149249e7bb1b2 Mon Sep 17 00:00:00 2001
+From: Owen Mech <owen@nianticspatial.com>
+Date: Thu, 24 Jul 2025 18:55:04 -0700
+Subject: [PATCH 4/5] [runtime] raycast from screen position
+
+---
+ c8/ecs/src/runtime/pointer-events.ts |  5 ++++-
+ c8/ecs/src/runtime/raycast.ts        | 25 +++++++++++++++++++------
+ 2 files changed, 23 insertions(+), 7 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/pointer-events.ts b/c8/ecs/src/runtime/pointer-events.ts
+index 0335eededd5..37125972c32 100644
+--- a/c8/ecs/src/runtime/pointer-events.ts
++++ b/c8/ecs/src/runtime/pointer-events.ts
+@@ -19,6 +19,8 @@ type ScreenPosition = {
+   y: number
+ }
+ 
++type PointerPosition = Pick<PointerEvent, 'clientX' | 'clientY'>
++
+ type PointerId = PointerEvent['pointerId']
+ 
+ interface ScreenTouchStartEvent {
+@@ -93,7 +95,7 @@ type MaybeTargetedEvent = ScreenTouchStartEvent | ScreenTouchMoveEvent | ScreenT
+ 
+ const getProportionalPosition = (
+   element: HTMLElement,
+-  event: Pick<PointerEvent, 'clientX' | 'clientY'>
++  event: PointerPosition
+ ): ScreenPosition => {
+   const rect = element.getBoundingClientRect()
+   return ({
+@@ -386,6 +388,7 @@ export {
+ 
+ export type {
+   ScreenPosition,
++  PointerPosition,
+   ScreenTouchStartEvent,
+   ScreenTouchMoveEvent,
+   ScreenTouchEndEvent,
+diff --git a/c8/ecs/src/runtime/raycast.ts b/c8/ecs/src/runtime/raycast.ts
+index 8f08d031064..877555f8758 100644
+--- a/c8/ecs/src/runtime/raycast.ts
++++ b/c8/ecs/src/runtime/raycast.ts
+@@ -8,7 +8,8 @@ import {mat4} from './math/mat4'
+ import {quat} from './math/quat'
+ import THREE from './three'
+ import {makeRaycastIntersections} from '../shared/custom-sorting'
+-import {getProportionalPosition, ScreenPosition} from './pointer-events'
++import {getProportionalPosition, PointerPosition, ScreenPosition} from './pointer-events'
++import type {MousePosition} from './input-events'
+ 
+ const origin_ = new THREE.Vector2()
+ const tempRayVector = vec3.zero()
+@@ -61,9 +62,15 @@ const raycastFrom = (
+   return raycast(world, tempTrs.t, tempRayVector, near, far)
+ }
+ 
++const isPointerPosition = (position: ScreenPosition | PointerPosition | MousePosition):
++  position is PointerPosition => 'clientX' in position && 'clientY' in position
++
++const isMousePosition = (position: ScreenPosition | PointerPosition | MousePosition):
++  position is MousePosition => Array.isArray(position)
++
+ const raycastScreenPosition = (
+   world: World,
+-  screenPosition: ScreenPosition | [number, number],
++  position: ScreenPosition | PointerPosition | MousePosition,
+   near: number = 0,
+   far: number = Infinity
+ ) => {
+@@ -75,10 +82,16 @@ const raycastScreenPosition = (
+   tempRaycaster.near = near
+   tempRaycaster.far = far
+   tempRaycaster.camera = activeCamera
+-  const mockEvent = Array.isArray(screenPosition)
+-    ? {clientX: screenPosition[0], clientY: screenPosition[1]}
+-    : {clientX: screenPosition.x, clientY: screenPosition.y}
+-  const proportionalPosition = getProportionalPosition(world.three.renderer.domElement, mockEvent)
++  let proportionalPosition: ScreenPosition
++  if (isPointerPosition(position)) {
++    proportionalPosition = getProportionalPosition(world.three.renderer.domElement, position)
++  } else if (isMousePosition(position)) {
++    const event = {clientX: position[0], clientY: position[1]}
++    proportionalPosition = getProportionalPosition(world.three.renderer.domElement, event)
++  } else {
++    proportionalPosition = position
++  }
++
+   origin_.set(proportionalPosition.x * 2 - 1, -proportionalPosition.y * 2 + 1)
+   tempRaycaster.setFromCamera(origin_, activeCamera)
+ 
+
+From cb8a29234a2c9b17ebebf7bff47aaf2f9f3a762d Mon Sep 17 00:00:00 2001
+From: Owen Mech <owen@nianticspatial.com>
+Date: Thu, 24 Jul 2025 19:02:19 -0700
+Subject: [PATCH 5/5] [runtime] raycast from screen position
+
+---
+ c8/ecs/src/runtime/BUILD           | 1 +
+ c8/ecs/src/runtime/input-events.ts | 5 ++++-
+ 2 files changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/c8/ecs/src/runtime/BUILD b/c8/ecs/src/runtime/BUILD
+index ff84dd47510..de65c44bae7 100644
+--- a/c8/ecs/src/runtime/BUILD
++++ b/c8/ecs/src/runtime/BUILD
+@@ -1532,6 +1532,7 @@ js_library(
+         "raycast.ts",
+     ],
+     deps = [
++        "//c8/ecs/src/runtime:input-events",
+         "//c8/ecs/src/runtime:pointer-events",
+         "//c8/ecs/src/runtime:raycast-types",
+         "//c8/ecs/src/runtime:three",
+diff --git a/c8/ecs/src/runtime/input-events.ts b/c8/ecs/src/runtime/input-events.ts
+index 341d33aa837..93a7bb31dd2 100644
+--- a/c8/ecs/src/runtime/input-events.ts
++++ b/c8/ecs/src/runtime/input-events.ts
+@@ -43,6 +43,8 @@ type MousePositions = {
+   scrollY: number
+ }
+ 
++type MousePosition = [number, number]
++
+ interface GamepadInput {
+   gamepad: Gamepad
+   btnIndexToButtonStatus: Map<number, BUTTON_STATUS>
+@@ -310,7 +312,7 @@ const createInputListener = (
+   const getGamepads = () => Array.from(gpdIndexToGamepadInput_.values())
+     .map(gamepadInput => gamepadInput.gamepad)
+ 
+-  const getMousePosition = () => ([
++  const getMousePosition = (): MousePosition => ([
+     mousePositionsToValue_.clientX,
+     mousePositionsToValue_.clientY,
+   ] as const)
+@@ -461,4 +463,5 @@ export type {
+   InputListenerApi,
+   GamepadConnectedEvent,
+   GamepadDisconnectedEvent,
++  MousePosition,
+ }

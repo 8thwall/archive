@@ -1,0 +1,210 @@
+From fb8a4fc45bf3471906cdf88d56dc5ce4d38bd5cb Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Wed, 8 Oct 2025 16:00:27 -0700
+Subject: [PATCH 1/7] [ecs][cloud-studio] Add Audio Buffer as a new audio
+ source
+
+
+From da41e712bd7b728e31eea107a0d44cb656029118 Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Wed, 8 Oct 2025 16:31:02 -0700
+Subject: [PATCH 2/7] [ecs][cloud-studio] Add Audio Buffer as a new audio
+ source
+
+
+From 5ae097af7f5f867754996b763e8ba02087804679 Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Wed, 8 Oct 2025 16:31:39 -0700
+Subject: [PATCH 3/7] [ecs][cloud-studio] Add Audio Buffer as a new audio
+ source
+
+---
+ c8/ecs/src/runtime/audio-buffer-sound.ts | 151 +++++++++++++++++++++++
+ 1 file changed, 151 insertions(+)
+ create mode 100644 c8/ecs/src/runtime/audio-buffer-sound.ts
+
+diff --git a/c8/ecs/src/runtime/audio-buffer-sound.ts b/c8/ecs/src/runtime/audio-buffer-sound.ts
+new file mode 100644
+index 00000000000..d870a8815ad
+--- /dev/null
++++ b/c8/ecs/src/runtime/audio-buffer-sound.ts
+@@ -0,0 +1,151 @@
++// import {DEFAULT_PITCH} from '../shared/audio-constants'
++// import {assets} from './assets'
++// import type {SoundSource} from './audio-sound'
++// import type {AudioSettings} from './audio-sound-types'
++// import type * as THREE_TYPES from './three-types'
++// import THREE from './three'
++
++// const createBufferAudio =
++// (context: AudioContext, listener: THREE_TYPES.AudioListener, audio: AudioSettings): SoundSource => {
++//   let audioNode: THREE_TYPES.PositionalAudio | THREE_TYPES.Audio
++//   let onAudioReady: (() => void) | null = null
++//   let onAudioEnded: (() => void) | null = null
++
++//   const controller = new AbortController()
++//   let url: string | undefined
++//   let buffer: AudioBuffer | null = null
++//   let startTime = 0
++
++//   audioNode = audio.positional
++//     ? new THREE.PositionalAudio(listener)
++//     : new THREE.Audio<GainNode>(listener)
++
++//   const setAudioNode = (positional: boolean) => {
++//     if (positional === !!(audioNode instanceof THREE.PositionalAudio)) {
++//       return
++//     }
++//     audioNode = positional
++//       ? new THREE.PositionalAudio(listener)
++//       : new THREE.Audio<GainNode>(listener)
++//     if (buffer) audioNode.setBuffer(buffer)
++//   }
++
++//   const loadSource = async (source: string, pitch?: number) => {
++//     try {
++//       const {signal} = controller
++//       const asset = await assets.load({url: source})
++//       if (signal.aborted) return
++//       const data = await asset.data.arrayBuffer()
++//       if (signal.aborted) return
++//       context.decodeAudioData(data, (decodedBuffer) => {
++//         audioNode.setBuffer(decodedBuffer)
++//         audioNode.setPlaybackRate(pitch ?? DEFAULT_PITCH)
++//         audioNode.setLoop(!!audio.loop)
++//         audioNode.setVolume(audio.volume ?? 1)
++//         url = source
++//         if (!audio.paused) {
++//           audioNode.play()
++//         }
++//         // update the internal buffer reference
++//         buffer = decodedBuffer
++//         startTime = context.currentTime
++//         if (onAudioReady) {
++//           onAudioReady()
++//         }
++//       })
++//     } catch (err) {
++//       // eslint-disable-next-line no-console
++//       console.warn('failed to load audio source', err)
++//     }
++//   }
++
++//   const getCurrentTime = (): number => {
++//     if (!buffer) return 0
++//     if (!audioNode.isPlaying) return startTime + audioNode.offset
++
++//     const total = (context.currentTime - startTime) - audioNode.offset * audioNode.getPlaybackRate()
++
++//     return audioNode.loop ? total % buffer.duration : Math.min(total, buffer.duration)
++//   }
++
++//   const setCurrentTime = (time: number) => {
++//     if (!buffer) return
++
++//     const wasPlaying = audioNode.isPlaying
++//     if (wasPlaying) audioNode.stop()
++
++//     const startOffset = Math.max(0, Math.min(time, buffer.duration))
++
++//     if (wasPlaying) {
++//       audioNode.offset = startOffset
++//       audioNode.play()
++//       startTime = context.currentTime
++//     }
++//   }
++
++//   // you play from the start, you play from the last offset
++//   const playSourceNode = () => {
++//     if (!buffer || audioNode.isPlaying) return
++//     audioNode.play()
++//   }
++
++//   const pauseSourceNode = () => {
++//     if (!buffer || !audioNode.isPlaying) return
++//     audioNode.stop()
++//   }
++
++//   const setPlaybackRate = (pitch: number) => {
++//     const elapsed = getCurrentTime()
++//     audioNode.offset = elapsed
++//     audioNode.setPlaybackRate(pitch)
++//   }
++
++//   loadSource(audio.url, audio.pitch)
++
++//   return {
++//     update: (config: AudioSettings) => {
++//       if (config.url && config.url !== url) {
++//         loadSource(config.url, config.pitch)
++//       } else if (config.pitch) {
++//         setPlaybackRate(config.pitch)
++//       }
++
++//       if (config.positional !== undefined) setAudioNode(config.positional)
++//       if (config.loop !== undefined) audioNode.setLoop(config.loop)
++//       if (config.volume !== undefined) audioNode.setVolume(config.volume)
++//       if (config.paused) audioNode.pause()
++//     },
++//     getCurrentTime,
++//     setCurrentTime,
++//     pause: () => {
++//       pauseSourceNode()
++//     },
++//     resume: () => {
++//       playSourceNode()
++//     },
++//     destroy: () => {
++//       controller.abort()
++//       pauseSourceNode()
++//     },
++//     onAudioReady: (cb) => {
++//       if (cb) {
++//         onAudioReady = cb
++//       } else if (onAudioReady) {
++//         onAudioReady = null
++//       }
++//     },
++//     onAudioEnded: (cb) => {
++//       if (cb) {
++//         onAudioEnded = cb
++//       } else if (onAudioEnded) {
++//         onAudioEnded = null
++//       }
++//     },
++//     audioNode,
++//     controller,
++//   }
++// }
++
++// export {
++//   createBufferAudio,
++// }
+
+From 21150c0eddaa213420eb8487f6b158ef746f50ea Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Thu, 9 Oct 2025 13:51:37 -0700
+Subject: [PATCH 4/7] [ecs][cloud-studio] Add Audio Buffer as a new audio
+ source
+
+
+From 59ce7ee22853b4f48785160e46787efb810a1c66 Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Thu, 9 Oct 2025 14:18:17 -0700
+Subject: [PATCH 5/7] [ecs][cloud-studio] Add Audio Buffer as a new audio
+ source
+
+
+From 5a2de6fe8c0849ffd5b2062c143f0e03b042e588 Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Mon, 13 Oct 2025 11:52:43 -0700
+Subject: [PATCH 6/7] [ecs][cloud-studio] Add Audio Buffer as a new audio
+ source
+
+
+From 93de1d8a59853f1e81f0dcb82cebd1d2496e3f8b Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Thu, 16 Oct 2025 16:27:32 -0700
+Subject: [PATCH 7/7] [ecs][cloud-studio] Add Audio Buffer as a new audio
+ source
+

@@ -1,0 +1,781 @@
+From 5b3e38a8529c6f667b77b843561e3d9ec92406f6 Mon Sep 17 00:00:00 2001
+From: lukeyreyno <lucas@nianticspatial.com>
+Date: Tue, 23 Sep 2025 13:21:25 -0700
+Subject: [PATCH 1/5] DRAFT: [nae][ecs] Move fonts to resource manager
+
+---
+ c8/ecs/src/shared/fonts.ts            | 82 +--------------------------
+ c8/ecs/src/shared/resource-manager.ts | 69 ++++++++++++++++++++++
+ 2 files changed, 72 insertions(+), 79 deletions(-)
+ create mode 100644 c8/ecs/src/shared/resource-manager.ts
+
+diff --git a/c8/ecs/src/shared/fonts.ts b/c8/ecs/src/shared/fonts.ts
+index b4e26608868..b848a541491 100644
+--- a/c8/ecs/src/shared/fonts.ts
++++ b/c8/ecs/src/shared/fonts.ts
+@@ -6,91 +6,15 @@
+ // fonts base on the font file uploaded by users in the future
+ // TODO (tri) change static fonts to dynamic ones
+ 
++import {RESOURCE_MAP} from '@ecs/shared/resource-manager'
++
+ type Font = {
+   json: string
+   png: string
+   ttf: string
+ }
+ 
+-const FONTS: Map<string, Font> = new Map([
+-  [
+-    'Nunito', {
+-      json: 'https://cdn.8thwall.com/web/font-atlases/nunito/nunito.json',
+-      png: 'https://cdn.8thwall.com/web/font-atlases/nunito/nunito.png',
+-      ttf: 'https://cdn.8thwall.com/web/fonts/Nunito-Regular.ttf',
+-    },
+-  ],
+-  [
+-    'Akzidenz Grotesk', {
+-      json: 'https://cdn.8thwall.com/web/font-atlases/akzidenz_grotesk/akzidenz_grotesk.json',
+-      png: 'https://cdn.8thwall.com/web/font-atlases/akzidenz_grotesk/akzidenz_grotesk.png',
+-      ttf: 'https://cdn.8thwall.com/web/fonts/akzidenz-grotesk-regular.ttf',
+-    },
+-  ],
+-  [
+-    'Baskerville', {
+-      json: 'https://cdn.8thwall.com/web/font-atlases/baskerville/baskerville.json',
+-      png: 'https://cdn.8thwall.com/web/font-atlases/baskerville/baskerville.png',
+-      ttf: 'https://cdn.8thwall.com/web/fonts/libre-baskerville-regular.ttf',
+-    },
+-  ],
+-  [
+-    'Futura', {
+-      json: 'https://cdn.8thwall.com/web/font-atlases/futura/futura.json',
+-      png: 'https://cdn.8thwall.com/web/font-atlases/futura/futura.png',
+-      ttf: 'https://cdn.8thwall.com/web/fonts/futura-regular.ttf',
+-    },
+-  ],
+-  [
+-    'Gotham', {
+-      json: 'https://cdn.8thwall.com/web/font-atlases/gotham/gotham.json',
+-      png: 'https://cdn.8thwall.com/web/font-atlases/gotham/gotham.png',
+-      ttf: 'https://cdn.8thwall.com/web/fonts/gotham-regular.ttf',
+-    },
+-  ],
+-  [
+-    'Helvetica', {
+-      json: 'https://cdn.8thwall.com/web/font-atlases/helvetica/helvetica.json',
+-      png: 'https://cdn.8thwall.com/web/font-atlases/helvetica/helvetica.png',
+-      ttf: 'https://cdn.8thwall.com/web/fonts/helvetica-regular.ttf',
+-    },
+-  ],
+-  [
+-    'Nanum Pen Script', {
+-      json: 'https://cdn.8thwall.com/web/font-atlases/nanum_pen_script/nanum_pen_script.json',
+-      png: 'https://cdn.8thwall.com/web/font-atlases/nanum_pen_script/nanum_pen_script.png',
+-      ttf: 'https://cdn.8thwall.com/web/fonts/nanum-pen-script-regular.ttf',
+-    },
+-  ],
+-  [
+-    'Press Start 2p', {
+-      json: 'https://cdn.8thwall.com/web/font-atlases/press_start_2p/press_start_2p.json',
+-      png: 'https://cdn.8thwall.com/web/font-atlases/press_start_2p/press_start_2p.png',
+-      ttf: 'https://cdn.8thwall.com/web/fonts/press-start-2p-regular.ttf',
+-    },
+-  ],
+-  [
+-    'Times', {
+-      json: 'https://cdn.8thwall.com/web/font-atlases/times/times.json',
+-      png: 'https://cdn.8thwall.com/web/font-atlases/times/times.png',
+-      ttf: 'https://cdn.8thwall.com/web/fonts/times-regular.ttf',
+-    },
+-  ],
+-  [
+-    'Inconsolata', {
+-      json: 'https://cdn.8thwall.com/web/font-atlases/inconsolata/inconsolata.json',
+-      png: 'https://cdn.8thwall.com/web/font-atlases/inconsolata/inconsolata.png',
+-      ttf: 'https://cdn.8thwall.com/web/fonts/inconsolata-regular.ttf',
+-    },
+-  ],
+-  [
+-    'Roboto', {
+-      json: 'https://cdn.8thwall.com/web/font-atlases/roboto/roboto.json',
+-      png: 'https://cdn.8thwall.com/web/font-atlases/roboto/roboto.png',
+-      ttf: 'https://cdn.8thwall.com/web/fonts/roboto-regular.ttf',
+-    },
+-  ],
+-])
++const FONTS: Map<string, Font> = new Map(Object.entries(RESOURCE_MAP.FONT))
+ 
+ const DEFAULT_FONT_NAME = 'Nunito'
+ const DEFAULT_FONT = FONTS.get(DEFAULT_FONT_NAME)!
+diff --git a/c8/ecs/src/shared/resource-manager.ts b/c8/ecs/src/shared/resource-manager.ts
+new file mode 100644
+index 00000000000..1f178c08279
+--- /dev/null
++++ b/c8/ecs/src/shared/resource-manager.ts
+@@ -0,0 +1,69 @@
++// @attr[](visibility = "//reality/app/nae/packager:__subpackages__")
++// @attr[](visibility = "//c8/ecs:__subpackages__")
++// @attr[](visibility = "//reality/cloud:shared")
++
++const FONT_MAP = {
++  'Nunito': {
++    json: 'https://cdn.8thwall.com/web/font-atlases/nunito/nunito.json',
++    png: 'https://cdn.8thwall.com/web/font-atlases/nunito/nunito.png',
++    ttf: 'https://cdn.8thwall.com/web/fonts/Nunito-Regular.ttf',
++  },
++  'Akzidenz Grotesk': {
++    json: 'https://cdn.8thwall.com/web/font-atlases/akzidenz_grotesk/akzidenz_grotesk.json',
++    png: 'https://cdn.8thwall.com/web/font-atlases/akzidenz_grotesk/akzidenz_grotesk.png',
++    ttf: 'https://cdn.8thwall.com/web/fonts/akzidenz-grotesk-regular.ttf',
++  },
++  'Baskerville': {
++    json: 'https://cdn.8thwall.com/web/font-atlases/baskerville/baskerville.json',
++    png: 'https://cdn.8thwall.com/web/font-atlases/baskerville/baskerville.png',
++    ttf: 'https://cdn.8thwall.com/web/fonts/libre-baskerville-regular.ttf',
++  },
++  'Futura': {
++    json: 'https://cdn.8thwall.com/web/font-atlases/futura/futura.json',
++    png: 'https://cdn.8thwall.com/web/font-atlases/futura/futura.png',
++    ttf: 'https://cdn.8thwall.com/web/fonts/futura-regular.ttf',
++  },
++  'Gotham': {
++    json: 'https://cdn.8thwall.com/web/font-atlases/gotham/gotham.json',
++    png: 'https://cdn.8thwall.com/web/font-atlases/gotham/gotham.png',
++    ttf: 'https://cdn.8thwall.com/web/fonts/gotham-regular.ttf',
++  },
++  'Helvetica': {
++    json: 'https://cdn.8thwall.com/web/font-atlases/helvetica/helvetica.json',
++    png: 'https://cdn.8thwall.com/web/font-atlases/helvetica/helvetica.png',
++    ttf: 'https://cdn.8thwall.com/web/fonts/helvetica-regular.ttf',
++  },
++  'Nanum Pen Script': {
++    json: 'https://cdn.8thwall.com/web/font-atlases/nanum_pen_script/nanum_pen_script.json',
++    png: 'https://cdn.8thwall.com/web/font-atlases/nanum_pen_script/nanum_pen_script.png',
++    ttf: 'https://cdn.8thwall.com/web/fonts/nanum-pen-script-regular.ttf',
++  },
++  'Press Start 2p': {
++    json: 'https://cdn.8thwall.com/web/font-atlases/press_start_2p/press_start_2p.json',
++    png: 'https://cdn.8thwall.com/web/font-atlases/press_start_2p/press_start_2p.png',
++    ttf: 'https://cdn.8thwall.com/web/fonts/press-start-2p-regular.ttf',
++  },
++  'Times': {
++    json: 'https://cdn.8thwall.com/web/font-atlases/times/times.json',
++    png: 'https://cdn.8thwall.com/web/font-atlases/times/times.png',
++    ttf: 'https://cdn.8thwall.com/web/fonts/times-regular.ttf',
++  },
++  'Inconsolata': {
++    json: 'https://cdn.8thwall.com/web/font-atlases/inconsolata/inconsolata.json',
++    png: 'https://cdn.8thwall.com/web/font-atlases/inconsolata/inconsolata.png',
++    ttf: 'https://cdn.8thwall.com/web/fonts/inconsolata-regular.ttf',
++  },
++  'Roboto': {
++    json: 'https://cdn.8thwall.com/web/font-atlases/roboto/roboto.json',
++    png: 'https://cdn.8thwall.com/web/font-atlases/roboto/roboto.png',
++    ttf: 'https://cdn.8thwall.com/web/fonts/roboto-regular.ttf',
++  },
++}
++
++const RESOURCE_MAP = {
++  FONT: FONT_MAP,
++}
++
++export {
++  RESOURCE_MAP,
++}
+
+From 770c5c1feb96580d1ed2633ddb150fcc0f1ac216 Mon Sep 17 00:00:00 2001
+From: lukeyreyno <lucas@nianticspatial.com>
+Date: Tue, 23 Sep 2025 13:37:39 -0700
+Subject: [PATCH 2/5] DRAFT: [nae][ecs] Move fonts to resource manager
+
+---
+ c8/ecs/src/shared/BUILD    | 15 +++++++++++++++
+ c8/ecs/src/shared/fonts.ts |  2 +-
+ 2 files changed, 16 insertions(+), 1 deletion(-)
+
+diff --git a/c8/ecs/src/shared/BUILD b/c8/ecs/src/shared/BUILD
+index 37d52e11f8f..1ebc246cf9a 100644
+--- a/c8/ecs/src/shared/BUILD
++++ b/c8/ecs/src/shared/BUILD
+@@ -287,6 +287,9 @@ js_library(
+         "//reality/app/nae/packager:__subpackages__",
+         "//reality/cloud:shared",
+     ],
++    deps = [
++        "//c8/ecs/src/shared:resource-manager",
++    ],
+ )
+ 
+ js_library(
+@@ -907,3 +910,15 @@ js_library(
+         "//reality/cloud:shared",
+     ],
+ )
++
++js_library(
++    name = "resource-manager",
++    srcs = [
++        "resource-manager.ts",
++    ],
++    visibility = [
++        "//c8/ecs:__subpackages__",
++        "//reality/app/nae/packager:__subpackages__",
++        "//reality/cloud:shared",
++    ],
++)
+diff --git a/c8/ecs/src/shared/fonts.ts b/c8/ecs/src/shared/fonts.ts
+index b848a541491..4693142456f 100644
+--- a/c8/ecs/src/shared/fonts.ts
++++ b/c8/ecs/src/shared/fonts.ts
+@@ -6,7 +6,7 @@
+ // fonts base on the font file uploaded by users in the future
+ // TODO (tri) change static fonts to dynamic ones
+ 
+-import {RESOURCE_MAP} from '@ecs/shared/resource-manager'
++import {RESOURCE_MAP} from './resource-manager'
+ 
+ type Font = {
+   json: string
+
+From 74908283cded90490154090cbf4129d5113549c4 Mon Sep 17 00:00:00 2001
+From: lukeyreyno <lucas@nianticspatial.com>
+Date: Thu, 25 Sep 2025 14:28:11 -0700
+Subject: [PATCH 3/5] DRAFT: [nae][ecs] Move fonts to resource manager
+
+---
+ c8/ecs/src/shared/BUILD               |   5 --
+ c8/ecs/src/shared/fonts.ts            |   4 +-
+ c8/ecs/src/shared/resource-manager.ts | 116 +++++++++++++++++---------
+ 3 files changed, 80 insertions(+), 45 deletions(-)
+
+diff --git a/c8/ecs/src/shared/BUILD b/c8/ecs/src/shared/BUILD
+index 1ebc246cf9a..a1b7d56af53 100644
+--- a/c8/ecs/src/shared/BUILD
++++ b/c8/ecs/src/shared/BUILD
+@@ -916,9 +916,4 @@ js_library(
+     srcs = [
+         "resource-manager.ts",
+     ],
+-    visibility = [
+-        "//c8/ecs:__subpackages__",
+-        "//reality/app/nae/packager:__subpackages__",
+-        "//reality/cloud:shared",
+-    ],
+ )
+diff --git a/c8/ecs/src/shared/fonts.ts b/c8/ecs/src/shared/fonts.ts
+index 4693142456f..bad24e43988 100644
+--- a/c8/ecs/src/shared/fonts.ts
++++ b/c8/ecs/src/shared/fonts.ts
+@@ -6,7 +6,7 @@
+ // fonts base on the font file uploaded by users in the future
+ // TODO (tri) change static fonts to dynamic ones
+ 
+-import {RESOURCE_MAP} from './resource-manager'
++import {resourceManager} from './resource-manager'
+ 
+ type Font = {
+   json: string
+@@ -14,7 +14,7 @@ type Font = {
+   ttf: string
+ }
+ 
+-const FONTS: Map<string, Font> = new Map(Object.entries(RESOURCE_MAP.FONT))
++const FONTS: Map<string, Font> = new Map(Object.entries(resourceManager.loadResourceMap('FONT')))
+ 
+ const DEFAULT_FONT_NAME = 'Nunito'
+ const DEFAULT_FONT = FONTS.get(DEFAULT_FONT_NAME)!
+diff --git a/c8/ecs/src/shared/resource-manager.ts b/c8/ecs/src/shared/resource-manager.ts
+index 1f178c08279..bfef78ae9c4 100644
+--- a/c8/ecs/src/shared/resource-manager.ts
++++ b/c8/ecs/src/shared/resource-manager.ts
+@@ -1,62 +1,58 @@
+-// @attr[](visibility = "//reality/app/nae/packager:__subpackages__")
+-// @attr[](visibility = "//c8/ecs:__subpackages__")
+-// @attr[](visibility = "//reality/cloud:shared")
+-
+ const FONT_MAP = {
+   'Nunito': {
+-    json: 'https://cdn.8thwall.com/web/font-atlases/nunito/nunito.json',
+-    png: 'https://cdn.8thwall.com/web/font-atlases/nunito/nunito.png',
+-    ttf: 'https://cdn.8thwall.com/web/fonts/Nunito-Regular.ttf',
++    json: '/web/font-atlases/nunito/nunito.json',
++    png: '/web/font-atlases/nunito/nunito.png',
++    ttf: '/web/fonts/Nunito-Regular.ttf',
+   },
+   'Akzidenz Grotesk': {
+-    json: 'https://cdn.8thwall.com/web/font-atlases/akzidenz_grotesk/akzidenz_grotesk.json',
+-    png: 'https://cdn.8thwall.com/web/font-atlases/akzidenz_grotesk/akzidenz_grotesk.png',
+-    ttf: 'https://cdn.8thwall.com/web/fonts/akzidenz-grotesk-regular.ttf',
++    json: '/web/font-atlases/akzidenz_grotesk/akzidenz_grotesk.json',
++    png: '/web/font-atlases/akzidenz_grotesk/akzidenz_grotesk.png',
++    ttf: '/web/fonts/akzidenz-grotesk-regular.ttf',
+   },
+   'Baskerville': {
+-    json: 'https://cdn.8thwall.com/web/font-atlases/baskerville/baskerville.json',
+-    png: 'https://cdn.8thwall.com/web/font-atlases/baskerville/baskerville.png',
+-    ttf: 'https://cdn.8thwall.com/web/fonts/libre-baskerville-regular.ttf',
++    json: '/web/font-atlases/baskerville/baskerville.json',
++    png: '/web/font-atlases/baskerville/baskerville.png',
++    ttf: '/web/fonts/libre-baskerville-regular.ttf',
+   },
+   'Futura': {
+-    json: 'https://cdn.8thwall.com/web/font-atlases/futura/futura.json',
+-    png: 'https://cdn.8thwall.com/web/font-atlases/futura/futura.png',
+-    ttf: 'https://cdn.8thwall.com/web/fonts/futura-regular.ttf',
++    json: '/web/font-atlases/futura/futura.json',
++    png: '/web/font-atlases/futura/futura.png',
++    ttf: '/web/fonts/futura-regular.ttf',
+   },
+   'Gotham': {
+-    json: 'https://cdn.8thwall.com/web/font-atlases/gotham/gotham.json',
+-    png: 'https://cdn.8thwall.com/web/font-atlases/gotham/gotham.png',
+-    ttf: 'https://cdn.8thwall.com/web/fonts/gotham-regular.ttf',
++    json: '/web/font-atlases/gotham/gotham.json',
++    png: '/web/font-atlases/gotham/gotham.png',
++    ttf: '/web/fonts/gotham-regular.ttf',
+   },
+   'Helvetica': {
+-    json: 'https://cdn.8thwall.com/web/font-atlases/helvetica/helvetica.json',
+-    png: 'https://cdn.8thwall.com/web/font-atlases/helvetica/helvetica.png',
+-    ttf: 'https://cdn.8thwall.com/web/fonts/helvetica-regular.ttf',
++    json: '/web/font-atlases/helvetica/helvetica.json',
++    png: '/web/font-atlases/helvetica/helvetica.png',
++    ttf: '/web/fonts/helvetica-regular.ttf',
+   },
+   'Nanum Pen Script': {
+-    json: 'https://cdn.8thwall.com/web/font-atlases/nanum_pen_script/nanum_pen_script.json',
+-    png: 'https://cdn.8thwall.com/web/font-atlases/nanum_pen_script/nanum_pen_script.png',
+-    ttf: 'https://cdn.8thwall.com/web/fonts/nanum-pen-script-regular.ttf',
++    json: '/web/font-atlases/nanum_pen_script/nanum_pen_script.json',
++    png: '/web/font-atlases/nanum_pen_script/nanum_pen_script.png',
++    ttf: '/web/fonts/nanum-pen-script-regular.ttf',
+   },
+   'Press Start 2p': {
+-    json: 'https://cdn.8thwall.com/web/font-atlases/press_start_2p/press_start_2p.json',
+-    png: 'https://cdn.8thwall.com/web/font-atlases/press_start_2p/press_start_2p.png',
+-    ttf: 'https://cdn.8thwall.com/web/fonts/press-start-2p-regular.ttf',
++    json: '/web/font-atlases/press_start_2p/press_start_2p.json',
++    png: '/web/font-atlases/press_start_2p/press_start_2p.png',
++    ttf: '/web/fonts/press-start-2p-regular.ttf',
+   },
+   'Times': {
+-    json: 'https://cdn.8thwall.com/web/font-atlases/times/times.json',
+-    png: 'https://cdn.8thwall.com/web/font-atlases/times/times.png',
+-    ttf: 'https://cdn.8thwall.com/web/fonts/times-regular.ttf',
++    json: '/web/font-atlases/times/times.json',
++    png: '/web/font-atlases/times/times.png',
++    ttf: '/web/fonts/times-regular.ttf',
+   },
+   'Inconsolata': {
+-    json: 'https://cdn.8thwall.com/web/font-atlases/inconsolata/inconsolata.json',
+-    png: 'https://cdn.8thwall.com/web/font-atlases/inconsolata/inconsolata.png',
+-    ttf: 'https://cdn.8thwall.com/web/fonts/inconsolata-regular.ttf',
++    json: '/web/font-atlases/inconsolata/inconsolata.json',
++    png: '/web/font-atlases/inconsolata/inconsolata.png',
++    ttf: '/web/fonts/inconsolata-regular.ttf',
+   },
+   'Roboto': {
+-    json: 'https://cdn.8thwall.com/web/font-atlases/roboto/roboto.json',
+-    png: 'https://cdn.8thwall.com/web/font-atlases/roboto/roboto.png',
+-    ttf: 'https://cdn.8thwall.com/web/fonts/roboto-regular.ttf',
++    json: '/web/font-atlases/roboto/roboto.json',
++    png: '/web/font-atlases/roboto/roboto.png',
++    ttf: '/web/fonts/roboto-regular.ttf',
+   },
+ }
+ 
+@@ -64,6 +60,50 @@ const RESOURCE_MAP = {
+   FONT: FONT_MAP,
+ }
+ 
++type ResourceType = keyof typeof RESOURCE_MAP
++
++const createResourceManager = () => {
++  const defaultPrefix = 'https://cdn.8thwall.com'
++  let prefix = defaultPrefix
++
++  const prefixResource = <T extends string | Record<string, string>>(resource: T): T => {
++    if (typeof resource === 'string') {
++      return (prefix + resource) as T
++    } else if (typeof resource === 'object' && resource !== null) {
++      const result: Record<string, string> = {}
++      for (const [key, value] of Object.entries(resource)) {
++        result[key] = prefix + value
++      }
++      return result as T
++    }
++    throw new Error('Invalid resource format')
++  }
++
++  const loadResourceMap = <T extends ResourceType>(type: T): typeof RESOURCE_MAP[T] => {
++    const resourceMap = RESOURCE_MAP[type]
++    if (!resourceMap) {
++      throw new Error(`Resource type not found: ${type}`)
++    }
++    return Object.fromEntries(
++      Object.entries(resourceMap).map(([key, value]) => [key, prefixResource(value)])
++    ) as typeof RESOURCE_MAP[T]
++  }
++
++  // TODO(lreyna): Add method to load individual resources by name and type
++  // e.g. loadResource('FONT', 'Nunito')
++
++  const updateResourcePrefix = (newPrefix: string) => {
++    prefix = newPrefix
++  }
++
++  return {
++    loadResourceMap,
++    updateResourcePrefix,
++  }
++}
++
++const resourceManager = createResourceManager()
++
+ export {
+-  RESOURCE_MAP,
++  resourceManager,
+ }
+
+From 58a89aec7d4be033438b8aa42e114433701d913f Mon Sep 17 00:00:00 2001
+From: lukeyreyno <lucas@nianticspatial.com>
+Date: Wed, 1 Oct 2025 10:53:26 -0700
+Subject: [PATCH 4/5] DRAFT: [nae][ecs] Move fonts to resource manager
+
+---
+ c8/ecs/src/shared/BUILD               |   3 +
+ c8/ecs/src/shared/fonts.ts            |  27 ++++++-
+ c8/ecs/src/shared/resource-manager.ts | 108 ++++++++++++++++----------
+ 3 files changed, 93 insertions(+), 45 deletions(-)
+
+diff --git a/c8/ecs/src/shared/BUILD b/c8/ecs/src/shared/BUILD
+index a1b7d56af53..9a19a064f89 100644
+--- a/c8/ecs/src/shared/BUILD
++++ b/c8/ecs/src/shared/BUILD
+@@ -916,4 +916,7 @@ js_library(
+     srcs = [
+         "resource-manager.ts",
+     ],
++    deps = [
++        "//c8/ecs/src/shared:fonts",
++    ],
+ )
+diff --git a/c8/ecs/src/shared/fonts.ts b/c8/ecs/src/shared/fonts.ts
+index bad24e43988..03ca93daa3c 100644
+--- a/c8/ecs/src/shared/fonts.ts
++++ b/c8/ecs/src/shared/fonts.ts
+@@ -14,10 +14,32 @@ type Font = {
+   ttf: string
+ }
+ 
+-const FONTS: Map<string, Font> = new Map(Object.entries(resourceManager.loadResourceMap('FONT')))
++const FontMap = () => {
++  const get = (key: string) => resourceManager.getResource('FONT', key) as Font | undefined
++
++  const has = (key: string): boolean => resourceManager.hasResource('FONT', key)
++
++  const values = () => {
++    const fontResourceList = resourceManager.listResources('FONT')
++    return fontResourceList.map((fontName) => {
++      const font = get(fontName)
++      if (!font) {
++        throw new Error(`Font not found: ${fontName}`)
++      }
++      return font
++    })
++  }
++
++  return {
++    get,
++    has,
++    values,
++  }
++}
++
++const FONTS = FontMap()
+ 
+ const DEFAULT_FONT_NAME = 'Nunito'
+-const DEFAULT_FONT = FONTS.get(DEFAULT_FONT_NAME)!
+ 
+ export type {
+   Font,
+@@ -26,5 +48,4 @@ export type {
+ export {
+   FONTS,
+   DEFAULT_FONT_NAME,
+-  DEFAULT_FONT,
+ }
+diff --git a/c8/ecs/src/shared/resource-manager.ts b/c8/ecs/src/shared/resource-manager.ts
+index bfef78ae9c4..a3c40abfcc2 100644
+--- a/c8/ecs/src/shared/resource-manager.ts
++++ b/c8/ecs/src/shared/resource-manager.ts
+@@ -1,58 +1,60 @@
+-const FONT_MAP = {
++import type {Font} from './fonts'
++
++const FONT_MAP: Record<string, Font> = {
+   'Nunito': {
+-    json: '/web/font-atlases/nunito/nunito.json',
+-    png: '/web/font-atlases/nunito/nunito.png',
+-    ttf: '/web/fonts/Nunito-Regular.ttf',
++    json: 'font-atlases/nunito/nunito.json',
++    png: 'font-atlases/nunito/nunito.png',
++    ttf: 'fonts/Nunito-Regular.ttf',
+   },
+   'Akzidenz Grotesk': {
+-    json: '/web/font-atlases/akzidenz_grotesk/akzidenz_grotesk.json',
+-    png: '/web/font-atlases/akzidenz_grotesk/akzidenz_grotesk.png',
+-    ttf: '/web/fonts/akzidenz-grotesk-regular.ttf',
++    json: 'font-atlases/akzidenz_grotesk/akzidenz_grotesk.json',
++    png: 'font-atlases/akzidenz_grotesk/akzidenz_grotesk.png',
++    ttf: 'fonts/akzidenz-grotesk-regular.ttf',
+   },
+   'Baskerville': {
+-    json: '/web/font-atlases/baskerville/baskerville.json',
+-    png: '/web/font-atlases/baskerville/baskerville.png',
+-    ttf: '/web/fonts/libre-baskerville-regular.ttf',
++    json: 'font-atlases/baskerville/baskerville.json',
++    png: 'font-atlases/baskerville/baskerville.png',
++    ttf: 'fonts/libre-baskerville-regular.ttf',
+   },
+   'Futura': {
+-    json: '/web/font-atlases/futura/futura.json',
+-    png: '/web/font-atlases/futura/futura.png',
+-    ttf: '/web/fonts/futura-regular.ttf',
++    json: 'font-atlases/futura/futura.json',
++    png: 'font-atlases/futura/futura.png',
++    ttf: 'fonts/futura-regular.ttf',
+   },
+   'Gotham': {
+-    json: '/web/font-atlases/gotham/gotham.json',
+-    png: '/web/font-atlases/gotham/gotham.png',
+-    ttf: '/web/fonts/gotham-regular.ttf',
++    json: 'font-atlases/gotham/gotham.json',
++    png: 'font-atlases/gotham/gotham.png',
++    ttf: 'fonts/gotham-regular.ttf',
+   },
+   'Helvetica': {
+-    json: '/web/font-atlases/helvetica/helvetica.json',
+-    png: '/web/font-atlases/helvetica/helvetica.png',
+-    ttf: '/web/fonts/helvetica-regular.ttf',
++    json: 'font-atlases/helvetica/helvetica.json',
++    png: 'font-atlases/helvetica/helvetica.png',
++    ttf: 'fonts/helvetica-regular.ttf',
+   },
+   'Nanum Pen Script': {
+-    json: '/web/font-atlases/nanum_pen_script/nanum_pen_script.json',
+-    png: '/web/font-atlases/nanum_pen_script/nanum_pen_script.png',
+-    ttf: '/web/fonts/nanum-pen-script-regular.ttf',
++    json: 'font-atlases/nanum_pen_script/nanum_pen_script.json',
++    png: 'font-atlases/nanum_pen_script/nanum_pen_script.png',
++    ttf: 'fonts/nanum-pen-script-regular.ttf',
+   },
+   'Press Start 2p': {
+-    json: '/web/font-atlases/press_start_2p/press_start_2p.json',
+-    png: '/web/font-atlases/press_start_2p/press_start_2p.png',
+-    ttf: '/web/fonts/press-start-2p-regular.ttf',
++    json: 'font-atlases/press_start_2p/press_start_2p.json',
++    png: 'font-atlases/press_start_2p/press_start_2p.png',
++    ttf: 'fonts/press-start-2p-regular.ttf',
+   },
+   'Times': {
+-    json: '/web/font-atlases/times/times.json',
+-    png: '/web/font-atlases/times/times.png',
+-    ttf: '/web/fonts/times-regular.ttf',
++    json: 'font-atlases/times/times.json',
++    png: 'font-atlases/times/times.png',
++    ttf: 'fonts/times-regular.ttf',
+   },
+   'Inconsolata': {
+-    json: '/web/font-atlases/inconsolata/inconsolata.json',
+-    png: '/web/font-atlases/inconsolata/inconsolata.png',
+-    ttf: '/web/fonts/inconsolata-regular.ttf',
++    json: 'font-atlases/inconsolata/inconsolata.json',
++    png: 'font-atlases/inconsolata/inconsolata.png',
++    ttf: 'fonts/inconsolata-regular.ttf',
+   },
+   'Roboto': {
+-    json: '/web/font-atlases/roboto/roboto.json',
+-    png: '/web/font-atlases/roboto/roboto.png',
+-    ttf: '/web/fonts/roboto-regular.ttf',
++    json: 'font-atlases/roboto/roboto.json',
++    png: 'font-atlases/roboto/roboto.png',
++    ttf: 'fonts/roboto-regular.ttf',
+   },
+ }
+ 
+@@ -63,7 +65,11 @@ const RESOURCE_MAP = {
+ type ResourceType = keyof typeof RESOURCE_MAP
+ 
+ const createResourceManager = () => {
+-  const defaultPrefix = 'https://cdn.8thwall.com'
++  const defaultScheme = 'https://'
++  const defaultHost = 'cdn.8thwall.com'
++  const defaultPath = '/web/'
++
++  const defaultPrefix = `${defaultScheme}${defaultHost}${defaultPath}`
+   let prefix = defaultPrefix
+ 
+   const prefixResource = <T extends string | Record<string, string>>(resource: T): T => {
+@@ -79,25 +85,43 @@ const createResourceManager = () => {
+     throw new Error('Invalid resource format')
+   }
+ 
+-  const loadResourceMap = <T extends ResourceType>(type: T): typeof RESOURCE_MAP[T] => {
++  const getResource = (type: ResourceType, name: string):
++   string | Font | undefined => {
++    const resourceMap = RESOURCE_MAP[type] as Record<string, Font>
++    if (!resourceMap) {
++      throw new Error(`Resource type not found: ${type}`)
++    }
++    const resource = resourceMap[name]
++    if (!resource) {
++      return undefined
++    }
++    return prefixResource(resource)
++  }
++
++  const hasResource = (type: ResourceType, name: string): boolean => {
+     const resourceMap = RESOURCE_MAP[type]
+     if (!resourceMap) {
+       throw new Error(`Resource type not found: ${type}`)
+     }
+-    return Object.fromEntries(
+-      Object.entries(resourceMap).map(([key, value]) => [key, prefixResource(value)])
+-    ) as typeof RESOURCE_MAP[T]
++    return name in resourceMap
+   }
+ 
+-  // TODO(lreyna): Add method to load individual resources by name and type
+-  // e.g. loadResource('FONT', 'Nunito')
++  const listResources = (type: ResourceType): string[] => {
++    const resourceMap = RESOURCE_MAP[type]
++    if (!resourceMap) {
++      throw new Error(`Resource type not found: ${type}`)
++    }
++    return Object.keys(resourceMap)
++  }
+ 
+   const updateResourcePrefix = (newPrefix: string) => {
+     prefix = newPrefix
+   }
+ 
+   return {
+-    loadResourceMap,
++    getResource,
++    hasResource,
++    listResources,
+     updateResourcePrefix,
+   }
+ }
+
+From 4d61f27a81548d6271e029d617da0caf129136bd Mon Sep 17 00:00:00 2001
+From: lukeyreyno <lucas@nianticspatial.com>
+Date: Wed, 1 Oct 2025 10:56:02 -0700
+Subject: [PATCH 5/5] DRAFT: [nae][ecs] Move fonts to resource manager
+
+---
+ c8/ecs/src/runtime/3d-ui.ts                               | 4 ++--
+ c8/ecs/src/runtime/BUILD                                  | 1 +
+ c8/ecs/src/runtime/api.ts                                 | 1 +
+ c8/ecs/src/shared/map-constants.ts                        | 6 +++---
+ .../cloud/xrhome/src/client/studio/hooks/use-ui-font.ts   | 8 ++++----
+ 5 files changed, 11 insertions(+), 9 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/3d-ui.ts b/c8/ecs/src/runtime/3d-ui.ts
+index 82d640cf2b6..759d4f8ae8a 100644
+--- a/c8/ecs/src/runtime/3d-ui.ts
++++ b/c8/ecs/src/runtime/3d-ui.ts
+@@ -2,7 +2,7 @@ import THREE from './three'
+ import type {Texture} from './three-types'
+ import type {LayoutMetrics, UiRuntimeSettings} from './ui'
+ import ThreeMeshUI from './8mesh'
+-import {Font, FONTS, DEFAULT_FONT, DEFAULT_FONT_NAME} from '../shared/fonts'
++import {Font, FONTS, DEFAULT_FONT_NAME} from '../shared/fonts'
+ import {assets} from './assets'
+ import type {Eid} from '../shared/schema'
+ import {parseNineSliceValue} from '../shared/ui-nine-slice'
+@@ -102,7 +102,7 @@ const update3dUi = (
+   metrics?: LayoutMetrics
+ ) => {
+   const fontName = settings.font ?? DEFAULT_FONT_NAME
+-  let font: FontMtsdf = DEFAULT_FONT
++  let font: FontMtsdf = FONTS.get(DEFAULT_FONT_NAME)!
+   if (!FONTS.has(fontName) && !loadedFonts.has(fontName)) {
+     let fontPromise = fontPromises.get(fontName)
+     if (!fontPromise) {
+diff --git a/c8/ecs/src/runtime/BUILD b/c8/ecs/src/runtime/BUILD
+index 268291b07e7..ed84b501bcd 100644
+--- a/c8/ecs/src/runtime/BUILD
++++ b/c8/ecs/src/runtime/BUILD
+@@ -91,6 +91,7 @@ js_library(
+         "//c8/ecs/src/runtime:video",
+         "//c8/ecs/src/runtime:world-attribute",
+         "//c8/ecs/src/runtime:xr",
++        "//c8/ecs/src/shared:resource-manager",
+     ],
+ )
+ 
+diff --git a/c8/ecs/src/runtime/api.ts b/c8/ecs/src/runtime/api.ts
+index 6e066d8b8b4..123efe16900 100644
+--- a/c8/ecs/src/runtime/api.ts
++++ b/c8/ecs/src/runtime/api.ts
+@@ -7,6 +7,7 @@ export * from './particles'
+ export * from './camera-events'
+ export * from './orbit-controls'
+ export * from './fly-controller'
++export * from '../shared/resource-manager'
+ export * from './gps-pointer'
+ export {ready, isReady} from './init-ready'
+ export * from './xr'
+diff --git a/c8/ecs/src/shared/map-constants.ts b/c8/ecs/src/shared/map-constants.ts
+index 287d07c0b27..f98195e6816 100644
+--- a/c8/ecs/src/shared/map-constants.ts
++++ b/c8/ecs/src/shared/map-constants.ts
+@@ -2,7 +2,7 @@
+ // @attr[](visibility = "//c8/ecs:__subpackages__")
+ // @attr[](visibility = "//reality/cloud:shared")
+ 
+-import {DEFAULT_FONT} from './fonts'
++import {FONTS, DEFAULT_FONT_NAME} from './fonts'
+ import type {Map, MapTheme} from './scene-graph'
+ 
+ const SERVER_URL = 'https://maptiles-api.nianticspatial.com/api/json/v1/GET_MAPTILES_SETTINGS'
+@@ -11,8 +11,8 @@ const WORKER_URL = 'https://cdn.8thwall.com/web/maps/tile-worker-m84q3e1b.js'
+ 
+ const FONT_URLS = {
+   default: {
+-    fontFamily: DEFAULT_FONT.json,
+-    fontTexture: DEFAULT_FONT.png,
++    fontFamily: FONTS.get(DEFAULT_FONT_NAME)!.json,
++    fontTexture: FONTS.get(DEFAULT_FONT_NAME)!.png,
+   },
+ }
+ 
+diff --git a/reality/cloud/xrhome/src/client/studio/hooks/use-ui-font.ts b/reality/cloud/xrhome/src/client/studio/hooks/use-ui-font.ts
+index ef77e374bde..bd722a0cd6a 100644
+--- a/reality/cloud/xrhome/src/client/studio/hooks/use-ui-font.ts
++++ b/reality/cloud/xrhome/src/client/studio/hooks/use-ui-font.ts
+@@ -1,7 +1,7 @@
+ import React from 'react'
+ 
+ import type {FontResource} from '@ecs/shared/scene-graph'
+-import {DEFAULT_FONT, DEFAULT_FONT_NAME, FONTS} from '@ecs/shared/fonts'
++import {DEFAULT_FONT_NAME, FONTS} from '@ecs/shared/fonts'
+ import {extractFontResourceUrl} from '@ecs/shared/resource'
+ import type {RawFontSetData} from '@ecs/shared/msdf-font-type'
+ 
+@@ -28,9 +28,9 @@ const useUiFont = (fontId: undefined | FontResource): Font => {
+   return React.useMemo(() => {
+     if (FONTS.has(fontName)) {
+       return {
+-        json: FONTS.get(fontName)?.json || DEFAULT_FONT.json,
+-        png: FONTS.get(fontName)?.png || DEFAULT_FONT.png,
+-        ttf: FONTS.get(fontName)?.ttf || DEFAULT_FONT.ttf,
++        json: FONTS.get(fontName)?.json || FONTS.get(DEFAULT_FONT_NAME)!.json,
++        png: FONTS.get(fontName)?.png || FONTS.get(DEFAULT_FONT_NAME)!.png,
++        ttf: FONTS.get(fontName)?.ttf || FONTS.get(DEFAULT_FONT_NAME)!.ttf,
+       }
+     }
+ 

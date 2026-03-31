@@ -1,0 +1,3001 @@
+From 96933ef3fa6ca7c36b8b101236cea209eb62762c Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Wed, 8 Oct 2025 10:56:03 -0700
+Subject: [PATCH 01/31] [ecs][cloud-studio] Refactor Audio buffer to allow
+ Audio buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/audio-buffer-sound.ts  | 128 ++++++++++++++++++++++
+ c8/ecs/src/runtime/audio-element-sound.ts |  88 +++++++++++++++
+ c8/ecs/src/runtime/audio-sound-types.ts   |  31 ++++++
+ c8/ecs/src/runtime/audio-sound.ts         |  26 +++++
+ 4 files changed, 273 insertions(+)
+ create mode 100644 c8/ecs/src/runtime/audio-buffer-sound.ts
+ create mode 100644 c8/ecs/src/runtime/audio-element-sound.ts
+ create mode 100644 c8/ecs/src/runtime/audio-sound-types.ts
+ create mode 100644 c8/ecs/src/runtime/audio-sound.ts
+
+diff --git a/c8/ecs/src/runtime/audio-buffer-sound.ts b/c8/ecs/src/runtime/audio-buffer-sound.ts
+new file mode 100644
+index 00000000000..f30ecaeafdf
+--- /dev/null
++++ b/c8/ecs/src/runtime/audio-buffer-sound.ts
+@@ -0,0 +1,128 @@
++import {DEFAULT_PITCH} from '../shared/audio-constants'
++import {assets} from './assets'
++import type {SoundSource} from './audio-sound'
++import type {AudioSettings} from './audio-sound-types'
++import type * as THREE_TYPES from './three-types'
++import THREE from './three'
++
++const createBufferAudio =
++(context: AudioContext, listener: THREE_TYPES.AudioListener, audio: AudioSettings): SoundSource => {
++  let audioNode: THREE_TYPES.PositionalAudio | THREE_TYPES.Audio
++  const controller = new AbortController()
++  let url: string | undefined
++  let buffer: AudioBuffer | null = null
++  let startTime = 0
++
++  audioNode = audio.positional
++    ? new THREE.PositionalAudio(listener)
++    : new THREE.Audio<GainNode>(listener)
++
++  const setAudioNode = (positional: boolean) => {
++    if (positional === !!(audioNode instanceof THREE.PositionalAudio)) {
++      return
++    }
++    audioNode = positional
++      ? new THREE.PositionalAudio(listener)
++      : new THREE.Audio<GainNode>(listener)
++    if (buffer) audioNode.setBuffer(buffer)
++  }
++
++  const loadSource = async (source: string, pitch?: number) => {
++    try {
++      const {signal} = controller
++      const asset = await assets.load({url: source})
++      if (signal.aborted) return
++      const data = await asset.data.arrayBuffer()
++      if (signal.aborted) return
++      context.decodeAudioData(data, (decodedBuffer) => {
++        audioNode.setBuffer(decodedBuffer)
++        audioNode.setPlaybackRate(pitch ?? DEFAULT_PITCH)
++        audioNode.setLoop(!!audio.loop)
++        audioNode.setVolume(audio.volume ?? 1)
++        url = source
++        if (!audio.paused) {
++          audioNode.play()
++        }
++        // update the internal buffer reference
++        buffer = decodedBuffer
++        startTime = context.currentTime
++      })
++    } catch (err) {
++      // eslint-disable-next-line no-console
++      console.warn('failed to load audio source', err)
++    }
++  }
++
++  const getCurrentTime = (): number => {
++    if (!buffer) return 0
++    if (!audioNode.isPlaying) return startTime + audioNode.offset
++
++    const total = (context.currentTime - startTime) - audioNode.offset * audioNode.getPlaybackRate()
++
++    return audioNode.loop ? total % buffer.duration : Math.min(total, buffer.duration)
++  }
++
++  const setCurrentTime = (time: number) => {
++    if (!buffer) return
++
++    const wasPlaying = audioNode.isPlaying
++    if (wasPlaying) audioNode.stop()
++
++    const startOffset = Math.max(0, Math.min(time, buffer.duration))
++
++    if (wasPlaying) {
++      audioNode.offset = startOffset
++      audioNode.play()
++      startTime = context.currentTime
++    }
++  }
++
++  // you play from the start, you play from the last offset
++  const playSourceNode = () => {
++    if (!buffer || audioNode.isPlaying) return
++    audioNode.play()
++  }
++
++  const pauseSourceNode = () => {
++    if (!buffer || !audioNode.isPlaying) return
++    audioNode.stop()
++  }
++
++  const setPlaybackRate = (pitch: number) => {
++    const elapsed = getCurrentTime()
++    audioNode.offset = elapsed
++    audioNode.setPlaybackRate(pitch)
++  }
++
++  loadSource(audio.url, audio.pitch)
++
++  return {
++    update: (config: AudioSettings) => {
++      if (config.url && config.url !== url) {
++        loadSource(config.url, config.pitch)
++      } else if (config.pitch) {
++        setPlaybackRate(config.pitch)
++      }
++
++      if (config.positional !== undefined) setAudioNode(config.positional)
++      if (config.loop !== undefined) audioNode.setLoop(config.loop)
++      if (config.volume !== undefined) audioNode.setVolume(config.volume)
++      if (config.paused) audioNode.pause()
++    },
++    getCurrentTime,
++    setCurrentTime,
++    pause: () => {
++      pauseSourceNode()
++    },
++    resume: () => {
++      playSourceNode()
++    },
++    destroy: () => {},
++    audioNode,
++    controller,
++  }
++}
++
++export {
++  createBufferAudio,
++}
+diff --git a/c8/ecs/src/runtime/audio-element-sound.ts b/c8/ecs/src/runtime/audio-element-sound.ts
+new file mode 100644
+index 00000000000..3f8909e5806
+--- /dev/null
++++ b/c8/ecs/src/runtime/audio-element-sound.ts
+@@ -0,0 +1,88 @@
++import {DEFAULT_PITCH} from '../shared/audio-constants'
++import {assets} from './assets'
++import type {SoundSource} from './audio-sound'
++import type {AudioSettings} from './audio-sound-types'
++import type * as THREE_TYPES from './three-types'
++import THREE from './three'
++
++const createAudioElementSound =
++(context: AudioContext, listener: THREE_TYPES.AudioListener, audio: AudioSettings): SoundSource => {
++  const audioElement = new Audio()
++  audioElement.preload = 'auto'
++  audioElement.crossOrigin = 'anonymous'
++  const controller = new AbortController()
++
++  let audioNode: THREE_TYPES.PositionalAudio | THREE_TYPES.Audio
++  audioNode = audio.positional
++    ? new THREE.PositionalAudio(listener)
++    : new THREE.Audio<GainNode>(listener)
++
++  const setAudioNode = (positional: boolean) => {
++    if (positional === !!(audioNode instanceof THREE.PositionalAudio)) {
++      return
++    }
++
++    audioNode = positional
++      ? new THREE.PositionalAudio(listener)
++      : new THREE.Audio<GainNode>(listener)
++    audioNode.setMediaElementSource(audioElement)
++  }
++
++  const loadSource = async (source: string, pitch?: number) => {
++    try {
++      const {signal} = controller
++      const asset = await assets.load({url: source})
++      if (signal.aborted) {
++        return
++      }
++      audioElement.src = asset.localUrl
++      // playbackRate directly affects the pitch of the audio (sample rate conversion)
++      // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/playbackRate
++      // Need to set defaultPlaybackRate rather than playbackRate or else the playbackRate/pitch
++      // will be reset to default after load.
++      audioElement.defaultPlaybackRate = pitch ?? DEFAULT_PITCH
++      ;(audioElement as any).preservesPitch = false
++      audioElement.load()
++    } catch (err) {
++      // eslint-disable-next-line no-console
++      console.warn('failed to load audio source', err)
++    }
++  }
++
++  loadSource(audio.url, audio.pitch)
++
++  return {
++    update: (config: AudioSettings) => {
++      const sourceChanged = config.url && config.url !== audioElement.src
++      if (sourceChanged) {
++        loadSource(config.url, config.pitch)
++      } else if (config.pitch) {
++        audioElement.playbackRate = config.pitch
++      }
++
++      // handle audioNode type change
++      if (config.positional !== undefined) {
++        setAudioNode(config.positional)
++      }
++
++      audioElement.loop = config.loop ?? audioElement.loop
++      audioElement.volume = config.volume ?? audioElement.volume
++
++      if (config.paused) {
++        audioElement.pause()
++      }
++    },
++    getCurrentTime: () => audioElement.currentTime,
++    setCurrentTime: (time) => { audioElement.currentTime = time },
++    pause: () => { audioElement.pause() },
++    resume: () => { if (audioElement.paused) audioElement.play() },
++    destroy: () => {},
++    audioNode,
++    controller,
++    element: audioElement,
++  }
++}
++
++export {
++  createAudioElementSound,
++}
+diff --git a/c8/ecs/src/runtime/audio-sound-types.ts b/c8/ecs/src/runtime/audio-sound-types.ts
+new file mode 100644
+index 00000000000..ae8933218b6
+--- /dev/null
++++ b/c8/ecs/src/runtime/audio-sound-types.ts
+@@ -0,0 +1,31 @@
++import type * as THREE_TYPES from './three-types'
++
++type AudioSettings = {
++  url: string
++  volume?: number
++  loop?: boolean
++  pitch?: number
++  paused?: boolean
++  positional?: boolean
++  refDistance?: number
++  rolloffFactor?: number
++  distanceModel?: string
++  maxDistance?: number
++}
++
++interface SoundSource {
++  update: (config: AudioSettings) => void
++  getCurrentTime: () => number
++  setCurrentTime: (time: number) => void
++  pause: () => void
++  resume: () => void
++  destroy: () => void
++  readonly audioNode: THREE_TYPES.Audio | THREE_TYPES.PositionalAudio
++  readonly controller: AbortController
++  readonly element?: HTMLMediaElement
++}
++
++export type {
++  AudioSettings,
++  SoundSource,
++}
+diff --git a/c8/ecs/src/runtime/audio-sound.ts b/c8/ecs/src/runtime/audio-sound.ts
+new file mode 100644
+index 00000000000..9cc9dcbeb95
+--- /dev/null
++++ b/c8/ecs/src/runtime/audio-sound.ts
+@@ -0,0 +1,26 @@
++import {createBufferAudio} from './audio-buffer-sound'
++import {createAudioElementSound} from './audio-element-sound'
++import type {AudioSettings, SoundSource} from './audio-sound-types'
++import type * as THREE_TYPES from './three-types'
++
++const createSound = (
++  context: AudioContext, listener: THREE_TYPES.AudioListener, settings: AudioSettings
++): SoundSource => {
++  // note(alan): Not all platforms support AudioBuffer
++  // @ts-ignore
++  if (context.createBuffer) {
++    console.log('using buffer audio')
++    return createBufferAudio(context, listener, settings)
++  } else {
++    console.log('using element audio')
++    return createAudioElementSound(context, listener, settings)
++  }
++}
++
++export type {
++  SoundSource,
++}
++
++export {
++  createSound,
++}
+
+From 41370376e5a878681a16a2a5f4943f2b0a39e010 Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Wed, 8 Oct 2025 14:52:01 -0700
+Subject: [PATCH 02/31] [ecs][cloud-studio] Refactor Audio buffer to allow
+ Audio buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/audio-element-sound.ts  |  39 +++++-
+ c8/ecs/src/runtime/audio-manager.ts        | 138 ++++++---------------
+ c8/ecs/src/runtime/audio-sound-types.ts    |   2 +
+ c8/ecs/src/runtime/audio.ts                |  17 ++-
+ c8/ecs/src/runtime/systems/audio-system.ts |   2 +-
+ c8/ecs/src/runtime/video-manager.ts        |   4 +-
+ 6 files changed, 86 insertions(+), 116 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/audio-element-sound.ts b/c8/ecs/src/runtime/audio-element-sound.ts
+index 3f8909e5806..7a1290c5dc5 100644
+--- a/c8/ecs/src/runtime/audio-element-sound.ts
++++ b/c8/ecs/src/runtime/audio-element-sound.ts
+@@ -6,8 +6,14 @@ import type * as THREE_TYPES from './three-types'
+ import THREE from './three'
+ 
+ const createAudioElementSound =
+-(context: AudioContext, listener: THREE_TYPES.AudioListener, audio: AudioSettings): SoundSource => {
++(
++  context: AudioContext,
++  listener: THREE_TYPES.AudioListener, audio: AudioSettings
++): SoundSource => {
+   const audioElement = new Audio()
++  let onAudioEnded: (() => void) | null = null
++  let onAudioReady: (() => void) | null = null
++
+   audioElement.preload = 'auto'
+   audioElement.crossOrigin = 'anonymous'
+   const controller = new AbortController()
+@@ -43,6 +49,11 @@ const createAudioElementSound =
+       audioElement.defaultPlaybackRate = pitch ?? DEFAULT_PITCH
+       ;(audioElement as any).preservesPitch = false
+       audioElement.load()
++      if (!audio.paused) {
++        audioElement.play().catch((e) => {
++          console.warn('audio play was prevented: ', e)
++        })
++      }
+     } catch (err) {
+       // eslint-disable-next-line no-console
+       console.warn('failed to load audio source', err)
+@@ -75,8 +86,32 @@ const createAudioElementSound =
+     getCurrentTime: () => audioElement.currentTime,
+     setCurrentTime: (time) => { audioElement.currentTime = time },
+     pause: () => { audioElement.pause() },
+-    resume: () => { if (audioElement.paused) audioElement.play() },
++    resume: () => {
++      if (audioElement.paused) {
++        audioElement.play().catch((e) => {
++          console.warn('audio play was prevented: ', e)
++        })
++      }
++    },
+     destroy: () => {},
++    onAudioReady: (cb: (() => void) | null) => {
++      if (cb) {
++        audioElement.addEventListener('canplaythrough', cb)
++        onAudioReady = cb
++      } else if (onAudioReady) {
++        audioElement.removeEventListener('canplaythrough', onAudioReady)
++        onAudioReady = null
++      }
++    },
++    onAudioEnded: (cb: (() => void) | null) => {
++      if (cb) {
++        audioElement.addEventListener('ended', cb)
++        onAudioEnded = cb
++      } else if (onAudioEnded) {
++        audioElement.removeEventListener('ended', onAudioEnded)
++        onAudioEnded = null
++      }
++    },
+     audioNode,
+     controller,
+     element: audioElement,
+diff --git a/c8/ecs/src/runtime/audio-manager.ts b/c8/ecs/src/runtime/audio-manager.ts
+index 46171bf26a6..b5c0bfa7ebc 100644
+--- a/c8/ecs/src/runtime/audio-manager.ts
++++ b/c8/ecs/src/runtime/audio-manager.ts
+@@ -1,5 +1,5 @@
+ import {
+-  DEFAULT_VOLUME, DEFAULT_PITCH, DEFAULT_REF_DISTANCE, DEFAULT_DISTANCE_MODEL,
++  DEFAULT_VOLUME, DEFAULT_REF_DISTANCE, DEFAULT_DISTANCE_MODEL,
+   DEFAULT_ROLLOFF_FACTOR, DEFAULT_MAX_DISTANCE, DEFAULT_COMPRESSOR_THRESHOLD,
+   DEFAULT_COMPRESSOR_KNEE, DEFAULT_COMPRESSOR_RATIO, DEFAULT_COMPRESSOR_ATTACK,
+   DEFAULT_COMPRESSOR_RELEASE,
+@@ -7,30 +7,16 @@ import {
+ import type {World} from './world'
+ import THREE from './three'
+ import type {Eid} from '../shared/schema'
+-import {assets} from './assets'
+ import type * as THREE_TYPES from './three-types'
+ import {events} from './event-ids'
+ import {createInstanced} from '../shared/instanced'
+ import {addChild} from './matrix-refresh'
+-
+-type AudioSettings = {
+-  url: string
+-  volume?: number
+-  loop?: boolean
+-  pitch?: number
+-  paused?: boolean
+-  positional?: boolean
+-  refDistance?: number
+-  rolloffFactor?: number
+-  distanceModel?: string
+-  maxDistance?: number
+-}
++import {createSound, SoundSource} from './audio-sound'
++import type {AudioSettings} from './audio-sound-types'
+ 
+ type Sound = {
+   id: Eid
+-  audioNode: THREE_TYPES.Audio | THREE_TYPES.PositionalAudio
+-  element: HTMLAudioElement
+-  controller: AbortController
++  source: SoundSource
+   url: string
+   paused: boolean
+ }
+@@ -52,13 +38,14 @@ const getValidDistanceModel = (distanceModel: any): string => (
+   DistanceModelValues.includes(distanceModel) ? distanceModel : DEFAULT_DISTANCE_MODEL
+ )
+ 
+-const setOptions = (
++const setAudioNodeOpts = (
+   audioNode: THREE_TYPES.Audio | THREE_TYPES.PositionalAudio,
+-  element: HTMLMediaElement,
+   options?: Omit<AudioSettings, 'url'>
+ ) => {
+   audioNode.setVolume(options?.volume ?? DEFAULT_VOLUME)
+-  element.loop = !!options?.loop
++  if (options?.loop !== undefined) {
++    audioNode.setLoop(!!options.loop)
++  }
+ 
+   if (audioNode instanceof THREE.PositionalAudio) {
+     audioNode.setRefDistance(options?.refDistance ?? DEFAULT_REF_DISTANCE)
+@@ -83,44 +70,28 @@ const createAudioManager = (world: World): InternalAudio => {
+ 
+   const sounds: Map<Eid, Sound> = new Map()
+   const endedEventCallbacks: Map<Eid, (event: Event) => void> = new Map()
+-  let paused = false
+ 
+   const maybeAddEndedEventListener = (sound: Sound) => {
+-    if (endedEventCallbacks.get(sound.id) || sound.element.loop) {
++    if (endedEventCallbacks.get(sound.id) || sound.source.audioNode.loop) {
+       return
+     }
+     const endedEventListener = () => {
+       world.events.dispatch(sound.id, events.AUDIO_END)
+     }
+-    sound.element.addEventListener('ended', endedEventListener)
++    sound.source.onAudioEnded(endedEventListener)
+     endedEventCallbacks.set(sound.id, endedEventListener)
+   }
+ 
+   const maybeRemoveEndedEventListener = (sound: Sound) => {
+     const endedEventCallback = endedEventCallbacks.get(sound.id)
+     if (endedEventCallback) {
+-      sound.element.removeEventListener('ended', endedEventCallback)
++      sound.source.onAudioEnded(null)
+       endedEventCallbacks.delete(sound.id)
+     }
+   }
+ 
+   const playSound = (sound: Sound) => {
+-    sound.paused = false
+-
+-    sound.element.autoplay = true
+-    if (paused) {
+-      return
+-    }
+-
+-    sound.element.play()
+-      .catch((error) => {
+-        world.events.dispatch(sound.id, 'audio-error', {error})
+-      })
+-  }
+-
+-  const pauseSound = (sound: Sound) => {
+-    sound.paused = true
+-    sound.element.pause()
++    sound.source.resume()
+   }
+ 
+   const addSound = (eid: Eid, audio: AudioSettings) => {
+@@ -128,45 +99,17 @@ const createAudioManager = (world: World): InternalAudio => {
+       return null
+     }
+ 
+-    const controller = new AbortController()
+-    const {signal} = controller
+-    const audioNode = audio.positional
+-      ? new THREE.PositionalAudio(listener)
+-      : new THREE.Audio(listener)
+-
+-    // connect all audio sources to output compressor
+-    audioNode.gain.disconnect()
+-    audioNode.gain.connect(compressor)
+-
+-    const audioElement = new Audio()
+-
+-    audioElement.addEventListener('canplaythrough', () => {
++    const soundSource = createSound(context, listener, audio)
++    soundSource.audioNode.gain.disconnect()
++    soundSource.audioNode.gain.connect(compressor)
++    soundSource.onAudioReady(() => {
+       world.events.dispatch(eid, events.AUDIO_CAN_PLAY_THROUGH)
+     })
+ 
+-    assets.load({url: audio.url}).then((asset) => {
+-      if (signal.aborted) {
+-        return
+-      }
+-      audioElement.src = asset.localUrl
+-      // playbackRate directly affects the pitch of the audio (sample rate conversion)
+-      // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/playbackRate
+-      // Need to set defaultPlaybackRate rather than playbackRate or else the playbackRate/pitch
+-      // will be reset to default after load.
+-      audioElement.defaultPlaybackRate = audio.pitch ?? DEFAULT_PITCH
+-      ;(audioElement as any).preservesPitch = false
+-      audioElement.load()
+-    })
+-
+-    audioElement.crossOrigin = 'anonymous'
+-    setOptions(audioNode, audioElement, audio)
+-    audioNode.setMediaElementSource(audioElement)
+-
++    setAudioNodeOpts(soundSource.audioNode, audio)
+     const sound = {
+       id: eid,
+-      audioNode,
+-      element: audioElement,
+-      controller,
++      source: soundSource,
+       url: audio.url,
+       paused: !!audio.paused,
+     }
+@@ -183,12 +126,7 @@ const createAudioManager = (world: World): InternalAudio => {
+     if (!sound) {
+       return
+     }
+-
+-    sound.controller.abort()
+-
+-    sound.element.pause()
+-    maybeRemoveEndedEventListener(sound)
+-    sound.audioNode.removeFromParent()
++    sound.source.destroy()
+     sounds.delete(eid)
+   }
+ 
+@@ -197,51 +135,49 @@ const createAudioManager = (world: World): InternalAudio => {
+     if (!sound) {
+       return
+     }
++    sound.source.update(newAudio)
++    if (newAudio.paused !== undefined) {
++      sound.paused = newAudio.paused
++    }
+ 
+-    const {element, audioNode, url: oldAudioUrl} = sound
+-    const positionalSame = !!newAudio.positional === (audioNode instanceof THREE.PositionalAudio)
+-    const audioUrlSame = oldAudioUrl && newAudio && newAudio.url === oldAudioUrl
+-
++    const positionalSame = !!newAudio.positional === (
++      sound.source.audioNode instanceof THREE.PositionalAudio)
++    const audioUrlSame = sound.url && newAudio.url && newAudio.url === sound.url
+     if (audioUrlSame && positionalSame) {
+-      element.playbackRate = newAudio.pitch ?? DEFAULT_PITCH
+-      setOptions(audioNode, element, newAudio)
+-      if (sound.element.loop) {
++      sound.source.update(newAudio)
++      setAudioNodeOpts(sound.source.audioNode, newAudio)
++      if (sound.source.audioNode.loop) {
+         maybeRemoveEndedEventListener(sound)
+       }
+       maybeAddEndedEventListener(sound)
+       if (newAudio.paused) {
+-        pauseSound(sound)
++        sound.source.pause()
+       } else {
+-        playSound(sound)
++        sound.source.resume()
+       }
+     } else {
+-      const {parent} = audioNode
++      const {parent} = sound.source.audioNode
+       removeSound(eid)
+       const newSound = addSound(eid, newAudio)
+       if (parent && newSound) {
+-        addChild(parent, newSound.audioNode)
++        addChild(parent, newSound.source.audioNode)
+       }
+     }
+   }
+ 
+   const pauseSounds = () => {
+-    paused = true
+     sounds.forEach((sound) => {
+-      sound.element.pause()
++      sound.source.pause()
+     })
+   }
+ 
+   const resumeSounds = () => {
+-    paused = false
+     sounds.forEach((sound) => {
+-      if (sound.paused || sound.element.ended) {
++      if (sound.paused) {
+         return
+       }
+ 
+-      sound.element.play()
+-        .catch((error: Error) => {
+-          world.events.dispatch(sound.id, 'audio-error', {error})
+-        })
++      sound.source.resume()
+     })
+   }
+ 
+@@ -265,7 +201,7 @@ const getAudioManager = createInstanced<World, InternalAudio>(createAudioManager
+ 
+ export {
+   getAudioManager,
+-  setOptions,
++  setAudioNodeOpts as setOptions,
+ }
+ 
+ export type {
+diff --git a/c8/ecs/src/runtime/audio-sound-types.ts b/c8/ecs/src/runtime/audio-sound-types.ts
+index ae8933218b6..69d3144c8a0 100644
+--- a/c8/ecs/src/runtime/audio-sound-types.ts
++++ b/c8/ecs/src/runtime/audio-sound-types.ts
+@@ -20,6 +20,8 @@ interface SoundSource {
+   pause: () => void
+   resume: () => void
+   destroy: () => void
++  onAudioReady: (cb: (() => void) | null) => void
++  onAudioEnded: (cb: (() => void) | null) => void
+   readonly audioNode: THREE_TYPES.Audio | THREE_TYPES.PositionalAudio
+   readonly controller: AbortController
+   readonly element?: HTMLMediaElement
+diff --git a/c8/ecs/src/runtime/audio.ts b/c8/ecs/src/runtime/audio.ts
+index 628fc34628c..a63b79d3abc 100644
+--- a/c8/ecs/src/runtime/audio.ts
++++ b/c8/ecs/src/runtime/audio.ts
+@@ -2,25 +2,22 @@ import type {World} from './world'
+ import type {Eid} from '../shared/schema'
+ import {getAudioManager} from './audio-manager'
+ 
+-const getSoundElement = (world: World, eid: Eid) => {
+-  const audioManager = getAudioManager(world)
+-  return audioManager.getSound(eid)?.element
+-}
++const getSoundSource = (world: World, eid: Eid) => getAudioManager(world).getSound(eid)?.source
+ 
+ const getCurrentTime = (world: World, eid: Eid) => {
+-  const element = getSoundElement(world, eid)
+-  if (!element) {
++  const source = getSoundSource(world, eid)
++  if (!source) {
+     throw new Error(`Audio for ${eid} does not exist, cannot get current time`)
+   }
+-  return element.currentTime
++  return source.getCurrentTime()
+ }
+ 
+ const setCurrentTime = (world: World, eid: Eid, time: number) => {
+-  const element = getSoundElement(world, eid)
+-  if (!element) {
++  const source = getSoundSource(world, eid)
++  if (!source) {
+     throw new Error(`Audio for ${eid} does not exist, cannot set current time`)
+   }
+-  element.currentTime = time
++  source.setCurrentTime(time)
+ }
+ 
+ const audio = {
+diff --git a/c8/ecs/src/runtime/systems/audio-system.ts b/c8/ecs/src/runtime/systems/audio-system.ts
+index 187d4c75dd4..b86d3e4840c 100644
+--- a/c8/ecs/src/runtime/systems/audio-system.ts
++++ b/c8/ecs/src/runtime/systems/audio-system.ts
+@@ -24,7 +24,7 @@ const makeAudioSystem = (world: World) => {
+     if (audio.url) {
+       const sound = audioManager.addSound(eid, audio)
+       if (sound) {
+-        addChild(object, sound.audioNode)
++        addChild(object, sound.source.audioNode)
+       }
+     }
+   }
+diff --git a/c8/ecs/src/runtime/video-manager.ts b/c8/ecs/src/runtime/video-manager.ts
+index e6279eb9f7b..5a6fa87e3f0 100644
+--- a/c8/ecs/src/runtime/video-manager.ts
++++ b/c8/ecs/src/runtime/video-manager.ts
+@@ -147,7 +147,7 @@ const createVideoManager = (world: World): VideoManager => {
+     audioNode.source = video.sourceNode as any
+     audioNode.connect()
+ 
+-    setAudioOptions(audioNode, video.element, settings)
++    setAudioOptions(audioNode, settings)
+ 
+     // Set parent of audio node to support positional
+     if (settings.positional) {
+@@ -283,7 +283,7 @@ const createVideoManager = (world: World): VideoManager => {
+           video.audioNode = createAudioNode(video, videoControls)
+         }
+       } else {
+-        setAudioOptions(audioNode, element, videoControls)
++        setAudioOptions(audioNode, videoControls)
+       }
+     } else {
+       element.loop = videoControls?.loop ?? VIDEO_DEFAULTS.loop
+
+From 2d0af1fcf4b1be72f218a7ead1e19f9e2953c63c Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Wed, 8 Oct 2025 14:53:02 -0700
+Subject: [PATCH 03/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+
+From a63749cb81ceda63be0b7b7071123c78d2e77fd9 Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Wed, 8 Oct 2025 15:01:31 -0700
+Subject: [PATCH 04/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/audio-buffer-sound.ts  | 22 ++++++++++++++++++++++
+ c8/ecs/src/runtime/audio-element-sound.ts | 13 ++++++++++++-
+ c8/ecs/src/runtime/audio-manager.ts       |  2 +-
+ 3 files changed, 35 insertions(+), 2 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/audio-buffer-sound.ts b/c8/ecs/src/runtime/audio-buffer-sound.ts
+index f30ecaeafdf..5a15430fc2c 100644
+--- a/c8/ecs/src/runtime/audio-buffer-sound.ts
++++ b/c8/ecs/src/runtime/audio-buffer-sound.ts
+@@ -1,3 +1,5 @@
++import {on} from 'events'
++
+ import {DEFAULT_PITCH} from '../shared/audio-constants'
+ import {assets} from './assets'
+ import type {SoundSource} from './audio-sound'
+@@ -8,6 +10,9 @@ import THREE from './three'
+ const createBufferAudio =
+ (context: AudioContext, listener: THREE_TYPES.AudioListener, audio: AudioSettings): SoundSource => {
+   let audioNode: THREE_TYPES.PositionalAudio | THREE_TYPES.Audio
++  let onAudioReady: (() => void) | null = null
++  let onAudioEnded: (() => void) | null = null
++
+   const controller = new AbortController()
+   let url: string | undefined
+   let buffer: AudioBuffer | null = null
+@@ -46,6 +51,9 @@ const createBufferAudio =
+         // update the internal buffer reference
+         buffer = decodedBuffer
+         startTime = context.currentTime
++        if (onAudioReady) {
++          onAudioReady()
++        }
+       })
+     } catch (err) {
+       // eslint-disable-next-line no-console
+@@ -118,6 +126,20 @@ const createBufferAudio =
+       playSourceNode()
+     },
+     destroy: () => {},
++    onAudioReady: (cb) => {
++      if (cb) {
++        onAudioReady = cb
++      } else if (onAudioReady) {
++        onAudioReady = null
++      }
++    },
++    onAudioEnded: (cb) => {
++      if (cb) {
++        onAudioEnded = cb
++      } else if (onAudioEnded) {
++        onAudioEnded = null
++      }
++    },
+     audioNode,
+     controller,
+   }
+diff --git a/c8/ecs/src/runtime/audio-element-sound.ts b/c8/ecs/src/runtime/audio-element-sound.ts
+index 7a1290c5dc5..6b2b226ee11 100644
+--- a/c8/ecs/src/runtime/audio-element-sound.ts
++++ b/c8/ecs/src/runtime/audio-element-sound.ts
+@@ -93,7 +93,18 @@ const createAudioElementSound =
+         })
+       }
+     },
+-    destroy: () => {},
++    destroy: () => {
++      if (onAudioEnded) {
++        audioElement.removeEventListener('ended', onAudioEnded)
++        onAudioEnded = null
++      }
++      if (onAudioReady) {
++        audioElement.removeEventListener('canplaythrough', onAudioReady)
++        onAudioReady = null
++      }
++      controller.abort()
++      audioElement.pause()
++    },
+     onAudioReady: (cb: (() => void) | null) => {
+       if (cb) {
+         audioElement.addEventListener('canplaythrough', cb)
+diff --git a/c8/ecs/src/runtime/audio-manager.ts b/c8/ecs/src/runtime/audio-manager.ts
+index b5c0bfa7ebc..38c735e1391 100644
+--- a/c8/ecs/src/runtime/audio-manager.ts
++++ b/c8/ecs/src/runtime/audio-manager.ts
+@@ -146,7 +146,7 @@ const createAudioManager = (world: World): InternalAudio => {
+     if (audioUrlSame && positionalSame) {
+       sound.source.update(newAudio)
+       setAudioNodeOpts(sound.source.audioNode, newAudio)
+-      if (sound.source.audioNode.loop) {
++      if (newAudio.loop !== undefined && !newAudio.loop) {
+         maybeRemoveEndedEventListener(sound)
+       }
+       maybeAddEndedEventListener(sound)
+
+From a4f1cdff2ae1e07b84b2f79fda60e763ad1d63a8 Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Wed, 8 Oct 2025 15:02:29 -0700
+Subject: [PATCH 05/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/audio-buffer-sound.ts | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/c8/ecs/src/runtime/audio-buffer-sound.ts b/c8/ecs/src/runtime/audio-buffer-sound.ts
+index 5a15430fc2c..a6ac8d63604 100644
+--- a/c8/ecs/src/runtime/audio-buffer-sound.ts
++++ b/c8/ecs/src/runtime/audio-buffer-sound.ts
+@@ -125,7 +125,10 @@ const createBufferAudio =
+     resume: () => {
+       playSourceNode()
+     },
+-    destroy: () => {},
++    destroy: () => {
++      controller.abort()
++      pauseSourceNode()
++    },
+     onAudioReady: (cb) => {
+       if (cb) {
+         onAudioReady = cb
+
+From 6005ffb3fb5c163003bae0c5c112cbba7d4b9b0e Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Wed, 8 Oct 2025 16:00:49 -0700
+Subject: [PATCH 06/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/audio-buffer-sound.ts  | 153 ----------------------
+ c8/ecs/src/runtime/audio-element-sound.ts |   8 +-
+ c8/ecs/src/runtime/audio-manager.ts       |   1 -
+ c8/ecs/src/runtime/audio-sound.ts         |  14 +-
+ 4 files changed, 12 insertions(+), 164 deletions(-)
+ delete mode 100644 c8/ecs/src/runtime/audio-buffer-sound.ts
+
+diff --git a/c8/ecs/src/runtime/audio-buffer-sound.ts b/c8/ecs/src/runtime/audio-buffer-sound.ts
+deleted file mode 100644
+index a6ac8d63604..00000000000
+--- a/c8/ecs/src/runtime/audio-buffer-sound.ts
++++ /dev/null
+@@ -1,153 +0,0 @@
+-import {on} from 'events'
+-
+-import {DEFAULT_PITCH} from '../shared/audio-constants'
+-import {assets} from './assets'
+-import type {SoundSource} from './audio-sound'
+-import type {AudioSettings} from './audio-sound-types'
+-import type * as THREE_TYPES from './three-types'
+-import THREE from './three'
+-
+-const createBufferAudio =
+-(context: AudioContext, listener: THREE_TYPES.AudioListener, audio: AudioSettings): SoundSource => {
+-  let audioNode: THREE_TYPES.PositionalAudio | THREE_TYPES.Audio
+-  let onAudioReady: (() => void) | null = null
+-  let onAudioEnded: (() => void) | null = null
+-
+-  const controller = new AbortController()
+-  let url: string | undefined
+-  let buffer: AudioBuffer | null = null
+-  let startTime = 0
+-
+-  audioNode = audio.positional
+-    ? new THREE.PositionalAudio(listener)
+-    : new THREE.Audio<GainNode>(listener)
+-
+-  const setAudioNode = (positional: boolean) => {
+-    if (positional === !!(audioNode instanceof THREE.PositionalAudio)) {
+-      return
+-    }
+-    audioNode = positional
+-      ? new THREE.PositionalAudio(listener)
+-      : new THREE.Audio<GainNode>(listener)
+-    if (buffer) audioNode.setBuffer(buffer)
+-  }
+-
+-  const loadSource = async (source: string, pitch?: number) => {
+-    try {
+-      const {signal} = controller
+-      const asset = await assets.load({url: source})
+-      if (signal.aborted) return
+-      const data = await asset.data.arrayBuffer()
+-      if (signal.aborted) return
+-      context.decodeAudioData(data, (decodedBuffer) => {
+-        audioNode.setBuffer(decodedBuffer)
+-        audioNode.setPlaybackRate(pitch ?? DEFAULT_PITCH)
+-        audioNode.setLoop(!!audio.loop)
+-        audioNode.setVolume(audio.volume ?? 1)
+-        url = source
+-        if (!audio.paused) {
+-          audioNode.play()
+-        }
+-        // update the internal buffer reference
+-        buffer = decodedBuffer
+-        startTime = context.currentTime
+-        if (onAudioReady) {
+-          onAudioReady()
+-        }
+-      })
+-    } catch (err) {
+-      // eslint-disable-next-line no-console
+-      console.warn('failed to load audio source', err)
+-    }
+-  }
+-
+-  const getCurrentTime = (): number => {
+-    if (!buffer) return 0
+-    if (!audioNode.isPlaying) return startTime + audioNode.offset
+-
+-    const total = (context.currentTime - startTime) - audioNode.offset * audioNode.getPlaybackRate()
+-
+-    return audioNode.loop ? total % buffer.duration : Math.min(total, buffer.duration)
+-  }
+-
+-  const setCurrentTime = (time: number) => {
+-    if (!buffer) return
+-
+-    const wasPlaying = audioNode.isPlaying
+-    if (wasPlaying) audioNode.stop()
+-
+-    const startOffset = Math.max(0, Math.min(time, buffer.duration))
+-
+-    if (wasPlaying) {
+-      audioNode.offset = startOffset
+-      audioNode.play()
+-      startTime = context.currentTime
+-    }
+-  }
+-
+-  // you play from the start, you play from the last offset
+-  const playSourceNode = () => {
+-    if (!buffer || audioNode.isPlaying) return
+-    audioNode.play()
+-  }
+-
+-  const pauseSourceNode = () => {
+-    if (!buffer || !audioNode.isPlaying) return
+-    audioNode.stop()
+-  }
+-
+-  const setPlaybackRate = (pitch: number) => {
+-    const elapsed = getCurrentTime()
+-    audioNode.offset = elapsed
+-    audioNode.setPlaybackRate(pitch)
+-  }
+-
+-  loadSource(audio.url, audio.pitch)
+-
+-  return {
+-    update: (config: AudioSettings) => {
+-      if (config.url && config.url !== url) {
+-        loadSource(config.url, config.pitch)
+-      } else if (config.pitch) {
+-        setPlaybackRate(config.pitch)
+-      }
+-
+-      if (config.positional !== undefined) setAudioNode(config.positional)
+-      if (config.loop !== undefined) audioNode.setLoop(config.loop)
+-      if (config.volume !== undefined) audioNode.setVolume(config.volume)
+-      if (config.paused) audioNode.pause()
+-    },
+-    getCurrentTime,
+-    setCurrentTime,
+-    pause: () => {
+-      pauseSourceNode()
+-    },
+-    resume: () => {
+-      playSourceNode()
+-    },
+-    destroy: () => {
+-      controller.abort()
+-      pauseSourceNode()
+-    },
+-    onAudioReady: (cb) => {
+-      if (cb) {
+-        onAudioReady = cb
+-      } else if (onAudioReady) {
+-        onAudioReady = null
+-      }
+-    },
+-    onAudioEnded: (cb) => {
+-      if (cb) {
+-        onAudioEnded = cb
+-      } else if (onAudioEnded) {
+-        onAudioEnded = null
+-      }
+-    },
+-    audioNode,
+-    controller,
+-  }
+-}
+-
+-export {
+-  createBufferAudio,
+-}
+diff --git a/c8/ecs/src/runtime/audio-element-sound.ts b/c8/ecs/src/runtime/audio-element-sound.ts
+index 6b2b226ee11..d11860146a6 100644
+--- a/c8/ecs/src/runtime/audio-element-sound.ts
++++ b/c8/ecs/src/runtime/audio-element-sound.ts
+@@ -13,6 +13,7 @@ const createAudioElementSound =
+   const audioElement = new Audio()
+   let onAudioEnded: (() => void) | null = null
+   let onAudioReady: (() => void) | null = null
++  let audioReady = false
+ 
+   audioElement.preload = 'auto'
+   audioElement.crossOrigin = 'anonymous'
+@@ -36,6 +37,7 @@ const createAudioElementSound =
+ 
+   const loadSource = async (source: string, pitch?: number) => {
+     try {
++      audioReady = false
+       const {signal} = controller
+       const asset = await assets.load({url: source})
+       if (signal.aborted) {
+@@ -54,6 +56,7 @@ const createAudioElementSound =
+           console.warn('audio play was prevented: ', e)
+         })
+       }
++      audioReady = true
+     } catch (err) {
+       // eslint-disable-next-line no-console
+       console.warn('failed to load audio source', err)
+@@ -87,7 +90,7 @@ const createAudioElementSound =
+     setCurrentTime: (time) => { audioElement.currentTime = time },
+     pause: () => { audioElement.pause() },
+     resume: () => {
+-      if (audioElement.paused) {
++      if (audioReady) {
+         audioElement.play().catch((e) => {
+           console.warn('audio play was prevented: ', e)
+         })
+@@ -96,12 +99,11 @@ const createAudioElementSound =
+     destroy: () => {
+       if (onAudioEnded) {
+         audioElement.removeEventListener('ended', onAudioEnded)
+-        onAudioEnded = null
+       }
+       if (onAudioReady) {
+         audioElement.removeEventListener('canplaythrough', onAudioReady)
+-        onAudioReady = null
+       }
++
+       controller.abort()
+       audioElement.pause()
+     },
+diff --git a/c8/ecs/src/runtime/audio-manager.ts b/c8/ecs/src/runtime/audio-manager.ts
+index 38c735e1391..dbb3b1ca2de 100644
+--- a/c8/ecs/src/runtime/audio-manager.ts
++++ b/c8/ecs/src/runtime/audio-manager.ts
+@@ -105,7 +105,6 @@ const createAudioManager = (world: World): InternalAudio => {
+     soundSource.onAudioReady(() => {
+       world.events.dispatch(eid, events.AUDIO_CAN_PLAY_THROUGH)
+     })
+-
+     setAudioNodeOpts(soundSource.audioNode, audio)
+     const sound = {
+       id: eid,
+diff --git a/c8/ecs/src/runtime/audio-sound.ts b/c8/ecs/src/runtime/audio-sound.ts
+index 9cc9dcbeb95..7b7058076ad 100644
+--- a/c8/ecs/src/runtime/audio-sound.ts
++++ b/c8/ecs/src/runtime/audio-sound.ts
+@@ -8,13 +8,13 @@ const createSound = (
+ ): SoundSource => {
+   // note(alan): Not all platforms support AudioBuffer
+   // @ts-ignore
+-  if (context.createBuffer) {
+-    console.log('using buffer audio')
+-    return createBufferAudio(context, listener, settings)
+-  } else {
+-    console.log('using element audio')
+-    return createAudioElementSound(context, listener, settings)
+-  }
++  // if (context.createBuffer) {
++  //   console.log('using buffer audio')
++  //   return createBufferAudio(context, listener, settings)
++  // } else {
++  console.log('using element audio')
++  return createAudioElementSound(context, listener, settings)
++  // }
+ }
+ 
+ export type {
+
+From affdb659964147b68374605a44de727f7d852b3f Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Wed, 8 Oct 2025 16:31:06 -0700
+Subject: [PATCH 07/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/audio-element-sound.ts | 30 +++++++++--------------
+ c8/ecs/src/runtime/audio-manager.ts       | 30 ++++++++++++++---------
+ c8/ecs/src/runtime/audio-sound-types.ts   |  6 ++---
+ c8/ecs/src/runtime/audio-sound.ts         | 13 +---------
+ c8/ecs/src/runtime/video-manager.ts       |  4 +--
+ 5 files changed, 37 insertions(+), 46 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/audio-element-sound.ts b/c8/ecs/src/runtime/audio-element-sound.ts
+index d11860146a6..d31117fc358 100644
+--- a/c8/ecs/src/runtime/audio-element-sound.ts
++++ b/c8/ecs/src/runtime/audio-element-sound.ts
+@@ -51,12 +51,13 @@ const createAudioElementSound =
+       audioElement.defaultPlaybackRate = pitch ?? DEFAULT_PITCH
+       ;(audioElement as any).preservesPitch = false
+       audioElement.load()
+-      if (!audio.paused) {
+-        audioElement.play().catch((e) => {
+-          console.warn('audio play was prevented: ', e)
++
++      // if audio isn't paused, then play as soon as it's ready
++      if (!audioElement.paused) {
++        audioElement.play().catch((err) => {
++          console.warn('audio play was prevented: ', err)
+         })
+       }
+-      audioReady = true
+     } catch (err) {
+       // eslint-disable-next-line no-console
+       console.warn('failed to load audio source', err)
+@@ -66,9 +67,9 @@ const createAudioElementSound =
+   loadSource(audio.url, audio.pitch)
+ 
+   return {
+-    update: (config: AudioSettings) => {
++    update: (config: Partial<AudioSettings>) => {
+       const sourceChanged = config.url && config.url !== audioElement.src
+-      if (sourceChanged) {
++      if (sourceChanged && config.url) {
+         loadSource(config.url, config.pitch)
+       } else if (config.pitch) {
+         audioElement.playbackRate = config.pitch
+@@ -89,11 +90,9 @@ const createAudioElementSound =
+     getCurrentTime: () => audioElement.currentTime,
+     setCurrentTime: (time) => { audioElement.currentTime = time },
+     pause: () => { audioElement.pause() },
+-    resume: () => {
++    play: async () => {
+       if (audioReady) {
+-        audioElement.play().catch((e) => {
+-          console.warn('audio play was prevented: ', e)
+-        })
++        audioElement.play()
+       }
+     },
+     destroy: () => {
+@@ -107,14 +106,9 @@ const createAudioElementSound =
+       controller.abort()
+       audioElement.pause()
+     },
+-    onAudioReady: (cb: (() => void) | null) => {
+-      if (cb) {
+-        audioElement.addEventListener('canplaythrough', cb)
+-        onAudioReady = cb
+-      } else if (onAudioReady) {
+-        audioElement.removeEventListener('canplaythrough', onAudioReady)
+-        onAudioReady = null
+-      }
++    onAudioReady: (cb: (() => void)) => {
++      audioElement.addEventListener('canplaythrough', cb)
++      onAudioReady = cb
+     },
+     onAudioEnded: (cb: (() => void) | null) => {
+       if (cb) {
+diff --git a/c8/ecs/src/runtime/audio-manager.ts b/c8/ecs/src/runtime/audio-manager.ts
+index dbb3b1ca2de..11a3d5bbf22 100644
+--- a/c8/ecs/src/runtime/audio-manager.ts
++++ b/c8/ecs/src/runtime/audio-manager.ts
+@@ -43,9 +43,6 @@ const setAudioNodeOpts = (
+   options?: Omit<AudioSettings, 'url'>
+ ) => {
+   audioNode.setVolume(options?.volume ?? DEFAULT_VOLUME)
+-  if (options?.loop !== undefined) {
+-    audioNode.setLoop(!!options.loop)
+-  }
+ 
+   if (audioNode instanceof THREE.PositionalAudio) {
+     audioNode.setRefDistance(options?.refDistance ?? DEFAULT_REF_DISTANCE)
+@@ -91,7 +88,9 @@ const createAudioManager = (world: World): InternalAudio => {
+   }
+ 
+   const playSound = (sound: Sound) => {
+-    sound.source.resume()
++    sound.source.play().catch((error) => {
++      world.events.dispatch(sound.id, 'audio-error', {error})
++    })
+   }
+ 
+   const addSound = (eid: Eid, audio: AudioSettings) => {
+@@ -102,9 +101,11 @@ const createAudioManager = (world: World): InternalAudio => {
+     const soundSource = createSound(context, listener, audio)
+     soundSource.audioNode.gain.disconnect()
+     soundSource.audioNode.gain.connect(compressor)
++
+     soundSource.onAudioReady(() => {
+       world.events.dispatch(eid, events.AUDIO_CAN_PLAY_THROUGH)
+     })
++
+     setAudioNodeOpts(soundSource.audioNode, audio)
+     const sound = {
+       id: eid,
+@@ -114,9 +115,6 @@ const createAudioManager = (world: World): InternalAudio => {
+     }
+     sounds.set(eid, sound)
+     maybeAddEndedEventListener(sound)
+-    if (!audio.paused) {
+-      playSound(sound)
+-    }
+     return sound
+   }
+ 
+@@ -152,7 +150,7 @@ const createAudioManager = (world: World): InternalAudio => {
+       if (newAudio.paused) {
+         sound.source.pause()
+       } else {
+-        sound.source.resume()
++        playSound(sound)
+       }
+     } else {
+       const {parent} = sound.source.audioNode
+@@ -166,6 +164,7 @@ const createAudioManager = (world: World): InternalAudio => {
+ 
+   const pauseSounds = () => {
+     sounds.forEach((sound) => {
++      sound.paused = true
+       sound.source.pause()
+     })
+   }
+@@ -175,8 +174,7 @@ const createAudioManager = (world: World): InternalAudio => {
+       if (sound.paused) {
+         return
+       }
+-
+-      sound.source.resume()
++      playSound(sound)
+     })
+   }
+ 
+@@ -198,9 +196,19 @@ const createAudioManager = (world: World): InternalAudio => {
+ 
+ const getAudioManager = createInstanced<World, InternalAudio>(createAudioManager)
+ 
++const setAudioOptions = (eid: Eid, options: Partial<AudioSettings>, world: World) => {
++  const audioManager = getAudioManager(world)
++  const sound = audioManager.getSound(eid)
++  if (!sound) {
++    return
++  }
++  sound.source.update(options)
++  setAudioNodeOpts(sound.source.audioNode, options)
++}
++
+ export {
+   getAudioManager,
+-  setAudioNodeOpts as setOptions,
++  setAudioOptions,
+ }
+ 
+ export type {
+diff --git a/c8/ecs/src/runtime/audio-sound-types.ts b/c8/ecs/src/runtime/audio-sound-types.ts
+index 69d3144c8a0..76fb134d16d 100644
+--- a/c8/ecs/src/runtime/audio-sound-types.ts
++++ b/c8/ecs/src/runtime/audio-sound-types.ts
+@@ -14,13 +14,13 @@ type AudioSettings = {
+ }
+ 
+ interface SoundSource {
+-  update: (config: AudioSettings) => void
++  update: (config: Partial<AudioSettings>) => void
+   getCurrentTime: () => number
+   setCurrentTime: (time: number) => void
+   pause: () => void
+-  resume: () => void
++  play: () => Promise<void>
+   destroy: () => void
+-  onAudioReady: (cb: (() => void) | null) => void
++  onAudioReady: (cb: (() => void)) => void
+   onAudioEnded: (cb: (() => void) | null) => void
+   readonly audioNode: THREE_TYPES.Audio | THREE_TYPES.PositionalAudio
+   readonly controller: AbortController
+diff --git a/c8/ecs/src/runtime/audio-sound.ts b/c8/ecs/src/runtime/audio-sound.ts
+index 7b7058076ad..ea8fe17009c 100644
+--- a/c8/ecs/src/runtime/audio-sound.ts
++++ b/c8/ecs/src/runtime/audio-sound.ts
+@@ -1,21 +1,10 @@
+-import {createBufferAudio} from './audio-buffer-sound'
+ import {createAudioElementSound} from './audio-element-sound'
+ import type {AudioSettings, SoundSource} from './audio-sound-types'
+ import type * as THREE_TYPES from './three-types'
+ 
+ const createSound = (
+   context: AudioContext, listener: THREE_TYPES.AudioListener, settings: AudioSettings
+-): SoundSource => {
+-  // note(alan): Not all platforms support AudioBuffer
+-  // @ts-ignore
+-  // if (context.createBuffer) {
+-  //   console.log('using buffer audio')
+-  //   return createBufferAudio(context, listener, settings)
+-  // } else {
+-  console.log('using element audio')
+-  return createAudioElementSound(context, listener, settings)
+-  // }
+-}
++): SoundSource => createAudioElementSound(context, listener, settings)
+ 
+ export type {
+   SoundSource,
+diff --git a/c8/ecs/src/runtime/video-manager.ts b/c8/ecs/src/runtime/video-manager.ts
+index 5a6fa87e3f0..06ba730f729 100644
+--- a/c8/ecs/src/runtime/video-manager.ts
++++ b/c8/ecs/src/runtime/video-manager.ts
+@@ -4,7 +4,7 @@ import type {World} from './world'
+ import type {Eid} from '../shared/schema'
+ import type * as THREE_TYPES from './three-types'
+ import {createInstanced} from '../shared/instanced'
+-import {getAudioManager, setOptions as setAudioOptions} from './audio-manager'
++import {getAudioManager, setAudioOptions} from './audio-manager'
+ import {VideoControls} from './components'
+ import {events} from './event-ids'
+ import type {VideoControlsRuntimeSettings} from './video-types'
+@@ -147,7 +147,7 @@ const createVideoManager = (world: World): VideoManager => {
+     audioNode.source = video.sourceNode as any
+     audioNode.connect()
+ 
+-    setAudioOptions(audioNode, settings)
++    setAudioOptions(video.eid, settings, world)
+ 
+     // Set parent of audio node to support positional
+     if (settings.positional) {
+
+From 16fda0f3508754ab69e95a4b4b43091dbe2ea2ea Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Wed, 8 Oct 2025 16:37:32 -0700
+Subject: [PATCH 08/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/audio-element-sound.ts | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/audio-element-sound.ts b/c8/ecs/src/runtime/audio-element-sound.ts
+index d31117fc358..0cd3fc19a28 100644
+--- a/c8/ecs/src/runtime/audio-element-sound.ts
++++ b/c8/ecs/src/runtime/audio-element-sound.ts
+@@ -54,9 +54,7 @@ const createAudioElementSound =
+ 
+       // if audio isn't paused, then play as soon as it's ready
+       if (!audioElement.paused) {
+-        audioElement.play().catch((err) => {
+-          console.warn('audio play was prevented: ', err)
+-        })
++        audioElement.play()
+       }
+     } catch (err) {
+       // eslint-disable-next-line no-console
+
+From d4fa2e1e6898f9b4f496cd5f16f1a5fdb8a08cbe Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Wed, 8 Oct 2025 16:43:31 -0700
+Subject: [PATCH 09/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/BUILD                  | 3 ++-
+ c8/ecs/src/runtime/audio-element-sound.ts | 3 +--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/BUILD b/c8/ecs/src/runtime/BUILD
+index ada833c3bd0..abce295bbac 100644
+--- a/c8/ecs/src/runtime/BUILD
++++ b/c8/ecs/src/runtime/BUILD
+@@ -170,7 +170,8 @@ js_library(
+         "audio-manager.ts",
+     ],
+     deps = [
+-        "//c8/ecs/src/runtime:assets",
++        "//c8/ecs/src/runtime:audio-sound",
++        "//c8/ecs/src/runtime:audio-sound-types",
+         "//c8/ecs/src/runtime:event-ids",
+         "//c8/ecs/src/runtime:matrix-refresh",
+         "//c8/ecs/src/runtime:three",
+diff --git a/c8/ecs/src/runtime/audio-element-sound.ts b/c8/ecs/src/runtime/audio-element-sound.ts
+index 0cd3fc19a28..c559d388af0 100644
+--- a/c8/ecs/src/runtime/audio-element-sound.ts
++++ b/c8/ecs/src/runtime/audio-element-sound.ts
+@@ -101,8 +101,8 @@ const createAudioElementSound =
+         audioElement.removeEventListener('canplaythrough', onAudioReady)
+       }
+ 
+-      controller.abort()
+       audioElement.pause()
++      controller.abort()
+     },
+     onAudioReady: (cb: (() => void)) => {
+       audioElement.addEventListener('canplaythrough', cb)
+@@ -119,7 +119,6 @@ const createAudioElementSound =
+     },
+     audioNode,
+     controller,
+-    element: audioElement,
+   }
+ }
+ 
+
+From 29399f9c66560d441a54292abb7c7dc556baaef1 Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Wed, 8 Oct 2025 16:47:30 -0700
+Subject: [PATCH 10/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/BUILD | 44 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 44 insertions(+)
+
+diff --git a/c8/ecs/src/runtime/BUILD b/c8/ecs/src/runtime/BUILD
+index abce295bbac..aeeb34e90d0 100644
+--- a/c8/ecs/src/runtime/BUILD
++++ b/c8/ecs/src/runtime/BUILD
+@@ -2306,3 +2306,47 @@ js_test(
+         "//c8/ecs/src/runtime:scene-sky",
+     ],
+ )
++
++js_library(
++    name = "audio-buffer-sound",
++    srcs = [
++        "audio-buffer-sound.ts",
++    ],
++)
++
++js_library(
++    name = "audio-element-sound",
++    srcs = [
++        "audio-element-sound.ts",
++    ],
++    deps = [
++        "//c8/ecs/src/runtime:assets",
++        "//c8/ecs/src/runtime:audio-sound",
++        "//c8/ecs/src/runtime:audio-sound-types",
++        "//c8/ecs/src/runtime:three",
++        "//c8/ecs/src/runtime:three-types",
++        "//c8/ecs/src/shared:audio-constants",
++    ],
++)
++
++js_library(
++    name = "audio-sound-types",
++    srcs = [
++        "audio-sound-types.ts",
++    ],
++    deps = [
++        "//c8/ecs/src/runtime:three-types",
++    ],
++)
++
++js_library(
++    name = "audio-sound",
++    srcs = [
++        "audio-sound.ts",
++    ],
++    deps = [
++        "//c8/ecs/src/runtime:audio-element-sound",
++        "//c8/ecs/src/runtime:audio-sound-types",
++        "//c8/ecs/src/runtime:three-types",
++    ],
++)
+
+From a5778d00983c630f32c93405772ee197d2cfefd5 Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Wed, 8 Oct 2025 16:52:52 -0700
+Subject: [PATCH 11/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/video-manager.ts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/c8/ecs/src/runtime/video-manager.ts b/c8/ecs/src/runtime/video-manager.ts
+index 06ba730f729..be7772269e2 100644
+--- a/c8/ecs/src/runtime/video-manager.ts
++++ b/c8/ecs/src/runtime/video-manager.ts
+@@ -283,7 +283,7 @@ const createVideoManager = (world: World): VideoManager => {
+           video.audioNode = createAudioNode(video, videoControls)
+         }
+       } else {
+-        setAudioOptions(audioNode, videoControls)
++        setAudioOptions(video.eid, videoControls, world)
+       }
+     } else {
+       element.loop = videoControls?.loop ?? VIDEO_DEFAULTS.loop
+
+From 8fa1798e107b37b52fece2e0b48e8647d8675844 Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Thu, 9 Oct 2025 12:37:43 -0700
+Subject: [PATCH 12/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/audio-element-sound.ts | 51 ++++++++++-------------
+ c8/ecs/src/runtime/audio-manager.ts       |  2 +
+ 2 files changed, 25 insertions(+), 28 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/audio-element-sound.ts b/c8/ecs/src/runtime/audio-element-sound.ts
+index c559d388af0..24cd942a473 100644
+--- a/c8/ecs/src/runtime/audio-element-sound.ts
++++ b/c8/ecs/src/runtime/audio-element-sound.ts
+@@ -13,31 +13,19 @@ const createAudioElementSound =
+   const audioElement = new Audio()
+   let onAudioEnded: (() => void) | null = null
+   let onAudioReady: (() => void) | null = null
+-  let audioReady = false
+ 
+   audioElement.preload = 'auto'
+   audioElement.crossOrigin = 'anonymous'
+   const controller = new AbortController()
+ 
+-  let audioNode: THREE_TYPES.PositionalAudio | THREE_TYPES.Audio
+-  audioNode = audio.positional
++  const audioNode: THREE_TYPES.PositionalAudio | THREE_TYPES.Audio = audio.positional
+     ? new THREE.PositionalAudio(listener)
+     : new THREE.Audio<GainNode>(listener)
+ 
+-  const setAudioNode = (positional: boolean) => {
+-    if (positional === !!(audioNode instanceof THREE.PositionalAudio)) {
+-      return
+-    }
+-
+-    audioNode = positional
+-      ? new THREE.PositionalAudio(listener)
+-      : new THREE.Audio<GainNode>(listener)
+-    audioNode.setMediaElementSource(audioElement)
+-  }
++  audioNode.setMediaElementSource(audioElement)
+ 
+-  const loadSource = async (source: string, pitch?: number) => {
++  const loadSource = async (source: string, pitch?: number, playOnLoad?: boolean) => {
+     try {
+-      audioReady = false
+       const {signal} = controller
+       const asset = await assets.load({url: source})
+       if (signal.aborted) {
+@@ -51,10 +39,11 @@ const createAudioElementSound =
+       audioElement.defaultPlaybackRate = pitch ?? DEFAULT_PITCH
+       ;(audioElement as any).preservesPitch = false
+       audioElement.load()
+-
+-      // if audio isn't paused, then play as soon as it's ready
+-      if (!audioElement.paused) {
+-        audioElement.play()
++      if (playOnLoad) {
++        audioElement.play().catch((err) => {
++          // eslint-disable-next-line no-console
++          console.warn('failed to play audio element after load', err)
++        })
+       }
+     } catch (err) {
+       // eslint-disable-next-line no-console
+@@ -62,35 +51,41 @@ const createAudioElementSound =
+     }
+   }
+ 
+-  loadSource(audio.url, audio.pitch)
++  loadSource(audio.url, audio.pitch, !audio.paused)
+ 
+   return {
+     update: (config: Partial<AudioSettings>) => {
+       const sourceChanged = config.url && config.url !== audioElement.src
+       if (sourceChanged && config.url) {
+-        loadSource(config.url, config.pitch)
++        const paused = config.paused ?? audioElement.paused
++        loadSource(config.url, config.pitch, !paused)
+       } else if (config.pitch) {
+         audioElement.playbackRate = config.pitch
+       }
+ 
+-      // handle audioNode type change
+-      if (config.positional !== undefined) {
+-        setAudioNode(config.positional)
+-      }
+-
+       audioElement.loop = config.loop ?? audioElement.loop
+       audioElement.volume = config.volume ?? audioElement.volume
+ 
+       if (config.paused) {
+         audioElement.pause()
++      } else if (config.paused !== undefined && audioElement.paused && !config.paused) {
++        // console.log('calling play from update')
++        // audioElement.play()
+       }
+     },
+     getCurrentTime: () => audioElement.currentTime,
+     setCurrentTime: (time) => { audioElement.currentTime = time },
+     pause: () => { audioElement.pause() },
+     play: async () => {
+-      if (audioReady) {
+-        audioElement.play()
++      try {
++        if (audioElement.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA) {
++          await audioElement.play()
++        } else {
++          throw new Error('audio not ready to play')
++        }
++      } catch (err) {
++        // eslint-disable-next-line no-console
++        console.warn('failed to play audio element', err)
+       }
+     },
+     destroy: () => {
+diff --git a/c8/ecs/src/runtime/audio-manager.ts b/c8/ecs/src/runtime/audio-manager.ts
+index 11a3d5bbf22..ec9612b2274 100644
+--- a/c8/ecs/src/runtime/audio-manager.ts
++++ b/c8/ecs/src/runtime/audio-manager.ts
+@@ -123,6 +123,7 @@ const createAudioManager = (world: World): InternalAudio => {
+     if (!sound) {
+       return
+     }
++
+     sound.source.destroy()
+     sounds.delete(eid)
+   }
+@@ -157,6 +158,7 @@ const createAudioManager = (world: World): InternalAudio => {
+       removeSound(eid)
+       const newSound = addSound(eid, newAudio)
+       if (parent && newSound) {
++        console.log('creating a new audio node due to Positional change')
+         addChild(parent, newSound.source.audioNode)
+       }
+     }
+
+From c6596dc1a0a3d4c0002170ded81e0036944f8f42 Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Thu, 9 Oct 2025 13:43:08 -0700
+Subject: [PATCH 13/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/audio-element-sound.ts | 26 ++++++++++-------------
+ c8/ecs/src/runtime/audio-manager.ts       |  4 ++--
+ 2 files changed, 13 insertions(+), 17 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/audio-element-sound.ts b/c8/ecs/src/runtime/audio-element-sound.ts
+index 24cd942a473..061e4531fb3 100644
+--- a/c8/ecs/src/runtime/audio-element-sound.ts
++++ b/c8/ecs/src/runtime/audio-element-sound.ts
+@@ -13,6 +13,8 @@ const createAudioElementSound =
+   const audioElement = new Audio()
+   let onAudioEnded: (() => void) | null = null
+   let onAudioReady: (() => void) | null = null
++  // we cannot rely on audiElement.src because it will be a blob:// URL after loading
++  let url: string | undefined
+ 
+   audioElement.preload = 'auto'
+   audioElement.crossOrigin = 'anonymous'
+@@ -39,6 +41,10 @@ const createAudioElementSound =
+       audioElement.defaultPlaybackRate = pitch ?? DEFAULT_PITCH
+       ;(audioElement as any).preservesPitch = false
+       audioElement.load()
++
++      // once the audio has loaded we need to replace the current url with the new one
++      url = source
++
+       if (playOnLoad) {
+         audioElement.play().catch((err) => {
+           // eslint-disable-next-line no-console
+@@ -55,8 +61,7 @@ const createAudioElementSound =
+ 
+   return {
+     update: (config: Partial<AudioSettings>) => {
+-      const sourceChanged = config.url && config.url !== audioElement.src
+-      if (sourceChanged && config.url) {
++      if (config.url && config.url !== url) {
+         const paused = config.paused ?? audioElement.paused
+         loadSource(config.url, config.pitch, !paused)
+       } else if (config.pitch) {
+@@ -69,24 +74,14 @@ const createAudioElementSound =
+       if (config.paused) {
+         audioElement.pause()
+       } else if (config.paused !== undefined && audioElement.paused && !config.paused) {
+-        // console.log('calling play from update')
+-        // audioElement.play()
++        audioElement.play()
+       }
+     },
+     getCurrentTime: () => audioElement.currentTime,
+     setCurrentTime: (time) => { audioElement.currentTime = time },
+     pause: () => { audioElement.pause() },
+     play: async () => {
+-      try {
+-        if (audioElement.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA) {
+-          await audioElement.play()
+-        } else {
+-          throw new Error('audio not ready to play')
+-        }
+-      } catch (err) {
+-        // eslint-disable-next-line no-console
+-        console.warn('failed to play audio element', err)
+-      }
++      audioElement.play()
+     },
+     destroy: () => {
+       if (onAudioEnded) {
+@@ -95,8 +90,9 @@ const createAudioElementSound =
+       if (onAudioReady) {
+         audioElement.removeEventListener('canplaythrough', onAudioReady)
+       }
+-
+       audioElement.pause()
++      audioElement.remove()
++      audioNode.disconnect()
+       controller.abort()
+     },
+     onAudioReady: (cb: (() => void)) => {
+diff --git a/c8/ecs/src/runtime/audio-manager.ts b/c8/ecs/src/runtime/audio-manager.ts
+index ec9612b2274..96fddfb8a1d 100644
+--- a/c8/ecs/src/runtime/audio-manager.ts
++++ b/c8/ecs/src/runtime/audio-manager.ts
+@@ -158,7 +158,6 @@ const createAudioManager = (world: World): InternalAudio => {
+       removeSound(eid)
+       const newSound = addSound(eid, newAudio)
+       if (parent && newSound) {
+-        console.log('creating a new audio node due to Positional change')
+         addChild(parent, newSound.source.audioNode)
+       }
+     }
+@@ -173,9 +172,10 @@ const createAudioManager = (world: World): InternalAudio => {
+ 
+   const resumeSounds = () => {
+     sounds.forEach((sound) => {
+-      if (sound.paused) {
++      if (!sound.paused) {
+         return
+       }
++      sound.paused = false
+       playSound(sound)
+     })
+   }
+
+From 18d5f9b2bb22d0ebb591cc988b678deacb9b88d6 Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Thu, 9 Oct 2025 13:51:42 -0700
+Subject: [PATCH 14/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+
+From e361d6e401d1a91aecebc1460894806debeeca0d Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Thu, 9 Oct 2025 13:53:57 -0700
+Subject: [PATCH 15/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/audio-element-sound.ts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/c8/ecs/src/runtime/audio-element-sound.ts b/c8/ecs/src/runtime/audio-element-sound.ts
+index 061e4531fb3..0b36f26063f 100644
+--- a/c8/ecs/src/runtime/audio-element-sound.ts
++++ b/c8/ecs/src/runtime/audio-element-sound.ts
+@@ -13,7 +13,7 @@ const createAudioElementSound =
+   const audioElement = new Audio()
+   let onAudioEnded: (() => void) | null = null
+   let onAudioReady: (() => void) | null = null
+-  // we cannot rely on audiElement.src because it will be a blob:// URL after loading
++  // we cannot rely on audiElement.src
+   let url: string | undefined
+ 
+   audioElement.preload = 'auto'
+
+From 29d27739e974450f16b46a09928cb5355f70c5bd Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Thu, 9 Oct 2025 13:56:47 -0700
+Subject: [PATCH 16/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/audio-element-sound.ts | 2 +-
+ c8/ecs/src/runtime/audio-sound.ts         | 4 ----
+ 2 files changed, 1 insertion(+), 5 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/audio-element-sound.ts b/c8/ecs/src/runtime/audio-element-sound.ts
+index 0b36f26063f..d5468ddf9f6 100644
+--- a/c8/ecs/src/runtime/audio-element-sound.ts
++++ b/c8/ecs/src/runtime/audio-element-sound.ts
+@@ -1,6 +1,6 @@
+ import {DEFAULT_PITCH} from '../shared/audio-constants'
+ import {assets} from './assets'
+-import type {SoundSource} from './audio-sound'
++import type {SoundSource} from './audio-sound-types'
+ import type {AudioSettings} from './audio-sound-types'
+ import type * as THREE_TYPES from './three-types'
+ import THREE from './three'
+diff --git a/c8/ecs/src/runtime/audio-sound.ts b/c8/ecs/src/runtime/audio-sound.ts
+index ea8fe17009c..1244c8b3eb6 100644
+--- a/c8/ecs/src/runtime/audio-sound.ts
++++ b/c8/ecs/src/runtime/audio-sound.ts
+@@ -6,10 +6,6 @@ const createSound = (
+   context: AudioContext, listener: THREE_TYPES.AudioListener, settings: AudioSettings
+ ): SoundSource => createAudioElementSound(context, listener, settings)
+ 
+-export type {
+-  SoundSource,
+-}
+-
+ export {
+   createSound,
+ }
+
+From 4204861e58f6fe8e69c23386f7ad33a04a509ba4 Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Thu, 9 Oct 2025 14:01:23 -0700
+Subject: [PATCH 17/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/BUILD | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/c8/ecs/src/runtime/BUILD b/c8/ecs/src/runtime/BUILD
+index aeeb34e90d0..bbd89eb3dc7 100644
+--- a/c8/ecs/src/runtime/BUILD
++++ b/c8/ecs/src/runtime/BUILD
+@@ -2321,7 +2321,6 @@ js_library(
+     ],
+     deps = [
+         "//c8/ecs/src/runtime:assets",
+-        "//c8/ecs/src/runtime:audio-sound",
+         "//c8/ecs/src/runtime:audio-sound-types",
+         "//c8/ecs/src/runtime:three",
+         "//c8/ecs/src/runtime:three-types",
+
+From 42af4304af94e3d1193c0941ff02ddca9d2df111 Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Thu, 9 Oct 2025 14:09:38 -0700
+Subject: [PATCH 18/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/audio-manager.ts | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/audio-manager.ts b/c8/ecs/src/runtime/audio-manager.ts
+index 96fddfb8a1d..7e23a9110f3 100644
+--- a/c8/ecs/src/runtime/audio-manager.ts
++++ b/c8/ecs/src/runtime/audio-manager.ts
+@@ -11,8 +11,8 @@ import type * as THREE_TYPES from './three-types'
+ import {events} from './event-ids'
+ import {createInstanced} from '../shared/instanced'
+ import {addChild} from './matrix-refresh'
+-import {createSound, SoundSource} from './audio-sound'
+-import type {AudioSettings} from './audio-sound-types'
++import {createSound} from './audio-sound'
++import type {AudioSettings, SoundSource} from './audio-sound-types'
+ 
+ type Sound = {
+   id: Eid
+@@ -88,8 +88,8 @@ const createAudioManager = (world: World): InternalAudio => {
+   }
+ 
+   const playSound = (sound: Sound) => {
+-    sound.source.play().catch((error) => {
+-      world.events.dispatch(sound.id, 'audio-error', {error})
++    sound.source.play().catch((e: Error) => {
++      world.events.dispatch(sound.id, 'audio-error', {e})
+     })
+   }
+ 
+
+From a7087ed2c7f5f68d553db796a6085f4fff139019 Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Thu, 9 Oct 2025 14:18:22 -0700
+Subject: [PATCH 19/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/BUILD | 7 -------
+ 1 file changed, 7 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/BUILD b/c8/ecs/src/runtime/BUILD
+index bbd89eb3dc7..525597c5f87 100644
+--- a/c8/ecs/src/runtime/BUILD
++++ b/c8/ecs/src/runtime/BUILD
+@@ -2307,13 +2307,6 @@ js_test(
+     ],
+ )
+ 
+-js_library(
+-    name = "audio-buffer-sound",
+-    srcs = [
+-        "audio-buffer-sound.ts",
+-    ],
+-)
+-
+ js_library(
+     name = "audio-element-sound",
+     srcs = [
+
+From b4bf60f06eac48a41cb3593c4b89e8c03361ecbe Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Thu, 9 Oct 2025 16:10:21 -0700
+Subject: [PATCH 20/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/audio-manager.ts | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/audio-manager.ts b/c8/ecs/src/runtime/audio-manager.ts
+index 7e23a9110f3..0465e28e3b8 100644
+--- a/c8/ecs/src/runtime/audio-manager.ts
++++ b/c8/ecs/src/runtime/audio-manager.ts
+@@ -165,17 +165,16 @@ const createAudioManager = (world: World): InternalAudio => {
+ 
+   const pauseSounds = () => {
+     sounds.forEach((sound) => {
+-      sound.paused = true
+       sound.source.pause()
+     })
+   }
+ 
+   const resumeSounds = () => {
+     sounds.forEach((sound) => {
+-      if (!sound.paused) {
++      if (sound.paused) {
+         return
+       }
+-      sound.paused = false
++
+       playSound(sound)
+     })
+   }
+
+From 6e9eced4bb043bc2fdaea14115451924c732477c Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Thu, 9 Oct 2025 16:21:02 -0700
+Subject: [PATCH 21/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/audio-element-sound.ts | 15 +++++----------
+ c8/ecs/src/runtime/audio-manager.ts       |  9 +++++----
+ c8/ecs/src/runtime/audio-sound-types.ts   |  2 +-
+ c8/ecs/src/runtime/audio-sound.ts         |  7 +++++--
+ 4 files changed, 16 insertions(+), 17 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/audio-element-sound.ts b/c8/ecs/src/runtime/audio-element-sound.ts
+index d5468ddf9f6..9dc6a770f52 100644
+--- a/c8/ecs/src/runtime/audio-element-sound.ts
++++ b/c8/ecs/src/runtime/audio-element-sound.ts
+@@ -8,11 +8,12 @@ import THREE from './three'
+ const createAudioElementSound =
+ (
+   context: AudioContext,
+-  listener: THREE_TYPES.AudioListener, audio: AudioSettings
++  listener: THREE_TYPES.AudioListener, audio: AudioSettings, onError: (err: Error) => void
+ ): SoundSource => {
+   const audioElement = new Audio()
+   let onAudioEnded: (() => void) | null = null
+   let onAudioReady: (() => void) | null = null
++
+   // we cannot rely on audiElement.src
+   let url: string | undefined
+ 
+@@ -46,14 +47,10 @@ const createAudioElementSound =
+       url = source
+ 
+       if (playOnLoad) {
+-        audioElement.play().catch((err) => {
+-          // eslint-disable-next-line no-console
+-          console.warn('failed to play audio element after load', err)
+-        })
++        audioElement.play()
+       }
+     } catch (err) {
+-      // eslint-disable-next-line no-console
+-      console.warn('failed to load audio source', err)
++      onError(err as Error)
+     }
+   }
+ 
+@@ -80,9 +77,7 @@ const createAudioElementSound =
+     getCurrentTime: () => audioElement.currentTime,
+     setCurrentTime: (time) => { audioElement.currentTime = time },
+     pause: () => { audioElement.pause() },
+-    play: async () => {
+-      audioElement.play()
+-    },
++    resume: () => { audioElement.play().catch((e: Error) => { onError(e) }) },
+     destroy: () => {
+       if (onAudioEnded) {
+         audioElement.removeEventListener('ended', onAudioEnded)
+diff --git a/c8/ecs/src/runtime/audio-manager.ts b/c8/ecs/src/runtime/audio-manager.ts
+index 0465e28e3b8..828622a923b 100644
+--- a/c8/ecs/src/runtime/audio-manager.ts
++++ b/c8/ecs/src/runtime/audio-manager.ts
+@@ -88,17 +88,18 @@ const createAudioManager = (world: World): InternalAudio => {
+   }
+ 
+   const playSound = (sound: Sound) => {
+-    sound.source.play().catch((e: Error) => {
+-      world.events.dispatch(sound.id, 'audio-error', {e})
+-    })
++    sound.source.resume()
+   }
+ 
+   const addSound = (eid: Eid, audio: AudioSettings) => {
+     if (!audio.url) {
+       return null
+     }
++    const onError = (error: Error) => {
++      world.events.dispatch(eid, 'audio-error', {error})
++    }
+ 
+-    const soundSource = createSound(context, listener, audio)
++    const soundSource = createSound(context, listener, audio, onError)
+     soundSource.audioNode.gain.disconnect()
+     soundSource.audioNode.gain.connect(compressor)
+ 
+diff --git a/c8/ecs/src/runtime/audio-sound-types.ts b/c8/ecs/src/runtime/audio-sound-types.ts
+index 76fb134d16d..a8685e7e993 100644
+--- a/c8/ecs/src/runtime/audio-sound-types.ts
++++ b/c8/ecs/src/runtime/audio-sound-types.ts
+@@ -18,7 +18,7 @@ interface SoundSource {
+   getCurrentTime: () => number
+   setCurrentTime: (time: number) => void
+   pause: () => void
+-  play: () => Promise<void>
++  resume: () => void
+   destroy: () => void
+   onAudioReady: (cb: (() => void)) => void
+   onAudioEnded: (cb: (() => void) | null) => void
+diff --git a/c8/ecs/src/runtime/audio-sound.ts b/c8/ecs/src/runtime/audio-sound.ts
+index 1244c8b3eb6..b4d20d128bd 100644
+--- a/c8/ecs/src/runtime/audio-sound.ts
++++ b/c8/ecs/src/runtime/audio-sound.ts
+@@ -3,8 +3,11 @@ import type {AudioSettings, SoundSource} from './audio-sound-types'
+ import type * as THREE_TYPES from './three-types'
+ 
+ const createSound = (
+-  context: AudioContext, listener: THREE_TYPES.AudioListener, settings: AudioSettings
+-): SoundSource => createAudioElementSound(context, listener, settings)
++  context: AudioContext,
++  listener: THREE_TYPES.AudioListener,
++  settings: AudioSettings,
++  onError: (err: Error) => void
++): SoundSource => createAudioElementSound(context, listener, settings, onError)
+ 
+ export {
+   createSound,
+
+From 527b39b113970098410b90d153c148ea53890eb2 Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Fri, 10 Oct 2025 15:09:23 -0700
+Subject: [PATCH 22/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/audio-element-sound.ts  | 66 +++++++++-------
+ c8/ecs/src/runtime/audio-manager.ts        | 92 ++++++++++------------
+ c8/ecs/src/runtime/audio-sound-types.ts    | 37 ++++++---
+ c8/ecs/src/runtime/audio-sound.ts          |  9 ++-
+ c8/ecs/src/runtime/audio.ts                | 18 +++--
+ c8/ecs/src/runtime/systems/audio-system.ts |  8 +-
+ 6 files changed, 129 insertions(+), 101 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/audio-element-sound.ts b/c8/ecs/src/runtime/audio-element-sound.ts
+index 9dc6a770f52..ed1612951ca 100644
+--- a/c8/ecs/src/runtime/audio-element-sound.ts
++++ b/c8/ecs/src/runtime/audio-element-sound.ts
+@@ -1,39 +1,38 @@
+ import {DEFAULT_PITCH} from '../shared/audio-constants'
+ import {assets} from './assets'
+-import type {SoundSource} from './audio-sound-types'
++import type {Sound} from './audio-sound-types'
+ import type {AudioSettings} from './audio-sound-types'
+ import type * as THREE_TYPES from './three-types'
+-import THREE from './three'
++import type {Eid} from '../shared/schema'
+ 
+ const createAudioElementSound =
+ (
++  eid: Eid,
+   context: AudioContext,
+-  listener: THREE_TYPES.AudioListener, audio: AudioSettings, onError: (err: Error) => void
+-): SoundSource => {
++  listener: THREE_TYPES.AudioListener,
++  audio: AudioSettings
++): Sound => {
+   const audioElement = new Audio()
+-  let onAudioEnded: (() => void) | null = null
+-  let onAudioReady: (() => void) | null = null
+-
+-  // we cannot rely on audiElement.src
+-  let url: string | undefined
+-
+   audioElement.preload = 'auto'
+   audioElement.crossOrigin = 'anonymous'
+   const controller = new AbortController()
++  let onAudioEnded: (() => void) | null = null
++  let onAudioReady: (() => void) | null = null
++  let onError: (err: Error) => void
+ 
+-  const audioNode: THREE_TYPES.PositionalAudio | THREE_TYPES.Audio = audio.positional
+-    ? new THREE.PositionalAudio(listener)
+-    : new THREE.Audio<GainNode>(listener)
+-
+-  audioNode.setMediaElementSource(audioElement)
++  // we cannot rely on audiElement.src
++  let url: string | undefined = audio.url ?? ''
++  let externalPause = !!audio.paused
+ 
+   const loadSource = async (source: string, pitch?: number, playOnLoad?: boolean) => {
+     try {
+       const {signal} = controller
++      url = source
+       const asset = await assets.load({url: source})
+       if (signal.aborted) {
+         return
+       }
++
+       audioElement.src = asset.localUrl
+       // playbackRate directly affects the pitch of the audio (sample rate conversion)
+       // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/playbackRate
+@@ -43,9 +42,6 @@ const createAudioElementSound =
+       ;(audioElement as any).preservesPitch = false
+       audioElement.load()
+ 
+-      // once the audio has loaded we need to replace the current url with the new one
+-      url = source
+-
+       if (playOnLoad) {
+         audioElement.play()
+       }
+@@ -57,16 +53,19 @@ const createAudioElementSound =
+   loadSource(audio.url, audio.pitch, !audio.paused)
+ 
+   return {
++    id: eid,
++    url,
++    loop: !!audioElement.loop,
++    paused: externalPause,
+     update: (config: Partial<AudioSettings>) => {
+       if (config.url && config.url !== url) {
+-        const paused = config.paused ?? audioElement.paused
++        const paused = config.paused ?? externalPause
+         loadSource(config.url, config.pitch, !paused)
+       } else if (config.pitch) {
+         audioElement.playbackRate = config.pitch
+       }
+ 
+       audioElement.loop = config.loop ?? audioElement.loop
+-      audioElement.volume = config.volume ?? audioElement.volume
+ 
+       if (config.paused) {
+         audioElement.pause()
+@@ -76,8 +75,14 @@ const createAudioElementSound =
+     },
+     getCurrentTime: () => audioElement.currentTime,
+     setCurrentTime: (time) => { audioElement.currentTime = time },
+-    pause: () => { audioElement.pause() },
+-    resume: () => { audioElement.play().catch((e: Error) => { onError(e) }) },
++    pause: () => {
++      externalPause = true
++      audioElement.pause()
++    },
++    resume: () => {
++      externalPause = false
++      audioElement.play().catch(onError)
++    },
+     destroy: () => {
+       if (onAudioEnded) {
+         audioElement.removeEventListener('ended', onAudioEnded)
+@@ -87,24 +92,29 @@ const createAudioElementSound =
+       }
+       audioElement.pause()
+       audioElement.remove()
+-      audioNode.disconnect()
+       controller.abort()
+     },
++    connect: (newNode) => {
++      if (audioElement.isConnected) {
++        throw new Error('Audio element already connected to a node, cannot disconnect/reconnect')
++      }
++      newNode.setMediaElementSource(audioElement)
++    },
+     onAudioReady: (cb: (() => void)) => {
+       audioElement.addEventListener('canplaythrough', cb)
+       onAudioReady = cb
+     },
+     onAudioEnded: (cb: (() => void) | null) => {
++      if (onAudioEnded) {
++        audioElement.removeEventListener('ended', onAudioEnded)
++        onAudioEnded = null
++      }
+       if (cb) {
+         audioElement.addEventListener('ended', cb)
+         onAudioEnded = cb
+-      } else if (onAudioEnded) {
+-        audioElement.removeEventListener('ended', onAudioEnded)
+-        onAudioEnded = null
+       }
+     },
+-    audioNode,
+-    controller,
++    onError: (cb: (err: Error) => void) => { onError = cb },
+   }
+ }
+ 
+diff --git a/c8/ecs/src/runtime/audio-manager.ts b/c8/ecs/src/runtime/audio-manager.ts
+index 828622a923b..9d6658ac7a6 100644
+--- a/c8/ecs/src/runtime/audio-manager.ts
++++ b/c8/ecs/src/runtime/audio-manager.ts
+@@ -12,20 +12,14 @@ import {events} from './event-ids'
+ import {createInstanced} from '../shared/instanced'
+ import {addChild} from './matrix-refresh'
+ import {createSound} from './audio-sound'
+-import type {AudioSettings, SoundSource} from './audio-sound-types'
+-
+-type Sound = {
+-  id: Eid
+-  source: SoundSource
+-  url: string
+-  paused: boolean
+-}
++import type {AudioNodeSettings, AudioSettings, Sound, ThreeAudioNode} from './audio-sound-types'
+ 
+ type InternalAudio = {
+   listener: THREE_TYPES.AudioListener
+   compressor: DynamicsCompressorNode
+   addSound: (eid: Eid, audio: AudioSettings) => Sound | null
+   getSound: (eid: Eid) => Sound | undefined
++  getAudioNode: (eid: Eid) => ThreeAudioNode | undefined
+   removeSound: (eid: Eid) => void
+   updateSound: (eid: Eid, newAudio: AudioSettings) => void
+   resumeSounds: () => void
+@@ -38,12 +32,11 @@ const getValidDistanceModel = (distanceModel: any): string => (
+   DistanceModelValues.includes(distanceModel) ? distanceModel : DEFAULT_DISTANCE_MODEL
+ )
+ 
+-const setAudioNodeOpts = (
+-  audioNode: THREE_TYPES.Audio | THREE_TYPES.PositionalAudio,
+-  options?: Omit<AudioSettings, 'url'>
++const setAudioNodeOptions = (
++  audioNode: ThreeAudioNode,
++  options?: AudioNodeSettings
+ ) => {
+   audioNode.setVolume(options?.volume ?? DEFAULT_VOLUME)
+-
+   if (audioNode instanceof THREE.PositionalAudio) {
+     audioNode.setRefDistance(options?.refDistance ?? DEFAULT_REF_DISTANCE)
+     audioNode.setDistanceModel(getValidDistanceModel(options?.distanceModel))
+@@ -66,31 +59,29 @@ const createAudioManager = (world: World): InternalAudio => {
+   compressor.connect(listener.gain)
+ 
+   const sounds: Map<Eid, Sound> = new Map()
++  const audioNodes: Map<Eid, ThreeAudioNode> = new Map()
+   const endedEventCallbacks: Map<Eid, (event: Event) => void> = new Map()
+ 
+   const maybeAddEndedEventListener = (sound: Sound) => {
+-    if (endedEventCallbacks.get(sound.id) || sound.source.audioNode.loop) {
++    const audioNode = audioNodes.get(sound.id)
++    if (endedEventCallbacks.get(sound.id) || !audioNode || sound.loop) {
+       return
+     }
+     const endedEventListener = () => {
+       world.events.dispatch(sound.id, events.AUDIO_END)
+     }
+-    sound.source.onAudioEnded(endedEventListener)
++    sound.onAudioEnded(endedEventListener)
+     endedEventCallbacks.set(sound.id, endedEventListener)
+   }
+ 
+   const maybeRemoveEndedEventListener = (sound: Sound) => {
+     const endedEventCallback = endedEventCallbacks.get(sound.id)
+     if (endedEventCallback) {
+-      sound.source.onAudioEnded(null)
++      sound.onAudioEnded(null)
+       endedEventCallbacks.delete(sound.id)
+     }
+   }
+ 
+-  const playSound = (sound: Sound) => {
+-    sound.source.resume()
+-  }
+-
+   const addSound = (eid: Eid, audio: AudioSettings) => {
+     if (!audio.url) {
+       return null
+@@ -98,23 +89,25 @@ const createAudioManager = (world: World): InternalAudio => {
+     const onError = (error: Error) => {
+       world.events.dispatch(eid, 'audio-error', {error})
+     }
++    const sound = createSound(eid, context, listener, audio)
++    sound.onError(onError)
++
++    const newAudioNode = audio.positional
++      ? new THREE.PositionalAudio(listener)
++      : new THREE.Audio(listener)
++    sound.connect(newAudioNode)
+ 
+-    const soundSource = createSound(context, listener, audio, onError)
+-    soundSource.audioNode.gain.disconnect()
+-    soundSource.audioNode.gain.connect(compressor)
++    newAudioNode.gain.disconnect()
++    newAudioNode.gain.connect(compressor)
+ 
+-    soundSource.onAudioReady(() => {
++    sound.onAudioReady(() => {
+       world.events.dispatch(eid, events.AUDIO_CAN_PLAY_THROUGH)
+     })
+ 
+-    setAudioNodeOpts(soundSource.audioNode, audio)
+-    const sound = {
+-      id: eid,
+-      source: soundSource,
+-      url: audio.url,
+-      paused: !!audio.paused,
+-    }
+     sounds.set(eid, sound)
++    audioNodes.set(eid, newAudioNode)
++
++    setAudioNodeOptions(newAudioNode, audio)
+     maybeAddEndedEventListener(sound)
+     return sound
+   }
+@@ -125,48 +118,46 @@ const createAudioManager = (world: World): InternalAudio => {
+       return
+     }
+ 
+-    sound.source.destroy()
++    sound.destroy()
+     sounds.delete(eid)
++    audioNodes.delete(eid)
+   }
+ 
+   const updateSound = (eid: Eid, newAudio: AudioSettings) => {
+     const sound = sounds.get(eid)
+-    if (!sound) {
++    const audioNode = audioNodes.get(eid)
++    if (!sound || !audioNode) {
+       return
+     }
+-    sound.source.update(newAudio)
+-    if (newAudio.paused !== undefined) {
+-      sound.paused = newAudio.paused
+-    }
+ 
+-    const positionalSame = !!newAudio.positional === (
+-      sound.source.audioNode instanceof THREE.PositionalAudio)
++    const positionalSame = !!newAudio.positional === (audioNode instanceof THREE.PositionalAudio)
+     const audioUrlSame = sound.url && newAudio.url && newAudio.url === sound.url
++
+     if (audioUrlSame && positionalSame) {
+-      sound.source.update(newAudio)
+-      setAudioNodeOpts(sound.source.audioNode, newAudio)
++      sound.update(newAudio)
++      setAudioNodeOptions(audioNode, newAudio)
+       if (newAudio.loop !== undefined && !newAudio.loop) {
+         maybeRemoveEndedEventListener(sound)
+       }
+       maybeAddEndedEventListener(sound)
+       if (newAudio.paused) {
+-        sound.source.pause()
++        sound.pause()
+       } else {
+-        playSound(sound)
++        sound.resume()
+       }
+     } else {
+-      const {parent} = sound.source.audioNode
++      const {parent} = audioNode
+       removeSound(eid)
+       const newSound = addSound(eid, newAudio)
+       if (parent && newSound) {
+-        addChild(parent, newSound.source.audioNode)
++        addChild(parent, audioNode)
+       }
+     }
+   }
+ 
+   const pauseSounds = () => {
+     sounds.forEach((sound) => {
+-      sound.source.pause()
++      sound.pause()
+     })
+   }
+ 
+@@ -176,17 +167,19 @@ const createAudioManager = (world: World): InternalAudio => {
+         return
+       }
+ 
+-      playSound(sound)
++      sound.resume()
+     })
+   }
+ 
+   const getSound = (eid: Eid) => sounds.get(eid)
++  const getAudioNode = (eid: Eid) => audioNodes.get(eid)
+ 
+   const internalAudio = {
+     listener,
+     compressor,
+     addSound,
+     getSound,
++    getAudioNode,
+     removeSound,
+     resumeSounds,
+     pauseSounds,
+@@ -201,11 +194,12 @@ const getAudioManager = createInstanced<World, InternalAudio>(createAudioManager
+ const setAudioOptions = (eid: Eid, options: Partial<AudioSettings>, world: World) => {
+   const audioManager = getAudioManager(world)
+   const sound = audioManager.getSound(eid)
+-  if (!sound) {
++  const audioNode = audioManager.getAudioNode(eid)
++  if (!sound || !audioNode) {
+     return
+   }
+-  sound.source.update(options)
+-  setAudioNodeOpts(sound.source.audioNode, options)
++  sound.update(options)
++  setAudioNodeOptions(audioNode, options)
+ }
+ 
+ export {
+diff --git a/c8/ecs/src/runtime/audio-sound-types.ts b/c8/ecs/src/runtime/audio-sound-types.ts
+index a8685e7e993..91c156bc448 100644
+--- a/c8/ecs/src/runtime/audio-sound-types.ts
++++ b/c8/ecs/src/runtime/audio-sound-types.ts
+@@ -1,11 +1,8 @@
+ import type * as THREE_TYPES from './three-types'
++import type {Eid} from '../shared/schema'
+ 
+-type AudioSettings = {
+-  url: string
++type AudioNodeSettings = {
+   volume?: number
+-  loop?: boolean
+-  pitch?: number
+-  paused?: boolean
+   positional?: boolean
+   refDistance?: number
+   rolloffFactor?: number
+@@ -13,21 +10,39 @@ type AudioSettings = {
+   maxDistance?: number
+ }
+ 
+-interface SoundSource {
+-  update: (config: Partial<AudioSettings>) => void
++type SoundSettings = {
++  loop?: boolean
++  pitch?: number
++  paused?: boolean
++}
++
++type AudioSettings = SoundSettings & AudioNodeSettings & {
++  url: string
++}
++
++type ThreeAudioNode = THREE_TYPES.Audio | THREE_TYPES.PositionalAudio
++
++interface Sound {
++  readonly id: Eid
++  readonly url: string
++  readonly paused: boolean
++  readonly loop: boolean
++  update: (config: Partial<SoundSettings>) => void
+   getCurrentTime: () => number
+   setCurrentTime: (time: number) => void
+   pause: () => void
+   resume: () => void
+   destroy: () => void
++  connect: (audioNode: ThreeAudioNode) => void
+   onAudioReady: (cb: (() => void)) => void
+   onAudioEnded: (cb: (() => void) | null) => void
+-  readonly audioNode: THREE_TYPES.Audio | THREE_TYPES.PositionalAudio
+-  readonly controller: AbortController
+-  readonly element?: HTMLMediaElement
++  onError: (cb: (err: Error) => void) => void
+ }
+ 
+ export type {
++  AudioNodeSettings,
++  SoundSettings,
+   AudioSettings,
+-  SoundSource,
++  ThreeAudioNode,
++  Sound,
+ }
+diff --git a/c8/ecs/src/runtime/audio-sound.ts b/c8/ecs/src/runtime/audio-sound.ts
+index b4d20d128bd..d8a34f92538 100644
+--- a/c8/ecs/src/runtime/audio-sound.ts
++++ b/c8/ecs/src/runtime/audio-sound.ts
+@@ -1,13 +1,14 @@
+ import {createAudioElementSound} from './audio-element-sound'
+-import type {AudioSettings, SoundSource} from './audio-sound-types'
++import type {AudioSettings, Sound} from './audio-sound-types'
+ import type * as THREE_TYPES from './three-types'
++import type {Eid} from '../shared/schema'
+ 
+ const createSound = (
++  eid: Eid,
+   context: AudioContext,
+   listener: THREE_TYPES.AudioListener,
+-  settings: AudioSettings,
+-  onError: (err: Error) => void
+-): SoundSource => createAudioElementSound(context, listener, settings, onError)
++  settings: AudioSettings
++): Sound => createAudioElementSound(eid, context, listener, settings)
+ 
+ export {
+   createSound,
+diff --git a/c8/ecs/src/runtime/audio.ts b/c8/ecs/src/runtime/audio.ts
+index a63b79d3abc..26a51258b85 100644
+--- a/c8/ecs/src/runtime/audio.ts
++++ b/c8/ecs/src/runtime/audio.ts
+@@ -1,23 +1,27 @@
+ import type {World} from './world'
+ import type {Eid} from '../shared/schema'
+ import {getAudioManager} from './audio-manager'
++import type {Sound} from './audio-sound-types'
+ 
+-const getSoundSource = (world: World, eid: Eid) => getAudioManager(world).getSound(eid)?.source
++const getSound = (world: World, eid: Eid): Sound | undefined => {
++  const audioManager = getAudioManager(world)
++  return audioManager.getSound(eid)
++}
+ 
+ const getCurrentTime = (world: World, eid: Eid) => {
+-  const source = getSoundSource(world, eid)
+-  if (!source) {
++  const sound = getSound(world, eid)
++  if (!sound) {
+     throw new Error(`Audio for ${eid} does not exist, cannot get current time`)
+   }
+-  return source.getCurrentTime()
++  return sound.getCurrentTime()
+ }
+ 
+ const setCurrentTime = (world: World, eid: Eid, time: number) => {
+-  const source = getSoundSource(world, eid)
+-  if (!source) {
++  const sound = getSound(world, eid)
++  if (!sound) {
+     throw new Error(`Audio for ${eid} does not exist, cannot set current time`)
+   }
+-  source.setCurrentTime(time)
++  sound.setCurrentTime(time)
+ }
+ 
+ const audio = {
+diff --git a/c8/ecs/src/runtime/systems/audio-system.ts b/c8/ecs/src/runtime/systems/audio-system.ts
+index b86d3e4840c..25be622e409 100644
+--- a/c8/ecs/src/runtime/systems/audio-system.ts
++++ b/c8/ecs/src/runtime/systems/audio-system.ts
+@@ -23,8 +23,12 @@ const makeAudioSystem = (world: World) => {
+     const audio = Audio.get(world, eid)
+     if (audio.url) {
+       const sound = audioManager.addSound(eid, audio)
+-      if (sound) {
+-        addChild(object, sound.source.audioNode)
++      if (!sound) {
++        throw new Error(`Failed to create audio for ${eid}`)
++      }
++      const audioNode = audioManager.getAudioNode(eid)
++      if (audioNode) {
++        addChild(object, audioNode)
+       }
+     }
+   }
+
+From ec084573cd88da457041ea129edcd0dd2d5bc7d2 Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Fri, 10 Oct 2025 15:12:57 -0700
+Subject: [PATCH 23/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/audio-element-sound.ts | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/c8/ecs/src/runtime/audio-element-sound.ts b/c8/ecs/src/runtime/audio-element-sound.ts
+index ed1612951ca..10319b9505c 100644
+--- a/c8/ecs/src/runtime/audio-element-sound.ts
++++ b/c8/ecs/src/runtime/audio-element-sound.ts
+@@ -26,6 +26,7 @@ const createAudioElementSound =
+ 
+   const loadSource = async (source: string, pitch?: number, playOnLoad?: boolean) => {
+     try {
++      audioElement.pause()
+       const {signal} = controller
+       url = source
+       const asset = await assets.load({url: source})
+
+From b37737af4b02d43f669c76ee0c6d0eef0949a57d Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Fri, 10 Oct 2025 15:36:54 -0700
+Subject: [PATCH 24/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/BUILD | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/c8/ecs/src/runtime/BUILD b/c8/ecs/src/runtime/BUILD
+index 525597c5f87..8bf00077d8e 100644
+--- a/c8/ecs/src/runtime/BUILD
++++ b/c8/ecs/src/runtime/BUILD
+@@ -190,6 +190,7 @@ js_library(
+     ],
+     deps = [
+         "//c8/ecs/src/runtime:audio-manager",
++        "//c8/ecs/src/runtime:audio-sound-types",
+         "//c8/ecs/src/runtime:world",
+         "//c8/ecs/src/shared:schema",
+     ],
+@@ -2315,9 +2316,9 @@ js_library(
+     deps = [
+         "//c8/ecs/src/runtime:assets",
+         "//c8/ecs/src/runtime:audio-sound-types",
+-        "//c8/ecs/src/runtime:three",
+         "//c8/ecs/src/runtime:three-types",
+         "//c8/ecs/src/shared:audio-constants",
++        "//c8/ecs/src/shared:schema",
+     ],
+ )
+ 
+@@ -2328,6 +2329,7 @@ js_library(
+     ],
+     deps = [
+         "//c8/ecs/src/runtime:three-types",
++        "//c8/ecs/src/shared:schema",
+     ],
+ )
+ 
+@@ -2340,5 +2342,6 @@ js_library(
+         "//c8/ecs/src/runtime:audio-element-sound",
+         "//c8/ecs/src/runtime:audio-sound-types",
+         "//c8/ecs/src/runtime:three-types",
++        "//c8/ecs/src/shared:schema",
+     ],
+ )
+
+From e089b8b4ca14c6cb8f1aaef5bfd2b50f0257c250 Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Mon, 13 Oct 2025 11:52:48 -0700
+Subject: [PATCH 25/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/audio-element-sound.ts  | 3 +--
+ c8/ecs/src/runtime/systems/audio-system.ts | 8 +++-----
+ 2 files changed, 4 insertions(+), 7 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/audio-element-sound.ts b/c8/ecs/src/runtime/audio-element-sound.ts
+index 10319b9505c..6e9d4529924 100644
+--- a/c8/ecs/src/runtime/audio-element-sound.ts
++++ b/c8/ecs/src/runtime/audio-element-sound.ts
+@@ -26,7 +26,6 @@ const createAudioElementSound =
+ 
+   const loadSource = async (source: string, pitch?: number, playOnLoad?: boolean) => {
+     try {
+-      audioElement.pause()
+       const {signal} = controller
+       url = source
+       const asset = await assets.load({url: source})
+@@ -43,7 +42,7 @@ const createAudioElementSound =
+       ;(audioElement as any).preservesPitch = false
+       audioElement.load()
+ 
+-      if (playOnLoad) {
++      if (playOnLoad && !externalPause) {
+         audioElement.play()
+       }
+     } catch (err) {
+diff --git a/c8/ecs/src/runtime/systems/audio-system.ts b/c8/ecs/src/runtime/systems/audio-system.ts
+index 25be622e409..c6048f34052 100644
+--- a/c8/ecs/src/runtime/systems/audio-system.ts
++++ b/c8/ecs/src/runtime/systems/audio-system.ts
+@@ -23,13 +23,11 @@ const makeAudioSystem = (world: World) => {
+     const audio = Audio.get(world, eid)
+     if (audio.url) {
+       const sound = audioManager.addSound(eid, audio)
+-      if (!sound) {
+-        throw new Error(`Failed to create audio for ${eid}`)
+-      }
+       const audioNode = audioManager.getAudioNode(eid)
+-      if (audioNode) {
+-        addChild(object, audioNode)
++      if (!sound || !audioNode) {
++        throw new Error(`Failed to create audio for ${eid}`)
+       }
++      addChild(object, audioNode)
+     }
+   }
+ 
+
+From 4321f6a0438af7d629937aec05ddf9331c71ed63 Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Thu, 16 Oct 2025 14:47:34 -0700
+Subject: [PATCH 26/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/audio-manager.ts | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/c8/ecs/src/runtime/audio-manager.ts b/c8/ecs/src/runtime/audio-manager.ts
+index 9d6658ac7a6..2a34af0171c 100644
+--- a/c8/ecs/src/runtime/audio-manager.ts
++++ b/c8/ecs/src/runtime/audio-manager.ts
+@@ -48,6 +48,7 @@ const setAudioNodeOptions = (
+ const createAudioManager = (world: World): InternalAudio => {
+   const listener = new THREE.AudioListener()
+   const context = listener.context as AudioContext
++  let globalAudioPaused = false
+ 
+   // use a compressor to avoid clipping and crackling sounds
+   const compressor = context.createDynamicsCompressor()
+@@ -134,7 +135,7 @@ const createAudioManager = (world: World): InternalAudio => {
+     const audioUrlSame = sound.url && newAudio.url && newAudio.url === sound.url
+ 
+     if (audioUrlSame && positionalSame) {
+-      sound.update(newAudio)
++      sound.update({paused: globalAudioPaused || newAudio.paused, ...newAudio})
+       setAudioNodeOptions(audioNode, newAudio)
+       if (newAudio.loop !== undefined && !newAudio.loop) {
+         maybeRemoveEndedEventListener(sound)
+@@ -156,12 +157,17 @@ const createAudioManager = (world: World): InternalAudio => {
+   }
+ 
+   const pauseSounds = () => {
++    globalAudioPaused = true
+     sounds.forEach((sound) => {
++      if (sound.paused) {
++        return
++      }
+       sound.pause()
+     })
+   }
+ 
+   const resumeSounds = () => {
++    globalAudioPaused = false
+     sounds.forEach((sound) => {
+       if (sound.paused) {
+         return
+
+From 447ff0f4516e8e7b4316ae8f99bda991118c2194 Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Thu, 16 Oct 2025 14:58:31 -0700
+Subject: [PATCH 27/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/audio-manager.ts | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/audio-manager.ts b/c8/ecs/src/runtime/audio-manager.ts
+index 2a34af0171c..92b0065103e 100644
+--- a/c8/ecs/src/runtime/audio-manager.ts
++++ b/c8/ecs/src/runtime/audio-manager.ts
+@@ -135,13 +135,13 @@ const createAudioManager = (world: World): InternalAudio => {
+     const audioUrlSame = sound.url && newAudio.url && newAudio.url === sound.url
+ 
+     if (audioUrlSame && positionalSame) {
+-      sound.update({paused: globalAudioPaused || newAudio.paused, ...newAudio})
++      sound.update(newAudio)
+       setAudioNodeOptions(audioNode, newAudio)
+       if (newAudio.loop !== undefined && !newAudio.loop) {
+         maybeRemoveEndedEventListener(sound)
+       }
+       maybeAddEndedEventListener(sound)
+-      if (newAudio.paused) {
++      if (newAudio.paused || globalAudioPaused) {
+         sound.pause()
+       } else {
+         sound.resume()
+
+From 841ef39468d0ff5e74790694f80b6b9d44548c45 Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Thu, 16 Oct 2025 15:10:16 -0700
+Subject: [PATCH 28/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/audio-element-sound.ts | 12 ++++++------
+ c8/ecs/src/runtime/audio-manager.ts       |  2 +-
+ 2 files changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/audio-element-sound.ts b/c8/ecs/src/runtime/audio-element-sound.ts
+index 6e9d4529924..1ea8ecdedcd 100644
+--- a/c8/ecs/src/runtime/audio-element-sound.ts
++++ b/c8/ecs/src/runtime/audio-element-sound.ts
+@@ -22,7 +22,7 @@ const createAudioElementSound =
+ 
+   // we cannot rely on audiElement.src
+   let url: string | undefined = audio.url ?? ''
+-  let externalPause = !!audio.paused
++  let internalPause = !!audio.paused
+ 
+   const loadSource = async (source: string, pitch?: number, playOnLoad?: boolean) => {
+     try {
+@@ -42,7 +42,7 @@ const createAudioElementSound =
+       ;(audioElement as any).preservesPitch = false
+       audioElement.load()
+ 
+-      if (playOnLoad && !externalPause) {
++      if (playOnLoad && !internalPause) {
+         audioElement.play()
+       }
+     } catch (err) {
+@@ -56,10 +56,10 @@ const createAudioElementSound =
+     id: eid,
+     url,
+     loop: !!audioElement.loop,
+-    paused: externalPause,
++    paused: internalPause,
+     update: (config: Partial<AudioSettings>) => {
+       if (config.url && config.url !== url) {
+-        const paused = config.paused ?? externalPause
++        const paused = config.paused ?? internalPause
+         loadSource(config.url, config.pitch, !paused)
+       } else if (config.pitch) {
+         audioElement.playbackRate = config.pitch
+@@ -76,11 +76,11 @@ const createAudioElementSound =
+     getCurrentTime: () => audioElement.currentTime,
+     setCurrentTime: (time) => { audioElement.currentTime = time },
+     pause: () => {
+-      externalPause = true
++      internalPause = true
+       audioElement.pause()
+     },
+     resume: () => {
+-      externalPause = false
++      internalPause = false
+       audioElement.play().catch(onError)
+     },
+     destroy: () => {
+diff --git a/c8/ecs/src/runtime/audio-manager.ts b/c8/ecs/src/runtime/audio-manager.ts
+index 92b0065103e..9e1eb20227c 100644
+--- a/c8/ecs/src/runtime/audio-manager.ts
++++ b/c8/ecs/src/runtime/audio-manager.ts
+@@ -143,7 +143,7 @@ const createAudioManager = (world: World): InternalAudio => {
+       maybeAddEndedEventListener(sound)
+       if (newAudio.paused || globalAudioPaused) {
+         sound.pause()
+-      } else {
++      } else if (!sound.paused) {
+         sound.resume()
+       }
+     } else {
+
+From d754fd1816395391e408e0fc638446e75a491894 Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Thu, 16 Oct 2025 15:20:01 -0700
+Subject: [PATCH 29/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/audio-manager.ts | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/audio-manager.ts b/c8/ecs/src/runtime/audio-manager.ts
+index 9e1eb20227c..c9d10d53e2c 100644
+--- a/c8/ecs/src/runtime/audio-manager.ts
++++ b/c8/ecs/src/runtime/audio-manager.ts
+@@ -141,9 +141,9 @@ const createAudioManager = (world: World): InternalAudio => {
+         maybeRemoveEndedEventListener(sound)
+       }
+       maybeAddEndedEventListener(sound)
+-      if (newAudio.paused || globalAudioPaused) {
++      if (newAudio.paused !== undefined && newAudio.paused) {
+         sound.pause()
+-      } else if (!sound.paused) {
++      } else if (!sound.paused && !globalAudioPaused) {
+         sound.resume()
+       }
+     } else {
+
+From fe113676b8c34f4f98552751a0dd37469ecf6057 Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Thu, 16 Oct 2025 16:25:31 -0700
+Subject: [PATCH 30/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/audio-manager.ts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/c8/ecs/src/runtime/audio-manager.ts b/c8/ecs/src/runtime/audio-manager.ts
+index c9d10d53e2c..3bc3710406b 100644
+--- a/c8/ecs/src/runtime/audio-manager.ts
++++ b/c8/ecs/src/runtime/audio-manager.ts
+@@ -141,7 +141,7 @@ const createAudioManager = (world: World): InternalAudio => {
+         maybeRemoveEndedEventListener(sound)
+       }
+       maybeAddEndedEventListener(sound)
+-      if (newAudio.paused !== undefined && newAudio.paused) {
++      if (newAudio.paused) {
+         sound.pause()
+       } else if (!sound.paused && !globalAudioPaused) {
+         sound.resume()
+
+From 05ab25519084bac7ecff6e6d0cc9a6666a1d21ea Mon Sep 17 00:00:00 2001
+From: Alan <alan@nianticspatial.com>
+Date: Thu, 16 Oct 2025 16:27:40 -0700
+Subject: [PATCH 31/31] [ecs][cloud-studio] Refactor Audio to allow Audio
+ buffer as a secondary source
+
+---
+ c8/ecs/src/runtime/BUILD | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+
+diff --git a/c8/ecs/src/runtime/BUILD b/c8/ecs/src/runtime/BUILD
+index 8bf00077d8e..1a097b04ebc 100644
+--- a/c8/ecs/src/runtime/BUILD
++++ b/c8/ecs/src/runtime/BUILD
+@@ -57,6 +57,7 @@ js_library(
+     ],
+     deps = [
+         "//c8/ecs/src/runtime:components",
++        "//c8/ecs/src/runtime:event-ids",
+         "//c8/ecs/src/runtime:registry",
+         "//c8/ecs/src/runtime:three",
+         "//c8/ecs/src/runtime:three-types",
+@@ -2308,6 +2309,26 @@ js_test(
+     ],
+ )
+ 
++js_test(
++    name = "component-callbacks-test",
++    size = "small",
++    esnext = 1,
++    externalize_npm = 1,
++    main = [
++        "component-callbacks-test.ts",
++    ],
++    npm_rule = "@npm-ecs//:npm-ecs",
++    deps = [
++        "//bzl/js:chai-js",
++        "//c8/ecs/src/runtime:test-env",
++        "//c8/ecs/src/runtime:test-runtime-lib",
++        "//c8/ecs/src/runtime:three",
++        "//c8/ecs/src/runtime:world",
++        "//c8/ecs/src/shared:scene-graph",
++        "//c8/ecs/src/shared:schema",
++    ],
++)
++
+ js_library(
+     name = "audio-element-sound",
+     srcs = [

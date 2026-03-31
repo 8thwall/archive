@@ -1,0 +1,2542 @@
+From 2733fc8f04bd2dd7b2196e9d80d3b67315469a81 Mon Sep 17 00:00:00 2001
+From: Cindy Hu <cindy@nianticspatial.com>
+Date: Fri, 18 Jul 2025 16:15:20 -0700
+Subject: [PATCH 1/8] [xrhome][studio] refactor tree hierarchy with
+ react-window
+
+---
+ reality/cloud/xrhome/package.json             |   1 +
+ .../src/client/studio/floating-left-panel.tsx |   2 +-
+ .../hooks/use-flatten-tree-hierarchy.ts       | 108 +++++++++
+ .../studio/space-section-collapsible.tsx      |  28 ++-
+ .../xrhome/src/client/studio/spaces-menu.tsx  |   9 +-
+ .../xrhome/src/client/studio/tree-element.tsx |  22 +-
+ .../src/client/studio/tree-hierarchy.tsx      | 220 ++++++++++++++----
+ .../client/studio/ui/tree-hierarchy-styles.ts |  12 +-
+ 8 files changed, 329 insertions(+), 73 deletions(-)
+ create mode 100644 reality/cloud/xrhome/src/client/studio/hooks/use-flatten-tree-hierarchy.ts
+
+diff --git a/reality/cloud/xrhome/package.json b/reality/cloud/xrhome/package.json
+index 37dcd4b1719..75d1489cb00 100644
+--- a/reality/cloud/xrhome/package.json
++++ b/reality/cloud/xrhome/package.json
+@@ -138,6 +138,7 @@
+     "react-share": "^4.0.1",
+     "react-sortable-hoc": "^1.9.1",
+     "react-split-pane": "^0.1.87",
++    "react-window": "^1.8.11",
+     "react-with-styles": "^3.2.3",
+     "real-semantic-ui-react": "npm:semantic-ui-react@^0.88.2",
+     "redux": "^4.2.1",
+diff --git a/reality/cloud/xrhome/src/client/studio/floating-left-panel.tsx b/reality/cloud/xrhome/src/client/studio/floating-left-panel.tsx
+index af444c91fe0..2e6534b8f08 100644
+--- a/reality/cloud/xrhome/src/client/studio/floating-left-panel.tsx
++++ b/reality/cloud/xrhome/src/client/studio/floating-left-panel.tsx
+@@ -135,7 +135,7 @@ const FloatingLeftPanel = React.forwardRef<HTMLDivElement, IFloatingLeftPanel>((
+                       pane1Style={{overflowY: 'hidden', flex: '1 0 0px'}}
+                     >
+                       <div className={classes.pane1}>
+-                        <TreeHierarchy />
++                        <TreeHierarchy height={height - size} />
+                       </div>
+                       <div className={classes.pane2}>
+                         {fileBrowser}
+diff --git a/reality/cloud/xrhome/src/client/studio/hooks/use-flatten-tree-hierarchy.ts b/reality/cloud/xrhome/src/client/studio/hooks/use-flatten-tree-hierarchy.ts
+new file mode 100644
+index 00000000000..23debc82651
+--- /dev/null
++++ b/reality/cloud/xrhome/src/client/studio/hooks/use-flatten-tree-hierarchy.ts
+@@ -0,0 +1,108 @@
++import React from 'react'
++
++import type {DerivedScene} from '../derive-scene'
++import {useDerivedScene} from '../derived-scene-context'
++import {useActiveSpace} from './active-space'
++import {useGitActiveClient} from '../../git/hooks/use-current-git'
++
++const SPACELESS_ID = 'spaceless-id'
++type FlattenedTreeNode = {
++  id: string
++  level: number
++  isSpace: boolean
++  spaceId?: string
++  parentId?: string
++  isLast?: boolean
++}
++
++const flattenTreeHierarchy = (
++  spaceIds: string[],
++  derivedScene: DerivedScene,
++  expanded: Record<string, boolean>,
++  activeSpaceId?: string
++) => {
++  const flattened: FlattenedTreeNode[] = []
++  const flattenNode = (
++    id: string, level: number, spaceId?: string, parentId?: string, isLast?: boolean
++  ) => {
++    flattened.push({id, level, isSpace: false, spaceId, parentId, isLast})
++    if (expanded[id]) {
++      const children = derivedScene.getChildren(id)
++      children.forEach((child, index) => {
++        flattenNode(child, level + 1, spaceId, id, index === children.length - 1)
++      })
++    }
++  }
++
++  spaceIds.forEach((spaceId) => {
++    if (spaceId && activeSpaceId && spaceId !== activeSpaceId) {
++      flattened.push({id: spaceId, level: 0, isSpace: true, spaceId, parentId: undefined})
++    }
++    if (expanded[spaceId]) {
++      const topLevelIds = derivedScene.getTopLevelObjectIds(spaceId)
++      topLevelIds.forEach((id, index) => {
++        flattenNode(id, 0, spaceId, spaceId, index === topLevelIds.length - 1)
++      })
++    }
++  })
++
++  if (activeSpaceId) {
++    const missingSpaceObjects = derivedScene.getTopLevelObjectIds(undefined)
++    if (missingSpaceObjects.length > 0) {
++      flattened.push({id: SPACELESS_ID, level: 0, isSpace: true, spaceId: undefined, parentId: undefined})
++      if (expanded[SPACELESS_ID]) {
++        missingSpaceObjects.forEach((id, index) => {
++          flattenNode(id, 0, undefined, undefined, index === missingSpaceObjects.length - 1)
++        })
++      }
++    }
++  }
++  return flattened
++}
++
++const useFlattenTreeHierarchy = (
++  spaceIds: string[]
++) => {
++  const derivedScene = useDerivedScene()
++  const activeSpace = useActiveSpace()
++  const activeClient = useGitActiveClient()
++
++  const allIds = derivedScene.getAllSceneObjects().map(e => e.id)
++    .concat(spaceIds)
++    .concat(SPACELESS_ID)
++
++  const [expanded, setExpanded] = React.useState<Record<string, boolean>>(
++    () => Object.fromEntries(allIds.map(id => [id, true]))
++  )
++
++  const [updateExpanded, setUpdateExpanded] = React.useState(false)
++  const prevIds = React.useRef<string[]>(undefined)
++
++  // this makes sure the hierarchy is expanded when the active client or active changes
++  React.useEffect(() => {
++    setUpdateExpanded(true)
++    prevIds.current = allIds
++  }, [activeClient, activeSpace?.id])
++
++  React.useEffect(() => {
++    if (updateExpanded && prevIds.current !== allIds) {
++      setExpanded(Object.fromEntries(allIds.map(id => [id, true])))
++      setUpdateExpanded(false)
++      prevIds.current = undefined
++    }
++  }, [updateExpanded, allIds])
++
++  // Flatten the tree for virtualization
++  const visibleNodes = React.useMemo(
++    () => flattenTreeHierarchy(spaceIds, derivedScene, expanded, activeSpace?.id),
++    [spaceIds, derivedScene, expanded, activeClient]
++  )
++
++  return {
++    expanded,
++    setExpanded,
++    visibleNodes,
++  }
++}
++
++export {useFlattenTreeHierarchy, SPACELESS_ID}
+diff --git a/reality/cloud/xrhome/src/client/studio/space-section-collapsible.tsx b/reality/cloud/xrhome/src/client/studio/space-section-collapsible.tsx
+index 1e6afd0e70d..69a322f6703 100644
+--- a/reality/cloud/xrhome/src/client/studio/space-section-collapsible.tsx
++++ b/reality/cloud/xrhome/src/client/studio/space-section-collapsible.tsx
+@@ -24,7 +24,7 @@ const useStyles = createThemedStyles(theme => ({
+     padding: '0 0.25rem',
+   },
+   collapseButton: {
+-    'padding': '0.25rem 0.5rem',
++    'padding': '0.1rem 0.5rem',
+     'display': 'flex',
+     'cursor': 'pointer',
+     'justifyContent': 'space-between',
+@@ -46,19 +46,21 @@ const useStyles = createThemedStyles(theme => ({
+ }))
+ 
+ interface ISpaceSectionCollapsible {
+-  children: React.ReactNode
++  children?: React.ReactNode
+   title: React.ReactNode
+   spaceId: string
+   contextMenuOptions?: MenuOption[]
++  collapsed?: boolean
++  onToggleCollapse?: () => void
+ }
+ 
+ const SpaceSectionCollapsible: React.FC<ISpaceSectionCollapsible> = ({
+-  children, title, contextMenuOptions, spaceId,
++  children, title, contextMenuOptions, spaceId, collapsed = false, onToggleCollapse,
+ }) => {
+   const {t} = useTranslation(['common'])
+   const classes = useStyles()
+   const styles = useStudioMenuStyles()
+-  const [isCollapsed, setCollapsed] = React.useState(false)
++  const [innerCollapsed, setInnerCollapsed] = React.useState(false)
+   const ctx = useSceneContext()
+   const menuState = useContextMenuState()
+   const {spaces} = ctx.scene
+@@ -66,12 +68,23 @@ const SpaceSectionCollapsible: React.FC<ISpaceSectionCollapsible> = ({
+ 
+   const includedSpaces = activeSpace?.id ? spaces[activeSpace.id].includedSpaces : []
+ 
++  const isCollapsed = collapsed || innerCollapsed
++
+   const collapseContextMenu = () => {
+     menuState.setContextMenuOpen(false)
+   }
+ 
+-  const onToggleCollapse = () => {
+-    setCollapsed(!isCollapsed)
++  // const onToggleCollapse = () => {
++  //   setCollapsed(!isCollapsed)
++  //   collapseContextMenu()
++  // }
++
++  const handleToggleCollapse = () => {
++    setInnerCollapsed(!innerCollapsed)
++    onToggleCollapse?.()
++  }
++  const handleToggle = () => {
++    handleToggleCollapse()
+     collapseContextMenu()
+   }
+ 
+@@ -85,7 +98,8 @@ const SpaceSectionCollapsible: React.FC<ISpaceSectionCollapsible> = ({
+         <button
+           type='button'
+           className={combine(classes.collapseButton, 'style-reset')}
+-          onClick={onToggleCollapse}
++          // onClick={onToggleCollapse}
++          onClick={handleToggle}
+           onContextMenu={contextMenuOptions ? menuState.handleContextMenu : undefined}
+         >
+           {title}
+diff --git a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+index a0a5162f94b..a7b55fe3ce8 100644
+--- a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
++++ b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+@@ -94,7 +94,8 @@ const SpaceTitle: React.FC<ISpaceTitle> = ({isOpen, onContextMenu, children}) =>
+   )
+ }
+ 
+-const SpacesMenu: React.FC = () => {
++// const SpacesMenu: React.FC = () => {
++const SpacesMenu = React.forwardRef<HTMLDivElement, {}>((props, ref) => {
+   const classes = useStudioMenuStyles()
+   const styles = useStyles()
+   const {t} = useTranslation(['cloud-studio-pages'])
+@@ -221,7 +222,7 @@ const SpacesMenu: React.FC = () => {
+   }
+ 
+   return (
+-    <>
++    <div ref={ref}>
+       {renameState.isRenaming ? (
+         <SpaceTitle isOpen={isOpen}>
+           <RenameSpaceForm
+@@ -333,8 +334,8 @@ const SpacesMenu: React.FC = () => {
+           type='warning'
+         />
+       )}
+-    </>
++    </div>
+   )
+-}
++})
+ 
+ export {SpacesMenu}
+diff --git a/reality/cloud/xrhome/src/client/studio/tree-element.tsx b/reality/cloud/xrhome/src/client/studio/tree-element.tsx
+index 88fcdddbf49..69746e4c035 100644
+--- a/reality/cloud/xrhome/src/client/studio/tree-element.tsx
++++ b/reality/cloud/xrhome/src/client/studio/tree-element.tsx
+@@ -42,15 +42,18 @@ interface ITreeElement {
+   id: string
+   level?: number
+   hideChildren?: boolean
++  flattened?: boolean
++  collapsed?: boolean
++  onToggleCollapse?: () => void
+ }
+ 
+ const TreeElement: React.FC<ITreeElement> = ({
+-  id, level = 0, hideChildren = false,
++  id, level = 0, hideChildren = false, flattened = false, collapsed = false, onToggleCollapse,
+ }) => {
+   const classes = useTreeElementStyles()
+   const {t} = useTranslation(['cloud-studio-pages'])
+   const [hovering, setHovering] = React.useState(false)
+-  const [collapsed, setCollapsed] = React.useState(false)
++  const [innerCollapsed, setInnerCollapsed] = React.useState(false)
+   const selectedRef = React.useRef<HTMLDivElement>(null)
+ 
+   const [newName, setNewName] = React.useState('')
+@@ -68,6 +71,13 @@ const TreeElement: React.FC<ITreeElement> = ({
+   const childIds = derivedScene.getChildren(id)
+   const hasChildren = childIds.length > 0
+ 
++  const isCollapsed = collapsed || innerCollapsed
++
++  const handleToggleCollapse = () => {
++    setInnerCollapsed(!innerCollapsed)
++    onToggleCollapse?.()
++  }
++
+   React.useEffect(() => {
+     if (selection.isSelected && selectedRef.current) {
+       selectedRef.current.scrollIntoView({block: 'nearest'})
+@@ -100,9 +110,9 @@ const TreeElement: React.FC<ITreeElement> = ({
+       onClick={(e) => {
+         e.stopPropagation()
+         collapseContextMenu()
+-        setCollapsed(!collapsed)
++        handleToggleCollapse()
+       }}
+-      className={combine('style-reset', classes.chevron, collapsed && classes.collapsedChevron)}
++      className={combine('style-reset', classes.chevron, isCollapsed && classes.collapsedChevron)}
+     >
+       <Icon stroke='chevronDown' />
+     </button>
+@@ -228,7 +238,7 @@ const TreeElement: React.FC<ITreeElement> = ({
+       </div>
+       <ContextMenu
+         menuState={menuState}
+-        options={collapse => <TreeElementMenuOptions id={id} collapse={collapse} />}
++        options={menuCollapse => <TreeElementMenuOptions id={id} collapse={menuCollapse} />}
+       />
+     </div>
+   )
+@@ -258,7 +268,7 @@ const TreeElement: React.FC<ITreeElement> = ({
+           )}
+           >
+             {text}
+-            {!collapsed && (
++            {!flattened && !isCollapsed && (
+               <div className={classes.treeElementChildren}>
+                 {childIds.map(e => (
+                   <div key={e}>
+diff --git a/reality/cloud/xrhome/src/client/studio/tree-hierarchy.tsx b/reality/cloud/xrhome/src/client/studio/tree-hierarchy.tsx
+index 7e1622496e3..58e48efa4ea 100644
+--- a/reality/cloud/xrhome/src/client/studio/tree-hierarchy.tsx
++++ b/reality/cloud/xrhome/src/client/studio/tree-hierarchy.tsx
+@@ -1,6 +1,7 @@
+ import React from 'react'
+ import {useTranslation} from 'react-i18next'
+ import {v4 as uuid} from 'uuid'
++import {FixedSizeList as List} from 'react-window'
+ 
+ import {getIncludedSpaces, isPrefabInstance} from '@ecs/shared/object-hierarchy'
+ 
+@@ -28,42 +29,125 @@ import {pasteObjects} from './configuration/copy-object'
+ import {useActiveRoot} from '../hooks/use-active-root'
+ import {useDerivedScene} from './derived-scene-context'
+ import {findPrefabDependencyCycle} from './configuration/prefab'
++import type {DerivedScene} from './derive-scene'
++import {useGitActiveClient} from '../git/hooks/use-current-git'
++import {SPACELESS_ID, useFlattenTreeHierarchy} from './hooks/use-flatten-tree-hierarchy'
+ 
+-const TreeHierarchyDropTarget: React.FC<{spaceId?: string}> = ({
+-  spaceId,
++const ROW_HEIGHT = 26
++
++const TreeHierarchyDropTarget: React.FC<{spaceIds?: string[], height?: number}> = ({
++  spaceIds, height = 500,
+ }) => {
++  const {t} = useTranslation('cloud-studio-pages')
+   const ctx = useSceneContext()
+   const stateCtx = useStudioStateContext()
+-  const derivedScene = useDerivedScene()
+   const classes = useTreeHierarchyStyles()
+   const [hovering, setHovering] = React.useState(false)
+ 
+-  const topLevelObjectIds = derivedScene.getTopLevelObjectIds(spaceId)
+   const activeSpace = useActiveSpace()
+-  const showSpacesMenu = !ctx.scene.spaces || spaceId === activeSpace?.id
++  const {expanded, setExpanded, visibleNodes} = useFlattenTreeHierarchy(spaceIds)
++
++  const listRef = React.useRef<List>(null)
++  const spaceMenuRef = React.useRef<HTMLDivElement>(null)
++  const [listHeight, setListHeight] = React.useState(height)
++
++  React.useLayoutEffect(() => {
++    const spaceMenuHeight = spaceMenuRef.current?.offsetHeight || 0
++    setListHeight(height - spaceMenuHeight)
++  }, [height, spaceMenuRef.current])
++
++  const handleToggle = (id: string) => {
++    setExpanded(prev => ({...prev, [id]: !prev[id]}))
++  }
++
++  React.useEffect(() => {
++    const lastSelected = stateCtx.state.selectedIds.at(-1)
++    if (lastSelected && listRef.current) {
++      const index = visibleNodes.findIndex(node => node.id === lastSelected)
++      if (index !== -1) {
++        listRef.current.scrollToItem(index, 'auto')
++      }
++    }
++  }, [visibleNodes, stateCtx.state.selectedIds])
+ 
+   return (
+-    <DropTarget
+-      as='div'
++    <div
+       className={combine(
+         classes.treeHierarchy, hovering && classes.hovered, classes.paddingTop
+       )}
+-      onHoverStart={() => setHovering(true)}
+-      onHoverStop={() => setHovering(false)}
+-      onDrop={(e) => {
+-        handleDrop(e, ctx, stateCtx, derivedScene, setHovering, spaceId)
+-      }}
+     >
+-      {showSpacesMenu && <SpacesMenu />}
+-      <div className={classes.paddingTop}>
+-        {topLevelObjectIds.map(e => (
+-          <div key={e}>
+-            <TreeHierarchyDivider parentId={spaceId} siblingId={e} level={0} />
+-            <TreeElement id={e} />
+-          </div>
+-        ))}
+-      </div>
+-      <TreeHierarchyDivider parentId={spaceId} siblingId={undefined} level={0} />
++      <SpacesMenu ref={spaceMenuRef} />
++      <TreeHierarchyDivider parentId={activeSpace?.id} siblingId={undefined} level={0} />
++      <List
++        ref={listRef}
++        height={listHeight}
++        itemCount={visibleNodes.length}
++        itemSize={ROW_HEIGHT}
++        width='100%'
++      >
++        {({index, style}) => {
++          const node = visibleNodes[index]
++          if (node.isSpace) {
++            if (node.id === SPACELESS_ID) {
++              return (
++                <div key={node.id} style={style}>
++                  <SpaceSectionCollapsible
++                    title={(
++                      <span>
++                        <Tooltip
++                          position='bottom-end'
++                          content={t('tree_hierarchy.missing_space.tooltip')}
++                        >
++                          <Icon stroke='warning' color='warning' inline />
++                        </Tooltip>
++                        <i>{t('tree_hierarchy.missing_space.title')}</i>
++                      </span>
++                    )}
++                    collapsed={!expanded[node.id]}
++                    onToggleCollapse={() => handleToggle(node.id)}
++                    spaceId=''
++                  />
++                </div>
++              )
++            } else {
++              return (
++                <div key={node.id} style={style}>
++                  <SpaceSectionCollapsible
++                    title={ctx.scene.spaces[node.id]?.name}
++                    spaceId={node.id}
++                    collapsed={!expanded[node.id]}
++                    onToggleCollapse={() => handleToggle(node.id)}
++                  />
++                </div>
++              )
++            }
++          } else {
++            return (
++              <div key={node.id} style={style}>
++                <TreeHierarchyDivider
++                  parentId={node.parentId}
++                  siblingId={node.id}
++                  level={node.level}
++                />
++                <TreeElement
++                  id={node.id}
++                  level={node.level}
++                  flattened
++                  collapsed={!expanded[node.id]}
++                  onToggleCollapse={() => handleToggle(node.id)}
++                />
++                {node.isLast && (
++                  <TreeHierarchyDivider
++                    parentId={node.parentId}
++                    siblingId={undefined}
++                    level={node.level}
++                  />
++                )}
++              </div>
++            )
++          }
++        }}
++      </List>
+       <div
+         tabIndex={-1}
+         className={
+@@ -72,7 +156,7 @@ const TreeHierarchyDropTarget: React.FC<{spaceId?: string}> = ({
+         onClick={() => stateCtx.setSelection()}
+         aria-hidden
+       />
+-    </DropTarget>
++    </div>
+   )
+ }
+ 
+@@ -80,6 +164,7 @@ const MissingSpaceSection: React.FC<{}> = () => {
+   const {t} = useTranslation('cloud-studio-pages')
+   const derivedScene = useDerivedScene()
+   const objectsToShow = derivedScene.getTopLevelObjectIds(undefined)
++  console.log('MissingSpaceSection', objectsToShow.length)
+ 
+   if (objectsToShow.length === 0) {
+     return null
+@@ -101,11 +186,14 @@ const MissingSpaceSection: React.FC<{}> = () => {
+         <TreeElement key={e} id={e} />
+       ))}
+     </SpaceSectionCollapsible>
+-
+   )
+ }
+ 
+-const TreeHierarchy: React.FC = () => {
++interface ITreeHierarchy {
++  height: number
++}
++
++const TreeHierarchy: React.FC<ITreeHierarchy> = ({height}) => {
+   const {t} = useTranslation('cloud-studio-pages')
+   const classes = useTreeHierarchyStyles()
+   const [searchText, setSearchText] = React.useState('')
+@@ -122,6 +210,15 @@ const TreeHierarchy: React.FC = () => {
+   const menuState = useContextMenuState()
+   const derivedScene = useDerivedScene()
+ 
++  const searchBarRef = React.useRef<HTMLDivElement>(null)
++  const [treeHeight, setTreeHeight] = React.useState(height)
++
++  React.useLayoutEffect(() => {
++    const searchBarHeight = searchBarRef.current?.offsetHeight || 0
++    setTreeHeight(height - searchBarHeight)
++    console.log({height, searchBarHeight, treeHeight})
++  }, [height, searchBarRef.current])
++
+   const copiedObjects = stateCtx.state.clipboard.type === 'objects'
+     ? stateCtx.state.clipboard.objects : []
+ 
+@@ -185,33 +282,9 @@ const TreeHierarchy: React.FC = () => {
+     />
+   )
+ 
+-  const treeHierarchy = (
+-    <>
+-      <TreeHierarchyDropTarget
+-        spaceId={activeSpace?.id}
+-      />
+-      {activeSpace?.id &&
+-        <>
+-          {includedSpaces.map(spaceId => (
+-            <SpaceSectionCollapsible
+-              key={spaceId}
+-              title={ctx.scene.spaces[spaceId].name}
+-              spaceId={spaceId}
+-            >
+-              <TreeHierarchyDropTarget
+-                spaceId={spaceId}
+-              />
+-            </SpaceSectionCollapsible>
+-          ))}
+-          <MissingSpaceSection />
+-        </>
+-      }
+-    </>
+-  )
+-
+   return (
+     <div className={classes.treeHierarchyContainer}>
+-      <div className={classes.searchBarContainer}>
++      <div ref={searchBarRef} className={classes.searchBarContainer}>
+         <SearchBar
+           searchText={searchText}
+           setSearchText={setSearchText}
+@@ -233,7 +306,15 @@ const TreeHierarchy: React.FC = () => {
+         onContextMenu={menuState.handleContextMenu}
+         {...menuState.getReferenceProps()}
+       >
+-        {!isIsolated && (searching ? searchResults : treeHierarchy)}
++        {!isIsolated && (searching ? searchResults : (
++          <>
++            <TreeHierarchyDropTarget
++              spaceIds={activeSpace ? [activeSpace.id, ...includedSpaces] : [undefined]}
++              height={treeHeight}
++            />
++            {/* {activeSpace?.id && <MissingSpaceSection />} */}
++          </>
++        ))}
+         {isIsolated && (searching ? searchResults : <IsolatedTreeHierarchy />)}
+         <ContextMenu menuState={menuState} options={menuOptions} />
+       </div>
+@@ -244,3 +325,40 @@ const TreeHierarchy: React.FC = () => {
+ export {
+   TreeHierarchy,
+ }
++
++/*
++
++    <DropTarget
++      as='div'
++      className={combine(
++        classes.treeHierarchy, hovering && classes.hovered, classes.paddingTop
++      )}
++      onHoverStart={() => setHovering(true)}
++      onHoverStop={() => setHovering(false)}
++      onDrop={(e) => {
++        // handleDrop(e, ctx, stateCtx, derivedScene, setHovering, spaceId)
++        handleDrop(e, ctx, stateCtx, derivedScene, setHovering, activeSpace?.id)
++      }}
++    >
++
++    </DropTarget>
++
++*/
++
++// const allIds = React.useMemo(() => {
++//   const acc = new Set<string>()
++//   function collect(ids: string[], isSpace: boolean) {
++//     for (const id of ids) {
++//       acc.add(id)
++//       if (isSpace) {
++//         const topLevelObjectIds = derivedScene.getTopLevelObjectIds(id)
++//         collect(topLevelObjectIds, false)
++//       } else {
++//         const children = derivedScene.getChildren(id)
++//         collect(children, false)
++//       }
++//     }
++//   }
++//   collect(spaceIds, true)
++//   return Array.from(acc)
++// }, [spaceIds, ctx.scene, derivedScene, activeClient])
+diff --git a/reality/cloud/xrhome/src/client/studio/ui/tree-hierarchy-styles.ts b/reality/cloud/xrhome/src/client/studio/ui/tree-hierarchy-styles.ts
+index e8db4e67867..e3775d18882 100644
+--- a/reality/cloud/xrhome/src/client/studio/ui/tree-hierarchy-styles.ts
++++ b/reality/cloud/xrhome/src/client/studio/ui/tree-hierarchy-styles.ts
+@@ -12,16 +12,20 @@ const useTreeHierarchyStyles = createThemedStyles(theme => ({
+     'paddingBottom': '0.5rem',
+     'margin': 0,
+     'display': 'flex',
++    'overflow': 'hidden',
+     'flexDirection': 'column',
+     '&:last-child': {
+       flexGrow: 1,
+     },
+   },
+   scrollableContainer: {
+-    overflowY: 'auto',
+-    display: 'flex',
+-    flexDirection: 'column',
+-    flex: 1,
++    // overflowY: 'hidden',
++    'display': 'flex',
++    'flexDirection': 'column',
++    'flex': 1,
++    '&:last-child': {
++      flexGrow: 1,
++    },
+   },
+   hovered: {
+     outline: '1px solid #44a',
+
+From 499b868c61e1d3d0a803bd1c58c91a6a5c7189b0 Mon Sep 17 00:00:00 2001
+From: Cindy Hu <57238301+cindyhu2023@users.noreply.github.com>
+Date: Wed, 6 Aug 2025 14:19:16 -0700
+Subject: [PATCH 2/8] [xrhome][studio] refactor tree hierarchy with
+ react-window
+
+---
+ reality/cloud/xrhome/package.json             |   3 +-
+ .../src/client/studio/floating-left-panel.tsx |  29 +++-
+ .../hooks/use-flatten-tree-hierarchy.ts       | 151 +++++++++++++++---
+ .../xrhome/src/client/studio/tree-element.tsx |   3 +
+ .../src/client/studio/tree-hierarchy.tsx      | 117 +++-----------
+ .../client/studio/ui/tree-hierarchy-styles.ts |   1 -
+ 6 files changed, 189 insertions(+), 115 deletions(-)
+
+diff --git a/reality/cloud/xrhome/package.json b/reality/cloud/xrhome/package.json
+index 75d1489cb00..2a6d69a96b3 100644
+--- a/reality/cloud/xrhome/package.json
++++ b/reality/cloud/xrhome/package.json
+@@ -28,6 +28,7 @@
+     "generate-model-definitions": "npx ts-node tools/generate-model-definitions.ts > src/shared/integration/db/models.ts && npx ts-node tools/generate-client-definitions.ts > src/client/common/types/db.ts",
+     "generate-studio-schema": "npx ts-node tools/generate-studio-schema.ts > src/client/studio/generated-schema.ts",
+     "setup": "npm install && gulp clean",
++    "test": "NODE_ENV=test ts-mocha test/**-test.* --reporter=dot",
+     "test-serial": "NODE_ENV=test ts-mocha test/**-test.* --no-parallel",
+     "test-file": "NODE_ENV=test ts-mocha",
+     "test-file-serial": "NODE_ENV=test ts-mocha --no-parallel",
+@@ -153,7 +154,7 @@
+     "simple-peer": "^9.11.1",
+     "slack": "^11.0.1",
+     "spdx-license-list": "^6.1.0",
+-    "stripe": "^8.222.0",
++    "stripe": "^9.0.0",
+     "styled-components": "^5.3.11",
+     "terser": "^3.17.0",
+     "three-mesh-bvh": "^0.7.6",
+diff --git a/reality/cloud/xrhome/src/client/studio/floating-left-panel.tsx b/reality/cloud/xrhome/src/client/studio/floating-left-panel.tsx
+index 2e6534b8f08..86e2c45e6f9 100644
+--- a/reality/cloud/xrhome/src/client/studio/floating-left-panel.tsx
++++ b/reality/cloud/xrhome/src/client/studio/floating-left-panel.tsx
+@@ -38,6 +38,10 @@ const useStyles = createUseStyles({
+     'position': 'relative !important',
+     '--log-container-resizer-color': 'transparent',
+   },
++  treeHierarchyContainer: {
++    flex: '1 0 0',
++    overflowY: 'hidden',
++  },
+   pane1: {
+     height: '100%',
+   },
+@@ -63,6 +67,9 @@ const FloatingLeftPanel = React.forwardRef<HTMLDivElement, IFloatingLeftPanel>((
+   const appKey = useEnclosedApp()?.appKey || ''
+   const {state: {errorMsg}} = stateCtx
+ 
++  const containerRef = React.useRef<HTMLDivElement>(null)
++  const [treeHeight, setTreeHeight] = React.useState(600)
++
+   const fileBrowserHeightPercent = useSelector(
+     s => s.editor.byKey[appKey]?.fileBrowserHeightPercent ?? DEFAULT_HEIGHT_PERCENT
+   )
+@@ -91,6 +98,22 @@ const FloatingLeftPanel = React.forwardRef<HTMLDivElement, IFloatingLeftPanel>((
+     }
+   }
+ 
++  const handleUpdateHeight = () => {
++    if (containerRef.current) {
++      const height = containerRef.current.offsetHeight
++      setTreeHeight(height)
++    }
++  }
++
++  React.useLayoutEffect(() => {
++    window.addEventListener('resize', handleUpdateHeight)
++    return () => window.removeEventListener('resize', handleUpdateHeight)
++  }, [])
++
++  React.useLayoutEffect(() => {
++    handleUpdateHeight()
++  }, [containerRef.current])
++
+   return (
+     <div className={combine(classes.editPanelLeft, classes.open)} ref={ref}>
+       {topBar}
+@@ -145,7 +168,11 @@ const FloatingLeftPanel = React.forwardRef<HTMLDivElement, IFloatingLeftPanel>((
+                 )
+               }}
+             </Measure>
+-          ) : <TreeHierarchy />}
++          ) : (
++            <div ref={containerRef} className={classes.treeHierarchyContainer}>
++              <TreeHierarchy height={treeHeight} />
++            </div>
++          )}
+         {fixedHelpButtonTray}
+       </FloatingTray>
+     </div>
+diff --git a/reality/cloud/xrhome/src/client/studio/hooks/use-flatten-tree-hierarchy.ts b/reality/cloud/xrhome/src/client/studio/hooks/use-flatten-tree-hierarchy.ts
+index 23debc82651..e30419fecdf 100644
+--- a/reality/cloud/xrhome/src/client/studio/hooks/use-flatten-tree-hierarchy.ts
++++ b/reality/cloud/xrhome/src/client/studio/hooks/use-flatten-tree-hierarchy.ts
+@@ -12,7 +12,6 @@ type FlattenedTreeNode = {
+   isSpace: boolean
+   spaceId?: string
+   parentId?: string
+-  isLast?: boolean
+ }
+ 
+ const flattenTreeHierarchy = (
+@@ -22,14 +21,16 @@ const flattenTreeHierarchy = (
+   activeSpaceId?: string
+ ) => {
+   const flattened: FlattenedTreeNode[] = []
++  const parentToChildren: Record<string, string[]> = {}
+   const flattenNode = (
+-    id: string, level: number, spaceId?: string, parentId?: string, isLast?: boolean
++    id: string, level: number, spaceId?: string, parentId?: string
+   ) => {
+-    flattened.push({id, level, isSpace: false, spaceId, parentId, isLast})
++    flattened.push({id, level, isSpace: false, spaceId, parentId})
+     if (expanded[id]) {
+       const children = derivedScene.getChildren(id)
+-      children.forEach((child, index) => {
+-        flattenNode(child, level + 1, spaceId, id, index === children.length - 1)
++      parentToChildren[id] = children
++      children.forEach((child) => {
++        flattenNode(child, level + 1, spaceId, id)
+       })
+     }
+   }
+@@ -40,8 +41,9 @@ const flattenTreeHierarchy = (
+     }
+     if (expanded[spaceId]) {
+       const topLevelIds = derivedScene.getTopLevelObjectIds(spaceId)
+-      topLevelIds.forEach((id, index) => {
+-        flattenNode(id, 0, spaceId, spaceId, index === topLevelIds.length - 1)
++      parentToChildren[spaceId] = topLevelIds
++      topLevelIds.forEach((id) => {
++        flattenNode(id, 0, spaceId, spaceId)
+       })
+     }
+   })
+@@ -49,15 +51,46 @@ const flattenTreeHierarchy = (
+   if (activeSpaceId) {
+     const missingSpaceObjects = derivedScene.getTopLevelObjectIds(undefined)
+     if (missingSpaceObjects.length > 0) {
+-      flattened.push({id: SPACELESS_ID, level: 0, isSpace: true, spaceId: undefined, parentId: undefined})
++      flattened.push({
++        id: SPACELESS_ID, level: 0, isSpace: true, spaceId: undefined, parentId: undefined,
++      })
+       if (expanded[SPACELESS_ID]) {
+-        missingSpaceObjects.forEach((id, index) => {
+-          flattenNode(id, 0, undefined, undefined, index === missingSpaceObjects.length - 1)
++        missingSpaceObjects.forEach((id) => {
++          flattenNode(id, 0, undefined, undefined)
+         })
+       }
+     }
+   }
+-  return flattened
++  return {flattened, parentToChildren}
++}
++
++const getEndDividers = (
++  id: string,
++  parentToChildren: Record<string, string[]>,
++  derivedScene: DerivedScene
++): string[] => {
++  const dividers: string[] = []
++  let currentId = id
++
++  // we only need the end dividers if you are the last in the siblings and have no children
++  const currParentId = derivedScene.getObject(currentId)?.parentId
++  const currSiblings = parentToChildren[currParentId] || []
++  if (parentToChildren[id]?.length > 0 || id !== currSiblings[currSiblings.length - 1]) {
++    return dividers
++  }
++
++  while (currentId) {
++    const parentId = derivedScene.getObject(currentId)?.parentId
++    const siblings = parentToChildren[parentId] || []
++    const isLastChild = siblings[siblings.length - 1] === currentId
++    if (isLastChild) {
++      dividers.push(parentId)
++      currentId = parentId
++    } else {
++      break
++    }
++  }
++  return dividers
+ }
+ 
+ const useFlattenTreeHierarchy = (
+@@ -76,25 +109,56 @@ const useFlattenTreeHierarchy = (
+   )
+ 
+   const [updateExpanded, setUpdateExpanded] = React.useState(false)
+-  const prevIds = React.useRef<string[]>(undefined)
++  const prevIds = React.useRef<string[]>(allIds)
+ 
+   // this makes sure the hierarchy is expanded when the active client or active changes
+   React.useEffect(() => {
+     setUpdateExpanded(true)
+-    prevIds.current = allIds
+   }, [activeClient, activeSpace?.id])
+ 
++  // Handle expansion state updates - both for client/space changes and new IDs
+   React.useEffect(() => {
+-    if (updateExpanded && prevIds.current !== allIds) {
+-      setExpanded(Object.fromEntries(allIds.map(id => [id, true])))
+-      setUpdateExpanded(false)
+-      prevIds.current = undefined
++    const previousIds = new Set(prevIds.current || [])
++
++    // Check if there are new IDs or if updateExpanded is triggered
++    const hasNewIds = allIds.some(id => !previousIds.has(id))
++
++    if (updateExpanded || hasNewIds) {
++      setExpanded((prevExpanded) => {
++        if (updateExpanded) {
++          // When client/space changes, expand everything
++          setUpdateExpanded(false)
++          return Object.fromEntries(allIds.map(id => [id, true]))
++        } else {
++          // When only new IDs are added, preserve existing states and expand new ones
++          const newExpanded = {...prevExpanded}
++          allIds.forEach((id) => {
++            if (!(id in newExpanded)) {
++              newExpanded[id] = true  // New objects are expanded by default
++            }
++          })
++          return newExpanded
++        }
++      })
+     }
++
++    prevIds.current = allIds
+   }, [updateExpanded, allIds])
+ 
+   // Flatten the tree for virtualization
+-  const visibleNodes = React.useMemo(
+-    () => flattenTreeHierarchy(spaceIds, derivedScene, expanded, activeSpace?.id),
++  const [visibleNodes, endDividers] = React.useMemo(
++    () => {
++      const {flattened, parentToChildren} = flattenTreeHierarchy(
++        spaceIds, derivedScene, expanded, activeSpace?.id
++      )
++      const dividers: Record<string, string[]> = {}
++      flattened.forEach((node) => {
++        if (!node.isSpace) {
++          dividers[node.id] = getEndDividers(node.id, parentToChildren, derivedScene)
++        }
++      })
++      return [flattened, dividers]
++    },
+     [spaceIds, derivedScene, expanded, activeClient]
+   )
+ 
+@@ -102,7 +166,56 @@ const useFlattenTreeHierarchy = (
+     expanded,
+     setExpanded,
+     visibleNodes,
++    endDividers,
+   }
+ }
+ 
+ export {useFlattenTreeHierarchy, SPACELESS_ID}
++
++/*
++const tree = {
++  'undefined': ['a', 'b'],
++  'a': ['a1', 'a2', 'a3'],
++  'b': ['b1', 'b2'],
++  'a1': ['a1a', 'a1b'],
++  'a2': ['a2a'],
++  'a3': ['a3a'],
++  'a1b': ['a1b1', 'a1b2'],
++  'a1b2': ['a1b2a', 'a1b2b'],
++  'b1': [],
++  'b2': ['b2a', 'b2b'],
++  'b2b': ['b2b1', 'b2b2'],
++  'b2b2': ['b2b2a', 'b2b2b'],
++}
++
++a
++├── a1
++│   ├── a1a
++│   └── a1b
++│       ├── a1b1
++│       └── a1b2
++│           ├── a1b2a
++│           └── a1b2b
++├── a2
++│   └── a2a
++└── a3
++    └── a3a
++
++b
++├── b1
++└── b2
++    ├── b2a
++    └── b2b
++        ├── b2b1
++        └── b2b2
++            ├── b2b2a
++            └── b2b2b
++
++the divider of a1b2b should include: [a1b2, a1b]
++the divider of b2b2b should include: [b2b2, b2b, b2, b, undefined]
++
++so the rule is that, if you are the last child, you look for the parent,
++if the parent is also the last child, you look for the grandparent,
++and so on until you find a parent that is not the last child or hit the top level object.
++
++*/
+diff --git a/reality/cloud/xrhome/src/client/studio/tree-element.tsx b/reality/cloud/xrhome/src/client/studio/tree-element.tsx
+index 69746e4c035..2f73e5b6004 100644
+--- a/reality/cloud/xrhome/src/client/studio/tree-element.tsx
++++ b/reality/cloud/xrhome/src/client/studio/tree-element.tsx
+@@ -42,6 +42,7 @@ interface ITreeElement {
+   id: string
+   level?: number
+   hideChildren?: boolean
++  startCollapsed?: boolean
+   flattened?: boolean
+   collapsed?: boolean
+   onToggleCollapse?: () => void
+@@ -49,10 +50,12 @@ interface ITreeElement {
+ 
+ const TreeElement: React.FC<ITreeElement> = ({
+   id, level = 0, hideChildren = false, flattened = false, collapsed = false, onToggleCollapse,
++   startCollapsed = false,
+ }) => {
+   const classes = useTreeElementStyles()
+   const {t} = useTranslation(['cloud-studio-pages'])
+   const [hovering, setHovering] = React.useState(false)
++  const [collapsed, setCollapsed] = React.useState(startCollapsed)
+   const [innerCollapsed, setInnerCollapsed] = React.useState(false)
+   const selectedRef = React.useRef<HTMLDivElement>(null)
+ 
+diff --git a/reality/cloud/xrhome/src/client/studio/tree-hierarchy.tsx b/reality/cloud/xrhome/src/client/studio/tree-hierarchy.tsx
+index 58e48efa4ea..4779d9b9ae9 100644
+--- a/reality/cloud/xrhome/src/client/studio/tree-hierarchy.tsx
++++ b/reality/cloud/xrhome/src/client/studio/tree-hierarchy.tsx
+@@ -6,7 +6,6 @@ import {FixedSizeList as List} from 'react-window'
+ import {getIncludedSpaces, isPrefabInstance} from '@ecs/shared/object-hierarchy'
+ 
+ import {useSceneContext} from './scene-context'
+-import {DropTarget} from './ui/drop-target'
+ import {combine} from '../common/styles'
+ import {TreeElement} from './tree-element'
+ import {useStudioStateContext} from './studio-state-context'
+@@ -14,13 +13,11 @@ import {OptionalFilters, SearchBar} from './ui/search-bar'
+ import {TreeHierarchySearchResults, TREE_HIERARCHY_FILTERS} from './tree-hierarchy-search-results'
+ import {Icon} from '../ui/components/icon'
+ import {NewPrimitiveButton} from './new-primitive-button'
+-import {useActiveSpace} from './hooks/active-space'
+-import {TreeHierarchyDivider} from './tree-hierarchy-divider'
++import {TreeHierarchyDivider, TreeHierarchyDividerGroup} from './tree-hierarchy-divider'
+ import {SpacesMenu} from './spaces-menu'
+ import {SpaceSectionCollapsible} from './space-section-collapsible'
+ import {Tooltip} from '../ui/components/tooltip'
+ import {IsolatedTreeHierarchy} from './isolated-tree-hierarchy'
+-import {handleDrop} from './tree-drop-targets'
+ import {useTreeHierarchyStyles} from './ui/tree-hierarchy-styles'
+ import {ContextMenu, useContextMenuState} from './ui/context-menu'
+ import {useNewPrimitiveOptions} from './new-primitive-button'
+@@ -29,8 +26,6 @@ import {pasteObjects} from './configuration/copy-object'
+ import {useActiveRoot} from '../hooks/use-active-root'
+ import {useDerivedScene} from './derived-scene-context'
+ import {findPrefabDependencyCycle} from './configuration/prefab'
+-import type {DerivedScene} from './derive-scene'
+-import {useGitActiveClient} from '../git/hooks/use-current-git'
+ import {SPACELESS_ID, useFlattenTreeHierarchy} from './hooks/use-flatten-tree-hierarchy'
+ 
+ const ROW_HEIGHT = 26
+@@ -42,14 +37,15 @@ const TreeHierarchyDropTarget: React.FC<{spaceIds?: string[], height?: number}>
+   const ctx = useSceneContext()
+   const stateCtx = useStudioStateContext()
+   const classes = useTreeHierarchyStyles()
+-  const [hovering, setHovering] = React.useState(false)
+ 
+-  const activeSpace = useActiveSpace()
+-  const {expanded, setExpanded, visibleNodes} = useFlattenTreeHierarchy(spaceIds)
++  const {expanded, setExpanded, visibleNodes, endDividers} = useFlattenTreeHierarchy(spaceIds)
+ 
+   const listRef = React.useRef<List>(null)
+   const spaceMenuRef = React.useRef<HTMLDivElement>(null)
+   const [listHeight, setListHeight] = React.useState(height)
++  const renderHeight = visibleNodes.length * ROW_HEIGHT < listHeight
++    ? visibleNodes.length * ROW_HEIGHT + 6
++    : listHeight - 6
+ 
+   React.useLayoutEffect(() => {
+     const spaceMenuHeight = spaceMenuRef.current?.offsetHeight || 0
+@@ -73,14 +69,15 @@ const TreeHierarchyDropTarget: React.FC<{spaceIds?: string[], height?: number}>
+   return (
+     <div
+       className={combine(
+-        classes.treeHierarchy, hovering && classes.hovered, classes.paddingTop
++        classes.treeHierarchy, classes.paddingTop
+       )}
+     >
+-      <SpacesMenu ref={spaceMenuRef} />
+-      <TreeHierarchyDivider parentId={activeSpace?.id} siblingId={undefined} level={0} />
++      <div ref={spaceMenuRef}>
++        <SpacesMenu />
++      </div>
+       <List
+         ref={listRef}
+-        height={listHeight}
++        height={renderHeight}
+         itemCount={visibleNodes.length}
+         itemSize={ROW_HEIGHT}
+         width='100%'
+@@ -128,6 +125,7 @@ const TreeHierarchyDropTarget: React.FC<{spaceIds?: string[], height?: number}>
+                   parentId={node.parentId}
+                   siblingId={node.id}
+                   level={node.level}
++                  flattened
+                 />
+                 <TreeElement
+                   id={node.id}
+@@ -136,11 +134,13 @@ const TreeHierarchyDropTarget: React.FC<{spaceIds?: string[], height?: number}>
+                   collapsed={!expanded[node.id]}
+                   onToggleCollapse={() => handleToggle(node.id)}
+                 />
+-                {node.isLast && (
+-                  <TreeHierarchyDivider
+-                    parentId={node.parentId}
+-                    siblingId={undefined}
+-                    level={node.level}
++                {endDividers[node.id]?.length > 0 && (
++                  <TreeHierarchyDividerGroup
++                    dividers={endDividers[node.id].map((parentId, idx) => ({
++                      parentId,
++                      siblingId: undefined,
++                      level: node.level - idx,
++                    }))}
+                   />
+                 )}
+               </div>
+@@ -160,35 +160,6 @@ const TreeHierarchyDropTarget: React.FC<{spaceIds?: string[], height?: number}>
+   )
+ }
+ 
+-const MissingSpaceSection: React.FC<{}> = () => {
+-  const {t} = useTranslation('cloud-studio-pages')
+-  const derivedScene = useDerivedScene()
+-  const objectsToShow = derivedScene.getTopLevelObjectIds(undefined)
+-  console.log('MissingSpaceSection', objectsToShow.length)
+-
+-  if (objectsToShow.length === 0) {
+-    return null
+-  }
+-
+-  return (
+-    <SpaceSectionCollapsible
+-      title={(
+-        <span>
+-          <Tooltip position='bottom-end' content={t('tree_hierarchy.missing_space.tooltip')}>
+-            <Icon stroke='warning' color='warning' inline />
+-          </Tooltip>
+-          <i>{t('tree_hierarchy.missing_space.title')}</i>
+-        </span>
+-      )}
+-      spaceId=''
+-    >
+-      {objectsToShow.map(e => (
+-        <TreeElement key={e} id={e} />
+-      ))}
+-    </SpaceSectionCollapsible>
+-  )
+-}
+-
+ interface ITreeHierarchy {
+   height: number
+ }
+@@ -216,11 +187,11 @@ const TreeHierarchy: React.FC<ITreeHierarchy> = ({height}) => {
+   React.useLayoutEffect(() => {
+     const searchBarHeight = searchBarRef.current?.offsetHeight || 0
+     setTreeHeight(height - searchBarHeight)
+-    console.log({height, searchBarHeight, treeHeight})
+   }, [height, searchBarRef.current])
+ 
+   const copiedObjects = stateCtx.state.clipboard.type === 'objects'
+-    ? stateCtx.state.clipboard.objects : []
++    ? stateCtx.state.clipboard.objects
++    : []
+ 
+   const pasteAllowed = () => {
+     const clipBoardContainsInstances = copiedObjects &&
+@@ -307,13 +278,10 @@ const TreeHierarchy: React.FC<ITreeHierarchy> = ({height}) => {
+         {...menuState.getReferenceProps()}
+       >
+         {!isIsolated && (searching ? searchResults : (
+-          <>
+-            <TreeHierarchyDropTarget
+-              spaceIds={activeSpace ? [activeSpace.id, ...includedSpaces] : [undefined]}
+-              height={treeHeight}
+-            />
+-            {/* {activeSpace?.id && <MissingSpaceSection />} */}
+-          </>
++          <TreeHierarchyDropTarget
++            spaceIds={activeSpace ? [activeSpace.id, ...includedSpaces] : [undefined]}
++            height={treeHeight}
++          />
+         ))}
+         {isIsolated && (searching ? searchResults : <IsolatedTreeHierarchy />)}
+         <ContextMenu menuState={menuState} options={menuOptions} />
+@@ -325,40 +293,3 @@ const TreeHierarchy: React.FC<ITreeHierarchy> = ({height}) => {
+ export {
+   TreeHierarchy,
+ }
+-
+-/*
+-
+-    <DropTarget
+-      as='div'
+-      className={combine(
+-        classes.treeHierarchy, hovering && classes.hovered, classes.paddingTop
+-      )}
+-      onHoverStart={() => setHovering(true)}
+-      onHoverStop={() => setHovering(false)}
+-      onDrop={(e) => {
+-        // handleDrop(e, ctx, stateCtx, derivedScene, setHovering, spaceId)
+-        handleDrop(e, ctx, stateCtx, derivedScene, setHovering, activeSpace?.id)
+-      }}
+-    >
+-
+-    </DropTarget>
+-
+-*/
+-
+-// const allIds = React.useMemo(() => {
+-//   const acc = new Set<string>()
+-//   function collect(ids: string[], isSpace: boolean) {
+-//     for (const id of ids) {
+-//       acc.add(id)
+-//       if (isSpace) {
+-//         const topLevelObjectIds = derivedScene.getTopLevelObjectIds(id)
+-//         collect(topLevelObjectIds, false)
+-//       } else {
+-//         const children = derivedScene.getChildren(id)
+-//         collect(children, false)
+-//       }
+-//     }
+-//   }
+-//   collect(spaceIds, true)
+-//   return Array.from(acc)
+-// }, [spaceIds, ctx.scene, derivedScene, activeClient])
+diff --git a/reality/cloud/xrhome/src/client/studio/ui/tree-hierarchy-styles.ts b/reality/cloud/xrhome/src/client/studio/ui/tree-hierarchy-styles.ts
+index e3775d18882..8f7d6055857 100644
+--- a/reality/cloud/xrhome/src/client/studio/ui/tree-hierarchy-styles.ts
++++ b/reality/cloud/xrhome/src/client/studio/ui/tree-hierarchy-styles.ts
+@@ -40,7 +40,6 @@ const useTreeHierarchyStyles = createThemedStyles(theme => ({
+     },
+   },
+   treeHierarchyEmpty: {
+-    minHeight: '0.5rem',
+     flexGrow: 1,
+   },
+   paddingTop: {
+
+From bdfcdf3df00eb26309def88e743173cfdb4f7141 Mon Sep 17 00:00:00 2001
+From: Cindy Hu <57238301+cindyhu2023@users.noreply.github.com>
+Date: Wed, 6 Aug 2025 15:22:22 -0700
+Subject: [PATCH 3/8] [xrhome][studio] refactor tree hierarchy with
+ react-window
+
+---
+ .../xrhome/src/client/studio/prefabs-list.tsx |  31 ++--
+ .../studio/space-section-collapsible.tsx      |   3 +-
+ .../xrhome/src/client/studio/tree-element.tsx | 163 ++++++++++++------
+ .../client/studio/tree-hierarchy-divider.tsx  |  54 +++++-
+ .../studio/tree-hierarchy-search-results.tsx  |   2 -
+ .../src/client/studio/tree-hierarchy.tsx      |  21 +--
+ 6 files changed, 194 insertions(+), 80 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/studio/prefabs-list.tsx b/reality/cloud/xrhome/src/client/studio/prefabs-list.tsx
+index 5c21c67a3f5..00dc850447e 100644
+--- a/reality/cloud/xrhome/src/client/studio/prefabs-list.tsx
++++ b/reality/cloud/xrhome/src/client/studio/prefabs-list.tsx
+@@ -97,25 +97,26 @@ const PrefabsList: React.FC = () => {
+         />
+         <NewPrimitiveButton makePrefab />
+       </div>
+-      {searching ? (
+-        <TreeHierarchySearchResults
+-          searchText={searchText}
+-          filters={filters}
+-          resetSearch={() => {
+-            setSearchText('')
+-            setFilters([])
+-          }}
+-          prefabList
+-        />
+-      ) : (
+-        <div className={classes.prefabContainer}>
+-          {prefabs.map(prefab => (
++      {searching
++        ? (
++          <TreeHierarchySearchResults
++            searchText={searchText}
++            filters={filters}
++            resetSearch={() => {
++              setSearchText('')
++              setFilters([])
++            }}
++            prefabList
++          />
++        )
++        : (
++          <div className={classes.prefabContainer}>          {prefabs.map(prefab => (
+             <div key={prefab.id} className={classes.prefabInner}>
+               <TreeElement id={prefab.id} startCollapsed />
+             </div>
+           ))}
+-        </div>
+-      )}
++          </div>
++        )}
+     </DropTarget>
+   )
+ }
+diff --git a/reality/cloud/xrhome/src/client/studio/space-section-collapsible.tsx b/reality/cloud/xrhome/src/client/studio/space-section-collapsible.tsx
+index 69a322f6703..c3b0b5e678a 100644
+--- a/reality/cloud/xrhome/src/client/studio/space-section-collapsible.tsx
++++ b/reality/cloud/xrhome/src/client/studio/space-section-collapsible.tsx
+@@ -13,6 +13,7 @@ import {updateIncludedSpaces} from './configuration/included-spaces'
+ 
+ const useStyles = createThemedStyles(theme => ({
+   collapseContainer: {
++    'padding': '0.2rem 0',
+     'display': 'flex',
+     'flexDirection': 'column',
+     '&:last-child': {
+@@ -24,7 +25,7 @@ const useStyles = createThemedStyles(theme => ({
+     padding: '0 0.25rem',
+   },
+   collapseButton: {
+-    'padding': '0.1rem 0.5rem',
++    'padding': '0.05rem 0.5rem',
+     'display': 'flex',
+     'cursor': 'pointer',
+     'justifyContent': 'space-between',
+diff --git a/reality/cloud/xrhome/src/client/studio/tree-element.tsx b/reality/cloud/xrhome/src/client/studio/tree-element.tsx
+index 2f73e5b6004..e9498ada6bd 100644
+--- a/reality/cloud/xrhome/src/client/studio/tree-element.tsx
++++ b/reality/cloud/xrhome/src/client/studio/tree-element.tsx
+@@ -38,27 +38,22 @@ import {ObjectChip} from './configuration/diff-chip'
+ const transparent = document.createElement('img')
+ transparent.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
+ 
+-interface ITreeElement {
++// Shared TreeElementBase component for common UI rendering
++interface ITreeElementBase {
+   id: string
+   level?: number
+   hideChildren?: boolean
+-  startCollapsed?: boolean
+-  flattened?: boolean
+-  collapsed?: boolean
++  hasChildren: boolean
++  isCollapsed: boolean
+   onToggleCollapse?: () => void
++  selectedRef: React.RefObject<HTMLDivElement>
+ }
+ 
+-const TreeElement: React.FC<ITreeElement> = ({
+-  id, level = 0, hideChildren = false, flattened = false, collapsed = false, onToggleCollapse,
+-   startCollapsed = false,
++const TreeElementBase: React.FC<ITreeElementBase> = ({
++  id, level = 0, hideChildren = false, hasChildren, isCollapsed, onToggleCollapse, selectedRef,
+ }) => {
+   const classes = useTreeElementStyles()
+   const {t} = useTranslation(['cloud-studio-pages'])
+-  const [hovering, setHovering] = React.useState(false)
+-  const [collapsed, setCollapsed] = React.useState(startCollapsed)
+-  const [innerCollapsed, setInnerCollapsed] = React.useState(false)
+-  const selectedRef = React.useRef<HTMLDivElement>(null)
+-
+   const [newName, setNewName] = React.useState('')
+ 
+   const ctx = useSceneContext()
+@@ -71,16 +66,6 @@ const TreeElement: React.FC<ITreeElement> = ({
+   const selection = useObjectSelection(id)
+   const sceneInterfaceCtx = React.useContext(sceneInterfaceContext)
+ 
+-  const childIds = derivedScene.getChildren(id)
+-  const hasChildren = childIds.length > 0
+-
+-  const isCollapsed = collapsed || innerCollapsed
+-
+-  const handleToggleCollapse = () => {
+-    setInnerCollapsed(!innerCollapsed)
+-    onToggleCollapse?.()
+-  }
+-
+   React.useEffect(() => {
+     if (selection.isSelected && selectedRef.current) {
+       selectedRef.current.scrollIntoView({block: 'nearest'})
+@@ -113,7 +98,7 @@ const TreeElement: React.FC<ITreeElement> = ({
+       onClick={(e) => {
+         e.stopPropagation()
+         collapseContextMenu()
+-        handleToggleCollapse()
++        onToggleCollapse?.()
+       }}
+       className={combine('style-reset', classes.chevron, isCollapsed && classes.collapsedChevron)}
+     >
+@@ -121,7 +106,7 @@ const TreeElement: React.FC<ITreeElement> = ({
+     </button>
+   )
+ 
+-  const text = (
++  return (
+     <div className={combine(
+       classes.treeElementButton,
+       selection.isSelected && classes.selectedButton,
+@@ -215,7 +200,8 @@ const TreeElement: React.FC<ITreeElement> = ({
+           <div className={combine(classes.treeElementIcon, object.hidden && classes.visibleIcon)}>
+             <IconButton
+               text={object.hidden
+-                ? t('tree_element.button.show_element') : t('tree_element.button.hide_element')}
++                ? t('tree_element.button.show_element')
++                : t('tree_element.button.hide_element')}
+               onClick={() => {
+                 collapseContextMenu()
+                 ctx.updateObject(object.id, o => ({...o, hidden: !o.hidden}))
+@@ -245,9 +231,89 @@ const TreeElement: React.FC<ITreeElement> = ({
+       />
+     </div>
+   )
++}
++
++// FlattenedTreeElement - for use with React Window (flattened rendering)
++interface IFlattenedTreeElement {
++  id: string
++  level?: number
++  collapsed?: boolean
++  onToggleCollapse?: () => void
++}
++
++const FlattenedTreeElement: React.FC<IFlattenedTreeElement> = ({
++  id, level = 0, collapsed = false, onToggleCollapse,
++}) => {
++  const derivedScene = useDerivedScene()
++  const selectedRef = React.useRef<HTMLDivElement>(null)
++
++  const childIds = derivedScene.getChildren(id)
++  const hasChildren = childIds.length > 0
++  const isCollapsed = collapsed
++
++  return (
++    <TreeElementBase
++      id={id}
++      level={level}
++      hasChildren={hasChildren}
++      isCollapsed={isCollapsed}
++      onToggleCollapse={onToggleCollapse}
++      selectedRef={selectedRef}
++    />
++  )
++}
++
++// TreeElement - for recursive rendering with children
++interface ITreeElement {
++  id: string
++  level?: number
++  hideChildren?: boolean
++  startCollapsed?: boolean
++  flattened?: boolean
++  collapsed?: boolean
++  onToggleCollapse?: () => void
++}
++
++const TreeElement: React.FC<ITreeElement> = ({
++  id, level = 0, hideChildren = false, flattened = false, collapsed = false, onToggleCollapse,
++  startCollapsed = false,
++}) => {
++  const classes = useTreeElementStyles()
++  const [hovering, setHovering] = React.useState(false)
++  const [innerCollapsed, setInnerCollapsed] = React.useState(startCollapsed)
++  const selectedRef = React.useRef<HTMLDivElement>(null)
++
++  const ctx = useSceneContext()
++  const stateCtx = useStudioStateContext()
++  const derivedScene = useDerivedScene()
++  const object = derivedScene.getObject(id)
++
++  const selection = useObjectSelection(id)
++
++  const childIds = derivedScene.getChildren(id)
++  const hasChildren = childIds.length > 0
++
++  const isCollapsed = collapsed || innerCollapsed
++
++  const handleToggleCollapse = () => {
++    setInnerCollapsed(!innerCollapsed)
++    onToggleCollapse?.()
++  }
++
++  const treeElementBase = (
++    <TreeElementBase
++      id={id}
++      level={level}
++      hideChildren={hideChildren}
++      hasChildren={hasChildren}
++      isCollapsed={isCollapsed}
++      onToggleCollapse={handleToggleCollapse}
++      selectedRef={selectedRef}
++    />
++  )
+ 
+   if (hideChildren) {
+-    return text
++    return treeElementBase
+   }
+ 
+   return (
+@@ -260,29 +326,29 @@ const TreeElement: React.FC<ITreeElement> = ({
+         handleDrop(e, ctx, stateCtx, derivedScene, setHovering, id)
+       }}
+     >
+-      <div
+-        ref={selectedRef}
+-      >
+-        {hasChildren ? (
+-          <div className={combine(
+-            classes.treeElementGroup,
+-            selection.isSelected && classes.selectedGroup,
+-            (object.hidden || object.disabled) && classes.hidden
+-          )}
+-          >
+-            {text}
+-            {!flattened && !isCollapsed && (
+-              <div className={classes.treeElementChildren}>
+-                {childIds.map(e => (
+-                  <div key={e}>
+-                    <TreeHierarchyDivider parentId={id} siblingId={e} level={level + 1} />
+-                    <TreeElement id={e} level={level + 1} />
+-                  </div>
+-                ))}
+-                <TreeHierarchyDivider parentId={id} siblingId={undefined} level={level + 1} />
+-              </div>
++      <div ref={selectedRef}>
++        {hasChildren
++          ? (
++            <div className={combine(
++              classes.treeElementGroup,
++              selection.isSelected && classes.selectedGroup,
++              (object.hidden || object.disabled) && classes.hidden
+             )}
+-          </div>) : text
++            >
++              {treeElementBase}
++              {!flattened && !isCollapsed && (
++                <div className={classes.treeElementChildren}>
++                  {childIds.map(e => (
++                    <div key={e}>
++                      <TreeHierarchyDivider parentId={id} siblingId={e} level={level + 1} />
++                      <TreeElement id={e} level={level + 1} />
++                    </div>
++                  ))}
++                  <TreeHierarchyDivider parentId={id} siblingId={undefined} level={level + 1} />
++                </div>
++              )}
++            </div>)
++          : treeElementBase
+         }
+       </div>
+     </DropTarget>
+@@ -291,4 +357,5 @@ const TreeElement: React.FC<ITreeElement> = ({
+ 
+ export {
+   TreeElement,
++  FlattenedTreeElement,
+ }
+diff --git a/reality/cloud/xrhome/src/client/studio/tree-hierarchy-divider.tsx b/reality/cloud/xrhome/src/client/studio/tree-hierarchy-divider.tsx
+index e6a37766118..84fd4815085 100644
+--- a/reality/cloud/xrhome/src/client/studio/tree-hierarchy-divider.tsx
++++ b/reality/cloud/xrhome/src/client/studio/tree-hierarchy-divider.tsx
+@@ -11,25 +11,52 @@ interface LevelTreeElementCssProperties extends React.CSSProperties {
+   '--level'?: number
+ }
+ 
++type Divider = {
++  parentId: string
++  siblingId: string
++  level: number
++}
++
++interface ITreeHierarchyDivider extends Divider {
++  standalone?: boolean
++  flattened?: boolean
++}
++
++interface ITreeHierarchyDividerGroup {
++  dividers: Divider[]
++}
++
+ const useStyles = createThemedStyles(theme => ({
+   dropElementDivider: {
+     height: '6px',  // Height of drop target
+     background: 'transparent',
+-    position: 'relative',
+     zIndex: 'calc(var(--level) + 1)',  // +1 z-index for each level down to ensure hover detection
+     width: 'calc(100% - (1.25em * var(--level) + 1.5em))',  // width is reduced for each level down
++  },
++  standalone: {
++    position: 'relative',
+     marginLeft: 'auto',
+     marginTop: '-3px',
+     marginBottom: '-3px',
+   },
++  flattened: {
++    marginTop: '0',
++    marginBottom: '-5px',
++  },
++  grouped: {
++    position: 'absolute',
++    top: 0,
++    left: 'calc(1.25em * var(--level) + 1.5em)',  // Indent based on level
++    right: 0,
++  },
+   hovering: {
+     height: '2px',  // Height of hover indicator
+     backgroundColor: theme.fgMain,
+   },
+ }))
+ 
+-const TreeHierarchyDivider: React.FC<{ parentId: string, siblingId: string, level: number }> = ({
+-  parentId, siblingId, level,
++const TreeHierarchyDivider: React.FC<ITreeHierarchyDivider> = ({
++  parentId, siblingId, level, standalone = true, flattened = false,
+ }) => {
+   const ctx = useSceneContext()
+   const stateCtx = useStudioStateContext()
+@@ -37,11 +64,15 @@ const TreeHierarchyDivider: React.FC<{ parentId: string, siblingId: string, leve
+   const classes = useStyles()
+   const [hovering, setHovering] = React.useState(false)
+ 
++  const positionClass = standalone
++    ? classes.standalone
++    : classes.grouped
++
+   return (
+     <div style={{'--level': level} as LevelTreeElementCssProperties}>
+       <DropTarget
+         as='div'
+-        className={classes.dropElementDivider}
++        className={`${classes.dropElementDivider} ${positionClass} ${flattened && classes.flattened}`}
+         onHoverStart={() => setHovering(true)}
+         onHoverStop={() => setHovering(false)}
+         onDrop={e => handleDrop(e, ctx, stateCtx, derivedScene, setHovering, parentId, siblingId)}
+@@ -52,6 +83,21 @@ const TreeHierarchyDivider: React.FC<{ parentId: string, siblingId: string, leve
+   )
+ }
+ 
++const TreeHierarchyDividerGroup: React.FC<ITreeHierarchyDividerGroup> = ({dividers}) => (
++  <div style={{position: 'relative'}}>
++    {dividers.map(divider => (
++      <TreeHierarchyDivider
++        key={`${divider.parentId}-${divider.siblingId}`}
++        parentId={divider.parentId}
++        siblingId={divider.siblingId}
++        level={divider.level}
++        standalone={false}
++      />
++    ))}
++  </div>
++)
++
+ export {
+   TreeHierarchyDivider,
++  TreeHierarchyDividerGroup,
+ }
+diff --git a/reality/cloud/xrhome/src/client/studio/tree-hierarchy-search-results.tsx b/reality/cloud/xrhome/src/client/studio/tree-hierarchy-search-results.tsx
+index 96e5e39a688..5b1ba1e01c2 100644
+--- a/reality/cloud/xrhome/src/client/studio/tree-hierarchy-search-results.tsx
++++ b/reality/cloud/xrhome/src/client/studio/tree-hierarchy-search-results.tsx
+@@ -7,8 +7,6 @@ import type {DeepReadonly} from 'ts-essentials'
+ import {hexColorWithAlpha} from '../../shared/colors'
+ import {createThemedStyles} from '../ui/theme'
+ import {ALL_NEW_COMPONENT_OPTIONS} from './configuration/new-component-strings'
+-import {useActiveSpace} from './hooks/active-space'
+-import {DIRECT_PROPERTY_COMPONENTS} from './hooks/available-components'
+ import {useSceneContext} from './scene-context'
+ import {StudioStateContext, useStudioStateContext} from './studio-state-context'
+ import {TreeElement} from './tree-element'
+diff --git a/reality/cloud/xrhome/src/client/studio/tree-hierarchy.tsx b/reality/cloud/xrhome/src/client/studio/tree-hierarchy.tsx
+index 4779d9b9ae9..167c8940fc3 100644
+--- a/reality/cloud/xrhome/src/client/studio/tree-hierarchy.tsx
++++ b/reality/cloud/xrhome/src/client/studio/tree-hierarchy.tsx
+@@ -7,7 +7,7 @@ import {getIncludedSpaces, isPrefabInstance} from '@ecs/shared/object-hierarchy'
+ 
+ import {useSceneContext} from './scene-context'
+ import {combine} from '../common/styles'
+-import {TreeElement} from './tree-element'
++import {FlattenedTreeElement} from './tree-element'
+ import {useStudioStateContext} from './studio-state-context'
+ import {OptionalFilters, SearchBar} from './ui/search-bar'
+ import {TreeHierarchySearchResults, TREE_HIERARCHY_FILTERS} from './tree-hierarchy-search-results'
+@@ -28,7 +28,7 @@ import {useDerivedScene} from './derived-scene-context'
+ import {findPrefabDependencyCycle} from './configuration/prefab'
+ import {SPACELESS_ID, useFlattenTreeHierarchy} from './hooks/use-flatten-tree-hierarchy'
+ 
+-const ROW_HEIGHT = 26
++const ROW_HEIGHT = 25
+ 
+ const TreeHierarchyDropTarget: React.FC<{spaceIds?: string[], height?: number}> = ({
+   spaceIds, height = 500,
+@@ -127,10 +127,9 @@ const TreeHierarchyDropTarget: React.FC<{spaceIds?: string[], height?: number}>
+                   level={node.level}
+                   flattened
+                 />
+-                <TreeElement
++                <FlattenedTreeElement
+                   id={node.id}
+                   level={node.level}
+-                  flattened
+                   collapsed={!expanded[node.id]}
+                   onToggleCollapse={() => handleToggle(node.id)}
+                 />
+@@ -277,12 +276,14 @@ const TreeHierarchy: React.FC<ITreeHierarchy> = ({height}) => {
+         onContextMenu={menuState.handleContextMenu}
+         {...menuState.getReferenceProps()}
+       >
+-        {!isIsolated && (searching ? searchResults : (
+-          <TreeHierarchyDropTarget
+-            spaceIds={activeSpace ? [activeSpace.id, ...includedSpaces] : [undefined]}
+-            height={treeHeight}
+-          />
+-        ))}
++        {!isIsolated && (searching
++          ? searchResults
++          : (
++            <TreeHierarchyDropTarget
++              spaceIds={activeSpace ? [activeSpace.id, ...includedSpaces] : [undefined]}
++              height={treeHeight}
++            />
++          ))}
+         {isIsolated && (searching ? searchResults : <IsolatedTreeHierarchy />)}
+         <ContextMenu menuState={menuState} options={menuOptions} />
+       </div>
+
+From ceea19c47b477605f85bba78a6fbeb55c8d38b4a Mon Sep 17 00:00:00 2001
+From: Cindy Hu <57238301+cindyhu2023@users.noreply.github.com>
+Date: Wed, 6 Aug 2025 16:20:40 -0700
+Subject: [PATCH 4/8] [xrhome][studio] refactor tree hierarchy with
+ react-window
+
+---
+ .../hooks/use-flatten-tree-hierarchy.ts       | 83 +++++--------------
+ .../xrhome/src/client/studio/tree-element.tsx | 41 ++++++---
+ 2 files changed, 52 insertions(+), 72 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/studio/hooks/use-flatten-tree-hierarchy.ts b/reality/cloud/xrhome/src/client/studio/hooks/use-flatten-tree-hierarchy.ts
+index e30419fecdf..57f83874987 100644
+--- a/reality/cloud/xrhome/src/client/studio/hooks/use-flatten-tree-hierarchy.ts
++++ b/reality/cloud/xrhome/src/client/studio/hooks/use-flatten-tree-hierarchy.ts
+@@ -3,7 +3,6 @@ import React from 'react'
+ import type {DerivedScene} from '../derive-scene'
+ import {useDerivedScene} from '../derived-scene-context'
+ import {useActiveSpace} from './active-space'
+-import {useGitActiveClient} from '../../git/hooks/use-current-git'
+ 
+ const SPACELESS_ID = 'spaceless-id'
+ type FlattenedTreeNode = {
+@@ -21,14 +20,14 @@ const flattenTreeHierarchy = (
+   activeSpaceId?: string
+ ) => {
+   const flattened: FlattenedTreeNode[] = []
+-  const parentToChildren: Record<string, string[]> = {}
++  const parentToVisibleChildren: Record<string, string[]> = {}
+   const flattenNode = (
+     id: string, level: number, spaceId?: string, parentId?: string
+   ) => {
+     flattened.push({id, level, isSpace: false, spaceId, parentId})
+     if (expanded[id]) {
+       const children = derivedScene.getChildren(id)
+-      parentToChildren[id] = children
++      parentToVisibleChildren[id] = children
+       children.forEach((child) => {
+         flattenNode(child, level + 1, spaceId, id)
+       })
+@@ -41,7 +40,7 @@ const flattenTreeHierarchy = (
+     }
+     if (expanded[spaceId]) {
+       const topLevelIds = derivedScene.getTopLevelObjectIds(spaceId)
+-      parentToChildren[spaceId] = topLevelIds
++      parentToVisibleChildren[spaceId] = topLevelIds
+       topLevelIds.forEach((id) => {
+         flattenNode(id, 0, spaceId, spaceId)
+       })
+@@ -61,27 +60,28 @@ const flattenTreeHierarchy = (
+       }
+     }
+   }
+-  return {flattened, parentToChildren}
++  return {flattened, parentToVisibleChildren}
+ }
+ 
+ const getEndDividers = (
+   id: string,
+-  parentToChildren: Record<string, string[]>,
++  parentToVisibleChildren: Record<string, string[]>,
+   derivedScene: DerivedScene
+ ): string[] => {
+   const dividers: string[] = []
+   let currentId = id
+ 
+-  // we only need the end dividers if you are the last in the siblings and have no children
++  // If you are the last child and have no visible children, you should render all
++  // dividers up to the first parent that is not the last child.
+   const currParentId = derivedScene.getObject(currentId)?.parentId
+-  const currSiblings = parentToChildren[currParentId] || []
+-  if (parentToChildren[id]?.length > 0 || id !== currSiblings[currSiblings.length - 1]) {
++  const currSiblings = parentToVisibleChildren[currParentId] || []
++  if (parentToVisibleChildren[id]?.length > 0 || id !== currSiblings[currSiblings.length - 1]) {
+     return dividers
+   }
+ 
+   while (currentId) {
+     const parentId = derivedScene.getObject(currentId)?.parentId
+-    const siblings = parentToChildren[parentId] || []
++    const siblings = parentToVisibleChildren[parentId] || []
+     const isLastChild = siblings[siblings.length - 1] === currentId
+     if (isLastChild) {
+       dividers.push(parentId)
+@@ -98,68 +98,45 @@ const useFlattenTreeHierarchy = (
+ ) => {
+   const derivedScene = useDerivedScene()
+   const activeSpace = useActiveSpace()
+-  const activeClient = useGitActiveClient()
+-
+   const allIds = derivedScene.getAllSceneObjects().map(e => e.id)
+     .concat(spaceIds)
+     .concat(SPACELESS_ID)
+-
+   const [expanded, setExpanded] = React.useState<Record<string, boolean>>(
+     () => Object.fromEntries(allIds.map(id => [id, true]))
+   )
+-
+-  const [updateExpanded, setUpdateExpanded] = React.useState(false)
+   const prevIds = React.useRef<string[]>(allIds)
+ 
+-  // this makes sure the hierarchy is expanded when the active client or active changes
+-  React.useEffect(() => {
+-    setUpdateExpanded(true)
+-  }, [activeClient, activeSpace?.id])
+-
+-  // Handle expansion state updates - both for client/space changes and new IDs
+   React.useEffect(() => {
+     const previousIds = new Set(prevIds.current || [])
+-
+-    // Check if there are new IDs or if updateExpanded is triggered
+     const hasNewIds = allIds.some(id => !previousIds.has(id))
+-
+-    if (updateExpanded || hasNewIds) {
++    if (hasNewIds) {
+       setExpanded((prevExpanded) => {
+-        if (updateExpanded) {
+-          // When client/space changes, expand everything
+-          setUpdateExpanded(false)
+-          return Object.fromEntries(allIds.map(id => [id, true]))
+-        } else {
+-          // When only new IDs are added, preserve existing states and expand new ones
+-          const newExpanded = {...prevExpanded}
+-          allIds.forEach((id) => {
+-            if (!(id in newExpanded)) {
+-              newExpanded[id] = true  // New objects are expanded by default
+-            }
+-          })
+-          return newExpanded
+-        }
++        const newExpanded = {...prevExpanded}
++        allIds.forEach((id) => {
++          if (!(id in newExpanded)) {
++            newExpanded[id] = true
++          }
++        })
++        return newExpanded
+       })
+     }
+-
+     prevIds.current = allIds
+-  }, [updateExpanded, allIds])
++  }, [allIds])
+ 
+-  // Flatten the tree for virtualization
+   const [visibleNodes, endDividers] = React.useMemo(
+     () => {
+-      const {flattened, parentToChildren} = flattenTreeHierarchy(
++      const {flattened, parentToVisibleChildren} = flattenTreeHierarchy(
+         spaceIds, derivedScene, expanded, activeSpace?.id
+       )
+       const dividers: Record<string, string[]> = {}
+       flattened.forEach((node) => {
+         if (!node.isSpace) {
+-          dividers[node.id] = getEndDividers(node.id, parentToChildren, derivedScene)
++          dividers[node.id] = getEndDividers(node.id, parentToVisibleChildren, derivedScene)
+         }
+       })
+       return [flattened, dividers]
+     },
+-    [spaceIds, derivedScene, expanded, activeClient]
++    [spaceIds, derivedScene, expanded, activeSpace?.id]
+   )
+ 
+   return {
+@@ -170,23 +147,9 @@ const useFlattenTreeHierarchy = (
+   }
+ }
+ 
+-export {useFlattenTreeHierarchy, SPACELESS_ID}
++export {useFlattenTreeHierarchy, flattenTreeHierarchy, SPACELESS_ID}
+ 
+ /*
+-const tree = {
+-  'undefined': ['a', 'b'],
+-  'a': ['a1', 'a2', 'a3'],
+-  'b': ['b1', 'b2'],
+-  'a1': ['a1a', 'a1b'],
+-  'a2': ['a2a'],
+-  'a3': ['a3a'],
+-  'a1b': ['a1b1', 'a1b2'],
+-  'a1b2': ['a1b2a', 'a1b2b'],
+-  'b1': [],
+-  'b2': ['b2a', 'b2b'],
+-  'b2b': ['b2b1', 'b2b2'],
+-  'b2b2': ['b2b2a', 'b2b2b'],
+-}
+ 
+ a
+ ├── a1
+diff --git a/reality/cloud/xrhome/src/client/studio/tree-element.tsx b/reality/cloud/xrhome/src/client/studio/tree-element.tsx
+index e9498ada6bd..32af8c3a2e4 100644
+--- a/reality/cloud/xrhome/src/client/studio/tree-element.tsx
++++ b/reality/cloud/xrhome/src/client/studio/tree-element.tsx
+@@ -39,7 +39,7 @@ const transparent = document.createElement('img')
+ transparent.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
+ 
+ // Shared TreeElementBase component for common UI rendering
+-interface ITreeElementBase {
++interface IBaseTreeElement {
+   id: string
+   level?: number
+   hideChildren?: boolean
+@@ -49,7 +49,7 @@ interface ITreeElementBase {
+   selectedRef: React.RefObject<HTMLDivElement>
+ }
+ 
+-const TreeElementBase: React.FC<ITreeElementBase> = ({
++const BaseTreeElement: React.FC<IBaseTreeElement> = ({
+   id, level = 0, hideChildren = false, hasChildren, isCollapsed, onToggleCollapse, selectedRef,
+ }) => {
+   const classes = useTreeElementStyles()
+@@ -244,22 +244,39 @@ interface IFlattenedTreeElement {
+ const FlattenedTreeElement: React.FC<IFlattenedTreeElement> = ({
+   id, level = 0, collapsed = false, onToggleCollapse,
+ }) => {
+-  const derivedScene = useDerivedScene()
++  const classes = useTreeElementStyles()
++  const [hovering, setHovering] = React.useState(false)
+   const selectedRef = React.useRef<HTMLDivElement>(null)
+ 
++  const ctx = useSceneContext()
++  const stateCtx = useStudioStateContext()
++  const derivedScene = useDerivedScene()
++
+   const childIds = derivedScene.getChildren(id)
+   const hasChildren = childIds.length > 0
+   const isCollapsed = collapsed
+ 
+   return (
+-    <TreeElementBase
+-      id={id}
+-      level={level}
+-      hasChildren={hasChildren}
+-      isCollapsed={isCollapsed}
+-      onToggleCollapse={onToggleCollapse}
+-      selectedRef={selectedRef}
+-    />
++    <DropTarget
++      as='div'
++      className={combine(classes.treeElement, hovering && classes.hovered)}
++      onHoverStart={() => setHovering(true)}
++      onHoverStop={() => setHovering(false)}
++      onDrop={(e) => {
++        handleDrop(e, ctx, stateCtx, derivedScene, setHovering, id)
++      }}
++    >
++      <div ref={selectedRef}>
++        <BaseTreeElement
++          id={id}
++          level={level}
++          hasChildren={hasChildren}
++          isCollapsed={isCollapsed}
++          onToggleCollapse={onToggleCollapse}
++          selectedRef={selectedRef}
++        />
++      </div>
++    </DropTarget>
+   )
+ }
+ 
+@@ -301,7 +318,7 @@ const TreeElement: React.FC<ITreeElement> = ({
+   }
+ 
+   const treeElementBase = (
+-    <TreeElementBase
++    <BaseTreeElement
+       id={id}
+       level={level}
+       hideChildren={hideChildren}
+
+From ef24458dde8754247d90a447e0c1afdf36d1387a Mon Sep 17 00:00:00 2001
+From: Cindy Hu <57238301+cindyhu2023@users.noreply.github.com>
+Date: Wed, 6 Aug 2025 16:30:34 -0700
+Subject: [PATCH 5/8] [xrhome][studio] refactor tree hierarchy with
+ react-window
+
+---
+ .../hooks/use-flatten-tree-hierarchy.ts       | 34 -------------------
+ 1 file changed, 34 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/studio/hooks/use-flatten-tree-hierarchy.ts b/reality/cloud/xrhome/src/client/studio/hooks/use-flatten-tree-hierarchy.ts
+index 57f83874987..81150511fd3 100644
+--- a/reality/cloud/xrhome/src/client/studio/hooks/use-flatten-tree-hierarchy.ts
++++ b/reality/cloud/xrhome/src/client/studio/hooks/use-flatten-tree-hierarchy.ts
+@@ -148,37 +148,3 @@ const useFlattenTreeHierarchy = (
+ }
+ 
+ export {useFlattenTreeHierarchy, flattenTreeHierarchy, SPACELESS_ID}
+-
+-/*
+-
+-a
+-├── a1
+-│   ├── a1a
+-│   └── a1b
+-│       ├── a1b1
+-│       └── a1b2
+-│           ├── a1b2a
+-│           └── a1b2b
+-├── a2
+-│   └── a2a
+-└── a3
+-    └── a3a
+-
+-b
+-├── b1
+-└── b2
+-    ├── b2a
+-    └── b2b
+-        ├── b2b1
+-        └── b2b2
+-            ├── b2b2a
+-            └── b2b2b
+-
+-the divider of a1b2b should include: [a1b2, a1b]
+-the divider of b2b2b should include: [b2b2, b2b, b2, b, undefined]
+-
+-so the rule is that, if you are the last child, you look for the parent,
+-if the parent is also the last child, you look for the grandparent,
+-and so on until you find a parent that is not the last child or hit the top level object.
+-
+-*/
+
+From dfa68e05f2721652b71ec254744199acf495fd4c Mon Sep 17 00:00:00 2001
+From: Cindy Hu <57238301+cindyhu2023@users.noreply.github.com>
+Date: Wed, 6 Aug 2025 16:38:30 -0700
+Subject: [PATCH 6/8] [xrhome][studio] refactor tree hierarchy with
+ react-window
+
+---
+ .../cloud/xrhome/src/client/studio/floating-left-panel.tsx   | 3 ++-
+ .../xrhome/src/client/studio/tree-hierarchy-divider.tsx      | 5 ++++-
+ .../src/client/studio/tree-hierarchy-search-results.tsx      | 2 ++
+ 3 files changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/studio/floating-left-panel.tsx b/reality/cloud/xrhome/src/client/studio/floating-left-panel.tsx
+index 86e2c45e6f9..3e30aa5180b 100644
+--- a/reality/cloud/xrhome/src/client/studio/floating-left-panel.tsx
++++ b/reality/cloud/xrhome/src/client/studio/floating-left-panel.tsx
+@@ -168,7 +168,8 @@ const FloatingLeftPanel = React.forwardRef<HTMLDivElement, IFloatingLeftPanel>((
+                 )
+               }}
+             </Measure>
+-          ) : (
++          )
++          : (
+             <div ref={containerRef} className={classes.treeHierarchyContainer}>
+               <TreeHierarchy height={treeHeight} />
+             </div>
+diff --git a/reality/cloud/xrhome/src/client/studio/tree-hierarchy-divider.tsx b/reality/cloud/xrhome/src/client/studio/tree-hierarchy-divider.tsx
+index 84fd4815085..121bbf1c1c4 100644
+--- a/reality/cloud/xrhome/src/client/studio/tree-hierarchy-divider.tsx
++++ b/reality/cloud/xrhome/src/client/studio/tree-hierarchy-divider.tsx
+@@ -6,6 +6,7 @@ import {DropTarget} from './ui/drop-target'
+ import {createThemedStyles} from '../ui/theme'
+ import {handleDrop} from './tree-drop-targets'
+ import {useDerivedScene} from './derived-scene-context'
++import {combine} from '../common/styles'
+ 
+ interface LevelTreeElementCssProperties extends React.CSSProperties {
+   '--level'?: number
+@@ -72,7 +73,9 @@ const TreeHierarchyDivider: React.FC<ITreeHierarchyDivider> = ({
+     <div style={{'--level': level} as LevelTreeElementCssProperties}>
+       <DropTarget
+         as='div'
+-        className={`${classes.dropElementDivider} ${positionClass} ${flattened && classes.flattened}`}
++        className={combine(
++          classes.dropElementDivider, positionClass, flattened && classes.flattened
++        )}
+         onHoverStart={() => setHovering(true)}
+         onHoverStop={() => setHovering(false)}
+         onDrop={e => handleDrop(e, ctx, stateCtx, derivedScene, setHovering, parentId, siblingId)}
+diff --git a/reality/cloud/xrhome/src/client/studio/tree-hierarchy-search-results.tsx b/reality/cloud/xrhome/src/client/studio/tree-hierarchy-search-results.tsx
+index 5b1ba1e01c2..5e24c335924 100644
+--- a/reality/cloud/xrhome/src/client/studio/tree-hierarchy-search-results.tsx
++++ b/reality/cloud/xrhome/src/client/studio/tree-hierarchy-search-results.tsx
+@@ -13,6 +13,8 @@ import {TreeElement} from './tree-element'
+ import {SearchToolbar} from './ui/search-bar'
+ import {useDerivedScene} from './derived-scene-context'
+ import type {DerivedScene} from './derive-scene'
++import {useActiveSpace} from './hooks/active-space'
++import {DIRECT_PROPERTY_COMPONENTS} from './hooks/available-components'
+ 
+ const SPACELESS_PLACEHOLDER_ID = 'spaceless-placeholder-id'
+ 
+
+From 2b70b7926c27b140c4f2b2dc5b9e4ce305e0a8f3 Mon Sep 17 00:00:00 2001
+From: Cindy Hu <57238301+cindyhu2023@users.noreply.github.com>
+Date: Wed, 6 Aug 2025 16:52:47 -0700
+Subject: [PATCH 7/8] [xrhome][studio] refactor tree hierarchy with
+ react-window
+
+---
+ .../xrhome/src/client/studio/prefabs-list.tsx |  31 +++--
+ .../studio/space-section-collapsible.tsx      |  20 +--
+ .../xrhome/src/client/studio/tree-element.tsx | 114 ++++++++----------
+ 3 files changed, 69 insertions(+), 96 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/studio/prefabs-list.tsx b/reality/cloud/xrhome/src/client/studio/prefabs-list.tsx
+index 00dc850447e..5c21c67a3f5 100644
+--- a/reality/cloud/xrhome/src/client/studio/prefabs-list.tsx
++++ b/reality/cloud/xrhome/src/client/studio/prefabs-list.tsx
+@@ -97,26 +97,25 @@ const PrefabsList: React.FC = () => {
+         />
+         <NewPrimitiveButton makePrefab />
+       </div>
+-      {searching
+-        ? (
+-          <TreeHierarchySearchResults
+-            searchText={searchText}
+-            filters={filters}
+-            resetSearch={() => {
+-              setSearchText('')
+-              setFilters([])
+-            }}
+-            prefabList
+-          />
+-        )
+-        : (
+-          <div className={classes.prefabContainer}>          {prefabs.map(prefab => (
++      {searching ? (
++        <TreeHierarchySearchResults
++          searchText={searchText}
++          filters={filters}
++          resetSearch={() => {
++            setSearchText('')
++            setFilters([])
++          }}
++          prefabList
++        />
++      ) : (
++        <div className={classes.prefabContainer}>
++          {prefabs.map(prefab => (
+             <div key={prefab.id} className={classes.prefabInner}>
+               <TreeElement id={prefab.id} startCollapsed />
+             </div>
+           ))}
+-          </div>
+-        )}
++        </div>
++      )}
+     </DropTarget>
+   )
+ }
+diff --git a/reality/cloud/xrhome/src/client/studio/space-section-collapsible.tsx b/reality/cloud/xrhome/src/client/studio/space-section-collapsible.tsx
+index c3b0b5e678a..5cffc852e70 100644
+--- a/reality/cloud/xrhome/src/client/studio/space-section-collapsible.tsx
++++ b/reality/cloud/xrhome/src/client/studio/space-section-collapsible.tsx
+@@ -47,21 +47,18 @@ const useStyles = createThemedStyles(theme => ({
+ }))
+ 
+ interface ISpaceSectionCollapsible {
+-  children?: React.ReactNode
+   title: React.ReactNode
+   spaceId: string
+   contextMenuOptions?: MenuOption[]
+-  collapsed?: boolean
+   onToggleCollapse?: () => void
+ }
+ 
+ const SpaceSectionCollapsible: React.FC<ISpaceSectionCollapsible> = ({
+-  children, title, contextMenuOptions, spaceId, collapsed = false, onToggleCollapse,
++  title, contextMenuOptions, spaceId, onToggleCollapse,
+ }) => {
+   const {t} = useTranslation(['common'])
+   const classes = useStyles()
+   const styles = useStudioMenuStyles()
+-  const [innerCollapsed, setInnerCollapsed] = React.useState(false)
+   const ctx = useSceneContext()
+   const menuState = useContextMenuState()
+   const {spaces} = ctx.scene
+@@ -69,23 +66,12 @@ const SpaceSectionCollapsible: React.FC<ISpaceSectionCollapsible> = ({
+ 
+   const includedSpaces = activeSpace?.id ? spaces[activeSpace.id].includedSpaces : []
+ 
+-  const isCollapsed = collapsed || innerCollapsed
+-
+   const collapseContextMenu = () => {
+     menuState.setContextMenuOpen(false)
+   }
+ 
+-  // const onToggleCollapse = () => {
+-  //   setCollapsed(!isCollapsed)
+-  //   collapseContextMenu()
+-  // }
+-
+-  const handleToggleCollapse = () => {
+-    setInnerCollapsed(!innerCollapsed)
+-    onToggleCollapse?.()
+-  }
+   const handleToggle = () => {
+-    handleToggleCollapse()
++    onToggleCollapse?.()
+     collapseContextMenu()
+   }
+ 
+@@ -99,7 +85,6 @@ const SpaceSectionCollapsible: React.FC<ISpaceSectionCollapsible> = ({
+         <button
+           type='button'
+           className={combine(classes.collapseButton, 'style-reset')}
+-          // onClick={onToggleCollapse}
+           onClick={handleToggle}
+           onContextMenu={contextMenuOptions ? menuState.handleContextMenu : undefined}
+         >
+@@ -128,7 +113,6 @@ const SpaceSectionCollapsible: React.FC<ISpaceSectionCollapsible> = ({
+           </div>
+         }
+       </div>
+-      {!isCollapsed && children}
+       {contextMenuOptions &&
+         <ContextMenu
+           menuState={menuState}
+diff --git a/reality/cloud/xrhome/src/client/studio/tree-element.tsx b/reality/cloud/xrhome/src/client/studio/tree-element.tsx
+index 32af8c3a2e4..a57e6ced708 100644
+--- a/reality/cloud/xrhome/src/client/studio/tree-element.tsx
++++ b/reality/cloud/xrhome/src/client/studio/tree-element.tsx
+@@ -38,7 +38,6 @@ import {ObjectChip} from './configuration/diff-chip'
+ const transparent = document.createElement('img')
+ transparent.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
+ 
+-// Shared TreeElementBase component for common UI rendering
+ interface IBaseTreeElement {
+   id: string
+   level?: number
+@@ -227,77 +226,25 @@ const BaseTreeElement: React.FC<IBaseTreeElement> = ({
+       </div>
+       <ContextMenu
+         menuState={menuState}
+-        options={menuCollapse => <TreeElementMenuOptions id={id} collapse={menuCollapse} />}
++        options={collapse => <TreeElementMenuOptions id={id} collapse={collapse} />}
+       />
+     </div>
+   )
+ }
+ 
+-// FlattenedTreeElement - for use with React Window (flattened rendering)
+-interface IFlattenedTreeElement {
+-  id: string
+-  level?: number
+-  collapsed?: boolean
+-  onToggleCollapse?: () => void
+-}
+-
+-const FlattenedTreeElement: React.FC<IFlattenedTreeElement> = ({
+-  id, level = 0, collapsed = false, onToggleCollapse,
+-}) => {
+-  const classes = useTreeElementStyles()
+-  const [hovering, setHovering] = React.useState(false)
+-  const selectedRef = React.useRef<HTMLDivElement>(null)
+-
+-  const ctx = useSceneContext()
+-  const stateCtx = useStudioStateContext()
+-  const derivedScene = useDerivedScene()
+-
+-  const childIds = derivedScene.getChildren(id)
+-  const hasChildren = childIds.length > 0
+-  const isCollapsed = collapsed
+-
+-  return (
+-    <DropTarget
+-      as='div'
+-      className={combine(classes.treeElement, hovering && classes.hovered)}
+-      onHoverStart={() => setHovering(true)}
+-      onHoverStop={() => setHovering(false)}
+-      onDrop={(e) => {
+-        handleDrop(e, ctx, stateCtx, derivedScene, setHovering, id)
+-      }}
+-    >
+-      <div ref={selectedRef}>
+-        <BaseTreeElement
+-          id={id}
+-          level={level}
+-          hasChildren={hasChildren}
+-          isCollapsed={isCollapsed}
+-          onToggleCollapse={onToggleCollapse}
+-          selectedRef={selectedRef}
+-        />
+-      </div>
+-    </DropTarget>
+-  )
+-}
+-
+-// TreeElement - for recursive rendering with children
+ interface ITreeElement {
+   id: string
+   level?: number
+   hideChildren?: boolean
+   startCollapsed?: boolean
+-  flattened?: boolean
+-  collapsed?: boolean
+-  onToggleCollapse?: () => void
+ }
+ 
+ const TreeElement: React.FC<ITreeElement> = ({
+-  id, level = 0, hideChildren = false, flattened = false, collapsed = false, onToggleCollapse,
+-  startCollapsed = false,
++  id, level = 0, hideChildren = false, startCollapsed = false,
+ }) => {
+   const classes = useTreeElementStyles()
+   const [hovering, setHovering] = React.useState(false)
+-  const [innerCollapsed, setInnerCollapsed] = React.useState(startCollapsed)
++  const [collapsed, setCollapsed] = React.useState(startCollapsed)
+   const selectedRef = React.useRef<HTMLDivElement>(null)
+ 
+   const ctx = useSceneContext()
+@@ -310,11 +257,8 @@ const TreeElement: React.FC<ITreeElement> = ({
+   const childIds = derivedScene.getChildren(id)
+   const hasChildren = childIds.length > 0
+ 
+-  const isCollapsed = collapsed || innerCollapsed
+-
+   const handleToggleCollapse = () => {
+-    setInnerCollapsed(!innerCollapsed)
+-    onToggleCollapse?.()
++    setCollapsed(!collapsed)
+   }
+ 
+   const treeElementBase = (
+@@ -323,7 +267,7 @@ const TreeElement: React.FC<ITreeElement> = ({
+       level={level}
+       hideChildren={hideChildren}
+       hasChildren={hasChildren}
+-      isCollapsed={isCollapsed}
++      isCollapsed={collapsed}
+       onToggleCollapse={handleToggleCollapse}
+       selectedRef={selectedRef}
+     />
+@@ -353,7 +297,7 @@ const TreeElement: React.FC<ITreeElement> = ({
+             )}
+             >
+               {treeElementBase}
+-              {!flattened && !isCollapsed && (
++              {!collapsed && (
+                 <div className={classes.treeElementChildren}>
+                   {childIds.map(e => (
+                     <div key={e}>
+@@ -372,6 +316,52 @@ const TreeElement: React.FC<ITreeElement> = ({
+   )
+ }
+ 
++interface IFlattenedTreeElement {
++  id: string
++  level?: number
++  collapsed?: boolean
++  onToggleCollapse?: () => void
++}
++
++const FlattenedTreeElement: React.FC<IFlattenedTreeElement> = ({
++  id, level = 0, collapsed = false, onToggleCollapse,
++}) => {
++  const classes = useTreeElementStyles()
++  const [hovering, setHovering] = React.useState(false)
++  const selectedRef = React.useRef<HTMLDivElement>(null)
++
++  const ctx = useSceneContext()
++  const stateCtx = useStudioStateContext()
++  const derivedScene = useDerivedScene()
++
++  const childIds = derivedScene.getChildren(id)
++  const hasChildren = childIds.length > 0
++  const isCollapsed = collapsed
++
++  return (
++    <DropTarget
++      as='div'
++      className={combine(classes.treeElement, hovering && classes.hovered)}
++      onHoverStart={() => setHovering(true)}
++      onHoverStop={() => setHovering(false)}
++      onDrop={(e) => {
++        handleDrop(e, ctx, stateCtx, derivedScene, setHovering, id)
++      }}
++    >
++      <div ref={selectedRef}>
++        <BaseTreeElement
++          id={id}
++          level={level}
++          hasChildren={hasChildren}
++          isCollapsed={isCollapsed}
++          onToggleCollapse={onToggleCollapse}
++          selectedRef={selectedRef}
++        />
++      </div>
++    </DropTarget>
++  )
++}
++
+ export {
+   TreeElement,
+   FlattenedTreeElement,
+
+From 4ff13259be914a1219df9e70666af872c4d8d70e Mon Sep 17 00:00:00 2001
+From: Cindy Hu <57238301+cindyhu2023@users.noreply.github.com>
+Date: Wed, 6 Aug 2025 17:45:37 -0700
+Subject: [PATCH 8/8] [xrhome][studio] refactor tree hierarchy with
+ react-window
+
+---
+ .../xrhome/src/client/studio/tree-element.tsx | 34 ++++++++-----------
+ .../src/client/studio/tree-hierarchy.tsx      |  4 +--
+ .../client/studio/ui/tree-hierarchy-styles.ts |  2 +-
+ 3 files changed, 17 insertions(+), 23 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/studio/tree-element.tsx b/reality/cloud/xrhome/src/client/studio/tree-element.tsx
+index a57e6ced708..ac79687b062 100644
+--- a/reality/cloud/xrhome/src/client/studio/tree-element.tsx
++++ b/reality/cloud/xrhome/src/client/studio/tree-element.tsx
+@@ -45,11 +45,10 @@ interface IBaseTreeElement {
+   hasChildren: boolean
+   isCollapsed: boolean
+   onToggleCollapse?: () => void
+-  selectedRef: React.RefObject<HTMLDivElement>
+ }
+ 
+ const BaseTreeElement: React.FC<IBaseTreeElement> = ({
+-  id, level = 0, hideChildren = false, hasChildren, isCollapsed, onToggleCollapse, selectedRef,
++  id, level = 0, hideChildren = false, hasChildren, isCollapsed, onToggleCollapse,
+ }) => {
+   const classes = useTreeElementStyles()
+   const {t} = useTranslation(['cloud-studio-pages'])
+@@ -65,12 +64,6 @@ const BaseTreeElement: React.FC<IBaseTreeElement> = ({
+   const selection = useObjectSelection(id)
+   const sceneInterfaceCtx = React.useContext(sceneInterfaceContext)
+ 
+-  React.useEffect(() => {
+-    if (selection.isSelected && selectedRef.current) {
+-      selectedRef.current.scrollIntoView({block: 'nearest'})
+-    }
+-  }, [selection.isSelected])
+-
+   const cancelRename = () => {
+     ctx.setIsRenaming(id, false)
+   }
+@@ -261,6 +254,12 @@ const TreeElement: React.FC<ITreeElement> = ({
+     setCollapsed(!collapsed)
+   }
+ 
++  React.useEffect(() => {
++    if (selection.isSelected && selectedRef.current) {
++      selectedRef.current.scrollIntoView({block: 'nearest'})
++    }
++  }, [selection.isSelected])
++
+   const treeElementBase = (
+     <BaseTreeElement
+       id={id}
+@@ -269,7 +268,6 @@ const TreeElement: React.FC<ITreeElement> = ({
+       hasChildren={hasChildren}
+       isCollapsed={collapsed}
+       onToggleCollapse={handleToggleCollapse}
+-      selectedRef={selectedRef}
+     />
+   )
+ 
+@@ -328,7 +326,6 @@ const FlattenedTreeElement: React.FC<IFlattenedTreeElement> = ({
+ }) => {
+   const classes = useTreeElementStyles()
+   const [hovering, setHovering] = React.useState(false)
+-  const selectedRef = React.useRef<HTMLDivElement>(null)
+ 
+   const ctx = useSceneContext()
+   const stateCtx = useStudioStateContext()
+@@ -348,16 +345,13 @@ const FlattenedTreeElement: React.FC<IFlattenedTreeElement> = ({
+         handleDrop(e, ctx, stateCtx, derivedScene, setHovering, id)
+       }}
+     >
+-      <div ref={selectedRef}>
+-        <BaseTreeElement
+-          id={id}
+-          level={level}
+-          hasChildren={hasChildren}
+-          isCollapsed={isCollapsed}
+-          onToggleCollapse={onToggleCollapse}
+-          selectedRef={selectedRef}
+-        />
+-      </div>
++      <BaseTreeElement
++        id={id}
++        level={level}
++        hasChildren={hasChildren}
++        isCollapsed={isCollapsed}
++        onToggleCollapse={onToggleCollapse}
++      />
+     </DropTarget>
+   )
+ }
+diff --git a/reality/cloud/xrhome/src/client/studio/tree-hierarchy.tsx b/reality/cloud/xrhome/src/client/studio/tree-hierarchy.tsx
+index 167c8940fc3..fe1a3a54214 100644
+--- a/reality/cloud/xrhome/src/client/studio/tree-hierarchy.tsx
++++ b/reality/cloud/xrhome/src/client/studio/tree-hierarchy.tsx
+@@ -43,6 +43,8 @@ const TreeHierarchyDropTarget: React.FC<{spaceIds?: string[], height?: number}>
+   const listRef = React.useRef<List>(null)
+   const spaceMenuRef = React.useRef<HTMLDivElement>(null)
+   const [listHeight, setListHeight] = React.useState(height)
++  // todo(cindyhu): something about the height calculation is off by a few pixels...
++  // it's showing a scrollbar when it shouldn't
+   const renderHeight = visibleNodes.length * ROW_HEIGHT < listHeight
+     ? visibleNodes.length * ROW_HEIGHT + 6
+     : listHeight - 6
+@@ -100,7 +102,6 @@ const TreeHierarchyDropTarget: React.FC<{spaceIds?: string[], height?: number}>
+                         <i>{t('tree_hierarchy.missing_space.title')}</i>
+                       </span>
+                     )}
+-                    collapsed={!expanded[node.id]}
+                     onToggleCollapse={() => handleToggle(node.id)}
+                     spaceId=''
+                   />
+@@ -112,7 +113,6 @@ const TreeHierarchyDropTarget: React.FC<{spaceIds?: string[], height?: number}>
+                   <SpaceSectionCollapsible
+                     title={ctx.scene.spaces[node.id]?.name}
+                     spaceId={node.id}
+-                    collapsed={!expanded[node.id]}
+                     onToggleCollapse={() => handleToggle(node.id)}
+                   />
+                 </div>
+diff --git a/reality/cloud/xrhome/src/client/studio/ui/tree-hierarchy-styles.ts b/reality/cloud/xrhome/src/client/studio/ui/tree-hierarchy-styles.ts
+index 8f7d6055857..988118aa68e 100644
+--- a/reality/cloud/xrhome/src/client/studio/ui/tree-hierarchy-styles.ts
++++ b/reality/cloud/xrhome/src/client/studio/ui/tree-hierarchy-styles.ts
+@@ -12,7 +12,7 @@ const useTreeHierarchyStyles = createThemedStyles(theme => ({
+     'paddingBottom': '0.5rem',
+     'margin': 0,
+     'display': 'flex',
+-    'overflow': 'hidden',
++    // 'overflow': 'hidden',
+     'flexDirection': 'column',
+     '&:last-child': {
+       flexGrow: 1,

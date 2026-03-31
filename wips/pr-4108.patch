@@ -1,0 +1,1795 @@
+From 1a20bd79984a0704e10803aeead7ec520db65a94 Mon Sep 17 00:00:00 2001
+From: Yu-Hsiang Huang <yuhsiang@8thwall.com>
+Date: Tue, 9 Sep 2025 18:09:20 -0700
+Subject: [PATCH 01/17] [xrhome][studio] Don't allow empty space name
+
+---
+ .../client/i18n/en-US/cloud-studio-pages.json |  2 ++
+ .../src/client/studio/space-menu-item.tsx     | 18 +++++++++--
+ .../xrhome/src/client/studio/spaces-menu.tsx  | 30 +++++++++++++++----
+ 3 files changed, 42 insertions(+), 8 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/i18n/en-US/cloud-studio-pages.json b/reality/cloud/xrhome/src/client/i18n/en-US/cloud-studio-pages.json
+index d773786532b..5a07bb4e5b8 100644
+--- a/reality/cloud/xrhome/src/client/i18n/en-US/cloud-studio-pages.json
++++ b/reality/cloud/xrhome/src/client/i18n/en-US/cloud-studio-pages.json
+@@ -854,8 +854,10 @@
+   "spaces_menu.title": "Spaces",
+   "spaces_menu.button.create_new_space": "Create New Space",
+   "spaces_menu.input.space_name": "Name",
++  "spaces_menu.input.default_space_name": "Space",
+   "spaces_menu.popup.entry_space": "Entry Space",
+   "spaces_menu.warning.duplicate_space_name": "Duplicate space name",
++  "spaces_menu.warning.empty_space_name": "Empty space name",
+   "splat_asset_configurator_grid.label": "Grid",
+   "studio_model_preview.debug.title": "Controls",
+   "studio_model_preview.debug.ambient_color": "Ambient Color",
+diff --git a/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx b/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
+index 7cb5a264bd2..0f9a1d4a7d5 100644
+--- a/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
++++ b/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
+@@ -36,12 +36,15 @@ interface ISpaceItem {
+   active: boolean
+   onClick: () => void
+   onRename: (newName: string) => void
++  setEmptyName: (empty: boolean) => void
++  emptyName: boolean
+   setDuplicateName: (duplicate: boolean) => void
+   duplicateName: boolean
+ }
+ 
+ const SpaceItem: React.FC<ISpaceItem> = ({
+-  space, spaces, onClick, active, onRename, setDuplicateName, duplicateName,
++  space, spaces, onClick, active, onRename, setEmptyName, emptyName,
++  setDuplicateName, duplicateName,
+ }) => {
+   const {t} = useTranslation(['cloud-studio-pages', 'common'])
+   const classes = useStudioMenuStyles()
+@@ -54,7 +57,7 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+   const spacesMenuOptions = useSpaceMenuOptions(space, renameState.startRename)
+ 
+   const handleRename = () => {
+-    if (duplicateName) {
++    if (emptyName || duplicateName) {
+       return
+     }
+     onRename(renameState.sceneName)
+@@ -62,6 +65,11 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+   }
+ 
+   const handleSetSpaceName = (name: string) => {
++    if (name.length === 0) {
++      setEmptyName(true)
++    } else if (emptyName) {
++      setEmptyName(false)
++    }
+     if (spaces.some(s => s.name === name && s.id !== space.id)) {
+       setDuplicateName(true)
+     } else if (duplicateName) {
+@@ -77,9 +85,13 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+         value={renameState.sceneName}
+         renameState={renameState}
+         onRename={handleRename}
+-        onBlur={() => setDuplicateName(false)}
++        onBlur={() => {
++          setEmptyName(false)
++          setDuplicateName(false)
++        }}
+         onChange={value => handleSetSpaceName(value)}
+         onEscapeKey={() => {
++          setEmptyName(false)
+           setDuplicateName(false)
+         }}
+       />
+diff --git a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+index 29586a3ce96..3df4e8f6724 100644
+--- a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
++++ b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+@@ -102,6 +102,7 @@ const SpacesMenu: React.FC = () => {
+   const [isOpen, setIsOpen] = React.useState(false)
+   const [newSpaceName, setNewSpaceName] = React.useState('')
+   const [isAdding, setIsAdding] = React.useState(false)
++  const [emptyName, setEmptyName] = React.useState(false)
+   const [duplicateName, setDuplicateName] = React.useState(false)
+ 
+   const ctx = useSceneContext()
+@@ -125,13 +126,14 @@ const SpacesMenu: React.FC = () => {
+     const selected = stateCtx.state.selectedIds
+     const spacelessSelected = selected.filter(s => !derivedScene.resolveSpaceForObject(s))
+     stateCtx.setSelection(...spacelessSelected)
++    setEmptyName(false)
+     setDuplicateName(false)
+     setIsOpen(false)
+   }
+ 
+   const startAddScene = () => {
+     setIsAdding(true)
+-    setNewSpaceName('')
++    setNewSpaceName(t('spaces_menu.input.default_space_name'))
+   }
+ 
+   const baseSpaceContextMenu = useSpaceMenuOptions(activeSpace, renameState.startRename)
+@@ -195,6 +197,11 @@ const SpacesMenu: React.FC = () => {
+   }
+ 
+   const handleSetSpaceName = (name: string, spaceRename?: DeepReadonly<Space>) => {
++    if (name.length === 0) {
++      setEmptyName(true)
++    } else if (emptyName) {
++      setEmptyName(false)
++    }
+     if (spaces.some(s => s.name === name && (s.id !== spaceRename?.id))) {
+       setDuplicateName(true)
+     } else if (duplicateName) {
+@@ -208,6 +215,7 @@ const SpacesMenu: React.FC = () => {
+   }
+ 
+   const cancelAddScene = () => {
++    setEmptyName(false)
+     setDuplicateName(false)
+     setIsAdding(false)
+   }
+@@ -230,15 +238,19 @@ const SpacesMenu: React.FC = () => {
+               value={renameState.sceneName}
+               renameState={renameState}
+               onRename={() => {
+-                if (duplicateName) {
++                if (emptyName || duplicateName) {
+                   return
+                 }
+                 onSpaceRename(activeSpace, renameState.sceneName)
+                 renameState.setIsRenaming(false)
+               }}
+-              onBlur={() => setDuplicateName(false)}
++              onBlur={() => {
++                setEmptyName(false)
++                setDuplicateName(false)
++              }}
+               onChange={value => handleSetSpaceName(value, activeSpace)}
+               onEscapeKey={() => {
++                setEmptyName(false)
+                 setDuplicateName(false)
+               }}
+             />
+@@ -275,6 +287,8 @@ const SpacesMenu: React.FC = () => {
+                       handleSelectScene(space.id)
+                       collapse()
+                     }}
++                    setEmptyName={setEmptyName}
++                    emptyName={emptyName}
+                     setDuplicateName={setDuplicateName}
+                     duplicateName={duplicateName}
+                   />
+@@ -283,7 +297,7 @@ const SpacesMenu: React.FC = () => {
+                   <form
+                     onSubmit={(e) => {
+                       e.preventDefault()
+-                      if (duplicateName) {
++                      if (emptyName || duplicateName) {
+                         return
+                       }
+                       handleAddScene()
+@@ -309,12 +323,18 @@ const SpacesMenu: React.FC = () => {
+                     />
+                   </form>
+                 )}
++                {emptyName &&
++                  <StaticBanner
++                    message={t('spaces_menu.warning.empty_space_name')}
++                    type='warning'
++                  />
++                }
+                 {duplicateName &&
+                   <StaticBanner
+                     message={t('spaces_menu.warning.duplicate_space_name')}
+                     type='warning'
+                   />
+-              }
++                }
+                 {(spaces.length > 0 || isAdding) && <div className={classes.divider} />}
+                 <FloatingMenuButton onClick={startAddScene}>
+                   {t('spaces_menu.button.create_new_space')}
+
+From 59807144970fd4328de3ea86170321d45c396810 Mon Sep 17 00:00:00 2001
+From: Yu-Hsiang Huang <yuhsiang@8thwall.com>
+Date: Tue, 9 Sep 2025 18:18:21 -0700
+Subject: [PATCH 02/17] [xrhome][studio] Don't allow empty space name
+
+---
+ .../xrhome/src/client/studio/space-menu-item.tsx     |  2 +-
+ .../cloud/xrhome/src/client/studio/spaces-menu.tsx   | 12 +++++++++++-
+ 2 files changed, 12 insertions(+), 2 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx b/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
+index 0f9a1d4a7d5..9f3819aff9d 100644
+--- a/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
++++ b/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
+@@ -67,7 +67,7 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+   const handleSetSpaceName = (name: string) => {
+     if (name.length === 0) {
+       setEmptyName(true)
+-    } else if (emptyName) {
++    } else {
+       setEmptyName(false)
+     }
+     if (spaces.some(s => s.name === name && s.id !== space.id)) {
+diff --git a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+index 3df4e8f6724..915b7bc2218 100644
+--- a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
++++ b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+@@ -134,6 +134,16 @@ const SpacesMenu: React.FC = () => {
+   const startAddScene = () => {
+     setIsAdding(true)
+     setNewSpaceName(t('spaces_menu.input.default_space_name'))
++    if (newSpaceName.length === 0) {
++      setEmptyName(true)
++    } else if (emptyName) {
++      setEmptyName(false)
++    }
++    if (spaces.some(s => s.name === newSpaceName)) {
++      setDuplicateName(true)
++    } else if (duplicateName) {
++      setDuplicateName(false)
++    }
+   }
+ 
+   const baseSpaceContextMenu = useSpaceMenuOptions(activeSpace, renameState.startRename)
+@@ -199,7 +209,7 @@ const SpacesMenu: React.FC = () => {
+   const handleSetSpaceName = (name: string, spaceRename?: DeepReadonly<Space>) => {
+     if (name.length === 0) {
+       setEmptyName(true)
+-    } else if (emptyName) {
++    } else {
+       setEmptyName(false)
+     }
+     if (spaces.some(s => s.name === name && (s.id !== spaceRename?.id))) {
+
+From 549b66d071fef689c212d94e8413490a4f8abaf5 Mon Sep 17 00:00:00 2001
+From: Yu-Hsiang Huang <yuhsiang@8thwall.com>
+Date: Tue, 9 Sep 2025 18:29:43 -0700
+Subject: [PATCH 03/17] [xrhome][studio] Don't allow empty space name
+
+---
+ reality/cloud/xrhome/src/client/studio/space-menu-item.tsx | 2 +-
+ reality/cloud/xrhome/src/client/studio/spaces-menu.tsx     | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx b/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
+index 9f3819aff9d..0f9a1d4a7d5 100644
+--- a/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
++++ b/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
+@@ -67,7 +67,7 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+   const handleSetSpaceName = (name: string) => {
+     if (name.length === 0) {
+       setEmptyName(true)
+-    } else {
++    } else if (emptyName) {
+       setEmptyName(false)
+     }
+     if (spaces.some(s => s.name === name && s.id !== space.id)) {
+diff --git a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+index 915b7bc2218..8cc7878706e 100644
+--- a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
++++ b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+@@ -209,7 +209,7 @@ const SpacesMenu: React.FC = () => {
+   const handleSetSpaceName = (name: string, spaceRename?: DeepReadonly<Space>) => {
+     if (name.length === 0) {
+       setEmptyName(true)
+-    } else {
++    } else if (emptyName) {
+       setEmptyName(false)
+     }
+     if (spaces.some(s => s.name === name && (s.id !== spaceRename?.id))) {
+
+From 94692bf26816657955408c0c6f1df67d71d50789 Mon Sep 17 00:00:00 2001
+From: Yu-Hsiang Huang <yuhsiang@8thwall.com>
+Date: Wed, 10 Sep 2025 17:45:16 -0700
+Subject: [PATCH 04/17] [xrhome][studio] Don't allow empty space name
+
+---
+ .../cloud/xrhome/src/client/i18n/en-US/cloud-studio-pages.json   | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/reality/cloud/xrhome/src/client/i18n/en-US/cloud-studio-pages.json b/reality/cloud/xrhome/src/client/i18n/en-US/cloud-studio-pages.json
+index 5a07bb4e5b8..ce31ef4f899 100644
+--- a/reality/cloud/xrhome/src/client/i18n/en-US/cloud-studio-pages.json
++++ b/reality/cloud/xrhome/src/client/i18n/en-US/cloud-studio-pages.json
+@@ -804,6 +804,7 @@
+   "simulator_view_controls.button.toggle_picture_in_picture": "Toggle fullscreen preview",
+   "simulator_view_controls.button.toggle_collapsed": "Toggle preview collapsed",
+   "source_control_configurator.title": "Source Control",
++  "source_control_configurator.badge.last_sync": "Last Sync",
+   "source_control_configurator.button.new_client": "New Client",
+   "source_control_configurator.button.copy_client_name": "Copy Client Name",
+   "source_control_configurator.button.duplicate_client": "Duplicate Client",
+
+From b6ee842801d216c10979899017cadafcfaed13cd Mon Sep 17 00:00:00 2001
+From: Yu-Hsiang Huang <yuhsiang@8thwall.com>
+Date: Wed, 10 Sep 2025 17:52:58 -0700
+Subject: [PATCH 05/17] [xrhome][studio] Don't allow empty space name
+
+---
+ reality/cloud/xrhome/src/client/studio/spaces-menu.tsx | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+index 8cc7878706e..30a18df40f3 100644
+--- a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
++++ b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+@@ -133,13 +133,16 @@ const SpacesMenu: React.FC = () => {
+ 
+   const startAddScene = () => {
+     setIsAdding(true)
+-    setNewSpaceName(t('spaces_menu.input.default_space_name'))
+-    if (newSpaceName.length === 0) {
++
++    const defaultSpaceName = t('spaces_menu.input.default_space_name')
++    setNewSpaceName(defaultSpaceName)
++
++    if (defaultSpaceName.length === 0) {
+       setEmptyName(true)
+     } else if (emptyName) {
+       setEmptyName(false)
+     }
+-    if (spaces.some(s => s.name === newSpaceName)) {
++    if (spaces.some(s => s.name === defaultSpaceName)) {
+       setDuplicateName(true)
+     } else if (duplicateName) {
+       setDuplicateName(false)
+
+From 1ac63ca2f9b6a4d2bf48011fa43a8a2d4b149b77 Mon Sep 17 00:00:00 2001
+From: Yu-Hsiang Huang <yuhsiang@8thwall.com>
+Date: Thu, 11 Sep 2025 17:27:00 -0700
+Subject: [PATCH 06/17] [xrhome][studio] Don't allow empty space name
+
+---
+ .../client/i18n/en-US/cloud-studio-pages.json |  1 +
+ .../src/client/studio/space-menu-item.tsx     | 24 ++++---------
+ .../xrhome/src/client/studio/spaces-menu.tsx  | 35 +++++--------------
+ 3 files changed, 15 insertions(+), 45 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/i18n/en-US/cloud-studio-pages.json b/reality/cloud/xrhome/src/client/i18n/en-US/cloud-studio-pages.json
+index ce31ef4f899..413df065c7e 100644
+--- a/reality/cloud/xrhome/src/client/i18n/en-US/cloud-studio-pages.json
++++ b/reality/cloud/xrhome/src/client/i18n/en-US/cloud-studio-pages.json
+@@ -475,6 +475,7 @@
+   "light_configurator.target_position.label": "Target Position",
+   "light_configurator.width.label": "Width",
+   "loading": "Loading...",
++  "local_sync.error.invalid_file": "Invalid file error: {{filePath}}",
+   "location_configurator.add_location": "Add Location",
+   "location_configurator.description": "Provide a VPS anchor for localizing content.",
+   "location_configurator.title": "Location",
+diff --git a/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx b/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
+index 0f9a1d4a7d5..02eb8b81321 100644
+--- a/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
++++ b/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
+@@ -36,15 +36,12 @@ interface ISpaceItem {
+   active: boolean
+   onClick: () => void
+   onRename: (newName: string) => void
+-  setEmptyName: (empty: boolean) => void
+-  emptyName: boolean
+   setDuplicateName: (duplicate: boolean) => void
+   duplicateName: boolean
+ }
+ 
+ const SpaceItem: React.FC<ISpaceItem> = ({
+-  space, spaces, onClick, active, onRename, setEmptyName, emptyName,
+-  setDuplicateName, duplicateName,
++  space, spaces, onClick, active, onRename, setDuplicateName, duplicateName,
+ }) => {
+   const {t} = useTranslation(['cloud-studio-pages', 'common'])
+   const classes = useStudioMenuStyles()
+@@ -57,7 +54,8 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+   const spacesMenuOptions = useSpaceMenuOptions(space, renameState.startRename)
+ 
+   const handleRename = () => {
+-    if (emptyName || duplicateName) {
++    console.log('[yhhuang][space-menu-item] handleRename', renameState)
++    if (!renameState.sceneName || duplicateName) {
+       return
+     }
+     onRename(renameState.sceneName)
+@@ -65,11 +63,7 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+   }
+ 
+   const handleSetSpaceName = (name: string) => {
+-    if (name.length === 0) {
+-      setEmptyName(true)
+-    } else if (emptyName) {
+-      setEmptyName(false)
+-    }
++    console.log('[yhhuang][space-menu-item] handleSetSpaceName', name, renameState.sceneName)
+     if (spaces.some(s => s.name === name && s.id !== space.id)) {
+       setDuplicateName(true)
+     } else if (duplicateName) {
+@@ -85,15 +79,9 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+         value={renameState.sceneName}
+         renameState={renameState}
+         onRename={handleRename}
+-        onBlur={() => {
+-          setEmptyName(false)
+-          setDuplicateName(false)
+-        }}
++        onBlur={() => setDuplicateName(false)}
+         onChange={value => handleSetSpaceName(value)}
+-        onEscapeKey={() => {
+-          setEmptyName(false)
+-          setDuplicateName(false)
+-        }}
++        onEscapeKey={() => setDuplicateName(false)}
+       />
+     )
+     : (
+diff --git a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+index 30a18df40f3..9f1c7daf262 100644
+--- a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
++++ b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+@@ -100,9 +100,8 @@ const SpacesMenu: React.FC = () => {
+   const {t} = useTranslation(['cloud-studio-pages'])
+   const menuState = useContextMenuState()
+   const [isOpen, setIsOpen] = React.useState(false)
+-  const [newSpaceName, setNewSpaceName] = React.useState('')
++  const [newSpaceName, setNewSpaceName] = React.useState<string>('')
+   const [isAdding, setIsAdding] = React.useState(false)
+-  const [emptyName, setEmptyName] = React.useState(false)
+   const [duplicateName, setDuplicateName] = React.useState(false)
+ 
+   const ctx = useSceneContext()
+@@ -126,7 +125,6 @@ const SpacesMenu: React.FC = () => {
+     const selected = stateCtx.state.selectedIds
+     const spacelessSelected = selected.filter(s => !derivedScene.resolveSpaceForObject(s))
+     stateCtx.setSelection(...spacelessSelected)
+-    setEmptyName(false)
+     setDuplicateName(false)
+     setIsOpen(false)
+   }
+@@ -137,11 +135,6 @@ const SpacesMenu: React.FC = () => {
+     const defaultSpaceName = t('spaces_menu.input.default_space_name')
+     setNewSpaceName(defaultSpaceName)
+ 
+-    if (defaultSpaceName.length === 0) {
+-      setEmptyName(true)
+-    } else if (emptyName) {
+-      setEmptyName(false)
+-    }
+     if (spaces.some(s => s.name === defaultSpaceName)) {
+       setDuplicateName(true)
+     } else if (duplicateName) {
+@@ -210,11 +203,7 @@ const SpacesMenu: React.FC = () => {
+   }
+ 
+   const handleSetSpaceName = (name: string, spaceRename?: DeepReadonly<Space>) => {
+-    if (name.length === 0) {
+-      setEmptyName(true)
+-    } else if (emptyName) {
+-      setEmptyName(false)
+-    }
++    console.log('[yhhuang][space-menu] handleSetSpaceName', name)
+     if (spaces.some(s => s.name === name && (s.id !== spaceRename?.id))) {
+       setDuplicateName(true)
+     } else if (duplicateName) {
+@@ -228,12 +217,12 @@ const SpacesMenu: React.FC = () => {
+   }
+ 
+   const cancelAddScene = () => {
+-    setEmptyName(false)
+     setDuplicateName(false)
+     setIsAdding(false)
+   }
+ 
+   const onSpaceRename = (space: DeepReadonly<Space>, newName: string) => {
++    console.log('[yhhuang][space-menu] onSpaceRename', newName)
+     ctx.updateScene((oldScene) => {
+       const newScene = {...oldScene, spaces: {...oldScene.spaces}}
+       newScene.spaces[space.id] = {...newScene.spaces[space.id], name: newName}
+@@ -251,21 +240,15 @@ const SpacesMenu: React.FC = () => {
+               value={renameState.sceneName}
+               renameState={renameState}
+               onRename={() => {
+-                if (emptyName || duplicateName) {
++                if (!renameState.sceneName || duplicateName) {
+                   return
+                 }
+                 onSpaceRename(activeSpace, renameState.sceneName)
+                 renameState.setIsRenaming(false)
+               }}
+-              onBlur={() => {
+-                setEmptyName(false)
+-                setDuplicateName(false)
+-              }}
++              onBlur={() => setDuplicateName(false)}
+               onChange={value => handleSetSpaceName(value, activeSpace)}
+-              onEscapeKey={() => {
+-                setEmptyName(false)
+-                setDuplicateName(false)
+-              }}
++              onEscapeKey={() => setDuplicateName(false)}
+             />
+           </SpaceTitle>
+         )
+@@ -300,8 +283,6 @@ const SpacesMenu: React.FC = () => {
+                       handleSelectScene(space.id)
+                       collapse()
+                     }}
+-                    setEmptyName={setEmptyName}
+-                    emptyName={emptyName}
+                     setDuplicateName={setDuplicateName}
+                     duplicateName={duplicateName}
+                   />
+@@ -310,7 +291,7 @@ const SpacesMenu: React.FC = () => {
+                   <form
+                     onSubmit={(e) => {
+                       e.preventDefault()
+-                      if (emptyName || duplicateName) {
++                      if (!newSpaceName || duplicateName) {
+                         return
+                       }
+                       handleAddScene()
+@@ -336,7 +317,7 @@ const SpacesMenu: React.FC = () => {
+                     />
+                   </form>
+                 )}
+-                {emptyName &&
++                {((isAdding && !newSpaceName) || (renameState.isRenaming && !renameState.sceneName)) &&
+                   <StaticBanner
+                     message={t('spaces_menu.warning.empty_space_name')}
+                     type='warning'
+
+From 29e02aabe74df01084ffe55bdc566f86f7b49294 Mon Sep 17 00:00:00 2001
+From: Yu-Hsiang Huang <yuhsiang@8thwall.com>
+Date: Thu, 11 Sep 2025 17:34:07 -0700
+Subject: [PATCH 07/17] [xrhome][studio] Don't allow empty space name
+
+---
+ reality/cloud/xrhome/src/client/studio/space-menu-item.tsx | 2 --
+ reality/cloud/xrhome/src/client/studio/spaces-menu.tsx     | 2 --
+ 2 files changed, 4 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx b/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
+index 02eb8b81321..5a14b7b00b2 100644
+--- a/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
++++ b/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
+@@ -54,7 +54,6 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+   const spacesMenuOptions = useSpaceMenuOptions(space, renameState.startRename)
+ 
+   const handleRename = () => {
+-    console.log('[yhhuang][space-menu-item] handleRename', renameState)
+     if (!renameState.sceneName || duplicateName) {
+       return
+     }
+@@ -63,7 +62,6 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+   }
+ 
+   const handleSetSpaceName = (name: string) => {
+-    console.log('[yhhuang][space-menu-item] handleSetSpaceName', name, renameState.sceneName)
+     if (spaces.some(s => s.name === name && s.id !== space.id)) {
+       setDuplicateName(true)
+     } else if (duplicateName) {
+diff --git a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+index 9f1c7daf262..60681eb4638 100644
+--- a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
++++ b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+@@ -203,7 +203,6 @@ const SpacesMenu: React.FC = () => {
+   }
+ 
+   const handleSetSpaceName = (name: string, spaceRename?: DeepReadonly<Space>) => {
+-    console.log('[yhhuang][space-menu] handleSetSpaceName', name)
+     if (spaces.some(s => s.name === name && (s.id !== spaceRename?.id))) {
+       setDuplicateName(true)
+     } else if (duplicateName) {
+@@ -222,7 +221,6 @@ const SpacesMenu: React.FC = () => {
+   }
+ 
+   const onSpaceRename = (space: DeepReadonly<Space>, newName: string) => {
+-    console.log('[yhhuang][space-menu] onSpaceRename', newName)
+     ctx.updateScene((oldScene) => {
+       const newScene = {...oldScene, spaces: {...oldScene.spaces}}
+       newScene.spaces[space.id] = {...newScene.spaces[space.id], name: newName}
+
+From 6496ba1226091efb8cf4ad586e72c3bdab7e5aaf Mon Sep 17 00:00:00 2001
+From: Yu-Hsiang Huang <yuhsiang@8thwall.com>
+Date: Thu, 11 Sep 2025 17:39:33 -0700
+Subject: [PATCH 08/17] [xrhome][studio] Don't allow empty space name
+
+---
+ .../cloud/xrhome/src/client/studio/spaces-menu.tsx    | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+index 60681eb4638..368435a2bf8 100644
+--- a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
++++ b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+@@ -315,11 +315,12 @@ const SpacesMenu: React.FC = () => {
+                     />
+                   </form>
+                 )}
+-                {((isAdding && !newSpaceName) || (renameState.isRenaming && !renameState.sceneName)) &&
+-                  <StaticBanner
+-                    message={t('spaces_menu.warning.empty_space_name')}
+-                    type='warning'
+-                  />
++                {((isAdding && !newSpaceName) ||
++                  (renameState.isRenaming && !renameState.sceneName)) &&
++                    <StaticBanner
++                      message={t('spaces_menu.warning.empty_space_name')}
++                      type='warning'
++                    />
+                 }
+                 {duplicateName &&
+                   <StaticBanner
+
+From 552741ab08bcabe97268cc662cfa51feeb34e390 Mon Sep 17 00:00:00 2001
+From: Yu-Hsiang Huang <yuhsiang@8thwall.com>
+Date: Fri, 12 Sep 2025 11:40:32 -0700
+Subject: [PATCH 09/17] [xrhome][studio] Don't allow empty space name
+
+---
+ .../xrhome/src/client/studio/spaces-menu.tsx  | 19 ++++++++++++-------
+ 1 file changed, 12 insertions(+), 7 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+index 368435a2bf8..13aa167fd7e 100644
+--- a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
++++ b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+@@ -315,12 +315,11 @@ const SpacesMenu: React.FC = () => {
+                     />
+                   </form>
+                 )}
+-                {((isAdding && !newSpaceName) ||
+-                  (renameState.isRenaming && !renameState.sceneName)) &&
+-                    <StaticBanner
+-                      message={t('spaces_menu.warning.empty_space_name')}
+-                      type='warning'
+-                    />
++                {isAdding && !newSpaceName &&
++                  <StaticBanner
++                    message={t('spaces_menu.warning.empty_space_name')}
++                    type='warning'
++                  />
+                 }
+                 {duplicateName &&
+                   <StaticBanner
+@@ -342,7 +341,13 @@ const SpacesMenu: React.FC = () => {
+           options={activeSpaceContextMenuOptions}
+         />
+       )}
+-      {duplicateName && !isOpen && (
++      {!isOpen && renameState.isRenaming && !renameState.sceneName && (
++        <StaticBanner
++          message={t('spaces_menu.warning.empty_space_name')}
++          type='warning'
++        />
++      )}
++      {!isOpen && duplicateName && (
+         <StaticBanner
+           message={t('spaces_menu.warning.duplicate_space_name')}
+           type='warning'
+
+From eb8d07812d16d1605ec9ff02ae7315ddf4a13793 Mon Sep 17 00:00:00 2001
+From: Yu-Hsiang Huang <yuhsiang@8thwall.com>
+Date: Fri, 12 Sep 2025 11:42:10 -0700
+Subject: [PATCH 10/17] [xrhome][studio] Don't allow empty space name
+
+---
+ reality/cloud/xrhome/src/client/studio/space-menu-item.tsx | 4 +++-
+ reality/cloud/xrhome/src/client/studio/spaces-menu.tsx     | 4 +++-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx b/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
+index 5a14b7b00b2..2c19e3c66a5 100644
+--- a/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
++++ b/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
+@@ -79,7 +79,9 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+         onRename={handleRename}
+         onBlur={() => setDuplicateName(false)}
+         onChange={value => handleSetSpaceName(value)}
+-        onEscapeKey={() => setDuplicateName(false)}
++        onEscapeKey={() => {
++          setDuplicateName(false)
++        }}
+       />
+     )
+     : (
+diff --git a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+index 13aa167fd7e..18671f755c9 100644
+--- a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
++++ b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+@@ -246,7 +246,9 @@ const SpacesMenu: React.FC = () => {
+               }}
+               onBlur={() => setDuplicateName(false)}
+               onChange={value => handleSetSpaceName(value, activeSpace)}
+-              onEscapeKey={() => setDuplicateName(false)}
++              onEscapeKey={() => {
++                setDuplicateName(false)
++              }}
+             />
+           </SpaceTitle>
+         )
+
+From e429bed74fb13b823a060bd0203b2da34ba0609e Mon Sep 17 00:00:00 2001
+From: Yu-Hsiang Huang <yuhsiang@8thwall.com>
+Date: Fri, 12 Sep 2025 11:57:37 -0700
+Subject: [PATCH 11/17] [xrhome][studio] Don't allow empty space name
+
+---
+ .../src/client/studio/space-menu-item.tsx     | 18 +++++++++--
+ .../xrhome/src/client/studio/spaces-menu.tsx  | 31 +++++++++++++++----
+ 2 files changed, 40 insertions(+), 9 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx b/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
+index 2c19e3c66a5..0f9a1d4a7d5 100644
+--- a/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
++++ b/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
+@@ -36,12 +36,15 @@ interface ISpaceItem {
+   active: boolean
+   onClick: () => void
+   onRename: (newName: string) => void
++  setEmptyName: (empty: boolean) => void
++  emptyName: boolean
+   setDuplicateName: (duplicate: boolean) => void
+   duplicateName: boolean
+ }
+ 
+ const SpaceItem: React.FC<ISpaceItem> = ({
+-  space, spaces, onClick, active, onRename, setDuplicateName, duplicateName,
++  space, spaces, onClick, active, onRename, setEmptyName, emptyName,
++  setDuplicateName, duplicateName,
+ }) => {
+   const {t} = useTranslation(['cloud-studio-pages', 'common'])
+   const classes = useStudioMenuStyles()
+@@ -54,7 +57,7 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+   const spacesMenuOptions = useSpaceMenuOptions(space, renameState.startRename)
+ 
+   const handleRename = () => {
+-    if (!renameState.sceneName || duplicateName) {
++    if (emptyName || duplicateName) {
+       return
+     }
+     onRename(renameState.sceneName)
+@@ -62,6 +65,11 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+   }
+ 
+   const handleSetSpaceName = (name: string) => {
++    if (name.length === 0) {
++      setEmptyName(true)
++    } else if (emptyName) {
++      setEmptyName(false)
++    }
+     if (spaces.some(s => s.name === name && s.id !== space.id)) {
+       setDuplicateName(true)
+     } else if (duplicateName) {
+@@ -77,9 +85,13 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+         value={renameState.sceneName}
+         renameState={renameState}
+         onRename={handleRename}
+-        onBlur={() => setDuplicateName(false)}
++        onBlur={() => {
++          setEmptyName(false)
++          setDuplicateName(false)
++        }}
+         onChange={value => handleSetSpaceName(value)}
+         onEscapeKey={() => {
++          setEmptyName(false)
+           setDuplicateName(false)
+         }}
+       />
+diff --git a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+index 18671f755c9..1fe861f8d94 100644
+--- a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
++++ b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+@@ -100,8 +100,9 @@ const SpacesMenu: React.FC = () => {
+   const {t} = useTranslation(['cloud-studio-pages'])
+   const menuState = useContextMenuState()
+   const [isOpen, setIsOpen] = React.useState(false)
+-  const [newSpaceName, setNewSpaceName] = React.useState<string>('')
++  const [newSpaceName, setNewSpaceName] = React.useState('')
+   const [isAdding, setIsAdding] = React.useState(false)
++  const [emptyName, setEmptyName] = React.useState(false)
+   const [duplicateName, setDuplicateName] = React.useState(false)
+ 
+   const ctx = useSceneContext()
+@@ -125,6 +126,7 @@ const SpacesMenu: React.FC = () => {
+     const selected = stateCtx.state.selectedIds
+     const spacelessSelected = selected.filter(s => !derivedScene.resolveSpaceForObject(s))
+     stateCtx.setSelection(...spacelessSelected)
++    setEmptyName(false)
+     setDuplicateName(false)
+     setIsOpen(false)
+   }
+@@ -135,6 +137,11 @@ const SpacesMenu: React.FC = () => {
+     const defaultSpaceName = t('spaces_menu.input.default_space_name')
+     setNewSpaceName(defaultSpaceName)
+ 
++    if (defaultSpaceName.length === 0) {
++      setEmptyName(true)
++    } else if (emptyName) {
++      setEmptyName(false)
++    }
+     if (spaces.some(s => s.name === defaultSpaceName)) {
+       setDuplicateName(true)
+     } else if (duplicateName) {
+@@ -203,6 +210,11 @@ const SpacesMenu: React.FC = () => {
+   }
+ 
+   const handleSetSpaceName = (name: string, spaceRename?: DeepReadonly<Space>) => {
++    if (name.length === 0) {
++      setEmptyName(true)
++    } else if (emptyName) {
++      setEmptyName(false)
++    }
+     if (spaces.some(s => s.name === name && (s.id !== spaceRename?.id))) {
+       setDuplicateName(true)
+     } else if (duplicateName) {
+@@ -216,6 +228,7 @@ const SpacesMenu: React.FC = () => {
+   }
+ 
+   const cancelAddScene = () => {
++    setEmptyName(false)
+     setDuplicateName(false)
+     setIsAdding(false)
+   }
+@@ -238,15 +251,19 @@ const SpacesMenu: React.FC = () => {
+               value={renameState.sceneName}
+               renameState={renameState}
+               onRename={() => {
+-                if (!renameState.sceneName || duplicateName) {
++                if (emptyName || duplicateName) {
+                   return
+                 }
+                 onSpaceRename(activeSpace, renameState.sceneName)
+                 renameState.setIsRenaming(false)
+               }}
+-              onBlur={() => setDuplicateName(false)}
++              onBlur={() => {
++                setEmptyName(false)
++                setDuplicateName(false)
++              }}
+               onChange={value => handleSetSpaceName(value, activeSpace)}
+               onEscapeKey={() => {
++                setEmptyName(false)
+                 setDuplicateName(false)
+               }}
+             />
+@@ -283,6 +300,8 @@ const SpacesMenu: React.FC = () => {
+                       handleSelectScene(space.id)
+                       collapse()
+                     }}
++                    setEmptyName={setEmptyName}
++                    emptyName={emptyName}
+                     setDuplicateName={setDuplicateName}
+                     duplicateName={duplicateName}
+                   />
+@@ -291,7 +310,7 @@ const SpacesMenu: React.FC = () => {
+                   <form
+                     onSubmit={(e) => {
+                       e.preventDefault()
+-                      if (!newSpaceName || duplicateName) {
++                      if (emptyName || duplicateName) {
+                         return
+                       }
+                       handleAddScene()
+@@ -317,7 +336,7 @@ const SpacesMenu: React.FC = () => {
+                     />
+                   </form>
+                 )}
+-                {isAdding && !newSpaceName &&
++                {emptyName &&
+                   <StaticBanner
+                     message={t('spaces_menu.warning.empty_space_name')}
+                     type='warning'
+@@ -343,7 +362,7 @@ const SpacesMenu: React.FC = () => {
+           options={activeSpaceContextMenuOptions}
+         />
+       )}
+-      {!isOpen && renameState.isRenaming && !renameState.sceneName && (
++      {!isOpen && emptyName && (
+         <StaticBanner
+           message={t('spaces_menu.warning.empty_space_name')}
+           type='warning'
+
+From 713c0086df8367ca6a1a3cef1f36713b533114df Mon Sep 17 00:00:00 2001
+From: Yu-Hsiang Huang <yuhsiang@8thwall.com>
+Date: Fri, 12 Sep 2025 13:41:09 -0700
+Subject: [PATCH 12/17] [xrhome][studio] Don't allow empty space name
+
+---
+ .../cloud/xrhome/src/client/i18n/en-US/cloud-studio-pages.json   | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/reality/cloud/xrhome/src/client/i18n/en-US/cloud-studio-pages.json b/reality/cloud/xrhome/src/client/i18n/en-US/cloud-studio-pages.json
+index 413df065c7e..378cec79003 100644
+--- a/reality/cloud/xrhome/src/client/i18n/en-US/cloud-studio-pages.json
++++ b/reality/cloud/xrhome/src/client/i18n/en-US/cloud-studio-pages.json
+@@ -273,6 +273,7 @@
+   "file_browser.search_bar.option.audio": "Audio",
+   "file_browser.search_bar.option.model": "Model",
+   "file_browser_corner_dropdown.label": "File Browser Corner Menu",
++  "file_configurator.button.open_externally": "Open Externally",
+   "floating_navigation.label": "Navigation Menu",
+   "geometry_configurator.button.unlock": "Unlock",
+   "geometry_configurator.geometry_depth.label": "Depth",
+
+From f106310aaaa7649755f174677153e827f89f5c0f Mon Sep 17 00:00:00 2001
+From: Yu-Hsiang Huang <yuhsiang@8thwall.com>
+Date: Fri, 12 Sep 2025 14:43:25 -0700
+Subject: [PATCH 13/17] [xrhome][studio] Don't allow empty space name
+
+
+From 93c2fd4f9a4eafb49d548baad992bc8587639d3e Mon Sep 17 00:00:00 2001
+From: Yu-Hsiang Huang <yuhsiang@8thwall.com>
+Date: Wed, 17 Sep 2025 10:37:57 -0700
+Subject: [PATCH 14/17] [xrhome][studio] Don't allow empty space name
+
+---
+ .../client/i18n/en-US/cloud-studio-pages.json |  3 +-
+ .../src/client/studio/space-menu-item.tsx     | 26 ++++++--------
+ .../xrhome/src/client/studio/spaces-menu.tsx  | 36 ++++++-------------
+ 3 files changed, 23 insertions(+), 42 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/i18n/en-US/cloud-studio-pages.json b/reality/cloud/xrhome/src/client/i18n/en-US/cloud-studio-pages.json
+index 378cec79003..c056eacbd52 100644
+--- a/reality/cloud/xrhome/src/client/i18n/en-US/cloud-studio-pages.json
++++ b/reality/cloud/xrhome/src/client/i18n/en-US/cloud-studio-pages.json
+@@ -713,9 +713,10 @@
+   "object_configurator.open_in_prefab_editor": "Open Prefab Editor",
+   "object_configurator.error.no_components_found": "No components found in file",
+   "prefab_delete_modal.header": "Delete Prefab?",
+-  "prefab_delete_modal.body": "Deleting a prefab will delete all prefab instances across your project’s spaces. What would you like to do?",
++  "prefab_delete_modal.body": "This prefab has instances present in the project. What would you like to do?",
+   "prefab_delete_modal.option.cancel": "Cancel",
+   "prefab_delete_modal.option.delete": "Delete all instances",
++  "prefab_delete_modal.option.unlink": "Unlink all instances",
+   "project_history_modal.button": "Project History",
+   "project_history_page.commit_summary.menu_label": "Commit Summary Menu",
+   "project_history_page.studio_commit_summary_menu.new_client": "New Client from Commit",
+diff --git a/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx b/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
+index 0f9a1d4a7d5..72040eac118 100644
+--- a/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
++++ b/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
+@@ -9,7 +9,7 @@ import {ContextMenu, useContextMenuState} from './ui/context-menu'
+ import {useSpaceMenuOptions} from './space-menu-options'
+ import {createThemedStyles} from '../ui/theme'
+ import {combine} from '../common/styles'
+-import {RenameSpaceForm, useRenameSpaceState} from './rename-space'
++import {RenameSpaceForm, useRenameSpaceState, IRenameSpaceState} from './rename-space'
+ import {Popup} from '../ui/components/popup'
+ import {Icon} from '../ui/components/icon'
+ import {CornerDropdownMenu} from './ui/corner-dropdown-menu'
+@@ -36,15 +36,14 @@ interface ISpaceItem {
+   active: boolean
+   onClick: () => void
+   onRename: (newName: string) => void
+-  setEmptyName: (empty: boolean) => void
+-  emptyName: boolean
+   setDuplicateName: (duplicate: boolean) => void
+   duplicateName: boolean
++  // renameState: IRenameSpaceState
+ }
+ 
+ const SpaceItem: React.FC<ISpaceItem> = ({
+-  space, spaces, onClick, active, onRename, setEmptyName, emptyName,
+-  setDuplicateName, duplicateName,
++  space, spaces, onClick, active, onRename, setDuplicateName, duplicateName,
++  // renameState,
+ }) => {
+   const {t} = useTranslation(['cloud-studio-pages', 'common'])
+   const classes = useStudioMenuStyles()
+@@ -57,7 +56,7 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+   const spacesMenuOptions = useSpaceMenuOptions(space, renameState.startRename)
+ 
+   const handleRename = () => {
+-    if (emptyName || duplicateName) {
++    if (!renameState.sceneName || duplicateName) {
+       return
+     }
+     onRename(renameState.sceneName)
+@@ -65,11 +64,6 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+   }
+ 
+   const handleSetSpaceName = (name: string) => {
+-    if (name.length === 0) {
+-      setEmptyName(true)
+-    } else if (emptyName) {
+-      setEmptyName(false)
+-    }
+     if (spaces.some(s => s.name === name && s.id !== space.id)) {
+       setDuplicateName(true)
+     } else if (duplicateName) {
+@@ -79,19 +73,19 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+ 
+   const isCurrentEntrySpace = ctx.scene.entrySpaceId === space.id
+ 
++  React.useEffect(() => {
++    console.log('[yhhuang][space-menu-item] renameState', renameState.isRenaming, renameState.sceneName)
++  }, [renameState.isRenaming, renameState.sceneName])
++
+   return renameState.isRenaming
+     ? (
+       <RenameSpaceForm
+         value={renameState.sceneName}
+         renameState={renameState}
+         onRename={handleRename}
+-        onBlur={() => {
+-          setEmptyName(false)
+-          setDuplicateName(false)
+-        }}
++        onBlur={() => setDuplicateName(false)}
+         onChange={value => handleSetSpaceName(value)}
+         onEscapeKey={() => {
+-          setEmptyName(false)
+           setDuplicateName(false)
+         }}
+       />
+diff --git a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+index 1fe861f8d94..8e4ef6251c3 100644
+--- a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
++++ b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+@@ -100,9 +100,8 @@ const SpacesMenu: React.FC = () => {
+   const {t} = useTranslation(['cloud-studio-pages'])
+   const menuState = useContextMenuState()
+   const [isOpen, setIsOpen] = React.useState(false)
+-  const [newSpaceName, setNewSpaceName] = React.useState('')
++  const [newSpaceName, setNewSpaceName] = React.useState<string>('')
+   const [isAdding, setIsAdding] = React.useState(false)
+-  const [emptyName, setEmptyName] = React.useState(false)
+   const [duplicateName, setDuplicateName] = React.useState(false)
+ 
+   const ctx = useSceneContext()
+@@ -126,7 +125,6 @@ const SpacesMenu: React.FC = () => {
+     const selected = stateCtx.state.selectedIds
+     const spacelessSelected = selected.filter(s => !derivedScene.resolveSpaceForObject(s))
+     stateCtx.setSelection(...spacelessSelected)
+-    setEmptyName(false)
+     setDuplicateName(false)
+     setIsOpen(false)
+   }
+@@ -137,11 +135,6 @@ const SpacesMenu: React.FC = () => {
+     const defaultSpaceName = t('spaces_menu.input.default_space_name')
+     setNewSpaceName(defaultSpaceName)
+ 
+-    if (defaultSpaceName.length === 0) {
+-      setEmptyName(true)
+-    } else if (emptyName) {
+-      setEmptyName(false)
+-    }
+     if (spaces.some(s => s.name === defaultSpaceName)) {
+       setDuplicateName(true)
+     } else if (duplicateName) {
+@@ -210,11 +203,6 @@ const SpacesMenu: React.FC = () => {
+   }
+ 
+   const handleSetSpaceName = (name: string, spaceRename?: DeepReadonly<Space>) => {
+-    if (name.length === 0) {
+-      setEmptyName(true)
+-    } else if (emptyName) {
+-      setEmptyName(false)
+-    }
+     if (spaces.some(s => s.name === name && (s.id !== spaceRename?.id))) {
+       setDuplicateName(true)
+     } else if (duplicateName) {
+@@ -228,7 +216,6 @@ const SpacesMenu: React.FC = () => {
+   }
+ 
+   const cancelAddScene = () => {
+-    setEmptyName(false)
+     setDuplicateName(false)
+     setIsAdding(false)
+   }
+@@ -241,6 +228,10 @@ const SpacesMenu: React.FC = () => {
+     })
+   }
+ 
++  React.useEffect(() => {
++    console.log('[yhhuang][spaces-menu] renameState', renameState.isRenaming, renameState.sceneName)
++  }, [renameState.isRenaming, renameState.sceneName])
++
+   return (
+     <>
+       {renameState.isRenaming
+@@ -251,19 +242,15 @@ const SpacesMenu: React.FC = () => {
+               value={renameState.sceneName}
+               renameState={renameState}
+               onRename={() => {
+-                if (emptyName || duplicateName) {
++                if (!renameState.sceneName || duplicateName) {
+                   return
+                 }
+                 onSpaceRename(activeSpace, renameState.sceneName)
+                 renameState.setIsRenaming(false)
+               }}
+-              onBlur={() => {
+-                setEmptyName(false)
+-                setDuplicateName(false)
+-              }}
++              onBlur={() => setDuplicateName(false)}
+               onChange={value => handleSetSpaceName(value, activeSpace)}
+               onEscapeKey={() => {
+-                setEmptyName(false)
+                 setDuplicateName(false)
+               }}
+             />
+@@ -300,17 +287,16 @@ const SpacesMenu: React.FC = () => {
+                       handleSelectScene(space.id)
+                       collapse()
+                     }}
+-                    setEmptyName={setEmptyName}
+-                    emptyName={emptyName}
+                     setDuplicateName={setDuplicateName}
+                     duplicateName={duplicateName}
++                    // renameState={renameState}
+                   />
+                 ))}
+                 {isAdding && (
+                   <form
+                     onSubmit={(e) => {
+                       e.preventDefault()
+-                      if (emptyName || duplicateName) {
++                      if (!newSpaceName || duplicateName) {
+                         return
+                       }
+                       handleAddScene()
+@@ -336,7 +322,7 @@ const SpacesMenu: React.FC = () => {
+                     />
+                   </form>
+                 )}
+-                {emptyName &&
++                {isAdding && !newSpaceName &&
+                   <StaticBanner
+                     message={t('spaces_menu.warning.empty_space_name')}
+                     type='warning'
+@@ -362,7 +348,7 @@ const SpacesMenu: React.FC = () => {
+           options={activeSpaceContextMenuOptions}
+         />
+       )}
+-      {!isOpen && emptyName && (
++      {!isOpen && renameState.isRenaming && !renameState.sceneName && (
+         <StaticBanner
+           message={t('spaces_menu.warning.empty_space_name')}
+           type='warning'
+
+From 78ff2c31fa8e3f79dfa121420a625af8405ffa02 Mon Sep 17 00:00:00 2001
+From: Yu-Hsiang Huang <yuhsiang@8thwall.com>
+Date: Wed, 17 Sep 2025 10:49:08 -0700
+Subject: [PATCH 15/17] [xrhome][studio] Don't allow empty space name
+
+---
+ .../src/client/studio/space-menu-item.tsx     | 26 ++++++++------
+ .../xrhome/src/client/studio/spaces-menu.tsx  | 36 +++++++++++++------
+ 2 files changed, 41 insertions(+), 21 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx b/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
+index 72040eac118..0f9a1d4a7d5 100644
+--- a/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
++++ b/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
+@@ -9,7 +9,7 @@ import {ContextMenu, useContextMenuState} from './ui/context-menu'
+ import {useSpaceMenuOptions} from './space-menu-options'
+ import {createThemedStyles} from '../ui/theme'
+ import {combine} from '../common/styles'
+-import {RenameSpaceForm, useRenameSpaceState, IRenameSpaceState} from './rename-space'
++import {RenameSpaceForm, useRenameSpaceState} from './rename-space'
+ import {Popup} from '../ui/components/popup'
+ import {Icon} from '../ui/components/icon'
+ import {CornerDropdownMenu} from './ui/corner-dropdown-menu'
+@@ -36,14 +36,15 @@ interface ISpaceItem {
+   active: boolean
+   onClick: () => void
+   onRename: (newName: string) => void
++  setEmptyName: (empty: boolean) => void
++  emptyName: boolean
+   setDuplicateName: (duplicate: boolean) => void
+   duplicateName: boolean
+-  // renameState: IRenameSpaceState
+ }
+ 
+ const SpaceItem: React.FC<ISpaceItem> = ({
+-  space, spaces, onClick, active, onRename, setDuplicateName, duplicateName,
+-  // renameState,
++  space, spaces, onClick, active, onRename, setEmptyName, emptyName,
++  setDuplicateName, duplicateName,
+ }) => {
+   const {t} = useTranslation(['cloud-studio-pages', 'common'])
+   const classes = useStudioMenuStyles()
+@@ -56,7 +57,7 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+   const spacesMenuOptions = useSpaceMenuOptions(space, renameState.startRename)
+ 
+   const handleRename = () => {
+-    if (!renameState.sceneName || duplicateName) {
++    if (emptyName || duplicateName) {
+       return
+     }
+     onRename(renameState.sceneName)
+@@ -64,6 +65,11 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+   }
+ 
+   const handleSetSpaceName = (name: string) => {
++    if (name.length === 0) {
++      setEmptyName(true)
++    } else if (emptyName) {
++      setEmptyName(false)
++    }
+     if (spaces.some(s => s.name === name && s.id !== space.id)) {
+       setDuplicateName(true)
+     } else if (duplicateName) {
+@@ -73,19 +79,19 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+ 
+   const isCurrentEntrySpace = ctx.scene.entrySpaceId === space.id
+ 
+-  React.useEffect(() => {
+-    console.log('[yhhuang][space-menu-item] renameState', renameState.isRenaming, renameState.sceneName)
+-  }, [renameState.isRenaming, renameState.sceneName])
+-
+   return renameState.isRenaming
+     ? (
+       <RenameSpaceForm
+         value={renameState.sceneName}
+         renameState={renameState}
+         onRename={handleRename}
+-        onBlur={() => setDuplicateName(false)}
++        onBlur={() => {
++          setEmptyName(false)
++          setDuplicateName(false)
++        }}
+         onChange={value => handleSetSpaceName(value)}
+         onEscapeKey={() => {
++          setEmptyName(false)
+           setDuplicateName(false)
+         }}
+       />
+diff --git a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+index 8e4ef6251c3..1fe861f8d94 100644
+--- a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
++++ b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+@@ -100,8 +100,9 @@ const SpacesMenu: React.FC = () => {
+   const {t} = useTranslation(['cloud-studio-pages'])
+   const menuState = useContextMenuState()
+   const [isOpen, setIsOpen] = React.useState(false)
+-  const [newSpaceName, setNewSpaceName] = React.useState<string>('')
++  const [newSpaceName, setNewSpaceName] = React.useState('')
+   const [isAdding, setIsAdding] = React.useState(false)
++  const [emptyName, setEmptyName] = React.useState(false)
+   const [duplicateName, setDuplicateName] = React.useState(false)
+ 
+   const ctx = useSceneContext()
+@@ -125,6 +126,7 @@ const SpacesMenu: React.FC = () => {
+     const selected = stateCtx.state.selectedIds
+     const spacelessSelected = selected.filter(s => !derivedScene.resolveSpaceForObject(s))
+     stateCtx.setSelection(...spacelessSelected)
++    setEmptyName(false)
+     setDuplicateName(false)
+     setIsOpen(false)
+   }
+@@ -135,6 +137,11 @@ const SpacesMenu: React.FC = () => {
+     const defaultSpaceName = t('spaces_menu.input.default_space_name')
+     setNewSpaceName(defaultSpaceName)
+ 
++    if (defaultSpaceName.length === 0) {
++      setEmptyName(true)
++    } else if (emptyName) {
++      setEmptyName(false)
++    }
+     if (spaces.some(s => s.name === defaultSpaceName)) {
+       setDuplicateName(true)
+     } else if (duplicateName) {
+@@ -203,6 +210,11 @@ const SpacesMenu: React.FC = () => {
+   }
+ 
+   const handleSetSpaceName = (name: string, spaceRename?: DeepReadonly<Space>) => {
++    if (name.length === 0) {
++      setEmptyName(true)
++    } else if (emptyName) {
++      setEmptyName(false)
++    }
+     if (spaces.some(s => s.name === name && (s.id !== spaceRename?.id))) {
+       setDuplicateName(true)
+     } else if (duplicateName) {
+@@ -216,6 +228,7 @@ const SpacesMenu: React.FC = () => {
+   }
+ 
+   const cancelAddScene = () => {
++    setEmptyName(false)
+     setDuplicateName(false)
+     setIsAdding(false)
+   }
+@@ -228,10 +241,6 @@ const SpacesMenu: React.FC = () => {
+     })
+   }
+ 
+-  React.useEffect(() => {
+-    console.log('[yhhuang][spaces-menu] renameState', renameState.isRenaming, renameState.sceneName)
+-  }, [renameState.isRenaming, renameState.sceneName])
+-
+   return (
+     <>
+       {renameState.isRenaming
+@@ -242,15 +251,19 @@ const SpacesMenu: React.FC = () => {
+               value={renameState.sceneName}
+               renameState={renameState}
+               onRename={() => {
+-                if (!renameState.sceneName || duplicateName) {
++                if (emptyName || duplicateName) {
+                   return
+                 }
+                 onSpaceRename(activeSpace, renameState.sceneName)
+                 renameState.setIsRenaming(false)
+               }}
+-              onBlur={() => setDuplicateName(false)}
++              onBlur={() => {
++                setEmptyName(false)
++                setDuplicateName(false)
++              }}
+               onChange={value => handleSetSpaceName(value, activeSpace)}
+               onEscapeKey={() => {
++                setEmptyName(false)
+                 setDuplicateName(false)
+               }}
+             />
+@@ -287,16 +300,17 @@ const SpacesMenu: React.FC = () => {
+                       handleSelectScene(space.id)
+                       collapse()
+                     }}
++                    setEmptyName={setEmptyName}
++                    emptyName={emptyName}
+                     setDuplicateName={setDuplicateName}
+                     duplicateName={duplicateName}
+-                    // renameState={renameState}
+                   />
+                 ))}
+                 {isAdding && (
+                   <form
+                     onSubmit={(e) => {
+                       e.preventDefault()
+-                      if (!newSpaceName || duplicateName) {
++                      if (emptyName || duplicateName) {
+                         return
+                       }
+                       handleAddScene()
+@@ -322,7 +336,7 @@ const SpacesMenu: React.FC = () => {
+                     />
+                   </form>
+                 )}
+-                {isAdding && !newSpaceName &&
++                {emptyName &&
+                   <StaticBanner
+                     message={t('spaces_menu.warning.empty_space_name')}
+                     type='warning'
+@@ -348,7 +362,7 @@ const SpacesMenu: React.FC = () => {
+           options={activeSpaceContextMenuOptions}
+         />
+       )}
+-      {!isOpen && renameState.isRenaming && !renameState.sceneName && (
++      {!isOpen && emptyName && (
+         <StaticBanner
+           message={t('spaces_menu.warning.empty_space_name')}
+           type='warning'
+
+From ccdc049cb27e46245c5fceb5148a3cb368af663a Mon Sep 17 00:00:00 2001
+From: Yu-Hsiang Huang <yuhsiang@8thwall.com>
+Date: Thu, 25 Sep 2025 16:06:47 -0700
+Subject: [PATCH 16/17] [xrhome][studio] Don't allow empty space name
+
+---
+ .../src/client/studio/space-menu-item.tsx     | 26 ++++++--------
+ .../xrhome/src/client/studio/spaces-menu.tsx  | 36 ++++++-------------
+ 2 files changed, 21 insertions(+), 41 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx b/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
+index 0f9a1d4a7d5..72040eac118 100644
+--- a/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
++++ b/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
+@@ -9,7 +9,7 @@ import {ContextMenu, useContextMenuState} from './ui/context-menu'
+ import {useSpaceMenuOptions} from './space-menu-options'
+ import {createThemedStyles} from '../ui/theme'
+ import {combine} from '../common/styles'
+-import {RenameSpaceForm, useRenameSpaceState} from './rename-space'
++import {RenameSpaceForm, useRenameSpaceState, IRenameSpaceState} from './rename-space'
+ import {Popup} from '../ui/components/popup'
+ import {Icon} from '../ui/components/icon'
+ import {CornerDropdownMenu} from './ui/corner-dropdown-menu'
+@@ -36,15 +36,14 @@ interface ISpaceItem {
+   active: boolean
+   onClick: () => void
+   onRename: (newName: string) => void
+-  setEmptyName: (empty: boolean) => void
+-  emptyName: boolean
+   setDuplicateName: (duplicate: boolean) => void
+   duplicateName: boolean
++  // renameState: IRenameSpaceState
+ }
+ 
+ const SpaceItem: React.FC<ISpaceItem> = ({
+-  space, spaces, onClick, active, onRename, setEmptyName, emptyName,
+-  setDuplicateName, duplicateName,
++  space, spaces, onClick, active, onRename, setDuplicateName, duplicateName,
++  // renameState,
+ }) => {
+   const {t} = useTranslation(['cloud-studio-pages', 'common'])
+   const classes = useStudioMenuStyles()
+@@ -57,7 +56,7 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+   const spacesMenuOptions = useSpaceMenuOptions(space, renameState.startRename)
+ 
+   const handleRename = () => {
+-    if (emptyName || duplicateName) {
++    if (!renameState.sceneName || duplicateName) {
+       return
+     }
+     onRename(renameState.sceneName)
+@@ -65,11 +64,6 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+   }
+ 
+   const handleSetSpaceName = (name: string) => {
+-    if (name.length === 0) {
+-      setEmptyName(true)
+-    } else if (emptyName) {
+-      setEmptyName(false)
+-    }
+     if (spaces.some(s => s.name === name && s.id !== space.id)) {
+       setDuplicateName(true)
+     } else if (duplicateName) {
+@@ -79,19 +73,19 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+ 
+   const isCurrentEntrySpace = ctx.scene.entrySpaceId === space.id
+ 
++  React.useEffect(() => {
++    console.log('[yhhuang][space-menu-item] renameState', renameState.isRenaming, renameState.sceneName)
++  }, [renameState.isRenaming, renameState.sceneName])
++
+   return renameState.isRenaming
+     ? (
+       <RenameSpaceForm
+         value={renameState.sceneName}
+         renameState={renameState}
+         onRename={handleRename}
+-        onBlur={() => {
+-          setEmptyName(false)
+-          setDuplicateName(false)
+-        }}
++        onBlur={() => setDuplicateName(false)}
+         onChange={value => handleSetSpaceName(value)}
+         onEscapeKey={() => {
+-          setEmptyName(false)
+           setDuplicateName(false)
+         }}
+       />
+diff --git a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+index 1fe861f8d94..8e4ef6251c3 100644
+--- a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
++++ b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+@@ -100,9 +100,8 @@ const SpacesMenu: React.FC = () => {
+   const {t} = useTranslation(['cloud-studio-pages'])
+   const menuState = useContextMenuState()
+   const [isOpen, setIsOpen] = React.useState(false)
+-  const [newSpaceName, setNewSpaceName] = React.useState('')
++  const [newSpaceName, setNewSpaceName] = React.useState<string>('')
+   const [isAdding, setIsAdding] = React.useState(false)
+-  const [emptyName, setEmptyName] = React.useState(false)
+   const [duplicateName, setDuplicateName] = React.useState(false)
+ 
+   const ctx = useSceneContext()
+@@ -126,7 +125,6 @@ const SpacesMenu: React.FC = () => {
+     const selected = stateCtx.state.selectedIds
+     const spacelessSelected = selected.filter(s => !derivedScene.resolveSpaceForObject(s))
+     stateCtx.setSelection(...spacelessSelected)
+-    setEmptyName(false)
+     setDuplicateName(false)
+     setIsOpen(false)
+   }
+@@ -137,11 +135,6 @@ const SpacesMenu: React.FC = () => {
+     const defaultSpaceName = t('spaces_menu.input.default_space_name')
+     setNewSpaceName(defaultSpaceName)
+ 
+-    if (defaultSpaceName.length === 0) {
+-      setEmptyName(true)
+-    } else if (emptyName) {
+-      setEmptyName(false)
+-    }
+     if (spaces.some(s => s.name === defaultSpaceName)) {
+       setDuplicateName(true)
+     } else if (duplicateName) {
+@@ -210,11 +203,6 @@ const SpacesMenu: React.FC = () => {
+   }
+ 
+   const handleSetSpaceName = (name: string, spaceRename?: DeepReadonly<Space>) => {
+-    if (name.length === 0) {
+-      setEmptyName(true)
+-    } else if (emptyName) {
+-      setEmptyName(false)
+-    }
+     if (spaces.some(s => s.name === name && (s.id !== spaceRename?.id))) {
+       setDuplicateName(true)
+     } else if (duplicateName) {
+@@ -228,7 +216,6 @@ const SpacesMenu: React.FC = () => {
+   }
+ 
+   const cancelAddScene = () => {
+-    setEmptyName(false)
+     setDuplicateName(false)
+     setIsAdding(false)
+   }
+@@ -241,6 +228,10 @@ const SpacesMenu: React.FC = () => {
+     })
+   }
+ 
++  React.useEffect(() => {
++    console.log('[yhhuang][spaces-menu] renameState', renameState.isRenaming, renameState.sceneName)
++  }, [renameState.isRenaming, renameState.sceneName])
++
+   return (
+     <>
+       {renameState.isRenaming
+@@ -251,19 +242,15 @@ const SpacesMenu: React.FC = () => {
+               value={renameState.sceneName}
+               renameState={renameState}
+               onRename={() => {
+-                if (emptyName || duplicateName) {
++                if (!renameState.sceneName || duplicateName) {
+                   return
+                 }
+                 onSpaceRename(activeSpace, renameState.sceneName)
+                 renameState.setIsRenaming(false)
+               }}
+-              onBlur={() => {
+-                setEmptyName(false)
+-                setDuplicateName(false)
+-              }}
++              onBlur={() => setDuplicateName(false)}
+               onChange={value => handleSetSpaceName(value, activeSpace)}
+               onEscapeKey={() => {
+-                setEmptyName(false)
+                 setDuplicateName(false)
+               }}
+             />
+@@ -300,17 +287,16 @@ const SpacesMenu: React.FC = () => {
+                       handleSelectScene(space.id)
+                       collapse()
+                     }}
+-                    setEmptyName={setEmptyName}
+-                    emptyName={emptyName}
+                     setDuplicateName={setDuplicateName}
+                     duplicateName={duplicateName}
++                    // renameState={renameState}
+                   />
+                 ))}
+                 {isAdding && (
+                   <form
+                     onSubmit={(e) => {
+                       e.preventDefault()
+-                      if (emptyName || duplicateName) {
++                      if (!newSpaceName || duplicateName) {
+                         return
+                       }
+                       handleAddScene()
+@@ -336,7 +322,7 @@ const SpacesMenu: React.FC = () => {
+                     />
+                   </form>
+                 )}
+-                {emptyName &&
++                {isAdding && !newSpaceName &&
+                   <StaticBanner
+                     message={t('spaces_menu.warning.empty_space_name')}
+                     type='warning'
+@@ -362,7 +348,7 @@ const SpacesMenu: React.FC = () => {
+           options={activeSpaceContextMenuOptions}
+         />
+       )}
+-      {!isOpen && emptyName && (
++      {!isOpen && renameState.isRenaming && !renameState.sceneName && (
+         <StaticBanner
+           message={t('spaces_menu.warning.empty_space_name')}
+           type='warning'
+
+From 77fe9c0c4b7d2fcbae322a83dfcdfb349a8fe26d Mon Sep 17 00:00:00 2001
+From: Yu-Hsiang Huang <yuhsiang@8thwall.com>
+Date: Thu, 25 Sep 2025 16:13:23 -0700
+Subject: [PATCH 17/17] [xrhome][studio] Don't allow empty space name
+
+---
+ .../src/client/studio/space-menu-item.tsx     | 26 ++++++++------
+ .../xrhome/src/client/studio/spaces-menu.tsx  | 36 +++++++++++++------
+ 2 files changed, 41 insertions(+), 21 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx b/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
+index 72040eac118..0f9a1d4a7d5 100644
+--- a/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
++++ b/reality/cloud/xrhome/src/client/studio/space-menu-item.tsx
+@@ -9,7 +9,7 @@ import {ContextMenu, useContextMenuState} from './ui/context-menu'
+ import {useSpaceMenuOptions} from './space-menu-options'
+ import {createThemedStyles} from '../ui/theme'
+ import {combine} from '../common/styles'
+-import {RenameSpaceForm, useRenameSpaceState, IRenameSpaceState} from './rename-space'
++import {RenameSpaceForm, useRenameSpaceState} from './rename-space'
+ import {Popup} from '../ui/components/popup'
+ import {Icon} from '../ui/components/icon'
+ import {CornerDropdownMenu} from './ui/corner-dropdown-menu'
+@@ -36,14 +36,15 @@ interface ISpaceItem {
+   active: boolean
+   onClick: () => void
+   onRename: (newName: string) => void
++  setEmptyName: (empty: boolean) => void
++  emptyName: boolean
+   setDuplicateName: (duplicate: boolean) => void
+   duplicateName: boolean
+-  // renameState: IRenameSpaceState
+ }
+ 
+ const SpaceItem: React.FC<ISpaceItem> = ({
+-  space, spaces, onClick, active, onRename, setDuplicateName, duplicateName,
+-  // renameState,
++  space, spaces, onClick, active, onRename, setEmptyName, emptyName,
++  setDuplicateName, duplicateName,
+ }) => {
+   const {t} = useTranslation(['cloud-studio-pages', 'common'])
+   const classes = useStudioMenuStyles()
+@@ -56,7 +57,7 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+   const spacesMenuOptions = useSpaceMenuOptions(space, renameState.startRename)
+ 
+   const handleRename = () => {
+-    if (!renameState.sceneName || duplicateName) {
++    if (emptyName || duplicateName) {
+       return
+     }
+     onRename(renameState.sceneName)
+@@ -64,6 +65,11 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+   }
+ 
+   const handleSetSpaceName = (name: string) => {
++    if (name.length === 0) {
++      setEmptyName(true)
++    } else if (emptyName) {
++      setEmptyName(false)
++    }
+     if (spaces.some(s => s.name === name && s.id !== space.id)) {
+       setDuplicateName(true)
+     } else if (duplicateName) {
+@@ -73,19 +79,19 @@ const SpaceItem: React.FC<ISpaceItem> = ({
+ 
+   const isCurrentEntrySpace = ctx.scene.entrySpaceId === space.id
+ 
+-  React.useEffect(() => {
+-    console.log('[yhhuang][space-menu-item] renameState', renameState.isRenaming, renameState.sceneName)
+-  }, [renameState.isRenaming, renameState.sceneName])
+-
+   return renameState.isRenaming
+     ? (
+       <RenameSpaceForm
+         value={renameState.sceneName}
+         renameState={renameState}
+         onRename={handleRename}
+-        onBlur={() => setDuplicateName(false)}
++        onBlur={() => {
++          setEmptyName(false)
++          setDuplicateName(false)
++        }}
+         onChange={value => handleSetSpaceName(value)}
+         onEscapeKey={() => {
++          setEmptyName(false)
+           setDuplicateName(false)
+         }}
+       />
+diff --git a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+index 8e4ef6251c3..1fe861f8d94 100644
+--- a/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
++++ b/reality/cloud/xrhome/src/client/studio/spaces-menu.tsx
+@@ -100,8 +100,9 @@ const SpacesMenu: React.FC = () => {
+   const {t} = useTranslation(['cloud-studio-pages'])
+   const menuState = useContextMenuState()
+   const [isOpen, setIsOpen] = React.useState(false)
+-  const [newSpaceName, setNewSpaceName] = React.useState<string>('')
++  const [newSpaceName, setNewSpaceName] = React.useState('')
+   const [isAdding, setIsAdding] = React.useState(false)
++  const [emptyName, setEmptyName] = React.useState(false)
+   const [duplicateName, setDuplicateName] = React.useState(false)
+ 
+   const ctx = useSceneContext()
+@@ -125,6 +126,7 @@ const SpacesMenu: React.FC = () => {
+     const selected = stateCtx.state.selectedIds
+     const spacelessSelected = selected.filter(s => !derivedScene.resolveSpaceForObject(s))
+     stateCtx.setSelection(...spacelessSelected)
++    setEmptyName(false)
+     setDuplicateName(false)
+     setIsOpen(false)
+   }
+@@ -135,6 +137,11 @@ const SpacesMenu: React.FC = () => {
+     const defaultSpaceName = t('spaces_menu.input.default_space_name')
+     setNewSpaceName(defaultSpaceName)
+ 
++    if (defaultSpaceName.length === 0) {
++      setEmptyName(true)
++    } else if (emptyName) {
++      setEmptyName(false)
++    }
+     if (spaces.some(s => s.name === defaultSpaceName)) {
+       setDuplicateName(true)
+     } else if (duplicateName) {
+@@ -203,6 +210,11 @@ const SpacesMenu: React.FC = () => {
+   }
+ 
+   const handleSetSpaceName = (name: string, spaceRename?: DeepReadonly<Space>) => {
++    if (name.length === 0) {
++      setEmptyName(true)
++    } else if (emptyName) {
++      setEmptyName(false)
++    }
+     if (spaces.some(s => s.name === name && (s.id !== spaceRename?.id))) {
+       setDuplicateName(true)
+     } else if (duplicateName) {
+@@ -216,6 +228,7 @@ const SpacesMenu: React.FC = () => {
+   }
+ 
+   const cancelAddScene = () => {
++    setEmptyName(false)
+     setDuplicateName(false)
+     setIsAdding(false)
+   }
+@@ -228,10 +241,6 @@ const SpacesMenu: React.FC = () => {
+     })
+   }
+ 
+-  React.useEffect(() => {
+-    console.log('[yhhuang][spaces-menu] renameState', renameState.isRenaming, renameState.sceneName)
+-  }, [renameState.isRenaming, renameState.sceneName])
+-
+   return (
+     <>
+       {renameState.isRenaming
+@@ -242,15 +251,19 @@ const SpacesMenu: React.FC = () => {
+               value={renameState.sceneName}
+               renameState={renameState}
+               onRename={() => {
+-                if (!renameState.sceneName || duplicateName) {
++                if (emptyName || duplicateName) {
+                   return
+                 }
+                 onSpaceRename(activeSpace, renameState.sceneName)
+                 renameState.setIsRenaming(false)
+               }}
+-              onBlur={() => setDuplicateName(false)}
++              onBlur={() => {
++                setEmptyName(false)
++                setDuplicateName(false)
++              }}
+               onChange={value => handleSetSpaceName(value, activeSpace)}
+               onEscapeKey={() => {
++                setEmptyName(false)
+                 setDuplicateName(false)
+               }}
+             />
+@@ -287,16 +300,17 @@ const SpacesMenu: React.FC = () => {
+                       handleSelectScene(space.id)
+                       collapse()
+                     }}
++                    setEmptyName={setEmptyName}
++                    emptyName={emptyName}
+                     setDuplicateName={setDuplicateName}
+                     duplicateName={duplicateName}
+-                    // renameState={renameState}
+                   />
+                 ))}
+                 {isAdding && (
+                   <form
+                     onSubmit={(e) => {
+                       e.preventDefault()
+-                      if (!newSpaceName || duplicateName) {
++                      if (emptyName || duplicateName) {
+                         return
+                       }
+                       handleAddScene()
+@@ -322,7 +336,7 @@ const SpacesMenu: React.FC = () => {
+                     />
+                   </form>
+                 )}
+-                {isAdding && !newSpaceName &&
++                {emptyName &&
+                   <StaticBanner
+                     message={t('spaces_menu.warning.empty_space_name')}
+                     type='warning'
+@@ -348,7 +362,7 @@ const SpacesMenu: React.FC = () => {
+           options={activeSpaceContextMenuOptions}
+         />
+       )}
+-      {!isOpen && renameState.isRenaming && !renameState.sceneName && (
++      {!isOpen && emptyName && (
+         <StaticBanner
+           message={t('spaces_menu.warning.empty_space_name')}
+           type='warning'

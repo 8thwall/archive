@@ -1,0 +1,314 @@
+From 709eae4e180d96ee915a74f0c4f762da69aff631 Mon Sep 17 00:00:00 2001
+From: Cindy Hu <57238301+cindyhu2023@users.noreply.github.com>
+Date: Mon, 15 Sep 2025 21:29:02 -0700
+Subject: [PATCH] dump update loader
+
+---
+ reality/cloud/studiohub/app/BUILD             |   8 +
+ reality/cloud/studiohub/app/loader.ts         |  46 +++++
+ reality/cloud/studiohub/app/start.ts          | 164 +++++++++++++++---
+ reality/cloud/studiohub/builder.config.js     |   3 +-
+ reality/cloud/xrhome/src/client/desktop/BUILD |   0
+ 5 files changed, 197 insertions(+), 24 deletions(-)
+ create mode 100644 reality/cloud/studiohub/app/loader.ts
+ create mode 100644 reality/cloud/xrhome/src/client/desktop/BUILD
+
+diff --git a/reality/cloud/studiohub/app/BUILD b/reality/cloud/studiohub/app/BUILD
+index 029e8f11546..937df60e39d 100644
+--- a/reality/cloud/studiohub/app/BUILD
++++ b/reality/cloud/studiohub/app/BUILD
+@@ -15,6 +15,7 @@ js_binary(
+     target = "node",
+     deps = [
+         "//reality/cloud/studiohub:application-state",
++        "//reality/cloud/studiohub/app:loader",
+         "//reality/cloud/studiohub/app/desktop-app:dev-cookie",
+         "//reality/cloud/studiohub/app/desktop-app:protocol",
+         "//reality/cloud/studiohub/app/desktop-app:register-on-open-url-handler",
+@@ -61,3 +62,10 @@ js_library(
+         "//reality/shared/studiohub:app-server-url-types",
+     ],
+ )
++
++js_library(
++    name = "loader",
++    srcs = [
++        "loader.ts",
++    ],
++)
+diff --git a/reality/cloud/studiohub/app/loader.ts b/reality/cloud/studiohub/app/loader.ts
+new file mode 100644
+index 00000000000..46a5bb7f8f3
+--- /dev/null
++++ b/reality/cloud/studiohub/app/loader.ts
+@@ -0,0 +1,46 @@
++const loaderHtml = `
++    <!DOCTYPE html>
++    <html>
++    <head>
++      <style>
++        body {
++          margin: 0;
++          padding: 0;
++          background: #2d3748;
++          color: white;
++          font-family: -apple-system, BlinkMacSystemFont, sans-serif;
++          display: flex;
++          flex-direction: column;
++          justify-content: center;
++          align-items: center;
++          height: 100vh;
++        }
++        .spinner {
++          border: 4px solid rgba(255, 255, 255, 0.3);
++          border-radius: 50%;
++          border-top: 4px solid #4299e1;
++          width: 40px;
++          height: 40px;
++          animation: spin 1s linear infinite;
++          margin-bottom: 20px;
++        }
++        @keyframes spin {
++          0% { transform: rotate(0deg); }
++          100% { transform: rotate(360deg); }
++        }
++        .message {
++          text-align: center;
++          font-size: 16px;
++        }
++      </style>
++    </head>
++    <body>
++      <div class="spinner"></div>
++      <div class="message">Checking for updates...</div>
++    </body>
++    </html>
++  `
++
++export {
++  loaderHtml,
++}
+diff --git a/reality/cloud/studiohub/app/start.ts b/reality/cloud/studiohub/app/start.ts
+index 42d753590b7..6f27b338a28 100644
+--- a/reality/cloud/studiohub/app/start.ts
++++ b/reality/cloud/studiohub/app/start.ts
+@@ -8,6 +8,8 @@ import path from 'path'
+ import {app, BrowserWindow, protocol, dialog} from 'electron'
+ import {autoUpdater} from 'electron-updater'
+ 
++import log from 'electron-log'
++
+ import {initDb} from '../application-state'
+ import {FILE_SYNC_SCHEME, registerFileSyncHandler} from './file-sync/protocol'
+ import {
+@@ -21,17 +23,144 @@ import {createStudioMcpWebsocketServer} from './studio-use/mcp-websocket-server'
+ import {PREFERENCES_SCHEME, registerPreferencesHandler} from './preferences/protocol'
+ import {maybeInterceptAndReapplyDevCookie} from './desktop-app/dev-cookie'
+ import {maybeInterceptOriginFor3rdPartyApi} from './desktop-app/third-party-origin'
++import {loaderHtml} from './loader'
+ 
+ const MCP_WEBSOCKET_PORT: number = parseInt(process.env.STUDIO_HUB_MCP_WEBSOCKET_PORT || '8080', 10)
+ const UPDATE_CHECK_INTERVAL = 60 * 60 * 1000
+ 
+-const setupAutoUpdater = (win: BrowserWindow) => {
+-  autoUpdater.checkForUpdatesAndNotify()
++const createWindow = () => {
++  const win = new BrowserWindow({
++    width: 1600,
++    height: 1200,
++    minWidth: 900,
++    minHeight: 700,
++    webPreferences: {
++      preload: path.join(__dirname, 'preload.js'),
++    },
++  })
++  win.loadURL('desktop://dist/index.html')
++  registerWindowOpenHandler(win)
++  registerOnOpenUrlHandler(win)
++  return win
++}
++
++const createLoaderWindow = () => {
++  const loaderWin = new BrowserWindow({
++    width: 400,
++    height: 300,
++    frame: false,
++    alwaysOnTop: true,
++    center: true,
++    resizable: false,
++    webPreferences: {
++      nodeIntegration: true,
++      contextIsolation: false,
++    },
++  })
++
++  loaderWin.loadURL(`data:text/html;charset=utf-8,${encodeURIComponent(loaderHtml)}`)
++  return loaderWin
++}
+ 
++const checkForUpdates = async (): Promise<BrowserWindow> => new Promise((resolve) => {
++  let loaderWin: BrowserWindow | null = null
++  let updateCheckComplete = false
++
++  // Set up auto updater configuration
++  autoUpdater.autoInstallOnAppQuit = false  // We'll handle restart manually
++
++  const createMainWindow = () => {
++    if (loaderWin) {
++      loaderWin.close()
++      loaderWin = null
++    }
++    const win = createWindow()
++    resolve(win)
++    return win
++  }
++
++  // Remove any existing listeners to prevent duplicates
++  autoUpdater.removeAllListeners('update-not-available')
++  autoUpdater.removeAllListeners('update-available')
++  autoUpdater.removeAllListeners('download-progress')
++  autoUpdater.removeAllListeners('update-downloaded')
++  autoUpdater.removeAllListeners('error')
++
++  // Handle when no update is available
++  const handleUpdateNotAvailable = () => {
++    log.info('No update available')
++    updateCheckComplete = true
++    createMainWindow()
++  }
++
++  // Handle when update is available - show loader
++  const handleUpdateAvailable = () => {
++    log.info('Update available, showing loader')
++    loaderWin = createLoaderWindow()
++    loaderWin.webContents.executeJavaScript(`
++        document.querySelector('.message').textContent = 'Downloading update...';
++      `)
++  }
++
++  // Handle download progress
++  const handleDownloadProgress = (progressObj: any) => {
++    if (loaderWin) {
++      log.info(`Download progress: ${progressObj.percent}%`)
++      const percent = Math.round(progressObj.percent)
++      loaderWin.webContents.executeJavaScript(`
++          document.querySelector('.message').textContent = 'Downloading update... ${percent}%';
++        `)
++    }
++  }
++
++  // Handle when update is downloaded - restart immediately
++  const handleUpdateDownloaded = () => {
++    log.info('Update downloaded, restarting app')
++    if (loaderWin) {
++      loaderWin.webContents.executeJavaScript(`
++          document.querySelector('.message').textContent = 'Update downloaded. Restarting...';
++        `)
++    }
++
++    // Wait a moment for the user to see the message, then restart
++    setTimeout(() => {
++      log.info('Quitting and installing update')
++      autoUpdater.quitAndInstall()
++    }, 1000)
++  }
++
++  // Handle errors - proceed to main window
++  const handleError = (error: any) => {
++    log.error('Auto updater error:', error)
++    updateCheckComplete = true
++    createMainWindow()
++  }
++
++  // Set up one-time listeners for initial update check
++  autoUpdater.once('update-not-available', handleUpdateNotAvailable)
++  autoUpdater.once('update-available', handleUpdateAvailable)
++  autoUpdater.on('download-progress', handleDownloadProgress)
++  autoUpdater.once('update-downloaded', handleUpdateDownloaded)
++  autoUpdater.once('error', handleError)
++
++  // Start the update check
++  autoUpdater.checkForUpdates()
++
++  // Fallback timeout in case update check hangs
++  setTimeout(() => {
++    if (!updateCheckComplete && !loaderWin) {
++      updateCheckComplete = true
++      createMainWindow()
++    }
++  }, 10000)  // 10 second timeout
++})
++
++const setupPeriodicUpdateCheck = (win: BrowserWindow) => {
+   setInterval(() => {
+     autoUpdater.checkForUpdatesAndNotify()
+   }, UPDATE_CHECK_INTERVAL)
+ 
++  // Handle periodic updates with user confirmation
+   autoUpdater.on('update-downloaded', () => {
+     const result = dialog.showMessageBoxSync(win, {
+       type: 'info',
+@@ -67,22 +196,6 @@ try {
+ 
+ app.commandLine.appendSwitch('ignore-certificate-errors')
+ 
+-const createWindow = () => {
+-  const win = new BrowserWindow({
+-    width: 1600,
+-    height: 1200,
+-    minWidth: 900,
+-    minHeight: 700,
+-    webPreferences: {
+-      preload: path.join(__dirname, 'preload.js'),
+-    },
+-  })
+-  win.loadURL('desktop://dist/index.html')
+-  registerWindowOpenHandler(win)
+-  registerOnOpenUrlHandler(win)
+-  return win
+-}
+-
+ const ws = createStudioMcpWebsocketServer(MCP_WEBSOCKET_PORT)
+ 
+ app.on('before-quit', () => {
+@@ -107,13 +220,18 @@ app.whenReady()
+     maybeInterceptAndReapplyDevCookie()
+     maybeInterceptOriginFor3rdPartyApi()
+ 
+-    const win = createWindow()
++    let win: BrowserWindow
++    if (app.isPackaged) {
++      // Check for updates first, then create window
++      win = await checkForUpdates()
++      // Set up periodic update checks after initial startup
++      setupPeriodicUpdateCheck(win)
++    } else {
++      // In development, skip update check and create window directly
++      win = createWindow()
++    }
+ 
+     win.webContents.on('did-finish-load', () => {
+       setUpMainFileWatchPort(win)
+     })
+-
+-    if (app.isPackaged) {
+-      setupAutoUpdater(win)
+-    }
+   })
+diff --git a/reality/cloud/studiohub/builder.config.js b/reality/cloud/studiohub/builder.config.js
+index d6bb560f8a7..ae0fadae950 100644
+--- a/reality/cloud/studiohub/builder.config.js
++++ b/reality/cloud/studiohub/builder.config.js
+@@ -70,7 +70,8 @@ module.exports = {
+     provider: 's3',
+     bucket: `${S3_BUCKET_KEY}`,
+     region: 'us-west-2',
+-    path: `/${DEPLOY_STAGE}`,
++    // path: `/${DEPLOY_STAGE}`,
++    path: '/test-updates',
+     acl: null,
+   },
+ }
+diff --git a/reality/cloud/xrhome/src/client/desktop/BUILD b/reality/cloud/xrhome/src/client/desktop/BUILD
+new file mode 100644
+index 00000000000..e69de29bb2d

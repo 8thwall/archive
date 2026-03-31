@@ -1,0 +1,2681 @@
+From 8bd4f156d0651316e6868e03c62d21d0e795fa02 Mon Sep 17 00:00:00 2001
+From: chloeason <chloe@nianticspatial.com>
+Date: Wed, 18 Jun 2025 10:16:44 -0700
+Subject: [PATCH 01/19] [xrhome][runtime] Embed video data directly into .glb
+ buffers
+
+---
+ c8/ecs/src/runtime/systems/gltf-system.ts     |  70 +++++++---
+ c8/ecs/src/runtime/video-texture.ts           |  33 ++++-
+ c8/ecs/src/runtime/video-types.ts             |   9 ++
+ c8/ecs/src/shared/video-constants.ts          |   2 +
+ .../asset-materials-configurator.tsx          |  11 +-
+ .../configuration/asset-mesh-configurator.tsx |   2 +
+ .../src/client/studio/embed-video-buffer.ts   | 130 ++++++++++++++++++
+ 7 files changed, 235 insertions(+), 22 deletions(-)
+ create mode 100644 reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+
+diff --git a/c8/ecs/src/runtime/systems/gltf-system.ts b/c8/ecs/src/runtime/systems/gltf-system.ts
+index a896f3e28ba..c79deabf66b 100644
+--- a/c8/ecs/src/runtime/systems/gltf-system.ts
++++ b/c8/ecs/src/runtime/systems/gltf-system.ts
+@@ -16,6 +16,8 @@ import type {SchemaOf} from '../world-attribute'
+ import {disposeObject, markAsDisposable} from '../dispose'
+ import {createVideoTexture} from '../video-texture'
+ import {getVideoManager} from '../video-manager'
++import type {EmbeddedVideos} from '../video-types'
++import {VIDEO_ACCESSOR_NAME} from '../../shared/video-constants'
+ 
+ const playAction = (
+   action: THREE_TYPES.AnimationAction,
+@@ -45,7 +47,8 @@ const playAction = (
+   }
+ }
+ 
+-const maybeLoadVideoTextures = (world: World, eid: Eid, node: THREE_TYPES.Mesh<any, any, any>) => {
++const maybeLoadVideoTextures = (world: World, eid: Eid, node: THREE_TYPES.Mesh<any, any, any>,
++  videosArrayBuffer: ArrayBuffer, embeddedVideos: EmbeddedVideos) => {
+   if (!node.material || !node.material.userData.videos) {
+     return []
+   }
+@@ -58,11 +61,13 @@ const maybeLoadVideoTextures = (world: World, eid: Eid, node: THREE_TYPES.Mesh<a
+ 
+   textureProps.forEach((prop) => {
+     const needsSrgb = prop === 'map' || prop === 'emissiveMap'
+-    const videoSrc = node.material.userData.videos[prop]
++    const videoData = node.material.userData.videos?.[prop]
+ 
+-    if (videoSrc) {
+-      const videoTexture = createVideoTexture(videoSrc.localUrl)
+-      videoTexture.userData.src = videoSrc.url
++    if (videoData && embeddedVideos[videoData.url]) {
++      const {offset, length, mimeType} = embeddedVideos[videoData.url]
++      const videoBuffer = videosArrayBuffer.slice(offset, offset + length)
++      const videoTexture = createVideoTexture({buffer: videoBuffer, mimeType})
++      videoTexture.userData.src = videoData.url
+       if (needsSrgb) {
+         videoTexture.colorSpace = THREE.SRGBColorSpace
+       }
+@@ -242,20 +247,49 @@ const makeGltfSystem = (world: World) => {
+               shadowConfig = Shadow.get(world, eid)
+             }
+ 
+-            gltf.scene.traverse((node) => {
+-              if (shadowConfig && node.isObject3D) {
+-                node.castShadow = !!shadowConfig.castShadow
+-                node.receiveShadow = !!shadowConfig.receiveShadow
+-              }
+-              if (node instanceof THREE.Mesh) {
+-                node.geometry.computeBoundsTree()
+-                const videoTextures = maybeLoadVideoTextures(world, eid, node)
+-                if (videoTextures.length) {
+-                  videos.set(eid, videoTextures.map(t => t.uuid))
++            const hasVideos = !!gltf.userData.embeddedVideos
++            // TODO(chloe): Make sure that previous video format of gltfs are still
++            // supported...?
++            if (hasVideos) {
++              const {embeddedVideos} = gltf.userData
++              const accessorIndex = gltf.parser.json.accessors.findIndex(
++                (acc: { name: any }) => acc.name === VIDEO_ACCESSOR_NAME
++              )
++
++              gltf.parser.getDependency('accessor', accessorIndex).then((acc) => {
++                const videosBuffer = acc.array.buffer.slice(
++                  acc.array.byteOffset,
++                  acc.array.byteOffset + acc.array.byteLength
++                )
++
++                gltf.scene.traverse((node) => {
++                  if (shadowConfig && node.isObject3D) {
++                    node.castShadow = !!shadowConfig.castShadow
++                    node.receiveShadow = !!shadowConfig.receiveShadow
++                  }
++                  if (node instanceof THREE.Mesh) {
++                    node.geometry.computeBoundsTree()
++                    const videoTextures = maybeLoadVideoTextures(world, eid, node, videosBuffer,
++                      embeddedVideos)
++                    if (videoTextures.length) {
++                      videos.set(eid, videoTextures.map(t => t.uuid))
++                    }
++                    markAsDisposable(node)
++                  }
++                })
++              })
++            } else {
++              gltf.scene.traverse((node) => {
++                if (shadowConfig && node.isObject3D) {
++                  node.castShadow = !!shadowConfig.castShadow
++                  node.receiveShadow = !!shadowConfig.receiveShadow
+                 }
+-                markAsDisposable(node)
+-              }
+-            })
++                if (node instanceof THREE.Mesh) {
++                  node.geometry.computeBoundsTree()
++                  markAsDisposable(node)
++                }
++              })
++            }
+ 
+             const model = GltfModel.get(world, eid)
+             object.userData.url = url
+diff --git a/c8/ecs/src/runtime/video-texture.ts b/c8/ecs/src/runtime/video-texture.ts
+index 4d09c4c3a28..1368d010211 100644
+--- a/c8/ecs/src/runtime/video-texture.ts
++++ b/c8/ecs/src/runtime/video-texture.ts
+@@ -1,14 +1,36 @@
+ import THREE from './three'
+ import type * as THREE_TYPES from './three-types'
+ 
+-function createVideoTexture(src: string) {
++type VideoArrayBuffer = {
++  buffer: ArrayBuffer
++  mimeType: string
++}
++
++function createVideoTexture(src: string | VideoArrayBuffer) {
++  let url: string
++  const isArrayBuffer = typeof src !== 'string'
++
++  if (isArrayBuffer) {
++    const blob = new Blob([src.buffer], {type: src.mimeType})
++    url = URL.createObjectURL(blob)
++  } else {
++    url = src
++  }
++
+   const video = Object.assign(document.createElement('video'), {
+     crossOrigin: 'anonymous',
+-    src,
++    src: url,
+     playsInline: true,
+     autoplay: false,
+   })
+-  return new THREE.VideoTexture(video)
++
++  const texture = new THREE.VideoTexture(video)
++
++  if (isArrayBuffer) {
++    texture.userData.disposableUrl = url
++  }
++
++  return texture
+ }
+ 
+ const deleteVideoTexture = (texture: THREE_TYPES.VideoTexture) => {
+@@ -18,6 +40,11 @@ const deleteVideoTexture = (texture: THREE_TYPES.VideoTexture) => {
+     video.removeAttribute('src')
+     video.load()
+   }
++
++  if (texture.userData.disposableUrl) {
++    URL.revokeObjectURL(texture.userData.disposableUrl)
++  }
++
+   texture.dispose()
+ }
+ 
+diff --git a/c8/ecs/src/runtime/video-types.ts b/c8/ecs/src/runtime/video-types.ts
+index 07399c81a64..c79bf6812b9 100644
+--- a/c8/ecs/src/runtime/video-types.ts
++++ b/c8/ecs/src/runtime/video-types.ts
+@@ -6,6 +6,15 @@ import type {VideoControls} from './components'
+ 
+ type VideoControlsRuntimeSettings = ReadData<SchemaOf<typeof VideoControls>>
+ 
++type EmbeddedVideoData = {
++  offset: number
++  length: number
++  mimeType: string
++}
++
++type EmbeddedVideos = Record<string, EmbeddedVideoData>
++
+ export type {
++  EmbeddedVideos,
+   VideoControlsRuntimeSettings,
+ }
+diff --git a/c8/ecs/src/shared/video-constants.ts b/c8/ecs/src/shared/video-constants.ts
+index 6fe47b78c21..2b8125868a8 100644
+--- a/c8/ecs/src/shared/video-constants.ts
++++ b/c8/ecs/src/shared/video-constants.ts
+@@ -16,8 +16,10 @@ const VIDEO_DEFAULTS = {
+ }
+ 
+ const SUPPORTED_VIDEO_FORMATS = ['video/mp4', 'video/webm']
++const VIDEO_ACCESSOR_NAME = 'videoAccessor'
+ 
+ export {
++  VIDEO_ACCESSOR_NAME,
+   VIDEO_DEFAULTS,
+   SUPPORTED_VIDEO_FORMATS,
+ }
+diff --git a/reality/cloud/xrhome/src/client/studio/configuration/asset-materials-configurator.tsx b/reality/cloud/xrhome/src/client/studio/configuration/asset-materials-configurator.tsx
+index 544beea6085..22756ff6c1e 100644
+--- a/reality/cloud/xrhome/src/client/studio/configuration/asset-materials-configurator.tsx
++++ b/reality/cloud/xrhome/src/client/studio/configuration/asset-materials-configurator.tsx
+@@ -17,6 +17,7 @@ import {
+ import type {ConfiguredMaterial, ConfiguredTextureResource} from './material-types'
+ import {FloatingTraySection} from '../../ui/components/floating-tray-section'
+ import {useStudioModelPreviewContext} from '../asset-previews/studio-model-preview-context'
++import {getArrayBufferFromVideo} from '../embed-video-buffer'
+ 
+ interface IThreeMaterialConfigurator {
+   threeMat: THREE.Material
+@@ -64,6 +65,7 @@ const useOverrideProperty = (
+   const tex = useTextureWithSettings(material, convertConfiguredTextureResource(resource))
+ 
+   useLayoutEffect(() => {
++    let aborted = false
+     const prevTexture = threeMat[property]
+     const prevUserData = threeMat.userData
+     const isDefault = typeof resource !== 'string' && resource?.type === 'default'
+@@ -80,13 +82,20 @@ const useOverrideProperty = (
+       if (!threeMat.userData.videos) {
+         threeMat.userData.videos = {}
+       }
+-      threeMat.userData.videos[property] = tex?.userData?.videoSrc
++      // eslint-disable-next-line local-rules/prefer-await
++      getArrayBufferFromVideo(tex?.userData?.videoSrc.localUrl).then((arrayBuffer) => {
++        if (!aborted) {
++          tex.userData.videoSrc.buffer = arrayBuffer
++          threeMat.userData.videos[property] = tex.userData.videoSrc
++        }
++      })
+     } else {
+       delete threeMat.userData?.videos?.[property]
+     }
+     threeMat.needsUpdate = true
+ 
+     return () => {
++      aborted = true
+       threeMat[property] = prevTexture
+       threeMat.userData = prevUserData
+       threeMat.needsUpdate = true
+diff --git a/reality/cloud/xrhome/src/client/studio/configuration/asset-mesh-configurator.tsx b/reality/cloud/xrhome/src/client/studio/configuration/asset-mesh-configurator.tsx
+index e0406719d45..2b47e693d75 100644
+--- a/reality/cloud/xrhome/src/client/studio/configuration/asset-mesh-configurator.tsx
++++ b/reality/cloud/xrhome/src/client/studio/configuration/asset-mesh-configurator.tsx
+@@ -38,6 +38,7 @@ import {Tooltip} from '../../ui/components/tooltip'
+ import {Icon} from '../../ui/components/icon'
+ import {useStudioModelPreviewContext} from '../asset-previews/studio-model-preview-context'
+ import {StaticBanner} from '../../ui/components/banner'
++import {embedVideoBuffers} from '../embed-video-buffer'
+ 
+ const textureCache: Record<string, boolean> = {}
+ 
+@@ -390,6 +391,7 @@ const AssetMeshConfigurator: React.FC<IAssetMeshConfigurator> = ({
+     resetPreviewOptions()
+     const glbDocument = await getGltfTransformDocument(previewScene, options)
+     promoteRootScene(glbDocument)
++    await embedVideoBuffers(glbDocument, previewScene, gltf)
+     const gltfBlob = await io.writeBinary(glbDocument)
+ 
+     const gltfFile: File = new File(
+diff --git a/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+new file mode 100644
+index 00000000000..770ec7cb949
+--- /dev/null
++++ b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+@@ -0,0 +1,130 @@
++import type {Document} from '@gltf-transform/core'
++import {Object3D, Mesh} from 'three'
++import type {GLTF} from 'three-stdlib'
++
++import type {EmbeddedVideos} from '@ecs/runtime/video-types'
++import {VIDEO_ACCESSOR_NAME} from '@ecs/shared/video-constants'
++
++const getArrayBufferFromVideo = async (videoUrl: string): Promise<ArrayBuffer> => {
++  try {
++    const response = await fetch(videoUrl)
++    if (!response.ok) {
++      throw new Error(`Failed to fetch video to convert to data URL: ${response.status}`)
++    }
++    return response.arrayBuffer()
++  } catch (error) {
++    throw new Error(`Failed to fetch video to convert to data URL: ${error}`)
++  }
++}
++
++const getMimeTypeFromBuffer = (arrayBuffer: ArrayBuffer): string | undefined => {
++  const bytes = new Uint8Array(arrayBuffer, 0, 8)
++  if (bytes[4] === 0x66 && bytes[5] === 0x74 && bytes[6] === 0x79 && bytes[7] === 0x70) {
++    return 'video/mp4'
++  }
++  if (bytes[0] === 0x1A && bytes[1] === 0x45 && bytes[2] === 0xDF && bytes[3] === 0xA3) {
++    return 'video/webm'
++  }
++  return undefined
++}
++
++const extractVideosToEmbed = (
++  scene: Object3D, existingEmbeddedVideos: EmbeddedVideos | undefined,
++  videosToEmbed: EmbeddedVideos, videoArrayBuffers: Record<string, ArrayBuffer>,
++  existingVideoBuffer: ArrayBuffer | undefined
++): number => {
++  const textureKeys = [
++    'map', 'alphaMap', 'roughnessMap', 'metalnessMap', 'normalMap', 'emissiveMap',
++  ]
++
++  scene.traverse((object: Object3D) => {
++    if (object instanceof Mesh && object.material) {
++      textureKeys.forEach((textureKey) => {
++        const videoData = object.material.userData?.videos
++        if (!videoData || !videoData?.[textureKey]) {
++          return
++        }
++        const videoDataByTexture = videoData[textureKey]
++        const {url} = videoDataByTexture
++        const existingData = existingEmbeddedVideos?.[url]
++        if (!videosToEmbed[url]) {
++          videosToEmbed[url] = {
++            offset: 0,  // Will be calculated and set later once all video data is collected
++            length: existingData ? existingData.length : videoDataByTexture.buffer.byteLength,
++            mimeType: existingData
++              ? existingData.mimeType
++              : getMimeTypeFromBuffer(videoDataByTexture.buffer),
++          }
++          videoArrayBuffers[url] = (existingData && existingVideoBuffer)
++            ? existingVideoBuffer.slice(
++              existingData.offset,
++              existingData.offset + existingData.length
++            )
++            : videoDataByTexture.buffer
++        }
++      })
++    }
++  })
++
++  let size = 0
++  Object.values(videosToEmbed).forEach(({length}) => { size += length })
++  return size
++}
++
++const embedVideoBuffers = async (glbDocument: Document, scene: Object3D, gltf: GLTF) => {
++  const root = glbDocument.getRoot()
++  const buffers = root.listBuffers()
++  if (!buffers.length) {
++    throw new Error('Failed to embed video to 3D asset - no buffers found in .glb to embed')
++  }
++  const mainBuffer = buffers[0]
++
++  const {parser, userData} = gltf
++
++  // Find existing accessor and video buffer from the original .glb
++  const existingAccessorIndex = parser.json.accessors.findIndex(
++    acc => acc.name === VIDEO_ACCESSOR_NAME
++  )
++  const existingAccessor = existingAccessorIndex > -1
++    ? await parser.getDependency('accessor', existingAccessorIndex)
++    : null
++  const existingEmbeddedVideos = userData?.embeddedVideos as EmbeddedVideos | undefined
++  const existingVideoBuffer = existingAccessor?.array.buffer.slice(
++    existingAccessor?.array.byteOffset,
++    existingAccessor?.array.byteOffset + existingAccessor?.array.byteLength
++  )
++
++  const videosToEmbed: EmbeddedVideos = {}
++  const arrayBuffersToEmbed: Record<string, ArrayBuffer> = {}
++
++  const totalSize = extractVideosToEmbed(scene, existingEmbeddedVideos, videosToEmbed,
++    arrayBuffersToEmbed, existingVideoBuffer)
++
++  if (totalSize) {
++    const videoBuffer = new ArrayBuffer(totalSize)
++    const videoBufferView = new Uint8Array(videoBuffer)
++
++    let offset = 0
++    Object.entries(videosToEmbed).forEach(([url, embeddedData]) => {
++      embeddedData.offset = offset
++      const bufferView = new Uint8Array(arrayBuffersToEmbed[url])
++      videoBufferView.set(bufferView, offset)
++      offset += embeddedData.length
++    })
++
++    // Create new accessor and embed new video buffer into this new glTF document for exporting
++    const accessor = glbDocument.createAccessor(VIDEO_ACCESSOR_NAME)
++    accessor.setArray(videoBufferView)
++    accessor.setType('SCALAR')
++    accessor.setBuffer(mainBuffer)
++
++    root.setExtras({...root.getExtras(), embeddedVideos: videosToEmbed})
++  } else {
++    delete root.getExtras()?.embeddedVideos
++  }
++}
++
++export {
++  embedVideoBuffers,
++  getArrayBufferFromVideo,
++}
+
+From 696da58e6b1e52ea2ea323cfc7de66627ab70165 Mon Sep 17 00:00:00 2001
+From: chloeason <chloe@nianticspatial.com>
+Date: Wed, 18 Jun 2025 11:29:37 -0700
+Subject: [PATCH 02/19] [xrhome][runtime] Embed video data directly into .glb
+ buffers
+
+---
+ c8/ecs/src/runtime/video-types.ts             |  4 +-
+ .../asset-materials-configurator.tsx          |  2 +-
+ .../src/client/studio/embed-video-buffer.ts   | 57 +++++++++----------
+ 3 files changed, 29 insertions(+), 34 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/video-types.ts b/c8/ecs/src/runtime/video-types.ts
+index c79bf6812b9..24a01348f8b 100644
+--- a/c8/ecs/src/runtime/video-types.ts
++++ b/c8/ecs/src/runtime/video-types.ts
+@@ -6,13 +6,13 @@ import type {VideoControls} from './components'
+ 
+ type VideoControlsRuntimeSettings = ReadData<SchemaOf<typeof VideoControls>>
+ 
+-type EmbeddedVideoData = {
++type EmbeddedVideoMetadata = {
+   offset: number
+   length: number
+   mimeType: string
+ }
+ 
+-type EmbeddedVideos = Record<string, EmbeddedVideoData>
++type EmbeddedVideos = Record<string, EmbeddedVideoMetadata>
+ 
+ export type {
+   EmbeddedVideos,
+diff --git a/reality/cloud/xrhome/src/client/studio/configuration/asset-materials-configurator.tsx b/reality/cloud/xrhome/src/client/studio/configuration/asset-materials-configurator.tsx
+index 22756ff6c1e..5e5e7c53994 100644
+--- a/reality/cloud/xrhome/src/client/studio/configuration/asset-materials-configurator.tsx
++++ b/reality/cloud/xrhome/src/client/studio/configuration/asset-materials-configurator.tsx
+@@ -85,8 +85,8 @@ const useOverrideProperty = (
+       // eslint-disable-next-line local-rules/prefer-await
+       getArrayBufferFromVideo(tex?.userData?.videoSrc.localUrl).then((arrayBuffer) => {
+         if (!aborted) {
+-          tex.userData.videoSrc.buffer = arrayBuffer
+           threeMat.userData.videos[property] = tex.userData.videoSrc
++          threeMat.userData.videos[property].buffer = arrayBuffer
+         }
+       })
+     } else {
+diff --git a/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+index 770ec7cb949..4d87be97150 100644
+--- a/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
++++ b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+@@ -17,25 +17,20 @@ const getArrayBufferFromVideo = async (videoUrl: string): Promise<ArrayBuffer> =
+   }
+ }
+ 
+-const getMimeTypeFromBuffer = (arrayBuffer: ArrayBuffer): string | undefined => {
++const getMimeTypeFromBuffer = (arrayBuffer: ArrayBuffer): string => {
+   const bytes = new Uint8Array(arrayBuffer, 0, 8)
+   if (bytes[4] === 0x66 && bytes[5] === 0x74 && bytes[6] === 0x79 && bytes[7] === 0x70) {
+     return 'video/mp4'
+   }
+-  if (bytes[0] === 0x1A && bytes[1] === 0x45 && bytes[2] === 0xDF && bytes[3] === 0xA3) {
+-    return 'video/webm'
+-  }
+-  return undefined
++  throw new Error('Unsupported video format - cannot embed into .glb. Retry with .mp4 format.')
+ }
+ 
+-const extractVideosToEmbed = (
+-  scene: Object3D, existingEmbeddedVideos: EmbeddedVideos | undefined,
+-  videosToEmbed: EmbeddedVideos, videoArrayBuffers: Record<string, ArrayBuffer>,
+-  existingVideoBuffer: ArrayBuffer | undefined
+-): number => {
+-  const textureKeys = [
+-    'map', 'alphaMap', 'roughnessMap', 'metalnessMap', 'normalMap', 'emissiveMap',
+-  ]
++const extractVideosToEmbed = (scene: Object3D, existingEmbeddedVideos: EmbeddedVideos | undefined,
++  existingVideoBuffer: ArrayBuffer | undefined) => {
++  const videoMetadataByUrl: EmbeddedVideos = {}
++  const videoBuffersByUrl: Record<string, ArrayBuffer> = {}
++  const textureKeys = ['map', 'alphaMap', 'roughnessMap', 'metalnessMap', 'normalMap',
++    'emissiveMap']
+ 
+   scene.traverse((object: Object3D) => {
+     if (object instanceof Mesh && object.material) {
+@@ -47,15 +42,14 @@ const extractVideosToEmbed = (
+         const videoDataByTexture = videoData[textureKey]
+         const {url} = videoDataByTexture
+         const existingData = existingEmbeddedVideos?.[url]
+-        if (!videosToEmbed[url]) {
+-          videosToEmbed[url] = {
++        if (!videoMetadataByUrl[url]) {
++          console.log('Embedding video from URL: ', url, 'existingData: ', existingData)
++          videoMetadataByUrl[url] = {
+             offset: 0,  // Will be calculated and set later once all video data is collected
+-            length: existingData ? existingData.length : videoDataByTexture.buffer.byteLength,
+-            mimeType: existingData
+-              ? existingData.mimeType
+-              : getMimeTypeFromBuffer(videoDataByTexture.buffer),
++            length: existingData?.length ?? videoDataByTexture.buffer.byteLength,
++            mimeType: existingData?.mimeType ?? getMimeTypeFromBuffer(videoDataByTexture.buffer),
+           }
+-          videoArrayBuffers[url] = (existingData && existingVideoBuffer)
++          videoBuffersByUrl[url] = (existingData && existingVideoBuffer)
+             ? existingVideoBuffer.slice(
+               existingData.offset,
+               existingData.offset + existingData.length
+@@ -66,9 +60,10 @@ const extractVideosToEmbed = (
+     }
+   })
+ 
+-  let size = 0
+-  Object.values(videosToEmbed).forEach(({length}) => { size += length })
+-  return size
++  return {
++    videoMetadataByUrl,
++    videoBuffersByUrl,
++  }
+ }
+ 
+ const embedVideoBuffers = async (glbDocument: Document, scene: Object3D, gltf: GLTF) => {
+@@ -81,7 +76,7 @@ const embedVideoBuffers = async (glbDocument: Document, scene: Object3D, gltf: G
+ 
+   const {parser, userData} = gltf
+ 
+-  // Find existing accessor and video buffer from the original .glb
++  // Attempt to find an existing accessor and video buffer from the original .glb
+   const existingAccessorIndex = parser.json.accessors.findIndex(
+     acc => acc.name === VIDEO_ACCESSOR_NAME
+   )
+@@ -94,20 +89,20 @@ const embedVideoBuffers = async (glbDocument: Document, scene: Object3D, gltf: G
+     existingAccessor?.array.byteOffset + existingAccessor?.array.byteLength
+   )
+ 
+-  const videosToEmbed: EmbeddedVideos = {}
+-  const arrayBuffersToEmbed: Record<string, ArrayBuffer> = {}
++  const {videoMetadataByUrl, videoBuffersByUrl} = extractVideosToEmbed(scene,
++    existingEmbeddedVideos, existingVideoBuffer)
+ 
+-  const totalSize = extractVideosToEmbed(scene, existingEmbeddedVideos, videosToEmbed,
+-    arrayBuffersToEmbed, existingVideoBuffer)
++  let totalSize = 0
++  Object.values(videoMetadataByUrl).forEach(({length}) => { totalSize += length })
+ 
+   if (totalSize) {
+     const videoBuffer = new ArrayBuffer(totalSize)
+     const videoBufferView = new Uint8Array(videoBuffer)
+ 
+     let offset = 0
+-    Object.entries(videosToEmbed).forEach(([url, embeddedData]) => {
++    Object.entries(videoMetadataByUrl).forEach(([url, embeddedData]) => {
+       embeddedData.offset = offset
+-      const bufferView = new Uint8Array(arrayBuffersToEmbed[url])
++      const bufferView = new Uint8Array(videoBuffersByUrl[url])
+       videoBufferView.set(bufferView, offset)
+       offset += embeddedData.length
+     })
+@@ -118,7 +113,7 @@ const embedVideoBuffers = async (glbDocument: Document, scene: Object3D, gltf: G
+     accessor.setType('SCALAR')
+     accessor.setBuffer(mainBuffer)
+ 
+-    root.setExtras({...root.getExtras(), embeddedVideos: videosToEmbed})
++    root.setExtras({...root.getExtras(), embeddedVideos: videoMetadataByUrl})
+   } else {
+     delete root.getExtras()?.embeddedVideos
+   }
+
+From caed0af4b83bf7a309df8bc914f35b37fc811e93 Mon Sep 17 00:00:00 2001
+From: chloeason <chloe@nianticspatial.com>
+Date: Wed, 18 Jun 2025 11:36:18 -0700
+Subject: [PATCH 03/19] [xrhome][runtime] Embed video data directly into .glb
+ buffers
+
+---
+ c8/ecs/src/runtime/systems/gltf-system.ts                 | 8 ++++----
+ .../cloud/xrhome/src/client/studio/embed-video-buffer.ts  | 4 +++-
+ 2 files changed, 7 insertions(+), 5 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/systems/gltf-system.ts b/c8/ecs/src/runtime/systems/gltf-system.ts
+index c79deabf66b..288739f0005 100644
+--- a/c8/ecs/src/runtime/systems/gltf-system.ts
++++ b/c8/ecs/src/runtime/systems/gltf-system.ts
+@@ -247,11 +247,11 @@ const makeGltfSystem = (world: World) => {
+               shadowConfig = Shadow.get(world, eid)
+             }
+ 
+-            const hasVideos = !!gltf.userData.embeddedVideos
++            const hasEmbeddedVideos = !!gltf.userData.embeddedVideos
+             // TODO(chloe): Make sure that previous video format of gltfs are still
+             // supported...?
+-            if (hasVideos) {
+-              const {embeddedVideos} = gltf.userData
++            if (hasEmbeddedVideos) {
++              const {embeddedVideos: embeddedMetadata} = gltf.userData
+               const accessorIndex = gltf.parser.json.accessors.findIndex(
+                 (acc: { name: any }) => acc.name === VIDEO_ACCESSOR_NAME
+               )
+@@ -270,7 +270,7 @@ const makeGltfSystem = (world: World) => {
+                   if (node instanceof THREE.Mesh) {
+                     node.geometry.computeBoundsTree()
+                     const videoTextures = maybeLoadVideoTextures(world, eid, node, videosBuffer,
+-                      embeddedVideos)
++                      embeddedMetadata)
+                     if (videoTextures.length) {
+                       videos.set(eid, videoTextures.map(t => t.uuid))
+                     }
+diff --git a/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+index 4d87be97150..b0a651face9 100644
+--- a/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
++++ b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+@@ -43,7 +43,6 @@ const extractVideosToEmbed = (scene: Object3D, existingEmbeddedVideos: EmbeddedV
+         const {url} = videoDataByTexture
+         const existingData = existingEmbeddedVideos?.[url]
+         if (!videoMetadataByUrl[url]) {
+-          console.log('Embedding video from URL: ', url, 'existingData: ', existingData)
+           videoMetadataByUrl[url] = {
+             offset: 0,  // Will be calculated and set later once all video data is collected
+             length: existingData?.length ?? videoDataByTexture.buffer.byteLength,
+@@ -72,6 +71,9 @@ const embedVideoBuffers = async (glbDocument: Document, scene: Object3D, gltf: G
+   if (!buffers.length) {
+     throw new Error('Failed to embed video to 3D asset - no buffers found in .glb to embed')
+   }
++
++  // Retrieve first buffer as .glb's single internal embedded buffer.
++  // See: https://github.com/donmccurdy/glTF-Transform/discussions/555
+   const mainBuffer = buffers[0]
+ 
+   const {parser, userData} = gltf
+
+From b9fbb9131baf0a9b82c9a0259696ae0e3ae4412f Mon Sep 17 00:00:00 2001
+From: chloeason <chloe@nianticspatial.com>
+Date: Wed, 18 Jun 2025 11:45:55 -0700
+Subject: [PATCH 04/19] [xrhome][runtime] Embed video data directly into .glb
+ buffers
+
+---
+ c8/ecs/src/runtime/systems/gltf-system.ts | 23 ++++++++++++++++-------
+ 1 file changed, 16 insertions(+), 7 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/systems/gltf-system.ts b/c8/ecs/src/runtime/systems/gltf-system.ts
+index 288739f0005..bcac743894d 100644
+--- a/c8/ecs/src/runtime/systems/gltf-system.ts
++++ b/c8/ecs/src/runtime/systems/gltf-system.ts
+@@ -48,7 +48,7 @@ const playAction = (
+ }
+ 
+ const maybeLoadVideoTextures = (world: World, eid: Eid, node: THREE_TYPES.Mesh<any, any, any>,
+-  videosArrayBuffer: ArrayBuffer, embeddedVideos: EmbeddedVideos) => {
++  videosArrayBuffer?: ArrayBuffer, embeddedVideos?: EmbeddedVideos) => {
+   if (!node.material || !node.material.userData.videos) {
+     return []
+   }
+@@ -63,10 +63,16 @@ const maybeLoadVideoTextures = (world: World, eid: Eid, node: THREE_TYPES.Mesh<a
+     const needsSrgb = prop === 'map' || prop === 'emissiveMap'
+     const videoData = node.material.userData.videos?.[prop]
+ 
+-    if (videoData && embeddedVideos[videoData.url]) {
+-      const {offset, length, mimeType} = embeddedVideos[videoData.url]
+-      const videoBuffer = videosArrayBuffer.slice(offset, offset + length)
+-      const videoTexture = createVideoTexture({buffer: videoBuffer, mimeType})
++    if (videoData) {
++      let videoTexture: THREE_TYPES.VideoTexture
++      const isLegacyApproach = !embeddedVideos?.[videoData.url] || !videosArrayBuffer
++      if (!isLegacyApproach) {
++        const {offset, length, mimeType} = embeddedVideos[videoData.url]
++        const videoBuffer = videosArrayBuffer.slice(offset, offset + length)
++        videoTexture = createVideoTexture({buffer: videoBuffer, mimeType})
++      } else {
++        videoTexture = createVideoTexture(videoData.localUrl)
++      }
+       videoTexture.userData.src = videoData.url
+       if (needsSrgb) {
+         videoTexture.colorSpace = THREE.SRGBColorSpace
+@@ -248,8 +254,6 @@ const makeGltfSystem = (world: World) => {
+             }
+ 
+             const hasEmbeddedVideos = !!gltf.userData.embeddedVideos
+-            // TODO(chloe): Make sure that previous video format of gltfs are still
+-            // supported...?
+             if (hasEmbeddedVideos) {
+               const {embeddedVideos: embeddedMetadata} = gltf.userData
+               const accessorIndex = gltf.parser.json.accessors.findIndex(
+@@ -286,6 +290,11 @@ const makeGltfSystem = (world: World) => {
+                 }
+                 if (node instanceof THREE.Mesh) {
+                   node.geometry.computeBoundsTree()
++                  // NOTE(chloe): Support legacy method for GLTF-modified videos using http URLs.
++                  const videoTextures = maybeLoadVideoTextures(world, eid, node)
++                  if (videoTextures.length) {
++                    videos.set(eid, videoTextures.map(t => t.uuid))
++                  }
+                   markAsDisposable(node)
+                 }
+               })
+
+From 74e87d18ba6fb8efd291445d40fbd92b36937f43 Mon Sep 17 00:00:00 2001
+From: chloeason <chloe@nianticspatial.com>
+Date: Wed, 18 Jun 2025 14:02:25 -0700
+Subject: [PATCH 05/19] [xrhome][runtime] Embed video data directly into .glb
+ buffers
+
+---
+ c8/ecs/src/runtime/systems/BUILD                |  2 ++
+ c8/ecs/src/runtime/systems/gltf-system.ts       | 17 ++++++++---------
+ .../src/client/studio/embed-video-buffer.ts     |  4 ++--
+ 3 files changed, 12 insertions(+), 11 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/systems/BUILD b/c8/ecs/src/runtime/systems/BUILD
+index b281170da12..b0c4faa9ac1 100644
+--- a/c8/ecs/src/runtime/systems/BUILD
++++ b/c8/ecs/src/runtime/systems/BUILD
+@@ -66,12 +66,14 @@ js_library(
+         "//c8/ecs/src/runtime:three-types",
+         "//c8/ecs/src/runtime:video-manager",
+         "//c8/ecs/src/runtime:video-texture",
++        "//c8/ecs/src/runtime:video-types",
+         "//c8/ecs/src/runtime:world",
+         "//c8/ecs/src/runtime:world-attribute",
+         "//c8/ecs/src/runtime/systems:system-helper",
+         "//c8/ecs/src/shared:gltf-constants",
+         "//c8/ecs/src/shared:scene-graph",
+         "//c8/ecs/src/shared:schema",
++        "//c8/ecs/src/shared:video-constants",
+     ],
+ )
+ 
+diff --git a/c8/ecs/src/runtime/systems/gltf-system.ts b/c8/ecs/src/runtime/systems/gltf-system.ts
+index bcac743894d..0f77fb54051 100644
+--- a/c8/ecs/src/runtime/systems/gltf-system.ts
++++ b/c8/ecs/src/runtime/systems/gltf-system.ts
+@@ -65,8 +65,8 @@ const maybeLoadVideoTextures = (world: World, eid: Eid, node: THREE_TYPES.Mesh<a
+ 
+     if (videoData) {
+       let videoTexture: THREE_TYPES.VideoTexture
+-      const isLegacyApproach = !embeddedVideos?.[videoData.url] || !videosArrayBuffer
+-      if (!isLegacyApproach) {
++      const useLegacyData = !embeddedVideos?.[videoData.url] || !videosArrayBuffer
++      if (!useLegacyData) {
+         const {offset, length, mimeType} = embeddedVideos[videoData.url]
+         const videoBuffer = videosArrayBuffer.slice(offset, offset + length)
+         videoTexture = createVideoTexture({buffer: videoBuffer, mimeType})
+@@ -253,19 +253,18 @@ const makeGltfSystem = (world: World) => {
+               shadowConfig = Shadow.get(world, eid)
+             }
+ 
+-            const hasEmbeddedVideos = !!gltf.userData.embeddedVideos
++            const videoAccessorIndex = gltf.parser.json.accessors.findIndex(
++              (acc: { name: string }) => acc.name === VIDEO_ACCESSOR_NAME
++            )
++            const hasVideoMetadata = !!gltf.userData.embeddedVideos
++            const hasEmbeddedVideos = hasVideoMetadata && videoAccessorIndex > -1
+             if (hasEmbeddedVideos) {
+               const {embeddedVideos: embeddedMetadata} = gltf.userData
+-              const accessorIndex = gltf.parser.json.accessors.findIndex(
+-                (acc: { name: any }) => acc.name === VIDEO_ACCESSOR_NAME
+-              )
+-
+-              gltf.parser.getDependency('accessor', accessorIndex).then((acc) => {
++              gltf.parser.getDependency('accessor', videoAccessorIndex).then((acc) => {
+                 const videosBuffer = acc.array.buffer.slice(
+                   acc.array.byteOffset,
+                   acc.array.byteOffset + acc.array.byteLength
+                 )
+-
+                 gltf.scene.traverse((node) => {
+                   if (shadowConfig && node.isObject3D) {
+                     node.castShadow = !!shadowConfig.castShadow
+diff --git a/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+index b0a651face9..1d9d66e9116 100644
+--- a/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
++++ b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+@@ -9,11 +9,11 @@ const getArrayBufferFromVideo = async (videoUrl: string): Promise<ArrayBuffer> =
+   try {
+     const response = await fetch(videoUrl)
+     if (!response.ok) {
+-      throw new Error(`Failed to fetch video to convert to data URL: ${response.status}`)
++      throw new Error(`Failed to fetch video to retrieve array buffer: ${response.status}`)
+     }
+     return response.arrayBuffer()
+   } catch (error) {
+-    throw new Error(`Failed to fetch video to convert to data URL: ${error}`)
++    throw new Error(`Failed to fetch video to retrieve array buffer: ${error}`)
+   }
+ }
+ 
+
+From 74439115c206a8499416a20601d8b0fd7bc71cc7 Mon Sep 17 00:00:00 2001
+From: chloeason <chloe@nianticspatial.com>
+Date: Wed, 18 Jun 2025 14:24:31 -0700
+Subject: [PATCH 06/19] [xrhome][runtime] Embed video data directly into .glb
+ buffers
+
+---
+ c8/ecs/src/runtime/video-texture.ts | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/video-texture.ts b/c8/ecs/src/runtime/video-texture.ts
+index 1368d010211..4195c0df80d 100644
+--- a/c8/ecs/src/runtime/video-texture.ts
++++ b/c8/ecs/src/runtime/video-texture.ts
+@@ -6,15 +6,15 @@ type VideoArrayBuffer = {
+   mimeType: string
+ }
+ 
+-function createVideoTexture(src: string | VideoArrayBuffer) {
++function createVideoTexture(videoSource: string | VideoArrayBuffer) {
+   let url: string
+-  const isArrayBuffer = typeof src !== 'string'
++  const isArrayBuffer = typeof videoSource !== 'string'
+ 
+   if (isArrayBuffer) {
+-    const blob = new Blob([src.buffer], {type: src.mimeType})
++    const blob = new Blob([videoSource.buffer], {type: videoSource.mimeType})
+     url = URL.createObjectURL(blob)
+   } else {
+-    url = src
++    url = videoSource
+   }
+ 
+   const video = Object.assign(document.createElement('video'), {
+
+From 644aaf0c138ff8925d4c2909f156530ac29da936 Mon Sep 17 00:00:00 2001
+From: chloeason <chloe@nianticspatial.com>
+Date: Wed, 18 Jun 2025 14:41:54 -0700
+Subject: [PATCH 07/19] [xrhome][runtime] Embed video data directly into .glb
+ buffers
+
+---
+ c8/ecs/src/runtime/systems/gltf-system.ts     |  4 +--
+ c8/ecs/src/runtime/video-types.ts             |  4 +--
+ .../src/client/studio/embed-video-buffer.ts   | 31 ++++++++++---------
+ 3 files changed, 20 insertions(+), 19 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/systems/gltf-system.ts b/c8/ecs/src/runtime/systems/gltf-system.ts
+index 0f77fb54051..375aa450467 100644
+--- a/c8/ecs/src/runtime/systems/gltf-system.ts
++++ b/c8/ecs/src/runtime/systems/gltf-system.ts
+@@ -16,7 +16,7 @@ import type {SchemaOf} from '../world-attribute'
+ import {disposeObject, markAsDisposable} from '../dispose'
+ import {createVideoTexture} from '../video-texture'
+ import {getVideoManager} from '../video-manager'
+-import type {EmbeddedVideos} from '../video-types'
++import type {EmbeddedVideosByUrl} from '../video-types'
+ import {VIDEO_ACCESSOR_NAME} from '../../shared/video-constants'
+ 
+ const playAction = (
+@@ -48,7 +48,7 @@ const playAction = (
+ }
+ 
+ const maybeLoadVideoTextures = (world: World, eid: Eid, node: THREE_TYPES.Mesh<any, any, any>,
+-  videosArrayBuffer?: ArrayBuffer, embeddedVideos?: EmbeddedVideos) => {
++  videosArrayBuffer?: ArrayBuffer, embeddedVideos?: EmbeddedVideosByUrl) => {
+   if (!node.material || !node.material.userData.videos) {
+     return []
+   }
+diff --git a/c8/ecs/src/runtime/video-types.ts b/c8/ecs/src/runtime/video-types.ts
+index 24a01348f8b..a157c5f6b1d 100644
+--- a/c8/ecs/src/runtime/video-types.ts
++++ b/c8/ecs/src/runtime/video-types.ts
+@@ -12,9 +12,9 @@ type EmbeddedVideoMetadata = {
+   mimeType: string
+ }
+ 
+-type EmbeddedVideos = Record<string, EmbeddedVideoMetadata>
++type EmbeddedVideosByUrl = Record<string, EmbeddedVideoMetadata>
+ 
+ export type {
+-  EmbeddedVideos,
++  EmbeddedVideosByUrl,
+   VideoControlsRuntimeSettings,
+ }
+diff --git a/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+index 1d9d66e9116..91b9a3a0367 100644
+--- a/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
++++ b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+@@ -2,9 +2,11 @@ import type {Document} from '@gltf-transform/core'
+ import {Object3D, Mesh} from 'three'
+ import type {GLTF} from 'three-stdlib'
+ 
+-import type {EmbeddedVideos} from '@ecs/runtime/video-types'
++import type {EmbeddedVideosByUrl} from '@ecs/runtime/video-types'
+ import {VIDEO_ACCESSOR_NAME} from '@ecs/shared/video-constants'
+ 
++import {rot18} from '../../shared/blacklist-words'
++
+ const getArrayBufferFromVideo = async (videoUrl: string): Promise<ArrayBuffer> => {
+   try {
+     const response = await fetch(videoUrl)
+@@ -25,9 +27,12 @@ const getMimeTypeFromBuffer = (arrayBuffer: ArrayBuffer): string => {
+   throw new Error('Unsupported video format - cannot embed into .glb. Retry with .mp4 format.')
+ }
+ 
+-const extractVideosToEmbed = (scene: Object3D, existingEmbeddedVideos: EmbeddedVideos | undefined,
+-  existingVideoBuffer: ArrayBuffer | undefined) => {
+-  const videoMetadataByUrl: EmbeddedVideos = {}
++const extractVideosToEmbed = (
++  scene: Object3D,
++  existingEmbeddedVideos: EmbeddedVideosByUrl | undefined,
++  existingVideoBuffer: ArrayBuffer | undefined
++) => {
++  const videoMetadataByUrl: EmbeddedVideosByUrl = {}
+   const videoBuffersByUrl: Record<string, ArrayBuffer> = {}
+   const textureKeys = ['map', 'alphaMap', 'roughnessMap', 'metalnessMap', 'normalMap',
+     'emissiveMap']
+@@ -40,20 +45,20 @@ const extractVideosToEmbed = (scene: Object3D, existingEmbeddedVideos: EmbeddedV
+           return
+         }
+         const videoDataByTexture = videoData[textureKey]
+-        const {url} = videoDataByTexture
++        const {url, buffer} = videoDataByTexture
+         const existingData = existingEmbeddedVideos?.[url]
+         if (!videoMetadataByUrl[url]) {
+           videoMetadataByUrl[url] = {
+             offset: 0,  // Will be calculated and set later once all video data is collected
+-            length: existingData?.length ?? videoDataByTexture.buffer.byteLength,
+-            mimeType: existingData?.mimeType ?? getMimeTypeFromBuffer(videoDataByTexture.buffer),
++            length: existingData?.length ?? buffer.byteLength,
++            mimeType: existingData?.mimeType ?? getMimeTypeFromBuffer(buffer),
+           }
+           videoBuffersByUrl[url] = (existingData && existingVideoBuffer)
+             ? existingVideoBuffer.slice(
+               existingData.offset,
+               existingData.offset + existingData.length
+             )
+-            : videoDataByTexture.buffer
++            : buffer
+         }
+       })
+     }
+@@ -76,16 +81,14 @@ const embedVideoBuffers = async (glbDocument: Document, scene: Object3D, gltf: G
+   // See: https://github.com/donmccurdy/glTF-Transform/discussions/555
+   const mainBuffer = buffers[0]
+ 
+-  const {parser, userData} = gltf
+-
+   // Attempt to find an existing accessor and video buffer from the original .glb
+-  const existingAccessorIndex = parser.json.accessors.findIndex(
++  const existingAccessorIndex = gltf.parser.json.accessors.findIndex(
+     acc => acc.name === VIDEO_ACCESSOR_NAME
+   )
+   const existingAccessor = existingAccessorIndex > -1
+-    ? await parser.getDependency('accessor', existingAccessorIndex)
++    ? await gltf.parser.getDependency('accessor', existingAccessorIndex)
+     : null
+-  const existingEmbeddedVideos = userData?.embeddedVideos as EmbeddedVideos | undefined
++  const existingEmbeddedVideos = gltf.userData?.embeddedVideos as EmbeddedVideosByUrl | undefined
+   const existingVideoBuffer = existingAccessor?.array.buffer.slice(
+     existingAccessor?.array.byteOffset,
+     existingAccessor?.array.byteOffset + existingAccessor?.array.byteLength
+@@ -116,8 +119,6 @@ const embedVideoBuffers = async (glbDocument: Document, scene: Object3D, gltf: G
+     accessor.setBuffer(mainBuffer)
+ 
+     root.setExtras({...root.getExtras(), embeddedVideos: videoMetadataByUrl})
+-  } else {
+-    delete root.getExtras()?.embeddedVideos
+   }
+ }
+ 
+
+From cea53bb4b3821e4d4a4c52453671df5ce6c0aa8f Mon Sep 17 00:00:00 2001
+From: chloeason <chloe@nianticspatial.com>
+Date: Wed, 18 Jun 2025 14:44:00 -0700
+Subject: [PATCH 08/19] [xrhome][runtime] Embed video data directly into .glb
+ buffers
+
+---
+ reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+index 91b9a3a0367..c9befbda509 100644
+--- a/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
++++ b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+@@ -5,8 +5,6 @@ import type {GLTF} from 'three-stdlib'
+ import type {EmbeddedVideosByUrl} from '@ecs/runtime/video-types'
+ import {VIDEO_ACCESSOR_NAME} from '@ecs/shared/video-constants'
+ 
+-import {rot18} from '../../shared/blacklist-words'
+-
+ const getArrayBufferFromVideo = async (videoUrl: string): Promise<ArrayBuffer> => {
+   try {
+     const response = await fetch(videoUrl)
+
+From 0c0c0ab9a6e4769901662945ef7cf651dd6f9a7e Mon Sep 17 00:00:00 2001
+From: chloeason <chloe@nianticspatial.com>
+Date: Wed, 18 Jun 2025 15:14:20 -0700
+Subject: [PATCH 09/19] [xrhome][runtime] Embed video data directly into .glb
+ buffers
+
+---
+ reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+index c9befbda509..2e69cfc2d6a 100644
+--- a/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
++++ b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+@@ -42,8 +42,7 @@ const extractVideosToEmbed = (
+         if (!videoData || !videoData?.[textureKey]) {
+           return
+         }
+-        const videoDataByTexture = videoData[textureKey]
+-        const {url, buffer} = videoDataByTexture
++        const {url, buffer} = videoData[textureKey]
+         const existingData = existingEmbeddedVideos?.[url]
+         if (!videoMetadataByUrl[url]) {
+           videoMetadataByUrl[url] = {
+
+From 8373c58c5ecf5175dc1b1f365e697b12b7f80daf Mon Sep 17 00:00:00 2001
+From: chloeason <chloe@nianticspatial.com>
+Date: Wed, 18 Jun 2025 15:20:02 -0700
+Subject: [PATCH 10/19] [xrhome][runtime] Embed video data directly into .glb
+ buffers
+
+---
+ .../src/client/studio/embed-video-buffer.ts   | 36 ++++++++++---------
+ 1 file changed, 19 insertions(+), 17 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+index 2e69cfc2d6a..456ee6f9b7d 100644
+--- a/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
++++ b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+@@ -37,25 +37,27 @@ const extractVideosToEmbed = (
+ 
+   scene.traverse((object: Object3D) => {
+     if (object instanceof Mesh && object.material) {
++      const videoData = object.material.userData?.videos
++      if (!videoData) {
++        return
++      }
+       textureKeys.forEach((textureKey) => {
+-        const videoData = object.material.userData?.videos
+-        if (!videoData || !videoData?.[textureKey]) {
+-          return
+-        }
+-        const {url, buffer} = videoData[textureKey]
+-        const existingData = existingEmbeddedVideos?.[url]
+-        if (!videoMetadataByUrl[url]) {
+-          videoMetadataByUrl[url] = {
+-            offset: 0,  // Will be calculated and set later once all video data is collected
+-            length: existingData?.length ?? buffer.byteLength,
+-            mimeType: existingData?.mimeType ?? getMimeTypeFromBuffer(buffer),
++        if (videoData[textureKey]) {
++          const {url, buffer} = videoData[textureKey]
++          const existingData = existingEmbeddedVideos?.[url]
++          if (!videoMetadataByUrl[url]) {
++            videoMetadataByUrl[url] = {
++              offset: 0,  // Will be calculated and set later once all video data is collected
++              length: existingData?.length ?? buffer.byteLength,
++              mimeType: existingData?.mimeType ?? getMimeTypeFromBuffer(buffer),
++            }
++            videoBuffersByUrl[url] = (existingData && existingVideoBuffer)
++              ? existingVideoBuffer.slice(
++                existingData.offset,
++                existingData.offset + existingData.length
++              )
++              : buffer
+           }
+-          videoBuffersByUrl[url] = (existingData && existingVideoBuffer)
+-            ? existingVideoBuffer.slice(
+-              existingData.offset,
+-              existingData.offset + existingData.length
+-            )
+-            : buffer
+         }
+       })
+     }
+
+From 39c3ce6c0afd24bb6de0aa238e0aaf16128f0ee2 Mon Sep 17 00:00:00 2001
+From: chloeason <chloe@nianticspatial.com>
+Date: Wed, 18 Jun 2025 15:26:25 -0700
+Subject: [PATCH 11/19] [xrhome][runtime] Embed video data directly into .glb
+ buffers
+
+
+From 6b6d61aae43f24a66955127579eebf8b3455815d Mon Sep 17 00:00:00 2001
+From: chloeason <chloe@nianticspatial.com>
+Date: Tue, 24 Jun 2025 10:05:33 -0700
+Subject: [PATCH 12/19] [xrhome][runtime] Embed video data directly into .glb
+ buffers
+
+---
+ c8/ecs/src/runtime/BUILD                      |  7 ++
+ c8/ecs/src/runtime/systems/BUILD              |  1 +
+ c8/ecs/src/runtime/systems/gltf-system.ts     | 13 ++-
+ c8/ecs/src/runtime/texture-constants.ts       |  7 ++
+ .../src/client/studio/embed-video-buffer.ts   | 81 ++++++++++---------
+ 5 files changed, 64 insertions(+), 45 deletions(-)
+ create mode 100644 c8/ecs/src/runtime/texture-constants.ts
+
+diff --git a/c8/ecs/src/runtime/BUILD b/c8/ecs/src/runtime/BUILD
+index d643270332b..4efc0c53d5a 100644
+--- a/c8/ecs/src/runtime/BUILD
++++ b/c8/ecs/src/runtime/BUILD
+@@ -2003,3 +2003,10 @@ js_test(
+         "//c8/ecs/src/runtime:world",
+     ],
+ )
++
++js_library(
++    name = "texture-constants",
++    srcs = [
++        "texture-constants.ts",
++    ],
++)
+diff --git a/c8/ecs/src/runtime/systems/BUILD b/c8/ecs/src/runtime/systems/BUILD
+index b0c4faa9ac1..0d93ec9ba10 100644
+--- a/c8/ecs/src/runtime/systems/BUILD
++++ b/c8/ecs/src/runtime/systems/BUILD
+@@ -62,6 +62,7 @@ js_library(
+         "//c8/ecs/src/runtime:loaders",
+         "//c8/ecs/src/runtime:matrix-refresh",
+         "//c8/ecs/src/runtime:physics",
++        "//c8/ecs/src/runtime:texture-constants",
+         "//c8/ecs/src/runtime:three",
+         "//c8/ecs/src/runtime:three-types",
+         "//c8/ecs/src/runtime:video-manager",
+diff --git a/c8/ecs/src/runtime/systems/gltf-system.ts b/c8/ecs/src/runtime/systems/gltf-system.ts
+index 375aa450467..0ab4fca640c 100644
+--- a/c8/ecs/src/runtime/systems/gltf-system.ts
++++ b/c8/ecs/src/runtime/systems/gltf-system.ts
+@@ -18,6 +18,7 @@ import {createVideoTexture} from '../video-texture'
+ import {getVideoManager} from '../video-manager'
+ import type {EmbeddedVideosByUrl} from '../video-types'
+ import {VIDEO_ACCESSOR_NAME} from '../../shared/video-constants'
++import {THREE_TEXTURE_KEYS} from '../texture-constants'
+ 
+ const playAction = (
+   action: THREE_TYPES.AnimationAction,
+@@ -53,13 +54,9 @@ const maybeLoadVideoTextures = (world: World, eid: Eid, node: THREE_TYPES.Mesh<a
+     return []
+   }
+ 
+-  const textureProps = [
+-    'map', 'alphaMap', 'emissiveMap', 'roughnessMap', 'metalnessMap', 'normalMap',
+-  ]
+-
+   const videoTextures: THREE_TYPES.VideoTexture[] = []
+ 
+-  textureProps.forEach((prop) => {
++  THREE_TEXTURE_KEYS.forEach((prop) => {
+     const needsSrgb = prop === 'map' || prop === 'emissiveMap'
+     const videoData = node.material.userData.videos?.[prop]
+ 
+@@ -257,8 +254,8 @@ const makeGltfSystem = (world: World) => {
+               (acc: { name: string }) => acc.name === VIDEO_ACCESSOR_NAME
+             )
+             const hasVideoMetadata = !!gltf.userData.embeddedVideos
+-            const hasEmbeddedVideos = hasVideoMetadata && videoAccessorIndex > -1
+-            if (hasEmbeddedVideos) {
++            const hasVideoBuffer = videoAccessorIndex > -1
++            if (hasVideoMetadata && hasVideoBuffer) {
+               const {embeddedVideos: embeddedMetadata} = gltf.userData
+               gltf.parser.getDependency('accessor', videoAccessorIndex).then((acc) => {
+                 const videosBuffer = acc.array.buffer.slice(
+@@ -289,7 +286,7 @@ const makeGltfSystem = (world: World) => {
+                 }
+                 if (node instanceof THREE.Mesh) {
+                   node.geometry.computeBoundsTree()
+-                  // NOTE(chloe): Support legacy method for GLTF-modified videos using http URLs.
++                  // NOTE(chloe): Uses legacy method for GLTF-modified videos using http URLs.
+                   const videoTextures = maybeLoadVideoTextures(world, eid, node)
+                   if (videoTextures.length) {
+                     videos.set(eid, videoTextures.map(t => t.uuid))
+diff --git a/c8/ecs/src/runtime/texture-constants.ts b/c8/ecs/src/runtime/texture-constants.ts
+new file mode 100644
+index 00000000000..420a35b7e9b
+--- /dev/null
++++ b/c8/ecs/src/runtime/texture-constants.ts
+@@ -0,0 +1,7 @@
++const THREE_TEXTURE_KEYS = [
++  'map', 'roughnessMap', 'metalnessMap', 'normalMap', 'alphaMap', 'emissiveMap',
++]
++
++export {
++  THREE_TEXTURE_KEYS,
++}
+diff --git a/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+index 456ee6f9b7d..1a7fdef34d7 100644
+--- a/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
++++ b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+@@ -4,6 +4,7 @@ import type {GLTF} from 'three-stdlib'
+ 
+ import type {EmbeddedVideosByUrl} from '@ecs/runtime/video-types'
+ import {VIDEO_ACCESSOR_NAME} from '@ecs/shared/video-constants'
++import {THREE_TEXTURE_KEYS} from '@ecs/runtime/texture-constants'
+ 
+ const getArrayBufferFromVideo = async (videoUrl: string): Promise<ArrayBuffer> => {
+   try {
+@@ -32,8 +33,6 @@ const extractVideosToEmbed = (
+ ) => {
+   const videoMetadataByUrl: EmbeddedVideosByUrl = {}
+   const videoBuffersByUrl: Record<string, ArrayBuffer> = {}
+-  const textureKeys = ['map', 'alphaMap', 'roughnessMap', 'metalnessMap', 'normalMap',
+-    'emissiveMap']
+ 
+   scene.traverse((object: Object3D) => {
+     if (object instanceof Mesh && object.material) {
+@@ -41,23 +40,24 @@ const extractVideosToEmbed = (
+       if (!videoData) {
+         return
+       }
+-      textureKeys.forEach((textureKey) => {
+-        if (videoData[textureKey]) {
+-          const {url, buffer} = videoData[textureKey]
+-          const existingData = existingEmbeddedVideos?.[url]
+-          if (!videoMetadataByUrl[url]) {
+-            videoMetadataByUrl[url] = {
+-              offset: 0,  // Will be calculated and set later once all video data is collected
+-              length: existingData?.length ?? buffer.byteLength,
+-              mimeType: existingData?.mimeType ?? getMimeTypeFromBuffer(buffer),
+-            }
+-            videoBuffersByUrl[url] = (existingData && existingVideoBuffer)
+-              ? existingVideoBuffer.slice(
+-                existingData.offset,
+-                existingData.offset + existingData.length
+-              )
+-              : buffer
++      THREE_TEXTURE_KEYS.forEach((textureKey) => {
++        if (!videoData[textureKey]) {
++          return
++        }
++        const {url, buffer} = videoData[textureKey]
++        const existingData = existingEmbeddedVideos?.[url]
++        if (!videoMetadataByUrl[url]) {
++          videoMetadataByUrl[url] = {
++            offset: -1,  // Will be calculated and set later once all video data is collected
++            length: existingData?.length ?? buffer.byteLength,
++            mimeType: existingData?.mimeType ?? getMimeTypeFromBuffer(buffer),
+           }
++          videoBuffersByUrl[url] = (existingData && existingVideoBuffer)
++            ? existingVideoBuffer.slice(
++              existingData.offset,
++              existingData.offset + existingData.length
++            )
++            : buffer
+         }
+       })
+     }
+@@ -99,26 +99,33 @@ const embedVideoBuffers = async (glbDocument: Document, scene: Object3D, gltf: G
+   let totalSize = 0
+   Object.values(videoMetadataByUrl).forEach(({length}) => { totalSize += length })
+ 
+-  if (totalSize) {
+-    const videoBuffer = new ArrayBuffer(totalSize)
+-    const videoBufferView = new Uint8Array(videoBuffer)
+-
+-    let offset = 0
+-    Object.entries(videoMetadataByUrl).forEach(([url, embeddedData]) => {
+-      embeddedData.offset = offset
+-      const bufferView = new Uint8Array(videoBuffersByUrl[url])
+-      videoBufferView.set(bufferView, offset)
+-      offset += embeddedData.length
+-    })
+-
+-    // Create new accessor and embed new video buffer into this new glTF document for exporting
+-    const accessor = glbDocument.createAccessor(VIDEO_ACCESSOR_NAME)
+-    accessor.setArray(videoBufferView)
+-    accessor.setType('SCALAR')
+-    accessor.setBuffer(mainBuffer)
+-
+-    root.setExtras({...root.getExtras(), embeddedVideos: videoMetadataByUrl})
++  if (!totalSize) {
++    // No video info to update the offsets
++    return
+   }
++
++  // Copy all video buffers into a single contiguous buffer
++  const videoBuffer = new ArrayBuffer(totalSize)
++  const videoBufferView = new Uint8Array(videoBuffer)
++
++  let offset = 0
++  Object.entries(videoMetadataByUrl).forEach(([url, embeddedData]) => {
++    if (embeddedData.offset !== -1) {
++      return
++    }
++    embeddedData.offset = offset
++    const bufferView = new Uint8Array(videoBuffersByUrl[url])
++    videoBufferView.set(bufferView, offset)
++    offset += embeddedData.length
++  })
++
++  // Create new accessor and embed new video buffer into this new glTF document for exporting
++  const accessor = glbDocument.createAccessor(VIDEO_ACCESSOR_NAME)
++  accessor.setArray(videoBufferView)
++  accessor.setType('SCALAR')
++  accessor.setBuffer(mainBuffer)
++
++  root.setExtras({...root.getExtras(), embeddedVideos: videoMetadataByUrl})
+ }
+ 
+ export {
+
+From 950c7b0cf2be77fa36f75625b67e981b253df54c Mon Sep 17 00:00:00 2001
+From: chloeason <chloe@nianticspatial.com>
+Date: Tue, 24 Jun 2025 10:21:49 -0700
+Subject: [PATCH 13/19] [xrhome][runtime] Embed video data directly into .glb
+ buffers
+
+---
+ .../xrhome/src/client/studio/embed-video-buffer.ts     | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+index 1a7fdef34d7..e6b37086008 100644
+--- a/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
++++ b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+@@ -69,7 +69,7 @@ const extractVideosToEmbed = (
+   }
+ }
+ 
+-const embedVideoBuffers = async (glbDocument: Document, scene: Object3D, gltf: GLTF) => {
++const embedVideoBuffers = async (glbDocument: Document, newScene: Object3D, existingGltf: GLTF) => {
+   const root = glbDocument.getRoot()
+   const buffers = root.listBuffers()
+   if (!buffers.length) {
+@@ -81,19 +81,19 @@ const embedVideoBuffers = async (glbDocument: Document, scene: Object3D, gltf: G
+   const mainBuffer = buffers[0]
+ 
+   // Attempt to find an existing accessor and video buffer from the original .glb
+-  const existingAccessorIndex = gltf.parser.json.accessors.findIndex(
++  const existingAccessorIndex = existingGltf.parser.json.accessors.findIndex(
+     acc => acc.name === VIDEO_ACCESSOR_NAME
+   )
+   const existingAccessor = existingAccessorIndex > -1
+-    ? await gltf.parser.getDependency('accessor', existingAccessorIndex)
++    ? await existingGltf.parser.getDependency('accessor', existingAccessorIndex)
+     : null
+-  const existingEmbeddedVideos = gltf.userData?.embeddedVideos as EmbeddedVideosByUrl | undefined
++  const existingEmbeddedVideos = existingGltf.userData?.embeddedVideos
+   const existingVideoBuffer = existingAccessor?.array.buffer.slice(
+     existingAccessor?.array.byteOffset,
+     existingAccessor?.array.byteOffset + existingAccessor?.array.byteLength
+   )
+ 
+-  const {videoMetadataByUrl, videoBuffersByUrl} = extractVideosToEmbed(scene,
++  const {videoMetadataByUrl, videoBuffersByUrl} = extractVideosToEmbed(newScene,
+     existingEmbeddedVideos, existingVideoBuffer)
+ 
+   let totalSize = 0
+
+From 5548b2002e3735043d08643bf8acc1db8e4c0bbe Mon Sep 17 00:00:00 2001
+From: chloeason <chloe@nianticspatial.com>
+Date: Mon, 7 Jul 2025 13:28:06 -0700
+Subject: [PATCH 14/19] [xrhome][runtime] Embed video data directly into .glb
+ buffers
+
+---
+ c8/ecs/src/runtime/BUILD                      |  58 +++++++-
+ c8/ecs/src/runtime/systems/BUILD              | 124 ++++++++++++++----
+ c8/ecs/src/runtime/systems/gltf-system.ts     |  62 ++++-----
+ c8/ecs/src/runtime/video-types.ts             |  16 +++
+ .../asset-materials-configurator.tsx          |  15 +--
+ .../configuration/asset-mesh-configurator.tsx |  44 +++++--
+ 6 files changed, 236 insertions(+), 83 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/BUILD b/c8/ecs/src/runtime/BUILD
+index 4efc0c53d5a..d5bedf6bdf3 100644
+--- a/c8/ecs/src/runtime/BUILD
++++ b/c8/ecs/src/runtime/BUILD
+@@ -77,6 +77,7 @@ js_library(
+         "//c8/ecs/src/runtime:orbit-controls",
+         "//c8/ecs/src/runtime:particles",
+         "//c8/ecs/src/runtime:physics",
++        "//c8/ecs/src/runtime:video",
+         "//c8/ecs/src/runtime:world-attribute",
+         "//c8/ecs/src/runtime:xr",
+     ],
+@@ -202,13 +203,16 @@ js_library(
+         "//c8/ecs/src/runtime/systems:geometry-system",
+         "//c8/ecs/src/runtime/systems:gltf-system",
+         "//c8/ecs/src/runtime/systems:hidden-system",
++        "//c8/ecs/src/runtime/systems:hider-material-system",
+         "//c8/ecs/src/runtime/systems:image-target-system",
+         "//c8/ecs/src/runtime/systems:light-systems",
+         "//c8/ecs/src/runtime/systems:map-system",
+-        "//c8/ecs/src/runtime/systems:material-systems",
++        "//c8/ecs/src/runtime/systems:material-system",
++        "//c8/ecs/src/runtime/systems:shadow-material-system",
+         "//c8/ecs/src/runtime/systems:splat-system",
+         "//c8/ecs/src/runtime/systems:transform-system",
+         "//c8/ecs/src/runtime/systems:ui-system",
++        "//c8/ecs/src/runtime/systems:unlit-material-system",
+         "//c8/ecs/src/runtime/systems:video-material-system",
+         "//c8/ecs/src/runtime/systems:video-system",
+         "//c8/ecs/src/shared:geometry-constants",
+@@ -1108,6 +1112,7 @@ js_library(
+         "//c8/ecs/src/runtime:persistent",
+         "//c8/ecs/src/runtime:prefab-entity",
+         "//c8/ecs/src/runtime:scene-environment",
++        "//c8/ecs/src/runtime:scene-fog",
+         "//c8/ecs/src/runtime:scene-types",
+         "//c8/ecs/src/runtime:spawn-into-object",
+         "//c8/ecs/src/runtime:world",
+@@ -1833,6 +1838,7 @@ js_library(
+         "//c8/ecs/src/runtime:audio-manager",
+         "//c8/ecs/src/runtime:components",
+         "//c8/ecs/src/runtime:event-ids",
++        "//c8/ecs/src/runtime:texture-types",
+         "//c8/ecs/src/runtime:three",
+         "//c8/ecs/src/runtime:three-types",
+         "//c8/ecs/src/runtime:video-types",
+@@ -1890,6 +1896,7 @@ js_library(
+     ],
+     deps = [
+         "//c8/ecs/src/runtime:components",
++        "//c8/ecs/src/runtime:texture-types",
+         "//c8/ecs/src/runtime:world-attribute",
+         "//c8/ecs/src/shared:schema",
+     ],
+@@ -2004,6 +2011,55 @@ js_test(
+     ],
+ )
+ 
++js_test(
++    name = "events-test",
++    size = "small",
++    esnext = 1,
++    externalize_npm = 1,
++    main = [
++        "events-test.ts",
++    ],
++    npm_rule = "@npm-ecs//:npm-ecs",
++    deps = [
++        "//bzl/js:chai-js",
++        "//c8/ecs/src/runtime:test-env",
++        "//c8/ecs/src/runtime:test-runtime-lib",
++    ],
++)
++
++js_library(
++    name = "video",
++    srcs = [
++        "video.ts",
++    ],
++    deps = [
++        "//c8/ecs/src/runtime:video-manager",
++        "//c8/ecs/src/runtime:video-types",
++        "//c8/ecs/src/runtime:world",
++        "//c8/ecs/src/shared:schema",
++    ],
++)
++
++js_library(
++    name = "texture-types",
++    srcs = [
++        "texture-types.ts",
++    ],
++)
++
++js_library(
++    name = "scene-fog",
++    srcs = [
++        "scene-fog.ts",
++    ],
++    deps = [
++        "//c8/ecs/src/runtime:three",
++        "//c8/ecs/src/runtime:world",
++        "//c8/ecs/src/shared:get-fog-from-scene-graph",
++        "//c8/ecs/src/shared:scene-graph",
++    ],
++)
++
+ js_library(
+     name = "texture-constants",
+     srcs = [
+diff --git a/c8/ecs/src/runtime/systems/BUILD b/c8/ecs/src/runtime/systems/BUILD
+index 0d93ec9ba10..3f2ccefa974 100644
+--- a/c8/ecs/src/runtime/systems/BUILD
++++ b/c8/ecs/src/runtime/systems/BUILD
+@@ -124,7 +124,7 @@ js_library(
+         "//c8/ecs/src/runtime:three-side",
+         "//c8/ecs/src/runtime:world",
+         "//c8/ecs/src/runtime/math",
+-        "//c8/ecs/src/runtime/systems:material-systems",
++        "//c8/ecs/src/runtime/systems:material-systems-helpers",
+         "//c8/ecs/src/runtime/systems:system-helper",
+         "//c8/ecs/src/shared:angle-conversion",
+         "//c8/ecs/src/shared:find-component",
+@@ -135,31 +135,6 @@ js_library(
+     ],
+ )
+ 
+-js_library(
+-    name = "material-systems",
+-    srcs = [
+-        "material-systems.ts",
+-    ],
+-    deps = [
+-        "//c8/ecs/src/runtime:assets",
+-        "//c8/ecs/src/runtime:components",
+-        "//c8/ecs/src/runtime:dispose",
+-        "//c8/ecs/src/runtime:event-ids",
+-        "//c8/ecs/src/runtime:events",
+-        "//c8/ecs/src/runtime:three",
+-        "//c8/ecs/src/runtime:three-side",
+-        "//c8/ecs/src/runtime:three-types",
+-        "//c8/ecs/src/runtime:three-wrapping",
+-        "//c8/ecs/src/runtime:video-manager",
+-        "//c8/ecs/src/runtime:video-texture",
+-        "//c8/ecs/src/runtime:world",
+-        "//c8/ecs/src/runtime/systems:system-helper",
+-        "//c8/ecs/src/shared:scene-graph",
+-        "//c8/ecs/src/shared:schema",
+-        "//c8/ecs/src/shared:video-constants",
+-    ],
+-)
+-
+ js_library(
+     name = "splat-system",
+     srcs = [
+@@ -297,9 +272,104 @@ js_library(
+         "//c8/ecs/src/runtime:three-types",
+         "//c8/ecs/src/runtime:video-manager",
+         "//c8/ecs/src/runtime:world",
+-        "//c8/ecs/src/runtime/systems:material-systems",
++        "//c8/ecs/src/runtime/systems:material-systems-helpers",
+         "//c8/ecs/src/runtime/systems:system-helper",
+         "//c8/ecs/src/shared:material-constants",
+         "//c8/ecs/src/shared:schema",
+     ],
+ )
++
++js_library(
++    name = "hider-material-system",
++    srcs = [
++        "hider-material-system.ts",
++    ],
++    deps = [
++        "//c8/ecs/src/runtime:components",
++        "//c8/ecs/src/runtime:event-ids",
++        "//c8/ecs/src/runtime:events",
++        "//c8/ecs/src/runtime:three",
++        "//c8/ecs/src/runtime:three-types",
++        "//c8/ecs/src/runtime:world",
++        "//c8/ecs/src/runtime/systems:material-systems-helpers",
++        "//c8/ecs/src/runtime/systems:system-helper",
++        "//c8/ecs/src/shared:schema",
++    ],
++)
++
++js_library(
++    name = "material-system",
++    srcs = [
++        "material-system.ts",
++    ],
++    deps = [
++        "//c8/ecs/src/runtime:components",
++        "//c8/ecs/src/runtime:three",
++        "//c8/ecs/src/runtime:three-side",
++        "//c8/ecs/src/runtime:three-types",
++        "//c8/ecs/src/runtime:video-manager",
++        "//c8/ecs/src/runtime:world",
++        "//c8/ecs/src/runtime/systems:material-systems-helpers",
++        "//c8/ecs/src/runtime/systems:system-helper",
++        "//c8/ecs/src/shared:scene-graph",
++        "//c8/ecs/src/shared:schema",
++    ],
++)
++
++js_library(
++    name = "material-systems-helpers",
++    srcs = [
++        "material-systems-helpers.ts",
++    ],
++    deps = [
++        "//c8/ecs/src/runtime:assets",
++        "//c8/ecs/src/runtime:dispose",
++        "//c8/ecs/src/runtime:three",
++        "//c8/ecs/src/runtime:three-types",
++        "//c8/ecs/src/runtime:three-wrapping",
++        "//c8/ecs/src/runtime:video-manager",
++        "//c8/ecs/src/runtime:video-texture",
++        "//c8/ecs/src/runtime:world",
++        "//c8/ecs/src/shared:scene-graph",
++        "//c8/ecs/src/shared:schema",
++        "//c8/ecs/src/shared:video-constants",
++    ],
++)
++
++js_library(
++    name = "shadow-material-system",
++    srcs = [
++        "shadow-material-system.ts",
++    ],
++    deps = [
++        "//c8/ecs/src/runtime:components",
++        "//c8/ecs/src/runtime:event-ids",
++        "//c8/ecs/src/runtime:events",
++        "//c8/ecs/src/runtime:three",
++        "//c8/ecs/src/runtime:three-side",
++        "//c8/ecs/src/runtime:three-types",
++        "//c8/ecs/src/runtime:world",
++        "//c8/ecs/src/runtime/systems:material-systems-helpers",
++        "//c8/ecs/src/runtime/systems:system-helper",
++        "//c8/ecs/src/shared:schema",
++    ],
++)
++
++js_library(
++    name = "unlit-material-system",
++    srcs = [
++        "unlit-material-system.ts",
++    ],
++    deps = [
++        "//c8/ecs/src/runtime:components",
++        "//c8/ecs/src/runtime:three",
++        "//c8/ecs/src/runtime:three-side",
++        "//c8/ecs/src/runtime:three-types",
++        "//c8/ecs/src/runtime:video-manager",
++        "//c8/ecs/src/runtime:world",
++        "//c8/ecs/src/runtime/systems:material-systems-helpers",
++        "//c8/ecs/src/runtime/systems:system-helper",
++        "//c8/ecs/src/shared:scene-graph",
++        "//c8/ecs/src/shared:schema",
++    ],
++)
+diff --git a/c8/ecs/src/runtime/systems/gltf-system.ts b/c8/ecs/src/runtime/systems/gltf-system.ts
+index 0ab4fca640c..2ca4dc29757 100644
+--- a/c8/ecs/src/runtime/systems/gltf-system.ts
++++ b/c8/ecs/src/runtime/systems/gltf-system.ts
+@@ -48,7 +48,7 @@ const playAction = (
+   }
+ }
+ 
+-const maybeLoadVideoTextures = (world: World, eid: Eid, node: THREE_TYPES.Mesh<any, any, any>,
++const maybeLoadVideoTextures = (node: THREE_TYPES.Mesh<any, any, any>,
+   videosArrayBuffer?: ArrayBuffer, embeddedVideos?: EmbeddedVideosByUrl) => {
+   if (!node.material || !node.material.userData.videos) {
+     return []
+@@ -71,6 +71,7 @@ const maybeLoadVideoTextures = (world: World, eid: Eid, node: THREE_TYPES.Mesh<a
+         videoTexture = createVideoTexture(videoData.localUrl)
+       }
+       videoTexture.userData.src = videoData.url
++      videoTexture.userData.textureKey = prop
+       if (needsSrgb) {
+         videoTexture.colorSpace = THREE.SRGBColorSpace
+       }
+@@ -79,9 +80,6 @@ const maybeLoadVideoTextures = (world: World, eid: Eid, node: THREE_TYPES.Mesh<a
+     }
+   })
+ 
+-  const videoManager = getVideoManager(world)
+-  videoManager.addVideo(eid, videoTextures)
+-
+   return videoTextures
+ }
+ 
+@@ -220,6 +218,28 @@ const makeGltfSystem = (world: World) => {
+     }
+   }
+ 
++  const configureGltfScene = (eid: Eid, scene: THREE_TYPES.Group, shadowConfig?: ShadowType,
++    videosBuffer?: ArrayBuffer, embeddedMetadata?: EmbeddedVideosByUrl) => {
++    const videoTexturesInGltf: THREE_TYPES.VideoTexture[] = []
++    scene.traverse((node) => {
++      if (shadowConfig && node.isObject3D) {
++        node.castShadow = !!shadowConfig.castShadow
++        node.receiveShadow = !!shadowConfig.receiveShadow
++      }
++      if (node instanceof THREE.Mesh) {
++        node.geometry.computeBoundsTree()
++        const videoTexturesInMaterial = maybeLoadVideoTextures(node, videosBuffer,
++          embeddedMetadata)
++        if (videoTexturesInMaterial.length) {
++          videoTexturesInGltf.push(...videoTexturesInMaterial)
++        }
++        markAsDisposable(node)
++      }
++    })
++    getVideoManager(world).addVideo(eid, videoTexturesInGltf)
++    videos.set(eid, videoTexturesInGltf.map(t => t.uuid))
++  }
++
+   const applyModel = (eid: Eid) => {
+     const object = world.three.entityToObject.get(eid)
+ 
+@@ -245,7 +265,7 @@ const makeGltfSystem = (world: World) => {
+               return resolve()
+             }
+ 
+-            let shadowConfig: ShadowType
++            let shadowConfig: ShadowType | undefined
+             if (Shadow.has(world, eid)) {
+               shadowConfig = Shadow.get(world, eid)
+             }
+@@ -262,38 +282,10 @@ const makeGltfSystem = (world: World) => {
+                   acc.array.byteOffset,
+                   acc.array.byteOffset + acc.array.byteLength
+                 )
+-                gltf.scene.traverse((node) => {
+-                  if (shadowConfig && node.isObject3D) {
+-                    node.castShadow = !!shadowConfig.castShadow
+-                    node.receiveShadow = !!shadowConfig.receiveShadow
+-                  }
+-                  if (node instanceof THREE.Mesh) {
+-                    node.geometry.computeBoundsTree()
+-                    const videoTextures = maybeLoadVideoTextures(world, eid, node, videosBuffer,
+-                      embeddedMetadata)
+-                    if (videoTextures.length) {
+-                      videos.set(eid, videoTextures.map(t => t.uuid))
+-                    }
+-                    markAsDisposable(node)
+-                  }
+-                })
++                configureGltfScene(eid, gltf.scene, shadowConfig, videosBuffer, embeddedMetadata)
+               })
+             } else {
+-              gltf.scene.traverse((node) => {
+-                if (shadowConfig && node.isObject3D) {
+-                  node.castShadow = !!shadowConfig.castShadow
+-                  node.receiveShadow = !!shadowConfig.receiveShadow
+-                }
+-                if (node instanceof THREE.Mesh) {
+-                  node.geometry.computeBoundsTree()
+-                  // NOTE(chloe): Uses legacy method for GLTF-modified videos using http URLs.
+-                  const videoTextures = maybeLoadVideoTextures(world, eid, node)
+-                  if (videoTextures.length) {
+-                    videos.set(eid, videoTextures.map(t => t.uuid))
+-                  }
+-                  markAsDisposable(node)
+-                }
+-              })
++              configureGltfScene(eid, gltf.scene, shadowConfig)
+             }
+ 
+             const model = GltfModel.get(world, eid)
+diff --git a/c8/ecs/src/runtime/video-types.ts b/c8/ecs/src/runtime/video-types.ts
+index a157c5f6b1d..1b81867e0a2 100644
+--- a/c8/ecs/src/runtime/video-types.ts
++++ b/c8/ecs/src/runtime/video-types.ts
+@@ -3,9 +3,23 @@
+ import type {ReadData} from '../shared/schema'
+ import type {SchemaOf} from './world-attribute'
+ import type {VideoControls} from './components'
++import type {EcsTextureKey} from './texture-types'
+ 
+ type VideoControlsRuntimeSettings = ReadData<SchemaOf<typeof VideoControls>>
+ 
++// Query parameters use AND logic - the query matches only if ALL provided parameters match.
++// If no parameters are provided, it matches all videos.
++type VideoQuery = {
++  src?: string
++  textureKey?: EcsTextureKey
++}
++
++type VideoTimeResult = {
++  src: string
++  textureKey: EcsTextureKey
++  time: number
++}
++
+ type EmbeddedVideoMetadata = {
+   offset: number
+   length: number
+@@ -15,6 +29,8 @@ type EmbeddedVideoMetadata = {
+ type EmbeddedVideosByUrl = Record<string, EmbeddedVideoMetadata>
+ 
+ export type {
++  VideoQuery,
++  VideoTimeResult,
+   EmbeddedVideosByUrl,
+   VideoControlsRuntimeSettings,
+ }
+diff --git a/reality/cloud/xrhome/src/client/studio/configuration/asset-materials-configurator.tsx b/reality/cloud/xrhome/src/client/studio/configuration/asset-materials-configurator.tsx
+index 5e5e7c53994..cc5405ae247 100644
+--- a/reality/cloud/xrhome/src/client/studio/configuration/asset-materials-configurator.tsx
++++ b/reality/cloud/xrhome/src/client/studio/configuration/asset-materials-configurator.tsx
+@@ -11,7 +11,7 @@ import {MaterialConfigurator} from './material-configurator'
+ import {useTextureWithSettings} from '../hooks/use-texture-with-settings'
+ 
+ import {
+-  convertThreeMaterial, findMaterialsInThreeScene, updateThreeMaterial, generateUniqueDataUrls,
++  convertThreeMaterial, updateThreeMaterial, generateUniqueDataUrls,
+   convertConfiguredMaterial, convertConfiguredTextureResource, replaceMaterial,
+ } from './three-material-util'
+ import type {ConfiguredMaterial, ConfiguredTextureResource} from './material-types'
+@@ -186,15 +186,14 @@ const ThreeMaterialConfigurator: React.FC<IThreeMaterialConfigurator> = (
+ 
+ interface IAssetMaterialsConfigurator {
+   previewScene: THREE.Object3D
++  materialsArray: THREE.Material[]
+   setHasChanged: (hasChanged: boolean) => void
+ }
+ 
+ const AssetMaterialsConfigurator: React.FC<IAssetMaterialsConfigurator> = (
+-  {previewScene, setHasChanged}
++  {previewScene, materialsArray, setHasChanged}
+ ) => {
+   const {t} = useTranslation(['cloud-studio-pages'])
+-  const [materialsArray, setMaterialsArray] = React.useState<THREE.Material[]>([])
+-
+   const {setShowTextureSizeWarning} = useStudioModelPreviewContext()
+ 
+   const textures = React.useMemo(() => (
+@@ -203,11 +202,9 @@ const AssetMaterialsConfigurator: React.FC<IAssetMaterialsConfigurator> = (
+   React.useEffect(() => {
+     // NOTE(alan): This can't be moved into a useMemo for some weird reason related to load order
+     // of the gltf scene.
+-    const materials = Array.from(findMaterialsInThreeScene(previewScene))
+-    setMaterialsArray(materials)
+ 
+-    for (let i = 0; i < materials.length; i++) {
+-      const material = materials[i] as any
++    for (let i = 0; i < materialsArray.length; i++) {
++      const material = materialsArray[i] as any
+       const warning =
+         !validateTextureResolution(material.map) ||
+         !validateTextureResolution(material.alphaMap) ||
+@@ -227,7 +224,7 @@ const AssetMaterialsConfigurator: React.FC<IAssetMaterialsConfigurator> = (
+     return () => {
+       setShowTextureSizeWarning(false)
+     }
+-  }, [previewScene])
++  }, [materialsArray])
+ 
+   if (materialsArray.length === 0) {
+     return null
+diff --git a/reality/cloud/xrhome/src/client/studio/configuration/asset-mesh-configurator.tsx b/reality/cloud/xrhome/src/client/studio/configuration/asset-mesh-configurator.tsx
+index 2b47e693d75..31b2f980aa3 100644
+--- a/reality/cloud/xrhome/src/client/studio/configuration/asset-mesh-configurator.tsx
++++ b/reality/cloud/xrhome/src/client/studio/configuration/asset-mesh-configurator.tsx
+@@ -2,14 +2,15 @@ import React from 'react'
+ 
+ import {useTranslation} from 'react-i18next'
+ 
+-import {AnimationMixer, Box3, Matrix4, Mesh, Object3D} from 'three'
++import {AnimationMixer, Box3, Matrix4, Mesh, Object3D, Material} from 'three'
+ 
+ import {createUseStyles} from 'react-jss'
+ 
+ import {GLTFExporter} from 'three/examples/jsm/exporters/GLTFExporter'
+ import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
+ 
+-import {Document, NodeIO} from '@gltf-transform/core'
++import {Document, NodeIO, PropertyType} from '@gltf-transform/core'
++import {prune} from '@gltf-transform/functions'
+ import {KHRONOS_EXTENSIONS} from '@gltf-transform/extensions'
+ 
+ import {MAX_RECOMMENDED_TEXTURE_SIZE} from '@ecs/shared/material-constants'
+@@ -26,7 +27,7 @@ import useCurrentApp from '../../common/use-current-app'
+ import {EditorFileLocation, extractFilePath, extractRepoId} from '../../editor/editor-file-location'
+ import {basename, dirname} from '../../editor/editor-common'
+ import {
+-  traverseTwo, containsTexture, replaceMaterialTexture,
++  traverseTwo, containsTexture, replaceMaterial,
+   getObject3DInfo, replaceMesh, getGltfTransformDocument,
+ } from '../asset-previews/asset-utils'
+ import {
+@@ -38,6 +39,7 @@ import {Tooltip} from '../../ui/components/tooltip'
+ import {Icon} from '../../ui/components/icon'
+ import {useStudioModelPreviewContext} from '../asset-previews/studio-model-preview-context'
+ import {StaticBanner} from '../../ui/components/banner'
++import {findMaterialsInThreeScene} from './three-material-util'
+ import {embedVideoBuffers} from '../embed-video-buffer'
+ 
+ const textureCache: Record<string, boolean> = {}
+@@ -84,6 +86,7 @@ const AssetMeshConfigurator: React.FC<IAssetMeshConfigurator> = ({
+ 
+   const [isChangingTextureSize, setIsChangingTextureSize] = React.useState(false)
+   const [isSimplifyingMesh, setIsSimplifyingMesh] = React.useState(false)
++  const [materialsArray, setMaterialsArray] = React.useState<Material[]>([])
+   const loaderTimeoutRef = React.useRef(null)
+ 
+   React.useEffect(() => {
+@@ -215,7 +218,7 @@ const AssetMeshConfigurator: React.FC<IAssetMeshConfigurator> = ({
+     changeModelPivotPoint('')
+     setSelectedPivotPoint('')
+ 
+-    replaceMaterialTexture(previewScene, sourceScene)
++    replaceMaterial(previewScene, sourceScene)
+     setSelectedTextureSize('')
+ 
+     replaceMesh(previewScene, sourceScene)
+@@ -230,6 +233,10 @@ const AssetMeshConfigurator: React.FC<IAssetMeshConfigurator> = ({
+     setIsSimplifyingMesh(false)
+   }
+ 
++  React.useEffect(() => {
++    setMaterialsArray(Array.from(findMaterialsInThreeScene(previewScene)))
++  }, [hasChanged])
++
+   // Reset model configuration options
+   React.useEffect(() => () => {
+     resetScene()
+@@ -274,10 +281,12 @@ const AssetMeshConfigurator: React.FC<IAssetMeshConfigurator> = ({
+         (loadedGltf) => {
+           replaceSceneContents(previewScene, loadedGltf.scene.children[0])
+           recalculateGltfFileSize()
++          URL.revokeObjectURL(url)
+           resolve()
+         },
+         undefined,
+         (e) => {
++          URL.revokeObjectURL(url)
+           reject(e)
+         }
+       )
+@@ -304,7 +313,7 @@ const AssetMeshConfigurator: React.FC<IAssetMeshConfigurator> = ({
+       const glbBinary = await maybeAbandon(changeTextureSize(selectedTextureSize, gltfExport))
+       if (!glbBinary) return
+ 
+-      await maybeAbandon(saveGltfTransformToScene(glbBinary, replaceMaterialTexture))
++      await maybeAbandon(saveGltfTransformToScene(glbBinary, replaceMaterial))
+     } catch (e) {
+       throw new Error(`Failed to transform ThreeJS glb to gltf-transform glb: ${e}`)
+     }
+@@ -338,7 +347,7 @@ const AssetMeshConfigurator: React.FC<IAssetMeshConfigurator> = ({
+   }
+ 
+   // Note (jgarciakimble) Using gltf-transform lets us get rid of Aux_Scene
+-  function promoteRootScene(document: Document) {
++  async function promoteRootScene(document: Document) {
+     const root = document.getRoot()
+     const scenes = root.listScenes()
+     if (scenes.length === 0) {
+@@ -357,14 +366,26 @@ const AssetMeshConfigurator: React.FC<IAssetMeshConfigurator> = ({
+       return
+     }
+ 
+-    // The only child of aux_scene is Root_Scene
+-    const rootNode = children[0]
+-    auxScene.removeChild(rootNode)
++    // The only child of aux_scene is an auxiliary node
++    const auxNode = children[0]
++    auxScene.removeChild(auxNode)
++
++    // The first child of the auxiliary node is the original root node
++    const rootNode = auxNode.listChildren()[0]
+ 
+-    const newScene = document.createScene(rootNode.getName())
++    // Remove appended '_1' to rootNode name
++    let rootNodeName = rootNode.getName()
++    if (rootNodeName.endsWith('_1')) {
++      rootNodeName = rootNodeName.slice(0, -2)
++      rootNode.setName(rootNodeName)
++    }
++
++    const newScene = document.createScene(rootNodeName)
+     newScene.addChild(rootNode)
+ 
+     root.setDefaultScene(newScene)
++
++    await document.transform(prune({propertyTypes: [PropertyType.NODE]}))
+   }
+ 
+   const resetPreviewOptions = () => {
+@@ -390,7 +411,7 @@ const AssetMeshConfigurator: React.FC<IAssetMeshConfigurator> = ({
+ 
+     resetPreviewOptions()
+     const glbDocument = await getGltfTransformDocument(previewScene, options)
+-    promoteRootScene(glbDocument)
++    await promoteRootScene(glbDocument)
+     await embedVideoBuffers(glbDocument, previewScene, gltf)
+     const gltfBlob = await io.writeBinary(glbDocument)
+ 
+@@ -520,6 +541,7 @@ const AssetMeshConfigurator: React.FC<IAssetMeshConfigurator> = ({
+       </FloatingTraySection>
+       <AssetMaterialsConfigurator
+         previewScene={previewScene as Object3D}
++        materialsArray={materialsArray}
+         setHasChanged={e => setHasChanged(e)}
+         key={previewScene.id}
+       />
+
+From 4273c3e1152e155502e0549d0195963b38195fe2 Mon Sep 17 00:00:00 2001
+From: chloeason <chloe@nianticspatial.com>
+Date: Tue, 8 Jul 2025 09:49:05 -0700
+Subject: [PATCH 15/19] [xrhome][runtime] Embed video data directly into .glb
+ buffers
+
+---
+ c8/ecs/src/runtime/BUILD                      |  3 +
+ c8/ecs/src/runtime/systems/gltf-system.ts     | 23 +++---
+ c8/ecs/src/runtime/texture-constants.ts       |  4 +-
+ c8/ecs/src/runtime/video-types.ts             | 11 ++-
+ .../asset-materials-configurator.tsx          | 11 +--
+ .../configuration/asset-mesh-configurator.tsx |  2 +-
+ .../src/client/studio/embed-video-buffer.ts   | 78 +++++++------------
+ 7 files changed, 59 insertions(+), 73 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/BUILD b/c8/ecs/src/runtime/BUILD
+index d5bedf6bdf3..6dae903381e 100644
+--- a/c8/ecs/src/runtime/BUILD
++++ b/c8/ecs/src/runtime/BUILD
+@@ -2065,4 +2065,7 @@ js_library(
+     srcs = [
+         "texture-constants.ts",
+     ],
++    deps = [
++        "//c8/ecs/src/runtime:texture-types",
++    ],
+ )
+diff --git a/c8/ecs/src/runtime/systems/gltf-system.ts b/c8/ecs/src/runtime/systems/gltf-system.ts
+index 2ca4dc29757..5895c4019f5 100644
+--- a/c8/ecs/src/runtime/systems/gltf-system.ts
++++ b/c8/ecs/src/runtime/systems/gltf-system.ts
+@@ -16,7 +16,7 @@ import type {SchemaOf} from '../world-attribute'
+ import {disposeObject, markAsDisposable} from '../dispose'
+ import {createVideoTexture} from '../video-texture'
+ import {getVideoManager} from '../video-manager'
+-import type {EmbeddedVideosByUrl} from '../video-types'
++import type {EmbeddedVideosByUrl, VideoUserData} from '../video-types'
+ import {VIDEO_ACCESSOR_NAME} from '../../shared/video-constants'
+ import {THREE_TEXTURE_KEYS} from '../texture-constants'
+ 
+@@ -56,26 +56,27 @@ const maybeLoadVideoTextures = (node: THREE_TYPES.Mesh<any, any, any>,
+ 
+   const videoTextures: THREE_TYPES.VideoTexture[] = []
+ 
+-  THREE_TEXTURE_KEYS.forEach((prop) => {
+-    const needsSrgb = prop === 'map' || prop === 'emissiveMap'
+-    const videoData = node.material.userData.videos?.[prop]
++  THREE_TEXTURE_KEYS.forEach((textureKey) => {
++    const needsSrgb = textureKey === 'map' || textureKey === 'emissiveMap'
++    const videoData: VideoUserData = node.material.userData.videos
+ 
+-    if (videoData) {
++    if (videoData && videoData[textureKey]) {
++      const {url, localUrl} = videoData[textureKey]
+       let videoTexture: THREE_TYPES.VideoTexture
+-      const useLegacyData = !embeddedVideos?.[videoData.url] || !videosArrayBuffer
++      const useLegacyData = !embeddedVideos?.[url] || !videosArrayBuffer
+       if (!useLegacyData) {
+-        const {offset, length, mimeType} = embeddedVideos[videoData.url]
++        const {offset, length, mimeType} = embeddedVideos[url]
+         const videoBuffer = videosArrayBuffer.slice(offset, offset + length)
+         videoTexture = createVideoTexture({buffer: videoBuffer, mimeType})
+       } else {
+-        videoTexture = createVideoTexture(videoData.localUrl)
++        videoTexture = createVideoTexture(localUrl)
+       }
+-      videoTexture.userData.src = videoData.url
+-      videoTexture.userData.textureKey = prop
++      videoTexture.userData.src = url
++      videoTexture.userData.textureKey = textureKey
+       if (needsSrgb) {
+         videoTexture.colorSpace = THREE.SRGBColorSpace
+       }
+-      node.material[prop] = videoTexture
++      node.material[textureKey] = videoTexture
+       videoTextures.push(videoTexture)
+     }
+   })
+diff --git a/c8/ecs/src/runtime/texture-constants.ts b/c8/ecs/src/runtime/texture-constants.ts
+index 420a35b7e9b..ad5c7fce6eb 100644
+--- a/c8/ecs/src/runtime/texture-constants.ts
++++ b/c8/ecs/src/runtime/texture-constants.ts
+@@ -1,4 +1,6 @@
+-const THREE_TEXTURE_KEYS = [
++import type {ThreeTextureKey} from './texture-types'
++
++const THREE_TEXTURE_KEYS: ThreeTextureKey[] = [
+   'map', 'roughnessMap', 'metalnessMap', 'normalMap', 'alphaMap', 'emissiveMap',
+ ]
+ 
+diff --git a/c8/ecs/src/runtime/video-types.ts b/c8/ecs/src/runtime/video-types.ts
+index 1b81867e0a2..519c82e4689 100644
+--- a/c8/ecs/src/runtime/video-types.ts
++++ b/c8/ecs/src/runtime/video-types.ts
+@@ -3,7 +3,7 @@
+ import type {ReadData} from '../shared/schema'
+ import type {SchemaOf} from './world-attribute'
+ import type {VideoControls} from './components'
+-import type {EcsTextureKey} from './texture-types'
++import type {EcsTextureKey, ThreeTextureKey} from './texture-types'
+ 
+ type VideoControlsRuntimeSettings = ReadData<SchemaOf<typeof VideoControls>>
+ 
+@@ -28,9 +28,18 @@ type EmbeddedVideoMetadata = {
+ 
+ type EmbeddedVideosByUrl = Record<string, EmbeddedVideoMetadata>
+ 
++type VideoArrayBuffer = {
++  buffer: ArrayBuffer
++  mimeType: string
++}
++
++type VideoUserData = Record<ThreeTextureKey, {url: string, localUrl: string}>
++
+ export type {
+   VideoQuery,
+   VideoTimeResult,
+   EmbeddedVideosByUrl,
+   VideoControlsRuntimeSettings,
++  VideoArrayBuffer,
++  VideoUserData,
+ }
+diff --git a/reality/cloud/xrhome/src/client/studio/configuration/asset-materials-configurator.tsx b/reality/cloud/xrhome/src/client/studio/configuration/asset-materials-configurator.tsx
+index cc5405ae247..f4de1cc047f 100644
+--- a/reality/cloud/xrhome/src/client/studio/configuration/asset-materials-configurator.tsx
++++ b/reality/cloud/xrhome/src/client/studio/configuration/asset-materials-configurator.tsx
+@@ -17,7 +17,6 @@ import {
+ import type {ConfiguredMaterial, ConfiguredTextureResource} from './material-types'
+ import {FloatingTraySection} from '../../ui/components/floating-tray-section'
+ import {useStudioModelPreviewContext} from '../asset-previews/studio-model-preview-context'
+-import {getArrayBufferFromVideo} from '../embed-video-buffer'
+ 
+ interface IThreeMaterialConfigurator {
+   threeMat: THREE.Material
+@@ -65,7 +64,6 @@ const useOverrideProperty = (
+   const tex = useTextureWithSettings(material, convertConfiguredTextureResource(resource))
+ 
+   useLayoutEffect(() => {
+-    let aborted = false
+     const prevTexture = threeMat[property]
+     const prevUserData = threeMat.userData
+     const isDefault = typeof resource !== 'string' && resource?.type === 'default'
+@@ -82,20 +80,13 @@ const useOverrideProperty = (
+       if (!threeMat.userData.videos) {
+         threeMat.userData.videos = {}
+       }
+-      // eslint-disable-next-line local-rules/prefer-await
+-      getArrayBufferFromVideo(tex?.userData?.videoSrc.localUrl).then((arrayBuffer) => {
+-        if (!aborted) {
+-          threeMat.userData.videos[property] = tex.userData.videoSrc
+-          threeMat.userData.videos[property].buffer = arrayBuffer
+-        }
+-      })
++      threeMat.userData.videos[property] = tex.userData.videoSrc
+     } else {
+       delete threeMat.userData?.videos?.[property]
+     }
+     threeMat.needsUpdate = true
+ 
+     return () => {
+-      aborted = true
+       threeMat[property] = prevTexture
+       threeMat.userData = prevUserData
+       threeMat.needsUpdate = true
+diff --git a/reality/cloud/xrhome/src/client/studio/configuration/asset-mesh-configurator.tsx b/reality/cloud/xrhome/src/client/studio/configuration/asset-mesh-configurator.tsx
+index 31b2f980aa3..d1bab16685b 100644
+--- a/reality/cloud/xrhome/src/client/studio/configuration/asset-mesh-configurator.tsx
++++ b/reality/cloud/xrhome/src/client/studio/configuration/asset-mesh-configurator.tsx
+@@ -412,7 +412,7 @@ const AssetMeshConfigurator: React.FC<IAssetMeshConfigurator> = ({
+     resetPreviewOptions()
+     const glbDocument = await getGltfTransformDocument(previewScene, options)
+     await promoteRootScene(glbDocument)
+-    await embedVideoBuffers(glbDocument, previewScene, gltf)
++    await embedVideoBuffers(glbDocument, previewScene)
+     const gltfBlob = await io.writeBinary(glbDocument)
+ 
+     const gltfFile: File = new File(
+diff --git a/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+index e6b37086008..7004d3de01e 100644
+--- a/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
++++ b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+@@ -1,42 +1,33 @@
+ import type {Document} from '@gltf-transform/core'
+ import {Object3D, Mesh} from 'three'
+-import type {GLTF} from 'three-stdlib'
+ 
+-import type {EmbeddedVideosByUrl} from '@ecs/runtime/video-types'
++import type {EmbeddedVideosByUrl, VideoArrayBuffer, VideoUserData} from '@ecs/runtime/video-types'
+ import {VIDEO_ACCESSOR_NAME} from '@ecs/shared/video-constants'
+ import {THREE_TEXTURE_KEYS} from '@ecs/runtime/texture-constants'
+ 
+-const getArrayBufferFromVideo = async (videoUrl: string): Promise<ArrayBuffer> => {
++const getBufferAndMimeTypeForVideo = async (videoUrl: string): Promise<VideoArrayBuffer> => {
+   try {
+     const response = await fetch(videoUrl)
+     if (!response.ok) {
+       throw new Error(`Failed to fetch video to retrieve array buffer: ${response.status}`)
+     }
+-    return response.arrayBuffer()
++    const blob = await response.blob()
++    const buffer = await blob.arrayBuffer()
++    return {buffer, mimeType: blob.type}
+   } catch (error) {
+     throw new Error(`Failed to fetch video to retrieve array buffer: ${error}`)
+   }
+ }
+ 
+-const getMimeTypeFromBuffer = (arrayBuffer: ArrayBuffer): string => {
+-  const bytes = new Uint8Array(arrayBuffer, 0, 8)
+-  if (bytes[4] === 0x66 && bytes[5] === 0x74 && bytes[6] === 0x79 && bytes[7] === 0x70) {
+-    return 'video/mp4'
+-  }
+-  throw new Error('Unsupported video format - cannot embed into .glb. Retry with .mp4 format.')
+-}
+-
+-const extractVideosToEmbed = (
+-  scene: Object3D,
+-  existingEmbeddedVideos: EmbeddedVideosByUrl | undefined,
+-  existingVideoBuffer: ArrayBuffer | undefined
+-) => {
++const extractVideosToEmbed = async (scene: Object3D) => {
+   const videoMetadataByUrl: EmbeddedVideosByUrl = {}
+   const videoBuffersByUrl: Record<string, ArrayBuffer> = {}
+ 
++  const urls: Record<string, string> = {}
++
+   scene.traverse((object: Object3D) => {
+     if (object instanceof Mesh && object.material) {
+-      const videoData = object.material.userData?.videos
++      const videoData: VideoUserData = object.material.userData?.videos
+       if (!videoData) {
+         return
+       }
+@@ -44,32 +35,36 @@ const extractVideosToEmbed = (
+         if (!videoData[textureKey]) {
+           return
+         }
+-        const {url, buffer} = videoData[textureKey]
+-        const existingData = existingEmbeddedVideos?.[url]
+-        if (!videoMetadataByUrl[url]) {
+-          videoMetadataByUrl[url] = {
+-            offset: -1,  // Will be calculated and set later once all video data is collected
+-            length: existingData?.length ?? buffer.byteLength,
+-            mimeType: existingData?.mimeType ?? getMimeTypeFromBuffer(buffer),
+-          }
+-          videoBuffersByUrl[url] = (existingData && existingVideoBuffer)
+-            ? existingVideoBuffer.slice(
+-              existingData.offset,
+-              existingData.offset + existingData.length
+-            )
+-            : buffer
++        const {url, localUrl} = videoData[textureKey]
++        if (!urls[url]) {
++          urls[url] = localUrl
+         }
+       })
+     }
+   })
+ 
++  await Promise.all(
++    Object.entries(urls).map(async ([url, localUrl]) => {
++      const {buffer, mimeType} = await getBufferAndMimeTypeForVideo(localUrl)
++
++      if (!videoMetadataByUrl[url]) {
++        videoMetadataByUrl[url] = {
++          offset: -1,  // Will be calculated and set later once all video data is collected
++          length: buffer.byteLength,
++          mimeType,
++        }
++        videoBuffersByUrl[url] = buffer
++      }
++    })
++  )
++
+   return {
+     videoMetadataByUrl,
+     videoBuffersByUrl,
+   }
+ }
+ 
+-const embedVideoBuffers = async (glbDocument: Document, newScene: Object3D, existingGltf: GLTF) => {
++const embedVideoBuffers = async (glbDocument: Document, newScene: Object3D) => {
+   const root = glbDocument.getRoot()
+   const buffers = root.listBuffers()
+   if (!buffers.length) {
+@@ -80,21 +75,7 @@ const embedVideoBuffers = async (glbDocument: Document, newScene: Object3D, exis
+   // See: https://github.com/donmccurdy/glTF-Transform/discussions/555
+   const mainBuffer = buffers[0]
+ 
+-  // Attempt to find an existing accessor and video buffer from the original .glb
+-  const existingAccessorIndex = existingGltf.parser.json.accessors.findIndex(
+-    acc => acc.name === VIDEO_ACCESSOR_NAME
+-  )
+-  const existingAccessor = existingAccessorIndex > -1
+-    ? await existingGltf.parser.getDependency('accessor', existingAccessorIndex)
+-    : null
+-  const existingEmbeddedVideos = existingGltf.userData?.embeddedVideos
+-  const existingVideoBuffer = existingAccessor?.array.buffer.slice(
+-    existingAccessor?.array.byteOffset,
+-    existingAccessor?.array.byteOffset + existingAccessor?.array.byteLength
+-  )
+-
+-  const {videoMetadataByUrl, videoBuffersByUrl} = extractVideosToEmbed(newScene,
+-    existingEmbeddedVideos, existingVideoBuffer)
++  const {videoMetadataByUrl, videoBuffersByUrl} = await extractVideosToEmbed(newScene)
+ 
+   let totalSize = 0
+   Object.values(videoMetadataByUrl).forEach(({length}) => { totalSize += length })
+@@ -130,5 +111,4 @@ const embedVideoBuffers = async (glbDocument: Document, newScene: Object3D, exis
+ 
+ export {
+   embedVideoBuffers,
+-  getArrayBufferFromVideo,
+ }
+
+From 30ca93bd6155c0397d8fd9f51d93e575bddde485 Mon Sep 17 00:00:00 2001
+From: chloeason <chloe@nianticspatial.com>
+Date: Tue, 8 Jul 2025 09:58:01 -0700
+Subject: [PATCH 16/19] [xrhome][runtime] Embed video data directly into .glb
+ buffers
+
+---
+ c8/ecs/src/runtime/systems/gltf-system.ts | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/c8/ecs/src/runtime/systems/gltf-system.ts b/c8/ecs/src/runtime/systems/gltf-system.ts
+index 5895c4019f5..1d9f3ac78aa 100644
+--- a/c8/ecs/src/runtime/systems/gltf-system.ts
++++ b/c8/ecs/src/runtime/systems/gltf-system.ts
+@@ -19,6 +19,7 @@ import {getVideoManager} from '../video-manager'
+ import type {EmbeddedVideosByUrl, VideoUserData} from '../video-types'
+ import {VIDEO_ACCESSOR_NAME} from '../../shared/video-constants'
+ import {THREE_TEXTURE_KEYS} from '../texture-constants'
++import type {ThreeTextureKey} from '../texture-types'
+ 
+ const playAction = (
+   action: THREE_TYPES.AnimationAction,
+@@ -56,7 +57,7 @@ const maybeLoadVideoTextures = (node: THREE_TYPES.Mesh<any, any, any>,
+ 
+   const videoTextures: THREE_TYPES.VideoTexture[] = []
+ 
+-  THREE_TEXTURE_KEYS.forEach((textureKey) => {
++  THREE_TEXTURE_KEYS.forEach((textureKey: ThreeTextureKey) => {
+     const needsSrgb = textureKey === 'map' || textureKey === 'emissiveMap'
+     const videoData: VideoUserData = node.material.userData.videos
+ 
+
+From 73a1616301f77d1c121f0c28e37c5b410edd9024 Mon Sep 17 00:00:00 2001
+From: chloeason <chloe@nianticspatial.com>
+Date: Tue, 8 Jul 2025 10:00:07 -0700
+Subject: [PATCH 17/19] [xrhome][runtime] Embed video data directly into .glb
+ buffers
+
+---
+ c8/ecs/src/runtime/systems/BUILD | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/c8/ecs/src/runtime/systems/BUILD b/c8/ecs/src/runtime/systems/BUILD
+index 3f2ccefa974..37c95479fe9 100644
+--- a/c8/ecs/src/runtime/systems/BUILD
++++ b/c8/ecs/src/runtime/systems/BUILD
+@@ -63,6 +63,7 @@ js_library(
+         "//c8/ecs/src/runtime:matrix-refresh",
+         "//c8/ecs/src/runtime:physics",
+         "//c8/ecs/src/runtime:texture-constants",
++        "//c8/ecs/src/runtime:texture-types",
+         "//c8/ecs/src/runtime:three",
+         "//c8/ecs/src/runtime:three-types",
+         "//c8/ecs/src/runtime:video-manager",
+
+From 8a74f4d44fccdd6b81bb410dd66900f8af524d5b Mon Sep 17 00:00:00 2001
+From: chloeason <chloe@nianticspatial.com>
+Date: Thu, 10 Jul 2025 14:21:25 -0700
+Subject: [PATCH 18/19] [xrhome][runtime] Embed video data directly into .glb
+ buffers
+
+---
+ c8/ecs/src/runtime/BUILD                      |  37 ++++-
+ c8/ecs/src/runtime/video-types.ts             |  18 +--
+ .../configuration/asset-mesh-configurator.tsx |   2 +-
+ .../src/client/studio/embed-video-buffer.ts   | 152 ++++++++----------
+ 4 files changed, 112 insertions(+), 97 deletions(-)
+
+diff --git a/c8/ecs/src/runtime/BUILD b/c8/ecs/src/runtime/BUILD
+index 6dae903381e..fece208a7c2 100644
+--- a/c8/ecs/src/runtime/BUILD
++++ b/c8/ecs/src/runtime/BUILD
+@@ -627,8 +627,8 @@ js_library(
+         "//c8/ecs/src/runtime:events",
+         "//c8/ecs/src/runtime:pointer-events-types",
+         "//c8/ecs/src/runtime:three",
+-        "//c8/ecs/src/runtime:three-types",
+         "//c8/ecs/src/runtime/math:vec3",
++        "//c8/ecs/src/shared:custom-sorting",
+         "//c8/ecs/src/shared:eid-operations",
+         "//c8/ecs/src/shared:schema",
+     ],
+@@ -1531,6 +1531,7 @@ js_library(
+         "//c8/ecs/src/runtime/math:mat4",
+         "//c8/ecs/src/runtime/math:quat",
+         "//c8/ecs/src/runtime/math:vec3",
++        "//c8/ecs/src/shared:custom-sorting",
+         "//c8/ecs/src/shared:eid-operations",
+         "//c8/ecs/src/shared:schema",
+     ],
+@@ -1930,9 +1931,9 @@ js_library(
+         "//c8/ecs/src/runtime:events-types",
+         "//c8/ecs/src/runtime:pointer-events",
+         "//c8/ecs/src/runtime:three",
+-        "//c8/ecs/src/runtime:three-types",
+         "//c8/ecs/src/runtime:ui-events",
+         "//c8/ecs/src/runtime:world",
++        "//c8/ecs/src/shared:custom-sorting",
+         "//c8/ecs/src/shared:eid-operations",
+         "//c8/ecs/src/shared:schema",
+         "//c8/ecs/src/shared:three-layers",
+@@ -2060,6 +2061,38 @@ js_library(
+     ],
+ )
+ 
++js_test(
++    name = "get-children-test",
++    size = "small",
++    esnext = 1,
++    externalize_npm = 1,
++    main = [
++        "get-children-test.ts",
++    ],
++    npm_rule = "@npm-ecs//:npm-ecs",
++    deps = [
++        "//bzl/js:chai-js",
++        "//c8/ecs/src/runtime:test-env",
++        "//c8/ecs/src/runtime:test-runtime-lib",
++    ],
++)
++
++js_test(
++    name = "geometry-test",
++    size = "small",
++    esnext = 1,
++    externalize_npm = 1,
++    main = [
++        "geometry-test.ts",
++    ],
++    npm_rule = "@npm-ecs//:npm-ecs",
++    deps = [
++        "//bzl/js:chai-js",
++        "//c8/ecs/src/runtime:test-env",
++        "//c8/ecs/src/runtime:test-runtime-lib",
++    ],
++)
++
+ js_library(
+     name = "texture-constants",
+     srcs = [
+diff --git a/c8/ecs/src/runtime/video-types.ts b/c8/ecs/src/runtime/video-types.ts
+index 519c82e4689..79a4dc0da39 100644
+--- a/c8/ecs/src/runtime/video-types.ts
++++ b/c8/ecs/src/runtime/video-types.ts
+@@ -3,7 +3,7 @@
+ import type {ReadData} from '../shared/schema'
+ import type {SchemaOf} from './world-attribute'
+ import type {VideoControls} from './components'
+-import type {EcsTextureKey, ThreeTextureKey} from './texture-types'
++import type {EcsTextureKey} from './texture-types'
+ 
+ type VideoControlsRuntimeSettings = ReadData<SchemaOf<typeof VideoControls>>
+ 
+@@ -20,25 +20,21 @@ type VideoTimeResult = {
+   time: number
+ }
+ 
+-type EmbeddedVideoMetadata = {
+-  offset: number
+-  length: number
+-  mimeType: string
+-}
+-
+-type EmbeddedVideosByUrl = Record<string, EmbeddedVideoMetadata>
+-
+ type VideoArrayBuffer = {
+   buffer: ArrayBuffer
+   mimeType: string
+ }
+ 
+-type VideoUserData = Record<ThreeTextureKey, {url: string, localUrl: string}>
++type VideoUserData = {
++  url: string
++  localUrl: string
++  accessor?: number
++  mimeType?: string
++}
+ 
+ export type {
+   VideoQuery,
+   VideoTimeResult,
+-  EmbeddedVideosByUrl,
+   VideoControlsRuntimeSettings,
+   VideoArrayBuffer,
+   VideoUserData,
+diff --git a/reality/cloud/xrhome/src/client/studio/configuration/asset-mesh-configurator.tsx b/reality/cloud/xrhome/src/client/studio/configuration/asset-mesh-configurator.tsx
+index d1bab16685b..76e371e7e11 100644
+--- a/reality/cloud/xrhome/src/client/studio/configuration/asset-mesh-configurator.tsx
++++ b/reality/cloud/xrhome/src/client/studio/configuration/asset-mesh-configurator.tsx
+@@ -412,7 +412,7 @@ const AssetMeshConfigurator: React.FC<IAssetMeshConfigurator> = ({
+     resetPreviewOptions()
+     const glbDocument = await getGltfTransformDocument(previewScene, options)
+     await promoteRootScene(glbDocument)
+-    await embedVideoBuffers(glbDocument, previewScene)
++    await embedVideoBuffers(glbDocument, gltf)
+     const gltfBlob = await io.writeBinary(glbDocument)
+ 
+     const gltfFile: File = new File(
+diff --git a/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+index 7004d3de01e..37a457c6ba7 100644
+--- a/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
++++ b/reality/cloud/xrhome/src/client/studio/embed-video-buffer.ts
+@@ -1,112 +1,98 @@
+ import type {Document} from '@gltf-transform/core'
+-import {Object3D, Mesh} from 'three'
+-
+-import type {EmbeddedVideosByUrl, VideoArrayBuffer, VideoUserData} from '@ecs/runtime/video-types'
+-import {VIDEO_ACCESSOR_NAME} from '@ecs/shared/video-constants'
++import {createHash} from 'crypto'
++import type {GLTF} from 'three-stdlib'
++import type {VideoArrayBuffer, VideoUserData} from '@ecs/runtime/video-types'
+ import {THREE_TEXTURE_KEYS} from '@ecs/runtime/texture-constants'
++import type {ThreeTextureKey} from '@ecs/runtime/texture-types'
+ 
+-const getBufferAndMimeTypeForVideo = async (videoUrl: string): Promise<VideoArrayBuffer> => {
+-  try {
+-    const response = await fetch(videoUrl)
+-    if (!response.ok) {
+-      throw new Error(`Failed to fetch video to retrieve array buffer: ${response.status}`)
+-    }
+-    const blob = await response.blob()
+-    const buffer = await blob.arrayBuffer()
+-    return {buffer, mimeType: blob.type}
+-  } catch (error) {
+-    throw new Error(`Failed to fetch video to retrieve array buffer: ${error}`)
+-  }
++const generateContentHash = (buffer: Uint8Array): string => {
++  const hash = createHash('sha256')
++  hash.update(buffer)
++  const fileHash = hash.digest('hex')
++  return fileHash
+ }
+ 
+-const extractVideosToEmbed = async (scene: Object3D) => {
+-  const videoMetadataByUrl: EmbeddedVideosByUrl = {}
+-  const videoBuffersByUrl: Record<string, ArrayBuffer> = {}
+-
+-  const urls: Record<string, string> = {}
+-
+-  scene.traverse((object: Object3D) => {
+-    if (object instanceof Mesh && object.material) {
+-      const videoData: VideoUserData = object.material.userData?.videos
+-      if (!videoData) {
+-        return
+-      }
+-      THREE_TEXTURE_KEYS.forEach((textureKey) => {
+-        if (!videoData[textureKey]) {
+-          return
+-        }
+-        const {url, localUrl} = videoData[textureKey]
+-        if (!urls[url]) {
+-          urls[url] = localUrl
+-        }
+-      })
++const getVideoBufferData = async (data: VideoUserData, gltf?: GLTF): Promise<VideoArrayBuffer> => {
++  if (gltf && data.accessor && data.mimeType) {
++    try {
++      const {accessor: accessorIndex, mimeType} = data
++      const accessor = await gltf.parser.loadAccessor(accessorIndex)
++      return {buffer: accessor.array, mimeType}
++    } catch (error) {
++      throw new Error(`Failed to retrieve video accessor from GLTF: ${error}`)
+     }
+-  })
+-
+-  await Promise.all(
+-    Object.entries(urls).map(async ([url, localUrl]) => {
+-      const {buffer, mimeType} = await getBufferAndMimeTypeForVideo(localUrl)
+-
+-      if (!videoMetadataByUrl[url]) {
+-        videoMetadataByUrl[url] = {
+-          offset: -1,  // Will be calculated and set later once all video data is collected
+-          length: buffer.byteLength,
+-          mimeType,
+-        }
+-        videoBuffersByUrl[url] = buffer
++  } else {
++    try {
++      const response = await fetch(data.localUrl)
++      if (!response.ok) {
++        throw new Error(`Failed to fetch video to retrieve array buffer: ${response.status}`)
+       }
+-    })
+-  )
+-
+-  return {
+-    videoMetadataByUrl,
+-    videoBuffersByUrl,
++      const blob = await response.blob()
++      const buffer = await blob.arrayBuffer()
++      return {buffer, mimeType: blob.type}
++    } catch (error) {
++      throw new Error(`Failed to fetch video to retrieve array buffer: ${error}`)
++    }
+   }
+ }
+ 
+-const embedVideoBuffers = async (glbDocument: Document, newScene: Object3D) => {
++// NOTE(chloe): Do not call prune() after this function is called. It will remove the embedded
++// video accessors as their data is 'unused' by the GLB scene.
++const embedVideoBuffers = async (glbDocument: Document, oldGltf: GLTF) => {
+   const root = glbDocument.getRoot()
+   const buffers = root.listBuffers()
+   if (!buffers.length) {
+     throw new Error('Failed to embed video to 3D asset - no buffers found in .glb to embed')
+   }
+ 
++  if (!root.listMaterials().length) {
++    return
++  }
++
+   // Retrieve first buffer as .glb's single internal embedded buffer.
+   // See: https://github.com/donmccurdy/glTF-Transform/discussions/555
+   const mainBuffer = buffers[0]
+ 
+-  const {videoMetadataByUrl, videoBuffersByUrl} = await extractVideosToEmbed(newScene)
++  // Content hashes used to dedupe multiple uses of the same video.
++  const videoHashes: Map<string, {accessor: number, mimeType: string}> = new Map()
+ 
+-  let totalSize = 0
+-  Object.values(videoMetadataByUrl).forEach(({length}) => { totalSize += length })
++  await Promise.all(
++    root.listMaterials().map(async (material) => {
++      const userDataByMaterial = material.getExtras()
++      if (!userDataByMaterial.videos) {
++        return
++      }
+ 
+-  if (!totalSize) {
+-    // No video info to update the offsets
+-    return
+-  }
++      await Promise.all(THREE_TEXTURE_KEYS.map(async (textureKey: ThreeTextureKey) => {
++        if (!userDataByMaterial.videos?.[textureKey]) {
++          return
++        }
+ 
+-  // Copy all video buffers into a single contiguous buffer
+-  const videoBuffer = new ArrayBuffer(totalSize)
+-  const videoBufferView = new Uint8Array(videoBuffer)
++        const userData = userDataByMaterial.videos[textureKey]
+ 
+-  let offset = 0
+-  Object.entries(videoMetadataByUrl).forEach(([url, embeddedData]) => {
+-    if (embeddedData.offset !== -1) {
+-      return
+-    }
+-    embeddedData.offset = offset
+-    const bufferView = new Uint8Array(videoBuffersByUrl[url])
+-    videoBufferView.set(bufferView, offset)
+-    offset += embeddedData.length
+-  })
++        const {buffer, mimeType} = await getVideoBufferData(userData, oldGltf)
++        const bufferView = new Uint8Array(buffer)
++        const hash = generateContentHash(bufferView)
++
++        if (videoHashes.has(hash)) {
++          const currData = videoHashes.get(hash)
++          userData.accessor = currData.accessor
++          userData.mimeType = currData.mimeType
++          return
++        }
++
++        videoHashes.set(hash, {accessor: root.listAccessors().length, mimeType})
+ 
+-  // Create new accessor and embed new video buffer into this new glTF document for exporting
+-  const accessor = glbDocument.createAccessor(VIDEO_ACCESSOR_NAME)
+-  accessor.setArray(videoBufferView)
+-  accessor.setType('SCALAR')
+-  accessor.setBuffer(mainBuffer)
++        const accessor = glbDocument.createAccessor()
++        accessor.setArray(bufferView)
++        accessor.setType('SCALAR')
++        accessor.setBuffer(mainBuffer)
+ 
+-  root.setExtras({...root.getExtras(), embeddedVideos: videoMetadataByUrl})
++        userData.accessor = root.listAccessors().length - 1
++        userData.mimeType = mimeType
++      }))
++    })
++  )
+ }
+ 
+ export {
+
+From 4b7547987e3b15159a060e1ec44bf377c8c4ddaa Mon Sep 17 00:00:00 2001
+From: chloeason <chloe@nianticspatial.com>
+Date: Thu, 10 Jul 2025 14:22:46 -0700
+Subject: [PATCH 19/19] [xrhome] Embed video data directly into .glb buffers
+
